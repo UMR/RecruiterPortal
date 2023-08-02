@@ -1,0 +1,40 @@
+<div class="second-div" *ngIf="employments.length > 0">
+  <h5>Employment</h5>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="empty-state text-center" *ngIf="employments && employments.length === 0">
+            <img src="assets/img/employement.svg" class="img-fluid mb-3" width="72" alt="">
+            <h5 class="mb-3">You haven't added any employment yet.</h5>            
+          </div>
+          <ul class="timeline">
+            <li *ngFor="let employment of employments">
+              <div class="timeline-list">
+                <img src="assets/img/employement.svg" class="img-fluid" width="30" alt="">
+                <div class="d-flex justify-content-between">
+                  <h4>{{employment.CompanyName}}</h4>                  
+                </div>
+                <p class="emp-address"><i class="fa fa-map-marker-alt"></i> {{employment.CompanyAddress}}</p>
+                <div class="post">
+                  <p><strong for="">{{employment.JobTItle}} | </strong> <span class="emp-time">{{getClientFormattedDate(employment.FromDate)}} - {{employment.ToDate==null?'Present':getClientFormattedDate(employment.ToDate)}}</span></p>
+                  <p class="emp-responsible">{{employment.Responisiblities}}</p>
+                  <p class="emp-salary"><strong>Salary: </strong>{{employment.StartingSalary}}
+                </div>
+                <div class="supervisor">
+                  <p><strong>Reason for leaving: </strong>{{employment.LeaveReason}} </p>
+                  <p><strong>Supervisor: </strong> {{employment.Supervisor}}</p>
+                  <p><label for="">Contact your previous Supervisor for a reference:</label> <strong class="text-danger">{{employment.CanContactThisEmployer==true?'YES':'NO'}}</strong></p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  
+

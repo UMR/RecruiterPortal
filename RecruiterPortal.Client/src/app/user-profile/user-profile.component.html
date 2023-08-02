@@ -1,0 +1,79 @@
+<div id="page-content-wrapper">
+
+  <!-- Navbar Start -->
+  <applicant-portal-header (onToggleButtonClicked)="(showHideMenu)()" isVisibleToggleButton=0></applicant-portal-header>
+  <!-- Navbar End -->
+  <!-- Main Content Start -->
+  <section class="main-content">
+    <div class="container-fluid">
+      <div class="card portal-card">
+        <loading-image [is-loading]="isLoading"></loading-image>
+        <div class="card-body" style="height:auto">
+          <h3 class="card-title mt-3 mb-3 pl-3">User Profile</h3>
+          <div class="row">
+            <div class="col-md-12">
+              <form [formGroup]="userFormGroup" novalidate>
+                <div class="card-body px-3 py-3" style="height:auto;">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="loginId" class="form-label">Login Id</label>
+                        <input id="loginId" name="loginId" type="text" class="form-control" autocomplete="off"
+                               formControlName="loginId" tabindex="1" placeholder="Login Id" />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input id="lastName" name="lastName" type="text" class="form-control" autocomplete="off"
+                               formControlName="lastName" tabindex="2" placeholder="Last Name" maxlength="50" trimmed required />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input id="firstName" name="firstName" type="text" class="form-control" autocomplete="off"
+                               formControlName="firstName" tabindex="3" placeholder="First Name" maxlength="50" trimmed required />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input id="email" name="email" type="text" class="form-control" autocomplete="off"
+                               formControlName="email" tabindex="4" placeholder="Email" maxlength="50" trimmed required />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="telephone" class="form-label">Telephone</label>
+                        <!--<input id="telephone" name="telephone" type="text" class="form-control" autocomplete="off"
+                        formControlName="telephone" tabindex="5" placeholder="Telephone" maxlength="50" trimmed required />-->
+                        <p-inputMask id="telephone" name="telephone" class="form-control pMaskRequired" autocomplete="off"
+                                     formControlName="telephone" tabindex="5" mask="999-999-9999" placeholder="999-999-9999" unmask="true"
+                                     [style]="{'width':'100%','border':'none','margin-top':'-10px','font-size':'18px'}" trimmed required></p-inputMask>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-sm-12 col-md-4 col-lg-4">
+                      <button type="button" (click)="onBack()" class="btn btn-primary btn-portal-border mr-3" tabindex="8">Back</button>
+                      <button type="button" (click)="onClear()" class="btn btn-primary btn-portal-border mr-3" tabindex="7">Clear</button>
+                      <button type="submit" class="btn btn-primary btn-portal" tabindex="6" [disabled]="!userFormGroup.valid" (click)="onSubmit()">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Main Content End -->
+
+</div>
+<p-toast key="toastKey1"></p-toast>
+
+

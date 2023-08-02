@@ -1,0 +1,155 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+<div class="tab-content" id="v-pills-tabContent">
+  <div class="tab-pane fade show active" id="v-pills-applicant" role="tabpanel" aria-labelledby="v-pills-applicant-tab">
+    <div class="card portal-card">
+      <div class="card-body">
+        <div class="row">
+          <a [routerLink]="['./edit']" class="text-right card-edit"><i class="fa fa-edit text-edit"></i></a>
+          <a class="text-right card-edit" (click)="onDownloadClick()" style="margin-top:50px;"><i class="fa fa-download text-edit"></i></a>
+          <div class="col-12">
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-action">
+                <div class="row">
+                  <div class="col-2">
+                    <label for="">Full Name: </label>
+                  </div>
+                  <div class="col-10" *ngIf="editApplicantInfoModel.FirstName">{{editApplicantInfoModel.MiddleName ? editApplicantInfoModel.FirstName+' '+editApplicantInfoModel.MiddleName+' '+editApplicantInfoModel.LastName : editApplicantInfoModel.FirstName+' '+editApplicantInfoModel.LastName}}</div>
+                </div>
+              </li>
+              <li class="list-group-item list-group-item-action">
+                <div class="row">
+                  <div class="col-2">
+                    <label for="">Address: </label>
+                  </div>
+                  <div class="col-10">
+                    {{editApplicantInfoModel.StreetAddress}}
+                    {{editApplicantInfoModel.Apartment}}
+                    {{(editApplicantInfoModel.ZipCode==='00000') ? "" :editApplicantInfoModel.ZipCode}}
+                    {{(editApplicantInfoModel.City==='Not Available') ? "" :editApplicantInfoModel.City}}
+                    {{(editApplicantInfoModel.State==='Not Available') ? "" :editApplicantInfoModel.State}}
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item list-group-item-action">
+                <div class="row">
+                  <div class="col-2">
+                    <label for="">Phone: </label>
+                  </div>
+                  <div class="col-3">{{editApplicantInfoModel.Phone}}</div>
+                  <div class="col-3">
+                    <label for="">Email: </label>
+                  </div>
+                  <div class="col-4">{{editApplicantInfoModel.Email}}</div>
+                </div>
+              </li>
+
+              <li class="list-group-item list-group-item-action">
+                <div class="row">
+                  <div class="col-2">
+                    <label for="">Date Of Birth: </label>
+                  </div>
+                  <div class="col-3">{{editApplicantInfoModel.DateOfBirth | date :'MM-dd-yyyy'}}</div>
+                  <div class="col-3">
+                    <label for="">Gender: </label>
+                  </div>
+                  <div class="col-4">{{editApplicantInfoModel.Gender}}</div>
+                </div>
+              </li>
+              <li class="list-group-item list-group-item-action">
+                <div class="row">
+                  <div class="col-2">
+                    <label for="">Country Of Birth: </label>
+                  </div>
+                  <div class="col-3">{{editApplicantInfoModel.CountryOfBirth}}</div>
+                  <div class="col-3">
+                    <label for="">Country Applied From: </label>
+                  </div>
+                  <div class="col-4">{{editApplicantInfoModel.CountryFromApplied}}</div>
+                </div>
+              </li>
+              <li class="list-group-item list-group-item-action">
+                <div class="row">
+                  <div class="col-2">
+                    <label for="">Date Available: </label>
+                  </div>
+                  <div class="col-3">{{editApplicantInfoModel.DateAvailable| date :'MM-dd-yyyy'}}</div>
+                  <div class="col-3">
+                    <label for="">Desire Salary: </label>
+                  </div>
+                  <div class="col-4">{{editApplicantInfoModel.DesiredSalary}}</div>
+                </div>
+              </li>
+              <li class="list-group-item list-group-item-action">
+                <div class="row">
+                  <div class="col-2">
+                    <label for="">Applied Position: </label>
+                  </div>
+                  <div class="col-10">{{editApplicantInfoModel.PositionAppliedFor}}</div>
+                </div>
+              </li>
+            </ul>
+            <div class="portal-card-body">
+              <div class="portal-card-list">
+                <div class="row">
+                  <div class="col-5" *ngIf="editApplicantInfoModel.IsUSCitizen == null">
+                    <label for="">
+                      Citizen of United States?:
+                    </label>
+                  </div>
+                  <div class="col-5" *ngIf="editApplicantInfoModel.IsUSCitizen != null">
+                    <label for="">
+                      Citizen of United States?:
+                      <strong class="text-success" *ngIf="editApplicantInfoModel.IsUSCitizen">YES</strong>
+                      <strong class="text-danger" *ngIf="!editApplicantInfoModel.IsUSCitizen">NO</strong>
+                    </label>
+                  </div>
+                  <div class="col-7">
+                    <p><strong>SSN:</strong> {{ValidSSNFormat(editApplicantInfoModel.SSN)}}</p>
+                  </div>
+                </div>
+
+              </div>
+              <div class="portal-card-list">
+                <label for="" *ngIf="editApplicantInfoModel.IsAuthorized == null">
+                  Authorized to work in the US?:
+                </label>
+                <label for="" *ngIf="editApplicantInfoModel.IsAuthorized != null">
+                  Authorized to work in the US?:
+                  <strong class="text-success" *ngIf="editApplicantInfoModel.IsAuthorized">YES</strong>
+                  <strong class="text-danger" *ngIf="!editApplicantInfoModel.IsAuthorized">NO</strong>
+                </label>
+              </div>
+              <div class="portal-card-list">
+                <label for="" *ngIf="editApplicantInfoModel.IsOldClient == null">
+                  Have you ever worked for this company?:
+                </label>
+                <label for="" *ngIf="editApplicantInfoModel.IsOldClient != null">
+                  Have you ever worked for this company?:
+                  <strong class="text-success" *ngIf="editApplicantInfoModel.IsOldClient">YES</strong>
+                  <strong class="text-danger" *ngIf="!editApplicantInfoModel.IsOldClient">NO</strong>
+                </label>
+              </div>
+              <div class="portal-card-list">
+                <div class="row">
+                  <div class="col-5">
+                    <label for="" *ngIf="editApplicantInfoModel.IsConvict == null">
+                      Have you ever been convicted of a felony?
+                    </label>
+                    <label for="" *ngIf="editApplicantInfoModel.IsConvict != null">
+                      Have you ever been convicted of a felony?
+                      <strong class="text-success" *ngIf="editApplicantInfoModel.IsConvict">YES</strong>
+                      <strong class="text-danger" *ngIf="!editApplicantInfoModel.IsConvict">NO</strong>
+                    </label>
+                  </div>
+                  <div class="col-7">
+                    <p>{{editApplicantInfoModel.ConvictionDetail}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

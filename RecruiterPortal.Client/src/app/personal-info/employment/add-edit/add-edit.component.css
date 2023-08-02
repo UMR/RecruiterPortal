@@ -1,0 +1,38 @@
+:host >>> p-autocomplete {
+  padding-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+:host >>> .ui-autocomplete {
+  width: 100%;
+}
+
+:host >>> p-autocomplete input, :host >>> p-autocomplete.ng-dirty.ng-invalid > .ui-autocomplete > .ui-inputtext {
+  border: none;
+  background: transparent;
+  width: 90%;
+  height: 40px;
+}
+
+:host >>> .ng-trigger {
+  max-height: 200px;
+  z-index: 1006;
+  top: 40px;
+  left: -204.208px;
+  transform: translateY(0px);
+  opacity: 1;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+:host >>> p-autocomplete-dropdown button {
+  border: none;
+  background: transparent;
+  width: 10%;
+  height: 500px;
+}
+
+.required {
+  color: red;
+}

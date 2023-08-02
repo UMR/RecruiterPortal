@@ -1,0 +1,24 @@
+<div class="first-div" *ngIf="editEducationModels.length > 0">
+  <h5>Education</h5>
+  <div class="tab-pane" id="v-pills-education" role="tabpanel" aria-labelledby="v-pills-education-tab">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4 timeline" *ngFor="let editEducationModel of editEducationModels" style="margin-bottom:20px;">
+            <div class="timeline-list">
+              <img src="assets/img/university.svg" class="img-fluid" width="36" alt="" />
+              <div class="d-flex justify-content-between">
+                <h4>{{editEducationModel.InstitutionTypeName}}</h4>
+              </div>
+              <h5>{{editEducationModel.SchoolName}}</h5>
+              <label for="">{{editEducationModel.Degree}}<span *ngIf="editEducationModel.FromDate!=''||editEducationModel.ToDate!=''"> ( {{editEducationModel.FromDate}} - {{editEducationModel.ToDate}} )</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

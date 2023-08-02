@@ -1,0 +1,38 @@
+<div class="second-div" *ngIf="userReferences.length > 0">
+  <h5>Reference</h5>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="empty-state text-center" *ngIf="userReferences.length === 0">
+            <img src="assets/img/refer.svg" class="img-fluid mb-3" width="72" alt="">
+            <h5 class="mb-3">You haven't added any reference yet.</h5>            
+          </div>
+
+          <ul class="timeline">
+            <li *ngFor="let ref of userReferences">
+              <div class="timeline-list">
+                <img src="assets/img/refer.svg" class="img-fluid" width="30" alt="">
+                <div class="d-flex justify-content-between">
+                  <h4> {{ref.Name}} </h4>                  
+                </div>
+                <h6>{{ref.NatureOfRelationship}}</h6>
+                <div class="refer">
+                  <p><label for="">{{ref.CompanyName}}</label></p>
+                  <p class="emp-address"><i class="fa fa-map-marker-alt"></i> {{ref.RefAddress}}</p>
+                  <p><i class="fa fa-phone-alt"></i> {{ref.RefPhone}}</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

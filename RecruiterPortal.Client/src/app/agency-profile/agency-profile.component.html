@@ -1,0 +1,99 @@
+<div id="page-content-wrapper">
+
+  <!-- Navbar Start -->
+  <applicant-portal-header (onToggleButtonClicked)="(showHideMenu)()" isVisibleToggleButton=0></applicant-portal-header>
+  <!-- Navbar End -->
+  <!-- Main Content Start -->
+  <section class="main-content">
+    <div class="container-fluid">
+      <div class="card portal-card">
+        <loading-image [is-loading]="isLoading"></loading-image>
+        <div class="card-body" style="height:auto">
+          <h3 class="card-title mt-3 mb-3 pl-3">Agency Profile</h3>
+          <div class="row">
+            <div class="col-md-12">
+              <form [formGroup]="agencyFormGroup" novalidate>
+                <div class="card-body px-3 py-3" style="height:auto;">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="agencyName" class="form-label">Agency Name</label>
+                        <input id="agencyName" name="agencyName" type="text" class="form-control" autocomplete="off"
+                               formControlName="agencyName" tabindex="1" placeholder="Agency Name" maxlength="500" trimmed />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="agencyUrl" class="form-label">Agency Url</label>
+                        <input id="agencyUrl" name="agencyUrl" type="text" class="form-control" autocomplete="off"
+                               formControlName="agencyUrl" tabindex="2" placeholder="Agency Url" maxlength="256" trimmed />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="agencyEmail" class="form-label">Agency Email</label>
+                        <input id="agencyEmail" name="agencyEmail" type="text" class="form-control" autocomplete="off"
+                               formControlName="agencyEmail" tabindex="3" placeholder="Agency Email" maxlength="256" trimmed />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="agencyPhone" class="form-label">Agency Phone</label>
+                        <!--<input id="agencyPhone" name="agencyPhone" type="text" class="form-control" autocomplete="off"
+                               formControlName="agencyPhone" tabindex="4" placeholder="Agency Phone" maxlength="15" trimmed required pattern="^\+?[0-9]\d{8,25}$" />-->
+                        <p-inputMask id="agencyPhone" name="agencyPhone" class="form-control pMaskRequired" autocomplete="off"
+                                     formControlName="agencyPhone" tabindex="4" mask="999-999-9999" placeholder="999-999-9999" unmask="true"
+                                     [style]="{'width':'100%','border':'none','margin-top':'-10px','font-size':'18px'}" trimmed required pattern="^\+?[0-9]\d{8,25}$"></p-inputMask>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="agencyAddress" class="form-label">Agency Address</label>
+                        <textarea id="agencyAddress" name="agencyAddress" class="form-control" rows="1" style="line-height: 1;"
+                                  formControlName="agencyAddress" tabindex="5" placeholder="Agency Address" maxlength="512" required>
+                        </textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="agencyContactPerson" class="form-label">Agency Contact Person</label>
+                        <input id="agencyContactPerson" name="agencyContactPerson" type="text" class="form-control" autocomplete="off"
+                               formControlName="agencyContactPerson" tabindex="6" placeholder="Agency Contact Person" maxlength="256" trimmed />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="agencyContactPersonPhone" class="form-label">Agency Contact Person Phone</label>
+                        <!--<input id="agencyContactPersonPhone" name="agencyContactPersonPhone" type="text" class="form-control" autocomplete="off"
+                        formControlName="agencyContactPersonPhone" tabindex="7" placeholder="Agency Contact Person Phone" maxlength="15" trimmed pattern="^\+?[0-9]\d{8,25}$"/>-->
+                        <p-inputMask id="agencyContactPersonPhone" name="agencyContactPersonPhone" class="form-control" autocomplete="off"
+                                     formControlName="agencyContactPersonPhone" tabindex="7" mask="999-999-9999" placeholder="999-999-9999" unmask="true"
+                                     [style]="{'width':'100%','border':'none','margin-top':'-10px','font-size':'18px'}" trimmed pattern="^\+?[0-9]\d{8,25}$"></p-inputMask>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-sm-12 col-md-4 col-lg-4">
+                      <button type="button" (click)="onBack()" class="btn btn-primary btn-portal-border mr-3" tabindex="10">Back</button>
+                      <button type="button" (click)="onClear()" class="btn btn-primary btn-portal-border mr-3" tabindex="9">Clear</button>
+                      <button type="submit" class="btn btn-primary btn-portal" tabindex="8" [disabled]="!agencyFormGroup.valid" (click)="onSubmit()">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Main Content End -->
+
+</div>
+<p-toast key="toastKey1"></p-toast>
+
+

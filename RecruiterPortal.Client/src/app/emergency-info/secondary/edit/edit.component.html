@@ -1,0 +1,85 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+<div class="tab-pane fade show active" id="v-pills-primary-emergency" role="tabpanel" aria-labelledby="v-pills-primary-emergency-tab">
+  <div class="card border-0 rounded-0">
+    <form [formGroup]="infoForm" (ngSubmit)="onSubmitPrimaryInfo()">
+      <div class="card-body px-3 py-3">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="lastname" class="form-label">Last Name</label>
+              <input id="lastname" name="lastname" type="text" class="form-control" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+                     autofocus formControlName="lastName" maxlength="30" trimmed required>
+              <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="firstname" class="form-label">
+                First Name
+              </label>
+              <input id="firstname" name="firstname" type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+                     autocomplete="off" formControlName="firstName" maxlength="30" trimmed required>
+              <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                <div *ngIf="f.firstName.errors.required">First Name required</div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="relationship-primary" class="form-label">Relationship</label>
+              <input id="relationship-primary" name="relationship-primary" type="text" class="form-control" autocomplete="off" formControlName="relationship" maxlength="50" trimmed>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="phone-home" class="form-label">Phone(Home)</label>
+              <input id="phone-home" name="phone-home" type="tel" class="form-control" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.homePhone.errors }" trimmed
+                     formControlName="homePhone" maxlength="25" required E164PhoneNumber="true">
+              <div *ngIf="submitted && f.homePhone.errors" class="invalid-feedback">
+                <div *ngIf="f.homePhone.errors.required">Home Phone required</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="phone-cell" class="form-label">Phone(Cell)</label>
+              <input id="phone-cell" name="phone-cell" type="tel" class="form-control" autocomplete="off" formControlName="cellPhone" maxlength="25" trimmed E164PhoneNumber="true">
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="work" class="form-label">Phone(Work)</label>
+              <input id="work" name="work" type="tel" class="form-control" autocomplete="off" formControlName="workPhone" maxlength="25" trimmed E164PhoneNumber="true">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <p><strong><em>Comments</em></strong> (include any special medical or personal information) you would want an emergency care provider to know - or special contact information:</p>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="card-footer">
+        <ul class="list-inline mb-0 d-flex justify-content-between">
+          <li class="list-inline-item">
+            <a [routerLink]="['/emergency-info/secondary']" routerLinkActive="active" class="btn btn-primary btn-portal-border" tabindex="28">Back</a>
+          </li>
+          <li class="list-inline-item">
+            <button type="button" (click)="onClear()" class="btn btn-primary btn-portal-border">Clear</button>
+          </li>
+          <li class="list-inline-item">
+            <!--<a href="#" class="btn btn-primary btn-portal">Save</a>-->
+            <button type="submit" class="btn btn-primary btn-block btn-portal" [disabled]="!infoForm.valid">Save</button>
+          </li>
+        </ul>
+      </div>
+    </form>
+  </div>
+</div>
+<p-toast key="toastKey1"></p-toast>

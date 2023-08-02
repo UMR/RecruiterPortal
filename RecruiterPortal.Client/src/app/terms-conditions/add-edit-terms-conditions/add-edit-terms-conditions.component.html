@@ -1,0 +1,214 @@
+<div class="container-fluid">
+  <loading-image [is-loading]="isLoading"></loading-image>
+  <div class="card portal-card">
+    <form (ngSubmit)="onSubmit()" [formGroup]="addEditTermsConditionsFormGroup" novalidate>
+      <div class="card-body px-3 py-3" style="height:auto;">
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="effectiveDate" class="form-label">Effective Date</label>
+              <p-calendar id="effectiveDate" name="effectiveDate" placeholder="MM-DD-YYYY"
+                          formControlName="effectiveDate"
+                          tabindex="1"
+                          dateFormat="mm-dd-yy"
+                          [monthNavigator]="true"
+                          [yearNavigator]="true"
+                          yearRange="1900:2100"
+                          [showIcon]="true">
+              </p-calendar>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="facilityName" class="form-label">Facility Name</label>
+              <input id="facilityName" name="facilityName" type="text" class="form-control" autocomplete="off"
+                     formControlName="facilityName" tabindex="2" trimmed maxlength="500" />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="streetAddress" class="form-label">Street Address</label>
+              <input id="streetAddress" name="streetAddress" type="text" class="form-control" autocomplete="off"
+                     formControlName="streetAddress" tabindex="3" trimmed maxlength="500" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="zipcode" class="form-label">Zip Code</label>
+              <p-autoComplete formControlName="zipCode" [suggestions]="zipCodeResults" class="form-control"
+                              (completeMethod)="onZipCodeSearch($event)" field="ZipCode" [dropdown]="true"
+                              forceSelection="true" (onSelect)="onZipCodeSelect($event)" tabindex="4">
+                <ng-template let-zipCode pTemplate="item">
+                  <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.ZipCode}},</div>
+                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.City}},</div>
+                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.StateAbbr}}</div>
+                  </div>
+                </ng-template>
+              </p-autoComplete>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="stateName" class="form-label">State</label>
+              <input id="stateName" name="stateName" type="text" class="form-control" autocomplete="off"
+                     formControlName="stateName" tabindex="5" trimmed maxlength="500" />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="city" class="form-label">Town/City</label>
+              <input id="city" name="city" type="text" class="form-control" autocomplete="off"
+                     formControlName="city" tabindex="6" trimmed maxlength="500" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="officePhone" class="form-label">Office Phone</label>
+              <input id="officePhone" name="officePhone" type="text" class="form-control" autocomplete="off"
+                     formControlName="officePhone" tabindex="7" trimmed maxlength="500" />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="position" class="form-label">Job Title/Position</label>
+              <input id="position" name="position" type="text" class="form-control" autocomplete="off"
+                     formControlName="position" tabindex="8" trimmed maxlength="500" />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="ratePayCompensation" class="form-label">Rate of Pay or Compensation</label>
+              <input id="ratePayCompensation" name="ratePayCompensation" type="text" class="form-control" autocomplete="off"
+                     formControlName="ratePayCompensation" tabindex="9" trimmed maxlength="500" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="daysPerWeek" class="form-label">Days Per Week</label>
+              <input id="daysPerWeek" name="daysPerWeek" type="text" class="form-control" autocomplete="off"
+                     formControlName="daysPerWeek" tabindex="10" trimmed maxlength="1" OnlyNumber="true"/>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="nameGeneralLiabilityInsurance" class="form-label">Name of General Liability Insurance</label>
+              <input id="nameGeneralLiabilityInsurance" name="nameGeneralLiabilityInsurance" type="text" class="form-control" autocomplete="off"
+                     formControlName="nameGeneralLiabilityInsurance" tabindex="11" trimmed maxlength="500" />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="generalLiabilityInsurancePolicyNo" class="form-label">Policy No</label>
+              <input id="generalLiabilityInsurancePolicyNo" name="generalLiabilityInsurancePolicyNo" type="text" class="form-control" autocomplete="off"
+                     formControlName="generalLiabilityInsurancePolicyNo" tabindex="12" trimmed maxlength="500" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="nameMalpracticeInsurance" class="form-label">Name of Malpractice Insurance</label>
+              <input id="nameMalpracticeInsurance" name="nameMalpracticeInsurance" type="text" class="form-control" autocomplete="off"
+                     formControlName="nameMalpracticeInsurance" tabindex="13" trimmed maxlength="500" />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="malpracticeInsurancePolicyNo" class="form-label">Policy No</label>
+              <input id="malpracticeInsurancePolicyNo" name="malpracticeInsurancePolicyNo" type="text" class="form-control" autocomplete="off"
+                     formControlName="malpracticeInsurancePolicyNo" tabindex="14" trimmed maxlength="500" />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="nameWorkersCompensationInsurance" class="form-label">Name of Workers Compensation Insurance</label>
+              <input id="nameWorkersCompensationInsurance" name="nameWorkersCompensationInsurance" type="text" class="form-control" autocomplete="off"
+                     formControlName="nameWorkersCompensationInsurance" tabindex="15" trimmed maxlength="500" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="workersCompensationInsurancePolicyNo" class="form-label">Policy No</label>
+              <input id="workersCompensationInsurancePolicyNo" name="workersCompensationInsurancePolicyNo" type="text" class="form-control" autocomplete="off"
+                     formControlName="workersCompensationInsurancePolicyNo" tabindex="16" trimmed maxlength="500" />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="nameDisabilityInsurance" class="form-label">Name of Disability Insurance</label>
+              <input id="nameDisabilityInsurance" name="nameDisabilityInsurance" type="text" class="form-control" autocomplete="off"
+                     formControlName="nameDisabilityInsurance" tabindex="17" trimmed maxlength="500" />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="nameDisabilityInsurancePolicyNo" class="form-label">Policy No</label>
+              <input id="nameDisabilityInsurancePolicyNo" name="nameDisabilityInsurancePolicyNo" type="text" class="form-control" autocomplete="off"
+                     formControlName="nameDisabilityInsurancePolicyNo" tabindex="18" trimmed maxlength="500" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="signatureDate" class="form-label">Signature Date</label>
+              <p-calendar id="signatureDate" name="signatureDate" placeholder="MM-DD-YYYY"
+                          formControlName="signatureDate"
+                          tabindex="19"
+                          dateFormat="mm-dd-yy"
+                          [monthNavigator]="true"
+                          [yearNavigator]="true"
+                          yearRange="1900:2100"
+                          [showIcon]="true">
+              </p-calendar>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="authorizedBy" class="form-label">Authorized By</label>
+              <input id="authorizedBy" name="authorizedBy" type="text" class="form-control" autocomplete="off"
+                     formControlName="authorizedBy" tabindex="20" trimmed maxlength="500" />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="authorizedDate" class="form-label">Authorized Date</label>
+              <p-calendar id="authorizedDate" name="authorizedDate" placeholder="MM-DD-YYYY"
+                          formControlName="authorizedDate"
+                          tabindex="21"
+                          dateFormat="mm-dd-yy"
+                          [monthNavigator]="true"
+                          [yearNavigator]="true"
+                          yearRange="1900:2100"
+                          [showIcon]="true">
+              </p-calendar>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <ul class="list-inline mb-0 d-flex justify-content-between">
+          <li class="list-inline-item">
+            <a [routerLink]="['/terms-conditions']" routerLinkActive="active" class="btn btn-primary btn-portal-border" tabindex="23">Back</a>
+          </li>
+          <li class="list-inline-item">
+            <button type="button" (click)="onClear()" class="btn btn-primary btn-portal-border" tabindex="24">Clear</button>
+          </li>
+          <li class="list-inline-item">
+            <button type="submit" class="btn btn-primary btn-portal" [disabled]="!addEditTermsConditionsFormGroup.valid" tabindex="22">Save</button>
+          </li>
+        </ul>
+      </div>
+    </form>
+  </div>
+</div>
+<p-toast key="toastKey1"></p-toast>

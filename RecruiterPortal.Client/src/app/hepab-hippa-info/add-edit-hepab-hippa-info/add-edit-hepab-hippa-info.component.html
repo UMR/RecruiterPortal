@@ -1,0 +1,180 @@
+<div class="container-fluid">
+  <loading-image [is-loading]="isLoading"></loading-image>
+  <div class="card portal-card">
+    <form (ngSubmit)="onSubmit()" [formGroup]="addEditHepabHippaGroup" novalidate>
+      <div class="card-body px-3 py-3"  style="height:auto;">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="portal-card-list">
+              <p><strong>Hepatitis B vaccination consent</strong></p>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="hasHepaConcent-yes" name="hasHepaConcent" class="custom-control-input" value="YES" checked
+                       formControlName="hasHepaConcent" tabindex="18" (change)="onHasHepaConcentChange($event)" />
+                <label for="hasHepaConcent-yes" class="custom-control-label text-success">YES</label>
+              </div>
+              <div class="list-inline-item custom-control custom-radio custom-control-inline">
+                <input type="radio" id="hasHepaConcent-no" name="hasHepaConcent" class="custom-control-input" value="NO"
+                       formControlName="hasHepaConcent" tabindex="19" (change)="onHasHepaConcentChange($event)" />
+                <label for="hasHepaConcent-no" class="custom-control-label text-danger">NO</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="portal-card-list">
+              <p><strong>Received a copy of the hepatitis B information sheet</strong></p>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="hasHepaSheet-yes" name="hasHepaSheet" class="custom-control-input" value="YES" checked
+                       formControlName="hasHepaSheet" tabindex="21" />
+                <label for="hasHepaSheet-yes" class="custom-control-label text-success">YES</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="hasHepaSheet-no" name="hasHepaSheet" class="custom-control-input" value="NO"
+                       formControlName="hasHepaSheet" tabindex="22" />
+                <label for="hasHepaSheet-no" class="custom-control-label text-danger">NO</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="portal-card-list">
+              <p><strong>Received training relative to the hepatitis B virus</strong></p>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="hasHepaTraining-yes" name="hasHepaTraining" class="custom-control-input" value="YES" checked
+                       formControlName="hasHepaTraining" tabindex="21" />
+                <label for="hasHepaTraining-yes" class="custom-control-label text-success">YES</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="hasHepaTraining-no" name="hasHepaTraining" class="custom-control-input" value="NO"
+                       formControlName="hasHepaTraining" tabindex="22" />
+                <label for="hasHepaTraining-no" class="custom-control-label text-danger">NO</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="portal-card-list">
+              <p><strong>Was examined by a licensed health care professional </strong></p>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="isExamined-yes" name="isExamined" class="custom-control-input" value="YES" checked
+                       formControlName="isExamined" tabindex="21" />
+                <label for="isExamined-yes" class="custom-control-label text-success">YES</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="isExamined-no" name="isExamined" class="custom-control-input" value="NO"
+                       formControlName="isExamined" tabindex="22" />
+                <label for="isExamined-no" class="custom-control-label text-danger">NO</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="portal-card-list">
+              <p><strong>Received the hepatitis B vaccination at no cost to me</strong></p>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="hasNoCostHepa-yes" name="hasNoCostHepa" class="custom-control-input" value="YES" checked
+                       formControlName="hasNoCostHepa" tabindex="21" />
+                <label for="hasNoCostHepa-yes" class="custom-control-label text-success">YES</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="hasNoCostHepa-no" name="hasNoCostHepa" class="custom-control-input" value="NO"
+                       formControlName="hasNoCostHepa" tabindex="22" />
+                <label for="hasNoCostHepa-no" class="custom-control-label text-danger">NO</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="portal-card-list">
+              <p><strong>Received training and information about the facility</strong></p>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="hasFacilityInfo-yes" name="hasFacilityInfo" class="custom-control-input" value="YES" checked
+                       formControlName="hasFacilityInfo" tabindex="21" />
+                <label for="hasFacilityInfo-yes" class="custom-control-label text-success">YES</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="hasFacilityInfo-no" name="hasFacilityInfo" class="custom-control-input" value="NO"
+                       formControlName="hasFacilityInfo" tabindex="22" />
+                <label for="hasFacilityInfo-no" class="custom-control-label text-danger">NO</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-8 col-lg-8">
+            <div class="form-group">
+              <label for="comment" class="form-label">Comment</label>
+              <input id="comment" name="comment" type="text" class="form-control" autocomplete="off"
+                     formControlName="comment" tabindex="8" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="signatureDate" class="form-label">Signature Date</label>
+              <p-calendar id="signatureDate" name="signatureDate" placeholder="MM-DD-YYYY"
+                          formControlName="signatureDate"
+                          tabindex="13"
+                          dateFormat="mm-dd-yy"
+                          [monthNavigator]="true"
+                          [yearNavigator]="true"
+                          yearRange="1900:2100"
+                          [showIcon]="true">
+              </p-calendar>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-8 col-lg-8">
+            <div class="form-group">
+              <label for="witnessName" class="form-label">Witness Name</label>
+              <input id="witnessName" name="apt" type="text" class="form-control" autocomplete="off"
+                     formControlName="witnessName" tabindex="9" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="witnessSignatureDate" class="form-label">Witness Signature Date</label>
+              <p-calendar id="witnessSignatureDate" name="witnessSignatureDate" placeholder="MM-DD-YYYY"
+                          formControlName="witnessSignatureDate"
+                          tabindex="16"
+                          dateFormat="mm-dd-yy"
+                          [monthNavigator]="true"
+                          [yearNavigator]="true"
+                          yearRange="1900:2100"
+                          [showIcon]="true">
+              </p-calendar>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-8 col-lg-8">
+            <div class="form-group">
+              <label for="complianceOfficer" class="form-label">Compliance Officer Name</label>
+              <input id="complianceOfficer" name="complianceOfficer" type="text" class="form-control" autocomplete="off"
+                     formControlName="complianceOfficer" tabindex="4" trimmed />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <ul class="list-inline mb-0 d-flex justify-content-between">
+          <li class="list-inline-item">
+            <a [routerLink]="['/hepab-hippa-info']" routerLinkActive="active" class="btn btn-primary btn-portal-border" tabindex="18">Back</a>
+          </li>
+          <li class="list-inline-item">
+            <button type="button" (click)="onClear()" class="btn btn-primary btn-portal-border" tabindex="19">Clear</button>
+          </li>
+          <li class="list-inline-item">
+            <button type="submit" class="btn btn-primary btn-portal" tabindex="17">Save</button>
+          </li>
+        </ul>
+      </div>
+    </form>
+  </div>
+</div>
+<p-toast key="toastKey1"></p-toast>

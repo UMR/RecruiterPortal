@@ -1,0 +1,35 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+<section class="login-area mt-5">
+  <div class="container">
+    <div class="row login">
+
+      <div class="col-md-7 px-0">
+        <div class="login-img">
+          <img src="assets/img/applicant.jpg" class="img-fluid" alt="">
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <div class="login-form">
+          <h4 class="mt-4 mb-4">Verification</h4>
+          <p>Please enter the verification code sent to your given email</p>
+          <p style="font-size: 13px !important;">Please enter the verification code sent to your given email. If no code has arrived in your Inbox, please check your <span style="color:brown">Spam folder</span> before requesting a new one.</p>
+
+          <form role="form" (ngSubmit)='onVerification()' #verficationForm="ngForm">
+
+            <div class="form-group">
+              <input id="verification" [(ngModel)]="verficationCode" name="verification" type="text" trimmed
+                     class="form-control" maxlength="10" autofocus required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-portal">Verify</button>
+            <p class="text-center mt-3"><a style="cursor:pointer" (click)="resendCodeEvent()">Resend Code</a></p>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<p-toast key="toastKey1"></p-toast>

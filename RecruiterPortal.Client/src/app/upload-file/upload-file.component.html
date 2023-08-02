@@ -1,0 +1,193 @@
+
+<div class="container-fluid">
+  <!--<div class="row">
+    <div class="col-md-10">
+    </div>
+    <div class="col-md-2">
+      <a target="_blank" href="assets/pdf/APPLICATION FORM.pdf" routerLinkActive="active" class="list-group-item list-group-item-action"> <i class="fa fa-file-download"></i>Download Application Form</a>
+    </div>
+  </div>-->
+  <div class="row">
+    <div class="col-md-12 mb-3">
+      <div class="card">
+        <p-steps [model]="steps" [(activeIndex)]="activeIndex" [readonly]="false" class="step-height" (activeIndexChange)="onActiveIndexChange($event)"></p-steps>
+        <router-outlet></router-outlet>
+      </div>
+      <!--<p-tabView>
+        <p-tabPanel header="Step 1">
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <app-com-upload-file fileType="AgencyHired" fileCaption="Agency Hire Form" filePath="assets/pdf/2021/AGENCY_HIRE_FORM_2021.docx"></app-com-upload-file>
+            </div>
+          </div>
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <app-com-upload-file fileType="ReferenceLetters" fileCaption="Reference Letters Form" filePath=""></app-com-upload-file>
+            </div>
+          </div>
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <app-com-upload-file fileType="Payroll" fileCaption="Payroll Form" filePath="assets/pdf/2021/Direct_Deposit_Payroll_Authorization.docx"></app-com-upload-file>
+            </div>
+          </div>
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <app-com-upload-file fileType="VoidedCheque" fileCaption="Voided Cheque Form" filePath=""></app-com-upload-file>
+            </div>
+          </div>
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <app-com-upload-file fileType="AdministrativeFeeAgreement" fileCaption="Administrative Fee Agreement Form" filePath="assets/pdf/2021/Administrative_Fee_Agreement.docx"></app-com-upload-file>
+            </div>
+          </div>
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <app-com-upload-file fileType="EmergencyContact" fileCaption="Emergency Contact Form" filePath="assets/pdf/2021/Emergency_Contact_Information_Form.docx"></app-com-upload-file>
+            </div>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="Step 2">
+          <div class="row pt-2">
+            <div class="col-md-12">
+              <app-com-upload-file fileType="EmploymentApplication" fileCaption="Employment Application Form" filePath="assets/pdf/2021/Employment_Application_Form.docx"></app-com-upload-file>
+            </div>
+          </div>
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <app-com-upload-file fileType="EmploymentEligibility" fileCaption="Employment Eligibility Form" filePath="assets/pdf/2021/Employment_Eligibility_Verification.docx"></app-com-upload-file>
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-md-12">
+              <app-com-upload-file fileType="HepatitisB" fileCaption="Hepatitis B Form" filePath="assets/pdf/2021/Hepatitis_B_Immunization.docx"></app-com-upload-file>
+            </div>
+          </div>
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <app-com-upload-file fileType="DeclinationInfluenza" fileCaption="Declination Influenza Form" filePath="assets/pdf/2021/Declination_of_Influenza_Vaccination.docx"></app-com-upload-file>
+            </div>
+          </div>
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <app-com-upload-file fileType="HippaForm" fileCaption="HIPPA Form" filePath="assets/pdf/2021/HIPPA_Form_2021.docx"></app-com-upload-file>
+            </div>
+          </div>
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <app-com-upload-file fileType="IndependentContractorAgreement" fileCaption="Independent Contractor Agreement Form" filePath="assets/pdf/2021/Independent_Contractor_Agreement_2021.docx"></app-com-upload-file>
+            </div>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="Step 3">
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <app-com-upload-file fileType="EmploymentContract" fileCaption="Employment Contract Form" filePath=""></app-com-upload-file>
+            </div>
+          </div>
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <app-com-upload-file fileType="TermsAndConditionsIndependentContractor" fileCaption="Terms and Conditions Independent Contractor Form" filePath="assets/pdf/2021/Terms_and_Conditions_Independent_Contractor_2020.docx"></app-com-upload-file>
+            </div>
+          </div>
+          <div class="row pt-2">
+            <div class="col-md-12">
+              <app-com-upload-file fileType="UmrHealthForm" fileCaption="Umr Health Form" filePath="assets/pdf/2021/UMR_HEALTH_FORM_05-25-2020.docx"></app-com-upload-file>
+            </div>
+          </div>
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <app-com-upload-file fileType="W9CoverSheet" fileCaption="W-9 Cover Sheet" filePath="assets/pdf/2021/W-9_Coversheet.docx"></app-com-upload-file>
+            </div>
+          </div>
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <app-com-upload-file fileType="W9" fileCaption="W-9 Form" filePath="assets/pdf/2021/W-9_Request_For_Taxpayer_Identification_Number_and_Certification.docx"></app-com-upload-file>
+            </div>
+          </div>
+        </p-tabPanel>
+        <p-tabPanel header="Step 4">
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <app-com-upload-file fileType="Resume" fileCaption="Resume"></app-com-upload-file>
+            </div>
+          </div>
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <app-com-upload-file fileType="Cpr" fileCaption="CPR(ALS/BLS)"></app-com-upload-file>
+            </div>
+          </div>
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <app-com-upload-file fileType="PhysicalExam" fileCaption="Physical Exam"></app-com-upload-file>
+            </div>
+          </div>
+          <div class="row pt-3">
+            <div class="col-md-12">
+              <app-com-upload-file fileType="NysChrc" fileCaption="NYS DOH CHRC Form" filePath="assets/pdf/NYS Department of Health CHRC 103.pdf"></app-com-upload-file>
+            </div>
+          </div>
+        </p-tabPanel>
+      </p-tabView>-->
+    </div>
+  </div>
+  <!--<div class="row">
+    <div class="col-md-4">
+      <div class="card portal-card">
+        <div class="card-body px-3 py-3">
+          <div class="upload">
+            <p-fileUpload mode="advanced"
+                          auto="true"
+                          customUpload="true"
+                          chooseLabel="Upload Application Form"
+                          accept="image/*,application/pdf,.doc,.docx,application/msword"
+                          maxFileSize="5000000"
+                          tabindex="1"
+                          (onSelect)="onFileSelect($event)"
+                          (uploadHandler)="onApplicationUploadHandler($event)"
+                          [auto]="true">
+              <ng-template pTemplate="toolbar">
+                <p class="mt-3">Size Maximum 5MB(doc, docx, pdf, jpg, jpeg, png, gif format)</p>
+              </ng-template>
+              <ng-template let-file pTemplate="file">
+              </ng-template>
+              <ng-template pTemplate="content">
+              </ng-template>
+            </p-fileUpload>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <loading-image [is-loading]="isLoading"></loading-image>
+      <div class="card portal-card">
+        <div class="card-body px-0 py-0">
+          <p-table #applicationTable [responsive]="true"
+                   [value]="applicationFiles"
+                   selectionMode="single"
+                   [(selection)]="selectedFile"
+                   dataKey="userFileID"
+                   [paginator]="true"
+                   [rows]="5"
+                   (onPage)="paginate($event)">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>File Name</th>
+                <th class="text-center">Uploaded Date</th>
+                <th class="text-center">Action</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-userFile>
+              <tr>
+                <td>{{userFile.fileName}}</td>
+                <td class="text-center">{{userFile.createdDate | date:'MM-dd-yyyy'}}</td>
+                <td class="text-center"><a (click)="onDeleteFile(userFile.userFileID)"><i class="fa fa-trash-alt text-danger"></i></a></td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>-->
+</div>
+<p-toast key="toastKey1"></p-toast>

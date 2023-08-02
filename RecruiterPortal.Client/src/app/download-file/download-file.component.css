@@ -1,0 +1,10 @@
+.portal-card .card-body {
+  height: auto !important;
+}
+.table .thead-portal th {
+  background: #5f27cd !important;
+  border: 0px;
+}
+.fa-download {
+  color: #5f27cd !important;
+}

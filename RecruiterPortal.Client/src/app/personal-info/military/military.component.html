@@ -1,0 +1,62 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+<div class="card portal-card">
+  <div class="card-body">
+    <a [routerLink]="['./edit']" class="text-right card-edit"><i class="fa fa-edit text-edit"></i></a>
+    <div class="row">
+      <div class="col-md-12">
+
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-action">
+            <div class="row">
+              <div class="col-3">
+                <label for="">Branch: </label>
+              </div>
+              <div class="col-9">{{userMilitary?.Branch}}</div>
+            </div>
+          </li>
+          <li class="list-group-item list-group-item-action">
+            <div class="row">
+              <div class="col-3">
+                <label for="">From: </label>
+              </div>
+              <div class="col-9">{{userMilitary?.FromDate | date :'MM-dd-yyyy'}}</div>
+            </div>
+          </li>
+          <li class="list-group-item list-group-item-action">
+            <div class="row">
+              <div class="col-3">
+                <label for="">To: </label>
+              </div>
+              <div class="col-9">{{userMilitary?.ToDate | date :'MM-dd-yyyy'}}</div>
+            </div>
+          </li>
+          <li class="list-group-item list-group-item-action">
+            <div class="row">
+              <div class="col-3">
+                <label for="">Rank at Discharge: </label>
+              </div>
+              <div class="col-9">{{userMilitary?.RankAtDischarge}}</div>
+            </div>
+          </li>
+          <li class="list-group-item list-group-item-action">
+            <div class="row">
+              <div class="col-3">
+                <label for="">Type of Discharge: </label>
+              </div>
+              <div class="col-9">{{dischargeType}}</div>
+            </div>
+          </li>
+          <li class="list-group-item list-group-item-action">
+            <div class="row">
+              <div class="col-3">
+                <label for="">If other than honorable, explain:</label>
+              </div>
+              <div class="col-9">{{userMilitary?.DisonourComment}}</div>
+            </div>
+          </li>
+        </ul>        
+      </div>
+    </div>
+  </div>
+</div>
+<p-toast key="toastKey1"></p-toast>

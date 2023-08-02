@@ -1,0 +1,25 @@
+<!-- Wrapper Start -->
+<div class="d-flex" id="wrapper" #wrapperDiv (window:resize)="onResize($event)">
+
+  <!-- Sidebar Start -->
+  <sidebar (onSideMenuClicked)="(hideSideMenu)()"></sidebar>
+  <!-- Sidebar End -->
+
+  <!-- Page Content Start -->
+  <div id="page-content-wrapper">
+
+    <!-- Navbar Start -->
+    <applicant-portal-header  (onToggleButtonClicked)="(showHideMenu)()" isVisibleToggleButton=1></applicant-portal-header>
+    <!-- Navbar End -->
+
+    <!-- Main Content Start -->
+    <section class="main-content">
+      <router-outlet></router-outlet>
+    </section>
+    <!-- Main Content End -->
+
+  </div>
+  <!-- Page Content Start -->
+
+</div>
+<!-- Wrapper End -->

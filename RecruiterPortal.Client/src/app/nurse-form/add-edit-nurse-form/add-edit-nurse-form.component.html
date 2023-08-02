@@ -1,0 +1,461 @@
+<div class="container-fluid">
+  <loading-image [is-loading]="isLoading"></loading-image>
+  <div class="card portal-card">
+    <form (ngSubmit)="onSubmit()" [formGroup]="addEditNurseFormGroup" novalidate>
+      <div class="card-body px-3 py-3" style="height:auto;">
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="portal-card-list">
+              <p><strong>Check what you are applying for?</strong></p>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="applyingForJobTypeRPN" name="applyingForJobType" class="custom-control-input" value="Yes"
+                       formControlName="applyingForJobType" tabindex="-1" />
+                <label for="applyingForJobTypeRPN" class="custom-control-label text-success">Registered Professional Nurse</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="applyingForJobTypeLPN" name="applyingForJobType" class="custom-control-input" value="No"
+                       formControlName="applyingForJobType" tabindex="0" />
+                <label for="applyingForJobTypeLPN" class="custom-control-label text-success">Licensed Practical Nurse</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="portal-card-list">
+              <p><strong>I am applying for?</strong></p>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="rbOriginalPermit" name="applyingForPosition" class="custom-control-input" value="1"
+                       formControlName="applyingForPosition" tabindex="1" />
+                <label for="rbOriginalPermit" class="custom-control-label text-success">Original Permit</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="rbAdditionalSupervisor" name="applyingForPosition" class="custom-control-input" value="2"
+                       formControlName="applyingForPosition" tabindex="2" />
+                <label for="rbAdditionalSupervisor" class="custom-control-label text-success">Additional supervisor/site</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="rbChangeSupervisor" name="applyingForPosition" class="custom-control-input" value="3"
+                       formControlName="applyingForPosition" tabindex="2" />
+                <label for="rbChangeSupervisor" class="custom-control-label text-success">Change of supervisor/site</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="portal-card-list">
+              <p><strong>Are you licensed as a nurse in another jurisdiction?</strong></p>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="licensedJurisdictionYes" name="licensedJurisdiction" class="custom-control-input" value="Yes"
+                       formControlName="licensedJurisdiction" tabindex="1" />
+                <label for="licensedJurisdictionYes" class="custom-control-label text-success">Yes</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="licensedJurisdictionNo" name="licensedJurisdiction" class="custom-control-input" value="No"
+                       formControlName="licensedJurisdiction" tabindex="2" />
+                <label for="licensedJurisdictionNo" class="custom-control-label text-success">No</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="portal-card-list">
+              <p><strong>If no, have you ever failed the RNlicensing examination?</strong></p>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="failedRNLicensingYes" name="failedRNLicensing" class="custom-control-input" value="Yes"
+                       formControlName="failedRNLicensing" tabindex="3" />
+                <label for="failedRNLicensingYes" class="custom-control-label text-success">Yes</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="failedRNLicensingNo" name="failedRNLicensing" class="custom-control-input" value="No"
+                       formControlName="failedRNLicensing" tabindex="4" />
+                <label for="failedRNLicensingNo" class="custom-control-label text-success">No</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="portal-card-list">
+              <p><strong>If no, have you ever failed the PNlicensing examination?</strong></p>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="failedPNLicensingYes" name="failedPNLicensing" class="custom-control-input" value="Yes"
+                       formControlName="failedPNLicensing" tabindex="5" />
+                <label for="failedPNLicensingYes" class="custom-control-label text-success">Yes</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="failedPNLicensingNo" name="failedPNLicensing" class="custom-control-input" value="No"
+                       formControlName="failedPNLicensing" tabindex="6" />
+                <label for="failedPNLicensingNo" class="custom-control-label text-success">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="portal-card-list">
+              <p><strong>Foreign Education ONLY. Have you successfully completed CGFNS/CNATS?</strong></p>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="cgfnscnatsCompletedYes" name="cgfnscnatsCompleted" class="custom-control-input" value="CGFNS"
+                       formControlName="cgfnscnatsCompleted" tabindex="7" (change)="onCgfnscnatsCompletedChange($event.target.value)" />
+                <label for="cgfnscnatsCompletedYes" class="custom-control-label text-success">CGFNS</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="cgfnscnatsCompletedNo" name="cgfnscnatsCompleted" class="custom-control-input" value="CNATS"
+                       formControlName="cgfnscnatsCompleted" tabindex="8" (change)="onCgfnscnatsCompletedChange($event.target.value)" />
+                <label for="cgfnscnatsCompletedNo" class="custom-control-label text-success">CNATS</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="cgfnsExaminationDate" class="form-label">IF CGFNS - Date CGFNS Qualifying Examination written</label>
+              <p-calendar id="cgfnsExaminationDate" name="cgfnsExaminationDate" placeholder="MM-DD-YYYY"
+                          formControlName="cgfnsExaminationDate"
+                          tabindex="9"
+                          dateFormat="mm-dd-yy"
+                          [monthNavigator]="true"
+                          [yearNavigator]="true"
+                          yearRange="1900:2100"
+                          [showIcon]="true" [disabled]="true">
+              </p-calendar>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="cgfnsCertificateNumber" class="form-label">CGFNS Certificate number</label>
+              <input id="cgfnsCertificateNumber" name="cgfnsCertificateNumber" type="text" class="form-control" autocomplete="off"
+                     formControlName="cgfnsCertificateNumber" tabindex="10" trimmed/>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="cnatsExaminationDate" class="form-label">IF CNATS - Date CNATS Examination written</label>
+              <p-calendar id="cnatsExaminationDate" name="cnatsExaminationDate" placeholder="MM-DD-YYYY"
+                          formControlName="cnatsExaminationDate"
+                          tabindex="11"
+                          dateFormat="mm-dd-yy"
+                          [monthNavigator]="true"
+                          [yearNavigator]="true"
+                          yearRange="1900:2100"
+                          [showIcon]="true"
+                          [disabled]="true">
+              </p-calendar>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="cnatsExamScore" class="form-label">CNATS Exam score</label>
+              <input id="cnatsExamScore" name="cnatsExamScore" type="text" class="form-control" autocomplete="off"
+                     formControlName="cnatsExamScore" tabindex="12" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-lg-12">
+            <fieldset>
+              <legend>Nursing School Information</legend>
+              <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label for="nursingSchoolAttended" class="form-label">Attended</label>
+                    <input id="nursingSchoolAttended" name="nursingSchoolAttended" type="text" class="form-control" autocomplete="off"
+                           formControlName="nursingSchoolAttended" tabindex="13" trimmed />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label for="nursingSchoolAddress" class="form-label">Address</label>
+                    <input id="nursingSchoolAddress" name="nursingSchoolAddress" type="text" class="form-control" autocomplete="off"
+                           formControlName="nursingSchoolAddress" tabindex="14" trimmed />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label for="nursingSchoolCompletedDate" class="form-label">Date degree completed</label>
+                    <p-calendar id="cnatsExaminationDate" name="nursingSchoolCompletedDate" placeholder="MM-DD-YYYY"
+                                formControlName="nursingSchoolCompletedDate"
+                                tabindex="15"
+                                dateFormat="mm-dd-yy"
+                                [monthNavigator]="true"
+                                [yearNavigator]="true"
+                                yearRange="1900:2100"
+                                [showIcon]="true">
+                    </p-calendar>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="permitteesName" class="form-label">Permittee's Name</label>
+              <input id="permitteesName" name="permitteesName" type="text" class="form-control" autocomplete="off"
+                     formControlName="permitteesName" tabindex="16" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="portal-card-list">
+              <p><strong>To be employed as (RN/LPN)</strong></p>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="rnlpnEmployedRN" name="rnlpnEmployed" class="custom-control-input" value="RN"
+                       formControlName="rnlpnEmployed" tabindex="17" />
+                <label for="rnlpnEmployedRN" class="custom-control-label text-success">RN</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="rnlpnEmployedLPN" name="rnlpnEmployed" class="custom-control-input" value="LPN"
+                       formControlName="rnlpnEmployed" tabindex="18" />
+                <label for="rnlpnEmployedLPN" class="custom-control-label text-success">LPN</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-lg-12">
+            <fieldset>
+              <legend>Employer Information</legend>
+              <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label for="employerName" class="form-label">Name</label>
+                    <input id="employerName" name="employerName" type="text" class="form-control" autocomplete="off"
+                           formControlName="employerName" tabindex="19" trimmed />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label for="permitteesName" class="form-label">Street Address</label>
+                    <input id="employerStreetAddress" name="employerStreetAddress" type="text" class="form-control" autocomplete="off"
+                           formControlName="employerStreetAddress" tabindex="20" trimmed />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label for="employerCity" class="form-label">City</label>
+                    <input id="employerCity" name="employerCity" type="text" class="form-control" autocomplete="off"
+                           formControlName="employerCity" tabindex="21" trimmed />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label for="employerStateProvince" class="form-label">State/Province</label>
+                    <input id="employerStateProvince" name="employerStateProvince" type="text" class="form-control" autocomplete="off"
+                           formControlName="employerStateProvince" tabindex="22" trimmed />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label for="employerZipCode" class="form-label">Zip Code</label>
+                    <input id="employerZipCode" name="employerZipCode" type="text" class="form-control" autocomplete="off"
+                           formControlName="employerZipCode" tabindex="23" trimmed />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label for="employerCountry" class="form-label">Country</label>
+                    <input id="employerCountry" name="employerCountry" type="text" class="form-control" autocomplete="off"
+                           formControlName="employerCountry" tabindex="24" trimmed />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label for="employerTelephone" class="form-label">Telephone</label>
+                    <input id="employerTelephone" name="employerTelephone" type="text" class="form-control" autocomplete="off"
+                           formControlName="employerTelephone" tabindex="25" trimmed />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label for="employerFax" class="form-label">Fax</label>
+                    <input id="employerFax" name="employerFax" type="text" class="form-control" autocomplete="off"
+                           formControlName="employerFax" tabindex="26" trimmed />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label for="employerEmail" class="form-label">Email</label>
+                    <input id="employerEmail" name="employerEmail" type="text" class="form-control" autocomplete="off"
+                           formControlName="employerEmail" tabindex="27" trimmed />
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-lg-12">
+            <fieldset>
+              <legend>If practice site is different from employer's address</legend>
+              <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label for="practiceName" class="form-label">Name</label>
+                    <input id="practiceName" name="practiceName" type="text" class="form-control" autocomplete="off"
+                           formControlName="practiceName" tabindex="28" trimmed />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label for="practiceStreetAddress" class="form-label">Street Address</label>
+                    <input id="practiceStreetAddress" name="practiceStreetAddress" type="text" class="form-control" autocomplete="off"
+                           formControlName="practiceStreetAddress" tabindex="29" trimmed />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label for="practiceCity" class="form-label">City</label>
+                    <input id="practiceCity" name="practiceCity" type="text" class="form-control" autocomplete="off"
+                           formControlName="practiceCity" tabindex="30" trimmed />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label for="practiceStateProvince" class="form-label">State/Province</label>
+                    <input id="practiceStateProvince" name="practiceStateProvince" type="text" class="form-control" autocomplete="off"
+                           formControlName="practiceStateProvince" tabindex="31" trimmed />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label for="practiceZipCode" class="form-label">Zip Code</label>
+                    <input id="practiceZipCode" name="practiceZipCode" type="text" class="form-control" autocomplete="off"
+                           formControlName="practiceZipCode" tabindex="32" trimmed />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label for="practiceCountry" class="form-label">Country</label>
+                    <input id="practiceCountry" name="practiceCountry" type="text" class="form-control" autocomplete="off"
+                           formControlName="practiceCountry" tabindex="33" trimmed />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label for="practiceTelephone" class="form-label">Telephone</label>
+                    <input id="practiceTelephone" name="practiceTelephone" type="text" class="form-control" autocomplete="off"
+                           formControlName="practiceTelephone" tabindex="34" trimmed />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label for="practiceFax" class="form-label">Fax</label>
+                    <input id="practiceFax" name="practiceFax" type="text" class="form-control" autocomplete="off"
+                           formControlName="practiceFax" tabindex="35" trimmed />
+                  </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="form-group">
+                    <label for="practiceEmail" class="form-label">Email</label>
+                    <input id="practiceEmail" name="practiceEmail" type="text" class="form-control" autocomplete="off"
+                           formControlName="practiceEmail" tabindex="36" trimmed />
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div class="row" style="display:none">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="registeredProfessionalNurse" class="form-label">Supervising registered professional nurse</label>
+              <input id="registeredProfessionalNurse" name="registeredProfessionalNurse" type="text" class="form-control" autocomplete="off"
+                     formControlName="registeredProfessionalNurse" tabindex="37" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="newYorkStateLicenseNumber1" class="form-label">New York State License number 1</label>
+              <input id="newYorkStateLicenseNumber1" name="newYorkStateLicenseNumber1" type="text" class="form-control" autocomplete="off"
+                     formControlName="newYorkStateLicenseNumber1" tabindex="38" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="newYorkStateLicenseNumber2" class="form-label">New York State License number 2</label>
+              <input id="newYorkStateLicenseNumber2" name="newYorkStateLicenseNumber2" type="text" class="form-control" autocomplete="off"
+                     formControlName="newYorkStateLicenseNumber2" tabindex="39" trimmed />
+            </div>
+          </div>
+        </div>
+        <div class="row" style="display:none">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="signatureBehalfEmployer" class="form-label">Signature on behalf of employer</label>
+              <input id="signatureBehalfEmployer" name="signatureBehalfEmployer" type="text" class="form-control" autocomplete="off"
+                     formControlName="signatureBehalfEmployer" tabindex="40" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="signatureDate" class="form-label">Signature date</label>
+              <p-calendar id="signatureDate" name="signatureDate" placeholder="MM-DD-YYYY"
+                          formControlName="signatureDate"
+                          tabindex="41"
+                          dateFormat="mm-dd-yy"
+                          [monthNavigator]="true"
+                          [yearNavigator]="true"
+                          yearRange="1900:2100"
+                          [showIcon]="true">
+              </p-calendar>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="printName" class="form-label">Print Name</label>
+              <input id="printName" name="printName" type="text" class="form-control" autocomplete="off"
+                     formControlName="printName" tabindex="42" trimmed />
+            </div>
+          </div>
+        </div>
+        <div class="row" style="display:none">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="newYorkStateProfession" class="form-label">Title</label>
+              <input id="newYorkStateProfession" name="newYorkStateProfession" type="text" class="form-control" autocomplete="off"
+                     formControlName="newYorkStateProfession" tabindex="43" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="title" class="form-label">New York State Profession</label>
+              <input id="title" name="title" type="text" class="form-control" autocomplete="off"
+                     formControlName="title" tabindex="44" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="newYorkStateProfessionalLicenseNumber" class="form-label">New York State Professional License Number</label>
+              <input id="newYorkStateProfessionalLicenseNumber" name="newYorkStateProfessionalLicenseNumber" type="text" class="form-control" autocomplete="off"
+                     formControlName="newYorkStateProfessionalLicenseNumber" tabindex="45" trimmed />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <ul class="list-inline mb-0 d-flex justify-content-between">
+          <li class="list-inline-item">
+            <a [routerLink]="['/nurse-form']" routerLinkActive="active" class="btn btn-primary btn-portal-border" tabindex="47">Back</a>
+          </li>
+          <li class="list-inline-item">
+            <button type="button" (click)="onClear()" class="btn btn-primary btn-portal-border" tabindex="48">Clear</button>
+          </li>
+          <li class="list-inline-item">
+            <button type="submit" class="btn btn-primary btn-portal" tabindex="46" [disabled]="!addEditNurseFormGroup.valid">Save</button>
+          </li>
+        </ul>
+      </div>
+    </form>
+  </div>
+</div>
+<p-toast key="toastKey1"></p-toast>

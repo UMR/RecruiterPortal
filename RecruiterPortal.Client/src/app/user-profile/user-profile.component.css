@@ -1,0 +1,15 @@
+#page-content-wrapper {
+  width: 65%;
+  margin: 0 auto;
+}
+
+
+:host >>> p-inputmask.pMaskRequired, :host >>> p-inputmask.pMaskRequired.ng-dirty.ng-invalid > .p-inputmask > .ui-inputtext {
+  border: 1px solid red !important;
+  border-left: 5px solid red !important;
+}
+
+  :host >>> p-inputmask.pMaskRequired.ng-valid {
+    border: 1px solid #ced4da !important;
+    border-left: 5px solid green !important;
+  }

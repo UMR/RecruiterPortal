@@ -1,0 +1,33 @@
+.portal-card .card-body {
+  height: auto !important;
+}
+:host >>> .upload p{
+  line-height: 16px;
+}
+
+/*:host >>> .p-tabview .p-tabview-panels {
+  background-color: #7d5fff!important;  
+  border: none !important;  
+}*/
+
+/*:host >>> .ui-tabview-panels {
+  background-color: #7d5fff!important;  
+  border: none!important;  
+}*/
+
+
+:host >>> .ui-tabview-panels {
+  background-color: rgb(100, 95, 200)!important;
+  background: linear-gradient(1, rgb(82, 106, 214) 0%, rgb(98, 55, 142) 100%);  
+  background: -webkit-linear-gradient(1, rgb(82, 106, 214) 0%, rgb(98, 55, 142) 100%);
+  border: none !important;
+}
+
+:host >>> .ui-steps {
+  position: relative;
+  visibility: hidden;
+}
+
+.step-height {
+  height:50px!important;
+}

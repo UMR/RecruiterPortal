@@ -1,0 +1,165 @@
+<div id="page-content-wrapper">
+  <!-- Navbar Start -->
+  <applicant-portal-header (onToggleButtonClicked)="(showHideMenu)()" isVisibleToggleButton=0></applicant-portal-header>
+  <!-- Navbar End -->
+  <!-- Main Content Start -->
+  <section class="main-content">
+    <div class="container-fluid">
+      <div class="card portal-card">
+        <loading-image [is-loading]="isLoading"></loading-image>
+        <div class="card-body" style="height:auto;">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card-body px-3 py-3" style="height:auto;">
+                <div class="row mb-3">
+                  <div class="col-sm-12 col-md-4 col-lg-4">
+                    <button type="button" routerLink="/view-by-applicant" class="btn btn-primary btn-portal-border mr-3" tabindex="7">Back</button>
+                    <button type="button" class="btn btn-primary btn-portal" tabindex="6" (click)="onAddNew()">Add New</button>
+                  </div>
+                </div>
+                <div class="row pd-15">
+                  <p-table #userTable [responsive]="true"
+                           [value]="users"
+                           dataKey="ApplicantPortalUserId"
+                           [paginator]="true"
+                           [rows]="rows"
+                           [columns]="cols"
+                           [totalRecords]="totalUsers"
+                           [lazy]="false"
+                           [rowsPerPageOptions]="[10,15,20]"
+                           [showCurrentPageReport]="true"
+                           currentPageReportTemplate="Total Records {{totalUsers}}">
+                    <ng-template pTemplate="header" let-columns>
+                      <tr>
+                        <th *ngFor="let col of columns">
+                          {{col.header}}
+                        </th>
+                        <th class="text-center">Action</th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-user let-rowData let-columns="columns">
+                      <tr [pSelectableRow]="user">
+                        <td *ngFor="let col of columns">
+                          {{rowData[col.field]}}
+                        </td>
+                        <td class="text-center">
+                          <a (click)="onEdit(user)" style="padding:0 7px;"><i class="pi pi-user-edit"></i></a>
+                          <a (click)="onDelete(user.LoginId)" style="padding:0 7px;"><i class="pi pi-trash"></i></a>
+                        </td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Main Content End -->
+
+  <p-dialog appendTo="body"
+            [(visible)]="displayModal"
+            modal="modal" width="495" height="auto"
+            header="{{saveBtn}} User"
+            [closable]="false" [showHeader]="true">
+    <div class="row">
+      <div class="col-md-12">
+        <form (ngSubmit)="onSubmit()" [formGroup]="usersFormGroup" novalidate>
+          <div class="card-body px-3 py-3" style="height:auto;">
+            <div class="form-group">
+              <label for="userLoginId" class="form-label">Login Id</label>
+              <input id="userLoginId" name="userLoginId" type="text" class="form-control" autocomplete="off"
+                     formControlName="userLoginId" tabindex="1" trimmed maxlength="250"
+                     required [ngClass]="{ 'is-invalid': f.userLoginId.errors }" />
+              <div *ngIf="f.userLoginId.errors && f.userLoginId?.touched" class="invalid-feedback">
+                <div *ngIf="f.userLoginId.errors.required">Login Id is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="userFirstName" class="form-label">First Name</label>
+              <input id="userFirstName" name="userFirstName" type="text" class="form-control" autocomplete="off"
+                     formControlName="userFirstName" tabindex="2" trimmed maxlength="250"
+                     required [ngClass]="{ 'is-invalid': f.userFirstName.errors }" />
+              <div *ngIf="f.userFirstName.errors && f.userFirstName?.touched" class="invalid-feedback">
+                <div *ngIf="f.userFirstName.errors.required">First Name is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="userLastName" class="form-label">Last Name</label>
+              <input id="userLastName" name="userLastName" type="text" class="form-control" autocomplete="off"
+                     formControlName="userLastName" tabindex="2" trimmed maxlength="250"
+                     required [ngClass]="{ 'is-invalid': f.userLastName.errors }" />
+              <div *ngIf="f.userLastName.errors && f.userLastName?.touched" class="invalid-feedback">
+                <div *ngIf="f.userLastName.errors.required">Last Name is required</div>
+              </div>
+            </div>
+            <div class="form-group">
+
+              <label for="userEmail" class="form-label">Email</label>
+              <input id="userEmail" name="userEmail" type="text" class="form-control" autocomplete="off"
+                     formControlName="userEmail" tabindex="2" trimmed maxlength="250"
+                     required [ngClass]="{ 'is-invalid': f.userEmail.errors }" />
+              <div *ngIf="f.userEmail.errors && f.userEmail?.touched" class="invalid-feedback">
+                <div *ngIf="f.userEmail.errors.required">Email is required</div>
+                <div *ngIf="f.userEmail.errors.pattern">Email must be a valid email address</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="userPassword" class="form-label">Password</label>
+              <input id="userPassword" name="userPassword" type="password" class="form-control" autocomplete="off"
+                     formControlName="userPassword" tabindex="2" trimmed maxlength="250"
+                     required [ngClass]="{ 'is-invalid': f.userPassword.errors }" />
+              <div *ngIf="f.userPassword.errors && f.userPassword?.touched" class="invalid-feedback">
+                <div *ngIf="f.userPassword.errors.required">Password is required</div>
+                <div *ngIf="f.userPassword.errors.minlength">Password must be at least 6 characters</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword" class="form-label">Confirm Password</label>
+              <input id="confirmPassword" name="confirmPassword" type="password" class="form-control" autocomplete="off"
+                     formControlName="confirmPassword" tabindex="2" trimmed maxlength="250"
+                     required [ngClass]="{ 'is-invalid': f.confirmPassword.errors }" />
+              <div *ngIf="f.confirmPassword.errors && f.confirmPassword?.touched" class="invalid-feedback">
+                <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="userTelephone" class="form-label">Telephone</label>
+              <input id="userTelephone" name="userTelephone" type="text" class="form-control" autocomplete="off"
+                     formControlName="userTelephone" tabindex="2" trimmed maxlength="250"
+                     required [ngClass]="{ 'is-invalid': f.userTelephone.errors }" />
+              <div *ngIf="f.userTelephone.errors && f.userTelephone?.touched" class="invalid-feedback">
+                <div *ngIf="f.userTelephone.errors.required">Telephone No. is required</div>
+                <div *ngIf="f.userTelephone.errors.pattern">Only number is accepted</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="userStatus" class="form-label">Status</label>
+              <select id="userStatus" name="userStatus" class="form-control" formControlName="userStatus"
+                      placeholder="User Status" tabindex="5" #userStatus (change)='onUserStatusChange($event)'
+                      [class.red-border]="!usersFormGroup.get('userStatus').value">
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+              </select>
+            </div>
+            <button type="button" (click)="onClose()" class="btn btn-primary btn-portal-border mr-3" tabindex="7">Close</button>
+            <button type="button" (click)="onClear()" class="btn btn-primary btn-portal-border mr-3" tabindex="7">Clear</button>
+            <button type="submit" class="btn btn-primary btn-portal float-right" tabindex="6" [disabled]="!usersFormGroup.valid" style=" width: 90px;">{{saveBtn}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </p-dialog>
+  <p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle text-danger">
+    <p-footer>
+      <button type="button" class="btn btn-primary btn-portal-border btn-dialog btn-cancel" pButton label="No" (click)="cd.reject()"></button>
+      <button type="button" class="btn btn-primary btn-portal btn-dialog" pButton label="Yes" (click)="cd.accept()"></button>
+    </p-footer>
+  </p-confirmDialog>
+</div>
+<p-toast key="toastKey1"></p-toast>
+
+

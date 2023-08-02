@@ -1,0 +1,54 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+<div class="container-fluid">
+  <div class="card portal-card">
+    <div class="card-body">
+      <a [routerLink]="['./add-edit']" *ngIf="userLicenses && userLicenses.length !== 0" class="text-right card-edit"><i class="fa fa-plus text-edit"></i></a>
+      <div class="row">
+        <div class="col-md-12">
+
+          <div class="empty-state text-center" *ngIf="userLicenses && userLicenses.length === 0">
+            <img src="assets/img/high-school.svg" class="img-fluid mb-3" width="72" alt="">
+            <h5 class="mb-3">You haven't added any license yet.</h5>
+            <a [routerLink]="['./add-edit']" class="btn btn-primary btn-portal-border">Add License</a>
+          </div>
+
+          <ul class="timeline">
+            <li *ngFor="let license of userLicenses">
+              <div class="timeline-list">
+                <img src="assets/img/high-school.svg" class="img-fluid" width="30" alt="">
+                <div class="d-flex justify-content-between">
+                  <h4>{{license.LicenseName}}</h4>
+                  <ul class="list-inline mr-5">
+                    <li class="list-inline-item mr-4"><a [routerLink]="['./add-edit',license.LicenseID]" class="text-primary"><i class="fa fa-pencil-alt"></i> Edit</a></li>
+                    <li class="list-inline-item"><a (click)="onDelete(license.LicenseID)" class="text-danger"><i class="fa fa-trash-alt"></i> Delete</a></li>
+                  </ul>
+                </div>
+                <h6>{{license.LicenseNo}}</h6>
+                <div class="refer">
+                  <div class="refer">
+                    <p *ngIf='license.issuedDate!==""'><label for="" style="color:#434A54">Issue Date:&nbsp;</label><label for="">{{license.IssuedDate}}</label></p>
+                    <p *ngIf='license.expiryDate!==""'><label for="" style="color:#434A54">Expiry Date:&nbsp;</label><label for="">{{license.ExpiryDate}}</label></p>
+                  </div>
+                </div>
+                <div class="refer">
+                  <p *ngIf='license.fileName!==""'><label for="" style="color:#434A54">File Name:&nbsp;</label><label for="">{{license.FileName}}</label></p>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle text-danger">
+    <p-footer>
+      <button type="button" class="btn btn-primary btn-portal-border btn-dialog btn-cancel" pButton label="No" (click)="cd.reject()"></button>
+      <button type="button" class="btn btn-primary btn-portal btn-dialog" pButton label="Yes" (click)="cd.accept()"></button>
+    </p-footer>
+  </p-confirmDialog>
+
+  <p-toast key="toastKey1"></p-toast>

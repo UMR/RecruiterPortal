@@ -1,0 +1,35 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+<section class="login-area mt-5">
+  <div class="container">
+    <div class="row login">
+      <div class="col-md-7 px-0">
+        <div class="login-img">
+          <img src="assets/img/applicant.jpg" class="img-fluid" alt="">
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="login-form">
+          <h4 class="mt-4 mb-4">Login</h4>
+          <form role="form" (ngSubmit)='onLogin()' #loginForm="ngForm">
+            <div class="form-group">
+              <label for="email" class="form-label">
+                Login ID
+              </label>
+              <input id="email" [(ngModel)]="email" #emailRef name="email" type="email" class="form-control" tabindex="1"
+                     #emailNgModel="ngModel"  autocomplete="off" autofocus required />
+              <!--<div *ngif="emailngmodel.touched">
+                <p *ngif="emailngmodel.errors?.pattern">this is not a valid email</p>
+              </div>-->
+            </div>
+            <div class="form-group">
+              <label for="password" class="form-label">Password</label>
+              <input id="password" [(ngModel)]="password" name="password" type="password" class="form-control" tabindex="2" required/>
+            </div>
+            <button type="submit" [disabled]="!loginForm.valid || isLoading" class="btn btn-primary btn-block btn-portal" tabindex="4">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<p-toast key="toastKey1"></p-toast>

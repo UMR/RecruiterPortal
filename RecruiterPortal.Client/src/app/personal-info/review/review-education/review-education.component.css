@@ -1,0 +1,16 @@
+:host >>> .empty-state {
+  margin-top: 144px !important;
+}
+
+  :host >>> .empty-state img {
+    opacity: .15;
+  }
+
+  :host >>> .empty-state h5 {
+    opacity: .3;
+    font-weight: 700;
+  }
+
+:host >>> .btn-portal {
+  border: 1px solid #5f27cd !important;
+}

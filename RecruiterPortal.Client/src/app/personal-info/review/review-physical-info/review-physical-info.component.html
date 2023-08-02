@@ -1,0 +1,51 @@
+<div class="second-div" *ngIf="userPhysical">
+  <h5>Physical Info</h5>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-3">
+              <label for="">Height (ft-in) : </label>
+            </div>
+            <div class="col-9">{{userPhysical?.Height}}</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-3">
+              <label for="">Eye Color: </label>
+            </div>
+            <div class="col-9">{{userPhysical?.EyeColor}}</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-3">
+              <label for="">Race: </label>
+            </div>
+            <div class="col-9">{{userPhysical?.Race}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="row pt-2">
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-3">
+              <label for="">Weight (lbs) : </label>
+            </div>
+            <div class="col-9">{{userPhysical?.Weight}}</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-3">
+              <label for="">Hair Color: </label>
+            </div>
+            <div class="col-9">{{userPhysical?.HairColor}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

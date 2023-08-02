@@ -1,0 +1,207 @@
+<div class="container-fluid">
+  <loading-image [is-loading]="isLoading"></loading-image>
+  <div class="card portal-card">
+    <form (ngSubmit)="onSubmit()" [formGroup]="addEditW9FormGroup" novalidate>
+      <div class="card-body px-3 py-3">
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="contractor-no" class="form-label">Name (as shown on your income tax return)</label>
+              <input id="contractor-no" name="contractor-name" type="text" class="form-control" autocomplete="off"
+                     formControlName="name" tabindex="1" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="business-name" class="form-label">Business Name</label>
+              <input id="business-name" name="business-name" type="text" class="form-control" autocomplete="off"
+                     formControlName="businessName" tabindex="2" trimmed />
+            </div>
+          </div>
+          <!--<div class="col-sm-12 col-md-4 col-lg-4">
+      <div class="form-group">
+        <label for="street-add" class="form-label">Business Name</label>
+        <input id="street-add" name="street-add" type="text" class="form-control" autocomplete="off"
+               formControlName="streetAdress" tabindex="10" trimmed />
+      </div>
+    </div>-->
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="companyLiability" class="mr-2">Limited Liability Company  </label>
+              <!--<div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="nonCitizen-yes" name="companyLiability" class="custom-control-input" value="YES" (change)="onCompanyLiabilityChange($event)"
+                       formControlName="companyLiability" tabindex="21" />
+                <label for="nonCitizen-yes" class="custom-control-label text-success">YES</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="nonCitizen-no" name="companyLiability" class="custom-control-input" value="NO" (change)="onCompanyLiabilityChange($event)"
+                       formControlName="companyLiability" tabindex="22" />
+                <label for="nonCitizen-no" class="custom-control-label text-danger">NO</label>
+              </div>-->
+              <input id="companyLiability" name="companyLiability" type="checkbox" formControlName="companyLiability" tabindex="3" (change)="onCompanyLiabilityChange($event)" />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-8 col-lg-8">
+            <div class="portal-card-list">
+              <p><strong>Check appropriate box for federal tax classification</strong></p>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="nursing-home" name="taxClassification" class="custom-control-input" value="proprietor" [attr.disabled]="isDisable"
+                       formControlName="taxClassification" tabindex="4" />
+                <label for="nursing-home" class="custom-control-label text-success">Individual/sole proprietor </label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="ccor" name="taxClassification" class="custom-control-input" value="cCor"
+                       formControlName="taxClassification" tabindex="5" />
+                <label for="ccor" class="custom-control-label text-success">C Corporation</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="scor" name="taxClassification" class="custom-control-input" value="sCor"
+                       formControlName="taxClassification" tabindex="6" />
+                <label for="scor" class="custom-control-label text-success">S Corporation</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="partnar" name="taxClassification" class="custom-control-input" value="partnarship"
+                       formControlName="taxClassification" tabindex="7" />
+                <label for="partnar" class="custom-control-label text-success">Partnership</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="trust" name="taxClassification" class="custom-control-input" value="trust"
+                       formControlName="taxClassification" tabindex="7" />
+                <label for="trust" class="custom-control-label text-success">Trust</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="other" name="taxClassification" class="custom-control-input" value="other"
+                       formControlName="taxClassification" tabindex="7" />
+                <label for="other" class="custom-control-label text-success">Others</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="state" class="form-label">Exemption from FATCA reporting code (if any)</label>
+              <input id="state" name="state" type="text" class="form-control" autocomplete="off"
+                     formControlName="FATCACode" tabindex="14" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="city" class="form-label">Street Address</label>
+              <input id="city" name="city" type="text" class="form-control" autocomplete="off"
+                     formControlName="stAddress" tabindex="10" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="notary" class="form-label">Apt/Suite No.</label>
+              <input id="notary" name="aptNo" type="text" class="form-control" autocomplete="off"
+                     formControlName="aptNo" tabindex="10" trimmed />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="zipcode" class="form-label">Zip Code</label>
+              <p-autoComplete formControlName="zipCode" [suggestions]="zipCodeResults" class="form-control"
+                              (completeMethod)="onZipCodeSearch($event)" field="ZipCode" [dropdown]="true"
+                              forceSelection="true" (onSelect)="onZipCodeSelect($event)" tabindex="12">
+                <ng-template let-zipCode pTemplate="item">
+                  <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.ZipCode}},</div>
+                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.City}},</div>
+                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.StateAbbr}}</div>
+                  </div>
+                </ng-template>
+              </p-autoComplete>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="state" class="form-label">State</label>
+              <input id="state" name="state" type="text" class="form-control" autocomplete="off"
+                     formControlName="state" tabindex="14" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="city" class="form-label">Town/City</label>
+              <input id="city" name="city" type="text" class="form-control" autocomplete="off"
+                     formControlName="city" tabindex="10" trimmed />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="state" class="form-label">List account number(s) here (optional)</label>
+              <input id="state" name="accountNo" type="text" class="form-control" autocomplete="off"
+                     formControlName="accountNo" tabindex="14" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="city" class="form-label">Requester’s name and address (optional)</label>
+              <input id="city" name="requesterName" type="text" class="form-control" autocomplete="off"
+                     formControlName="requesterName" tabindex="10" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="notary" class="form-label">Social Security No.</label>
+              <input id="notary" name="ssn" type="text" class="form-control" autocomplete="off"
+                     formControlName="ssn" tabindex="10" trimmed />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="notary" class="form-label">Employer Identification No.</label>
+              <input id="notary" name="empIdNo" type="text" class="form-control" autocomplete="off"
+                     formControlName="empIdNo" tabindex="10" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="notary" class="form-label">Exempt payee code (if any)</label>
+              <input id="notary" name="payeeCode" type="text" class="form-control" autocomplete="off"
+                     formControlName="payeeCode" tabindex="10" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="date-available" class="form-label">Date</label>
+              <p-calendar id="date-available" name="date-available" placeholder="MM-DD-YYYY"
+                          formControlName="date"
+                          tabindex="15"
+                          dateFormat="mm-dd-yy"
+                          [monthNavigator]="true"
+                          [yearNavigator]="true"
+                          yearRange="1900:2100"
+                          [showIcon]="true">
+              </p-calendar>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <ul class="list-inline mb-0 d-flex justify-content-between">
+          <li class="list-inline-item">
+            <a [routerLink]="['/w9-form-info']" routerLinkActive="active" class="btn btn-primary btn-portal-border" tabindex="23">Back</a>
+          </li>
+          <li class="list-inline-item">
+            <button type="button" (click)="onClear()" class="btn btn-primary btn-portal-border" tabindex="24">Clear</button>
+          </li>
+          <li class="list-inline-item">
+            <button type="submit" class="btn btn-primary btn-portal" [disabled]="!addEditW9FormGroup.valid" tabindex="22">Save</button>
+          </li>
+        </ul>
+      </div>
+    </form>
+  </div>
+</div>
+<p-toast key="toastKey1"></p-toast>

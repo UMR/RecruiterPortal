@@ -1,0 +1,56 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+<div class="tab-pane" id="v-pills-energency-secondary" role="tabpanel" aria-labelledby="v-pills-energency-secondary-tab">
+  <div class="card border-0 rounded-0">
+    <div class="card-body px-0 py-0">
+      <a [routerLink]="['./edit']" class="text-right"><i class="fa fa-edit text-edit card-edit"></i></a>
+      <a class="text-right card-edit" (click)="onDownloadClick()" style="margin-top:50px;"><i class="fa fa-download"></i></a>
+      <div class="row">
+        <div class="col-12">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-3">
+                  <label for="">Full Name: </label>
+                </div>
+                <div class="col-9">{{secondaryInfo.EmrFirstName}}  {{secondaryInfo.EmrLastName}}</div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-3">
+                  <label for="">Relationship: </label>
+                </div>
+                <div class="col-9">{{secondaryInfo.NatureOfRelationship}}</div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-3">
+                  <label for="">Phone(Home): </label>
+                </div>
+                <div class="col-9">{{secondaryInfo.EmrHomePhone}}</div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-3">
+                  <label for="">Phone(Cell): </label>
+                </div>
+                <div class="col-9">{{secondaryInfo.EmrCellPhone}}</div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-3">
+                  <label for="">Phone(Work): </label>
+                </div>
+                <div class="col-9">{{secondaryInfo.EmrWorkPhone}}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p-toast key="toastKey1"></p-toast>

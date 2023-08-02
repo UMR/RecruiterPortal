@@ -1,0 +1,8 @@
+<app-com-upload-file fileType="AgencyHired" fileCaption="Agency Hire Form" filePath="assets/pdf/2021/AGENCY_HIRE_FORM_2021.docx" (getFileTypeChange)="getFileTypeChange($event)"></app-com-upload-file>
+
+<div class="step-body">
+  <div class="float-md-right">
+    <button type="button" class="btn btn-primary btn-block btn-portal" (click)="nextPage()" [disabled]="userFiles.length == 0">Next<i class="fa fa-angle-right" aria-hidden="true"></i></button>
+  </div>
+</div>
+

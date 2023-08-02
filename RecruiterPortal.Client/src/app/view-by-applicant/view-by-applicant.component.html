@@ -1,0 +1,125 @@
+<div id="page-content-wrapper">
+
+  <!-- Navbar Start -->
+  <applicant-portal-header (onToggleButtonClicked)="(showHideMenu)()" isVisibleToggleButton=0></applicant-portal-header>
+  <!-- Navbar End -->
+  <!-- Main Content Start -->
+  <section class="main-content">
+    <div class="container-fluid">
+      <div class="card portal-card">
+        <loading-image [is-loading]="isLoading"></loading-image>
+        <div class="card-body" style="height:auto;">
+
+          <!--<a [routerLink]="['/personal-info']" class="text-right card-edit"><i class="fa fa-edit text-edit"></i></a>-->
+          <div class="row">
+            <div class="col-md-12">
+              <form (ngSubmit)="onSubmit()" [formGroup]="viewByApplicantFormGroup" novalidate>
+                <div class="card-body px-3 py-3" style="height:auto;">
+                  <div class="row">
+                    <!--<div class="col-sm-12 col-md-4 col-lg-4">
+                      <div class="form-group">
+                        <label for="fullname" class="form-label">Applicant Full name</label>
+                        <p-autoComplete formControlName="fullname" class="form-control" [minLength]="1"
+                                        [suggestions]="applicanFullnameResults" (completeMethod)="onApplicantFullnameSearch($event)"
+                                        tabindex="1">
+                        </p-autoComplete>
+                      </div>
+                    </div>-->
+                    <div class="col-sm-6 col-md-2 col-lg-2">
+                      <div class="form-group">
+                        <label for="applicantLastName" class="form-label">Applicant Last Name</label>
+                        <input id="applicantLastName" name="applicantLastName" type="text" class="form-control" autocomplete="off"
+                               formControlName="applicantLastName" tabindex="1" trimmed maxlength="250" />
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-2 col-lg-2">
+                      <div class="form-group">
+                        <label for="applicantFirstName" class="form-label">Applicant First Name</label>
+                        <input id="applicantFirstName" name="applicantFirstName" type="text" class="form-control" autocomplete="off"
+                               formControlName="applicantFirstName" tabindex="2" trimmed maxlength="250" />
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-2 col-lg-2">
+                      <div class="form-group">
+                        <label for="applicantEmail" class="form-label">Applicant Email</label>
+                        <p-autoComplete formControlName="applicantEmail" class="form-control" [minLength]="1"
+                                        [suggestions]="applicantEmailResults" (completeMethod)="onApplicantEmailSearch($event)"
+                                        tabindex="3">
+                        </p-autoComplete>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-2 col-lg-2">
+                      <div class="form-group">
+                        <label for="applicantStatus" class="form-label">Applicant Status</label>
+                        <select id="applicantStatus" name="applicantStatus" class="form-control" formControlName="applicantStatus"
+                                placeholder="Applicant Status" tabindex="5" #applicantStatus (change)='onApplicantStatusChange($event)'>
+                          <option value="Existing">Existing Applicant</option>
+                          <option value="New">New Applicant</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-2 col-lg-2">
+                      <div class="form-group" style="margin-top:20px;float:right">
+                        <button type="button" (click)="onClear()" class="btn btn-clear mr-3" tabindex="7">Clear</button>
+                        <button type="submit" class="btn btn-search" tabindex="6" [disabled]="!viewByApplicantFormGroup.valid">Search</button>
+                      </div>
+                    </div>
+                  </div>
+                  <!--<div class="row mb-3">
+                    <div class="col-sm-12 col-md-4 col-lg-4">
+                      <button type="button" (click)="onClear()" class="btn btn-primary btn-portal-border mr-3" tabindex="7">Clear</button>
+                      <button type="submit" class="btn btn-primary btn-portal" tabindex="6" [disabled]="!viewByApplicantFormGroup.valid">Search</button>
+                    </div>
+                  </div>-->
+                  <div class="row pd-15">
+
+                    <p-table #applicantTable [responsive]="true"
+                             [value]="applicants"
+                             selectionMode="single"
+                             [(selection)]="selectedApplicant"
+                             dataKey="ApplicantPortalUserId"
+                             [paginator]="true"
+                             [rows]="rows"
+                             [columns]="cols"
+                             [totalRecords]="totalApplicants"
+                             [lazy]="true"
+                             (onLazyLoad)="loadApplicantsLazy($event)"
+                             [rowsPerPageOptions]="[10,15,20]"
+                             [showCurrentPageReport]="true"
+                             currentPageReportTemplate="Total Records {{totalApplicants}}">
+                      <ng-template pTemplate="header" let-columns>
+                        <tr>
+                          <th *ngFor="let col of columns">
+                            {{col.header}}
+                          </th>
+                          <th *ngIf="selectedApplicantStatus===2 && isSubmitted" class="text-center">View/Edit</th>
+                          <th *ngIf="selectedApplicantStatus===1 && isSubmitted" class="text-center">Import</th>
+                          <th *ngIf="selectedApplicantStatus===2 && isSubmitted" class="text-center">Sync</th>
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-applicant let-rowData let-columns="columns">
+                        <tr [pSelectableRow]="applicant">
+                          <td *ngFor="let col of columns">
+                            <span class="p-column-title" style="padding-bottom: 2px; font-weight: bold;">{{col.header}}:&nbsp;</span>{{rowData[col.field]}}
+                          </td>
+                          <td class="text-center" *ngIf="selectedApplicantStatus===2 && isSubmitted"><a (click)="onEdit(applicant.ApplicantID)"><i class="pi pi-pencil"></i></a></td>
+                          <td class="text-center" *ngIf="selectedApplicantStatus===1 && isSubmitted"><button type="button" (click)="onImportSync(applicant.ApplicantPortalUserId)" class="btn btn-primary btn-import-sync">Import</button> </td>
+                          <td class="text-center" *ngIf="selectedApplicantStatus===2 && isSubmitted"><button [disabled]="selectedApplicantStatus===2 && !applicant.hasChanges" type="button" (click)="onImportSync(applicant.ApplicantPortalUserId)" class="btn btn-primary btn-import-sync">Sync</button> </td>
+                        </tr>
+                      </ng-template>
+                    </p-table>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Main Content End -->
+
+</div>
+<p-toast key="toastKey1"></p-toast>
+
+

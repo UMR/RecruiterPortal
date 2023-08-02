@@ -1,0 +1,187 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+<div class="container-fluid">
+  <div class="card portal-card">
+    <div class="card-body" style="height:auto">
+      <a [routerLink]="['./add-edit-terms-conditions']" class="text-right card-edit"><i class="fa fa-edit text-edit"></i></a>
+      <a class="text-right card-edit" (click)="onDownloadClick()" style="margin-top:50px;"><i class="fa fa-download"></i></a>
+      <div class="row">
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-6">
+                  <label for="">Effective Date : </label>
+                </div>
+                <div class="col-6">{{termsConditions?.EffectiveDate| date :'MM-dd-yyyy'}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-6">
+                  <label for="">Facility Name : </label>
+                </div>
+                <div class="col-6">{{termsConditions?.FacilityName}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-6">
+                  <label for="">Street Address : </label>
+                </div>
+                <div class="col-6">{{termsConditions?.StreetAddress}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-6">
+                  <label for="">Zip Code : </label>
+                </div>
+                <div class="col-6">{{termsConditions?.ZipCode}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-6">
+                  <label for="">State : </label>
+                </div>
+                <div class="col-6">{{termsConditions?.StateName}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-6">
+                  <label for="">Town/City : </label>
+                </div>
+                <div class="col-6">{{termsConditions?.City}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-6">
+                  <label for="">Office Phone : </label>
+                </div>
+                <div class="col-6">{{termsConditions?.OfficePhone}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-6">
+                  <label for="">Position : </label>
+                </div>
+                <div class="col-6">{{termsConditions?.Position}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-6">
+                  <label for="">Rate of Pay or Compensation : </label>
+                </div>
+                <div class="col-6">{{termsConditions?.RatePayCompensation}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-6">
+                  <label for="">Days Per Week : </label>
+                </div>
+                <div class="col-6">{{termsConditions?.DaysPerWeek}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-6">
+                  <label for="">Name of General Liability Insurance : </label>
+                </div>
+                <div class="col-6">{{termsConditions?.NameGeneralLiabilityInsurance}}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-6">
+                  <label for="">Policy No : </label>
+                </div>
+                <div class="col-6">{{termsConditions?.GeneralLiabilityInsurancePolicyNo}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-6">
+                  <label for="">Name of Malpractice Insurance  : </label>
+                </div>
+                <div class="col-6">{{termsConditions?.NameMalpracticeInsurance}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-6">
+                  <label for="">Policy No : </label>
+                </div>
+                <div class="col-6">{{termsConditions?.MalpracticeInsurancePolicyNo}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-6">
+                  <label for="">Name of Workers Compensation Insurance : </label>
+                </div>
+                <div class="col-6">{{termsConditions?.NameWorkersCompensationInsurance}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-6">
+                  <label for="">Policy No : </label>
+                </div>
+                <div class="col-6">{{termsConditions?.WorkersCompensationInsurancePolicyNo}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-6">
+                  <label for="">Name of Disability Insurance : </label>
+                </div>
+                <div class="col-6">{{termsConditions?.NameDisabilityInsurance}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-6">
+                  <label for="">Policy No : </label>
+                </div>
+                <div class="col-6">{{termsConditions?.NameDisabilityInsurancePolicyNo}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-6">
+                  <label for="">Signature Date : </label>
+                </div>
+                <div class="col-6">{{termsConditions?.SignatureDate | date :'MM-dd-yyyy'}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-6">
+                  <label for="">Authorizad By : </label>
+                </div>
+                <div class="col-6">{{termsConditions?.AuthorizedBy}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-6">
+                  <label for="">Authorized Date : </label>
+                </div>
+                <div class="col-6">{{termsConditions?.AuthorizedDate | date :'MM-dd-yyyy'}}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

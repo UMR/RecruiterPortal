@@ -1,0 +1,48 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+<div class="container-fluid">
+  <div class="card portal-card">
+    <div class="card-body">
+      <div class="row">
+        <a [routerLink]="['./add-edit-agreement']" class="text-right card-edit"><i class="fa fa-edit text-edit"></i></a>
+        <a class="text-right card-edit" (click)="onDownloadClick()" style="margin-top:50px;"><i class="fa fa-download text-download"></i></a>
+        <div class="col-md-12">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Contractor Name:<span> {{contractorName}} </span></label>
+                </div>
+                <div class="col-4">
+                  <label for="">Street Address : {{streetAdress}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">Town/City:  {{cityTown}}</label>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">State:<span> {{state}} </span></label>
+                </div>
+                <div class="col-4">
+                  <label for="">Zip Code : {{zipCode}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">Notary:  {{notary}}</label>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Date:  {{getClientFormattedDate(date)}}</label>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

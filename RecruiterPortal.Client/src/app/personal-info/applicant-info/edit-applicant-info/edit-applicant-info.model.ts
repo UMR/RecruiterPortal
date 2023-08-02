@@ -1,0 +1,29 @@
+export class EditApplicantInfoModel {
+  LastName: string;
+  FirstName: string;
+  MiddleName: string;
+  StreetAddress: string;
+  Apartment: string;
+  ZipCode: string;
+  City: string;
+  State: string;
+  Email: string;
+  ApplicantEmailID: string;
+  Phone: string;
+  ApplicantPhoneID: string;
+  SSN: string;
+  DateAvailable: Date;
+  DesiredSalary: string;
+  PositionAppliedFor: string;
+  DesiredPositionId: string;
+  IsUSCitizen: boolean;
+  IsAuthorized: boolean;
+  IsOldClient: boolean;
+  IsConvict: boolean;
+  ConvictionDetail: string;
+  DateOfBirth: Date;
+  Gender: string;
+  CountryOfBirth: string;
+  CountryFromApplied: string;
+  ApplicantID: number;
+}

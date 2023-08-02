@@ -1,0 +1,11 @@
+<app-com-upload-file fileType="W9CoverSheet" fileCaption="W-9 Cover Sheet Form" filePath="assets/pdf/2021/W-9_Coversheet.docx"
+                     (getFileTypeChange)="getFileTypeChange($event)"></app-com-upload-file>
+
+<div class="step-body">
+  <div class="float-md-left">
+    <button type="button" class="btn btn-primary btn-block btn-portal" (click)="prevPage()"><i class="fa fa-angle-left" aria-hidden="true"></i>Previous</button>
+  </div>
+  <div class="float-md-right">
+    <button type="button" class="btn btn-primary btn-block btn-portal" (click)="nextPage()" [disabled]="userFiles.length == 0">Next<i class="fa fa-angle-right" aria-hidden="true"></i></button>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+<div class="card portal-card">
+  <div class="card-body">
+    <a [routerLink]="['./edit']" class="text-right card-edit"><i class="fa fa-edit text-edit"></i></a>
+    <div class="row">
+      <div class="col-md-12">
+
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-action">
+            <div class="row">
+              <div class="col-3">
+                <label for="">Height (ft-in) : </label>
+              </div>
+              <div class="col-9">{{getHeight(userPhysical?.Height)}}</div>
+            </div>
+          </li>
+          <li class="list-group-item list-group-item-action">
+            <div class="row">
+              <div class="col-3">
+                <label for="">Eye Color: </label>
+              </div>
+              <div class="col-9">{{userPhysical?.EyeColor}}</div>
+            </div>
+          </li>
+          <li class="list-group-item list-group-item-action">
+            <div class="row">
+              <div class="col-3">
+                <label for="">Race: </label>
+              </div>
+              <div class="col-9">{{userPhysical?.Race}}</div>
+            </div>
+          </li>
+          <li class="list-group-item list-group-item-action">
+            <div class="row">
+              <div class="col-3">
+                <label for="">Weight (lbs) : </label>
+              </div>
+              <div class="col-9">{{userPhysical?.Weight}}</div>
+            </div>
+          </li>
+          <li class="list-group-item list-group-item-action">
+            <div class="row">
+              <div class="col-3">
+                <label for="">Hair Color: </label>
+              </div>
+              <div class="col-9">{{userPhysical?.HairColor}}</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<p-toast key="toastKey1"></p-toast>

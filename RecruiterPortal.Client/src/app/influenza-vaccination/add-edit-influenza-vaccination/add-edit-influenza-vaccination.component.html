@@ -1,0 +1,76 @@
+<div class="container-fluid">
+  <loading-image [is-loading]="isLoading"></loading-image>
+  <div class="card portal-card">
+    <form (ngSubmit)="onSubmit()" [formGroup]="addEditInfluenzaVaccinationFormGroup" novalidate>
+      <div class="card-body px-3 py-3">        
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="facilityName" class="form-label">Facility Name</label>
+              <input id="facilityName" name="facilityName" type="text" class="form-control" autocomplete="off"
+                     formControlName="facilityName" tabindex="1" trimmed maxlength="500"/>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="reasonDeclination" class="form-label">Reason for Declination</label>
+              <input id="reasonDeclination" name="reasonDeclination" type="text" class="form-control" autocomplete="off"
+                     formControlName="reasonDeclination" tabindex="2" trimmed maxlength="500"/>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="signature" class="form-label">Signature</label>
+              <input id="signature" name="signature" type="text" class="form-control" autocomplete="off"
+                     formControlName="signature" tabindex="3" trimmed  maxlength="500"/>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="entryDate" class="form-label">Date</label>
+              <p-calendar id="entryDate" name="entryDate" placeholder="MM-DD-YYYY"
+                          formControlName="entryDate"
+                          tabindex="4"
+                          dateFormat="mm-dd-yy"
+                          [monthNavigator]="true"
+                          [yearNavigator]="true"
+                          yearRange="1900:2100"
+                          [showIcon]="true">
+              </p-calendar>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="name" class="form-label">Name</label>
+              <input id="name" name="name" type="text" class="form-control" autocomplete="off"
+                     formControlName="name" tabindex="5" trimmed maxlength="500" />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="nursingSchoolAttended" class="form-label">Department</label>
+              <input id="department" name="department" type="text" class="form-control" autocomplete="off"
+                     formControlName="department" tabindex="6" trimmed maxlength="500"/>
+            </div>
+          </div>
+        </div>                  
+      </div>
+      <div class="card-footer">
+        <ul class="list-inline mb-0 d-flex justify-content-between">
+          <li class="list-inline-item">
+            <a [routerLink]="['/influenza-vaccination']" routerLinkActive="active" class="btn btn-primary btn-portal-border" tabindex="8">Back</a>
+          </li>
+          <li class="list-inline-item">
+            <button type="button" (click)="onClear()" class="btn btn-primary btn-portal-border" tabindex="9">Clear</button>
+          </li>
+          <li class="list-inline-item">
+            <button type="submit" class="btn btn-primary btn-portal" tabindex="7" [disabled]="!addEditInfluenzaVaccinationFormGroup.valid">Save</button>
+          </li>
+        </ul>
+      </div>
+    </form>
+  </div>
+</div>
+<p-toast key="toastKey1"></p-toast>

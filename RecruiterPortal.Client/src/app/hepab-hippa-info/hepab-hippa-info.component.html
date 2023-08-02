@@ -1,0 +1,170 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+<div class="container-fluid">
+  <div class="card portal-card">
+    <div class="card-body" style="height:auto">
+      <a [routerLink]="['./add-edit-hepab-hippa-info']" class="text-right card-edit"><i class="fa fa-edit text-edit"></i></a>
+      <a class="text-right card-edit" (click)="onDownloadClick()" style="margin-top:50px;"><i class="fa fa-download text-edit"></i></a>
+      <div class="row">
+        <div class="col-md-12">
+
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Hepatitis B vaccination consent : </label>
+                </div>
+                <div class="col-8" *ngIf="!userHepabHippa">
+                  <label for="">
+                  </label>
+                </div>
+                <div class="col-8" *ngIf="userHepabHippa != null && userHepabHippa?.HasHepaConcent == null">
+                  <label for="">
+                  </label>
+                </div>
+                <div class="col-8" *ngIf="userHepabHippa != null && userHepabHippa.HasHepaConcent != null">
+                  <strong class="text-success" *ngIf="userHepabHippa?.HasHepaConcent">YES</strong>
+                  <strong class="text-danger" *ngIf="!userHepabHippa?.HasHepaConcent">NO</strong>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Received a copy of the hepatitis B information sheet : </label>
+                </div>
+                <div class="col-8" *ngIf="!userHepabHippa">
+                  <label for="">
+                  </label>
+                </div>
+                <div class="col-8" *ngIf="userHepabHippa != null && userHepabHippa?.HasHepaSheet == null">
+                  <label for="">
+                  </label>
+                </div>
+                <div class="col-8" *ngIf="userHepabHippa != null && userHepabHippa.HasHepaSheet != null">
+                  <strong class="text-success" *ngIf="userHepabHippa?.HasHepaSheet">YES</strong>
+                  <strong class="text-danger" *ngIf="!userHepabHippa?.HasHepaSheet">NO</strong>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Received training relative to the hepatitis B virus : </label>
+                </div>
+                <div class="col-8" *ngIf="!userHepabHippa">
+                  <label for="">
+                  </label>
+                </div>
+                <div class="col-8" *ngIf="userHepabHippa != null && userHepabHippa?.HasHepaTraining == null">
+                  <label for="">
+                  </label>
+                </div>
+                <div class="col-8" *ngIf="userHepabHippa != null && userHepabHippa.HasHepaTraining != null">
+                  <strong class="text-success" *ngIf="userHepabHippa?.HasHepaTraining">YES</strong>
+                  <strong class="text-danger" *ngIf="!userHepabHippa?.HasHepaTraining">NO</strong>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Was examined by a licensed health care professional : </label>
+                </div>
+                <div class="col-8" *ngIf="!userHepabHippa">
+                  <label for="">
+                  </label>
+                </div>
+                <div class="col-8" *ngIf="userHepabHippa != null && userHepabHippa?.IsExamined == null">
+                  <label for="">
+                  </label>
+                </div>
+                <div class="col-8" *ngIf="userHepabHippa != null && userHepabHippa.IsExamined != null">
+                  <strong class="text-success" *ngIf="userHepabHippa?.IsExamined">YES</strong>
+                  <strong class="text-danger" *ngIf="!userHepabHippa?.IsExamined">NO</strong>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Received the hepatitis B vaccination at no cost to me : </label>
+                </div>
+                <div class="col-8" *ngIf="!userHepabHippa">
+                  <label for="">
+                  </label>
+                </div>
+                <div class="col-8" *ngIf="userHepabHippa != null && userHepabHippa?.HasNoCostHepa == null">
+                  <label for="">
+                  </label>
+                </div>
+                <div class="col-8" *ngIf="userHepabHippa != null && userHepabHippa.HasNoCostHepa != null">
+                  <strong class="text-success" *ngIf="userHepabHippa?.HasNoCostHepa">YES</strong>
+                  <strong class="text-danger" *ngIf="!userHepabHippa?.HasNoCostHepa">NO</strong>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Received training and information about the facility: </label>
+                </div>
+                <div class="col-8" *ngIf="!userHepabHippa">
+                  <label for="">
+                  </label>
+                </div>
+                <div class="col-8" *ngIf="userHepabHippa != null && userHepabHippa?.HasFacilityInfo == null">
+                  <label for="">
+                  </label>
+                </div>
+                <div class="col-8" *ngIf="userHepabHippa != null && userHepabHippa.HasFacilityInfo != null">
+                  <strong class="text-success" *ngIf="userHepabHippa?.HasFacilityInfo">YES</strong>
+                  <strong class="text-danger" *ngIf="!userHepabHippa?.HasFacilityInfo">NO</strong>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Comment : </label>
+                </div>
+                <div class="col-8">{{userHepabHippa?.Comment}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Signature Date : </label>
+                </div>
+                <div class="col-8">{{getClientFormattedDate(userHepabHippa?.SignatureDate)}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Witness Name : </label>
+                </div>
+                <div class="col-8">{{userHepabHippa?.WitnessName}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Witness Signature Date : </label>
+                </div>
+                <div class="col-8">{{getClientFormattedDate(userHepabHippa?.WitnessSignatureDate)}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Compliance Officer Name : </label>
+                </div>
+                <div class="col-8">{{userHepabHippa?.ComplianceOfficer}}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

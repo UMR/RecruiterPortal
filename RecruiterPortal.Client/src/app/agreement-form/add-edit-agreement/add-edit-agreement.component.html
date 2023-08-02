@@ -1,0 +1,94 @@
+<div class="container-fluid">
+  <loading-image [is-loading]="isLoading"></loading-image>
+  <div class="card portal-card">
+    <form (ngSubmit)="onSubmit()" [formGroup]="addEditAgreementFormGroup" novalidate>
+      <div class="card-body px-3 py-3">
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="contractor-no" class="form-label">Contractor Name</label>
+              <input id="contractor-no" name="contractor-name" type="text" class="form-control" autocomplete="off"
+                     formControlName="contractorName" tabindex="10" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="street-add" class="form-label">Street Address</label>
+              <input id="street-add" name="street-add" type="text" class="form-control" autocomplete="off"
+                     formControlName="streetAdress" tabindex="10" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="zipcode" class="form-label">Zip Code</label>
+              <p-autoComplete formControlName="zipCode" [suggestions]="zipCodeResults" class="form-control"
+                              (completeMethod)="onZipCodeSearch($event)" field="ZipCode" [dropdown]="true"
+                              forceSelection="true" (onSelect)="onZipCodeSelect($event)" tabindex="12">
+                <ng-template let-zipCode pTemplate="item">
+                  <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.ZipCode}},</div>
+                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.City}},</div>
+                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.StateAbbr}}</div>
+                  </div>
+                </ng-template>
+              </p-autoComplete>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="state" class="form-label">State</label>
+              <input id="state" name="state" type="text" class="form-control" autocomplete="off"
+                     formControlName="state" tabindex="14" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="city" class="form-label">Town/City</label>
+              <input id="city" name="city" type="text" class="form-control" autocomplete="off"
+                     formControlName="cityTown" tabindex="10" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="notary" class="form-label">Notary</label>
+              <input id="notary" name="notary" type="text" class="form-control" autocomplete="off"
+                     formControlName="notary" tabindex="10" trimmed />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="date-available" class="form-label">Date</label>
+              <p-calendar id="date-available" name="date-available" placeholder="MM-DD-YYYY"
+                          formControlName="date"
+                          tabindex="15"
+                          dateFormat="mm-dd-yy"
+                          [monthNavigator]="true"
+                          [yearNavigator]="true"
+                          yearRange="1900:2100"
+                          [showIcon]="true">
+              </p-calendar>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <ul class="list-inline mb-0 d-flex justify-content-between">
+          <li class="list-inline-item">
+            <a [routerLink]="['/agreement-form-info']" routerLinkActive="active" class="btn btn-primary btn-portal-border" tabindex="23">Back</a>
+          </li>
+          <li class="list-inline-item">
+            <button type="button" (click)="onClear()" class="btn btn-primary btn-portal-border" tabindex="24">Clear</button>
+          </li>
+          <li class="list-inline-item">
+            <button type="submit" class="btn btn-primary btn-portal" [disabled]="!addEditAgreementFormGroup.valid" tabindex="22">Save</button>
+          </li>
+        </ul>
+      </div>
+    </form>
+  </div>
+</div>
+<p-toast key="toastKey1"></p-toast>

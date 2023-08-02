@@ -1,0 +1,203 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+<div class="container-fluid">
+  <div class="card portal-card">
+    <div class="card-body" style="height:auto;">
+      <a [routerLink]="['./add-edit-nurse-form']" class="text-right card-edit"><i class="fa fa-edit text-edit"></i></a>
+      <a class="text-right card-edit" (click)="onDownloadClick()" style="margin-top:50px;"><i class="fa fa-download"></i></a>
+      <div class="row">
+        <div class="col-md-12">
+
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Check what you are applying for? : <span style="font-weight: 100"> {{getApplyingForJobTypeText(nurseForm?.applyingForJobType)}} </span></label>
+                </div>
+                <div class="col-4">
+                  <label for="">I am applying for? : <span style="font-weight: 100"> {{getApplyingPositionText(nurseForm?.applyingForPosition)}} </span></label>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Are you licensed as a nurse in another jurisdiction? : <span style="font-weight: 100"> {{getRadioText(nurseForm?.licensedJurisdiction)}} </span></label>
+                </div>
+                <div class="col-4">
+                  <label for="">If no, have you ever failed the RNlicensing examination? : <span style="font-weight: 100"> {{getRadioText(nurseForm?.failedRNLicensing)}} </span></label>
+                </div>
+                <div class="col-4">
+                  <label for="">If no, have you ever failed the PNlicensing examination? : <span style="font-weight: 100"> {{getRadioText(nurseForm?.failedPNLicensing)}} </span></label>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Foreign Education ONLY. Have you successfully completed CGFNS/CNATS? : <span style="font-weight: 100"> {{nurseForm?.cgfnscnatsCompleted}} </span></label>
+                </div>
+                <div class="col-4">
+                  <label for="">IF CGFNS - Date CGFNS Qualifying Examination written : <span style="font-weight: 100"> {{nurseForm?.cgfnsExaminationDate | date :'MM-dd-yyyy'}} </span></label>
+                </div>
+                <div class="col-4">
+                  <label for="">CGFNS Certificate number : <span style="font-weight: 100"> {{nurseForm?.cgfnsCertificateNumber}} </span></label>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">IF CNATS - Date CNATS Examination written : <span style="font-weight: 100"> {{nurseForm?.cnatsExaminationDate | date :'MM-dd-yyyy'}} </span></label>
+                </div>
+                <div class="col-4">
+                  <label for="">CNATS Exam score : <span style="font-weight: 100"> {{nurseForm?.cnatsExamScore}} </span></label>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <fieldset class="mt-1">
+                <legend>Nursing School Information</legend>
+                <div class="row">
+                  <div class="col-4">
+                    <label for="">Nursing school attended : <span style="font-weight: 100"> {{nurseForm?.nursingSchoolAttended}} </span></label>
+                  </div>
+                  <div class="col-4">
+                    <label for="">Address : <span style="font-weight: 100"> {{nurseForm?.nursingSchoolAddress}} </span></label>
+                  </div>
+                  <div class="col-4">
+                    <label for="">Date degree completed : <span style="font-weight: 100"> {{nurseForm?.nursingSchoolCompletedDate | date :'MM-dd-yyyy'}} </span></label>
+                  </div>
+                </div>
+              </fieldset>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Permittee's Name : <span style="font-weight: 100"> {{nurseForm?.permitteesName}} </span></label>
+                </div>
+                <div class="col-4">
+                  <label for="">To be employed as (RN/LPN) : <span style="font-weight: 100"> {{nurseForm?.rnlpnEmployed}} </span></label>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <fieldset class="mt-1">
+                <legend>Employer Information</legend>
+                <div class="row mb-3">
+                  <div class="col-4">
+                    <label for="">Name : <span style="font-weight: 100"> {{nurseForm?.employerName}} </span></label>
+                  </div>
+                  <div class="col-4">
+                    <label for="">Street Address : <span style="font-weight: 100"> {{nurseForm?.employerStreetAddress}} </span></label>
+                  </div>
+                  <div class="col-4">
+                    <label for="">City : <span style="font-weight: 100"> {{nurseForm?.employerCity}} </span></label>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-4">
+                    <label for="">State/Province : <span style="font-weight: 100"> {{nurseForm?.employerStateProvince}} </span></label>
+                  </div>
+                  <div class="col-4">
+                    <label for="">Zip Code : <span style="font-weight: 100"> {{nurseForm?.employerZipCode}} </span></label>
+                  </div>
+                  <div class="col-4">
+                    <label for="">Country : <span style="font-weight: 100"> {{nurseForm?.employerCountry}} </span></label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-4">
+                    <label for="">Telephone : <span style="font-weight: 100"> {{nurseForm?.employerTelephone}} </span></label>
+                  </div>
+                  <div class="col-4">
+                    <label for="">Fax : <span style="font-weight: 100"> {{nurseForm?.employerFax}} </span></label>
+                  </div>
+                  <div class="col-4">
+                    <label for="">Email : <span style="font-weight: 100"> {{nurseForm?.employerEmail}} </span></label>
+                  </div>
+                </div>
+              </fieldset>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <fieldset class="mt-1">
+                <legend>If practice site is different from employer's address</legend>
+                <div class="row mb-3">
+                  <div class="col-4">
+                    <label for="">Name : <span style="font-weight: 100"> {{nurseForm?.practiceName}} </span></label>
+                  </div>
+                  <div class="col-4">
+                    <label for="">Street Address : <span style="font-weight: 100"> {{nurseForm?.practiceStreetAddress}} </span></label>
+                  </div>
+                  <div class="col-4">
+                    <label for="">City : <span style="font-weight: 100"> {{nurseForm?.practiceCity}} </span></label>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-4">
+                    <label for="">State/Province : <span style="font-weight: 100"> {{nurseForm?.practiceStateProvince}} </span></label>
+                  </div>
+                  <div class="col-4">
+                    <label for="">Zip Code : <span style="font-weight: 100"> {{nurseForm?.practiceZipCode}} </span></label>
+                  </div>
+                  <div class="col-4">
+                    <label for="">Country : <span style="font-weight: 100"> {{nurseForm?.practiceCountry}} </span></label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-4">
+                    <label for="">Telephone : <span style="font-weight: 100"> {{nurseForm?.practiceTelephone}} </span></label>
+                  </div>
+                  <div class="col-4">
+                    <label for="">Fax : <span style="font-weight: 100"> {{nurseForm?.practiceFax}} </span></label>
+                  </div>
+                  <div class="col-4">
+                    <label for="">Email : <span style="font-weight: 100"> {{nurseForm?.practiceEmail}} </span></label>
+                  </div>
+                </div>
+              </fieldset>
+            </li>
+            <li class="list-group-item list-group-item-action" style="display:none">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Supervising registered professional nurse : <span style="font-weight: 100"> {{nurseForm?.registeredProfessionalNurse}} </span></label>
+                </div>
+                <div class="col-4">
+                  <label for="">New York State License number 1 : <span style="font-weight: 100"> {{nurseForm?.newYorkStateLicenseNumber1}} </span></label>
+                </div>
+                <div class="col-4">
+                  <label for="">New York State License number 2 : <span style="font-weight: 100"> {{nurseForm?.newYorkStateLicenseNumber2}} </span></label>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action"  style="display:none">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Signature on behalf of employer : <span style="font-weight: 100"> {{nurseForm?.signatureBehalfEmployer}} </span></label>
+                </div>
+                <div class="col-4">
+                  <label for="">Date : <span style="font-weight: 100"> {{nurseForm?.signatureDate | date :'MM-dd-yyyy'}} </span></label>
+                </div>
+                <div class="col-4">
+                  <label for="">Print Name : <span style="font-weight: 100"> {{nurseForm?.printName}} </span></label>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action"  style="display:none">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Title : <span style="font-weight: 100">{{nurseForm?.title}} </span></label>
+                </div>
+                <div class="col-4">
+                  <label for="">New York State Profession : <span style="font-weight: 100"> {{nurseForm?.newYorkStateProfession}} </span></label>
+                </div>
+                <div class="col-4">
+                  <label for="">New York State Professional License Number : <span style="font-weight: 100"> {{nurseForm?.newYorkStateProfessionalLicenseNumber}} </span></label>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

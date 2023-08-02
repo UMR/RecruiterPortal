@@ -1,0 +1,126 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+<div class="tab-pane" id="v-pills-education" role="tabpanel" aria-labelledby="v-pills-education-tab">
+  <div class="card portal-card">
+    <form (ngSubmit)="onSubmit()" [formGroup]="editEducationFormGroup" novalidate>
+      <div class="card-body px-3 py-3">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="isntitutionType" class="form-label">Institution Type</label>
+              <!--<p-dropdown [options]="institutionTypes" placeholder="Select a Institution Type" id="isntitutionType" optionLabel="text" [showClear]="true" formControlName="isntitutionType" class="form-control" autofocus required> </p-dropdown>-->
+
+              <select id="isntitutionType" name="isntitutionType" class="form-control" formControlName="isntitutionType" placeholder="Select a Institution Type"
+                      tabindex="5" autofocus required>
+                <option value="">----Select Institution Type----</option>
+                <option *ngFor="let institutionType of institutionTypes" value="{{institutionType.Value}}">{{institutionType.Text}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="schoolName" class="form-label">Institution Name</label>
+              <input id="schoolName" name="schoolName" type="text" trimmed tabindex="1"
+                     class="form-control" autocomplete="off" required
+                     formControlName="schoolName" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="fromDate" class="form-label">From</label>
+              <!--<p-calendar id="fromDate" name="fromDate" placeholder="MM-DD-YYYY"
+              formControlName="fromDate"
+              tabindex="3"
+              dateFormat="mm-dd-yy"
+              [monthNavigator]="true"
+              [yearNavigator]="true"
+              yearRange="1900:2030"
+              [showIcon]="true"
+              compare="toDate" reverse="true" compare-operator="<">
+              </p-calendar>-->
+              <!--<input id="fromDate" name="fromDate" type="text" tabindex="3" OnlyNumber="true"
+              class="form-control" autocomplete="off" pattern="^\d{4}$" maxlength="4"
+              formControlName="fromDate" compare="toDate" reverse="true" compare-operator="<"/>-->
+              <select id="fromDate" name="fromDate" class="form-control" formControlName="fromDate" placeholder="From Year"
+                      tabindex="3" autofocus compare="toDate" reverse="true" compare-operator="<">
+                <option value="">----Select Year----</option>
+                <option *ngFor="let year of yearArray" value="{{year}}">{{year}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="toDate" class="form-label">To</label>
+              <!--<p-calendar id="toDate" name="toDate" placeholder="MM-DD-YYYY"
+              formControlName="toDate"
+              tabindex="4"
+              dateFormat="mm-dd-yy"
+              [monthNavigator]="true"
+              [yearNavigator]="true"
+              yearRange="1900:2030"
+              [showIcon]="true"
+              compare="fromDate" reverse="true" compare-operator=">">
+              </p-calendar>-->
+              <!--<input id="toDate" name="toDate" type="text" tabindex="4" maxlength="4"
+              class="form-control" autocomplete="off" pattern="^\d{4}$" OnlyNumber="true"
+              formControlName="toDate" compare="fromDate" reverse="true" compare-operator=">"/>-->
+              <select id="toDate" name="toDate" class="form-control" formControlName="toDate" placeholder="To Year"
+                      tabindex="4" autofocus compare="fromDate" reverse="true" compare-operator=">">
+                <option value="">----Select Year----</option>
+                <option *ngFor="let year of yearArray" value="{{year}}">{{year}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="degree" class="form-label">Degree</label>
+              <input id="degree" name="degree" type="text" class="form-control" trimmed tabindex="5"
+                     autocomplete="off" formControlName="degree" required />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="address" class="form-label">Address</label>
+              <input id="address" name="address" type="text" class="form-control" trimmed tabindex="2"
+                     autocomplete="off" formControlName="schoolAddress" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="portal-card-list mb-0">
+              <p><strong>Did you Graduate?</strong><span class="required"> *required</span></p>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="sgraduate-yes" name="isSchoolGraduate" class="custom-control-input" value="YES" checked
+                       formControlName="isSchoolGraduate" tabindex="6" />
+                <label for="sgraduate-yes" class="custom-control-label text-success">YES</label>
+              </div>
+              <div class="list-inline-item custom-control custom-radio custom-control-inline">
+                <input type="radio" id="sgraduate-no" name="isSchoolGraduate" class="custom-control-input" value="NO"
+                       formControlName="isSchoolGraduate" tabindex="7" />
+                <label for="sgraduate-no" class="custom-control-label text-danger">NO</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <ul class="list-inline mb-0 d-flex justify-content-between">
+          <li class="list-inline-item">
+            <a [routerLink]="['/personal-info/education']" routerLinkActive="active" class="btn btn-primary btn-portal-border" tabindex="23">Back</a>
+          </li>
+          <li class="list-inline-item">
+            <button type="button" (click)="onClear()" class="btn btn-primary btn-portal-border" tabindex="24">Clear</button>
+          </li>
+          <li class="list-inline-item">
+            <button type="submit" class="btn btn-primary btn-portal" [disabled]="!editEducationFormGroup.valid" tabindex="22">Save</button>
+          </li>
+        </ul>
+      </div>
+    </form>
+  </div>
+</div>
+<p-toast key="toastKey1"></p-toast>

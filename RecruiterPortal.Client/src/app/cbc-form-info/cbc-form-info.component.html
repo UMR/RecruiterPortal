@@ -1,0 +1,157 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+<div class="container-fluid">
+  <div class="card portal-card">
+    <div class="card-body" style="height:auto">
+      <div class="row">
+        <a [routerLink]="['./add-edit-cbc']" class="text-right card-edit"><i class="fa fa-edit text-edit"></i></a>
+        <a class="text-right card-edit" (click)="onDownloadClick()" style="margin-top:50px;"><i class="fa fa-download text-download"></i></a>
+        <div class="col-md-12">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Agency Identification:<span> {{agencyIdentification}} </span></label>
+                </div>
+                <div class="col-4">
+                  <label for="">PFI# : {{pfi}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">License #:  {{license}}</label>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Agency Full Name: {{agencyName}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">(Authorized Person) First Name : {{agFirstName}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">(Authorized Person) Last Name:  {{agLastName}}</label>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Agency Street No: {{streetNo}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">Agency Street Address: {{streetName}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">Apartment/Unit #:  {{agApt}}</label>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Agency Zip Code: {{agZipCode}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">City: {{agCity}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">State:  {{agState}}</label>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Agency Telephone: {{agTelephone}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">Agency Email: {{agEmail}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">Agency Date:  {{getClientFormattedDate(agDate)}}</label>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Fingerprinting Method: {{fpMethod}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">Name of Location of Fingerprint Services: {{locationFPService}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">Identification verified before fingerprinting:  {{identification}}</label>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">St. Address: {{fpStAddress}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">Zip Code: {{fpZipCode}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">City:  {{fpCity}}</label>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">State: {{fpState}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">Title: {{fpTitle}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">First Name:  {{fpFirstName}}</label>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Last Name: {{fpLastName}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">Signature: {{fpSignature}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">
+                    Fingerprinted Date:  {{getClientFormattedDate(fbDate)}}
+                  </label>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Mother's Maiden Name: {{motherMaidenName}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">Alias (AKA): {{alias}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">Signature of Parent or Legal Guardian:  {{guardianSign}}</label>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Home Phone: {{homePhone}}</label>
+                </div>
+                <div class="col-4">
+                  <label for="">Tile: {{title}}</label>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

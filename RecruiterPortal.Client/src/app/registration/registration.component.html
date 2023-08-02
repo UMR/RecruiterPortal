@@ -1,0 +1,92 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+<section class="login-area mt-5">
+  <div class="container">
+    <div class="row login">
+
+      <div class="col-md-7 px-0">
+        <div class="login-img">
+          <img src="assets/img/applicant.jpg" class="img-fluid" alt="">
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <div class="login-form">
+          <h4 class="mt-4 mb-4">Registration</h4>
+
+          <form [formGroup]="regForm" (ngSubmit)="onRegSubmit()">
+
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="lastname" class="form-label">Last Name</label>
+                  <input id="lastname" name="lastname" type="text" class="form-control" autocomplete="off" trimmed required
+                         formControlName="lastName" autofocus [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
+                  <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                    <div *ngIf="f.firstName.errors.required">Last Name is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="firstname" class="form-label">First Name</label>
+                  <input id="firstname" name="firstname" type="text" class="form-control" autocomplete="off" trimmed required
+                         formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
+                  <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                    <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="form-label">Email</label>
+              <input id="email" name="email" type="email" class="form-control" autocomplete="off" trimmed required
+                     formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" (focusout)="focusOutEmail()">
+              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+                <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="password" class="form-label">Password</label>
+                  <input id="password" name="password" type="password" class="form-control" required
+                         formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="cpassword" class="form-label">Confirm Password</label>
+                  <input id="cpassword" formControlName="confirmPassword" type="password" required
+                         class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+                  <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                    <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                    <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="terms-condition custom-control custom-checkbox" [class.red-border]="submitted && !regForm.get('isConditionAgree').value">
+              <input type="checkbox" id="terms-condition" name="terms-condition" formControlName="isConditionAgree" class="custom-control-input">
+              <label for="terms-condition" class="custom-control-label">I agree with <a>terms & conditions</a></label>
+            </div>
+            <div class="mb-10">
+              <button type="submit" class="btn btn-primary btn-block btn-portal">Register</button>
+            </div>
+            <p class="text-center mt-3" style="margin-top:10px !important;font-size:12px !important">Have an account? <a [routerLink]="['/login']">Login</a></p>
+            <p style="margin-top:6px !important;text-align:center;font-size:12px">
+              In case of sign up difficulty send your resume directly to
+              <a href="mailto:recruitment@universalmedicalrecord.com">recruitment@universalmedicalrecord.com</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<p-toast key="toastKey1"></p-toast>

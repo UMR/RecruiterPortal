@@ -1,0 +1,343 @@
+<div class="container-fluid">
+  <loading-image [is-loading]="isLoading"></loading-image>
+  <div class="card portal-card">
+    <form (ngSubmit)="onSubmit()" [formGroup]="addEditCBCFormGroup" novalidate>
+      <div class="card-body px-3 py-3">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="portal-card-list">
+              <p><strong>Agency Identification</strong></p>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="nursing-home" name="agencyIdentification" class="custom-control-input" value="NursingHome"
+                       formControlName="agencyIdentification" tabindex="1" (change)="onAgencyIdentityChange($event)" />
+                <label for="nursing-home" class="custom-control-label text-success">Nursing Home</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="CHHA" name="agencyIdentification" class="custom-control-input" value="CHHA"
+                       formControlName="agencyIdentification" tabindex="2" (change)="onAgencyIdentityChange($event)" />
+                <label for="CHHA" class="custom-control-label text-success">CHHA</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="LTHHCP" name="agencyIdentification" class="custom-control-input" value="LTHHCP"
+                       formControlName="agencyIdentification" tabindex="3" (change)="onAgencyIdentityChange($event)" />
+                <label for="LTHHCP" class="custom-control-label text-success">LTHHCP</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="LHCSA" name="agencyIdentification" class="custom-control-input" value="LHCSA"
+                       formControlName="agencyIdentification" tabindex="4" (change)="onAgencyIdentityChange($event)" />
+                <label for="LHCSA" class="custom-control-label text-success">LHCSA</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="pfi" class="form-label">PFI#</label>
+              <input id="pfi" name="pfi" type="text" class="form-control" autocomplete="off"
+                     formControlName="pfi" tabindex="5" trimmed E164PhoneNumber="true" maxlength="50" />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="license" class="form-label">License #</label>
+              <input id="license" name="license" type="text" class="form-control" autocomplete="off"
+                     formControlName="license" tabindex="6" trimmed E164PhoneNumber="true" maxlength="50" />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="fullName" class="form-label">Agency Full Name</label>
+              <input id="fullName" name="fullName" type="text" class="form-control" autocomplete="off"
+                     formControlName="agencyName" tabindex="7" trimmed maxlength="100" />
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label for="agFirstName" class="form-label">(Authorized Person) First Name</label>
+            <input id="agFirstName" name="agFirstName" type="text" class="form-control" autocomplete="off"
+                   formControlName="agFirstName" tabindex="9" trimmed maxlength="50" />
+          </div>
+          <div class="col-md-4">
+            <label for="agLastName" class="form-label">(Authorized Person) Last Name</label>
+            <input id="agLastName" name="agLastName" type="text" class="form-control" autocomplete="off"
+                   formControlName="agLastName" tabindex="10" trimmed maxlength="50" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="street-no" class="form-label">Street No</label>
+              <input id="street-no" name="street-no" type="text" class="form-control" autocomplete="off"
+                     formControlName="streetNo" tabindex="10" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="street-name" class="form-label">Street Address</label>
+              <input id="street-name" name="street-name" type="text" class="form-control" autocomplete="off"
+                     formControlName="streetName" tabindex="10" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="apartment" class="form-label">Apartment/Unit #</label>
+              <input id="apartment" name="apartment" type="text" class="form-control" autocomplete="off"
+                     formControlName="agApt" tabindex="11" trimmed />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="zipcode" class="form-label">Agency Zip Code</label>
+              <p-autoComplete formControlName="agZipCode" [suggestions]="zipCodeResults" class="form-control"
+                              (completeMethod)="onZipCodeSearch($event)" field="ZipCode" [dropdown]="true"
+                              forceSelection="true" (onSelect)="onAgencyZipCodeSelect($event)" tabindex="12">
+                <ng-template let-zipCode pTemplate="item">
+                  <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.ZipCode}},</div>
+                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.City}},</div>
+                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.StateAbbr}}</div>
+                  </div>
+                </ng-template>
+              </p-autoComplete>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="city" class="form-label">City</label>
+              <input id="city" name="city" type="text" class="form-control" autocomplete="off"
+                     formControlName="agCity" tabindex="13" trimmed />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="state" class="form-label">State</label>
+              <input id="state" name="state" type="text" class="form-control" autocomplete="off"
+                     formControlName="agState" tabindex="14" trimmed />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="agTel" class="form-label">Agency Telephone</label>
+              <input id="agTel" name="agTel" type="text" class="form-control" autocomplete="off"
+                     formControlName="agTelephone" tabindex="8" trimmed E164PhoneNumber="true" maxlength="25" />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="email" class="form-label">Email</label>
+              <input id="email" name="email" type="text" class="form-control" autocomplete="off"
+                     formControlName="agEmail" tabindex="10" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="date-available" class="form-label">Date</label>
+              <p-calendar id="date-available" name="date-available" placeholder="MM-DD-YYYY"
+                          formControlName="agDate"
+                          tabindex="15"
+                          dateFormat="mm-dd-yy"
+                          [monthNavigator]="true"
+                          [yearNavigator]="true"
+                          yearRange="1900:2100"
+                          [showIcon]="true">
+              </p-calendar>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="portal-card-list">
+              <p><strong>Fingerprinting Method</strong></p>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="inkRoll" name="fpMethod" class="custom-control-input" value="InkRoll"
+                       formControlName="fpMethod" tabindex="1" />
+                <label for="inkRoll" class="custom-control-label text-success">Ink & Roll</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="liveScan" name="fpMethod" class="custom-control-input" value="LiveScan"
+                       formControlName="fpMethod" tabindex="2" />
+                <label for="liveScan" class="custom-control-label text-success">Live Scan</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="location-fp" class="form-label">Name of Location of Fingerprint Services</label>
+              <input id="location-fp" name="street-name" type="text" class="form-control" autocomplete="off"
+                     formControlName="locationFPService" tabindex="10" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="portal-card-list">
+              <p><strong>Identification verified before fingerprinting</strong></p>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="identity-yes" name="identification" class="custom-control-input" value="Yes"
+                       formControlName="identification" tabindex="1" />
+                <label for="identity-yes" class="custom-control-label text-success">Yes</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="identity-no" name="identification" class="custom-control-input" value="No"
+                       formControlName="identification" tabindex="2" />
+                <label for="identity-no" class="custom-control-label text-danger">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="stAdderss" class="form-label">St. Address</label>
+              <input id="stAdderss" name="fpStAddress" type="text" class="form-control" autocomplete="off"
+                     formControlName="fpStAddress" tabindex="13" trimmed />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="zipcode" class="form-label">Zip Code</label>
+              <p-autoComplete formControlName="fpZipCode" [suggestions]="zipCodeResults" class="form-control"
+                              (completeMethod)="onZipCodeSearch($event)" field="ZipCode" [dropdown]="true"
+                              forceSelection="true" (onSelect)="onFpZipCodeSelect($event)" tabindex="12">
+                <ng-template let-zipCode pTemplate="item">
+                  <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.ZipCode}},</div>
+                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.City}},</div>
+                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.StateAbbr}}</div>
+                  </div>
+                </ng-template>
+              </p-autoComplete>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="fpCity" class="form-label">City</label>
+              <input id="fpCity" name="fpCity" type="text" class="form-control" autocomplete="off"
+                     formControlName="fpCity" tabindex="13" trimmed />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="fpState" class="form-label">State</label>
+              <input id="fpState" name="fpState" type="text" class="form-control" autocomplete="off"
+                     formControlName="fpState" tabindex="14" trimmed />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="fpTitle" class="form-label">Title</label>
+              <input id="fpTitle" name="fpTitle" type="text" class="form-control" autocomplete="off"
+                     formControlName="fpTitle" tabindex="7" trimmed maxlength="100" />
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label for="fpFirstName" class="form-label">First Name</label>
+            <input id="fpFirstName" name="fpFirstName" type="text" class="form-control" autocomplete="off"
+                   formControlName="fpFirstName" tabindex="9" trimmed maxlength="50" />
+          </div>
+          <div class="col-md-4">
+            <label for="fpLastName" class="form-label">Last Name</label>
+            <input id="fpLastName" name="fpLastName" type="text" class="form-control" autocomplete="off"
+                   formControlName="fpLastName" tabindex="10" trimmed maxlength="50" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="fpSignature" class="form-label">Signature</label>
+              <input id="fpSignature" name="fpSignature" type="text" class="form-control" autocomplete="off"
+                     formControlName="fpSignature" tabindex="9" trimmed maxlength="50" />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="fbDate" class="form-label">Fingerprinted Date</label>
+              <p-calendar id="date-available" name="date-available" placeholder="MM-DD-YYYY"
+                          formControlName="fbDate"
+                          tabindex="15"
+                          dateFormat="mm-dd-yy"
+                          [monthNavigator]="true"
+                          [yearNavigator]="true"
+                          yearRange="1900:2100"
+                          [showIcon]="true">
+              </p-calendar>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="maiden-name" class="form-label">Mother's Maiden Name</label>
+              <input id="maiden-name" name="maiden-name" type="text" class="form-control" autocomplete="off"
+                     formControlName="motherMaidenName" tabindex="10" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="alias" class="form-label">Alias (AKA)</label>
+              <input id="alias" name="alias" type="text" class="form-control" autocomplete="off"
+                     formControlName="alias" tabindex="10" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="guardianSign" class="form-label">Signature of Parent or Legal Guardian</label>
+              <input id="guardianSign" name="guardianSign" type="text" class="form-control" autocomplete="off"
+                     formControlName="guardianSign" tabindex="11" trimmed />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="homePhone" class="form-label">Home Phone</label>
+              <input id="homePhone" name="homePhone" type="text" class="form-control" autocomplete="off"
+                     formControlName="homePhone" trimmed E164PhoneNumber="true" tabindex="10" />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="title" class="form-label">Tile</label>
+              <input id="title" name="title" type="text" class="form-control" autocomplete="off"
+                     formControlName="title" tabindex="10" trimmed />
+            </div>
+          </div>
+          <!--<div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="date" class="form-label">Date</label>
+              <p-calendar id="date" name="date-available" placeholder="MM-DD-YYYY"
+                          formControlName="date"
+                          tabindex="15"
+                          dateFormat="mm-dd-yy"
+                          [monthNavigator]="true"
+                          [yearNavigator]="true"
+                          yearRange="1900:2100"
+                          [showIcon]="true">
+              </p-calendar>
+            </div>
+          </div>-->
+        </div>
+      </div>
+      <div class="card-footer">
+        <ul class="list-inline mb-0 d-flex justify-content-between">
+          <li class="list-inline-item">
+            <a [routerLink]="['/cbc-form-info']" routerLinkActive="active" class="btn btn-primary btn-portal-border" tabindex="23">Back</a>
+          </li>
+          <li class="list-inline-item">
+            <button type="button" (click)="onClear()" class="btn btn-primary btn-portal-border" tabindex="24">Clear</button>
+          </li>
+          <li class="list-inline-item">
+            <button type="submit" class="btn btn-primary btn-portal" [disabled]="!addEditCBCFormGroup.valid" tabindex="22">Save</button>
+          </li>
+        </ul>
+      </div>
+    </form>
+  </div>
+</div>
+<p-toast key="toastKey1"></p-toast>

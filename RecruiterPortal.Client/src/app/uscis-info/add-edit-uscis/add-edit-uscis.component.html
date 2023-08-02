@@ -1,0 +1,215 @@
+<div class="container-fluid">
+  <loading-image [is-loading]="isLoading"></loading-image>
+  <div class="card portal-card">
+    <form (ngSubmit)="onSubmit()" [formGroup]="addEditUSCISGroup" novalidate>
+      <div class="card-body px-3 py-3" style="height:auto;">
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <p><strong>Are you a noncitizen national of USA:</strong></p>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="nonCitizen-yes" name="isNonCitizen" class="custom-control-input" value="YES" checked
+                       formControlName="isNonCitizen" tabindex="21" />
+                <label for="nonCitizen-yes" class="custom-control-label text-success">YES</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="nonCitizen-no" name="isNonCitizen" class="custom-control-input" value="NO"
+                       formControlName="isNonCitizen" tabindex="22" />
+                <label for="nonCitizen-no" class="custom-control-label text-danger">NO</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <p><strong>Are you a lawful permanent resident:</strong></p>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="lawFullPermanent-yes" name="isLawFullPermanent" class="custom-control-input" value="YES" checked
+                       formControlName="isLawFullPermanent" tabindex="1" />
+                <label for="lawFullPermanent-yes" class="custom-control-label text-success">YES</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="lawFullPermanent-no" name="isLawFullPermanent" class="custom-control-input" value="NO"
+                       formControlName="isLawFullPermanent" tabindex="2" />
+                <label for="lawFullPermanent-no" class="custom-control-label text-danger">NO</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="uSCISNumber" class="form-label">USCIS Number</label>
+              <input id="uSCISNumber" name="uSCISNumber" type="text" class="form-control" autocomplete="off"
+                     formControlName="uSCISNumber" tabindex="3" trimmed />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="workAuthExpiryDate" class="form-label">Work Authorization Expiry Date</label>
+              <p-calendar id="workAuthExpiryDate" name="workAuthExpiryDate" placeholder="MM-DD-YYYY"
+                          formControlName="workAuthExpiryDate"
+                          tabindex="4"
+                          dateFormat="mm-dd-yy"
+                          [monthNavigator]="true"
+                          [yearNavigator]="true"
+                          yearRange="1900:2100"
+                          [showIcon]="true">
+              </p-calendar>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="i94AdmissionNumber" class="form-label">I94 Admission Number</label>
+              <input id="i94AdmissionNumber" name="i94AdmissionNumber" type="text" class="form-control" autocomplete="off"
+                     formControlName="i94AdmissionNumber" tabindex="5" trimmed />
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="foreignPassort" class="form-label">Foreign Passport Number</label>
+              <input id="foreignPassort" name="foreignPassort" type="text" class="form-control" autocomplete="off"
+                     formControlName="foreignPassort" tabindex="6" trimmed />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="additionalInformation" class="form-label">Additional Information</label>
+              <input id="additionalInformation" name="additionalInformation" type="text" class="form-control" autocomplete="off"
+                     formControlName="additionalInformation" tabindex="7" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="translatorFirstName" class="form-label">Translator First Name</label>
+              <input id="translatorFirstName" name="translatorFirstName" type="text" class="form-control" autocomplete="off"
+                     formControlName="translatorFirstName" tabindex="8" trimmed />
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="translatorLastName" class="form-label">Translator Last Name</label>
+              <input id="translatorLastName" name="translatorLastName" type="text" class="form-control" autocomplete="off"
+                     formControlName="translatorLastName" tabindex="9" trimmed />
+            </div>
+          </div>
+
+
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="streetAddress" class="form-label">Street Address</label>
+              <input id="streetAddress" name="streetAddress" type="text" class="form-control" autocomplete="off"
+                     formControlName="streetAddress" tabindex="10" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="apt" class="form-label">Apartment</label>
+              <input id="apt" name="apt" type="text" class="form-control" autocomplete="off"
+                     formControlName="apt" tabindex="11" trimmed />
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="zipCode" class="form-label">Zip Code</label>
+              <p-autoComplete formControlName="zipCode" [suggestions]="zipCodeResults" class="form-control"
+                              (completeMethod)="onZipCodeSearch($event)" field="ZipCode" [dropdown]="true"
+                              forceSelection="true" (onSelect)="onZipCodeSelect($event)" tabindex="12">
+                <ng-template let-zipCode pTemplate="item">
+                  <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.ZipCode}},</div>
+                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.City}},</div>
+                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.StateName}}</div>
+                  </div>
+                </ng-template>
+              </p-autoComplete>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="city" class="form-label">City</label>
+              <input id="city" name="city" type="text" class="form-control" autocomplete="off"
+                     formControlName="city" tabindex="13" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="stateName" class="form-label">State</label>
+              <input id="stateName" name="stateName" type="text" class="form-control" autocomplete="off"
+                     formControlName="stateName" tabindex="14" trimmed />
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="employmentDate" class="form-label">Employment Date</label>
+              <p-calendar id="employmentDate" name="employmentDate" placeholder="MM-DD-YYYY"
+                          formControlName="employmentDate"
+                          tabindex="15"
+                          dateFormat="mm-dd-yy"
+                          [monthNavigator]="true"
+                          [yearNavigator]="true"
+                          yearRange="1900:2100"
+                          [showIcon]="true">
+              </p-calendar>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="documentTitle" class="form-label">Document Title</label>
+              <input id="documentTitle" name="documentTitle" type="text" class="form-control" autocomplete="off"
+                     formControlName="documentTitle" tabindex="16" trimmed />
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="documentNumber" class="form-label">Document Number</label>
+              <input id="documentNumber" name="documentNumber" type="text" class="form-control" autocomplete="off"
+                     formControlName="documentNumber" tabindex="17" trimmed />
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="form-group">
+              <label for="expirationDate" class="form-label">Expiration Date</label>
+              <p-calendar id="expirationDate" name="expirationDate" placeholder="MM-DD-YYYY"
+                          formControlName="expirationDate"
+                          tabindex="18"
+                          dateFormat="mm-dd-yy"
+                          [monthNavigator]="true"
+                          [yearNavigator]="true"
+                          yearRange="1900:2100"
+                          [showIcon]="true">
+              </p-calendar>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="card-footer">
+        <ul class="list-inline mb-0 d-flex justify-content-between">
+          <li class="list-inline-item">
+            <a [routerLink]="['/uscis-info']" routerLinkActive="active" class="btn btn-primary btn-portal-border" tabindex="19">Back</a>
+          </li>
+          <li class="list-inline-item">
+            <button type="button" (click)="onClear();" class="btn btn-primary btn-portal-border" tabindex="20">Clear</button>
+          </li>
+          <li class="list-inline-item">
+            <button type="submit" class="btn btn-primary btn-portal" tabindex="21">Save</button>
+          </li>
+        </ul>
+      </div>
+    </form>
+  </div>
+</div>
+<p-toast key="toastKey1"></p-toast>

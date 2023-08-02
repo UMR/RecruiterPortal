@@ -1,0 +1,20 @@
+:host >>> loading-image > div.loader {
+  height: 4px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #ddd;
+  bottom: 0px;
+}
+
+.red-border {
+  border: 1px solid #f00
+}
+
+.container {
+  max-width: 600px;
+}
+
+.mb-10 {
+  margin-bottom: 20px;
+}

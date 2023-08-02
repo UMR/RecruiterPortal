@@ -1,0 +1,190 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+<div class="container-fluid">
+  <div class="card portal-card">
+    <div class="card-body" style="height:auto">
+      <a [routerLink]="['./add-edit-uscis']" class="text-right card-edit"><i class="fa fa-edit text-edit"></i></a>
+      <a class="text-right card-edit" (click)="onDownloadClick()" style="margin-top:50px;"><i class="fa fa-download text-edit"></i></a>
+      <div class="row">
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Are you a noncitizen national of USA: </label>
+                </div>
+                <div class="col-8" *ngIf="!userUSCIS">
+                  <label for="">
+                  </label>
+                </div>
+                <div class="col-8" *ngIf="userUSCIS != null && userUSCIS?.IsNonCitizen == null">
+                  <label for="">
+                  </label>
+                </div>
+                <div class="col-8" *ngIf="userUSCIS != null && userUSCIS.IsNonCitizen != null">
+                  <label for="">
+                    <strong class="text-success" *ngIf="userUSCIS?.IsNonCitizen">YES</strong>
+                    <strong class="text-danger" *ngIf="!userUSCIS?.IsNonCitizen">NO</strong>
+                  </label>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Are you a lawful permanent resident : </label>
+                </div>
+                <div class="col-8" *ngIf="!userUSCIS">
+                  <label for="">
+                  </label>
+                </div>
+                <div class="col-8" *ngIf="userUSCIS != null && userUSCIS?.IsLawFullPermanent == null">
+                  <label for="">
+                  </label>
+                </div>
+                <div class="col-8" *ngIf="userUSCIS != null && userUSCIS.IsLawFullPermanent !=null">
+                  <label for="">
+                    <strong *ngIf="!userUSCIS"></strong>
+                    <strong class="text-success" *ngIf="userUSCIS?.IsLawFullPermanent">YES</strong>
+                    <strong class="text-danger" *ngIf="!userUSCIS?.IsLawFullPermanent">NO</strong>
+                  </label>
+                </div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">USCIS Number : </label>
+                </div>
+                <div class="col-8">{{userUSCIS?.USCISNumber}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Work Authorization Expiry Date : </label>
+                </div>
+                <div class="col-8">{{getClientFormattedDate(userUSCIS?.WorkAuthExpiryDate)}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">I94 Admission Number : </label>
+                </div>
+                <div class="col-8">{{userUSCIS?.I94AdmissionNumber}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Foreign Passport Number: </label>
+                </div>
+                <div class="col-8">{{userUSCIS?.ForeignPassort}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Translator First Name : </label>
+                </div>
+                <div class="col-8">{{userUSCIS?.TranslatorFirstName}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Translator Last Name : </label>
+                </div>
+                <div class="col-8">{{userUSCIS?.TranslatorLastName}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Street Address: </label>
+                </div>
+                <div class="col-8">{{userUSCIS?.StreetAddress}}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Apartment : </label>
+                </div>
+                <div class="col-8">{{userUSCIS?.Apt}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Zip Code : </label>
+                </div>
+                <div class="col-8">{{userUSCIS?.ZipCode}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">City : </label>
+                </div>
+                <div class="col-8">{{userUSCIS?.City}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">State : </label>
+                </div>
+                <div class="col-8">{{userUSCIS?.StateName}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Additional Information : </label>
+                </div>
+                <div class="col-8">{{userUSCIS?.AdditionalInformation}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Employment Date : </label>
+                </div>
+                <div class="col-8">{{getClientFormattedDate(userUSCIS?.EmploymentDate)}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Rehire Document Title : </label>
+                </div>
+                <div class="col-8">{{userUSCIS?.DocumentTitle}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Rehire Document Number : </label>
+                </div>
+                <div class="col-8">{{userUSCIS?.DocumentNumber}}</div>
+              </div>
+            </li>
+            <li class="list-group-item list-group-item-action">
+              <div class="row">
+                <div class="col-4">
+                  <label for="">Rehire Expiration Date : </label>
+                </div>
+                <div class="col-8">{{getClientFormattedDate(userUSCIS?.ExpirationDate)}}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

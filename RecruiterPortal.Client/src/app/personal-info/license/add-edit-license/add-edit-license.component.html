@@ -1,0 +1,51 @@
+<loading-image [is-loading]="isLoading"></loading-image>
+<div class="card portal-card">
+  <div class="card-body px-3 py-3">
+    <form [formGroup]="licenseFormGroup" novalidate>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="licenseName" class="form-label">License Name</label>
+            <input id="licenseName" name="licenseName" type="text" class="form-control" autocomplete="off" autofocus formControlName="licenseName" tabindex="1" pTooltip="Maximum 200 characters" tooltipPosition="top"
+                   tooltipEvent="focus" required trimmed>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="licenseNo" class="form-label">License No.</label>
+            <input id="licenseNo" name="licenseNo" type="text" class="form-control" autocomplete="off" autofocus formControlName="licenseNo" tabindex="2" pTooltip="Maximum 50 characters" tooltipPosition="top"
+                   tooltipEvent="focus" trimmed>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="expiryDate" class="form-label">Expiry Date</label>
+            <p-calendar id="expiryDate" name="expiryDate" placeholder="MM-DD-YYYY"
+                        formControlName="expiryDate"
+                        tabindex="3"
+                        dateFormat="mm-dd-yy"
+                        [monthNavigator]="true"
+                        [yearNavigator]="true"
+                        yearRange="1900:2030"
+                        [showIcon]="true">
+            </p-calendar>
+          </div>
+        </div>
+      </div>      
+    </form>
+  </div>
+  <div class="card-footer">
+    <ul class="list-inline mb-0 d-flex justify-content-between">
+      <li class="list-inline-item">
+        <a (click)="onClear()" class="btn btn-primary btn-portal-border" tabindex="5">Clear</a>
+      </li>
+      <li class="list-inline-item">
+        <button class="btn btn-primary btn-portal" pTooltip="Fill out form with valid info." tabindex="4"
+                tooltipPosition="left" [tooltipDisabled]="licenseFormGroup.valid" [disabled]="licenseFormGroup.invalid" (click)="onSave()">
+          Save
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+<p-toast key="toastKey1"></p-toast>
