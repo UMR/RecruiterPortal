@@ -20,7 +20,7 @@ namespace RecruiterPortalDAL.Managers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception(ex.Message);
             }
         }
 
@@ -39,8 +39,9 @@ namespace RecruiterPortalDAL.Managers
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception(ex.Message);
             }
+
             return eyeColorDataTable;
         }
     }
