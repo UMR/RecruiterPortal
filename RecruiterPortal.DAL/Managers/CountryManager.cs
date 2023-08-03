@@ -7,16 +7,16 @@ namespace RecruiterPortalDAL.Managers
 {
     public class CountryManager
     {
-        public static IEnumerable<ViewCountryName> GetCountryName(string countryName)
+        public static IEnumerable<Country> GetCountryName(string countryName)
         {
             string spName = "sp_GetCountryName";
             try
             {
-                GenericRepository<ViewCountryName> view_Country_NameRepo = new GenericRepository<ViewCountryName>();
+                GenericRepository<Country> view_Country_NameRepo = new GenericRepository<Country>();
                 dynamic expandoObject = new ExpandoObject();
                 expandoObject.CountryName = countryName;
                 SqlParameter[] sqlParameters = view_Country_NameRepo.GetSqlParametersFromExpandoObject(expandoObject, spName);
-                IEnumerable<ViewCountryName> view_CountryNameList = view_Country_NameRepo.GetAll(spName, sqlParameters); ;
+                IEnumerable<Country> view_CountryNameList = view_Country_NameRepo.GetAll(spName, sqlParameters); ;
 
                 return view_CountryNameList;
             }

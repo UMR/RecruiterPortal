@@ -8,13 +8,13 @@ namespace RecruiterPortalDAL.Managers
 {
     public class HairColorManager
     {
-        public static IEnumerable<ViewHairColor> GetHairColor()
+        public static IEnumerable<HairColor> GetHairColor()
         {
             string spName = "sp_GetHairColor";
             try
             {
-                GenericRepository<ViewHairColor> view_hair_color_Repo = new GenericRepository<ViewHairColor>();
-                IEnumerable<ViewHairColor> view_hair_color_List = view_hair_color_Repo.GetAll(spName); ;
+                GenericRepository<HairColor> view_hair_color_Repo = new GenericRepository<HairColor>();
+                IEnumerable<HairColor> view_hair_color_List = view_hair_color_Repo.GetAll(spName); ;
 
                 return view_hair_color_List;
             }
@@ -32,7 +32,7 @@ namespace RecruiterPortalDAL.Managers
             {
                 dynamic expandoObject = new ExpandoObject();
                 expandoObject.HairColor = HairColor;
-                GenericRepository<ViewHairColor> hairColorRepo = new GenericRepository<ViewHairColor>();
+                GenericRepository<HairColor> hairColorRepo = new GenericRepository<HairColor>();
                 SqlParameter[] sqlParameters = hairColorRepo.GetSqlParametersFromExpandoObject(expandoObject, spName);
                 hairColorDataTable = hairColorRepo.LoadDataTable(spName, sqlParameters);
             }

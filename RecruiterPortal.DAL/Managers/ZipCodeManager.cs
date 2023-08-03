@@ -8,16 +8,16 @@ namespace RecruiterPortalDAL.Managers
 {
     public class ZipCodeManager
     {
-        public static IEnumerable<ViewLookUpZipCode> GetZipCodeCityStateByZipCode(string Zipcode)
+        public static IEnumerable<LookupZipCode> GetZipCodeCityStateByZipCode(string Zipcode)
         {
             string spName = "sp_GetZipCodeByZipCode";
             try
             {
-                GenericRepository<ViewLookUpZipCode> view_LookUp_ZipCodeRepo = new GenericRepository<ViewLookUpZipCode>();
+                GenericRepository<LookupZipCode> view_LookUp_ZipCodeRepo = new GenericRepository<LookupZipCode>();
                 dynamic expandoObject = new ExpandoObject();
                 expandoObject.Zipcode = Zipcode;
                 SqlParameter[] sqlParameters = view_LookUp_ZipCodeRepo.GetSqlParametersFromExpandoObject(expandoObject, spName);
-                IEnumerable<ViewLookUpZipCode> view_LookUp_ZipCodeList = view_LookUp_ZipCodeRepo.GetAll(spName, sqlParameters); ;
+                IEnumerable<LookupZipCode> view_LookUp_ZipCodeList = view_LookUp_ZipCodeRepo.GetAll(spName, sqlParameters); ;
 
                 return view_LookUp_ZipCodeList;
             }
@@ -27,16 +27,16 @@ namespace RecruiterPortalDAL.Managers
             }
         }
 
-        public static IEnumerable<ViewIssueAuthority> GetIssueingAuthorityByText(string text)
+        public static IEnumerable<ViewIssuingAuthority> GetIssueingAuthorityByText(string text)
         {
             string spName = "sp_GetIssueingAuthorityByText";
             try
             {
-                GenericRepository<ViewIssueAuthority> view_IssueAuthority = new GenericRepository<ViewIssueAuthority>();
+                GenericRepository<ViewIssuingAuthority> view_IssueAuthority = new GenericRepository<ViewIssuingAuthority>();
                 dynamic expandoObject = new ExpandoObject();
                 expandoObject.IssueAuthority = text;
                 SqlParameter[] sqlParameters = view_IssueAuthority.GetSqlParametersFromExpandoObject(expandoObject, spName);
-                IEnumerable<ViewIssueAuthority> view_IssueAuthorityList = view_IssueAuthority.GetAll(spName, sqlParameters); ;
+                IEnumerable<ViewIssuingAuthority> view_IssueAuthorityList = view_IssueAuthority.GetAll(spName, sqlParameters); ;
 
                 return view_IssueAuthorityList;
             }
@@ -52,7 +52,7 @@ namespace RecruiterPortalDAL.Managers
 
             dynamic expandoObject = new ExpandoObject();
             expandoObject.StateName = stateName;
-            GenericRepository<ViewState> stateRepo = new GenericRepository<ViewState>();
+            GenericRepository<State> stateRepo = new GenericRepository<State>();
             SqlParameter[] sqlParameters = stateRepo.GetSqlParametersFromExpandoObject(expandoObject, spName);
             DataTable stateDataTable = null;
             try

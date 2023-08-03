@@ -19,17 +19,17 @@ public partial class HepaBhippa
 
     public bool? HasFacilityInfo { get; set; }
 
-    public string? Comment { get; set; }
+    public string Comment { get; set; }
 
     public DateTime? SignatureDate { get; set; }
 
-    public string? WitnessName { get; set; }
+    public string WitnessName { get; set; }
 
     public DateTime? WitnessSignatureDate { get; set; }
 
-    public string? ComplianceOfficer { get; set; }
+    public string ComplianceOfficer { get; set; }
 
     public long UserId { get; set; }
 
-    public virtual User User { get; set; } = null!;
+    public virtual User User { get; set; }
 }

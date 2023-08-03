@@ -9,13 +9,13 @@ public partial class UserFile
 
     public byte FileType { get; set; }
 
-    public byte[] FileData { get; set; } = null!;
+    public byte[] FileData { get; set; }
 
-    public string FileName { get; set; } = null!;
+    public string FileName { get; set; }
 
     public DateTime CreatedDate { get; set; }
 
     public long UserId { get; set; }
 
-    public virtual User User { get; set; } = null!;
+    public virtual User User { get; set; }
 }

@@ -7,7 +7,7 @@ public partial class UserPhoto
 {
     public long PhotoId { get; set; }
 
-    public byte[]? Photo { get; set; }
+    public byte[] Photo { get; set; }
 
     public long UserId { get; set; }
 
@@ -15,5 +15,5 @@ public partial class UserPhoto
 
     public DateTime? UpdatedDate { get; set; }
 
-    public virtual User User { get; set; } = null!;
+    public virtual User User { get; set; }
 }

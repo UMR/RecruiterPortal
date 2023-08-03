@@ -7,10 +7,10 @@ namespace RecruiterPortalDAL.Managers
 {
     public class AgencyManager
     {
-        public static ViewAgency GetAgencyByURLPrefix(string p_Url)
+        public static Agency GetAgencyByURLPrefix(string p_Url)
         {
             string spName = "SP_GET_AgencyByUrl";
-            SqlParameter[] sqlParameters = new GenericRepository<ViewAgency>().GetSqlParametersFromStoredProcedure(spName);
+            SqlParameter[] sqlParameters = new GenericRepository<Agency>().GetSqlParametersFromStoredProcedure(spName);
 
             foreach (SqlParameter sqlParameter in sqlParameters)
             {
@@ -20,11 +20,11 @@ namespace RecruiterPortalDAL.Managers
                 }
             }
 
-            ViewAgency agency;
+            Agency agency;
 
             try
             {
-                agency = new GenericRepository<ViewAgency>().GetOne(spName, sqlParameters);
+                agency = new GenericRepository<Agency>().GetOne(spName, sqlParameters);
             }
             catch (Exception ex)
             {
@@ -36,7 +36,7 @@ namespace RecruiterPortalDAL.Managers
         public static DataTable GetAgencies()
         {
             string spName = "SP_All_GET_Agency";
-            GenericRepository<ViewAgency> agencyRepo = new GenericRepository<ViewAgency>();
+            GenericRepository<Agency> agencyRepo = new GenericRepository<Agency>();
             SqlParameter[] sqlParameters = agencyRepo.GetSqlParametersFromStoredProcedure(spName);
             DataTable agencyDt = null;
             try

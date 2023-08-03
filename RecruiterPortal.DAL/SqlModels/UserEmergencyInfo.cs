@@ -7,15 +7,15 @@ public partial class UserEmergencyInfo
 {
     public long UserEmergencyInfoId { get; set; }
 
-    public string EmrLastName { get; set; } = null!;
+    public string EmrLastName { get; set; }
 
-    public string EmrFirstName { get; set; } = null!;
+    public string EmrFirstName { get; set; }
 
-    public string? NatureOfRelationship { get; set; }
+    public string NatureOfRelationship { get; set; }
 
-    public string? EmrCellPhone { get; set; }
+    public string EmrCellPhone { get; set; }
 
-    public string EmrHomePhone { get; set; } = null!;
+    public string EmrHomePhone { get; set; }
 
     public byte EmrType { get; set; }
 
@@ -23,7 +23,7 @@ public partial class UserEmergencyInfo
 
     public DateTime? CreatedDate { get; set; }
 
-    public string? EmrWorkPhone { get; set; }
+    public string EmrWorkPhone { get; set; }
 
-    public virtual User User { get; set; } = null!;
+    public virtual User User { get; set; }
 }

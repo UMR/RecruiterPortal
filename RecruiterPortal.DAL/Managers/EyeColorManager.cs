@@ -8,13 +8,13 @@ namespace RecruiterPortalDAL.Managers
 {
     public class EyeColorManager
     {
-        public static IEnumerable<ViewEyeColor> GetEyeColor()
+        public static IEnumerable<EyeColor> GetEyeColor()
         {
             string spName = "sp_GetEyeColor";
             try
             {
-                GenericRepository<ViewEyeColor> view_eye_color_Repo = new GenericRepository<ViewEyeColor>();
-                IEnumerable<ViewEyeColor> view_eye_color_List = view_eye_color_Repo.GetAll(spName); ;
+                GenericRepository<EyeColor> view_eye_color_Repo = new GenericRepository<EyeColor>();
+                IEnumerable<EyeColor> view_eye_color_List = view_eye_color_Repo.GetAll(spName); ;
 
                 return view_eye_color_List;
             }
@@ -33,7 +33,7 @@ namespace RecruiterPortalDAL.Managers
             {
                 dynamic expandoObject = new ExpandoObject();
                 expandoObject.EyeColor = EyeColor;
-                GenericRepository<ViewEyeColor> eyeColorRepo = new GenericRepository<ViewEyeColor>();
+                GenericRepository<EyeColor> eyeColorRepo = new GenericRepository<EyeColor>();
                 SqlParameter[] sqlParameters = eyeColorRepo.GetSqlParametersFromExpandoObject(expandoObject, spName);
                 eyeColorDataTable = eyeColorRepo.LoadDataTable(spName, sqlParameters);
             }

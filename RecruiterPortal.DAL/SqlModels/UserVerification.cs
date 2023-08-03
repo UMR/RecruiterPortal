@@ -15,7 +15,7 @@ public partial class UserVerification
 
     public bool Active { get; set; }
 
-    public string? VerficationCode { get; set; }
+    public string VerficationCode { get; set; }
 
-    public virtual User User { get; set; } = null!;
+    public virtual User User { get; set; }
 }
