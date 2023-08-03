@@ -1,0 +1,11 @@
+﻿USE [UMRRecruitmentApplicant]
+GO
+
+CREATE OR ALTER PROCEDURE sp_USCIS_Delete (
+ 	 @USCISID bigint
+ )
+ AS
+ DELETE FROM [USCIS] WHERE [USCISID] = @USCISID
+ 
+
+GO

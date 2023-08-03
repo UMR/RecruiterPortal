@@ -1,0 +1,7 @@
+﻿ALTER TABLE dbo.USCIS
+ADD IsNonCitizen bit NULL
+GO
+
+ALTER TABLE dbo.USCIS
+ADD IsLawFullPermanent bit NULL
+GO

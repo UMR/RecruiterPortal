@@ -1,0 +1,65 @@
+﻿USE [UMRRecruitmentApplicant]
+GO
+
+/****** Object:  Table [dbo].[UserDetails]    Script Date: 8/23/2021 2:35:48 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].CBCForm(
+	[CBCID] [bigint] IDENTITY(1,1) NOT NULL,
+	[UserID] [bigint] NOT NULL,
+	[Alias_AKA] NVARCHAR(500) NULL, 
+	[HomePhone] NVARCHAR (500) NULL,
+	[AgencyIdentification] NVARCHAR (500) NULL,
+	[LTHHP_PFI] NVARCHAR(500) NULL, 
+	[LHCSA_License] NVARCHAR(500) NULL,
+	[AgencyName] NVARCHAR(500) NULL, 
+	[ATelephoneNo] NVARCHAR (500) NULL,
+	[APLastName] NVARCHAR (500) NULL,
+	[APFirstName] NVARCHAR(500) NULL, 
+	[AStreetNo] NVARCHAR(500) NULL,
+	[AStreetName] NVARCHAR(500) NULL, 
+	[AApt] NVARCHAR (500) NULL,
+	[ACity] NVARCHAR (500) NULL,
+	[AState] NVARCHAR(500) NULL, 
+	[AZipCode] NVARCHAR(500) NULL,
+	[AEmail] NVARCHAR(500) NULL, 
+	[ADate] NVARCHAR (500) NULL,
+	[FingerprintingMethod] NVARCHAR (500) NULL,
+	[FingerprintServicesName] NVARCHAR(500) NULL, 
+	[FStAddress] NVARCHAR(500) NULL,
+	[FCity] NVARCHAR(500) NULL, 
+	[FState] NVARCHAR (500) NULL,
+	[FZip] NVARCHAR (500) NULL,
+	[FIdentificationVerified] NVARCHAR(500) NULL, 
+	[FFirstName] NVARCHAR(500) NULL,
+	[FLastName] NVARCHAR (500) NULL,
+	[FTitle] NVARCHAR (500) NULL,
+	[Signature] NVARCHAR(500) NULL, 
+	[DateFingerPrinted] NVARCHAR(500) NULL,
+	[MotherMaidenName] NVARCHAR(500) NULL, 
+	[ParentorLegalGuardian] NVARCHAR (500) NULL,
+	[Title] NVARCHAR (500) NULL,
+	[CreatedBy] [int] NULL,
+	[CreatedDate] [datetime] NULL,
+	[UpdatedBy] [int] NULL,
+	[UpdatedDate] [datetime] NULL,
+ CONSTRAINT [PK_CBC] PRIMARY KEY CLUSTERED 
+(
+	[CBCID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].CBCForm ADD  CONSTRAINT [DF__CBC__Creat__6166761E]  DEFAULT (getdate()) FOR [CreatedDate]
+GO
+
+ALTER TABLE [dbo].CBCForm  WITH CHECK ADD  CONSTRAINT [FK_CBC_User] FOREIGN KEY([UserID])
+REFERENCES [dbo].[User] ([UserID])
+GO
+
+ALTER TABLE [dbo].CBCForm CHECK CONSTRAINT [FK_CBC_User]
+GO
