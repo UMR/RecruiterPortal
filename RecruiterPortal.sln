@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecruiterPortal.Auth", "Rec
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecruiterPortal.API", "RecruiterPortal.API\RecruiterPortal.API.csproj", "{CFC3C261-E4B7-49F5-B6D7-200C204B6A42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecruiterPortal.DAL", "RecruiterPortal.DAL\RecruiterPortal.DAL.csproj", "{003C872A-D5E2-4D20-BF21-8A4F0D1574CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecruiterPortal.DAL", "RecruiterPortal.DAL\RecruiterPortal.DAL.csproj", "{003C872A-D5E2-4D20-BF21-8A4F0D1574CE}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "RecruiterPortal.DB", "RecruiterPortal.DB\RecruiterPortal.DB.sqlproj", "{90FE67B0-FE7F-4B6B-9434-A9331F0390C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecruiterPortal.Common", "RecruiterPortal.Common\RecruiterPortal.Common.csproj", "{5E95A182-4684-4D01-9CAB-C48DF60F9DA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{90FE67B0-FE7F-4B6B-9434-A9331F0390C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90FE67B0-FE7F-4B6B-9434-A9331F0390C5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{90FE67B0-FE7F-4B6B-9434-A9331F0390C5}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{5E95A182-4684-4D01-9CAB-C48DF60F9DA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E95A182-4684-4D01-9CAB-C48DF60F9DA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E95A182-4684-4D01-9CAB-C48DF60F9DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E95A182-4684-4D01-9CAB-C48DF60F9DA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
