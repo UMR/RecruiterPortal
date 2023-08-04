@@ -399,5 +399,8 @@
     <None Include="2023-08-03\07_SR_07_Create_ZipCodeTable.sql" />
     <None Include="2023-08-03\08_SR_08_Create_Race_Table.sql" />
     <None Include="2023-08-03\09_SR_09_Create_PdfTemplateTable.sql" />
+    <None Include="2023-08-03\10_SR_10_Create_Recruiter_Table.sql" />
+    <None Include="2023-08-03\11_SR_11_Create_Roles_Table.sql" />
+    <None Include="2023-08-03\12_SR_12_Create_RecruiterRoles_Table.sql" />
   </ItemGroup>
 </Project>
