@@ -17,9 +17,9 @@ namespace ApplicantPortalAPI.AuthorizationServer.Services
         public Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
         {
             try
-            {                
-                int agencyId = GetAgencyIdByFullUrl(_httpContextAccessor.HttpContext);
-                if (UserManager.ValidateUser(context.UserName, context.Password))
+            {
+                int agencyId = GetAgencyIdByUrl(_httpContextAccessor.HttpContext);
+                if (UserManager.ValidateUser(context.UserName, context.Password, agencyId))
                 {
                     var user = UserManager.GetUserByName(context.UserName);
                     context.Result = new GrantValidationResult(user.Email, OidcConstants.AuthenticationMethods.Password);
@@ -32,27 +32,29 @@ namespace ApplicantPortalAPI.AuthorizationServer.Services
             }
 
             return Task.FromResult(0);
-        }        
+        }
 
-        private int GetAgencyIdByFullUrl(HttpContext context)
+        private int GetAgencyIdByUrl(HttpContext context)
         {
             int agencyId = 0;
             string url = UriHelper.GetEncodedUrl(context.Request);
-            Agency agencyData;
+            Agency agency;
 
             if (!string.IsNullOrEmpty(url))
             {
                 var splitUrl = url.Split('=');
-                var subDomain = splitUrl[1].ToString();
-
-                agencyData = AgencyManager.GetAgencyByURLPrefix(subDomain.ToString());
-                if (agencyData != null)
+                if (splitUrl.Length > 1)
                 {
-                    agencyId = Convert.ToInt32(agencyData.AgencyId.ToString());
+                    var subDomain = splitUrl[1].ToString();
+                    agency = AgencyManager.GetAgencyByURLPrefix(subDomain.ToString());
+                    if (agency != null)
+                    {
+                        agencyId = Convert.ToInt32(agency.AgencyId.ToString());
+                    }
                 }
             }
 
             return agencyId;
-        }       
+        }
     }
 }

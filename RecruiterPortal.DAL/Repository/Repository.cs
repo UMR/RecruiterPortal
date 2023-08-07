@@ -108,12 +108,12 @@ namespace RecruiterPortal.DAL.Repository
                     parameterNames[i] = parameters[i].ParameterName;
                 }
 
-                var result = context.Database.SqlQueryRaw<T>(string.Format("{0}", sqlQuery, string.Join(",", parameterNames), parameters));
+                var result = context.Set<T>().FromSqlRaw<T>(string.Format("{0}", sqlQuery, string.Join(",", parameterNames), parameters));
                 return result.ToList();
             }
             else
             {
-                var result = context.Database.SqlQueryRaw<T>(sqlQuery);
+                var result = context.Set<T>().FromSqlRaw<T>(sqlQuery);
                 return result.ToList();
             }
         }
@@ -131,7 +131,7 @@ namespace RecruiterPortal.DAL.Repository
                     }
                     using (context)
                     {
-                        var result = context.Database.SqlQueryRaw<T>(string.Format("EXEC {0} {1}", storedProcedureName, string.Join(",", parameterNames)), parameters);
+                        var result = context.Set<T>().FromSqlRaw<T>(string.Format("EXEC {0} {1}", storedProcedureName, string.Join(",", parameterNames)), parameters);
                         return result.ToList();
                     }
                 }
@@ -139,7 +139,7 @@ namespace RecruiterPortal.DAL.Repository
                 {
                     using (context)
                     {
-                        var result = context.Database.SqlQueryRaw<T>(string.Format("EXEC {0}", storedProcedureName));
+                        var result = context.Set<T>().FromSqlRaw<T>(string.Format("EXEC {0}", storedProcedureName));
                         return result.ToList();
                     }
                 }
