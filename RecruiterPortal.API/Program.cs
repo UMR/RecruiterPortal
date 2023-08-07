@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using RecruiterPortal.API.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.ConfigureIdentityServerServices();
 
+builder.ConfigureIdentityServerServices();
 builder.Services.AddCors(o =>
 {
     o.AddPolicy("CorsPolicy",
@@ -12,7 +12,6 @@ builder.Services.AddCors(o =>
         .AllowAnyMethod()
         .AllowAnyHeader());
 });
-
 builder.Services.AddControllers(config =>
 {
     config.Filters.Add(new AuthorizeFilter(new AuthorizationPolicyBuilder().
