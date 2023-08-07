@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using RecruiterPortal.API.Exceptions;
-using System.ComponentModel.DataAnnotations;
 
 namespace RecruiterPortal.API.Filters
 {
