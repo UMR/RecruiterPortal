@@ -10,6 +10,13 @@ namespace RecruiterPortal.Auth.Services
 {
     public class ProfileService : IProfileService
     {
+        private readonly ILogger<ProfileService> _logger;
+
+        public ProfileService(ILogger<ProfileService> logger)
+        {
+            _logger = logger;
+        }
+
         public Task GetProfileDataAsync(ProfileDataRequestContext context)
         {
             try
@@ -42,7 +49,7 @@ namespace RecruiterPortal.Auth.Services
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
+                _logger.LogError($"Something went wrong: {ex}");
             }
 
             return Task.FromResult(0);
@@ -57,7 +64,7 @@ namespace RecruiterPortal.Auth.Services
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
+                _logger.LogError($"Something went wrong: {ex}");
             }
         }
     }

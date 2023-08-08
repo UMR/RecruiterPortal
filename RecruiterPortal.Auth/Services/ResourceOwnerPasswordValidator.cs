@@ -9,26 +9,29 @@ namespace ApplicantPortalAPI.AuthorizationServer.Services
     public class ResourceOwnerPasswordValidator : IResourceOwnerPasswordValidator
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public ResourceOwnerPasswordValidator(IHttpContextAccessor httpContextAccessor)
+        private readonly ILogger<ResourceOwnerPasswordValidator> _logger;
+
+        public ResourceOwnerPasswordValidator(IHttpContextAccessor httpContextAccessor, ILogger<ResourceOwnerPasswordValidator> logger)
         {
             _httpContextAccessor = httpContextAccessor;
+            _logger = logger;
         }
 
         public Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
         {
             try
-            {
+            {                
                 int agencyId = GetAgencyIdByUrl(_httpContextAccessor.HttpContext);
                 if (UserManager.ValidateUser(context.UserName, context.Password, agencyId))
                 {
                     var user = UserManager.GetUserByName(context.UserName);
                     context.Result = new GrantValidationResult(user.Email, OidcConstants.AuthenticationMethods.Password);
-                    //Log.Info("Validation Pass");
+                    _logger.LogInformation($"Authentication Pass For User {context.UserName}");
                 }
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
+                _logger.LogError($"Something went wrong: {ex}");
             }
 
             return Task.FromResult(0);
