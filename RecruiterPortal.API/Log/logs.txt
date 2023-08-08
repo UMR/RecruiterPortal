@@ -20,3 +20,40 @@
 2023-08-08 14:35:54.791 +06:00  INF  Executed action RecruiterPortal.API.Controllers.RegistrationController.GetAgencyByURL (RecruiterPortal.API) in 2972.2243ms
 2023-08-08 14:35:54.793 +06:00  INF  Executed endpoint 'RecruiterPortal.API.Controllers.RegistrationController.GetAgencyByURL (RecruiterPortal.API)'
 2023-08-08 14:35:54.793 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/registration/get-agency-by-url/umr - - - 200 - application/json;+charset=utf-8 3962.4905ms
+2023-08-08 18:40:15.930 +06:00  INF  User profile is available. Using 'C:\Users\srana.AEL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-08 18:40:16.054 +06:00  INF  Now listening on: http://localhost:6002
+2023-08-08 18:40:16.058 +06:00  INF  Application started. Press Ctrl+C to shut down.
+2023-08-08 18:40:16.058 +06:00  INF  Hosting environment: Development
+2023-08-08 18:40:16.058 +06:00  INF  Content root path: F:\RecruiterPortal\RecruiterPortal.API\
+2023-08-08 18:40:16.337 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger - -
+2023-08-08 18:40:16.525 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger - - - 301 0 - 192.4215ms
+2023-08-08 18:40:16.530 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/index.html - -
+2023-08-08 18:40:16.998 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/index.html - - - 200 - text/html;charset=utf-8 468.3145ms
+2023-08-08 18:40:16.999 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/swagger-ui.css - -
+2023-08-08 18:40:17.034 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/_framework/aspnetcore-browser-refresh.js - -
+2023-08-08 18:40:17.034 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/swagger-ui-standalone-preset.js - -
+2023-08-08 18:40:17.036 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/_framework/aspnetcore-browser-refresh.js - - - 200 11953 application/javascript;+charset=utf-8 2.1732ms
+2023-08-08 18:40:17.044 +06:00  INF  Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-08-08 18:40:17.045 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/swagger-ui.css - - - 200 143632 text/css 45.9514ms
+2023-08-08 18:40:17.045 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/swagger-ui-bundle.js - -
+2023-08-08 18:40:17.785 +06:00  INF  Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2023-08-08 18:40:17.795 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/swagger-ui-standalone-preset.js - - - 200 337162 application/javascript 760.4261ms
+2023-08-08 18:40:17.832 +06:00  INF  Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2023-08-08 18:40:17.832 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/swagger-ui-bundle.js - - - 200 1092889 application/javascript 786.9226ms
+2023-08-08 18:40:18.092 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - -
+2023-08-08 18:40:18.139 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/favicon-32x32.png - -
+2023-08-08 18:40:18.139 +06:00  INF  Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2023-08-08 18:40:18.139 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/favicon-32x32.png - - - 200 628 image/png 0.4589ms
+2023-08-08 18:40:18.848 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 756.4732ms
+2023-08-08 19:14:54.193 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/index.html - -
+2023-08-08 19:14:54.199 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/index.html - - - 200 - text/html;charset=utf-8 5.6215ms
+2023-08-08 19:14:54.236 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/_framework/aspnetcore-browser-refresh.js - -
+2023-08-08 19:14:54.238 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/_framework/aspnetcore-browser-refresh.js - - - 200 11953 application/javascript;+charset=utf-8 0.9276ms
+2023-08-08 19:14:54.652 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - -
+2023-08-08 19:14:54.686 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 34.3238ms
+2023-08-08 19:15:34.142 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/index.html - -
+2023-08-08 19:15:34.151 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/index.html - - - 200 - text/html;charset=utf-8 9.5786ms
+2023-08-08 19:15:34.209 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/_framework/aspnetcore-browser-refresh.js - -
+2023-08-08 19:15:34.210 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/_framework/aspnetcore-browser-refresh.js - - - 200 11953 application/javascript;+charset=utf-8 0.9089ms
+2023-08-08 19:15:34.448 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - -
+2023-08-08 19:15:34.494 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 46.7732ms

@@ -93,3 +93,83 @@
 2023-08-08 14:35:51.614 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/.well-known/openid-configuration/jwks - -
 2023-08-08 14:35:51.624 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
 2023-08-08 14:35:51.643 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/.well-known/openid-configuration/jwks - - - 200 - application/json;+charset=UTF-8 28.4961ms
+2023-08-08 18:40:10.282 +06:00  INF  Starting IdentityServer4 version 4.1.2+997a6cdd643e46cd5762b710c4ddc43574cbec2e
+2023-08-08 18:40:10.325 +06:00  INF  You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2023-08-08 18:40:10.330 +06:00  INF  Using the default authentication scheme idsrv for IdentityServer
+2023-08-08 18:40:10.435 +06:00  INF  User profile is available. Using 'C:\Users\srana.AEL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-08 18:40:10.784 +06:00  INF  Now listening on: http://localhost:6001
+2023-08-08 18:40:10.784 +06:00  INF  Application started. Press Ctrl+C to shut down.
+2023-08-08 18:40:10.784 +06:00  INF  Hosting environment: Development
+2023-08-08 18:40:10.784 +06:00  INF  Content root path: F:\RecruiterPortal\RecruiterPortal.Auth\
+2023-08-08 18:40:11.048 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger - -
+2023-08-08 18:40:16.204 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger - - - 301 0 - 5168.8509ms
+2023-08-08 18:40:16.212 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/index.html - -
+2023-08-08 18:40:16.984 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/swagger-ui.css - -
+2023-08-08 18:40:16.998 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/index.html - - - 200 - text/html;charset=utf-8 785.7566ms
+2023-08-08 18:40:17.041 +06:00  INF  Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-08-08 18:40:17.041 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/swagger-ui.css - - - 200 143632 text/css 57.0466ms
+2023-08-08 18:40:17.096 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/swagger-ui-bundle.js - -
+2023-08-08 18:40:17.097 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/swagger-ui-standalone-preset.js - -
+2023-08-08 18:40:17.358 +06:00  INF  Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2023-08-08 18:40:17.358 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/swagger-ui-standalone-preset.js - - - 200 337162 application/javascript 260.3780ms
+2023-08-08 18:40:17.377 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - -
+2023-08-08 18:40:17.379 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - - - 200 11954 application/javascript;+charset=utf-8 2.0631ms
+2023-08-08 18:40:17.827 +06:00  INF  Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2023-08-08 18:40:17.828 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/swagger-ui-bundle.js - - - 200 1092889 application/javascript 731.4483ms
+2023-08-08 18:40:18.199 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - -
+2023-08-08 18:40:18.264 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/favicon-32x32.png - -
+2023-08-08 18:40:18.264 +06:00  INF  Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2023-08-08 18:40:18.264 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/favicon-32x32.png - - - 200 628 image/png 0.5021ms
+2023-08-08 18:40:18.697 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 498.2084ms
+2023-08-08 18:42:51.709 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/Home - -
+2023-08-08 18:42:51.851 +06:00  INF  Executing endpoint 'RecruiterPortal.Auth.Controllers.HomeController.Index (RecruiterPortal.Auth)'
+2023-08-08 18:42:51.872 +06:00  INF  Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller RecruiterPortal.Auth.Controllers.HomeController (RecruiterPortal.Auth).
+2023-08-08 18:42:51.876 +06:00  INF  Executing OkObjectResult, writing value of type 'System.String'.
+2023-08-08 18:42:51.883 +06:00  INF  Executed action RecruiterPortal.Auth.Controllers.HomeController.Index (RecruiterPortal.Auth) in 5.8797ms
+2023-08-08 18:42:51.884 +06:00  INF  Executed endpoint 'RecruiterPortal.Auth.Controllers.HomeController.Index (RecruiterPortal.Auth)'
+2023-08-08 18:42:51.884 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/Home - - - 200 - text/plain;+charset=utf-8 174.5423ms
+2023-08-08 18:42:53.426 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/Home - -
+2023-08-08 18:42:53.429 +06:00  INF  Executing endpoint 'RecruiterPortal.Auth.Controllers.HomeController.Index (RecruiterPortal.Auth)'
+2023-08-08 18:42:53.429 +06:00  INF  Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller RecruiterPortal.Auth.Controllers.HomeController (RecruiterPortal.Auth).
+2023-08-08 18:42:53.430 +06:00  INF  Executing OkObjectResult, writing value of type 'System.String'.
+2023-08-08 18:42:53.430 +06:00  INF  Executed action RecruiterPortal.Auth.Controllers.HomeController.Index (RecruiterPortal.Auth) in 0.5402ms
+2023-08-08 18:42:53.430 +06:00  INF  Executed endpoint 'RecruiterPortal.Auth.Controllers.HomeController.Index (RecruiterPortal.Auth)'
+2023-08-08 18:42:53.430 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/Home - - - 200 - text/plain;+charset=utf-8 3.7822ms
+2023-08-08 18:42:54.192 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/Home - -
+2023-08-08 18:42:54.206 +06:00  INF  Executing endpoint 'RecruiterPortal.Auth.Controllers.HomeController.Index (RecruiterPortal.Auth)'
+2023-08-08 18:42:54.206 +06:00  INF  Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller RecruiterPortal.Auth.Controllers.HomeController (RecruiterPortal.Auth).
+2023-08-08 18:42:54.206 +06:00  INF  Executing OkObjectResult, writing value of type 'System.String'.
+2023-08-08 18:42:54.206 +06:00  INF  Executed action RecruiterPortal.Auth.Controllers.HomeController.Index (RecruiterPortal.Auth) in 0.2481ms
+2023-08-08 18:42:54.206 +06:00  INF  Executed endpoint 'RecruiterPortal.Auth.Controllers.HomeController.Index (RecruiterPortal.Auth)'
+2023-08-08 18:42:54.206 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/Home - - - 200 - text/plain;+charset=utf-8 13.7756ms
+2023-08-08 19:14:53.628 +06:00  INF  Starting IdentityServer4 version 4.1.2+997a6cdd643e46cd5762b710c4ddc43574cbec2e
+2023-08-08 19:14:53.646 +06:00  INF  You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2023-08-08 19:14:53.649 +06:00  INF  Using the default authentication scheme idsrv for IdentityServer
+2023-08-08 19:14:53.708 +06:00  INF  User profile is available. Using 'C:\Users\srana.AEL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-08 19:14:53.787 +06:00  INF  Now listening on: http://localhost:6001
+2023-08-08 19:14:53.787 +06:00  INF  Application started. Press Ctrl+C to shut down.
+2023-08-08 19:14:53.787 +06:00  INF  Hosting environment: Development
+2023-08-08 19:14:53.787 +06:00  INF  Content root path: F:\RecruiterPortal\RecruiterPortal.Auth\
+2023-08-08 19:14:54.045 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/index.html - -
+2023-08-08 19:14:54.785 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/index.html - - - 200 - text/html;charset=utf-8 742.2704ms
+2023-08-08 19:14:54.880 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - -
+2023-08-08 19:14:54.883 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - - - 200 11954 application/javascript;+charset=utf-8 2.8172ms
+2023-08-08 19:14:55.393 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - -
+2023-08-08 19:14:55.487 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 93.5599ms
+2023-08-08 19:15:33.317 +06:00  INF  Starting IdentityServer4 version 4.1.2+997a6cdd643e46cd5762b710c4ddc43574cbec2e
+2023-08-08 19:15:33.338 +06:00  INF  You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2023-08-08 19:15:33.340 +06:00  INF  Using the default authentication scheme idsrv for IdentityServer
+2023-08-08 19:15:33.402 +06:00  INF  User profile is available. Using 'C:\Users\srana.AEL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-08 19:15:33.475 +06:00  INF  Now listening on: http://localhost:6001
+2023-08-08 19:15:33.476 +06:00  INF  Application started. Press Ctrl+C to shut down.
+2023-08-08 19:15:33.476 +06:00  INF  Hosting environment: Development
+2023-08-08 19:15:33.476 +06:00  INF  Content root path: F:\RecruiterPortal\RecruiterPortal.Auth\
+2023-08-08 19:15:34.178 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/index.html - -
+2023-08-08 19:15:34.727 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/index.html - - - 200 - text/html;charset=utf-8 554.6402ms
+2023-08-08 19:15:34.828 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - -
+2023-08-08 19:15:34.830 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - - - 200 11954 application/javascript;+charset=utf-8 2.1767ms
+2023-08-08 19:15:35.045 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - -
+2023-08-08 19:15:35.194 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 148.7716ms
+2023-08-08 19:17:23.552 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6001/UMRRecruitmentBasic/connect/token?old=umr - -
+2023-08-08 19:17:23.560 +06:00  INF  No CORS policy found for the specified request.
+2023-08-08 19:17:23.580 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6001/UMRRecruitmentBasic/connect/token?old=umr - - - 404 0 - 27.6736ms
