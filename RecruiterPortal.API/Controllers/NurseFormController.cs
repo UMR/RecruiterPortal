@@ -13,6 +13,10 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
     [ApiController]
     public class NurseFormController : CustomControllerBase
     {
+        public NurseFormController(ILogger<NurseFormController> logger) : base(logger)
+        {
+        }
+
         [Route("get-nurse-form/{applicantId}")]
         [HttpGet]
         public IActionResult GetNurseFormByUserId(int applicantId)

@@ -13,6 +13,10 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
     [ApiController]
     public class TermsConditionsController : CustomControllerBase
     {
+        public TermsConditionsController(ILogger<TermsConditionsController> logger) : base(logger)
+        {
+        }
+
         [Route("get-terms-conditions/{applicantId}")]
         [HttpGet]
         public IActionResult GetTermsConditionsByUserId(int applicantId)

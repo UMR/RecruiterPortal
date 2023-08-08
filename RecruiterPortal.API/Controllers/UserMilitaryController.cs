@@ -11,6 +11,9 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
     [ApiController]
     public class UserMilitaryController : CustomControllerBase
     {
+        public UserMilitaryController(ILogger<UserMilitaryController> logger) : base(logger)
+        {
+        }
 
         [Route("get/{applicantId}")]
         [HttpGet]

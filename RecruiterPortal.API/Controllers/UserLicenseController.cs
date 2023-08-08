@@ -11,6 +11,10 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
     [ApiController]
     public class UserLicenseController : CustomControllerBase
     {
+        public UserLicenseController(ILogger<UserLicenseController> logger) : base(logger)
+        {
+        }
+
         [Route("get-all/{applicantId}")]
         [HttpGet]
         public IActionResult GetUserLicenseByUserID(int applicantId)

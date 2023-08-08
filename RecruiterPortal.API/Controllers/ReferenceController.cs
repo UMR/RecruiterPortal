@@ -10,6 +10,10 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
     [ApiController]
     public class ReferenceController : CustomControllerBase
     {
+        public ReferenceController(ILogger<ReferenceController> logger) : base(logger)
+        {
+        }
+
         [Route("applicant-reference/{applicantId}")]
         [HttpGet]
         public IActionResult GetUserReferenceByUserId(int applicantId)
