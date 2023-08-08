@@ -1,0 +1,22 @@
+2023-08-08 14:34:52.197 +06:00  INF  User profile is available. Using 'C:\Users\Atikur Zaman\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-08 14:34:52.329 +06:00  INF  Now listening on: http://localhost:6002
+2023-08-08 14:34:52.335 +06:00  INF  Application started. Press Ctrl+C to shut down.
+2023-08-08 14:34:52.335 +06:00  INF  Hosting environment: Development
+2023-08-08 14:34:52.335 +06:00  INF  Content root path: D:\UMR Git Projects\RecruiterPortal\RecruiterPortal.API\
+2023-08-08 14:34:52.679 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/index.html - -
+2023-08-08 14:34:53.167 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/index.html - - - 200 - text/html;charset=utf-8 495.7395ms
+2023-08-08 14:34:53.517 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/_vs/browserLink - -
+2023-08-08 14:34:53.519 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/_framework/aspnetcore-browser-refresh.js - -
+2023-08-08 14:34:53.523 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/_framework/aspnetcore-browser-refresh.js - - - 200 12370 application/javascript;+charset=utf-8 2.0339ms
+2023-08-08 14:34:53.531 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 14.2260ms
+2023-08-08 14:34:53.635 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - -
+2023-08-08 14:34:53.779 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 144.1396ms
+2023-08-08 14:35:50.830 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/registration/get-agency-by-url/umr - -
+2023-08-08 14:35:51.774 +06:00  INF  Successfully validated the token.
+2023-08-08 14:35:51.779 +06:00  INF  Executing endpoint 'RecruiterPortal.API.Controllers.RegistrationController.GetAgencyByURL (RecruiterPortal.API)'
+2023-08-08 14:35:51.810 +06:00  INF  Route matched with {action = "GetAgencyByURL", controller = "Registration"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAgencyByURL(System.String) on controller RecruiterPortal.API.Controllers.RegistrationController (RecruiterPortal.API).
+2023-08-08 14:35:51.850 +06:00  INF  Something went wrong
+2023-08-08 14:35:54.738 +06:00  INF  Executing OkObjectResult, writing value of type 'RecruiterPortal.DAL.SqlModels.ViewAgency'.
+2023-08-08 14:35:54.791 +06:00  INF  Executed action RecruiterPortal.API.Controllers.RegistrationController.GetAgencyByURL (RecruiterPortal.API) in 2972.2243ms
+2023-08-08 14:35:54.793 +06:00  INF  Executed endpoint 'RecruiterPortal.API.Controllers.RegistrationController.GetAgencyByURL (RecruiterPortal.API)'
+2023-08-08 14:35:54.793 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/registration/get-agency-by-url/umr - - - 200 - application/json;+charset=utf-8 3962.4905ms
