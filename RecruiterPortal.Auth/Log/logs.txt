@@ -65,3 +65,31 @@
 2023-08-08 14:21:26.190 +06:00  INF  Token request validation success, {"ClientId":"recruitmentweb","ClientName":"Recruitment Web Client","GrantType":"password","Scopes":"recruitment.fullaccess","AuthorizationCode":"********","RefreshToken":"********","UserName":"test@test.com","AuthenticationContextReferenceClasses":null,"Tenant":null,"IdP":null,"Raw":{"grant_type":"password","username":"test@test.com","password":"***REDACTED***","scope":"recruitment.fullaccess","client_id":"recruitmentweb","client_secret":"***REDACTED***"},"$type":"TokenRequestValidationLog"}
 2023-08-08 14:21:26.354 +06:00  WRN  Certificate CN=idsrv3test has expired on 01/21/2020 04:00:00
 2023-08-08 14:21:26.505 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 189 - 200 - application/json;+charset=UTF-8 2863.9648ms
+2023-08-08 14:34:50.974 +06:00  INF  Starting IdentityServer4 version 4.1.2+997a6cdd643e46cd5762b710c4ddc43574cbec2e
+2023-08-08 14:34:51.002 +06:00  INF  You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2023-08-08 14:34:51.008 +06:00  INF  Using the default authentication scheme idsrv for IdentityServer
+2023-08-08 14:34:51.109 +06:00  INF  User profile is available. Using 'C:\Users\Atikur Zaman\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-08 14:34:51.200 +06:00  INF  Now listening on: http://localhost:6001
+2023-08-08 14:34:51.200 +06:00  INF  Application started. Press Ctrl+C to shut down.
+2023-08-08 14:34:51.200 +06:00  INF  Hosting environment: Development
+2023-08-08 14:34:51.200 +06:00  INF  Content root path: D:\UMR Git Projects\RecruiterPortal\RecruiterPortal.Auth\
+2023-08-08 14:34:52.011 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/index.html - -
+2023-08-08 14:34:52.385 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/index.html - - - 200 - text/html;charset=utf-8 377.7647ms
+2023-08-08 14:34:52.425 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - -
+2023-08-08 14:34:52.425 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/_vs/browserLink - -
+2023-08-08 14:34:52.428 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - - - 200 12372 application/javascript;+charset=utf-8 2.4755ms
+2023-08-08 14:34:52.446 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 20.3663ms
+2023-08-08 14:34:52.997 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - -
+2023-08-08 14:34:53.079 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 82.4118ms
+2023-08-08 14:35:06.741 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 189
+2023-08-08 14:35:06.771 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 14:35:09.798 +06:00  INF  Authentication Pass For User test@test.com
+2023-08-08 14:35:09.816 +06:00  INF  Token request validation success, {"ClientId":"recruitmentweb","ClientName":"Recruitment Web Client","GrantType":"password","Scopes":"recruitment.fullaccess","AuthorizationCode":"********","RefreshToken":"********","UserName":"test@test.com","AuthenticationContextReferenceClasses":null,"Tenant":null,"IdP":null,"Raw":{"grant_type":"password","username":"test@test.com","password":"***REDACTED***","scope":"recruitment.fullaccess","client_id":"recruitmentweb","client_secret":"***REDACTED***"},"$type":"TokenRequestValidationLog"}
+2023-08-08 14:35:09.969 +06:00  WRN  Certificate CN=idsrv3test has expired on 01/21/2020 04:00:00
+2023-08-08 14:35:10.102 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 189 - 200 - application/json;+charset=UTF-8 3361.4413ms
+2023-08-08 14:35:51.398 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/.well-known/openid-configuration - -
+2023-08-08 14:35:51.401 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2023-08-08 14:35:51.440 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/.well-known/openid-configuration - - - 200 - application/json;+charset=UTF-8 41.7500ms
+2023-08-08 14:35:51.614 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/.well-known/openid-configuration/jwks - -
+2023-08-08 14:35:51.624 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
+2023-08-08 14:35:51.643 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/.well-known/openid-configuration/jwks - - - 200 - application/json;+charset=UTF-8 28.4961ms
