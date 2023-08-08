@@ -25,12 +25,6 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             try
             {
-                #region For Cache Setting
-                //var applicantDbConnStringName = base.GetApplicantDBConnectionStringName();
-                //_httpContextAccessor.HttpContext.Session.SetString("ApplicantDBConnStringName", "ApplicantDBConnStringName");
-                //Utility.SetApplicantDbConnectionStringName(applicantDbConnStringName);
-                #endregion
-
                 DataTable dt = UserManager.GetUserDetailsByID(applicantId);
                 string jsonString = JsonConvert.SerializeObject(dt,
                     new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
@@ -39,15 +33,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-                //}
             }
         }
 
@@ -64,15 +51,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-                //}
             }
         }
 
@@ -95,15 +75,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-                //}
             }
         }
 
@@ -123,15 +96,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-                //}
             }
         }
 
@@ -151,15 +117,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-                //}
             }
         }
         [Route("hair-color")]
@@ -178,15 +137,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-                //}
             }
         }
 
@@ -210,15 +162,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-                //}
             }
         }
 
@@ -234,15 +179,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-                //}
             }
         }
 
@@ -263,15 +201,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-                // }
             }
         }
 
@@ -1206,15 +1137,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-                //}
             }
         }
     }
