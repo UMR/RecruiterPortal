@@ -83,18 +83,9 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-                //}
-            }
-
-            return BadRequest();
+            }            
         }
 
         [Route("save-nurse-form")]
@@ -174,15 +165,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-                //}
             }
         }
 
@@ -201,15 +185,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-                //}
             }
         }
         private byte[] GenerateNurseFormFile(int applicantId, out string fileName)
@@ -274,8 +251,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                throw new Exception(ex.Message);
             }
         }
 

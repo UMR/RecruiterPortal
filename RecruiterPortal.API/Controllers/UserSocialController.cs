@@ -10,7 +10,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
     [ApiController]
     public class UserSocialController : CustomControllerBase
     {
-        public UserSocialController(ILogger<CustomControllerBase> logger) : base(logger)
+        public UserSocialController(ILogger<UserSocialController> logger) : base(logger)
         {
         }
 
