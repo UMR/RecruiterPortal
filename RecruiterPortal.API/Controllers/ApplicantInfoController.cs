@@ -15,10 +15,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
     [ApiController]
     public class ApplicantInfoController : CustomControllerBase
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        public ApplicantInfoController(IHttpContextAccessor httpContextAccessor)
+        public ApplicantInfoController(ILogger<ApplicantInfoController> logger) : base(logger)
         {
-            _httpContextAccessor = httpContextAccessor;
         }
 
         [Route("details/{applicantId}")]

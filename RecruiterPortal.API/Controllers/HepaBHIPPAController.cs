@@ -14,6 +14,10 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
     [ApiController]
     public class HepaBHIPPAController : CustomControllerBase
     {
+        public HepaBHIPPAController(ILogger<HepaBHIPPAController> logger) : base(logger)
+        {
+        }
+
         [Route("get/{applicantId}")]
         [HttpGet]
         public IActionResult GetUserHepaBHIPPAByUserId(int applicantId)

@@ -13,12 +13,14 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
     [ApiController]
     public class CBCController : CustomControllerBase
     {
+        public CBCController(ILogger<CBCController> logger) : base(logger)
+        {
+        }
 
         [Route("get/{applicantId}")]
         [HttpGet]
         public IActionResult GetUserCBCByUserId(int applicantId)
         {
-
             try
             {
                 Cbcform cbcForm = CBCManager.GetByUserID(applicantId);
@@ -71,25 +73,15 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
-                return StatusCode(500, ex.Message);
-                //}
-            }
-
-            return BadRequest();
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);                
+            }            
         }
 
         [Route("save")]
         [HttpPost]
         public IActionResult Save(CBCModel cbcModel)
         {
-
             try
             {
                 if (ModelState.IsValid)
@@ -153,18 +145,11 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
-                return StatusCode(500, ex.Message);
-                //}
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);               
             }
 
-            return BadRequest();
+            return BadRequest(cbcModel);
         }
         [HttpGet]
         [Route("file/{applicantId}")]
@@ -181,15 +166,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
-                return StatusCode(500, ex.Message);
-                //}
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);                
             }
         }
 
@@ -355,8 +333,6 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         [NonAction]
         private void FillApplicantInfo(int applicantId,AcroFields pdfFormFields)
         {
-            //DataTable dtApplicant = ApplicantManager.GetApplicant(applicantId);
-
             DataTable dtApplicant = UserManager.GetUserDetailsByID(applicantId);
             DataTable dt = UserPhysicalManager.GetPhysicalDtByUserID(applicantId);
 

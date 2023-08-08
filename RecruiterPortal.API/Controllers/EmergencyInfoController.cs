@@ -13,6 +13,10 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
     [ApiController]
     public class EmergencyInfoController : CustomControllerBase
     {
+        public EmergencyInfoController(ILogger<EmergencyInfoController> logger) : base(logger)
+        {
+        }
+
         [Route("primary")]
         [HttpPost]
         public IActionResult SavePrimaryInfo(EmergencyInfo emergencyInfo)

@@ -13,6 +13,9 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
     [ApiController]
     public class AgreementController : CustomControllerBase
     {
+        public AgreementController(ILogger<AgreementController> logger) : base(logger)
+        {
+        }
 
         [Route("get/{applicantId}")]
         [HttpGet]
@@ -34,26 +37,15 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
-                //    return StatusCode(500, ex.Message);
-                //}
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-            }
-
-            return BadRequest();
+            }            
         }
 
         [Route("save")]
         [HttpPost]
         public IActionResult Save(AgreementModel agreement)
         {
-
             try
             {
                 if (ModelState.IsValid)
@@ -78,18 +70,11 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
-                return StatusCode(500, ex.Message);
-                //}
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);                
             }
 
-            return BadRequest();
+            return BadRequest(agreement);
         }
 
         [HttpGet]
@@ -107,15 +92,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
-                return StatusCode(500, ex.Message);
-                //}
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);                
             }
         }
 
