@@ -135,7 +135,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
         }
 
-        [Route("{id}")]
+        [Route("delete/{id}")]
         [HttpDelete]
         public IActionResult DeleteEducationByEduID(long id)
         {
@@ -158,9 +158,9 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
         }
 
-        [Route("{applicantId}")]
+        [Route("save")]
         [HttpPost]
-        public IActionResult SaveEmploymentInfo(int applicantId, EducationModel educationModel)
+        public IActionResult SaveEmploymentInfo(EducationModel educationModel)
         {
             try
             {
@@ -192,9 +192,9 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
                 userEducation.InstitutionType = Convert.ToByte(educationModel.InstitutionType);
                 userEducation.UserEducationId = educationModel.EducationID;
-                userEducation.UserId = applicantId;
+                //userEducation.UserId = applicantId;
                 userEducation.IsGraduate = educationModel.IsGraduate;
-                userEducation.UserId = applicantId;
+                //userEducation.UserId = applicantId;
                 EducationManager.InsertEducation(userEducation);
                 return Ok();
             }
