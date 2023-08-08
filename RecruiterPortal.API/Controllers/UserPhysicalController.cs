@@ -10,11 +10,14 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
     [ApiController]
     public class UserPhysicalController : CustomControllerBase
     {
+        public UserPhysicalController(ILogger<UserPhysicalController> logger) : base(logger)
+        {
+        }
+
         [Route("get/{applicantId}")]
         [HttpGet]
         public IActionResult GetUserPhysicalInfoByUserId(int applicantId)
         {
-
             try
             {
                 UserPhysical userPhysical = UserPhysicalManager.GetByUserID(applicantId);
@@ -36,10 +39,9 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-            }
-
-            return BadRequest();
+            }            
         }
 
         [Route("save")]
@@ -76,6 +78,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
             }
 

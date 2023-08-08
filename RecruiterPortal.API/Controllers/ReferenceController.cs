@@ -48,10 +48,9 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-            }
-
-            return BadRequest();
+            }            
         }
 
         [Route("user-reference-by-id/{userReferenceId}")]
@@ -89,18 +88,9 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-                //}
-            }
-
-            return BadRequest();
+            }            
         }
 
         [Route("save")]
@@ -139,6 +129,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
             }
 
@@ -149,7 +140,6 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         [HttpDelete]
         public IActionResult DeleteUserReferenceId(long userReferenceId)
         {
-
             try
             {
                 ReferenceManager.Delete(userReferenceId);
@@ -157,10 +147,9 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-            }
-
-            return BadRequest();
+            }            
         }
     }
 }
