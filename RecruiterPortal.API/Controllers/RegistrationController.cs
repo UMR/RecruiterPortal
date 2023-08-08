@@ -10,11 +10,8 @@ namespace RecruiterPortal.API.Controllers
     [ApiController]
     public class RegistrationController : CustomControllerBase
     {
-        private readonly ILogger<RegistrationController> _logger;
-
-        public RegistrationController(ILogger<RegistrationController> logger)
+        public RegistrationController(ILogger<RegistrationController> logger) : base(logger)
         {
-            _logger = logger;
         }
 
         [Route("register")]

@@ -13,6 +13,10 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
     [ApiController]
     public class InfluenzaVaccinationController : CustomControllerBase
     {
+        public InfluenzaVaccinationController(ILogger<InfluenzaVaccinationController> logger) : base(logger)
+        {
+        }
+
         [Route("get-influenza-vaccination/{applicantId}")]
         [HttpGet]
         public IActionResult GetInfluenzaVaccinationByUserId(int applicantId)

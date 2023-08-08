@@ -13,6 +13,10 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
     [ApiController]
     public class USCISController : CustomControllerBase
     {
+        public USCISController(ILogger<USCISController> logger) : base(logger)
+        {
+        }
+
         [Route("get/{applicantId}")]
         [HttpGet]
         public IActionResult GetUserUSCISByUserId(int applicantId)
@@ -34,9 +38,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
-            }
-
-            return BadRequest();
+            }            
         }
 
         [Route("save")]

@@ -12,6 +12,13 @@ namespace RecruiterPortal.API.Controllers
     [ApiController]
     public class CustomControllerBase : ControllerBase
     {
+        protected readonly ILogger<CustomControllerBase> _logger;
+
+        public CustomControllerBase(ILogger<CustomControllerBase> logger)
+        {            
+            _logger = logger;
+        }
+
         [Route("user")]
         [HttpGet]
         public IActionResult CurrentUser()
@@ -23,16 +30,7 @@ namespace RecruiterPortal.API.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
-                //    return StatusCode(500, ex);
-                //}
-
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500);
             }
         }
@@ -47,16 +45,7 @@ namespace RecruiterPortal.API.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
-                //    return StatusCode(500, ex);
-                //}
-
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500);
             }
         }

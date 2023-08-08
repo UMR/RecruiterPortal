@@ -11,6 +11,10 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
     [ApiController]
     public class EducationController : CustomControllerBase
     {
+        public EducationController(ILogger<EducationController> logger) : base(logger)
+        {
+        }
+
         [Route("info/{applicantId}")]
         [HttpGet]
         public IActionResult GetEducationInfo(int applicantId)
