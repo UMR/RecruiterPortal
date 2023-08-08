@@ -21,4 +21,8 @@
     <ProjectReference Include="..\RecruiterPortal.DAL\RecruiterPortal.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Log\" />
+  </ItemGroup>
+
 </Project>

@@ -10,6 +10,13 @@ namespace RecruiterPortal.API.Controllers
     [ApiController]
     public class RegistrationController : CustomControllerBase
     {
+        private readonly ILogger<RegistrationController> _logger;
+
+        public RegistrationController(ILogger<RegistrationController> logger)
+        {
+            _logger = logger;
+        }
+
         [Route("register")]
         [HttpPost]
         [AllowAnonymous]
@@ -24,16 +31,7 @@ namespace RecruiterPortal.API.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
-                //    return StatusCode(500, ex);
-                //}
-
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex);
             }
         }
@@ -49,17 +47,8 @@ namespace RecruiterPortal.API.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
-                //    return StatusCode(500, ex);
-                //}
-
-                return StatusCode(500, ex);
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex);                
             }
         }
 
@@ -70,20 +59,12 @@ namespace RecruiterPortal.API.Controllers
         {
             try
             {
+                _logger.LogInformation($"Something went wrong");
                 return Ok(UserManager.GetAgencyByURL(url));
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
-                //    return StatusCode(500, ex);
-                //}
-
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex);
             }
         }
@@ -103,16 +84,7 @@ namespace RecruiterPortal.API.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
-                //    return StatusCode(500, ex);
-                //}
-
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex);
             }
         }
@@ -128,16 +100,7 @@ namespace RecruiterPortal.API.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
-                //    return StatusCode(500, ex);
-                //}
-
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex);
             }
         }
@@ -153,15 +116,7 @@ namespace RecruiterPortal.API.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
-                //    return StatusCode(500, ex);
-                //}
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex);
             }
         }
@@ -176,15 +131,7 @@ namespace RecruiterPortal.API.Controllers
             }
             catch (Exception ex)
             {
-                //Log.Write(ex);
-                //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-                //{
-                //    return StatusCode(500);
-                //}
-                //else
-                //{
-                //    return StatusCode(500, ex);
-                //}
+                _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex);
             }
         }
