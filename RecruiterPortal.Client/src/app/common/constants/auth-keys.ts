@@ -3,10 +3,10 @@ export const currentUserVerificationStatus = 'currentRecruiterVerificationStatus
 export const applicantId = 'applicantId';
 
 //////////////////////////////   Localhost   ///////////////////////////
-export const authorizationServerUrl = 'http://localhost:35447';
+export const authorizationServerUrl = 'http://localhost:6001';
 export const pathMatch = '/UMRRecruitmentBasic';
 export const scopes = ['UMRRecruitmentBasic', 'offline_access', 'openid'];
-export const resourceServerUrl = 'http://localhost:55493';
+export const resourceServerUrl = 'http://localhost:6002';
 export const recaptchaSitekey = '6LcMLzYdAAAAAM2ZK5SePLk_sfsA_cP2og7KecX6';
 
 //////////////////////    172.16.1.11 TEST   //////////////////////////
