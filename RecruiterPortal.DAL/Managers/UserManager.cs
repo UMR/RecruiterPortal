@@ -10,7 +10,7 @@ using static RecruiterPortal.DAL.Utility.Utility;
 namespace RecruiterPortalDAL.Managers
 {
     public class UserManager
-    {   
+    {
         public static bool ValidateUser(string p_Email, string p_Password, bool useEncryption = true)
         {
             bool IsValid = false;
@@ -30,7 +30,7 @@ namespace RecruiterPortalDAL.Managers
             }
 
             GenericRepository<User> userRepo = new GenericRepository<User>();
-            SqlParameter[] sqlParameters = userRepo.GetSqlParametersFromExpandoObject(ValiddateLogin, spName, "@");           
+            SqlParameter[] sqlParameters = userRepo.GetSqlParametersFromExpandoObject(ValiddateLogin, spName, "@");
 
             try
             {
@@ -45,9 +45,9 @@ namespace RecruiterPortalDAL.Managers
                 }
             }
             catch (Exception ex)
-            {             
+            {
                 throw new Exception(ex.Message);
-            }            
+            }
 
             return IsValid;
         }
@@ -71,7 +71,7 @@ namespace RecruiterPortalDAL.Managers
             }
 
             GenericRepository<User> userRepo = new GenericRepository<User>();
-            SqlParameter[] sqlParameters = userRepo.GetSqlParametersFromExpandoObject(ValiddateLogin, spName, "@");            
+            SqlParameter[] sqlParameters = userRepo.GetSqlParametersFromExpandoObject(ValiddateLogin, spName, "@");
 
             try
             {
@@ -86,9 +86,9 @@ namespace RecruiterPortalDAL.Managers
                 }
             }
             catch (Exception ex)
-            {                
+            {
                 throw new Exception(ex.Message);
-            }            
+            }
 
             return IsValid;
         }
@@ -100,7 +100,7 @@ namespace RecruiterPortalDAL.Managers
 
             GenericRepository<User> userRepo = new GenericRepository<User>();
             SqlParameter[] sqlParameters = userRepo.GetSqlParametersFromExpandoObject(UserEmail, spName, "@");
-           
+
             User appUser = null;
             try
             {
@@ -109,9 +109,9 @@ namespace RecruiterPortalDAL.Managers
 
             }
             catch (Exception ex)
-            {                
+            {
                 throw new Exception(ex.Message);
-            }            
+            }
 
             return appUser;
         }
@@ -158,7 +158,7 @@ namespace RecruiterPortalDAL.Managers
             UserEmail.p_Email = p_Email;
 
             GenericRepository<User> userRepo = new GenericRepository<User>();
-            SqlParameter[] sqlParameters = userRepo.GetSqlParametersFromExpandoObject(UserEmail, spName, "@");           
+            SqlParameter[] sqlParameters = userRepo.GetSqlParametersFromExpandoObject(UserEmail, spName, "@");
             User appUser = null;
 
             try
@@ -168,12 +168,12 @@ namespace RecruiterPortalDAL.Managers
 
             }
             catch (Exception ex)
-            {                
+            {
                 throw new Exception(ex.Message);
-            }            
+            }
 
             return appUser;
-        }       
+        }
         public static bool GetUserByEmail(string p_Email)
         {
             dynamic UserEmail = new System.Dynamic.ExpandoObject();
@@ -256,7 +256,7 @@ namespace RecruiterPortalDAL.Managers
                     }
                 }
 
-                List<SqlParameter> returnPrms = userRepo.Insert(spName, sqlParameters);                
+                List<SqlParameter> returnPrms = userRepo.Insert(spName, sqlParameters);
                 string mailBody = "Use this code to verify your account for UMR Recruitment Service: " + verificationCOde;
                 string mailSubject = "Verification code for UMR Recruitment Service";
 
@@ -265,9 +265,9 @@ namespace RecruiterPortalDAL.Managers
                 return 1;
             }
             catch (Exception ex)
-            {                
+            {
                 throw new Exception(ex.Message);
-            }            
+            }
         }
 
         public static bool SendMailToRecruiter(long userId)
@@ -463,18 +463,26 @@ namespace RecruiterPortalDAL.Managers
         }
 
 
-        public static DataTable GetAllUserByFilter(ApplicantSearchModel applicantSearchModel)
+        public static DataSet GetAllUserByFilter(ApplicantSearchModel applicantSearchModel)
         {
+
             string spName = "sp_GetAllApplicantByFilter";
             dynamic expandoObject = new ExpandoObject();
-            expandoObject.EnumID = applicantSearchModel.Email;
+            expandoObject.Email = applicantSearchModel.Email;
+            expandoObject.FirstName = applicantSearchModel.FirstName;
+            expandoObject.LastName = applicantSearchModel.LastName;
+            expandoObject.RecruiterId = applicantSearchModel.RecruiterId;
+            expandoObject.IsVerified = applicantSearchModel.IsVerified;
+            expandoObject.take = applicantSearchModel.take;
+            expandoObject.skip = applicantSearchModel.skip;
+
             GenericRepository<User> userRepo = new GenericRepository<User>();
             SqlParameter[] sqlParameters = userRepo.GetSqlParametersFromExpandoObject(expandoObject, spName);
-            DataTable userDt = null;
+            DataSet userDt = null;
 
             try
             {
-                userDt = userRepo.LoadDataTable(spName, sqlParameters);
+                userDt = userRepo.LoadDataSetTable(spName, sqlParameters);
 
             }
             catch (Exception ex)

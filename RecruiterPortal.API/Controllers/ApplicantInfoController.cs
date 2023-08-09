@@ -26,14 +26,17 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             try
             {
-                DataTable data = UserManager.GetAllUserByFilter(applicantSearchModel);
+                DataSet data = UserManager.GetAllUserByFilter(applicantSearchModel);
 
                 List<ApplicantInfoModel> appModelList = new List<ApplicantInfoModel>();
-              
 
-                if (data.Rows.Count > 0)
+
+                if (data != null)
                 {
-                    foreach (DataRow oRow in data.Rows)
+                    DataTable dataTable = data.Tables[1];
+                    DataTable rowCountTable = data.Tables[0];
+
+                    foreach (DataRow oRow in dataTable.Rows)
                     {
                         ApplicantInfoModel userReferenceModel = new ApplicantInfoModel();
 

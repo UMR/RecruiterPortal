@@ -303,6 +303,48 @@ namespace RecruiterPortal.DAL.Repository
             return dataTabel;
         }
 
+        public DataSet LoadDataStoredProcedure(string storedProcedureName, SqlParameter[] parameters = null)
+        {
+            string spName = storedProcedureName;
+            SqlConnection con = new SqlConnection(context.Database.GetDbConnection().ConnectionString);
+            SqlCommand cmd = new SqlCommand(spName, con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            DataSet dataSet = new DataSet();
+
+            try
+            {
+                if (parameters != null)
+                {
+                    for (int i = 0; i < parameters.Length; i++)
+                    {
+                        cmd.Parameters.Add(parameters[i]);
+                    }
+                }
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                cmd.Connection.Open();
+                da.Fill(dataSet);
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                if ((cmd.Connection != null) && (cmd.Connection.State != ConnectionState.Closed))
+                {
+                    cmd.Connection.Close();
+                }
+            }
+
+            return dataSet;
+        }
+
         public SqlParameter[] StoredProcedureParams(string storedProcedureName)
         {
             string spName = storedProcedureName;

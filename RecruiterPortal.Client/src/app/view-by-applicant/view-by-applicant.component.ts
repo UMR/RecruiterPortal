@@ -118,6 +118,7 @@ export class ViewByApplicantComponent implements OnInit {
         }
         this.viewByApplicantService.getViewByApplicantSearch(model)
             .subscribe(response => {
+                console.log(response);
                 if (response.status === 200) {
                     this.applicants = (response.body as any).applicants;
                     this.totalApplicants = (response.body as any).totalApplicants;

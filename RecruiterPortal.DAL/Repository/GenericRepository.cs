@@ -53,7 +53,10 @@ namespace RecruiterPortal.DAL.Repository
         {
            return _repo.LoadDataSetStoredProcedure(storedProcedureName, parameters);
         }
-
+        public DataSet LoadDataSetTable(string storedProcedureName, SqlParameter[] parameters = null)
+        {
+            return _repo.LoadDataStoredProcedure(storedProcedureName, parameters);
+        }
         public SqlParameter[] GetSqlParametersFromObject(T obj, string spName, string preFix = "@")
         {
             List<SqlParameter> parameters = _repo.StoredProcedureParams(spName).ToList<SqlParameter>();

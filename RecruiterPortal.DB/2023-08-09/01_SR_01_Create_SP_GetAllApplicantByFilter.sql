@@ -17,13 +17,13 @@ GO
 -- =============================================
 CREATE PROCEDURE [dbo].[sp_GetAllApplicantByFilter] 
 	-- Add the parameters for the stored procedure here
-	@p_LastName NVARCHAR(100) = NULL,
-	@p_FirstName NVARCHAR(100) = NULL,
-	@p_Email NVARCHAR(100) = NULL,
-	@p_IsVerified bit = NULL,
-	@p_RecuriterId NVARCHAR(100) = NULL,
-	@p_Take INT = NULL,
-	@p_Skip INT = NULL
+	@LastName NVARCHAR(100) = NULL,
+	@FirstName NVARCHAR(100) = NULL,
+	@Email NVARCHAR(100) = NULL,
+	@IsVerified bit = NULL,
+	@RecuriterId NVARCHAR(100) = NULL,
+	@Take INT = NULL,
+	@Skip INT = NULL
 AS
 BEGIN
 	-- SET NOCOUNT ON added to prevent extra result sets from
@@ -31,21 +31,21 @@ BEGIN
 	SET NOCOUNT ON;
 
 SELECT COUNT(App.[UserID]) AS RowNumber FROM [UMRRecruitmentApplicant].[dbo].[User] As App
-  WHERE App.AgencyId IN (SELECT AgencyID FROM [dbo].Recruiter WHERE UserID=@p_RecuriterID)
-    AND (@p_FirstName IS NULL OR ([First_Name] LIKE '%'+ @p_FirstName +'%'))
-	AND (@p_LastName IS NULL OR ([Last_Name] LIKE '%'+ @p_LastName +'%' ))
-	AND (@p_Email IS NULL OR ([Email] LIKE '%'+ @p_Email +'%' ))
-	AND (@p_IsVerified IS NULL OR ([IsVerified] =@p_IsVerified ))
+  WHERE App.AgencyId IN (SELECT AgencyID FROM [dbo].Recruiter WHERE UserID=@RecuriterId)
+    AND (@FirstName IS NULL OR ([First_Name] LIKE '%'+ @FirstName +'%'))
+	AND (@LastName IS NULL OR ([Last_Name] LIKE '%'+ @LastName +'%' ))
+	AND (@Email IS NULL OR ([Email] LIKE '%'+ @Email +'%' ))
+	AND (@IsVerified IS NULL OR ([IsVerified] =@IsVerified ))
 
 
     -- Select for data row count
 
 SELECT * FROM [UMRRecruitmentApplicant].[dbo].[User] As App
-  WHERE  App.AgencyId IN (SELECT AgencyID FROM [dbo].Recruiter WHERE UserID=@p_RecuriterID)
-	AND (@p_FirstName IS NULL OR (App.[First_Name] LIKE '%'+ @p_FirstName +'%'))
-	AND (@p_LastName IS NULL OR (App.[Last_Name] LIKE '%'+ @p_LastName +'%' ))
-	AND (@p_Email IS NULL OR (App.Email LIKE '%'+ @p_Email +'%' ))
+  WHERE  App.AgencyId IN (SELECT AgencyID FROM [dbo].Recruiter WHERE UserID=@RecuriterId)
+	AND (@FirstName IS NULL OR (App.[First_Name] LIKE '%'+ @FirstName +'%'))
+	AND (@LastName IS NULL OR (App.[Last_Name] LIKE '%'+ @LastName +'%' ))
+	AND (@Email IS NULL OR (App.Email LIKE '%'+ @Email +'%' ))
   ORDER BY App.CreatedDate,[Last_Name],[First_Name]
-  OFFSET @p_Skip ROWS FETCH NEXT @p_Take ROWS ONLY
+  OFFSET @Skip ROWS FETCH NEXT @Take ROWS ONLY
   
 END
