@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using RecruiterPortal.API.Controllers;
+using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.SqlModels;
 using RecruiterPortalDAL.Managers;
 using RecruiterPortalDAL.Models;
@@ -17,6 +18,39 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
     {
         public ApplicantInfoController(ILogger<ApplicantInfoController> logger) : base(logger)
         {
+        }
+
+        [Route("get-all-applicant")]
+        [HttpPost]
+        public IActionResult GetAllApplicant(ApplicantSearchModel applicantSearchModel)
+        {
+            try
+            {
+                DataTable data = UserManager.GetAllUserByFilter(applicantSearchModel);
+
+                List<ApplicantInfoModel> appModelList = new List<ApplicantInfoModel>();
+              
+
+                if (data.Rows.Count > 0)
+                {
+                    foreach (DataRow oRow in data.Rows)
+                    {
+                        ApplicantInfoModel userReferenceModel = new ApplicantInfoModel();
+
+                        userReferenceModel.Email = oRow["Email"].ToString(); ;
+                        userReferenceModel.FirstName = oRow["First_Name"].ToString();
+                        userReferenceModel.LastName = oRow["Last_Name"].ToString();
+                        userReferenceModel.UserId = Convert.ToInt32(oRow["UserID"].ToString());
+                        appModelList.Add(userReferenceModel);
+                    }
+                }
+                return Ok(appModelList);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [Route("details/{applicantId}")]
@@ -1087,7 +1121,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
         }
         [NonAction]
-        private void FillPdfFormFieldsEAMilitery(int applicantId,AcroFields pdfFormFields)
+        private void FillPdfFormFieldsEAMilitery(int applicantId, AcroFields pdfFormFields)
         {
             DataTable dt = UserMilitaryManager.GetUserMilitaryByUserID(applicantId);
             if (dt != null && dt.Rows.Count > 0)

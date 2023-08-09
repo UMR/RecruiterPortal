@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
 using RecruiterPortal.DAL.Utility;
@@ -462,6 +463,27 @@ namespace RecruiterPortalDAL.Managers
         }
 
 
+        public static DataTable GetAllUserByFilter(ApplicantSearchModel applicantSearchModel)
+        {
+            string spName = "sp_GetAllApplicantByFilter";
+            dynamic expandoObject = new ExpandoObject();
+            expandoObject.EnumID = applicantSearchModel.Email;
+            GenericRepository<User> userRepo = new GenericRepository<User>();
+            SqlParameter[] sqlParameters = userRepo.GetSqlParametersFromExpandoObject(expandoObject, spName);
+            DataTable userDt = null;
+
+            try
+            {
+                userDt = userRepo.LoadDataTable(spName, sqlParameters);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return userDt;
+        }
         public static int DeleteUserByEmail(string email)
         {
             string spName = "sp_ApendUserEmail";

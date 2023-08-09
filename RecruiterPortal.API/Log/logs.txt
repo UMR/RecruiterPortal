@@ -208,3 +208,213 @@
 2023-08-09 14:12:12.153 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - -
 2023-08-09 14:12:12.557 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 404.3196ms
 >>>>>>> Stashed changes
+2023-08-09 19:42:42.409 +06:00  INF  User profile is available. Using 'C:\Users\srana.AEL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-09 19:42:42.993 +06:00  INF  Now listening on: http://localhost:6002
+2023-08-09 19:42:42.999 +06:00  INF  Application started. Press Ctrl+C to shut down.
+2023-08-09 19:42:42.999 +06:00  INF  Hosting environment: Development
+2023-08-09 19:42:42.999 +06:00  INF  Content root path: F:\RecruiterPortal\RecruiterPortal.API\
+2023-08-09 19:42:44.071 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/index.html - -
+2023-08-09 19:42:44.980 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/index.html - - - 200 - text/html;charset=utf-8 924.1243ms
+2023-08-09 19:42:45.034 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/_framework/aspnetcore-browser-refresh.js - -
+2023-08-09 19:42:45.037 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/_framework/aspnetcore-browser-refresh.js - - - 200 11953 application/javascript;+charset=utf-8 3.4844ms
+2023-08-09 19:42:45.302 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - -
+2023-08-09 19:42:45.582 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 279.5887ms
+2023-08-09 19:47:10.522 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-09 19:47:10.522 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - -
+2023-08-09 19:47:10.523 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - -
+2023-08-09 19:47:10.583 +06:00  INF  CORS policy execution successful.
+2023-08-09 19:47:10.583 +06:00  INF  CORS policy execution successful.
+2023-08-09 19:47:10.583 +06:00  INF  CORS policy execution successful.
+2023-08-09 19:47:10.587 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - - - 204 - - 64.0620ms
+2023-08-09 19:47:10.591 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - - - 204 - - 103.7966ms
+2023-08-09 19:47:10.591 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - - - 204 - - 68.5643ms
+2023-08-09 19:47:10.593 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 94
+2023-08-09 19:47:10.593 +06:00  INF  CORS policy execution successful.
+2023-08-09 19:47:10.594 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - -
+2023-08-09 19:47:10.594 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-09 19:47:10.595 +06:00  INF  CORS policy execution successful.
+2023-08-09 19:47:10.595 +06:00  INF  CORS policy execution successful.
+2023-08-09 19:47:12.980 +06:00  INF  Failed to validate the token.Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:47:12 PM'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateJWS(String token, TokenValidationParameters validationParameters, BaseConfiguration currentConfiguration, SecurityToken& signatureValidatedToken, ExceptionDispatchInfo& exceptionThrown)
+--- End of stack trace from previous location ---
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, JwtSecurityToken outerToken, TokenValidationParameters validationParameters, SecurityToken& signatureValidatedToken)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+
+2023-08-09 19:47:12.980 +06:00  INF  Failed to validate the token.Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:47:12 PM'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateJWS(String token, TokenValidationParameters validationParameters, BaseConfiguration currentConfiguration, SecurityToken& signatureValidatedToken, ExceptionDispatchInfo& exceptionThrown)
+--- End of stack trace from previous location ---
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, JwtSecurityToken outerToken, TokenValidationParameters validationParameters, SecurityToken& signatureValidatedToken)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+
+2023-08-09 19:47:12.980 +06:00  INF  Failed to validate the token.Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:47:12 PM'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateJWS(String token, TokenValidationParameters validationParameters, BaseConfiguration currentConfiguration, SecurityToken& signatureValidatedToken, ExceptionDispatchInfo& exceptionThrown)
+--- End of stack trace from previous location ---
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, JwtSecurityToken outerToken, TokenValidationParameters validationParameters, SecurityToken& signatureValidatedToken)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+
+2023-08-09 19:47:13.116 +06:00  INF  BearerIdentityServerAuthenticationJwt was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:47:12 PM'.
+2023-08-09 19:47:13.116 +06:00  INF  BearerIdentityServerAuthenticationJwt was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:47:12 PM'.
+2023-08-09 19:47:13.116 +06:00  INF  BearerIdentityServerAuthenticationJwt was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:47:12 PM'.
+2023-08-09 19:47:13.118 +06:00  INF  Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:47:12 PM'.
+2023-08-09 19:47:13.118 +06:00  INF  Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:47:12 PM'.
+2023-08-09 19:47:13.118 +06:00  INF  Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:47:12 PM'.
+2023-08-09 19:47:13.121 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - - - 404 0 - 2526.9159ms
+2023-08-09 19:47:13.121 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - - - 404 0 - 2526.8810ms
+2023-08-09 19:47:13.124 +06:00  INF  Executing endpoint '405 HTTP Method Not Supported'
+2023-08-09 19:47:13.125 +06:00  INF  Executed endpoint '405 HTTP Method Not Supported'
+2023-08-09 19:47:13.125 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 94 - 405 0 - 2531.7799ms
+2023-08-09 19:47:30.903 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-09 19:47:30.912 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - -
+2023-08-09 19:47:30.912 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - -
+2023-08-09 19:47:30.916 +06:00  INF  CORS policy execution successful.
+2023-08-09 19:47:30.916 +06:00  INF  CORS policy execution successful.
+2023-08-09 19:47:30.916 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - - - 204 - - 4.0979ms
+2023-08-09 19:47:30.916 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - - - 204 - - 12.6547ms
+2023-08-09 19:47:30.919 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-09 19:47:30.923 +06:00  INF  CORS policy execution successful.
+2023-08-09 19:47:30.923 +06:00  INF  CORS policy execution successful.
+2023-08-09 19:47:30.923 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - -
+2023-08-09 19:47:30.923 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - - - 204 - - 10.9588ms
+2023-08-09 19:47:30.923 +06:00  INF  CORS policy execution successful.
+2023-08-09 19:47:30.924 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 94
+2023-08-09 19:47:30.924 +06:00  INF  CORS policy execution successful.
+2023-08-09 19:47:30.926 +06:00  INF  Failed to validate the token.Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:47:30 PM'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateJWS(String token, TokenValidationParameters validationParameters, BaseConfiguration currentConfiguration, SecurityToken& signatureValidatedToken, ExceptionDispatchInfo& exceptionThrown)
+--- End of stack trace from previous location ---
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, JwtSecurityToken outerToken, TokenValidationParameters validationParameters, SecurityToken& signatureValidatedToken)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+
+2023-08-09 19:47:30.926 +06:00  INF  BearerIdentityServerAuthenticationJwt was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:47:30 PM'.
+2023-08-09 19:47:30.926 +06:00  INF  Failed to validate the token.Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:47:30 PM'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateJWS(String token, TokenValidationParameters validationParameters, BaseConfiguration currentConfiguration, SecurityToken& signatureValidatedToken, ExceptionDispatchInfo& exceptionThrown)
+--- End of stack trace from previous location ---
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, JwtSecurityToken outerToken, TokenValidationParameters validationParameters, SecurityToken& signatureValidatedToken)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+
+2023-08-09 19:47:30.926 +06:00  INF  Failed to validate the token.Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:47:30 PM'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateJWS(String token, TokenValidationParameters validationParameters, BaseConfiguration currentConfiguration, SecurityToken& signatureValidatedToken, ExceptionDispatchInfo& exceptionThrown)
+--- End of stack trace from previous location ---
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, JwtSecurityToken outerToken, TokenValidationParameters validationParameters, SecurityToken& signatureValidatedToken)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+
+2023-08-09 19:47:30.926 +06:00  INF  Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:47:30 PM'.
+2023-08-09 19:47:30.926 +06:00  INF  BearerIdentityServerAuthenticationJwt was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:47:30 PM'.
+2023-08-09 19:47:30.926 +06:00  INF  BearerIdentityServerAuthenticationJwt was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:47:30 PM'.
+2023-08-09 19:47:30.926 +06:00  INF  Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:47:30 PM'.
+2023-08-09 19:47:30.926 +06:00  INF  Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:47:30 PM'.
+2023-08-09 19:47:30.926 +06:00  INF  Executing endpoint '405 HTTP Method Not Supported'
+2023-08-09 19:47:30.926 +06:00  INF  Executed endpoint '405 HTTP Method Not Supported'
+2023-08-09 19:47:30.926 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - - - 404 0 - 3.5681ms
+2023-08-09 19:47:30.926 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - - - 404 0 - 7.6677ms
+2023-08-09 19:47:30.927 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 94 - 405 0 - 2.4481ms
+2023-08-09 19:48:49.755 +06:00  INF  User profile is available. Using 'C:\Users\srana.AEL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-09 19:48:49.984 +06:00  INF  Now listening on: http://localhost:6002
+2023-08-09 19:48:50.002 +06:00  INF  Application started. Press Ctrl+C to shut down.
+2023-08-09 19:48:50.003 +06:00  INF  Hosting environment: Development
+2023-08-09 19:48:50.003 +06:00  INF  Content root path: F:\RecruiterPortal\RecruiterPortal.API\
+2023-08-09 19:48:50.754 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/index.html - -
+2023-08-09 19:48:51.284 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/index.html - - - 200 - text/html;charset=utf-8 538.4851ms
+2023-08-09 19:48:51.319 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/_framework/aspnetcore-browser-refresh.js - -
+2023-08-09 19:48:51.325 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/_framework/aspnetcore-browser-refresh.js - - - 200 11953 application/javascript;+charset=utf-8 6.1557ms
+2023-08-09 19:48:51.445 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - -
+2023-08-09 19:48:51.624 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 178.8923ms
+2023-08-09 19:49:00.201 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-09 19:49:00.201 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - -
+2023-08-09 19:49:00.209 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - -
+2023-08-09 19:49:00.209 +06:00  INF  CORS policy execution successful.
+2023-08-09 19:49:00.209 +06:00  INF  CORS policy execution successful.
+2023-08-09 19:49:00.210 +06:00  INF  CORS policy execution successful.
+2023-08-09 19:49:00.212 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - - - 204 - - 2.8494ms
+2023-08-09 19:49:00.212 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - - - 204 - - 10.2255ms
+2023-08-09 19:49:00.212 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - - - 204 - - 10.2343ms
+2023-08-09 19:49:00.214 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 94
+2023-08-09 19:49:00.214 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-09 19:49:00.215 +06:00  INF  CORS policy execution successful.
+2023-08-09 19:49:00.215 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - -
+2023-08-09 19:49:00.215 +06:00  INF  CORS policy execution successful.
+2023-08-09 19:49:00.215 +06:00  INF  CORS policy execution successful.
+2023-08-09 19:49:01.005 +06:00  INF  Failed to validate the token.Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:49:00 PM'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateJWS(String token, TokenValidationParameters validationParameters, BaseConfiguration currentConfiguration, SecurityToken& signatureValidatedToken, ExceptionDispatchInfo& exceptionThrown)
+--- End of stack trace from previous location ---
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, JwtSecurityToken outerToken, TokenValidationParameters validationParameters, SecurityToken& signatureValidatedToken)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+
+2023-08-09 19:49:01.005 +06:00  INF  Failed to validate the token.Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:49:00 PM'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateJWS(String token, TokenValidationParameters validationParameters, BaseConfiguration currentConfiguration, SecurityToken& signatureValidatedToken, ExceptionDispatchInfo& exceptionThrown)
+--- End of stack trace from previous location ---
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, JwtSecurityToken outerToken, TokenValidationParameters validationParameters, SecurityToken& signatureValidatedToken)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+
+2023-08-09 19:49:01.006 +06:00  INF  Failed to validate the token.Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:49:00 PM'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateJWS(String token, TokenValidationParameters validationParameters, BaseConfiguration currentConfiguration, SecurityToken& signatureValidatedToken, ExceptionDispatchInfo& exceptionThrown)
+--- End of stack trace from previous location ---
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, JwtSecurityToken outerToken, TokenValidationParameters validationParameters, SecurityToken& signatureValidatedToken)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+
+2023-08-09 19:49:01.054 +06:00  INF  BearerIdentityServerAuthenticationJwt was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:49:00 PM'.
+2023-08-09 19:49:01.054 +06:00  INF  BearerIdentityServerAuthenticationJwt was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:49:00 PM'.
+2023-08-09 19:49:01.054 +06:00  INF  BearerIdentityServerAuthenticationJwt was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:49:00 PM'.
+2023-08-09 19:49:01.056 +06:00  INF  Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:49:00 PM'.
+2023-08-09 19:49:01.056 +06:00  INF  Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:49:00 PM'.
+2023-08-09 19:49:01.056 +06:00  INF  Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 9:03:18 AM', Current time: '8/9/2023 1:49:00 PM'.
+2023-08-09 19:49:01.058 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - - - 404 0 - 843.7578ms
+2023-08-09 19:49:01.058 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - - - 404 0 - 843.5267ms
+2023-08-09 19:49:01.063 +06:00  INF  Executing endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-09 19:49:01.112 +06:00  INF  Route matched with {action = "GetAllApplicant", controller = "ApplicantInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllApplicant(RecruiterPortal.DAL.Models.ApplicantSearchModel) on controller ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController (RecruiterPortal.API).
+2023-08-09 19:49:01.122 +06:00  INF  Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+ClaimsAuthorizationRequirement:Claim.Type=Scope and Claim.Value is one of the following values: (recruitment.fullaccess)
+2023-08-09 19:49:01.122 +06:00  INF  Authorization failed for the request at filter 'Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter'.
+2023-08-09 19:49:01.124 +06:00  INF  Executing ChallengeResult with authentication schemes ([]).
+2023-08-09 19:49:01.134 +06:00  INF  AuthenticationScheme: BearerIdentityServerAuthenticationJwt was challenged.
+2023-08-09 19:49:01.134 +06:00  INF  AuthenticationScheme: Bearer was challenged.
+2023-08-09 19:49:01.139 +06:00  INF  Executed action ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API) in 22.325ms
+2023-08-09 19:49:01.140 +06:00  INF  Executed endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-09 19:49:01.140 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 94 - 401 0 - 926.3431ms
+2023-08-09 19:52:38.640 +06:00  INF  User profile is available. Using 'C:\Users\srana.AEL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-09 19:52:39.035 +06:00  INF  Now listening on: http://localhost:6002
+2023-08-09 19:52:39.073 +06:00  INF  Application started. Press Ctrl+C to shut down.
+2023-08-09 19:52:39.137 +06:00  INF  Hosting environment: Development
+2023-08-09 19:52:39.137 +06:00  INF  Content root path: F:\RecruiterPortal\RecruiterPortal.API\
+2023-08-09 19:52:39.751 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/index.html - -
+2023-08-09 19:52:40.358 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/_framework/aspnetcore-browser-refresh.js - -
+2023-08-09 19:52:40.364 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/_framework/aspnetcore-browser-refresh.js - - - 200 11953 application/javascript;+charset=utf-8 3.6070ms
+2023-08-09 19:52:40.364 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/index.html - - - 200 - text/html;charset=utf-8 621.3018ms
+2023-08-09 19:52:40.609 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - -
+2023-08-09 19:52:40.875 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 266.3793ms
