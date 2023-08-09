@@ -173,6 +173,7 @@
 2023-08-08 19:17:23.552 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6001/UMRRecruitmentBasic/connect/token?old=umr - -
 2023-08-08 19:17:23.560 +06:00  INF  No CORS policy found for the specified request.
 2023-08-08 19:17:23.580 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6001/UMRRecruitmentBasic/connect/token?old=umr - - - 404 0 - 27.6736ms
+<<<<<<< Updated upstream
 2023-08-08 19:19:43.925 +06:00  INF  Starting IdentityServer4 version 4.1.2+997a6cdd643e46cd5762b710c4ddc43574cbec2e
 2023-08-08 19:19:43.980 +06:00  INF  You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
 2023-08-08 19:19:43.999 +06:00  INF  Using the default authentication scheme idsrv for IdentityServer
@@ -432,3 +433,202 @@
 2023-08-09 14:03:20.546 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/.well-known/openid-configuration/jwks - -
 2023-08-09 14:03:20.547 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
 2023-08-09 14:03:20.575 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/.well-known/openid-configuration/jwks - - - 200 - application/json;+charset=UTF-8 28.6765ms
+=======
+2023-08-08 20:06:44.862 +06:00  INF  Starting IdentityServer4 version 4.1.2+997a6cdd643e46cd5762b710c4ddc43574cbec2e
+2023-08-08 20:06:44.886 +06:00  INF  You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2023-08-08 20:06:44.891 +06:00  INF  Using the default authentication scheme idsrv for IdentityServer
+2023-08-08 20:06:44.984 +06:00  INF  User profile is available. Using 'C:\Users\Atikur Zaman\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-08 20:06:45.069 +06:00  INF  Now listening on: http://localhost:6001
+2023-08-08 20:06:45.069 +06:00  INF  Application started. Press Ctrl+C to shut down.
+2023-08-08 20:06:45.069 +06:00  INF  Hosting environment: Development
+2023-08-08 20:06:45.069 +06:00  INF  Content root path: D:\UMR Git Projects\RecruiterPortal\RecruiterPortal.Auth\
+2023-08-08 20:06:45.799 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/index.html - -
+2023-08-08 20:06:46.360 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/index.html - - - 200 - text/html;charset=utf-8 580.4493ms
+2023-08-08 20:06:46.637 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - -
+2023-08-08 20:06:46.639 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - - - 200 12372 application/javascript;+charset=utf-8 2.3364ms
+2023-08-08 20:06:46.682 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/_vs/browserLink - -
+2023-08-08 20:06:46.703 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 20.7430ms
+2023-08-08 20:06:47.425 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - -
+2023-08-08 20:06:47.514 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 88.9454ms
+2023-08-08 20:06:58.731 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89
+2023-08-08 20:06:58.768 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:06:58.799 +06:00  ERR  Client secret validation failed for client: recruitmentweb.
+2023-08-08 20:06:58.807 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89 - 400 - application/json;+charset=UTF-8 76.4022ms
+2023-08-08 20:07:06.358 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 189
+2023-08-08 20:07:06.359 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:07:08.587 +06:00  INF  Authentication Pass For User test@test.com
+2023-08-08 20:07:08.600 +06:00  INF  Token request validation success, {"ClientId":"recruitmentweb","ClientName":"Recruitment Web Client","GrantType":"password","Scopes":"recruitment.fullaccess","AuthorizationCode":"********","RefreshToken":"********","UserName":"test@test.com","AuthenticationContextReferenceClasses":null,"Tenant":null,"IdP":null,"Raw":{"grant_type":"password","username":"test@test.com","password":"***REDACTED***","scope":"recruitment.fullaccess","client_id":"recruitmentweb","client_secret":"***REDACTED***"},"$type":"TokenRequestValidationLog"}
+2023-08-08 20:07:08.747 +06:00  WRN  Certificate CN=idsrv3test has expired on 01/21/2020 04:00:00
+2023-08-08 20:07:08.869 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 189 - 200 - application/json;+charset=UTF-8 2511.4407ms
+2023-08-08 20:07:48.363 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 189
+2023-08-08 20:07:48.386 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:07:48.427 +06:00  INF  Authentication Pass For User test@test.com
+2023-08-08 20:07:48.429 +06:00  INF  Token request validation success, {"ClientId":"recruitmentweb","ClientName":"Recruitment Web Client","GrantType":"password","Scopes":"recruitment.fullaccess","AuthorizationCode":"********","RefreshToken":"********","UserName":"test@test.com","AuthenticationContextReferenceClasses":null,"Tenant":null,"IdP":null,"Raw":{"grant_type":"password","username":"test@test.com","password":"***REDACTED***","scope":"recruitment.fullaccess","client_id":"recruitmentweb","client_secret":"***REDACTED***"},"$type":"TokenRequestValidationLog"}
+2023-08-08 20:07:48.431 +06:00  WRN  Certificate CN=idsrv3test has expired on 01/21/2020 04:00:00
+2023-08-08 20:07:48.433 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 189 - 200 - application/json;+charset=UTF-8 69.9173ms
+2023-08-08 20:08:00.963 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 189
+2023-08-08 20:08:00.963 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:08:00.972 +06:00  INF  Authentication Pass For User test@test.com
+2023-08-08 20:08:00.974 +06:00  INF  Token request validation success, {"ClientId":"recruitmentweb","ClientName":"Recruitment Web Client","GrantType":"password","Scopes":"recruitment.fullaccess","AuthorizationCode":"********","RefreshToken":"********","UserName":"test@test.com","AuthenticationContextReferenceClasses":null,"Tenant":null,"IdP":null,"Raw":{"grant_type":"password","username":"test@test.com","password":"***REDACTED***","scope":"recruitment.fullaccess","client_id":"recruitmentweb","client_secret":"***REDACTED***"},"$type":"TokenRequestValidationLog"}
+2023-08-08 20:08:00.976 +06:00  WRN  Certificate CN=idsrv3test has expired on 01/21/2020 04:00:00
+2023-08-08 20:08:00.979 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 189 - 200 - application/json;+charset=UTF-8 15.9458ms
+2023-08-08 20:08:16.024 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89
+2023-08-08 20:08:16.024 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:08:16.025 +06:00  WRN  Malformed Basic Authentication credential.
+2023-08-08 20:08:16.025 +06:00  ERR  No client identifier found
+2023-08-08 20:08:16.025 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89 - 400 - application/json;+charset=UTF-8 1.0597ms
+2023-08-08 20:09:05.736 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89
+2023-08-08 20:09:05.736 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:09:05.736 +06:00  ERR  Client secret validation failed for client: recruitmentweb.
+2023-08-08 20:09:05.737 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89 - 400 - application/json;+charset=UTF-8 1.2140ms
+2023-08-08 20:12:44.109 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89
+2023-08-08 20:12:44.109 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:12:44.109 +06:00  ERR  Client secret validation failed for client: recruitmentweb.
+2023-08-08 20:12:44.109 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89 - 400 - application/json;+charset=UTF-8 0.7677ms
+2023-08-08 20:12:46.153 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89
+2023-08-08 20:12:46.154 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:12:46.154 +06:00  ERR  Client secret validation failed for client: recruitmentweb.
+2023-08-08 20:12:46.156 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89 - 400 - application/json;+charset=UTF-8 2.3010ms
+2023-08-08 20:13:33.912 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/index.html - -
+2023-08-08 20:13:33.927 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/index.html - - - 200 - text/html;charset=utf-8 14.9010ms
+2023-08-08 20:13:34.000 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - -
+2023-08-08 20:13:34.001 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - - - 200 12372 application/javascript;+charset=utf-8 0.4681ms
+2023-08-08 20:13:34.098 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/_vs/browserLink - -
+2023-08-08 20:13:34.116 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 18.7345ms
+2023-08-08 20:13:34.390 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - -
+2023-08-08 20:13:34.393 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 2.9022ms
+2023-08-08 20:13:54.813 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89
+2023-08-08 20:13:54.813 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:13:54.813 +06:00  ERR  No client identifier found
+2023-08-08 20:13:54.813 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89 - 400 - application/json;+charset=UTF-8 0.5001ms
+2023-08-08 20:14:42.133 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89
+2023-08-08 20:14:42.133 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:14:42.133 +06:00  ERR  No client with id 'test' found. aborting
+2023-08-08 20:14:42.133 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89 - 400 - application/json;+charset=UTF-8 0.7486ms
+2023-08-08 20:14:58.712 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89
+2023-08-08 20:14:58.712 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:14:58.712 +06:00  ERR  Client secret validation failed for client: recruitmentweb.
+2023-08-08 20:14:58.712 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89 - 400 - application/json;+charset=UTF-8 0.5762ms
+2023-08-08 20:15:12.927 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89
+2023-08-08 20:15:12.927 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:15:12.927 +06:00  ERR  Client secret validation failed for client: recruitmentweb.
+2023-08-08 20:15:12.928 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89 - 400 - application/json;+charset=UTF-8 0.7885ms
+2023-08-08 20:15:21.807 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89
+2023-08-08 20:15:21.808 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:15:21.808 +06:00  ERR  Client secret validation failed for client: recruitmentweb.
+2023-08-08 20:15:21.808 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89 - 400 - application/json;+charset=UTF-8 0.7336ms
+2023-08-08 20:15:24.083 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89
+2023-08-08 20:15:24.083 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:15:24.083 +06:00  ERR  Client secret validation failed for client: recruitmentweb.
+2023-08-08 20:15:24.083 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89 - 400 - application/json;+charset=UTF-8 0.6475ms
+2023-08-08 20:15:25.218 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89
+2023-08-08 20:15:25.218 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:15:25.219 +06:00  ERR  Client secret validation failed for client: recruitmentweb.
+2023-08-08 20:15:25.219 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89 - 400 - application/json;+charset=UTF-8 0.4986ms
+2023-08-08 20:15:26.463 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89
+2023-08-08 20:15:26.464 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:15:26.464 +06:00  ERR  Client secret validation failed for client: recruitmentweb.
+2023-08-08 20:15:26.464 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89 - 400 - application/json;+charset=UTF-8 0.7855ms
+2023-08-08 20:15:27.698 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89
+2023-08-08 20:15:27.698 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:15:27.699 +06:00  ERR  Client secret validation failed for client: recruitmentweb.
+2023-08-08 20:15:27.699 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89 - 400 - application/json;+charset=UTF-8 0.9165ms
+2023-08-08 20:19:06.571 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89
+2023-08-08 20:19:06.571 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:19:06.571 +06:00  ERR  Client secret validation failed for client: recruitmentweb.
+2023-08-08 20:19:06.572 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 89 - 400 - application/json;+charset=UTF-8 0.6715ms
+2023-08-08 20:19:14.640 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0
+2023-08-08 20:19:14.641 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:19:14.641 +06:00  ERR  Client secret validation failed for client: recruitmentweb.
+2023-08-08 20:19:14.641 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0 - 400 - application/json;+charset=UTF-8 0.6912ms
+2023-08-08 20:19:19.971 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/index.html - -
+2023-08-08 20:19:19.976 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/index.html - - - 200 - text/html;charset=utf-8 5.0590ms
+2023-08-08 20:19:19.995 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/_vs/browserLink - -
+2023-08-08 20:19:19.996 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - -
+2023-08-08 20:19:19.997 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - - - 200 12372 application/javascript;+charset=utf-8 0.1400ms
+2023-08-08 20:19:20.000 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 4.4347ms
+2023-08-08 20:19:20.415 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - -
+2023-08-08 20:19:20.416 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 0.6022ms
+2023-08-08 20:19:35.849 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0
+2023-08-08 20:19:35.850 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:19:35.850 +06:00  ERR  Client secret validation failed for client: recruitmentweb.
+2023-08-08 20:19:35.850 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0 - 400 - application/json;+charset=UTF-8 0.5033ms
+2023-08-08 20:19:37.216 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0
+2023-08-08 20:19:37.216 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:19:37.217 +06:00  ERR  Client secret validation failed for client: recruitmentweb.
+2023-08-08 20:19:37.217 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0 - 400 - application/json;+charset=UTF-8 1.0950ms
+2023-08-08 20:19:49.827 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0
+2023-08-08 20:19:49.828 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:19:49.829 +06:00  ERR  No client identifier found
+2023-08-08 20:19:49.829 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0 - 400 - application/json;+charset=UTF-8 2.0520ms
+2023-08-08 20:19:51.322 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0
+2023-08-08 20:19:51.322 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:19:51.322 +06:00  ERR  No client identifier found
+2023-08-08 20:19:51.322 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0 - 400 - application/json;+charset=UTF-8 0.5052ms
+2023-08-08 20:20:37.254 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0
+2023-08-08 20:20:37.254 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:20:37.254 +06:00  ERR  No client identifier found
+2023-08-08 20:20:37.254 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0 - 400 - application/json;+charset=UTF-8 0.4550ms
+2023-08-08 20:20:39.104 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0
+2023-08-08 20:20:39.104 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:20:39.104 +06:00  ERR  No client identifier found
+2023-08-08 20:20:39.105 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0 - 400 - application/json;+charset=UTF-8 0.5894ms
+2023-08-08 20:20:49.996 +06:00  INF  Starting IdentityServer4 version 4.1.2+997a6cdd643e46cd5762b710c4ddc43574cbec2e
+2023-08-08 20:20:50.059 +06:00  INF  You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2023-08-08 20:20:50.068 +06:00  INF  Using the default authentication scheme idsrv for IdentityServer
+2023-08-08 20:20:50.342 +06:00  INF  User profile is available. Using 'C:\Users\Atikur Zaman\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-08 20:20:50.516 +06:00  INF  Now listening on: http://localhost:6001
+2023-08-08 20:20:50.516 +06:00  INF  Application started. Press Ctrl+C to shut down.
+2023-08-08 20:20:50.516 +06:00  INF  Hosting environment: Development
+2023-08-08 20:20:50.516 +06:00  INF  Content root path: D:\UMR Git Projects\RecruiterPortal\RecruiterPortal.Auth\
+2023-08-08 20:20:51.681 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/index.html - -
+2023-08-08 20:20:52.499 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - -
+2023-08-08 20:20:52.512 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - - - 200 12372 application/javascript;+charset=utf-8 11.0999ms
+2023-08-08 20:20:52.535 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/index.html - - - 200 - text/html;charset=utf-8 868.9064ms
+2023-08-08 20:20:53.285 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/_vs/browserLink - -
+2023-08-08 20:20:53.324 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 39.2440ms
+2023-08-08 20:20:53.401 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - -
+2023-08-08 20:20:53.527 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 126.0668ms
+2023-08-08 20:20:57.421 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0
+2023-08-08 20:20:57.491 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:20:57.525 +06:00  ERR  No client identifier found
+2023-08-08 20:20:57.538 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0 - 400 - application/json;+charset=UTF-8 117.3198ms
+2023-08-08 20:20:58.791 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0
+2023-08-08 20:20:58.794 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:20:58.795 +06:00  ERR  No client identifier found
+2023-08-08 20:20:58.795 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0 - 400 - application/json;+charset=UTF-8 4.0418ms
+2023-08-08 20:21:44.962 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0
+2023-08-08 20:21:44.983 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:21:44.983 +06:00  ERR  No client identifier found
+2023-08-08 20:21:44.983 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0 - 400 - application/json;+charset=UTF-8 21.1135ms
+2023-08-08 20:21:59.396 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0
+2023-08-08 20:21:59.396 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:21:59.396 +06:00  ERR  No client identifier found
+2023-08-08 20:21:59.396 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0 - 400 - application/json;+charset=UTF-8 0.5585ms
+2023-08-08 20:22:12.094 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0
+2023-08-08 20:22:12.094 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-08 20:22:12.094 +06:00  ERR  No client identifier found
+2023-08-08 20:22:12.094 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 0 - 400 - application/json;+charset=UTF-8 0.4959ms
+2023-08-09 14:12:10.350 +06:00  INF  Starting IdentityServer4 version 4.1.2+997a6cdd643e46cd5762b710c4ddc43574cbec2e
+2023-08-09 14:12:10.391 +06:00  INF  You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2023-08-09 14:12:10.400 +06:00  INF  Using the default authentication scheme idsrv for IdentityServer
+2023-08-09 14:12:10.606 +06:00  INF  User profile is available. Using 'C:\Users\Atikur Zaman\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-09 14:12:10.904 +06:00  INF  Now listening on: http://localhost:6001
+2023-08-09 14:12:10.905 +06:00  INF  Application started. Press Ctrl+C to shut down.
+2023-08-09 14:12:10.905 +06:00  INF  Hosting environment: Development
+2023-08-09 14:12:10.905 +06:00  INF  Content root path: D:\UMR Git Projects\RecruiterPortal\RecruiterPortal.Auth\
+2023-08-09 14:12:11.667 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/index.html - -
+2023-08-09 14:12:12.486 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/index.html - - - 200 - text/html;charset=utf-8 825.5843ms
+2023-08-09 14:12:12.552 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - -
+2023-08-09 14:12:12.568 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/_vs/browserLink - -
+2023-08-09 14:12:12.572 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - - - 200 12372 application/javascript;+charset=utf-8 19.5247ms
+2023-08-09 14:12:12.608 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 40.4897ms
+2023-08-09 14:12:12.810 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - -
+2023-08-09 14:12:12.944 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 133.5679ms
+2023-08-09 14:12:57.421 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 189
+2023-08-09 14:12:57.505 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-09 14:13:13.552 +06:00  INF  Authentication Pass For User test@test.com
+2023-08-09 14:13:15.658 +06:00  INF  Token request validation success, {"ClientId":"recruitmentweb","ClientName":"Recruitment Web Client","GrantType":"password","Scopes":"recruitment.fullaccess","AuthorizationCode":"********","RefreshToken":"********","UserName":"test@test.com","AuthenticationContextReferenceClasses":null,"Tenant":null,"IdP":null,"Raw":{"grant_type":"password","username":"test@test.com","password":"***REDACTED***","scope":"recruitment.fullaccess","client_id":"recruitmentweb","client_secret":"***REDACTED***"},"$type":"TokenRequestValidationLog"}
+2023-08-09 14:13:16.090 +06:00  WRN  Certificate CN=idsrv3test has expired on 01/21/2020 04:00:00
+2023-08-09 14:13:16.579 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 189 - 200 - application/json;+charset=UTF-8 19157.7591ms
+>>>>>>> Stashed changes
