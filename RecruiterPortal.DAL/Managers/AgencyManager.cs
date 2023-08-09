@@ -33,6 +33,24 @@ namespace RecruiterPortalDAL.Managers
 
             return agency;
         }
+
+        public static List<Agency> GetAllActiveAgency()
+        {
+            string spName = "SP_Get_All_Active_Agency";  
+            List<Agency> agencies;
+
+            try
+            {
+                agencies = new GenericRepository<Agency>().GetAll(spName, null).ToList(); ;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return agencies;
+        }
+
         public static DataTable GetAgencies()
         {
             string spName = "SP_All_GET_Agency";
