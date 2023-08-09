@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { authorizationServerUrl, pathMatch, scopes } from '../constants/auth-keys';
+import { authorizationServerUrl, pathMatch, scopes, clientSecret } from '../constants/auth-keys';
 
-const accessTokenUrl = `${authorizationServerUrl + pathMatch}/connect/token`;
-const accessTokenBody = `grant_type=password&username={0}&password={1}&scope=${scopes.join('+')}`;
+const accessTokenUrl = `${authorizationServerUrl}/connect/token`;
+const accessTokenBody = `grant_type=password&username={0}&password={1}&scope=recruitment.fullaccess&client_id=recruitmentweb&client_secret=${encodeURIComponent(clientSecret)}`;
 
 const accessTokenRevokeUrl = `${authorizationServerUrl + pathMatch}/connect/revocation`;
 const refreshTokenRevokeBody = 'token={0}&token_type_hint=refresh_token';
@@ -11,8 +11,8 @@ const accessTokenFromRefreshTokenBody = 'grant_type=refresh_token&refresh_token=
 
 function getheaders(): HttpHeaders {
     let headers = new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic V2ViVU1SUmVjcnVpdG1lbnRCYXNpY0NsaWVudDo4YnJNTkxxbGJ2ZE84WGZra0FxTWgvZXNrcnBCakxKblVZM0hLQWVvZTYwPQ=='
+        'Content-Type': 'application/x-www-form-urlencoded'
+        /* 'Authorization': 'Basic V2ViVU1SUmVjcnVpdG1lbnRCYXNpY0NsaWVudDo4YnJNTkxxbGJ2ZE84WGZra0FxTWgvZXNrcnBCakxKblVZM0hLQWVvZTYwPQ=='*/
     });
     return headers;
 }
@@ -20,7 +20,7 @@ function getheaders(): HttpHeaders {
 // oldQueryParam will be removed for static connection string
 export function getToken(http: HttpClient, userID: string, password: string, oldQueryParam: string): any {
     const body = accessTokenBody.replace('{0}', userID).replace('{1}', password);
-  return http.post(accessTokenUrl + "?old=" + oldQueryParam , body, { headers: getheaders() });
+    return http.post(accessTokenUrl + "?old=" + oldQueryParam, body, { headers: getheaders() });
 }
 
 export function revokeToken(http: HttpClient, refreshToken: string): any {

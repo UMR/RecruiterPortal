@@ -1,6 +1,7 @@
-export const authCookieKey = 'tokenKeyRecruiter';
+export const authCookieKey = 'tokenKeyRecruiterPortal';
 export const currentUserVerificationStatus = 'currentRecruiterVerificationStatus';
 export const applicantId = 'applicantId';
+export const clientSecret = 's*|9%2~*=95*+|t8*~3**%;U73*+-c';
 
 //////////////////////////////   Localhost   ///////////////////////////
 export const authorizationServerUrl = 'http://localhost:6001';

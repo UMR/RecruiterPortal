@@ -21,7 +21,6 @@ export class LoginService {
 
   // oldQueryParam will be removed for static connection string
   login(userID: string, password: string, oldQueryParam: string) {
-    console.log(oldQueryParam);
     return this.authService.login(userID, password, oldQueryParam);
   }
 
