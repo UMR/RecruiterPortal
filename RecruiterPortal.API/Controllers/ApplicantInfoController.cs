@@ -67,8 +67,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             try
             {
                 DataTable dt = UserManager.GetUserDetailsByID(applicantId);
-                string jsonString = JsonConvert.SerializeObject(dt,
-                    new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
+                string jsonString = JsonConvert.SerializeObject(dt,new JsonSerializerSettings { ContractResolver = null });
 
                 return Ok(jsonString);
             }

@@ -77,7 +77,7 @@
                              [value]="applicants"
                              selectionMode="single"
                              [(selection)]="selectedApplicant"
-                             dataKey="userId"
+                             dataKey="UserId"
                              [paginator]="true"
                              [rows]="rows"
                              [columns]="cols"
@@ -102,7 +102,7 @@
                           <td *ngFor="let col of columns">
                             <span class="p-column-title" style="padding-bottom: 2px; font-weight: bold;">{{col.header}}:&nbsp;</span>{{rowData[col.field]}}
                           </td>
-                          <td class="text-center" *ngIf="selectedApplicantStatus===2 && isSubmitted"><a (click)="onEdit(applicant.userId)"><i class="pi pi-pencil"></i></a></td>
+                          <td class="text-center" *ngIf="selectedApplicantStatus===2 && isSubmitted"><a (click)="onEdit(applicant.UserId)"><i class="pi pi-pencil"></i></a></td>
                           <td class="text-center" *ngIf="selectedApplicantStatus===1 && isSubmitted"><button type="button" (click)="onImportSync(applicant.ApplicantPortalUserId)" class="btn btn-primary btn-import-sync">Import</button> </td>
                           <td class="text-center" *ngIf="selectedApplicantStatus===2 && isSubmitted"><button [disabled]="selectedApplicantStatus===2 && !applicant.hasChanges" type="button" (click)="onImportSync(applicant.ApplicantPortalUserId)" class="btn btn-primary btn-import-sync">Sync</button> </td>
                         </tr>
