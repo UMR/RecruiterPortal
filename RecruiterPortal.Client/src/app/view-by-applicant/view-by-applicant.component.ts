@@ -45,9 +45,9 @@ export class ViewByApplicantComponent implements OnInit {
     ngOnInit(): void {
         this.isLoading = true;
         this.cols = [
-            { field: 'LastName', header: 'Applicant Last Name' },
-            { field: 'FirstName', header: 'Applicant First Name' },
-            { field: 'ApplicantEmail', header: 'Applicant Email' },
+            { field: 'lastName', header: 'Applicant Last Name' },
+            { field: 'firstName', header: 'Applicant First Name' },
+            { field: 'email', header: 'Applicant Email' },
             { field: 'ApplicantMobilePhone', header: 'Applicant Mobile Phone' }
         ];
         this.selectedApplicantStatus = EnumApplicantStatus.Existing;
@@ -111,7 +111,7 @@ export class ViewByApplicantComponent implements OnInit {
             firstName: applicantFirstName,
             lastName: applicantLastName,
             email: applicantEmail,
-            recruiterId: 1,
+           /* recruiterId: "1",*/
             isVerified: true,
             take: this.take,
             skip: this.skip,

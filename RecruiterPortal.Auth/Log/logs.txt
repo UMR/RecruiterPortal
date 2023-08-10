@@ -1011,3 +1011,70 @@
 2023-08-09 20:00:42.913 +06:00  INF  Token request validation success, {"ClientId":"recruitmentweb","ClientName":"Recruitment Web Client","GrantType":"password","Scopes":"recruitment.fullaccess","AuthorizationCode":"********","RefreshToken":"********","UserName":"test@test.com","AuthenticationContextReferenceClasses":null,"Tenant":null,"IdP":null,"Raw":{"grant_type":"password","username":"test@test.com","password":"***REDACTED***","scope":"recruitment.fullaccess","client_id":"recruitmentweb","client_secret":"***REDACTED***"},"$type":"TokenRequestValidationLog"}
 2023-08-09 20:00:42.915 +06:00  WRN  Certificate CN=idsrv3test has expired on 01/21/2020 04:00:00
 2023-08-09 20:00:42.916 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 189 - 200 - application/json;+charset=UTF-8 17.0576ms
+2023-08-10 12:37:53.555 +06:00  INF  Starting IdentityServer4 version 4.1.2+997a6cdd643e46cd5762b710c4ddc43574cbec2e
+2023-08-10 12:37:53.599 +06:00  INF  You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2023-08-10 12:37:53.602 +06:00  INF  Using the default authentication scheme idsrv for IdentityServer
+2023-08-10 12:37:53.664 +06:00  INF  User profile is available. Using 'C:\Users\srana.AEL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-10 12:37:53.933 +06:00  INF  Now listening on: http://localhost:6001
+2023-08-10 12:37:53.933 +06:00  INF  Application started. Press Ctrl+C to shut down.
+2023-08-10 12:37:53.933 +06:00  INF  Hosting environment: Development
+2023-08-10 12:37:53.933 +06:00  INF  Content root path: F:\RecruiterPortal\RecruiterPortal.Auth\
+2023-08-10 12:37:54.655 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/index.html - -
+2023-08-10 12:38:00.682 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/index.html - - - 200 - text/html;charset=utf-8 6030.4826ms
+2023-08-10 12:38:00.756 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - -
+2023-08-10 12:38:00.759 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - - - 200 11954 application/javascript;+charset=utf-8 2.7219ms
+2023-08-10 12:38:00.909 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - -
+2023-08-10 12:38:01.122 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 212.9684ms
+2023-08-10 12:40:48.581 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/.well-known/openid-configuration - -
+2023-08-10 12:40:48.780 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2023-08-10 12:40:48.856 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/.well-known/openid-configuration - - - 200 - application/json;+charset=UTF-8 275.8446ms
+2023-08-10 12:40:49.141 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/.well-known/openid-configuration/jwks - -
+2023-08-10 12:40:49.143 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
+2023-08-10 12:40:49.456 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/.well-known/openid-configuration/jwks - - - 200 - application/json;+charset=UTF-8 314.5289ms
+2023-08-10 12:41:05.125 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 176
+2023-08-10 12:41:05.137 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:41:05.491 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.TokenEndpoint for /connect/token
+2023-08-10 12:41:09.858 +06:00  INF  Authentication Pass For User srana@ael-bd.com
+2023-08-10 12:41:09.871 +06:00  INF  Token request validation success, {"ClientId":"recruitmentweb","ClientName":"Recruitment Web Client","GrantType":"password","Scopes":"recruitment.fullaccess","AuthorizationCode":"********","RefreshToken":"********","UserName":"srana@ael-bd.com","AuthenticationContextReferenceClasses":null,"Tenant":null,"IdP":null,"Raw":{"grant_type":"password","username":"srana@ael-bd.com","password":"***REDACTED***","scope":"recruitment.fullaccess","client_id":"recruitmentweb","client_secret":"***REDACTED***"},"$type":"TokenRequestValidationLog"}
+2023-08-10 12:41:10.398 +06:00  WRN  Certificate CN=idsrv3test has expired on 01/21/2020 04:00:00
+2023-08-10 12:41:10.765 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6001/connect/token?old=umr application/x-www-form-urlencoded 176 - 200 - application/json;+charset=UTF-8 5640.6579ms
+2023-08-10 12:43:16.543 +06:00  INF  Starting IdentityServer4 version 4.1.2+997a6cdd643e46cd5762b710c4ddc43574cbec2e
+2023-08-10 12:43:16.585 +06:00  INF  You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2023-08-10 12:43:16.598 +06:00  INF  Using the default authentication scheme idsrv for IdentityServer
+2023-08-10 12:43:16.864 +06:00  INF  User profile is available. Using 'C:\Users\srana.AEL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-10 12:43:17.089 +06:00  INF  Now listening on: http://localhost:6001
+2023-08-10 12:43:17.090 +06:00  INF  Application started. Press Ctrl+C to shut down.
+2023-08-10 12:43:17.090 +06:00  INF  Hosting environment: Development
+2023-08-10 12:43:17.090 +06:00  INF  Content root path: F:\RecruiterPortal\RecruiterPortal.Auth\
+2023-08-10 12:43:18.102 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/index.html - -
+2023-08-10 12:43:19.221 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/index.html - - - 200 - text/html;charset=utf-8 1129.8451ms
+2023-08-10 12:43:19.290 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - -
+2023-08-10 12:43:19.294 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - - - 200 11954 application/javascript;+charset=utf-8 4.0558ms
+2023-08-10 12:43:19.761 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - -
+2023-08-10 12:43:19.880 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 118.6253ms
+2023-08-10 12:43:29.029 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/.well-known/openid-configuration - -
+2023-08-10 12:43:29.077 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2023-08-10 12:43:29.133 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/.well-known/openid-configuration - - - 200 - application/json;+charset=UTF-8 103.7168ms
+2023-08-10 12:43:29.327 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/.well-known/openid-configuration/jwks - -
+2023-08-10 12:43:29.379 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
+2023-08-10 12:43:29.753 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/.well-known/openid-configuration/jwks - - - 200 - application/json;+charset=UTF-8 425.9426ms
+2023-08-10 13:01:23.943 +06:00  INF  Starting IdentityServer4 version 4.1.2+997a6cdd643e46cd5762b710c4ddc43574cbec2e
+2023-08-10 13:01:23.968 +06:00  INF  You are using the in-memory version of the persisted grant store. This will store consent decisions, authorization codes, refresh and reference tokens in memory only. If you are using any of those features in production, you want to switch to a different store implementation.
+2023-08-10 13:01:23.971 +06:00  INF  Using the default authentication scheme idsrv for IdentityServer
+2023-08-10 13:01:24.051 +06:00  INF  User profile is available. Using 'C:\Users\srana.AEL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-10 13:01:24.151 +06:00  INF  Now listening on: http://localhost:6001
+2023-08-10 13:01:24.151 +06:00  INF  Application started. Press Ctrl+C to shut down.
+2023-08-10 13:01:24.151 +06:00  INF  Hosting environment: Development
+2023-08-10 13:01:24.151 +06:00  INF  Content root path: F:\RecruiterPortal\RecruiterPortal.Auth\
+2023-08-10 13:01:24.616 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/index.html - -
+2023-08-10 13:01:25.826 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - -
+2023-08-10 13:01:25.829 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/index.html - - - 200 - text/html;charset=utf-8 1222.2479ms
+2023-08-10 13:01:25.830 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/_framework/aspnetcore-browser-refresh.js - - - 200 11954 application/javascript;+charset=utf-8 2.5153ms
+2023-08-10 13:01:25.986 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - -
+2023-08-10 13:01:26.053 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 67.3361ms
+2023-08-10 13:01:47.351 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/.well-known/openid-configuration - -
+2023-08-10 13:01:47.386 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryEndpoint for /.well-known/openid-configuration
+2023-08-10 13:01:47.419 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/.well-known/openid-configuration - - - 200 - application/json;+charset=UTF-8 67.9828ms
+2023-08-10 13:01:47.670 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6001/.well-known/openid-configuration/jwks - -
+2023-08-10 13:01:47.672 +06:00  INF  Invoking IdentityServer endpoint: IdentityServer4.Endpoints.DiscoveryKeyEndpoint for /.well-known/openid-configuration/jwks
+2023-08-10 13:01:47.817 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6001/.well-known/openid-configuration/jwks - - - 200 - application/json;+charset=UTF-8 146.9059ms

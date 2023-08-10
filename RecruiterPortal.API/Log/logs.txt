@@ -512,3 +512,491 @@
 2023-08-09 20:00:21.289 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 22.3224ms
 2023-08-09 20:00:21.530 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - -
 2023-08-09 20:00:21.758 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 228.1442ms
+2023-08-10 12:37:59.360 +06:00  INF  User profile is available. Using 'C:\Users\srana.AEL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-10 12:37:59.443 +06:00  INF  Now listening on: http://localhost:6002
+2023-08-10 12:37:59.446 +06:00  INF  Application started. Press Ctrl+C to shut down.
+2023-08-10 12:37:59.446 +06:00  INF  Hosting environment: Development
+2023-08-10 12:37:59.446 +06:00  INF  Content root path: F:\RecruiterPortal\RecruiterPortal.API\
+2023-08-10 12:38:00.047 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/index.html - -
+2023-08-10 12:38:00.460 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/index.html - - - 200 - text/html;charset=utf-8 417.3806ms
+2023-08-10 12:38:00.497 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/_framework/aspnetcore-browser-refresh.js - -
+2023-08-10 12:38:00.501 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/_framework/aspnetcore-browser-refresh.js - - - 200 11953 application/javascript;+charset=utf-8 3.5609ms
+2023-08-10 12:38:00.761 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - -
+2023-08-10 12:38:01.239 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 477.1006ms
+2023-08-10 12:40:46.991 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 12:40:46.991 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - -
+2023-08-10 12:40:46.995 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - -
+2023-08-10 12:40:46.997 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:40:46.997 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:40:46.997 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:40:46.999 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - - - 204 - - 8.4331ms
+2023-08-10 12:40:46.999 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - - - 204 - - 8.8067ms
+2023-08-10 12:40:46.999 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - - - 204 - - 4.5181ms
+2023-08-10 12:40:47.001 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 94
+2023-08-10 12:40:47.001 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:40:47.002 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 12:40:47.002 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - -
+2023-08-10 12:40:47.002 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:40:47.002 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:40:49.880 +06:00  INF  Failed to validate the token.Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 3:03:35 PM', Current time: '8/10/2023 6:40:49 AM'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateJWS(String token, TokenValidationParameters validationParameters, BaseConfiguration currentConfiguration, SecurityToken& signatureValidatedToken, ExceptionDispatchInfo& exceptionThrown)
+--- End of stack trace from previous location ---
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, JwtSecurityToken outerToken, TokenValidationParameters validationParameters, SecurityToken& signatureValidatedToken)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+
+2023-08-10 12:40:49.880 +06:00  INF  Failed to validate the token.Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 3:03:35 PM', Current time: '8/10/2023 6:40:49 AM'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateJWS(String token, TokenValidationParameters validationParameters, BaseConfiguration currentConfiguration, SecurityToken& signatureValidatedToken, ExceptionDispatchInfo& exceptionThrown)
+--- End of stack trace from previous location ---
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, JwtSecurityToken outerToken, TokenValidationParameters validationParameters, SecurityToken& signatureValidatedToken)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+
+2023-08-10 12:40:49.880 +06:00  INF  Failed to validate the token.Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 3:03:35 PM', Current time: '8/10/2023 6:40:49 AM'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, JwtSecurityToken jwtToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateJWS(String token, TokenValidationParameters validationParameters, BaseConfiguration currentConfiguration, SecurityToken& signatureValidatedToken, ExceptionDispatchInfo& exceptionThrown)
+--- End of stack trace from previous location ---
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, JwtSecurityToken outerToken, TokenValidationParameters validationParameters, SecurityToken& signatureValidatedToken)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+
+2023-08-10 12:40:50.007 +06:00  INF  BearerIdentityServerAuthenticationJwt was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 3:03:35 PM', Current time: '8/10/2023 6:40:49 AM'.
+2023-08-10 12:40:50.007 +06:00  INF  BearerIdentityServerAuthenticationJwt was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 3:03:35 PM', Current time: '8/10/2023 6:40:49 AM'.
+2023-08-10 12:40:50.007 +06:00  INF  BearerIdentityServerAuthenticationJwt was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 3:03:35 PM', Current time: '8/10/2023 6:40:49 AM'.
+2023-08-10 12:40:50.009 +06:00  INF  Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 3:03:35 PM', Current time: '8/10/2023 6:40:49 AM'.
+2023-08-10 12:40:50.009 +06:00  INF  Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 3:03:35 PM', Current time: '8/10/2023 6:40:49 AM'.
+2023-08-10 12:40:50.009 +06:00  INF  Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '8/9/2023 3:03:35 PM', Current time: '8/10/2023 6:40:49 AM'.
+2023-08-10 12:40:50.013 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - - - 404 0 - 3011.1137ms
+2023-08-10 12:40:50.013 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - - - 404 0 - 3011.1183ms
+2023-08-10 12:40:50.016 +06:00  INF  Executing endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 12:40:50.055 +06:00  INF  Route matched with {action = "GetAllApplicant", controller = "ApplicantInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllApplicant(RecruiterPortal.DAL.Models.ApplicantSearchModel) on controller ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController (RecruiterPortal.API).
+2023-08-10 12:40:50.063 +06:00  INF  Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+ClaimsAuthorizationRequirement:Claim.Type=Scope and Claim.Value is one of the following values: (recruitment.fullaccess)
+2023-08-10 12:40:50.064 +06:00  INF  Authorization failed for the request at filter 'Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter'.
+2023-08-10 12:40:50.068 +06:00  INF  Executing ChallengeResult with authentication schemes ([]).
+2023-08-10 12:40:50.082 +06:00  INF  AuthenticationScheme: BearerIdentityServerAuthenticationJwt was challenged.
+2023-08-10 12:40:50.082 +06:00  INF  AuthenticationScheme: Bearer was challenged.
+2023-08-10 12:40:50.089 +06:00  INF  Executed action ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API) in 26.2713ms
+2023-08-10 12:40:50.090 +06:00  INF  Executed endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 12:40:50.090 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 94 - 401 0 - 3088.9317ms
+2023-08-10 12:41:10.802 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 12:41:10.802 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - -
+2023-08-10 12:41:10.802 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - -
+2023-08-10 12:41:10.809 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:41:10.809 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:41:10.809 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - - - 204 - - 6.9842ms
+2023-08-10 12:41:10.809 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - - - 204 - - 6.2838ms
+2023-08-10 12:41:10.813 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:41:10.813 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - - - 204 - - 10.5795ms
+2023-08-10 12:41:10.814 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 12:41:10.814 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - -
+2023-08-10 12:41:10.815 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:41:10.815 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:41:10.815 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 94
+2023-08-10 12:41:10.815 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:41:10.869 +06:00  INF  Successfully validated the token.
+2023-08-10 12:41:10.869 +06:00  INF  Successfully validated the token.
+2023-08-10 12:41:10.869 +06:00  INF  Successfully validated the token.
+2023-08-10 12:41:10.871 +06:00  INF  Executing endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 12:41:10.871 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - - - 404 0 - 56.3480ms
+2023-08-10 12:41:10.871 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - - - 404 0 - 56.3754ms
+2023-08-10 12:41:10.871 +06:00  INF  Route matched with {action = "GetAllApplicant", controller = "ApplicantInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllApplicant(RecruiterPortal.DAL.Models.ApplicantSearchModel) on controller ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController (RecruiterPortal.API).
+2023-08-10 12:41:15.871 +06:00  INF  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[RecruiterPortal.DAL.SqlModels.ApplicantInfoModel, RecruiterPortal.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2023-08-10 12:41:15.897 +06:00  INF  Executed action ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API) in 5026.0694ms
+2023-08-10 12:41:15.897 +06:00  INF  Executed endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 12:41:15.897 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 94 - 200 - application/json;+charset=utf-8 5082.6382ms
+2023-08-10 12:43:16.711 +06:00  INF  User profile is available. Using 'C:\Users\srana.AEL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-10 12:43:16.977 +06:00  INF  Now listening on: http://localhost:6002
+2023-08-10 12:43:16.996 +06:00  INF  Application started. Press Ctrl+C to shut down.
+2023-08-10 12:43:16.997 +06:00  INF  Hosting environment: Development
+2023-08-10 12:43:16.997 +06:00  INF  Content root path: F:\RecruiterPortal\RecruiterPortal.API\
+2023-08-10 12:43:18.496 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/index.html - -
+2023-08-10 12:43:19.606 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/index.html - - - 200 - text/html;charset=utf-8 1135.5298ms
+2023-08-10 12:43:19.655 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/_framework/aspnetcore-browser-refresh.js - -
+2023-08-10 12:43:19.660 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/_framework/aspnetcore-browser-refresh.js - - - 200 11953 application/javascript;+charset=utf-8 4.5379ms
+2023-08-10 12:43:19.903 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - -
+2023-08-10 12:43:20.253 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 349.3689ms
+2023-08-10 12:43:28.510 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 12:43:28.510 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - -
+2023-08-10 12:43:28.518 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - -
+2023-08-10 12:43:28.530 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:43:28.530 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:43:28.531 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:43:28.533 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - - - 204 - - 22.6910ms
+2023-08-10 12:43:28.533 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - - - 204 - - 14.5344ms
+2023-08-10 12:43:28.536 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - - - 204 - - 25.9332ms
+2023-08-10 12:43:28.542 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - -
+2023-08-10 12:43:28.542 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 12:43:28.544 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 94
+2023-08-10 12:43:28.547 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:43:28.547 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:43:28.548 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:43:29.972 +06:00  INF  Successfully validated the token.
+2023-08-10 12:43:29.972 +06:00  INF  Successfully validated the token.
+2023-08-10 12:43:29.972 +06:00  INF  Successfully validated the token.
+2023-08-10 12:43:29.979 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - - - 404 0 - 1436.3507ms
+2023-08-10 12:43:29.979 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - - - 404 0 - 1436.3465ms
+2023-08-10 12:43:29.983 +06:00  INF  Executing endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 12:43:30.027 +06:00  INF  Route matched with {action = "GetAllApplicant", controller = "ApplicantInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllApplicant(RecruiterPortal.DAL.Models.ApplicantSearchModel) on controller ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController (RecruiterPortal.API).
+2023-08-10 12:45:33.807 +06:00  INF  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[RecruiterPortal.DAL.SqlModels.ApplicantInfoModel, RecruiterPortal.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2023-08-10 12:45:33.834 +06:00  INF  Executed action ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API) in 123799.9371ms
+2023-08-10 12:45:33.835 +06:00  INF  Executed endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 12:45:33.835 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 94 - 200 - application/json;+charset=utf-8 125290.9639ms
+2023-08-10 12:45:38.390 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - -
+2023-08-10 12:45:38.390 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 12:45:38.396 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - -
+2023-08-10 12:45:38.398 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:45:38.398 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:45:38.399 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - - - 204 - - 8.8945ms
+2023-08-10 12:45:38.399 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - - - 204 - - 8.8991ms
+2023-08-10 12:45:38.400 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - -
+2023-08-10 12:45:38.400 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 12:45:38.401 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:45:38.401 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:45:38.401 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:45:38.401 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - - - 204 - - 5.2366ms
+2023-08-10 12:45:38.402 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 94
+2023-08-10 12:45:38.402 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:45:38.403 +06:00  INF  Successfully validated the token.
+2023-08-10 12:45:38.403 +06:00  INF  Successfully validated the token.
+2023-08-10 12:45:38.403 +06:00  INF  Successfully validated the token.
+2023-08-10 12:45:38.403 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - - - 404 0 - 2.5428ms
+2023-08-10 12:45:38.403 +06:00  INF  Executing endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 12:45:38.403 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - - - 404 0 - 2.5738ms
+2023-08-10 12:45:38.403 +06:00  INF  Route matched with {action = "GetAllApplicant", controller = "ApplicantInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllApplicant(RecruiterPortal.DAL.Models.ApplicantSearchModel) on controller ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController (RecruiterPortal.API).
+2023-08-10 12:49:07.773 +06:00  INF  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[RecruiterPortal.DAL.SqlModels.ApplicantInfoModel, RecruiterPortal.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2023-08-10 12:49:07.846 +06:00  INF  Executed action ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API) in 209442.7369ms
+2023-08-10 12:49:07.846 +06:00  INF  Executed endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 12:49:07.846 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 94 - 200 - application/json;+charset=utf-8 209444.0048ms
+2023-08-10 12:49:09.652 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - -
+2023-08-10 12:49:09.652 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 12:49:09.652 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:49:09.652 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:49:09.652 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - - - 204 - - 0.2950ms
+2023-08-10 12:49:09.652 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - - - 204 - - 0.2987ms
+2023-08-10 12:49:09.660 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 12:49:09.660 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - -
+2023-08-10 12:49:09.660 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - -
+2023-08-10 12:49:09.660 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:49:09.660 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:49:09.660 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:49:09.660 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - - - 204 - - 0.2484ms
+2023-08-10 12:49:09.660 +06:00  INF  Successfully validated the token.
+2023-08-10 12:49:09.660 +06:00  INF  Successfully validated the token.
+2023-08-10 12:49:09.660 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - - - 404 0 - 0.9073ms
+2023-08-10 12:49:09.661 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - - - 404 0 - 1.0348ms
+2023-08-10 12:49:09.668 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 96
+2023-08-10 12:49:09.668 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:49:09.669 +06:00  INF  Successfully validated the token.
+2023-08-10 12:49:09.669 +06:00  INF  Executing endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 12:49:09.669 +06:00  INF  Route matched with {action = "GetAllApplicant", controller = "ApplicantInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllApplicant(RecruiterPortal.DAL.Models.ApplicantSearchModel) on controller ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController (RecruiterPortal.API).
+2023-08-10 12:49:15.947 +06:00  INF  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[RecruiterPortal.DAL.SqlModels.ApplicantInfoModel, RecruiterPortal.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2023-08-10 12:49:15.947 +06:00  INF  Executed action ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API) in 6278.1429ms
+2023-08-10 12:49:15.947 +06:00  INF  Executed endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 12:49:15.947 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 96 - 200 - application/json;+charset=utf-8 6279.3537ms
+2023-08-10 12:49:23.283 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 12:49:23.283 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - -
+2023-08-10 12:49:23.283 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:49:23.283 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - -
+2023-08-10 12:49:23.283 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:49:23.283 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:49:23.283 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - - - 204 - - 0.3195ms
+2023-08-10 12:49:23.283 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - - - 204 - - 0.2295ms
+2023-08-10 12:49:23.283 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - - - 204 - - 0.1812ms
+2023-08-10 12:49:23.285 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 96
+2023-08-10 12:49:23.285 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:49:23.285 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 12:49:23.285 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - -
+2023-08-10 12:49:23.285 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:49:23.286 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:49:23.286 +06:00  INF  Successfully validated the token.
+2023-08-10 12:49:23.286 +06:00  INF  Executing endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 12:49:23.286 +06:00  INF  Route matched with {action = "GetAllApplicant", controller = "ApplicantInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllApplicant(RecruiterPortal.DAL.Models.ApplicantSearchModel) on controller ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController (RecruiterPortal.API).
+2023-08-10 12:49:23.286 +06:00  INF  Successfully validated the token.
+2023-08-10 12:49:23.286 +06:00  INF  Successfully validated the token.
+2023-08-10 12:49:23.286 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - - - 404 0 - 1.1126ms
+2023-08-10 12:49:23.286 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - - - 404 0 - 1.0081ms
+2023-08-10 12:50:35.112 +06:00  INF  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[RecruiterPortal.DAL.SqlModels.ApplicantInfoModel, RecruiterPortal.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2023-08-10 12:50:35.124 +06:00  INF  Executed action ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API) in 71837.7318ms
+2023-08-10 12:50:35.124 +06:00  INF  Executed endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 12:50:35.124 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 96 - 200 - application/json;+charset=utf-8 71839.2712ms
+2023-08-10 12:50:56.246 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - -
+2023-08-10 12:50:56.246 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 12:50:56.246 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:50:56.246 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:50:56.247 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - - - 204 - - 0.2432ms
+2023-08-10 12:50:56.252 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - -
+2023-08-10 12:50:56.252 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:50:56.252 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - - - 204 - - 0.2464ms
+2023-08-10 12:50:56.281 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - - - 204 - - 31.6502ms
+2023-08-10 12:50:56.292 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 12:50:56.292 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:50:56.292 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - -
+2023-08-10 12:50:56.292 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:50:56.293 +06:00  INF  Successfully validated the token.
+2023-08-10 12:50:56.293 +06:00  INF  Successfully validated the token.
+2023-08-10 12:50:56.293 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - - - 404 0 - 2.2939ms
+2023-08-10 12:50:56.293 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - - - 404 0 - 0.8583ms
+2023-08-10 12:50:56.293 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 78
+2023-08-10 12:50:56.293 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:50:56.305 +06:00  INF  Successfully validated the token.
+2023-08-10 12:50:56.308 +06:00  INF  Executing endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 12:50:56.308 +06:00  INF  Route matched with {action = "GetAllApplicant", controller = "ApplicantInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllApplicant(RecruiterPortal.DAL.Models.ApplicantSearchModel) on controller ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController (RecruiterPortal.API).
+2023-08-10 12:51:10.927 +06:00  INF  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[RecruiterPortal.DAL.SqlModels.ApplicantInfoModel, RecruiterPortal.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2023-08-10 12:51:10.936 +06:00  INF  Executed action ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API) in 14627.5776ms
+2023-08-10 12:51:10.936 +06:00  INF  Executed endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 12:51:10.936 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 78 - 200 - application/json;+charset=utf-8 14642.9530ms
+2023-08-10 12:51:51.755 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 12:51:51.756 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:51:51.756 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - -
+2023-08-10 12:51:51.756 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:51:51.762 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - - - 204 - - 6.4360ms
+2023-08-10 12:51:51.762 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - - - 204 - - 10.5221ms
+2023-08-10 12:51:51.776 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 12:51:51.777 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:51:51.786 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - -
+2023-08-10 12:51:51.786 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - -
+2023-08-10 12:51:51.786 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:51:51.786 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:51:51.786 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - - - 204 - - 1.0301ms
+2023-08-10 12:51:51.786 +06:00  INF  Successfully validated the token.
+2023-08-10 12:51:51.792 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - - - 404 0 - 9.7371ms
+2023-08-10 12:51:51.795 +06:00  INF  Successfully validated the token.
+2023-08-10 12:51:51.795 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - - - 404 0 - 9.6840ms
+2023-08-10 12:51:51.810 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 78
+2023-08-10 12:51:51.812 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:51:51.813 +06:00  INF  Successfully validated the token.
+2023-08-10 12:51:51.813 +06:00  INF  Executing endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 12:51:51.813 +06:00  INF  Route matched with {action = "GetAllApplicant", controller = "ApplicantInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllApplicant(RecruiterPortal.DAL.Models.ApplicantSearchModel) on controller ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController (RecruiterPortal.API).
+2023-08-10 12:53:52.033 +06:00  INF  Executing OkObjectResult, writing value of type '<>f__AnonymousType2`2[[System.Collections.Generic.List`1[[RecruiterPortal.DAL.SqlModels.ApplicantInfoModel, RecruiterPortal.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-08-10 12:53:52.035 +06:00  INF  Executed action ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API) in 120222.012ms
+2023-08-10 12:53:52.035 +06:00  INF  Executed endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 12:53:52.035 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 78 - 200 - application/json;+charset=utf-8 120225.0170ms
+2023-08-10 12:56:14.277 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - -
+2023-08-10 12:56:14.278 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 12:56:14.282 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:56:14.282 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:56:14.282 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - - - 204 - - 19.4912ms
+2023-08-10 12:56:14.282 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - - - 204 - - 4.6712ms
+2023-08-10 12:56:14.291 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - -
+2023-08-10 12:56:14.291 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - -
+2023-08-10 12:56:14.294 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 12:56:14.311 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:56:14.311 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:56:14.311 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:56:14.312 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - - - 204 - - 20.3238ms
+2023-08-10 12:56:14.312 +06:00  INF  Successfully validated the token.
+2023-08-10 12:56:14.312 +06:00  INF  Successfully validated the token.
+2023-08-10 12:56:14.313 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - - - 404 0 - 21.9184ms
+2023-08-10 12:56:14.313 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - - - 404 0 - 18.3189ms
+2023-08-10 12:56:14.320 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 78
+2023-08-10 12:56:14.323 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:56:14.324 +06:00  INF  Successfully validated the token.
+2023-08-10 12:56:14.324 +06:00  INF  Executing endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 12:56:14.325 +06:00  INF  Route matched with {action = "GetAllApplicant", controller = "ApplicantInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllApplicant(RecruiterPortal.DAL.Models.ApplicantSearchModel) on controller ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController (RecruiterPortal.API).
+2023-08-10 12:56:18.886 +06:00  INF  Executing OkObjectResult, writing value of type '<>f__AnonymousType2`2[[System.Collections.Generic.List`1[[RecruiterPortal.DAL.SqlModels.ApplicantInfoModel, RecruiterPortal.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-08-10 12:56:18.893 +06:00  INF  Executed action ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API) in 4567.7321ms
+2023-08-10 12:56:18.893 +06:00  INF  Executed endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 12:56:18.893 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 78 - 200 - application/json;+charset=utf-8 4573.4688ms
+2023-08-10 12:57:36.072 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 12:57:36.073 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:57:36.081 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - - - 204 - - 8.9522ms
+2023-08-10 12:57:36.082 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - -
+2023-08-10 12:57:36.083 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:57:36.083 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - - - 204 - - 1.0622ms
+2023-08-10 12:57:36.131 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - -
+2023-08-10 12:57:36.131 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:57:36.131 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - - - 204 - - 0.6448ms
+2023-08-10 12:57:36.153 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 12:57:36.154 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:57:36.161 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 78
+2023-08-10 12:57:36.161 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - -
+2023-08-10 12:57:36.161 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:57:36.161 +06:00  INF  CORS policy execution successful.
+2023-08-10 12:57:36.161 +06:00  INF  Successfully validated the token.
+2023-08-10 12:57:36.161 +06:00  INF  Successfully validated the token.
+2023-08-10 12:57:36.161 +06:00  INF  Successfully validated the token.
+2023-08-10 12:57:36.161 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - - - 404 0 - 7.8703ms
+2023-08-10 12:57:36.161 +06:00  INF  Executing endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 12:57:36.161 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - - - 404 0 - 0.6426ms
+2023-08-10 12:57:36.161 +06:00  INF  Route matched with {action = "GetAllApplicant", controller = "ApplicantInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllApplicant(RecruiterPortal.DAL.Models.ApplicantSearchModel) on controller ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController (RecruiterPortal.API).
+2023-08-10 13:01:29.365 +06:00  INF  User profile is available. Using 'C:\Users\srana.AEL\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-08-10 13:01:29.445 +06:00  INF  Now listening on: http://localhost:6002
+2023-08-10 13:01:29.448 +06:00  INF  Application started. Press Ctrl+C to shut down.
+2023-08-10 13:01:29.448 +06:00  INF  Hosting environment: Development
+2023-08-10 13:01:29.448 +06:00  INF  Content root path: F:\RecruiterPortal\RecruiterPortal.API\
+2023-08-10 13:01:29.673 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/index.html - -
+2023-08-10 13:01:30.061 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/index.html - - - 200 - text/html;charset=utf-8 390.2750ms
+2023-08-10 13:01:30.106 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/_framework/aspnetcore-browser-refresh.js - -
+2023-08-10 13:01:30.112 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/_framework/aspnetcore-browser-refresh.js - - - 200 11953 application/javascript;+charset=utf-8 5.9044ms
+2023-08-10 13:01:30.327 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - -
+2023-08-10 13:01:30.604 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 277.0049ms
+2023-08-10 13:01:46.338 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 13:01:46.338 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - -
+2023-08-10 13:01:46.341 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - -
+2023-08-10 13:01:46.346 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:01:46.346 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:01:46.346 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:01:46.348 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - - - 204 - - 7.4933ms
+2023-08-10 13:01:46.348 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - - - 204 - - 10.1588ms
+2023-08-10 13:01:46.348 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - - - 204 - - 10.1589ms
+2023-08-10 13:01:46.350 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 78
+2023-08-10 13:01:46.351 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 13:01:46.351 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - -
+2023-08-10 13:01:46.351 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:01:46.351 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:01:46.351 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:01:48.107 +06:00  INF  Successfully validated the token.
+2023-08-10 13:01:48.107 +06:00  INF  Successfully validated the token.
+2023-08-10 13:01:48.107 +06:00  INF  Successfully validated the token.
+2023-08-10 13:01:48.112 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - - - 404 0 - 1761.1241ms
+2023-08-10 13:01:48.112 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - - - 404 0 - 1761.2092ms
+2023-08-10 13:01:48.115 +06:00  INF  Executing endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 13:01:48.148 +06:00  INF  Route matched with {action = "GetAllApplicant", controller = "ApplicantInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllApplicant(RecruiterPortal.DAL.Models.ApplicantSearchModel) on controller ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController (RecruiterPortal.API).
+2023-08-10 13:01:52.672 +06:00  INF  Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Collections.Generic.List`1[[RecruiterPortal.DAL.SqlModels.ApplicantInfoModel, RecruiterPortal.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-08-10 13:01:52.732 +06:00  INF  Executed action ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API) in 4574.2394ms
+2023-08-10 13:01:52.734 +06:00  INF  Executed endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 13:01:52.734 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 78 - 200 - application/json;+charset=utf-8 6383.9127ms
+2023-08-10 13:01:56.286 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 13:01:56.288 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - -
+2023-08-10 13:01:56.291 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/details/41 - -
+2023-08-10 13:01:56.292 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:01:56.292 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:01:56.292 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - - - 204 - - 6.0599ms
+2023-08-10 13:01:56.292 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - - - 204 - - 3.9923ms
+2023-08-10 13:01:56.294 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - -
+2023-08-10 13:01:56.294 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 13:01:56.295 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:01:56.295 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:01:56.296 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:01:56.296 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/details/41 - - - 204 - - 4.4715ms
+2023-08-10 13:01:56.297 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/applicant-info/details/41 - -
+2023-08-10 13:01:56.297 +06:00  INF  Successfully validated the token.
+2023-08-10 13:01:56.297 +06:00  INF  Successfully validated the token.
+2023-08-10 13:01:56.297 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:01:56.297 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - - - 404 0 - 2.9570ms
+2023-08-10 13:01:56.297 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - - - 404 0 - 2.8756ms
+2023-08-10 13:01:56.298 +06:00  INF  Successfully validated the token.
+2023-08-10 13:01:56.298 +06:00  INF  Executing endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetEducationInfo (RecruiterPortal.API)'
+2023-08-10 13:01:56.301 +06:00  INF  Route matched with {action = "GetEducationInfo", controller = "ApplicantInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetEducationInfo(Int32) on controller ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController (RecruiterPortal.API).
+2023-08-10 13:01:56.852 +06:00  INF  Executing OkObjectResult, writing value of type 'System.String'.
+2023-08-10 13:01:56.852 +06:00  INF  Executed action ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetEducationInfo (RecruiterPortal.API) in 551.0281ms
+2023-08-10 13:01:56.852 +06:00  INF  Executed endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetEducationInfo (RecruiterPortal.API)'
+2023-08-10 13:01:56.852 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/applicant-info/details/41 - - - 200 - text/plain;+charset=utf-8 555.1804ms
+2023-08-10 13:02:06.193 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/user-license/get-all/41 - -
+2023-08-10 13:02:06.193 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:02:06.193 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/user-license/get-all/41 - - - 204 - - 0.3970ms
+2023-08-10 13:02:06.195 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/user-license/get-all/41 - -
+2023-08-10 13:02:06.199 +06:00  ERR  An unhandled exception has occurred while executing the request.Microsoft.AspNetCore.Routing.Matching.AmbiguousMatchException: The request matched multiple endpoints. Matches: 
+
+ApplicantPortalAPI.ResourceServer.Controllers.UserLicenseController.GetUserLicenseByUserID (RecruiterPortal.API)
+ApplicantPortalAPI.ResourceServer.Controllers.UserLicenseController.GetUserLicenseByFileType (RecruiterPortal.API)
+   at Microsoft.AspNetCore.Routing.Matching.DefaultEndpointSelector.ReportAmbiguity(CandidateState[] candidateState)
+   at Microsoft.AspNetCore.Routing.Matching.DefaultEndpointSelector.ProcessFinalCandidates(HttpContext httpContext, CandidateState[] candidateState)
+   at Microsoft.AspNetCore.Routing.Matching.DefaultEndpointSelector.Select(HttpContext httpContext, CandidateState[] candidateState)
+   at Microsoft.AspNetCore.Routing.Matching.DfaMatcher.MatchAsync(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+
+2023-08-10 13:02:06.237 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/user-license/get-all/41 - - - 500 - text/plain;+charset=utf-8 42.8738ms
+2023-08-10 13:02:09.914 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/emergency-info/get-emergency-info/41 - -
+2023-08-10 13:02:09.914 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:02:09.914 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/emergency-info/get-emergency-info/41 - - - 204 - - 0.3844ms
+2023-08-10 13:02:09.916 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/emergency-info/get-emergency-info/41 - -
+2023-08-10 13:02:09.919 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:02:09.919 +06:00  INF  Successfully validated the token.
+2023-08-10 13:02:09.920 +06:00  INF  Executing endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.EmergencyInfoController.GetEmergencyInfo (RecruiterPortal.API)'
+2023-08-10 13:02:10.018 +06:00  INF  Route matched with {action = "GetEmergencyInfo", controller = "EmergencyInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetEmergencyInfo(Int32) on controller ApplicantPortalAPI.ResourceServer.Controllers.EmergencyInfoController (RecruiterPortal.API).
+2023-08-10 13:02:10.426 +06:00  INF  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[RecruiterPortal.DAL.SqlModels.UserEmergencyInfo, RecruiterPortal.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2023-08-10 13:02:10.430 +06:00  INF  Executed action ApplicantPortalAPI.ResourceServer.Controllers.EmergencyInfoController.GetEmergencyInfo (RecruiterPortal.API) in 412.5337ms
+2023-08-10 13:02:10.430 +06:00  INF  Executed endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.EmergencyInfoController.GetEmergencyInfo (RecruiterPortal.API)'
+2023-08-10 13:02:10.430 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/emergency-info/get-emergency-info/41 - - - 200 - application/json;+charset=utf-8 514.5924ms
+2023-08-10 13:02:10.432 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/emergency-info/get-emergency-info/41 - -
+2023-08-10 13:02:10.432 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:02:10.432 +06:00  INF  Successfully validated the token.
+2023-08-10 13:02:10.432 +06:00  INF  Executing endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.EmergencyInfoController.GetEmergencyInfo (RecruiterPortal.API)'
+2023-08-10 13:02:10.432 +06:00  INF  Route matched with {action = "GetEmergencyInfo", controller = "EmergencyInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetEmergencyInfo(Int32) on controller ApplicantPortalAPI.ResourceServer.Controllers.EmergencyInfoController (RecruiterPortal.API).
+2023-08-10 13:02:10.460 +06:00  INF  Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[RecruiterPortal.DAL.SqlModels.UserEmergencyInfo, RecruiterPortal.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2023-08-10 13:02:10.460 +06:00  INF  Executed action ApplicantPortalAPI.ResourceServer.Controllers.EmergencyInfoController.GetEmergencyInfo (RecruiterPortal.API) in 27.8608ms
+2023-08-10 13:02:10.460 +06:00  INF  Executed endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.EmergencyInfoController.GetEmergencyInfo (RecruiterPortal.API)'
+2023-08-10 13:02:10.460 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/emergency-info/get-emergency-info/41 - - - 200 - application/json;+charset=utf-8 28.9299ms
+2023-08-10 13:02:24.141 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 13:02:24.142 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:02:24.142 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/agency/is-agency-owner - - - 204 - - 0.6028ms
+2023-08-10 13:02:24.142 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - -
+2023-08-10 13:02:24.142 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:02:24.142 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/user/get-current-user - - - 204 - - 0.1546ms
+2023-08-10 13:02:24.144 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - -
+2023-08-10 13:02:24.144 +06:00  INF  Request starting HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - -
+2023-08-10 13:02:24.144 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:02:24.144 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:02:24.145 +06:00  INF  Successfully validated the token.
+2023-08-10 13:02:24.145 +06:00  INF  Successfully validated the token.
+2023-08-10 13:02:24.145 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/agency/is-agency-owner - - - 404 0 - 1.1910ms
+2023-08-10 13:02:24.145 +06:00  INF  Request finished HTTP/1.1 GET http://localhost:6002/api/user/get-current-user - - - 404 0 - 0.9851ms
+2023-08-10 13:02:24.150 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - -
+2023-08-10 13:02:24.150 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:02:24.150 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - - - 204 - - 0.2680ms
+2023-08-10 13:02:24.151 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 78
+2023-08-10 13:02:24.151 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:02:24.152 +06:00  INF  Successfully validated the token.
+2023-08-10 13:02:24.152 +06:00  INF  Executing endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 13:02:24.152 +06:00  INF  Route matched with {action = "GetAllApplicant", controller = "ApplicantInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllApplicant(RecruiterPortal.DAL.Models.ApplicantSearchModel) on controller ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController (RecruiterPortal.API).
+2023-08-10 13:02:24.195 +06:00  INF  Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Collections.Generic.List`1[[RecruiterPortal.DAL.SqlModels.ApplicantInfoModel, RecruiterPortal.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-08-10 13:02:24.196 +06:00  INF  Executed action ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API) in 43.5753ms
+2023-08-10 13:02:24.196 +06:00  INF  Executed endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 13:02:24.196 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 78 - 200 - application/json;+charset=utf-8 44.4028ms
+2023-08-10 13:02:32.642 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - -
+2023-08-10 13:02:32.643 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:02:32.643 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - - - 204 - - 0.4119ms
+2023-08-10 13:02:32.644 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 82
+2023-08-10 13:02:32.644 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:02:32.645 +06:00  INF  Successfully validated the token.
+2023-08-10 13:02:32.645 +06:00  INF  Executing endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 13:02:32.645 +06:00  INF  Route matched with {action = "GetAllApplicant", controller = "ApplicantInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllApplicant(RecruiterPortal.DAL.Models.ApplicantSearchModel) on controller ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController (RecruiterPortal.API).
+2023-08-10 13:02:32.681 +06:00  INF  Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Collections.Generic.List`1[[RecruiterPortal.DAL.SqlModels.ApplicantInfoModel, RecruiterPortal.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-08-10 13:02:32.681 +06:00  INF  Executed action ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API) in 36.0517ms
+2023-08-10 13:02:32.681 +06:00  INF  Executed endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 13:02:32.681 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 82 - 200 - application/json;+charset=utf-8 37.1495ms
+2023-08-10 13:02:39.523 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - -
+2023-08-10 13:02:39.523 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:02:39.523 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - - - 204 - - 0.3351ms
+2023-08-10 13:02:39.524 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 82
+2023-08-10 13:02:39.524 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:02:39.525 +06:00  INF  Successfully validated the token.
+2023-08-10 13:02:39.525 +06:00  INF  Executing endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 13:02:39.525 +06:00  INF  Route matched with {action = "GetAllApplicant", controller = "ApplicantInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllApplicant(RecruiterPortal.DAL.Models.ApplicantSearchModel) on controller ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController (RecruiterPortal.API).
+2023-08-10 13:02:39.555 +06:00  INF  Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Collections.Generic.List`1[[RecruiterPortal.DAL.SqlModels.ApplicantInfoModel, RecruiterPortal.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-08-10 13:02:39.555 +06:00  INF  Executed action ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API) in 29.7933ms
+2023-08-10 13:02:39.555 +06:00  INF  Executed endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 13:02:39.555 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 82 - 200 - application/json;+charset=utf-8 31.0329ms
+2023-08-10 13:02:46.593 +06:00  INF  Request starting HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - -
+2023-08-10 13:02:46.593 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:02:46.594 +06:00  INF  Request finished HTTP/1.1 OPTIONS http://localhost:6002/api/applicant-info/get-all-applicant - - - 204 - - 0.2714ms
+2023-08-10 13:02:46.596 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 83
+2023-08-10 13:02:46.596 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:02:46.597 +06:00  INF  Successfully validated the token.
+2023-08-10 13:02:46.597 +06:00  INF  Executing endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 13:02:46.597 +06:00  INF  Route matched with {action = "GetAllApplicant", controller = "ApplicantInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllApplicant(RecruiterPortal.DAL.Models.ApplicantSearchModel) on controller ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController (RecruiterPortal.API).
+2023-08-10 13:02:46.600 +06:00  INF  Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Collections.Generic.List`1[[RecruiterPortal.DAL.SqlModels.ApplicantInfoModel, RecruiterPortal.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-08-10 13:02:46.600 +06:00  INF  Executed action ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API) in 2.9856ms
+2023-08-10 13:02:46.600 +06:00  INF  Executed endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 13:02:46.600 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 83 - 200 - application/json;+charset=utf-8 4.1244ms
+2023-08-10 13:02:51.271 +06:00  INF  Request starting HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 80
+2023-08-10 13:02:51.271 +06:00  INF  CORS policy execution successful.
+2023-08-10 13:02:51.272 +06:00  INF  Successfully validated the token.
+2023-08-10 13:02:51.272 +06:00  INF  Executing endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 13:02:51.272 +06:00  INF  Route matched with {action = "GetAllApplicant", controller = "ApplicantInfo"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllApplicant(RecruiterPortal.DAL.Models.ApplicantSearchModel) on controller ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController (RecruiterPortal.API).
+2023-08-10 13:02:51.275 +06:00  INF  Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Collections.Generic.List`1[[RecruiterPortal.DAL.SqlModels.ApplicantInfoModel, RecruiterPortal.DAL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=6.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2023-08-10 13:02:51.276 +06:00  INF  Executed action ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API) in 3.2811ms
+2023-08-10 13:02:51.276 +06:00  INF  Executed endpoint 'ApplicantPortalAPI.ResourceServer.Controllers.ApplicantInfoController.GetAllApplicant (RecruiterPortal.API)'
+2023-08-10 13:02:51.276 +06:00  INF  Request finished HTTP/1.1 POST http://localhost:6002/api/applicant-info/get-all-applicant application/json 80 - 200 - application/json;+charset=utf-8 4.5999ms

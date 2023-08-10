@@ -26,15 +26,19 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             try
             {
-                DataSet data = UserManager.GetAllUserByFilter(applicantSearchModel);
+               DataSet data = UserManager.GetAllUserByFilter(applicantSearchModel);
 
                 List<ApplicantInfoModel> appModelList = new List<ApplicantInfoModel>();
-
+                int applicantCount = 0;
 
                 if (data != null)
                 {
                     DataTable dataTable = data.Tables[1];
                     DataTable rowCountTable = data.Tables[0];
+                    if (rowCountTable != null && rowCountTable.Rows.Count > 0)
+                    {
+                        applicantCount = Convert.ToInt32(rowCountTable.Rows[0]["RowNumber"]);
+                    }
 
                     foreach (DataRow oRow in dataTable.Rows)
                     {
@@ -47,7 +51,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                         appModelList.Add(userReferenceModel);
                     }
                 }
-                return Ok(appModelList);
+                return Ok(new { applicants = appModelList, totalApplicants = applicantCount });
             }
             catch (Exception ex)
             {

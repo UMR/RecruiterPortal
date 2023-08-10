@@ -1,6 +1,6 @@
 ﻿USE [UMRRecruitmentApplicant]
 GO
-/****** Object:  StoredProcedure [dbo].[sp_SyncDataFromApplicantPortalBasic]    Script Date: 8/9/2023 6:27:21 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_GetAllApplicantByFilter]    Script Date: 8/10/2023 12:33:04 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -32,19 +32,20 @@ BEGIN
 
 SELECT COUNT(App.[UserID]) AS RowNumber FROM [UMRRecruitmentApplicant].[dbo].[User] As App
   WHERE App.AgencyId IN (SELECT AgencyID FROM [dbo].Recruiter WHERE UserID=@RecuriterId)
-    AND (@FirstName IS NULL OR ([First_Name] LIKE '%'+ @FirstName +'%'))
-	AND (@LastName IS NULL OR ([Last_Name] LIKE '%'+ @LastName +'%' ))
-	AND (@Email IS NULL OR ([Email] LIKE '%'+ @Email +'%' ))
-	AND (@IsVerified IS NULL OR ([IsVerified] =@IsVerified ))
+    AND ([First_Name] LIKE '%'+ @FirstName +'%')
+	AND ([Last_Name] LIKE '%'+ @LastName +'%' )
+	AND ([Email] LIKE '%'+ @Email +'%' )
+	AND ([IsVerified] =@IsVerified )
 
 
     -- Select for data row count
 
 SELECT * FROM [UMRRecruitmentApplicant].[dbo].[User] As App
   WHERE  App.AgencyId IN (SELECT AgencyID FROM [dbo].Recruiter WHERE UserID=@RecuriterId)
-	AND (@FirstName IS NULL OR (App.[First_Name] LIKE '%'+ @FirstName +'%'))
-	AND (@LastName IS NULL OR (App.[Last_Name] LIKE '%'+ @LastName +'%' ))
-	AND (@Email IS NULL OR (App.Email LIKE '%'+ @Email +'%' ))
+	AND (App.[First_Name] LIKE '%'+ @FirstName +'%')
+	AND (App.[Last_Name] LIKE '%'+ @LastName +'%' )
+	AND (App.Email LIKE '%'+ @Email +'%' )
+	AND ([IsVerified] =@IsVerified )
   ORDER BY App.CreatedDate,[Last_Name],[First_Name]
   OFFSET @Skip ROWS FETCH NEXT @Take ROWS ONLY
   
