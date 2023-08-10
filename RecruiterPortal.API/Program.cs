@@ -28,10 +28,9 @@ builder.Services.AddControllers(config =>
     config.Filters.Add(new AuthorizeFilter(new AuthorizationPolicyBuilder().
         RequireAuthenticatedUser().
         RequireClaim(builder.Configuration["IdentityServer:ClaimType"], builder.Configuration["IdentityServer:ClaimValue"]).Build()));
-});
-//    .AddJsonOptions(options => {
-//    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-//});
+}).AddJsonOptions(options => {
+         options.JsonSerializerOptions.PropertyNamingPolicy = null;
+     });
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
