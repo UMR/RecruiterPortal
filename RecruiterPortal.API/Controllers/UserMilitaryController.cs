@@ -35,12 +35,9 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     userMilitaryModel.RankAtDischarge = userMilitary.RankAtDischarge;
                     if (userMilitary.TypeOfDischarge != null)
                     {
-                        userMilitaryModel.DischargeType = Convert.ToInt32(userMilitary.TypeOfDischarge).ToString();
+                        userMilitaryModel.DischargeType = Convert.ToBoolean(userMilitary.TypeOfDischarge) ? 1 : 0;
                     }
-                    else
-                    {
-                        userMilitaryModel.DischargeType = string.Empty;
-                    }
+
                     userMilitaryModel.DisonourComment = userMilitary.DisonourComment;
                     userMilitaryModel.UserID = userMilitary.UserId;
                 }
@@ -51,7 +48,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             {
                 _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-            }            
+            }
         }
 
         [Route("save")]
@@ -83,7 +80,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     }
                     userMilitary.RankAtDischarge = userMilitaryModel.RankAtDischarge;
 
-                    if (!string.IsNullOrEmpty(userMilitaryModel.DischargeType))
+                    if (userMilitaryModel.DischargeType != null)
                     {
                         if (Convert.ToInt32(userMilitaryModel.DischargeType) == (int)EnumTypeOfDischarge.Honorable)
                         {
