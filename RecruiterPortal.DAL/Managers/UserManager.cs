@@ -471,7 +471,7 @@ namespace RecruiterPortalDAL.Managers
             expandoObject.Email = applicantSearchModel.Email;
             expandoObject.FirstName = applicantSearchModel.FirstName;
             expandoObject.LastName = applicantSearchModel.LastName;
-            expandoObject.RecruiterId = applicantSearchModel.RecruiterId;
+            expandoObject.CurrentUserId = applicantSearchModel.CurrentUserId;
             expandoObject.IsVerified = applicantSearchModel.IsVerified;
             expandoObject.take = applicantSearchModel.take;
             expandoObject.skip = applicantSearchModel.skip;

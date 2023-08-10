@@ -111,7 +111,7 @@ export class ViewByApplicantComponent implements OnInit {
             firstName: applicantFirstName,
             lastName: applicantLastName,
             email: applicantEmail,
-           /* recruiterId: "1",*/
+            CurrentUserId: 1,
             isVerified: true,
             take: this.take,
             skip: this.skip,
