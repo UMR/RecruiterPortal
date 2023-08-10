@@ -5,19 +5,19 @@ namespace RecruiterPortal.DAL.SqlModels;
 
 public partial class ViewLookUpZipCode
 {
-    public string SateCode { get; set; } = null!;
+    public string SateCode { get; set; }
 
-    public string StateName { get; set; } = null!;
+    public string StateName { get; set; }
 
-    public string ZipCode { get; set; } = null!;
+    public string ZipCode { get; set; }
 
-    public string City { get; set; } = null!;
+    public string City { get; set; }
 
-    public string StateAbbr { get; set; } = null!;
+    public string StateAbbr { get; set; }
 
-    public string County { get; set; } = null!;
+    public string County { get; set; }
 
     public double? Decommissioned { get; set; }
 
-    public string? Description { get; set; }
+    public string Description { get; set; }
 }

@@ -43,9 +43,17 @@ public partial class UmrrecruitmentApplicantContext : DbContext
 
     public virtual DbSet<NurseForm> NurseForms { get; set; }
 
+    public virtual DbSet<Pdftemplate> Pdftemplates { get; set; }
+
     public virtual DbSet<Position> Positions { get; set; }
 
     public virtual DbSet<Race> Races { get; set; }
+
+    public virtual DbSet<Recruiter> Recruiters { get; set; }
+
+    public virtual DbSet<RecruiterRole> RecruiterRoles { get; set; }
+
+    public virtual DbSet<Role> Roles { get; set; }
 
     public virtual DbSet<State> States { get; set; }
 
@@ -538,6 +546,19 @@ public partial class UmrrecruitmentApplicantContext : DbContext
                 .HasConstraintName("FK_NurseForm_UserID");
         });
 
+        modelBuilder.Entity<Pdftemplate>(entity =>
+        {
+            entity.HasKey(e => e.TermplateId);
+
+            entity.ToTable("PDFTemplates");
+
+            entity.Property(e => e.TermplateId).HasColumnName("TermplateID");
+            entity.Property(e => e.FileName)
+                .HasMaxLength(150)
+                .HasColumnName("FIleName");
+            entity.Property(e => e.FileTypeCode).HasMaxLength(50);
+        });
+
         modelBuilder.Entity<Position>(entity =>
         {
             entity.ToTable("Position");
@@ -563,6 +584,65 @@ public partial class UmrrecruitmentApplicantContext : DbContext
             entity.Property(e => e.RaceCode)
                 .HasMaxLength(30)
                 .IsUnicode(false);
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<Recruiter>(entity =>
+        {
+            entity.HasKey(e => e.UserId);
+
+            entity.ToTable("Recruiter");
+
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.AgencyId).HasColumnName("AgencyID");
+            entity.Property(e => e.ApplicantTypeId).HasColumnName("ApplicantTypeID");
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.Email)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.FirstName)
+                .IsRequired()
+                .HasMaxLength(50);
+            entity.Property(e => e.IsActive).HasDefaultValueSql("((1))");
+            entity.Property(e => e.LastName)
+                .IsRequired()
+                .HasMaxLength(50);
+            entity.Property(e => e.LoginId)
+                .IsRequired()
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Odapermission).HasColumnName("ODAPermission");
+            entity.Property(e => e.Password)
+                .IsRequired()
+                .HasMaxLength(200)
+                .IsUnicode(false);
+            entity.Property(e => e.Telephone)
+                .HasMaxLength(15)
+                .IsUnicode(false);
+            entity.Property(e => e.TimeOut).HasDefaultValueSql("((144000))");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+
+            entity.HasOne(d => d.Agency).WithMany(p => p.Recruiters).HasForeignKey(d => d.AgencyId);
+        });
+
+        modelBuilder.Entity<RecruiterRole>(entity =>
+        {
+            entity.HasNoKey();
+
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.RoleId).HasColumnName("RoleID");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
+        });
+
+        modelBuilder.Entity<Role>(entity =>
+        {
+            entity.Property(e => e.RoleId).HasColumnName("RoleID");
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.RoleName)
+                .IsRequired()
+                .HasMaxLength(100);
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
         });
 
@@ -846,7 +926,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
         {
             entity.HasKey(e => e.LicenseId).HasName("PK_License");
 
-            entity.ToTable("UserLicense", tb => tb.HasTrigger("Update_ChangeTracker_UserLicense"));
+            entity.ToTable("UserLicense");
 
             entity.Property(e => e.LicenseId).HasColumnName("LicenseID");
             entity.Property(e => e.CreatedDate)
@@ -877,7 +957,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
 
         modelBuilder.Entity<UserMilitary>(entity =>
         {
-            entity.ToTable("UserMilitary", tb => tb.HasTrigger("Update_ChangeTracker_UserMilitary"));
+            entity.ToTable("UserMilitary");
 
             entity.Property(e => e.UserMilitaryId).HasColumnName("UserMilitaryID");
             entity.Property(e => e.Branch).HasMaxLength(500);

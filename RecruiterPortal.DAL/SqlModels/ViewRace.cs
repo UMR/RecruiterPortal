@@ -5,5 +5,5 @@ namespace RecruiterPortal.DAL.SqlModels;
 
 public partial class ViewRace
 {
-    public string Race { get; set; } = null!;
+    public string Race { get; set; }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RecruiterPortal.DAL.SqlModels;
 
-public partial class ViewPdftemplate
+public partial class Pdftemplate
 {
     public long TermplateId { get; set; }
 

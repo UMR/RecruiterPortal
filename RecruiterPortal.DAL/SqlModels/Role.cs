@@ -3,17 +3,13 @@ using System.Collections.Generic;
 
 namespace RecruiterPortal.DAL.SqlModels;
 
-public partial class ViewState
+public partial class Role
 {
-    public int StateId { get; set; }
+    public int RoleId { get; set; }
 
-    public string SateCode { get; set; }
+    public string RoleName { get; set; }
 
-    public string StateName { get; set; }
-
-    public int CountryId { get; set; }
-
-    public string Description { get; set; }
+    public int? Rank { get; set; }
 
     public int? CreatedBy { get; set; }
 

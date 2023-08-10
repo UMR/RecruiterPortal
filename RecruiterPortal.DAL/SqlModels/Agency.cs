@@ -32,4 +32,6 @@ public partial class Agency
     public bool? IsActive { get; set; }
 
     public string AgencyLoginId { get; set; }
+
+    public virtual ICollection<Recruiter> Recruiters { get; set; } = new List<Recruiter>();
 }
