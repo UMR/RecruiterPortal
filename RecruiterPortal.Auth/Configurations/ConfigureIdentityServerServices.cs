@@ -1,6 +1,7 @@
 ﻿using IdentityServer4.Models;
 using Newtonsoft.Json;
 using RecruiterPortal.Auth.Extensions;
+using RecruiterPortalDAL.Managers;
 using System.Security.Cryptography.X509Certificates;
 
 namespace RecruiterPortal.Auth.Configurations
@@ -21,21 +22,31 @@ namespace RecruiterPortal.Auth.Configurations
 
         public static List<Client> GetClients(IConfiguration configuration)
         {
-            List<Client> clients = configuration.GetSection("IdentityServer:Clients").Get<List<Client>>();                        
+            List<Client> clients = configuration.GetSection("IdentityServer:Clients").Get<List<Client>>();
+            List<string> corsOriginsFromDb = new List<string>();
+            var agencies = AgencyManager.GetAllActiveAgency();
+            var httpProtocol = configuration.GetSection("HttpProtocol").Value;
+            var domain = configuration.GetSection("Domain").Value;
+
+            if (agencies != null && agencies.Count > 0) 
+            {
+                foreach (var agency in agencies)
+                {
+                    corsOriginsFromDb.Add($"{httpProtocol}{agency.Urlprefix}.{domain}");
+                }                
+            }
 
             foreach (var client in clients)
             {
                 List<string> allowedCorsOrigins = new List<string>();
-                allowedCorsOrigins.Add("http://umrtest.com");
+                allowedCorsOrigins.AddRange(corsOriginsFromDb);
 
                 foreach (var corsOrigin in client.AllowedCorsOrigins)
                 {
                     allowedCorsOrigins.Add(corsOrigin);
                 }
-
                 client.AllowedCorsOrigins = allowedCorsOrigins;
-            }
-            
+            }            
 
             return clients;
         }
