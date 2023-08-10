@@ -109,7 +109,7 @@ export class EditApplicantInfoComponent implements OnInit {
 
     onSubmit() {
         let applicantInfoModel = new EditApplicantInfoModel();
-        applicantInfoModel.ApplicantID = this.storageService.getApplicantId;
+        applicantInfoModel.UserId = this.storageService.getApplicantId;
         applicantInfoModel.LastName = this.editApplicantInfoFormGroup.get('lastName').value ? this.editApplicantInfoFormGroup.get('lastName').value.trim() : "";
         applicantInfoModel.FirstName = this.editApplicantInfoFormGroup.get('firstName').value ? this.editApplicantInfoFormGroup.get('firstName').value.trim() : "";
         applicantInfoModel.MiddleName = this.editApplicantInfoFormGroup.get('middleName').value ? this.editApplicantInfoFormGroup.get('middleName').value.trim() : "";

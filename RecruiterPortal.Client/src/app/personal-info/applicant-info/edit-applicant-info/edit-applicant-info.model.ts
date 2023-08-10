@@ -25,5 +25,5 @@ export class EditApplicantInfoModel {
   Gender: string;
   CountryOfBirth: string;
   CountryFromApplied: string;
-  ApplicantID: number;
+  UserId: number;
 }
