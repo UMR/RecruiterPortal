@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using RecruiterPortal.API.Configurations;
 using Serilog;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,8 @@ builder.Services.AddControllers(config =>
     config.Filters.Add(new AuthorizeFilter(new AuthorizationPolicyBuilder().
         RequireAuthenticatedUser().
         RequireClaim(builder.Configuration["IdentityServer:ClaimType"], builder.Configuration["IdentityServer:ClaimValue"]).Build()));
+}).AddJsonOptions(options => {
+    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
 });
 
 builder.Services.AddEndpointsApiExplorer();
