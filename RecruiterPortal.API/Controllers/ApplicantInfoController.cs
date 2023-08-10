@@ -62,7 +62,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
         [Route("details/{applicantId}")]
         [HttpGet]
-        public IActionResult GetEducationInfo(int applicantId)
+        public IActionResult GetApplicantInfoById(int applicantId)
         {
             try
             {
