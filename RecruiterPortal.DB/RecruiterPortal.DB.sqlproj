@@ -407,5 +407,6 @@
     <None Include="2023-08-09\02_SR_02_ALTER_SP_GET_AGENCY.sql" />
     <None Include="2023-08-09\03_AZ_01_CREATE_PROCEDURE_SP_Get_All_Active_Agency.sql" />
     <None Include="2023-08-09\04_AZ_02_GetRecruiterByLoginId.sql" />
+    <None Include="2023-08-09\05_AZ_03_ValidateRecruiter.sql" />
   </ItemGroup>
 </Project>
