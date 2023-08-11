@@ -1,43 +1,95 @@
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 
-  <ul class="list-inline mb-0">
-    <li class="list-inline-item">
-      <a class="navbar-brand" [routerLink]="['/view-by-applicant']">
-        <div class="row">
-          <div class="col pr-2">
-            <img src="assets/img/logo.svg" width="30" height="30" alt="">
-          </div>
-          <div class="col px-0 d-none d-md-block d-lg-block">
-            <h6>Recruiter Portal</h6>
-          </div>
-        </div>
-      </a>
-    </li>
-    <li class="list-inline-item d-md-none d-lg-none"  *ngIf="isVisibleToggleButton == 1">
-      <a href="" (click)="menuToggle($event)"><span id="menu-toggle" class="navbar-toggler-icon"></span></a>
-    </li>
-  </ul>
+    <ul class="list-inline mb-0 nav navbar-nav">
+        <li class="list-inline-item">
+            <a class="navbar-brand active" [routerLink]="['/view-by-applicant']">
+                <div class="row">
+                    <div class="col pr-2">
+                        <img src="assets/img/logo.svg" width="30" height="30" alt="">
+                    </div>
+                    <div class="col px-0 d-none d-md-block d-lg-block">
+                        <h6 style="padding-right: 0.5rem;">Recruiter Portal</h6>
+                    </div>
+                </div>
+            </a>
+        </li>
+        <li class="list-inline-item">
+            <a class="navbar-brand" [routerLink]="['/view-by-applicant']">
+                <div class="row">
+                    <div class="col pr-2">
+                        <h6>Dashboad</h6>
+                    </div>
+                </div>
+            </a>
+        </li>
+        <li class="list-inline-item">
+            <a class="navbar-brand" [routerLink]="['/view-by-applicant']">
+                <div class="row">
+                    <div class="col pr-2">
+                        <h6>Job Orders</h6>
+                    </div>
+                </div>
+            </a>
+        </li>
+        <li class="list-inline-item">
+            <a class="navbar-brand" [routerLink]="['/view-by-applicant']">
+                <div class="row">
+                    <div class="col pr-2">
+                        <h6>Communication Center</h6>
+                    </div>
+                </div>
+            </a>
+        </li>
+        <li class="list-inline-item">
+            <a class="navbar-brand" [routerLink]="['/view-by-applicant']">
+                <div class="row">
+                    <div class="col pr-2">
+                        <h6>Reports</h6>
+                    </div>
+                </div>
+            </a>
+        </li>
+        <li class="list-inline-item dropdown">
+            <a class="navbar-brand dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                <h6>Status <i class="fa fa-caret-down"></i> </h6>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#"> Lead</a></li>
+                <li><a class="dropdown-item" href="#"> Paper-screened </a></li>
+                <li><a class="dropdown-item" href="#"> Dial  </a></li>
+                <li><a class="dropdown-item" href="#"> Connect </a></li>
+                <li><a class="dropdown-item" href="#"> Phone-screened </a></li>
+                <li><a class="dropdown-item" href="#"> Send-out   </a></li>
+                <li><a class="dropdown-item" href="#"> Pending   </a></li>
+                <li><a class="dropdown-item" href="#"> Hired    </a></li>
+                <li><a class="dropdown-item" href="#"> Do Not Contact   </a></li>
+            </ul>
+        </li>
+        <li class="list-inline-item d-md-none d-lg-none" *ngIf="isVisibleToggleButton == 1">
+            <a href="" (click)="menuToggle($event)"><span id="menu-toggle" class="navbar-toggler-icon"></span></a>
+        </li>
+    </ul>
 
-  <div class="dropdown">
-    <img src="assets/img/user.svg" class="dropdown-toggle rounded-circle" width="30" height="30" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <div class="dropdown-menu dropdown-menu-right dropdown-user" aria-labelledby="dropdownMenuButton" style="padding:0px;">
-      <div class="media">
-        <!--<img src="assets/img/user.svg" class="rounded-circle" width="72" height="72" alt="...">-->
-        <div class="media-body">
-          <h5 class="mb-2 mt-3 user-name">{{username}}</h5>
-          <!--<h6><a [routerLink]="['/login']" (click)="logout()"><i class="fa fa-power-off mr-2"></i>Logout</a></h6>-->
-          <ul class="list-group">
-            <li class="list-group-item" [routerLink]="['/agency-profile']" *ngIf="isAgencyOwner"><a>Agency Profile</a></li>
-            <li class="list-group-item" [routerLink]="['/user-profile']"><a>User Profile</a></li>
-            <li class="list-group-item" [routerLink]="['/user-management']" *ngIf="isAgencyOwner"><a>Manage Users</a></li>
-            <li class="list-group-item" [routerLink]="['/change-password']"><a>Change Password</a></li>
-            <li class="list-group-item" [routerLink]="['/login']"><a  (click)="logout()"><i class="fa fa-power-off mr-2"></i>Logout</a></li>
-          </ul>
-        </div>        
-      </div>      
+    <div class="dropdown">
+        <img src="assets/img/user.svg" class="dropdown-toggle rounded-circle" width="30" height="30" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="dropdown-menu dropdown-menu-right dropdown-user" aria-labelledby="dropdownMenuButton" style="padding:0px;">
+            <div class="media">
+                <!--<img src="assets/img/user.svg" class="rounded-circle" width="72" height="72" alt="...">-->
+                <div class="media-body">
+                    <h5 class="mb-2 mt-3 user-name">{{username}}</h5>
+                    <!--<h6><a [routerLink]="['/login']" (click)="logout()"><i class="fa fa-power-off mr-2"></i>Logout</a></h6>-->
+                    <ul class="list-group">
+                        <li class="list-group-item" [routerLink]="['/agency-profile']" *ngIf="isAgencyOwner"><a>Agency Profile</a></li>
+                        <li class="list-group-item" [routerLink]="['/user-profile']"><a>User Profile</a></li>
+                        <li class="list-group-item" [routerLink]="['/user-management']" *ngIf="isAgencyOwner"><a>Manage Users</a></li>
+                        <li class="list-group-item" [routerLink]="['/change-password']"><a>Change Password</a></li>
+                        <li class="list-group-item" [routerLink]="['/login']"><a (click)="logout()"><i class="fa fa-power-off mr-2"></i>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 
 </nav>
 <!-- Navbar End -->
