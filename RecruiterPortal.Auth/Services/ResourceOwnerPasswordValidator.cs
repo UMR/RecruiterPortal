@@ -1,6 +1,7 @@
 ﻿using IdentityModel;
 using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Http.Extensions;
+using RecruiterPortal.DAL.Managers;
 using RecruiterPortal.DAL.SqlModels;
 using RecruiterPortalDAL.Managers;
 
@@ -17,15 +18,35 @@ namespace ApplicantPortalAPI.AuthorizationServer.Services
             _logger = logger;
         }
 
+        //public Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
+        //{
+        //    try
+        //    {
+        //        int agencyId = GetAgencyIdByUrl(_httpContextAccessor.HttpContext);
+        //        if (UserManager.ValidateUser(context.UserName, context.Password, agencyId))
+        //        {
+        //            var user = UserManager.GetUserByName(context.UserName);
+        //            context.Result = new GrantValidationResult(user.Email, OidcConstants.AuthenticationMethods.Password);
+        //            _logger.LogInformation($"Authentication Pass For User {context.UserName}");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError($"Something went wrong: {ex}");
+        //    }
+
+        //    return Task.FromResult(0);
+        //}
+
         public Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
         {
             try
-            {                
-                int agencyId = GetAgencyIdByUrl(_httpContextAccessor.HttpContext);
-                if (UserManager.ValidateUser(context.UserName, context.Password, agencyId))
+            {
+                long agencyId = GetAgencyIdByUrl(_httpContextAccessor.HttpContext);
+                if (RecruiterManager.ValidateRecruiter(context.UserName, context.Password, agencyId, false))
                 {
-                    var user = UserManager.GetUserByName(context.UserName);
-                    context.Result = new GrantValidationResult(user.Email, OidcConstants.AuthenticationMethods.Password);
+                    var recruiter = RecruiterManager.GetRecruiterByLoginid(context.UserName);
+                    context.Result = new GrantValidationResult(context.UserName, OidcConstants.AuthenticationMethods.Password);
                     _logger.LogInformation($"Authentication Pass For User {context.UserName}");
                 }
             }
