@@ -2,7 +2,7 @@
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using RecruiterPortal.Common;
-using RecruiterPortalDAL.Managers;
+using RecruiterPortal.DAL.Managers;
 using System.Dynamic;
 using System.Security.Claims;
 
@@ -22,18 +22,17 @@ namespace RecruiterPortal.Auth.Services
             try
             {
                 var claims = new ClaimsIdentity();
-                var user = UserManager.GetUserByName(context.Subject.GetSubjectId());
+                var recruiter = RecruiterManager.GetRecruiterByLoginid(context.Subject.GetSubjectId());
                 dynamic currentUserDynamic = new ExpandoObject();
 
-                if (user != null)
+                if (recruiter != null)
                 {
-                    currentUserDynamic.UserID = user.UserId;
-                    currentUserDynamic.First_Name = user.FirstName;
-                    currentUserDynamic.Middle_Name = user.MiddleName;
-                    currentUserDynamic.Last_Name = user.LastName;
-                    currentUserDynamic.Email = user.Email;
-                    currentUserDynamic.IsVerified = user.IsVerified;
-                    currentUserDynamic.CreatedDate = user.CreatedDate;
+                    currentUserDynamic.UserId = recruiter.UserId;
+                    currentUserDynamic.FirstName = recruiter.FirstName;                    
+                    currentUserDynamic.LastName = recruiter.LastName;
+                    currentUserDynamic.Email = recruiter.Email;
+                    currentUserDynamic.IsActive = recruiter.IsActive;
+                    currentUserDynamic.CreatedDate = recruiter.CreatedDate;
                 }
 
                 if (currentUserDynamic != null)
@@ -59,8 +58,8 @@ namespace RecruiterPortal.Auth.Services
         {
             try
             {
-                var user = UserManager.GetUserByName(context.Subject.GetSubjectId());
-                context.IsActive = user != null;
+                var recruiter = RecruiterManager.GetRecruiterByLoginid(context.Subject.GetSubjectId());
+                context.IsActive = recruiter != null;
             }
             catch (Exception ex)
             {
