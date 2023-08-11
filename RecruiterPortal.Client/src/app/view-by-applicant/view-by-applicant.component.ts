@@ -6,10 +6,6 @@ import { Table } from 'primeng/components/table/table';
 import { StorageService } from '../common/services/storage.service';
 import { ViewByApplicantService } from './view-by-applicant.service';
 
-export enum EnumApplicantStatus {
-    New = 1,
-    Existing = 2
-}
 
 @Component({
     selector: 'app-view-by-applicant',
@@ -50,7 +46,7 @@ export class ViewByApplicantComponent implements OnInit {
             { field: 'Email', header: 'Applicant Email' },
             { field: 'ApplicantMobilePhone', header: 'Applicant Mobile Phone' }
         ];
-        this.selectedApplicantStatus = EnumApplicantStatus.Existing;
+        this.selectedApplicantStatus = 1;
     }
 
     createViewByApplicantFormGroup() {
@@ -58,7 +54,7 @@ export class ViewByApplicantComponent implements OnInit {
             applicantFirstName: [''],
             applicantLastName: [''],
             applicantEmail: [''],
-            applicantStatus: [EnumApplicantStatus[EnumApplicantStatus.Existing]]
+            applicantStatus: this.selectedApplicantStatus
         });
     }
 
@@ -105,7 +101,7 @@ export class ViewByApplicantComponent implements OnInit {
         const applicantLastName = this.viewByApplicantFormGroup.controls.applicantLastName.value ? this.viewByApplicantFormGroup.controls.applicantLastName.value : '';
         const applicantEmail = this.viewByApplicantFormGroup.controls.applicantEmail.value ? this.viewByApplicantFormGroup.controls.applicantEmail.value : '';
         const applicantStatus = this.viewByApplicantFormGroup.controls.applicantStatus.value ? this.viewByApplicantFormGroup.controls.applicantStatus.value : '';
-        this.selectedApplicantStatus = (<any>EnumApplicantStatus)[applicantStatus];
+        this.selectedApplicantStatus = this.selectedApplicantStatus;
 
         const model = {
             firstName: applicantFirstName,
@@ -172,8 +168,8 @@ export class ViewByApplicantComponent implements OnInit {
 
     onClear() {
         this.viewByApplicantFormGroup.reset();
-        this.viewByApplicantFormGroup.controls.applicantStatus.setValue(EnumApplicantStatus[EnumApplicantStatus.Existing]);
-        this.selectedApplicantStatus = EnumApplicantStatus.Existing;
+        this.viewByApplicantFormGroup.controls.applicantStatus.setValue(this.selectedApplicantStatus);
+        this.selectedApplicantStatus = this.selectedApplicantStatus;
         this.applicantTable.reset();
         this.getApplicants();
     }
