@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using RecruiterPortal.DAL.SqlModels;
 using RecruiterPortalDAL.Managers;
 using System.ComponentModel;
@@ -12,11 +13,11 @@ namespace RecruiterPortal.API.Controllers
     [ApiController]
     public class CustomControllerBase : ControllerBase
     {
-        protected readonly ILogger<CustomControllerBase> _logger;
+        protected readonly ILogger<CustomControllerBase> _logger;       
 
         public CustomControllerBase(ILogger<CustomControllerBase> logger)
         {            
-            _logger = logger;
+            _logger = logger;           
         }
 
         [Route("user")]
@@ -53,13 +54,13 @@ namespace RecruiterPortal.API.Controllers
         internal User GetCurrentUser()
         {
             var caller = User as ClaimsPrincipal;
-            var currentUserClaim = "KKKKK"; //caller.FindFirst(ApplicantPortalAPI.AuthorizationServer.Constants.CurrentUserClaim);
+            var recruiterClaim = caller.FindFirst("RecruiterClaim");
             User currentUser = null;
-            //if (currentUserClaim != null && !string.IsNullOrEmpty(currentUserClaim.Value))
-            //{
-            //    dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(currentUserClaim.Value);                
-            //    currentUser = JsonConvert.DeserializeObject<User>(currentUserClaim.Value);
-            //}
+            if (recruiterClaim != null && !string.IsNullOrEmpty(recruiterClaim.Value))
+            {
+                dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(recruiterClaim.Value);
+                currentUser = JsonConvert.DeserializeObject<User>(recruiterClaim.Value);
+            }
             return currentUser;
         }
 
