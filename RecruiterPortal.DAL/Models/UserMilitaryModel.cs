@@ -12,7 +12,7 @@ namespace RecruiterPortalDAL.Models
         public string FromDate { get; set; }
         public string ToDate { get; set; }
         public string RankAtDischarge { get; set; }
-        public string DischargeType { get; set; }
+        public int? DischargeType { get; set; }
         public string DisonourComment { get; set; }
         public long UserID { get; set; }
     }
