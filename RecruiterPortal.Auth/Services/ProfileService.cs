@@ -11,10 +11,12 @@ namespace RecruiterPortal.Auth.Services
     public class ProfileService : IProfileService
     {
         private readonly ILogger<ProfileService> _logger;
+        private readonly IConfiguration _configuration;
 
-        public ProfileService(ILogger<ProfileService> logger)
+        public ProfileService(ILogger<ProfileService> logger, IConfiguration configuration)
         {
             _logger = logger;
+            _configuration = configuration;
         }
 
         public Task GetProfileDataAsync(ProfileDataRequestContext context)
@@ -40,8 +42,8 @@ namespace RecruiterPortal.Auth.Services
                     var currentUserJson = Newtonsoft.Json.JsonConvert.SerializeObject(currentUserDynamic);
                     claims.AddClaims(new[]
                     {
-                        new Claim(Constants.CurrentUserClaim, currentUserJson)
-                });
+                        new Claim(_configuration.GetSection("RecruiterClaim").Value, currentUserJson)
+                    });                
                 }
 
                 context.IssuedClaims = claims.Claims.ToList();

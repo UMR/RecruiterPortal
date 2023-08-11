@@ -16,27 +16,7 @@ namespace ApplicantPortalAPI.AuthorizationServer.Services
         {
             _httpContextAccessor = httpContextAccessor;
             _logger = logger;
-        }
-
-        //public Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
-        //{
-        //    try
-        //    {
-        //        int agencyId = GetAgencyIdByUrl(_httpContextAccessor.HttpContext);
-        //        if (UserManager.ValidateUser(context.UserName, context.Password, agencyId))
-        //        {
-        //            var user = UserManager.GetUserByName(context.UserName);
-        //            context.Result = new GrantValidationResult(user.Email, OidcConstants.AuthenticationMethods.Password);
-        //            _logger.LogInformation($"Authentication Pass For User {context.UserName}");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError($"Something went wrong: {ex}");
-        //    }
-
-        //    return Task.FromResult(0);
-        //}
+        }        
 
         public Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
         {
