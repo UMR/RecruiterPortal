@@ -14,38 +14,9 @@ namespace RecruiterPortalDAL.Managers
 
             try
             {
-                SqlParameter[] sqlParameters = new GenericRepository<UserPhysical>().GetSqlParametersFromStoredProcedure(spName);
-
-                foreach (SqlParameter sqlParameter in sqlParameters)
-                {
-
-                    if ("@p_" + nameof(userPhysical.Height).ToLower() == sqlParameter.ParameterName.ToLower())
-                    {
-                        sqlParameter.Value = userPhysical.Height;
-                    }
-                    else if ("@p_" + nameof(userPhysical.EyeColor) == sqlParameter.ParameterName)
-                    {
-                        sqlParameter.Value = userPhysical.EyeColor;
-                    }
-                    else if ("@p_" + nameof(userPhysical.Race) == sqlParameter.ParameterName)
-                    {
-                        sqlParameter.Value = userPhysical.Race;
-                    }
-                    else if ("@p_" + nameof(userPhysical.Weight) == sqlParameter.ParameterName)
-                    {
-                        sqlParameter.Value = userPhysical.Weight;
-                    }
-                    else if ("@p_" + nameof(userPhysical.HairColor) == sqlParameter.ParameterName)
-                    {
-                        sqlParameter.Value = userPhysical.HairColor;
-                    }
-                    else if ("@p_" + nameof(userPhysical.UserId) == sqlParameter.ParameterName)
-                    {
-                        sqlParameter.Value = userPhysical.UserId;
-                    }
-                }
-
-                List<SqlParameter> returnPrms = new GenericRepository<UserPhysical>().Insert(spName, sqlParameters);
+                GenericRepository<UserPhysical> physicalRepo = new GenericRepository<UserPhysical>();
+                SqlParameter[] sqlParameters = physicalRepo.GetSqlParametersFromObject(userPhysical, spName, "@p_");
+                physicalRepo.Insert(spName, sqlParameters);
 
                 return 1;
             }
@@ -61,41 +32,9 @@ namespace RecruiterPortalDAL.Managers
 
             try
             {
-                SqlParameter[] sqlParameters = new GenericRepository<UserPhysical>().GetSqlParametersFromStoredProcedure(spName);
-
-                foreach (SqlParameter sqlParameter in sqlParameters)
-                {
-                    if ("@p_" + nameof(userPhysical.UserPhysicalId).ToLower() == sqlParameter.ParameterName.ToLower())
-                    {
-                        sqlParameter.Value = userPhysical.UserPhysicalId;
-                    }
-                    else if ("@p_" + nameof(userPhysical.Height).ToLower() == sqlParameter.ParameterName.ToLower())
-                    {
-                        sqlParameter.Value = userPhysical.Height;
-                    }
-                    else if ("@p_" + nameof(userPhysical.EyeColor) == sqlParameter.ParameterName)
-                    {
-                        sqlParameter.Value = userPhysical.EyeColor;
-                    }
-                    else if ("@p_" + nameof(userPhysical.Race) == sqlParameter.ParameterName)
-                    {
-                        sqlParameter.Value = userPhysical.Race;
-                    }
-                    else if ("@p_" + nameof(userPhysical.Weight) == sqlParameter.ParameterName)
-                    {
-                        sqlParameter.Value = userPhysical.Weight;
-                    }
-                    else if ("@p_" + nameof(userPhysical.HairColor) == sqlParameter.ParameterName)
-                    {
-                        sqlParameter.Value = userPhysical.HairColor;
-                    }
-                    else if ("@p_" + nameof(userPhysical.UserId) == sqlParameter.ParameterName)
-                    {
-                        sqlParameter.Value = userPhysical.UserId;
-                    }
-                }
-
-                return new GenericRepository<UserPhysical>().Update(spName, sqlParameters);
+                GenericRepository<UserPhysical> physicalRepo = new GenericRepository<UserPhysical>();
+                SqlParameter[] sqlParameters = physicalRepo.GetSqlParametersFromObject(userPhysical, spName, "@p_");
+                return physicalRepo.Update(spName, sqlParameters);
 
             }
             catch (Exception ex)
