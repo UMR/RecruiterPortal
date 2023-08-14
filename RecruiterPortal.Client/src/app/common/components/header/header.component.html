@@ -3,7 +3,7 @@
 
     <ul class="list-inline mb-0 nav navbar-nav">
         <li class="list-inline-item">
-            <a class="navbar-brand active" [routerLink]="['/view-by-applicant']">
+            <a class="navbar-brand active" [routerLink]="['/dashboard']">
                 <div class="row">
                     <div class="col pr-2">
                         <img src="assets/img/logo.svg" width="30" height="30" alt="">
@@ -15,10 +15,19 @@
             </a>
         </li>
         <li class="list-inline-item">
+            <a class="navbar-brand" [routerLink]="['/dashboard']">
+                <div class="row">
+                    <div class="col pr-2">
+                        <h6>Dashboard</h6>
+                    </div>
+                </div>
+            </a>
+        </li>
+        <li class="list-inline-item">
             <a class="navbar-brand" [routerLink]="['/view-by-applicant']">
                 <div class="row">
                     <div class="col pr-2">
-                        <h6>Dashboad</h6>
+                        <h6>Applicant List</h6>
                     </div>
                 </div>
             </a>

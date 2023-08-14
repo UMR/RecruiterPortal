@@ -16,7 +16,7 @@ export class ApplicantAuthGuard implements CanActivate {
       return true;
     }
     if (this.authService.isLoggedIn && !applicantId) {      
-      this.router.navigate(['view-by-applicant']);
+      this.router.navigate(['dashboard']);
       return false;
     }
     if (state.url !== '' && state.url !== '/') {
