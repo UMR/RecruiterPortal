@@ -126,9 +126,9 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             try
             {
-                IEnumerable<Race> view_RaceList = RaceManager.GetRace();
+                IEnumerable<Race> races = RaceManager.GetRace();
                 List<string> raceList = new List<string>();
-                foreach (Race race in view_RaceList)
+                foreach (Race race in races)
                 {
                     raceList.Add(race.Race1);
                 }

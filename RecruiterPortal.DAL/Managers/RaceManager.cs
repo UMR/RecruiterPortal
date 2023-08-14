@@ -10,10 +10,10 @@ namespace RecruiterPortalDAL.Managers
             string spName = "sp_GetRace";
             try
             {
-                GenericRepository<Race> view_Race_Repo = new GenericRepository<Race>();
-                IEnumerable<Race> view_Race_List = view_Race_Repo.GetAll(spName); ;
+                GenericRepository<Race> raceRepo = new GenericRepository<Race>();
+                IEnumerable<Race> races = raceRepo.GetAll(spName); ;
 
-                return view_Race_List;
+                return races;
             }
             catch (Exception ex)
             {
