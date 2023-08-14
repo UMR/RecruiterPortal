@@ -151,6 +151,42 @@ namespace RecruiterPortalDAL.Managers
             }
             return userEmail;
         }
+        public static DataTable GetUserFirstName(string firstName)
+        {
+            string spName = "sp_GetUserFirstName";
+            dynamic expandoObject = new ExpandoObject();
+            expandoObject.FirstName = firstName;
+            GenericRepository<ExpandoObject> firstNameRepo = new GenericRepository<ExpandoObject>();
+            SqlParameter[] sqlParameters = firstNameRepo.GetSqlParametersFromExpandoObject(expandoObject, spName);
+            DataTable userFirstName = null;
+            try
+            {
+                userFirstName = firstNameRepo.LoadDataTable(spName, sqlParameters);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return userFirstName;
+        }
+        public static DataTable GetUserLastName(string lastName)
+        {
+            string spName = "sp_GetUserLastName";
+            dynamic expandoObject = new ExpandoObject();
+            expandoObject.LastName = lastName;
+            GenericRepository<ExpandoObject> emailRepo = new GenericRepository<ExpandoObject>();
+            SqlParameter[] sqlParameters = emailRepo.GetSqlParametersFromExpandoObject(expandoObject, spName);
+            DataTable userLastName = null;
+            try
+            {
+                userLastName = emailRepo.LoadDataTable(spName, sqlParameters);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return userLastName;
+        }
         public static void SaveUserDetails(long UserID, ApplicantInfoModel applicantInfoModel)
         {
             string spName = "sp_InsertUserDetails";

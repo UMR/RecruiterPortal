@@ -72,6 +72,34 @@ export class ViewByApplicantComponent implements OnInit {
             },
             () => { });
     }
+    onApplicantFirstNameSearch($event) {
+        this.viewByApplicantService.getApplicantFirstName($event.query).subscribe(response => {
+            if (response.status === 200) {
+                this.applicanFullnameResults = response.body;
+            }
+            else {
+                this.applicanFullnameResults = [];
+            }
+        },
+            err => {
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get applicant fullname', detail: '' });
+            },
+            () => { });
+    }
+    onApplicantLasrNameSearch($event) {
+        this.viewByApplicantService.getApplicantLasrName($event.query).subscribe(response => {
+            if (response.status === 200) {
+                this.applicanFullnameResults = response.body;
+            }
+            else {
+                this.applicanFullnameResults = [];
+            }
+        },
+            err => {
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get applicant fullname', detail: '' });
+            },
+            () => { });
+    }
 
     onApplicantEmailSearch($event) {
         this.viewByApplicantService.getApplicantEmail($event.query).subscribe(response => {

@@ -417,5 +417,7 @@
     <None Include="Special\03_HairColor_Insert_Data.sql" />
     <None Include="2023-08-14\03_AZ_03_ALTER_PROCEDURE_GetHairColor.sql" />
     <None Include="2023-08-14\04_SR_01_CREATE_sp_GetUserEmailByEmailSearch.sql" />
+    <None Include="2023-08-14\05_SR_02_CREATE_sp_GetUserFirstName.sql" />
+    <None Include="2023-08-14\06_SR_03_CREATE_sp_GetUserLastName.sql" />
   </ItemGroup>
 </Project>

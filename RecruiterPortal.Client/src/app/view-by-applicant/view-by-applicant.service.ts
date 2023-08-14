@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 export class ViewByApplicantService {
     private getViewByApplicantSearchURI: string = `${resourceServerUrl}/api/applicant-info/get-all-applicant`;
     private getApplicantFullnameURI: string = `${resourceServerUrl}/api/view-by-applicant/get-applicant-fullname`;
+    private getApplicantFirstNameURI: string = `${resourceServerUrl}/api/applicant-info/get-applicant-firstname`;
+    private getApplicantLastNameURI: string = `${resourceServerUrl}/api/applicant-info/get-applicant-lastname`;
     private getApplicantEmailURI: string = `${resourceServerUrl}/api/applicant-info/get-applicant-email`;
     private getImportSyncApplicantURI: string = `${resourceServerUrl}/api/applicant-info/importsync/`;
 
@@ -33,6 +35,23 @@ export class ViewByApplicantService {
 
     getApplicantFullName(name: string): Observable<HttpResponse<any>> {
         return this.httpClient.get(this.getApplicantFullnameURI,
+            {
+                params: new HttpParams()
+                    .set('name', name)
+                , observe: 'response'
+            });
+    }
+
+    getApplicantFirstName(name: string): Observable<HttpResponse<any>> {
+        return this.httpClient.get(this.getApplicantFirstNameURI,
+            {
+                params: new HttpParams()
+                    .set('name', name)
+                , observe: 'response'
+            });
+    }
+    getApplicantLasrName(name: string): Observable<HttpResponse<any>> {
+        return this.httpClient.get(this.getApplicantLastNameURI,
             {
                 params: new HttpParams()
                     .set('name', name)

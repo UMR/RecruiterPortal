@@ -80,6 +80,48 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        [Route("get-applicant-firstname")]
+        [HttpGet]
+        public IActionResult GetApplicantFirstName(string firstName)
+        {
+            try
+            {
+                DataTable dataTable = UserManager.GetUserFirstName(firstName);
+                List<string> userList = new List<string>();
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    userList.Add(dr["First_Name"].ToString());
+                }
+                return Ok(userList.ToArray());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [Route("get-applicant-lastname")]
+        [HttpGet]
+        public IActionResult GetApplicantLastName(string laseName)
+        {
+            try
+            {
+                DataTable dataTable = UserManager.GetUserLastName(laseName);
+                List<string> userList = new List<string>();
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    userList.Add(dr["Last_Name"].ToString());
+                }
+                return Ok(userList.ToArray());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         [Route("details/{applicantId}")]
         [HttpGet]
         public IActionResult GetApplicantInfoById(int applicantId)
