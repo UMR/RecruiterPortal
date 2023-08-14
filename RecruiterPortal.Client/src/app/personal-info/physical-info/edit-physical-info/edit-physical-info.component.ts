@@ -32,8 +32,7 @@ export class EditPhysicalInfoComponent implements OnInit {
             race: ['', [this.noWhitespaceValidator, Validators.maxLength(200)]],
             weight: ['', [Validators.maxLength(3), Validators.max(499), Validators.min(0)]],
             hairColor: ['', [this.noWhitespaceValidator, Validators.maxLength(200)]]
-        });
-        console.log("createPhysicalInfoForm");
+        });        
     }
 
     getUserPhysicalInfo() {
