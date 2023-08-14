@@ -167,9 +167,9 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             try
             {
-                IEnumerable<HairColor> view_Hair_color_List = HairColorManager.GetHairColor();
+                IEnumerable<HairColor> hairColors = HairColorManager.GetHairColor();
                 List<string> hairColorList = new List<string>();
-                foreach (HairColor race in view_Hair_color_List)
+                foreach (HairColor race in hairColors)
                 {
                     hairColorList.Add(race.HairColor1);
                 }
