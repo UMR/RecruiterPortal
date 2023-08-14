@@ -75,6 +75,7 @@ export class ViewByApplicantComponent implements OnInit {
 
     onApplicantEmailSearch($event) {
         this.viewByApplicantService.getApplicantEmail($event.query).subscribe(response => {
+            console.log(response.body);
             if (response.status === 200) {
                 this.applicantEmailResults = response.body;
             }

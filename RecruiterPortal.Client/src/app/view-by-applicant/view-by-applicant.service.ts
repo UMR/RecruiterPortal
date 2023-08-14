@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 export class ViewByApplicantService {
     private getViewByApplicantSearchURI: string = `${resourceServerUrl}/api/applicant-info/get-all-applicant`;
     private getApplicantFullnameURI: string = `${resourceServerUrl}/api/view-by-applicant/get-applicant-fullname`;
-    private getApplicantEmailURI: string = `${resourceServerUrl}/api/view-by-applicant/get-applicant-email`;
+    private getApplicantEmailURI: string = `${resourceServerUrl}/api/applicant-info/get-applicant-email`;
     private getImportSyncApplicantURI: string = `${resourceServerUrl}/api/applicant-info/importsync/`;
 
     constructor(private httpClient: HttpClient) {

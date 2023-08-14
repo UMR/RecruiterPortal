@@ -26,7 +26,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             try
             {
-               DataSet data = UserManager.GetAllUserByFilter(applicantSearchModel);
+                DataSet data = UserManager.GetAllUserByFilter(applicantSearchModel);
 
                 List<ApplicantInfoModel> appModelList = new List<ApplicantInfoModel>();
                 int applicantCount = 0;
@@ -60,6 +60,26 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
         }
 
+        [Route("get-applicant-email")]
+        [HttpGet]
+        public IActionResult GetApplicantEmail(string email)
+        {
+            try
+            {
+                DataTable dataTable = UserManager.GetUserEmail(email);
+                List<string> emailList = new List<string>();
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    emailList.Add(dr["Email"].ToString());
+                }
+                return Ok(emailList.ToArray());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
         [Route("details/{applicantId}")]
         [HttpGet]
         public IActionResult GetApplicantInfoById(int applicantId)
@@ -67,7 +87,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             try
             {
                 DataTable dt = UserManager.GetUserDetailsByID(applicantId);
-                string jsonString = JsonConvert.SerializeObject(dt,new JsonSerializerSettings { ContractResolver = null });
+                string jsonString = JsonConvert.SerializeObject(dt, new JsonSerializerSettings { ContractResolver = null });
 
                 return Ok(jsonString);
             }

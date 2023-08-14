@@ -133,6 +133,24 @@ namespace RecruiterPortalDAL.Managers
             }
             return appUser;
         }
+        public static DataTable GetUserEmail(string email)
+        {
+            string spName = "sp_GetUserEmailByEmailSearch";
+            dynamic expandoObject = new ExpandoObject();
+            expandoObject.Email = email;
+            GenericRepository<ExpandoObject> emailRepo = new GenericRepository<ExpandoObject>();
+            SqlParameter[] sqlParameters = emailRepo.GetSqlParametersFromExpandoObject(expandoObject, spName);
+            DataTable userEmail = null;
+            try
+            {
+                userEmail = emailRepo.LoadDataTable(spName, sqlParameters);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return userEmail;
+        }
         public static void SaveUserDetails(long UserID, ApplicantInfoModel applicantInfoModel)
         {
             string spName = "sp_InsertUserDetails";
