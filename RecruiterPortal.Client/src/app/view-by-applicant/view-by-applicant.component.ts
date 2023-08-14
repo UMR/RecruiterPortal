@@ -22,7 +22,7 @@ export class ViewByApplicantComponent implements OnInit {
     public applicants: any[] = [];
     public totalApplicants: number;
     public selectedApplicantId: number;
-    public selectedApplicantStatus: number;
+    public selectedApplicantStatus: string = "1";
     public cols: any[];
     public rows: number = 15;
     private take: number;
@@ -46,7 +46,7 @@ export class ViewByApplicantComponent implements OnInit {
             { field: 'Email', header: 'Applicant Email' },
             { field: 'ApplicantMobilePhone', header: 'Applicant Mobile Phone' }
         ];
-        this.selectedApplicantStatus = 1;
+        this.selectedApplicantStatus = "1";
     }
 
     createViewByApplicantFormGroup() {
@@ -89,8 +89,9 @@ export class ViewByApplicantComponent implements OnInit {
     }
 
     onApplicantStatusChange(event) {
+        console.log(event.target.value);
+        this.selectedApplicantStatus = event.target.value;
         this.getApplicants();
-        //this.selectedApplicantStatus = (<any>EnumApplicantStatus)[event.target.value];    
     }
 
     getApplicants() {
@@ -100,15 +101,15 @@ export class ViewByApplicantComponent implements OnInit {
         const applicantFirstName = this.viewByApplicantFormGroup.controls.applicantFirstName.value ? this.viewByApplicantFormGroup.controls.applicantFirstName.value : '';
         const applicantLastName = this.viewByApplicantFormGroup.controls.applicantLastName.value ? this.viewByApplicantFormGroup.controls.applicantLastName.value : '';
         const applicantEmail = this.viewByApplicantFormGroup.controls.applicantEmail.value ? this.viewByApplicantFormGroup.controls.applicantEmail.value : '';
-        const applicantStatus = this.viewByApplicantFormGroup.controls.applicantStatus.value ? this.viewByApplicantFormGroup.controls.applicantStatus.value : '';
-        this.selectedApplicantStatus = this.selectedApplicantStatus;
+        //const applicantStatus = this.viewByApplicantFormGroup.controls.applicantStatus.value ? this.viewByApplicantFormGroup.controls.applicantStatus.value : '';
+       
 
         const model = {
             firstName: applicantFirstName,
             lastName: applicantLastName,
             email: applicantEmail,
             CurrentUserId: 1,
-            isVerified: true,
+            isVerified: this.selectedApplicantStatus == "1" ? true : false,
             take: this.take,
             skip: this.skip,
         }

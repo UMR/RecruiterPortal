@@ -92,7 +92,7 @@
                                                     <th *ngFor="let col of columns">
                                                         {{col.header}}
                                                     </th>
-                                                    <th *ngIf="selectedApplicantStatus===2 && isSubmitted" class="text-center">View/Edit</th>
+                                                    <th *ngIf="selectedApplicantStatus==='1'" class="text-center">View/Edit</th>
                                                     <th *ngIf="selectedApplicantStatus===1 && isSubmitted" class="text-center">Import</th>
                                                     <th *ngIf="selectedApplicantStatus===2 && isSubmitted" class="text-center">Sync</th>
                                                 </tr>
@@ -102,7 +102,7 @@
                                                     <td *ngFor="let col of columns">
                                                         <span class="p-column-title" style="padding-bottom: 2px; font-weight: bold;">{{col.header}}:&nbsp;</span>{{rowData[col.field]}}
                                                     </td>
-                                                    <td class="text-center" *ngIf="selectedApplicantStatus===2 && isSubmitted"><a (click)="onEdit(applicant.UserId)"><i class="pi pi-pencil"></i></a></td>
+                                                    <td class="text-center" *ngIf="selectedApplicantStatus==='1'"><a (click)="onEdit(applicant.UserId)"><i class="pi pi-pencil"></i></a></td>
                                                     <td class="text-center" *ngIf="selectedApplicantStatus===1 && isSubmitted"><button type="button" (click)="onImportSync(applicant.ApplicantPortalUserId)" class="btn btn-primary btn-import-sync">Import</button> </td>
                                                     <td class="text-center" *ngIf="selectedApplicantStatus===2 && isSubmitted"><button [disabled]="selectedApplicantStatus===2 && !applicant.hasChanges" type="button" (click)="onImportSync(applicant.ApplicantPortalUserId)" class="btn btn-primary btn-import-sync">Sync</button> </td>
                                                 </tr>
