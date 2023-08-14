@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~8.2.13",
     "@angular/router": "~8.2.13",
     "angular2-cookie": "1.2.6",
+    "chart.js": "2.7.3",
     "primeng": "8.1.1",
     "primeicons": "2.0.0",
     "rxjs": "6.5.3",
