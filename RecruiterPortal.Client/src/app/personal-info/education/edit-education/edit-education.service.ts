@@ -8,48 +8,43 @@ import { StorageService } from '../../../common/services/storage.service';
 @Injectable()
 export class EditEducationService {
 
-  private educationInfoURI: string = `${resourceServerUrl}/api/education/info`;
-  private educationURI: string = `${resourceServerUrl}/api/education`;
-  private facilityTypeURI: string = `${resourceServerUrl}/api/education/facility_type`;
+    private educationInfoURI: string = `${resourceServerUrl}/api/education/info`;
+    private educationURI: string = `${resourceServerUrl}/api/education`;
+    private facilityTypeURI: string = `${resourceServerUrl}/api/education/facility_type`;
+    private educationUpdateURI: string = `${resourceServerUrl}/api/education/update`;
 
-  //private educationUpdateURI: string = `${resourceServerUrl}/api/education/update`;
+    constructor(private http: HttpClient, private storageService: StorageService) { }
 
-  constructor(private http: HttpClient, private storageService: StorageService) { }
+    getEducationInfo(): Observable<HttpResponse<any>> {
+        return this.http.get(this.educationInfoURI + "/" + this.storageService.getApplicantId, { observe: 'response' });
+    }
 
-  getEducationInfo(): Observable<HttpResponse<any>> {
-    return this.http.get(this.educationInfoURI + "/" + this.storageService.getApplicantId, { observe: 'response' });
-  }
+    insertEducation(empInfo: EditEducationModel): Observable<HttpResponse<any>> {
 
-  insertEducation(empInfo: EditEducationModel): Observable<HttpResponse<any>> {
+        return this.http.post(this.educationURI + "/save", empInfo, {
+            headers: new HttpHeaders()
+                .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
+        });
+    }
 
-    return this.http.post(this.educationURI + "/save", empInfo, {
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
-    });
-  }
+    getEduInfo(id: any): Observable<HttpResponse<any>> {
+        return this.http.get(this.educationURI + "/" + id, { observe: 'response' });
+    }
 
-  getEduInfo(id: any): Observable<HttpResponse<any>> {
+    updateEducation(eduModel: EditEducationModel): Observable<HttpResponse<any>> {
+        return this.http.put(this.educationUpdateURI, eduModel, {
+            headers: new HttpHeaders()
+                .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
+        });
+    }
 
-    //console.log(id);
-    return this.http.get(this.educationURI + "/" + id, { observe: 'response' });
-  }
+    deleteEmpInfo(id: any) {
+        return this.http.delete(this.educationURI + "/delete/" + id);
+    }
 
-  updateEducation(eduModel: EditEducationModel): Observable<HttpResponse<any>> {
-    return this.http.post(this.educationURI + "/save", eduModel, {
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
-    });
-  }
-
-  deleteEmpInfo(id: any) {
-    return this.http.delete(this.educationURI + "/delete/" + id);
-  }
-
-  getFacilityType(): Observable<HttpResponse<any>> {
-    //console.log('Type Before');
-    return this.http.get(this.facilityTypeURI, {
-      observe: 'response'
-    });
-    //console.log('Type After');
-  }
+    getFacilityType(): Observable<HttpResponse<any>> {
+        return this.http.get(this.facilityTypeURI, {
+            observe: 'response'
+        });
+    }
 }

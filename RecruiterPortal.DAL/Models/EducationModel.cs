@@ -12,8 +12,8 @@ namespace RecruiterPortalDAL.Models
         public string ToDate { get; set; }
         public bool IsGraduate { get; set; }
         public int InstitutionType { get; set; }
-
         public string InstitutionTypeName { get; set; }
+        public string InstitutionDescription { get; set; }
+        public long ApplicantID { get; set; }
     }
-        
 }

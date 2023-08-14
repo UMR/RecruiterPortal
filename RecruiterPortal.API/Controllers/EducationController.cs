@@ -48,14 +48,12 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
         }
 
+        [Route("update")]
         [HttpPut]
         public IActionResult UpdateEducationInfo(EducationModel educationModel)
         {
             try
-            {
-                var currentUser = base.GetCurrentUser();
-
-                //EducationManager.DeleteEducationByUserID(currentUser.UserID);
+            {   
                 UserEducation userEducation = new UserEducation();
                 userEducation.SchoolName = educationModel.SchoolName;
                 userEducation.SchoolAddress = educationModel.SchoolAddress;
@@ -79,10 +77,9 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 }
                 userEducation.InstitutionType = Convert.ToByte(educationModel.InstitutionType);
                 userEducation.UserEducationId = educationModel.EducationID;
-                userEducation.UserId = currentUser.UserId;
+                userEducation.UserId = educationModel.ApplicantID;
                 userEducation.IsGraduate = educationModel.IsGraduate;
                 EducationManager.UpdateEducation(userEducation);
-
                 return Ok();
             }
             catch (Exception ex)
@@ -165,12 +162,10 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 {
                     userEducation.ToDate = Convert.ToInt32(educationModel.ToDate);
                 }
-
                 userEducation.InstitutionType = Convert.ToByte(educationModel.InstitutionType);
                 userEducation.UserEducationId = educationModel.EducationID;
-                //userEducation.UserId = applicantId;
-                userEducation.IsGraduate = educationModel.IsGraduate;
-                //userEducation.UserId = applicantId;
+                userEducation.UserId = educationModel.ApplicantID;
+                userEducation.IsGraduate = educationModel.IsGraduate;                
                 EducationManager.InsertEducation(userEducation);
                 return Ok();
             }
