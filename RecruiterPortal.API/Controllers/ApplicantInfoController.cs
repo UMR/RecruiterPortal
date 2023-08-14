@@ -147,9 +147,9 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             try
             {
-                IEnumerable<EyeColor> view_Eye_color_List = EyeColorManager.GetEyeColor();
+                IEnumerable<EyeColor> eyeColors = EyeColorManager.GetEyeColor();
                 List<string> eyeColorList = new List<string>();
-                foreach (EyeColor eyeColor in view_Eye_color_List)
+                foreach (EyeColor eyeColor in eyeColors)
                 {
                     eyeColorList.Add(eyeColor.EyeColor1);
                 }

@@ -13,10 +13,10 @@ namespace RecruiterPortalDAL.Managers
             string spName = "sp_GetEyeColor";
             try
             {
-                GenericRepository<EyeColor> view_eye_color_Repo = new GenericRepository<EyeColor>();
-                IEnumerable<EyeColor> view_eye_color_List = view_eye_color_Repo.GetAll(spName); ;
+                GenericRepository<EyeColor> eyeColorRepo = new GenericRepository<EyeColor>();
+                IEnumerable<EyeColor> eyeColorList = eyeColorRepo.GetAll(spName); ;
 
-                return view_eye_color_List;
+                return eyeColorList;
             }
             catch (Exception ex)
             {
