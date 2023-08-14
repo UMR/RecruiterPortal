@@ -93,9 +93,9 @@ export class EditEducationComponent implements OnInit {
         educationModel.Degree = this.editEducationFormGroup.get('degree').value.trim();
         educationModel.IsGraduate = this.getBooleanValue(this.editEducationFormGroup.get('isSchoolGraduate').value.trim());
         educationModel.ApplicantID = this.storageService.getApplicantId;
-        educationModel.InstitutionType = +this.editEducationFormGroup.get('isntitutionType').value;
-        console.log(this.userEducationId);
+        educationModel.InstitutionType = +this.editEducationFormGroup.get('isntitutionType').value;        
         this.isLoading = true;
+
         if (this.userEducationId) {
             educationModel.EducationID = +this.userEducationId;
             this.editEducationService.updateEducation(educationModel)
