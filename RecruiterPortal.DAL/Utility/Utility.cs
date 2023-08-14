@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Reflection;
 
 namespace RecruiterPortal.DAL.Utility
 {
@@ -75,7 +76,35 @@ namespace RecruiterPortal.DAL.Utility
             [Description("USCIS Form")]
             USCIS = 25
         }
-        
+
+        public enum EnumEducationInstitutionType
+        {
+            [Description("High School")]
+            HighSchool = 0,
+            [Description("College")]
+            College = 1,
+            [Description("University")]
+            University = 2,
+            [Description("Other")]
+            Other = 3
+        }
+
+        public static string GetEnumDescription(Enum GenericEnum)
+        {
+            Type genericEnumType = GenericEnum.GetType();
+            MemberInfo[] memberInfo = genericEnumType.GetMember(GenericEnum.ToString());
+            if ((memberInfo != null && memberInfo.Length > 0))
+            {
+                var _Attribs = memberInfo[0].GetCustomAttributes(typeof(System.ComponentModel.DescriptionAttribute), false);
+                if ((_Attribs != null && _Attribs.Count() > 0))
+                {
+                    return ((System.ComponentModel.DescriptionAttribute)_Attribs.ElementAt(0)).Description;
+                }
+            }
+            return GenericEnum.ToString();
+        }
+
+
         public static string[] GetPhoneParts(string phoneNumber)
         {
             string[] phoneParts = new string[3];

@@ -82,7 +82,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 return StatusCode(500, ex.Message);
             }
 
-            return BadRequest();
+            return BadRequest(userPhysicalModel);
         }
     }
 }

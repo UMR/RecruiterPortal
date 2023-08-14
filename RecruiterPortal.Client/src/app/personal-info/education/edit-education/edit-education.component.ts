@@ -19,8 +19,7 @@ export class EditEducationComponent implements OnInit {
   public editEducationModel: EditEducationModel = new EditEducationModel();
   public editEducationFormGroup: FormGroup;
   public isLoading: boolean = false;
-  public submitted: boolean = false;
-  //public employmentModal: EmploymentModel[] = [];
+  public submitted: boolean = false;  
   private userEducationId;
   institutionTypes: any[];
   yearArray: any[] = [];
@@ -50,17 +49,16 @@ export class EditEducationComponent implements OnInit {
     this.activeRoute.paramMap.subscribe(params => {
       this.userEducationId = params.get('id');
       if (this.userEducationId != null) {
-
         forkJoin(
           [this.editEducationService.getFacilityType(),
           this.editEducationService.getEduInfo(this.userEducationId)]
         ).subscribe(data => {
-          //console.log(data);
+          console.log(data);
           //console.log(data[0].body);
           //console.log(data[1].body);
           if (data[0].status === 200) {
             this.institutionTypes = data[0].body;
-            //console.log(this.institutionTypes);
+            console.log(this.institutionTypes);
           }
           if (data[1].status === 200) {
             //console.log(data[1].body);

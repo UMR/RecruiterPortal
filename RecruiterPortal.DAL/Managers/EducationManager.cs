@@ -4,6 +4,7 @@ using RecruiterPortal.DAL.SqlModels;
 using System.Collections;
 using System.Data;
 using System.Dynamic;
+using static RecruiterPortal.DAL.Utility.Utility;
 
 namespace RecruiterPortalDAL.Managers
 {
@@ -137,6 +138,17 @@ namespace RecruiterPortalDAL.Managers
             }
             return educationDataTable;
         }
-        
+
+        public static SortedList GetAllInstitutionTypes()
+        {
+            SortedList codeType = new SortedList();
+            foreach (EnumEducationInstitutionType item in Enum.GetValues(typeof(EnumEducationInstitutionType)))
+            {
+                codeType.Add((int)item, GetEnumDescription(item));
+            }
+
+            return codeType;
+        }
+
     }
 }

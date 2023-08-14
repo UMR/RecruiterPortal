@@ -3,10 +3,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { EditPhysicalInfoService } from './edit-physical-info.service';
-import { CompareValidator } from '../../../common/directives/compare-validator.directive';
 import { StorageService } from '../../../common/services/storage.service';
-import { applicantId } from '../../../common/constants/auth-keys';
-
 
 @Component({
     selector: 'app-edit-physical-info',
@@ -20,9 +17,6 @@ export class EditPhysicalInfoComponent implements OnInit {
     public races: string[];
     public eyeColors: string[];
     public hairColors: string[];
-
-    //@ViewChild("trefDishonour", { static: false }) trefDishonour: ElementRef;
-
     constructor(private fb: FormBuilder, private editPhysicalInfoService: EditPhysicalInfoService, private router: Router,
         private messageService: MessageService, private service: StorageService) { }
 
@@ -43,22 +37,16 @@ export class EditPhysicalInfoComponent implements OnInit {
     }
 
     getUserPhysicalInfo() {
-        this.isLoading = true;
-        //fill race drop down first
+        this.isLoading = true;        
         this.getAllEyeColor();
         this.getAllHairColor();
         this.editPhysicalInfoService.getAllRaces()
             .subscribe(dataRaces => {
                 if (dataRaces.status === 200) {
                     this.races = dataRaces.body;
-                    //console.log(dataRaces.body);
-
-                    //fill physical info
                     this.editPhysicalInfoService.getPhysicalInfo(this.service.getApplicantId)
-                        .subscribe(data => {
-                            //console.log(data.status);
-                            if (data.status === 200) {
-                                //console.log(data.body);
+                        .subscribe(data => {                            
+                            if (data.status === 200) {                                
                                 this.userPhysical = data.body;
                                 this.fillUserPhysicalInfoService();
                             }
@@ -73,8 +61,6 @@ export class EditPhysicalInfoComponent implements OnInit {
                             () => {
                                 this.isLoading = false;
                             });
-                    //
-
                 }
                 else {
                     this.userPhysical = {};
@@ -98,9 +84,6 @@ export class EditPhysicalInfoComponent implements OnInit {
             },
                 err => {
                     this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get eye color', detail: '' });
-                },
-                () => {
-
                 });
     }
     getAllHairColor() {
@@ -112,9 +95,6 @@ export class EditPhysicalInfoComponent implements OnInit {
             },
                 err => {
                     this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get hair color', detail: '' });
-                },
-                () => {
-
                 });
     }
 

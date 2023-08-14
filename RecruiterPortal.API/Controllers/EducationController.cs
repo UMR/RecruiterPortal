@@ -185,41 +185,31 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         [HttpGet]
         public IActionResult GetFacilityTypes()
         {
-            //try
-            //{
-            //    SortedList institutionTypes = EducationManager.GetAllInstitutionTypes();
-
-            //    List<KeyValueModel> result = new List<KeyValueModel>();
-
-            //    if (institutionTypes != null)
-            //    {
-            //        for (int i = 0; i < institutionTypes.Count; i++)
-            //        {
-            //            KeyValueModel childNode = new KeyValueModel();
-            //            childNode.Value = institutionTypes.GetKey(i).ToString();
-            //            childNode.Text = institutionTypes.GetByIndex(i).ToString();
-            //            result.Add(childNode);
-            //        }
-            //        return Ok(result);
-            //    }
-            //    else
-            //    {
-            //        return Ok();
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    //Log.Write(ex);
-            //    //if (ApplicantPortalAPI.AuthorizationServer.Constants.IsProductionBuild)
-            //    //{
-            //    //    return StatusCode(500);
-            //    //}
-            //    //else
-            //    //{
-            //    return StatusCode(500, ex.Message);
-            //    //}
-            //}
-            return Ok();
+            try
+            {
+                SortedList institutionTypes = EducationManager.GetAllInstitutionTypes();
+                List<KeyValueModel> result = new List<KeyValueModel>();
+                if (institutionTypes != null)
+                {
+                    for (int i = 0; i < institutionTypes.Count; i++)
+                    {
+                        KeyValueModel childNode = new KeyValueModel();
+                        childNode.Value = institutionTypes.GetKey(i).ToString();
+                        childNode.Text = institutionTypes.GetByIndex(i).ToString();
+                        result.Add(childNode);
+                    }
+                    return Ok(result);
+                }
+                else
+                {
+                    return Ok();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }            
         }
     }
 }
