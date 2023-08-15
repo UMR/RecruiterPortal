@@ -63,6 +63,10 @@ const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
+        path: 'calendar', loadChildren: './calendar/calendar.module#CalendarModule'
+    },
+    {
+        canActivate: [AuthGuard],
         path: 'change-password', loadChildren: './change-password/change-password.module#ChangePasswordModule'
     },
     {
