@@ -55,6 +55,10 @@ const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
+        path: 'communication-center', loadChildren: './communication-center/communication-center.module#CommunicationCenterModule'
+    },
+    {
+        canActivate: [AuthGuard],
         path: 'change-password', loadChildren: './change-password/change-password.module#ChangePasswordModule'
     },
     {
