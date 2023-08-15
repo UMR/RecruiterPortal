@@ -5,7 +5,7 @@ namespace RecruiterPortal.DAL.Managers
 {
     public class InstitutionManager
     {
-        public static IEnumerable<Institution> GetInstitutions(string institutionName)
+        public static IEnumerable<Institution> GetInstitutions()
         {
             string spName = "sp_GetInstitution";
             try

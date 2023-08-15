@@ -5,20 +5,30 @@ using RecruiterPortal.DAL.SqlModels;
 
 namespace RecruiterPortal.API.Controllers
 {
-    public class EmploymentController: CustomControllerBase
+    [Route("api/employment")]
+    [ApiController]
+    public class EmploymentController : CustomControllerBase
     {
         public EmploymentController(ILogger<EducationController> logger) : base(logger)
         {
-        }              
-        
+        }
 
-        [Route("institute/{text}")]
+
+        [Route("institute")]
         [HttpGet]
         public IActionResult GetInstituteByText(string text)
         {
             try
             {
-                IEnumerable<Institution> institutions = InstitutionManager.GetInstitutions(text);
+                IEnumerable<Institution> institutions = InstitutionManager.GetInstitutions();                
+                
+                if (!string.IsNullOrEmpty(text)) 
+                {
+                    var filteredInstitutions = institutions.Where(i => i.InstituteName.Contains(text));
+                    var count = filteredInstitutions.Count();
+                    return Ok(filteredInstitutions);
+                }
+                
                 return Ok(institutions);
             }
             catch (Exception ex)

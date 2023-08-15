@@ -1,175 +1,166 @@
 <div class="tab-pane" id="v-pills-previous-employment" role="tabpanel" aria-labelledby="v-pills-previous-employment-tab">
-  <div class="card portal-card">
-    <form (ngSubmit)="onSubmit()" [formGroup]="empForm">
-      <div class="card-body px-3 py-3">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="companyName" class="form-label">Company</label>
-              <p-autoComplete formControlName="companyName" [suggestions]="institutionResults" class="form-control"
-                              (completeMethod)="onInstitutiionSearch($event)" field="Text" required autocomplete="off"
-                              forceSelection="true" (onSelect)="onInstitutiionSelect($event)" [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }" [dropdown]="true">
-                <ng-template let-institute pTemplate="item">
-                  <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{institute.Text}}</div>
-                  </div>
-                </ng-template>
-              </p-autoComplete>
-              <!--<input id="company" name="company" type="text" class="form-control" formControlName="companyName" trimmed required
-              autocomplete="off" autofocus maxlength="500" [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }">-->
-              <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
-                <div *ngIf="f.companyName.errors.required">Company Name required</div>
-              </div>
-              <input type="hidden" id="instituteId" name="instituteId" formControlName="instituteId">
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="jobTItle" class="form-label">Job Title</label>
-              <p-autoComplete formControlName="jobTItle" [suggestions]="positionResults" class="form-control"
-                              (completeMethod)="onPositionSearch($event)" field="Text" required autocomplete="off"
-                              forceSelection="true" (onSelect)="onPositionSelect($event)" [ngClass]="{ 'is-invalid': submitted && f.jobTItle.errors }" [dropdown]="true">
-                <ng-template let-position pTemplate="item">
-                  <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{position.Text}}</div>
-                  </div>
-                </ng-template>
-              </p-autoComplete>
-              <!--input id="job-title" name="job-title" type="text" class="form-control" formControlName="jobTItle" trimmed required
-              autocomplete="off" autofocus maxlength="500" [ngClass]="{ 'is-invalid': submitted && f.jobTItle.errors }">-->
-              <div *ngIf="submitted && f.jobTItle.errors" class="invalid-feedback">
-                <div *ngIf="f.jobTItle.errors.required">Job TItle required</div>
-              </div>
-              <input type="hidden" id="positionId" name="positionId" formControlName="positionId">
-            </div>
-            <!--<div class="form-group">
-              <label for="address" class="form-label">Address</label>
-              <input id="address" name="address" type="text" class="form-control" formControlName="companyAddress" trimmed
-                     autocomplete="off" autofocus maxlength="500" [ngClass]="{ 'is-invalid': submitted && f.companyAddress.errors }">
-            </div>-->
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="supervisor" class="form-label">Supervisor</label>
-              <input id="supervisor" name="supervisor" type="text" formControlName="supervisor" trimmed
-                     class="form-control" autocomplete="off" autofocus maxlength="250" [ngClass]="{ 'is-invalid': submitted && f.supervisor.errors }">
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label for="phone" class="form-label">Phone</label>
-              <input id="phone" name="phone" type="tel" class="form-control" formControlName="companyPhone" maxlength="25" trimmed
-                     autocomplete="off" autofocus [ngClass]="{ 'is-invalid': submitted && f.companyPhone.errors }" E164PhoneNumber="true">
-              <div *ngIf="submitted && f.companyPhone.errors" class="invalid-feedback">
-                <div *ngIf="f.companyPhone.errors.required">Company Phone required</div>
-              </div>
-              <input type="hidden" id="institutePhoneId" name="institutePhoneId" formControlName="institutePhoneId">
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label for="Starting-salary" class="form-label">
-                Salary
-              </label>
-              <input id="Starting-salary" name="Starting-salary" type="text" formControlName="startingSalary" trimmed OnlyNumber="true" style="text-align:right"
-                     class="form-control" autocomplete="off" autofocus maxlength="200" [ngClass]="{ 'is-invalid': submitted && f.startingSalary.errors }">
-            </div>
-          </div>
-        </div>
-        <!--<div class="row">
-          <div class="col-md-6">
+    <div class="card portal-card">
+        <form (ngSubmit)="onSubmit()" [formGroup]="empForm">
+            <div class="card-body px-3 py-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="companyName" class="form-label">Company</label>
+                            <p-autoComplete formControlName="companyName" [suggestions]="institutionResults" class="form-control"
+                                            (completeMethod)="onInstitutiionSearch($event)" field="Text" required autocomplete="off"
+                                            forceSelection="true" (onSelect)="onInstitutiionSelect($event)" [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }" [dropdown]="true">
+                                <ng-template let-institute pTemplate="item">
+                                    <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                                        <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{institute.InstituteName}}</div>
+                                    </div>
+                                </ng-template>
+                            </p-autoComplete>
+                            <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
+                                <div *ngIf="f.companyName.errors.required">Company Name required</div>
+                            </div>
+                            <input type="hidden" id="instituteId" name="instituteId" formControlName="instituteId">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="jobTItle" class="form-label">Job Title</label>
+                            <p-autoComplete formControlName="jobTItle" [suggestions]="positionResults" class="form-control"
+                                            (completeMethod)="onPositionSearch($event)" field="Text" required autocomplete="off"
+                                            forceSelection="true" (onSelect)="onPositionSelect($event)" [ngClass]="{ 'is-invalid': submitted && f.jobTItle.errors }" [dropdown]="true">
+                                <ng-template let-position pTemplate="item">
+                                    <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                                        <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{position.Text}}</div>
+                                    </div>
+                                </ng-template>
+                            </p-autoComplete>
+                            <div *ngIf="submitted && f.jobTItle.errors" class="invalid-feedback">
+                                <div *ngIf="f.jobTItle.errors.required">Job TItle required</div>
+                            </div>
+                            <input type="hidden" id="positionId" name="positionId" formControlName="positionId">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="supervisor" class="form-label">Supervisor</label>
+                            <input id="supervisor" name="supervisor" type="text" formControlName="supervisor" trimmed
+                                   class="form-control" autocomplete="off" autofocus maxlength="250" [ngClass]="{ 'is-invalid': submitted && f.supervisor.errors }">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input id="phone" name="phone" type="tel" class="form-control" formControlName="companyPhone" maxlength="25" trimmed
+                                   autocomplete="off" autofocus [ngClass]="{ 'is-invalid': submitted && f.companyPhone.errors }" E164PhoneNumber="true">
+                            <div *ngIf="submitted && f.companyPhone.errors" class="invalid-feedback">
+                                <div *ngIf="f.companyPhone.errors.required">Company Phone required</div>
+                            </div>
+                            <input type="hidden" id="institutePhoneId" name="institutePhoneId" formControlName="institutePhoneId">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="Starting-salary" class="form-label">
+                                Salary
+                            </label>
+                            <input id="Starting-salary" name="Starting-salary" type="text" formControlName="startingSalary" trimmed OnlyNumber="true" style="text-align:right"
+                                   class="form-control" autocomplete="off" autofocus maxlength="200" [ngClass]="{ 'is-invalid': submitted && f.startingSalary.errors }">
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="row">
+                  <div class="col-md-6">
 
-          </div>
-          <div class="col-md-3">
+                  </div>
+                  <div class="col-md-3">
 
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label for="ending-salary" class="form-label">Ending Salary</label>
-              <input id="ending-salary" name="ending-salary" type="text" formControlName="endingSalary" trimmed OnlyNumber="true"
-                     class="form-control" autocomplete="off" autofocus maxlength="200" [ngClass]="{ 'is-invalid': submitted && f.endingSalary.errors }">
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="ending-salary" class="form-label">Ending Salary</label>
+                      <input id="ending-salary" name="ending-salary" type="text" formControlName="endingSalary" trimmed OnlyNumber="true"
+                             class="form-control" autocomplete="off" autofocus maxlength="200" [ngClass]="{ 'is-invalid': submitted && f.endingSalary.errors }">
+                    </div>
+                  </div>
+                </div>-->
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="responsibilities" class="form-label">Responsibilities</label>
+                            <input id="responsibilities" name="responsibilities" type="text" class="form-control" autocomplete="off" trimmed
+                                   formControlName="responisiblities" [ngClass]="{ 'is-invalid': submitted && f.responisiblities.errors }">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="form" class="form-label">From</label>
+                            <p-calendar id="fromDate" name="fromDate" placeholder="MM-DD-YYYY"
+                                        formControlName="fromDate"
+                                        tabindex="2"
+                                        dateFormat="mm-dd-yy"
+                                        [monthNavigator]="true"
+                                        [yearNavigator]="true"
+                                        yearRange="1900:2030"
+                                        [showIcon]="true"
+                                        compare="toDate" reverse="true" compare-operator="<">
+                            </p-calendar>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="to" class="form-label">To</label>
+                            <p-calendar id="toDate" name="toDate" placeholder="MM-DD-YYYY"
+                                        formControlName="toDate"
+                                        tabindex="3"
+                                        dateFormat="mm-dd-yy"
+                                        [monthNavigator]="true"
+                                        [yearNavigator]="true"
+                                        yearRange="1900:2030"
+                                        [showIcon]="true" compare="fromDate" reverse="true" compare-operator=">">
+                            </p-calendar>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="reason-leaving" class="form-label">Reason for Leaving</label>
+                            <input id="reason-leaving" name="reason-leaving" type="text" class="form-control" autocomplete="off" formControlName="leaveReason" maxlength="500" trimmed>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="portal-card-list mb-0">
+                            <p><strong>May we contact your previous supervisor for a reference?</strong><span class="required"> *required</span></p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="supervisor-yes" name="canContactThisEmployer" class="custom-control-input" value="YES" formControlName="canContactThisEmployer">
+                                <label for="supervisor-yes" class="custom-control-label text-success">YES</label>
+                            </div>
+                            <div class="list-inline-item custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="supervisor-no" name="canContactThisEmployer" class="custom-control-input" value="NO" formControlName="canContactThisEmployer">
+                                <label for="supervisor-no" class="custom-control-label text-danger">NO</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>-->
-        <div class="row">
-          <div class="col">
-            <div class="form-group">
-              <label for="responsibilities" class="form-label">Responsibilities</label>
-              <input id="responsibilities" name="responsibilities" type="text" class="form-control" autocomplete="off" trimmed
-                     formControlName="responisiblities" [ngClass]="{ 'is-invalid': submitted && f.responisiblities.errors }">
+            <div class="card-footer">
+                <ul class="list-inline mb-0 d-flex justify-content-between">
+                    <li class="list-inline-item">
+                        <a [routerLink]="['/personal-info/employment']" routerLinkActive="active" class="btn btn-primary btn-portal-border">Back</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <button type="button" (click)="onClear()" class="btn btn-primary btn-portal-border">Clear</button>
+                    </li>
+                    <li class="list-inline-item">
+                        <button type="submit" class="btn btn-primary btn-portal" [disabled]="!empForm.valid">Save</button>
+                    </li>
+                </ul>
             </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-3">
-            <div class="form-group">
-              <label for="form" class="form-label">From</label>
-              <p-calendar id="fromDate" name="fromDate" placeholder="MM-DD-YYYY"
-                          formControlName="fromDate"
-                          tabindex="2"
-                          dateFormat="mm-dd-yy"
-                          [monthNavigator]="true"
-                          [yearNavigator]="true"
-                          yearRange="1900:2030"
-                          [showIcon]="true"
-                          compare="toDate" reverse="true" compare-operator="<">
-              </p-calendar>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label for="to" class="form-label">To</label>
-              <p-calendar id="toDate" name="toDate" placeholder="MM-DD-YYYY"
-                          formControlName="toDate"
-                          tabindex="3"
-                          dateFormat="mm-dd-yy"
-                          [monthNavigator]="true"
-                          [yearNavigator]="true"
-                          yearRange="1900:2030"
-                          [showIcon]="true" compare="fromDate" reverse="true" compare-operator=">">
-              </p-calendar>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="reason-leaving" class="form-label">Reason for Leaving</label>
-              <input id="reason-leaving" name="reason-leaving" type="text" class="form-control" autocomplete="off" formControlName="leaveReason" maxlength="500" trimmed>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="portal-card-list mb-0">
-              <p><strong>May we contact your previous supervisor for a reference?</strong><span class="required"> *required</span></p>
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="supervisor-yes" name="canContactThisEmployer" class="custom-control-input" value="YES" formControlName="canContactThisEmployer">
-                <label for="supervisor-yes" class="custom-control-label text-success">YES</label>
-              </div>
-              <div class="list-inline-item custom-control custom-radio custom-control-inline">
-                <input type="radio" id="supervisor-no" name="canContactThisEmployer" class="custom-control-input" value="NO" formControlName="canContactThisEmployer">
-                <label for="supervisor-no" class="custom-control-label text-danger">NO</label>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer">
-        <ul class="list-inline mb-0 d-flex justify-content-between">
-          <li class="list-inline-item">
-            <a [routerLink]="['/personal-info/employment']" routerLinkActive="active" class="btn btn-primary btn-portal-border">Back</a>
-          </li>
-          <li class="list-inline-item">
-            <button type="button" (click)="onClear()" class="btn btn-primary btn-portal-border">Clear</button>
-          </li>
-          <li class="list-inline-item">
-            <button type="submit" class="btn btn-primary btn-portal" [disabled]="!empForm.valid">Save</button>
-          </li>
-        </ul>
-      </div>
-    </form>
-  </div>
+        </form>
+    </div>
 </div>
 <p-toast key="toastKey1"></p-toast>
 

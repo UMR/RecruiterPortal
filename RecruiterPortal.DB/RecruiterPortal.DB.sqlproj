@@ -423,5 +423,6 @@
     <None Include="2023-08-15\01_AZ_01_CREATE_TABLE_UserWorkHistory.sql" />
     <None Include="2023-08-15\02_AZ_02_CREATE_TABLE_Institution.sql" />
     <None Include="Special\04_AZ_04_Institution_Insert_Data_.sql" />
+    <None Include="2023-08-15\03_AZ_03_ALTER_PROCEDURE_GetInstitution.sql" />
   </ItemGroup>
 </Project>
