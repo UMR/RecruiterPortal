@@ -19,25 +19,25 @@ const routes: Routes = [
         children: [
             //{ path: '', redirectTo: "view-by-applicant", pathMatch: 'full' },
             //{ path: '', redirectTo: "personal-info", pathMatch: 'full' },      
-            { path: 'personal-info', loadChildren: './personal-info/personal-info.module#PersonalInfoModule' },
+            { path: 'personal-info', loadChildren: './applicant-details/personal-info/personal-info.module#PersonalInfoModule' },
             /*{ path: 'change-password', loadChildren: './change-password/change-password.module#ChangePasswordModule' },*/
-            //{ path: 'progress-tracking', loadChildren: './progress-tracking/progress-tracking.module#ProgressTrackingModule' },
-            /*{ path: 'upload-requirements', loadChildren: './upload-file/upload-file.module#UploadFileModule' },*/
-            //{ path: 'download-file', loadChildren: './download-file/download-file.module#DownloadFileModule' },
-            { path: 'emergency-info', loadChildren: './emergency-info/emergency-info.module#EmergencyInfoModule' },
-            { path: 'identification-info', loadChildren: './identification-info/identification-info.module#IdentificationInfoModule' },
-            /*{ path: 'license-certificate', loadChildren: './license-certificate/license-certificate.module#LicenseCertificateModule' },*/
-            //{ path: 'primary', loadChildren: './emergency-info/primary/primary.module#PrimaryModule' },
-            //{ path: 'secondary', loadChildren: './emergency-info/secondary/secondary.module#SecondaryModule' }
-            { path: 'w9-form-info', loadChildren: './w9-form/w9-form-info.module#W9FormInfoModule' },
-            { path: 'nurse-form', loadChildren: './nurse-form/nurse-form.module#NurseFormModule' },
-            { path: 'cbc-form-info', loadChildren: './cbc-form-info/cbc-form-info.module#CBCFormInfoModule' },
-            { path: 'uscis-info', loadChildren: './uscis-info/uscis-info.module#UscisInfoModule' },
-            { path: 'agreement-form-info', loadChildren: './agreement-form/agreement-form-info.module#AgreementFormInfoModule' },
-            { path: 'influenza-vaccination', loadChildren: './influenza-vaccination/influenza-vaccination.module#InfluenzaVaccinationModule' },
-            { path: 'terms-conditions', loadChildren: './terms-conditions/terms-conditions.module#TermsConditionsModule' },
-            { path: 'hepab-hippa-info', loadChildren: './hepab-hippa-info/hepab-hippa-info.module#HepabHippaInfoModule' },
-            /* { path: 'disclaimer', loadChildren: './personal-info/disclaimer/disclaimer.module#DisclaimerModule' }*/
+            //{ path: 'progress-tracking', loadChildren: './applicant-details/progress-tracking/progress-tracking.module#ProgressTrackingModule' },
+            /*{ path: 'upload-requirements', loadChildren: './applicant-details/upload-file/upload-file.module#UploadFileModule' },*/
+            //{ path: 'download-file', loadChildren: './applicant-details/download-file/download-file.module#DownloadFileModule' },
+            { path: 'emergency-info', loadChildren: './applicant-details/emergency-info/emergency-info.module#EmergencyInfoModule' },
+            { path: 'identification-info', loadChildren: './applicant-details/identification-info/identification-info.module#IdentificationInfoModule' },
+            /*{ path: 'license-certificate', loadChildren: './applicant-details/license-certificate/license-certificate.module#LicenseCertificateModule' },*/
+            //{ path: 'primary', loadChildren: './applicant-details/emergency-info/primary/primary.module#PrimaryModule' },
+            //{ path: 'secondary', loadChildren: './applicant-details/emergency-info/secondary/secondary.module#SecondaryModule' }
+            { path: 'w9-form-info', loadChildren: './applicant-details/w9-form/w9-form-info.module#W9FormInfoModule' },
+            { path: 'nurse-form', loadChildren: './applicant-details/nurse-form/nurse-form.module#NurseFormModule' },
+            { path: 'cbc-form-info', loadChildren: './applicant-details/cbc-form-info/cbc-form-info.module#CBCFormInfoModule' },
+            { path: 'uscis-info', loadChildren: './applicant-details/uscis-info/uscis-info.module#UscisInfoModule' },
+            { path: 'agreement-form-info', loadChildren: './applicant-details/agreement-form/agreement-form-info.module#AgreementFormInfoModule' },
+            { path: 'influenza-vaccination', loadChildren: './applicant-details/influenza-vaccination/influenza-vaccination.module#InfluenzaVaccinationModule' },
+            { path: 'terms-conditions', loadChildren: './applicant-details/terms-conditions/terms-conditions.module#TermsConditionsModule' },
+            { path: 'hepab-hippa-info', loadChildren: './applicant-details/hepab-hippa-info/hepab-hippa-info.module#HepabHippaInfoModule' },
+            /* { path: 'disclaimer', loadChildren: './applicant-details/personal-info/disclaimer/disclaimer.module#DisclaimerModule' }*/
         ]
     },
     {
