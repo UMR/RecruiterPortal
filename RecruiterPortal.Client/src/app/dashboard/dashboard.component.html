@@ -4,18 +4,26 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-6">
-                    <p-chart type="pie" [data]="data"></p-chart>
+                    <div style="background-color:white">
+                        <p-chart type="pie" [data]="data"></p-chart>
+                    </div>
                 </div>
                 <div class="col-6">
-                    <p-chart type="doughnut" [data]="data"></p-chart>
+                    <div style="background-color:white">
+                        <p-chart type="doughnut" [data]="data"></p-chart>
+                    </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
-                    <p-chart type="bar" [data]="data1"></p-chart>
+                    <div style="background-color:white;margin-top:16px">
+                        <p-chart type="bar" [data]="data1"></p-chart>
+                    </div>
                 </div>
                 <div class="col-6">
-                    <p-chart type="polarArea" [data]="data"></p-chart>
+                    <div style="background-color: white; margin-top: 16px">
+                        <p-chart type="polarArea" [data]="data"></p-chart>
+                    </div>
                 </div>
             </div>
         </div>
