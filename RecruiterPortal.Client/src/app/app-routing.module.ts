@@ -59,6 +59,10 @@ const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
+        path: 'reports', loadChildren: './reports/reports.module#ReportsModule'
+    },
+    {
+        canActivate: [AuthGuard],
         path: 'change-password', loadChildren: './change-password/change-password.module#ChangePasswordModule'
     },
     {

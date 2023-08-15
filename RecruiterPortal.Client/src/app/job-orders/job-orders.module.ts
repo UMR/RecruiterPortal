@@ -7,11 +7,11 @@ import { SharedModule } from '../common/shared.module';
 
 
 @NgModule({
-  declarations: [JobOrdersComponent],
-  imports: [
-    CommonModule,
-      JobOrdersRoutingModule,
-      SharedModule
-  ]
+    declarations: [JobOrdersComponent],
+    imports: [
+        CommonModule,
+        JobOrdersRoutingModule,
+        SharedModule
+    ]
 })
 export class JobOrdersModule { }
