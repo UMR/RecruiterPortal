@@ -39,6 +39,8 @@ public partial class UmrrecruitmentApplicantContext : DbContext
 
     public virtual DbSet<InfluenzaVaccination> InfluenzaVaccinations { get; set; }
 
+    public virtual DbSet<Institution> Institutions { get; set; }
+
     public virtual DbSet<LookupZipCode> LookupZipCodes { get; set; }
 
     public virtual DbSet<NurseForm> NurseForms { get; set; }
@@ -90,6 +92,8 @@ public partial class UmrrecruitmentApplicantContext : DbContext
     public virtual DbSet<UserSocial> UserSocials { get; set; }
 
     public virtual DbSet<UserVerification> UserVerifications { get; set; }
+
+    public virtual DbSet<UserWorkHistory> UserWorkHistories { get; set; }
 
     public virtual DbSet<ViewAgency> ViewAgencies { get; set; }
 
@@ -433,6 +437,17 @@ public partial class UmrrecruitmentApplicantContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_InfluenzaVaccination_UserID");
+        });
+
+        modelBuilder.Entity<Institution>(entity =>
+        {
+            entity.ToTable("Institution");
+
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.InstituteName)
+                .IsRequired()
+                .HasMaxLength(250);
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
         });
 
         modelBuilder.Entity<LookupZipCode>(entity =>
@@ -1114,6 +1129,34 @@ public partial class UmrrecruitmentApplicantContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_UserVerification_User");
+        });
+
+        modelBuilder.Entity<UserWorkHistory>(entity =>
+        {
+            entity.ToTable("UserWorkHistory");
+
+            entity.Property(e => e.City)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.FromDate).HasColumnType("datetime");
+            entity.Property(e => e.InstituteName).HasMaxLength(200);
+            entity.Property(e => e.PositionName)
+                .HasMaxLength(200)
+                .IsUnicode(false);
+            entity.Property(e => e.ReasonForLeaving).HasColumnType("text");
+            entity.Property(e => e.Responisiblities)
+                .HasMaxLength(500)
+                .IsUnicode(false);
+            entity.Property(e => e.Salary).HasMaxLength(250);
+            entity.Property(e => e.Supervisor)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            entity.Property(e => e.SupervisorPhone)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Todate).HasColumnType("datetime");
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
         });
 
         modelBuilder.Entity<ViewAgency>(entity =>
