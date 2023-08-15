@@ -51,6 +51,10 @@ const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
+        path: 'job-orders', loadChildren: './job-orders/job-orders.module#JobOrdersModule'
+    },
+    {
+        canActivate: [AuthGuard],
         path: 'change-password', loadChildren: './change-password/change-password.module#ChangePasswordModule'
     },
     {
