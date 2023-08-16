@@ -50,7 +50,7 @@ export class AddEditComponent implements OnInit {
     get f() { return this.empForm.controls; }
 
     getUserCompany(userId: string) {
-        this.addEditService.getEmpInfo(userId)
+        this.addEditService.getEmploymentById(userId)
             .subscribe(data => {
                 console.log(data);
                 this.empForm.patchValue({
@@ -74,9 +74,6 @@ export class AddEditComponent implements OnInit {
                     instituteId: data.body.InstituteID,
                     institutePhoneId: data.body.InstitutePhoneID,
                 });
-
-
-
             },
                 err => {
                     this.isLoading = false;
@@ -112,7 +109,7 @@ export class AddEditComponent implements OnInit {
                     CanContactThisEmployer: this.empForm.get('canContactThisEmployer').value == "YES" ? true : false,
                     Responisiblities: this.empForm.get('responisiblities').value
                 })
-                this.addEditService.updaeteEmpInfo(this.employmentModal[0])
+                this.addEditService.updaeteEmployment(this.employmentModal[0])
                     .subscribe(data => {
                         if (data.status === 200) {
                             this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Successfully Update', detail: '' });
@@ -148,7 +145,7 @@ export class AddEditComponent implements OnInit {
                     Responisiblities: this.empForm.get('responisiblities').value
                 })
                 console.log(this.employmentModal[0]);
-                this.addEditService.insertEmp(this.employmentModal[0])
+                this.addEditService.insertEmployment(this.employmentModal[0])
                     .subscribe(data => {
                         if (data.status === 200) {
                             this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Successfully Saved', detail: '' });

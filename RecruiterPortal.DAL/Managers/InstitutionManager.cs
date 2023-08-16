@@ -1,7 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
-using System.ComponentModel;
 using System.Dynamic;
 
 namespace RecruiterPortal.DAL.Managers
