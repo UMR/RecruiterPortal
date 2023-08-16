@@ -10,13 +10,12 @@ namespace RecruiterPortalDAL.Models
     {
         public string ID { get; set; }
         public int InstituteID { get; set; }
-        public string CompanyName { get; set; }
-        public int InstitutePhoneID { get; set; }
+        public string CompanyName { get; set; }        
         public string CompanyAddress { get; set; }
         public string Supervisor { get; set; }
         public string CompanyPhone { get; set; }
         public int PositionID { get; set; }
-        public string JobTItle { get; set; }
+        public string JobTitle { get; set; }
         public string StartingSalary { get; set; }
         public string EndingSalary { get; set; }
         public string FromDate { get; set; }

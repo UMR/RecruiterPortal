@@ -17,7 +17,7 @@ public partial class UserCompany
 
     public string CompanyPhone { get; set; }
 
-    public string JobTitle { get; set; }
+    public string JobTItle { get; set; }
 
     public long? EmpositionId { get; set; }
 

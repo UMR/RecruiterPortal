@@ -6,25 +6,25 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class AddEditService {
 
-    private empInfoURI: string = `${resourceServerUrl}/api/employment`;
+    private employmentURI: string = `${resourceServerUrl}/api/employment`;
 
     constructor(private httpClient: HttpClient) {
 
     }
 
-    insertEmployment(employment: EmploymentModel): Observable<HttpResponse<any>> {
-        return this.httpClient.post(this.empInfoURI + "/add", employment, {
+    insertEmployment(employment): Observable<HttpResponse<any>> {
+        return this.httpClient.post(`${this.employmentURI}/insert-employment`, employment, {
             headers: new HttpHeaders()
                 .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
         });
     }
 
     getEmploymentById(id: any): Observable<HttpResponse<any>> {
-        return this.httpClient.get(this.empInfoURI + "/" + id, { observe: 'response' });
+        return this.httpClient.get(this.employmentURI + "/" + id, { observe: 'response' });
     }
 
-    updaeteEmployment(employment: EmploymentModel): Observable<HttpResponse<any>> {
-        return this.httpClient.put(this.empInfoURI + "/update", employment, {
+    updaeteEmployment(employment): Observable<HttpResponse<any>> {
+        return this.httpClient.put(`${this.employmentURI}/update-employment`, employment, {
             headers: new HttpHeaders()
                 .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
         });

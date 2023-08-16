@@ -802,7 +802,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
             entity.Property(e => e.EmpositionId).HasColumnName("EMPositionID");
             entity.Property(e => e.EndingSalary).HasMaxLength(200);
             entity.Property(e => e.FromDate).HasColumnType("datetime");
-            entity.Property(e => e.JobTitle)
+            entity.Property(e => e.JobTItle)
                 .IsRequired()
                 .HasMaxLength(500)
                 .HasColumnName("JobTItle");

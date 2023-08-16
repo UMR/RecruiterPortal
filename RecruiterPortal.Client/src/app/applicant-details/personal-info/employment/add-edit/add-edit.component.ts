@@ -31,11 +31,11 @@ export class AddEditComponent implements OnInit {
         });
 
         this.empForm = this.fb.group({
-            companyName: ["", Validators.compose([Validators.required, Validators.maxLength(30)])],            
+            companyName: ["", Validators.compose([Validators.required, Validators.maxLength(30)])],
             supervisor: ["", Validators.compose([Validators.maxLength(250)])],
             companyPhone: ["", Validators.compose([Validators.maxLength(50)])],
             jobTItle: ["", Validators.compose([Validators.required, Validators.maxLength(100)])],
-            startingSalary: ["", Validators.compose([Validators.maxLength(30)])],            
+            startingSalary: ["", Validators.compose([Validators.maxLength(30)])],
             fromDate: [null, [new CompareValidator('toDate', '<', 'true')]],
             toDate: [null, [new CompareValidator('fromDate', '>', 'true')]],
             leaveReason: [""],
@@ -86,30 +86,28 @@ export class AddEditComponent implements OnInit {
     }
     onSubmit() {
         this.submitted = true;
+        const employmentModel = {
+            ID: this.userCompanyId,
+            InstituteID: this.empForm.controls.instituteId.value,            
+            PositionID: this.empForm.controls.positionId.value,
+            ApplicantID: this.storageService.getApplicantId,
+            CompanyPhone: this.empForm.controls.companyPhone.value,            
+            Supervisor: this.empForm.controls.supervisor.value,
+            CompanyName: this.empForm.controls.companyName.value,
+            JobTitle: this.empForm.controls.jobTItle.value,
+            StartingSalary: this.empForm.controls.startingSalary.value,            
+            FromDate: this.empForm.controls.fromDate.value ? new Date(this.empForm.controls.fromDate.value).toLocaleString() : '',
+            ToDate: this.empForm.controls.toDate.value ? new Date(this.empForm.controls.toDate.value).toLocaleString() : '',
+            LeaveReason: this.empForm.controls.leaveReason.value,
+            CanContactThisEmployer: this.empForm.controls.canContactThisEmployer.value == "YES" ? true : false,
+            Responisiblities: this.empForm.controls.responisiblities.value
+        };
+
         this.employmentModal = [];
         if (!this.empForm.invalid) {
             this.isLoading = true;
             if (this.userCompanyId != null) {
-                this.employmentModal.push({
-                    ID: this.userCompanyId,
-                    InstituteID: this.empForm.get('instituteId').value,
-                    InstitutePhoneID: this.empForm.get('institutePhoneId').value,
-                    PositionID: this.empForm.get('positionId').value,
-                    ApplicantID: this.storageService.getApplicantId,
-                    CompanyPhone: this.empForm.get('companyPhone').value,
-                    CompanyAddress: "",
-                    Supervisor: this.empForm.get('supervisor').value,
-                    CompanyName: this.empForm.get('companyName').value.Text,
-                    JobTItle: this.empForm.get('jobTItle').value.Text,
-                    StartingSalary: this.empForm.get('startingSalary').value,
-                    EndingSalary: "",
-                    FromDate: this.empForm.get('fromDate').value ? new Date(this.empForm.get('fromDate').value).toLocaleString() : '',
-                    ToDate: this.empForm.get('toDate').value ? new Date(this.empForm.get('toDate').value).toLocaleString() : '',
-                    LeaveReason: this.empForm.get('leaveReason').value,
-                    CanContactThisEmployer: this.empForm.get('canContactThisEmployer').value == "YES" ? true : false,
-                    Responisiblities: this.empForm.get('responisiblities').value
-                })
-                this.addEditService.updaeteEmployment(this.employmentModal[0])
+                this.addEditService.updaeteEmployment(employmentModel)
                     .subscribe(data => {
                         if (data.status === 200) {
                             this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Successfully Update', detail: '' });
@@ -125,27 +123,7 @@ export class AddEditComponent implements OnInit {
                         });
             }
             else {
-                this.employmentModal.push({
-                    ID: "",
-                    InstituteID: this.empForm.get('instituteId').value,
-                    InstitutePhoneID: this.empForm.get('institutePhoneId').value,
-                    PositionID: this.empForm.get('positionId').value,
-                    ApplicantID: this.storageService.getApplicantId,
-                    CompanyPhone: this.empForm.get('companyPhone').value,
-                    CompanyAddress: "",
-                    Supervisor: this.empForm.get('supervisor').value,
-                    CompanyName: this.empForm.get('companyName').value.Text,
-                    JobTItle: this.empForm.get('jobTItle').value.Text,
-                    StartingSalary: this.empForm.get('startingSalary').value,
-                    EndingSalary: "",
-                    FromDate: this.empForm.get('fromDate').value ? new Date(this.empForm.get('fromDate').value).toLocaleString() : '',
-                    ToDate: this.empForm.get('toDate').value ? new Date(this.empForm.get('toDate').value).toLocaleString() : '',
-                    LeaveReason: this.empForm.get('leaveReason').value,
-                    CanContactThisEmployer: this.empForm.get('canContactThisEmployer').value == "YES" ? true : false,
-                    Responisiblities: this.empForm.get('responisiblities').value
-                })
-                console.log(this.employmentModal[0]);
-                this.addEditService.insertEmployment(this.employmentModal[0])
+                this.addEditService.insertEmployment(employmentModel)
                     .subscribe(data => {
                         if (data.status === 200) {
                             this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Successfully Saved', detail: '' });
@@ -176,22 +154,22 @@ export class AddEditComponent implements OnInit {
     }
 
     onPositionSearch($event) {
-        this.addEditService.getPositionByPositionName($event.query).subscribe(response => {            
+        this.addEditService.getPositionByPositionName($event.query).subscribe(response => {
             this.positionResults = response.body;
         },
             err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get positions', detail: '' }); },
             () => { });
     }
-    onPositionSelect($event) {        
+    onPositionSelect($event) {
         this.empForm.patchValue({
             jobTItle: $event.PositionName,
             positionId: $event.Id
         });
     }
 
-    onInstitutiionSearch($event) {        
+    onInstitutiionSearch($event) {
         this.addEditService.getInsituteByInsituteName($event.query).subscribe(response => {
-            if (response.status === 200) {                
+            if (response.status === 200) {
                 this.institutionResults = response.body;
             }
         },
@@ -199,7 +177,7 @@ export class AddEditComponent implements OnInit {
             () => { });
     }
 
-    onInstitutiionSelect($event) {        
+    onInstitutiionSelect($event) {
         this.empForm.patchValue({
             instituteId: $event.Id,
             companyName: $event.InstituteName
