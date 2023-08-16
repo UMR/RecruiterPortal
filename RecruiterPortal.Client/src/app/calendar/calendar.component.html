@@ -3,7 +3,47 @@
     <applicant-portal-header (onToggleButtonClicked)="(showHideMenu)()" isVisibleToggleButton=0></applicant-portal-header>
     <section class="main-content">
         <div class="container-fluid">
-            <h1>Calendar works!</h1>
+            <div class="control-section">
+
+                <select name="options" [(ngModel)]="currentSchedulerView" (ngModelChange)="switchSchedulerView()">
+                    <option value="day">Day</option>
+                    <option value="week">Week</option>
+                    <option value="2week">2 Weeks</option>
+                    <option value="month">Month</option>
+                    <option value="crews-week">Crews</option>
+                </select>
+
+                <ejs-schedule #scheduleObj width='100%' height='650px' [selectedDate]="selectedDate"
+                              [eventSettings]="eventSettings">
+                    <e-views>
+                        <e-view displayName='1D' option='Day'></e-view>
+                        <e-view displayName='1W' [isSelected]="true" option='Week'></e-view>
+                        <!-- <e-view displayName='2W' option='Week' [interval]='2'></e-view> -->
+                        <e-view displayName='TW+G' option='TimelineWeek' [group]="group" [timeScale]='timeScale'></e-view>
+                    </e-views>
+
+                    <e-resources>
+                        <e-resource field='crews' title='Crew' [dataSource]='crews' [allowMultiple]='true' name='Crews'
+                                    textField='name' idField='id'>
+                        </e-resource>
+                    </e-resources>
+
+                    <ng-template #resourceHeaderTemplate let-data>
+                        <div class="scheduler-resource-cell">
+                            <div class="scheduler-resource-cell_name">{{data.resourceData.name}}</div>
+                            <div class="scheduler-resource-cell_btns">
+                                <button class="btn btn-icon btn-sm btn-sq" type="button">
+                                    ^
+                                </button>
+                                <button class="btn btn-icon btn-sm btn-sq" type="button">
+                                    v
+                                </button>
+                            </div>
+                        </div>
+                    </ng-template>
+
+                </ejs-schedule>
+            </div>
         </div>
     </section>
 </div>
