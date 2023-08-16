@@ -123,6 +123,7 @@
     <Folder Include="2023-08-14" />
     <Folder Include="Special" />
     <Folder Include="2023-08-15" />
+    <Folder Include="2023-08-16" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="2019-11-04\01_TR_01_CREATE_DATABASE.sql" />
@@ -424,5 +425,7 @@
     <None Include="2023-08-15\02_AZ_02_CREATE_TABLE_Institution.sql" />
     <None Include="Special\04_AZ_04_Institution_Insert_Data_.sql" />
     <None Include="2023-08-15\03_AZ_03_ALTER_PROCEDURE_GetInstitution.sql" />
+    <None Include="2023-08-16\01_AZ_01_CREATE_TABLE_Position.sql" />
+    <None Include="2023-08-16\02_AZ_02_ALTER_PROCEDURE_GetPosition.sql" />
   </ItemGroup>
 </Project>
