@@ -25,11 +25,11 @@
                         <div class="form-group">
                             <label for="jobTItle" class="form-label">Job Title</label>
                             <p-autoComplete formControlName="jobTItle" [suggestions]="positionResults" class="form-control"
-                                            (completeMethod)="onPositionSearch($event)" field="Text" required autocomplete="off"
+                                            (completeMethod)="onPositionSearch($event)" required autocomplete="off"
                                             forceSelection="true" (onSelect)="onPositionSelect($event)" [ngClass]="{ 'is-invalid': submitted && f.jobTItle.errors }" [dropdown]="true">
                                 <ng-template let-position pTemplate="item">
                                     <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                                        <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{position.Text}}</div>
+                                        <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{position.PositionName}}</div>
                                     </div>
                                 </ng-template>
                             </p-autoComplete>

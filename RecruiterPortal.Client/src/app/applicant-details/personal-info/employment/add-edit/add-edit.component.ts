@@ -179,15 +179,16 @@ export class AddEditComponent implements OnInit {
     }
 
     onPositionSearch($event) {
-        this.addEditService.getPositionByPositionName($event.query).subscribe(data => {            
-            this.positionResults = data.body.Data;
+        this.addEditService.getPositionByPositionName($event.query).subscribe(response => {            
+            this.positionResults = response.body;
         },
-            err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get position', detail: '' }); },
+            err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get positions', detail: '' }); },
             () => { });
     }
     onPositionSelect($event) {        
         this.empForm.patchValue({
-            positionId: $event.Value
+            jobTItle: $event.PositionName,
+            positionId: $event.Id
         });
     }
 
@@ -197,7 +198,7 @@ export class AddEditComponent implements OnInit {
                 this.institutionResults = response.body;
             }
         },
-            err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get institute', detail: '' }); },
+            err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get institutes', detail: '' }); },
             () => { });
     }
 

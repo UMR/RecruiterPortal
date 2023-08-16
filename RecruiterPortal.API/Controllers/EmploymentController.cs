@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RecruiterPortal.DAL.Managers;
 using RecruiterPortal.DAL.SqlModels;
+using RecruiterPortalDAL.Managers;
 
 namespace RecruiterPortal.API.Controllers
 {
@@ -20,16 +21,23 @@ namespace RecruiterPortal.API.Controllers
         {
             try
             {
-                IEnumerable<Institution> institutions = InstitutionManager.GetInstitutions(text);                
-                
-                if (!string.IsNullOrEmpty(text)) 
-                {
-                    var filteredInstitutions = institutions.Where(i => i.InstituteName.Contains(text));
-                    var count = filteredInstitutions.Count();
-                    return Ok(filteredInstitutions);
-                }
-                
+                IEnumerable<Institution> institutions = InstitutionManager.GetInstitutions(text); 
                 return Ok(institutions);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("position")]
+        [HttpGet]
+        public IActionResult GetPositionByText(string text)
+        {
+            try
+            {
+                IEnumerable<Position> positions = PositionManager.GetPositions(text);
+                return Ok(positions);
             }
             catch (Exception ex)
             {

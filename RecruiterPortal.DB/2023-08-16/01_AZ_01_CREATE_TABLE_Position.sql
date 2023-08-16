@@ -13,8 +13,7 @@ GO
 
 CREATE TABLE [dbo].[Position](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[PositionName] [varchar](100) NOT NULL,
-	[IsActive] [bit] NULL,
+	[PositionName] [varchar](250) NOT NULL,	
 	[CreatedBy] [int] NULL,
 	[CreatedDate] [datetime] NULL,
 	[UpdatedBy] [int] NULL,

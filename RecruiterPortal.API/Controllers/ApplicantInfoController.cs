@@ -1229,11 +1229,11 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 IEnumerable<Position> positionList;
                 if (position == "all")
                 {
-                    positionList = PositionManager.GetPosition("");
+                    positionList = PositionManager.GetPositions("");
                 }
                 else
                 {
-                    positionList = PositionManager.GetPosition(position);
+                    positionList = PositionManager.GetPositions(position);
                 }
                 return Ok(new ResponseModels<IEnumerable<Position>>(positionList));
             }

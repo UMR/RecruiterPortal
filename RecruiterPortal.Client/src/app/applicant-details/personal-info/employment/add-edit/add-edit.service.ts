@@ -31,7 +31,7 @@ export class AddEditService {
     });
   }
   getPositionByPositionName(posotion: string): Observable<HttpResponse<any>> {
-    return this.httpClient.get(encodeURI(this.positionURI + posotion), { observe: 'response' });
+      return this.httpClient.get(encodeURI(`${resourceServerUrl}/api/employment/position?text=${posotion}`), { observe: 'response' });
   }
   getInsituteByInsituteName(institute: string): Observable<HttpResponse<any>> {
       return this.httpClient.get(encodeURI(`${resourceServerUrl}/api/employment/institute?text=${institute}`), { observe: 'response' });
