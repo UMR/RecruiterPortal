@@ -7,7 +7,7 @@
                         <div class="form-group">
                             <label for="companyName" class="form-label">Company</label>
                             <p-autoComplete formControlName="companyName" [suggestions]="institutionResults" class="form-control"
-                                            (completeMethod)="onInstitutiionSearch($event)" field="Text" required autocomplete="off"
+                                            (completeMethod)="onInstitutiionSearch($event)" required autocomplete="off"
                                             forceSelection="true" (onSelect)="onInstitutiionSelect($event)" [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }" [dropdown]="true">
                                 <ng-template let-institute pTemplate="item">
                                     <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">

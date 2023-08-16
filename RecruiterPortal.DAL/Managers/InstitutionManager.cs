@@ -1,19 +1,24 @@
-﻿using RecruiterPortal.DAL.Repository;
+﻿using Microsoft.Data.SqlClient;
+using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
+using System.ComponentModel;
+using System.Dynamic;
 
 namespace RecruiterPortal.DAL.Managers
 {
     public class InstitutionManager
     {
-        public static IEnumerable<Institution> GetInstitutions()
+        public static IEnumerable<Institution> GetInstitutions(string name)
         {
             string spName = "sp_GetInstitution";
             try
             {
                 GenericRepository<Institution> institutionRepo = new GenericRepository<Institution>();
-                IEnumerable<Institution> institutions = institutionRepo.GetAll(spName); ;
+                dynamic expandoObject = new ExpandoObject();
+                expandoObject.Name = name;
+                SqlParameter[] sqlParameters = institutionRepo.GetSqlParametersFromExpandoObject(expandoObject, spName, "@");
 
-                return institutions;
+                return institutionRepo.GetAll(spName, sqlParameters);                
             }
             catch (Exception ex)
             {

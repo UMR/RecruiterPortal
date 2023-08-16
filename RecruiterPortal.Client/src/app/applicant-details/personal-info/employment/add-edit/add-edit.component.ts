@@ -191,20 +191,20 @@ export class AddEditComponent implements OnInit {
         });
     }
 
-    onInstitutiionSearch($event) {
-        console.log($event.query);
+    onInstitutiionSearch($event) {        
         this.addEditService.getInsituteByInsituteName($event.query).subscribe(response => {
-            if (response.status === 200) {
+            if (response.status === 200) {                
                 this.institutionResults = response.body;
             }
         },
             err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get institute', detail: '' }); },
             () => { });
     }
+
     onInstitutiionSelect($event) {        
         this.empForm.patchValue({
-            Id: $event.Value,
-            InstituteName: $event.Phone,            
+            instituteId: $event.Id,
+            companyName: $event.InstituteName
         });
     }
 

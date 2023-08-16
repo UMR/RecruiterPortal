@@ -20,7 +20,7 @@ namespace RecruiterPortal.API.Controllers
         {
             try
             {
-                IEnumerable<Institution> institutions = InstitutionManager.GetInstitutions();                
+                IEnumerable<Institution> institutions = InstitutionManager.GetInstitutions(text);                
                 
                 if (!string.IsNullOrEmpty(text)) 
                 {
