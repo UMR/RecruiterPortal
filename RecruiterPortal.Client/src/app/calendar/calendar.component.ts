@@ -16,9 +16,9 @@ export class CalendarComponent {
     public eventSettings: EventSettingsModel = { dataSource: this.data };
 
     group: GroupModel = { resources: ["Crews"], allowGroupEdit: true };
-    //crews = JSON.parse(
-    //    `[{"id":21,"name":"Sealcoat Crew 1","crewsDivisionId":6,"isActive":true,"order":0,"color":"#21e70c","divisionName":"The Warehouse","officeId":23},{"id":22,"name":"Sealcoat Crew 2","crewsDivisionId":6,"isActive":true,"order":1,"color":"#ffff00","divisionName":"The Warehouse","officeId":23},{"id":23,"name":"Structural Crew 1","crewsDivisionId":7,"isActive":true,"order":2,"color":"#0080ff","divisionName":"Vance Refrigeration","officeId":23},{"id":24,"name":"Structural Crew 2","crewsDivisionId":7,"isActive":true,"order":3,"color":null,"divisionName":"Vance Refrigeration","officeId":23}]`
-    //);
+    crews = JSON.parse(
+        `[{"id":21,"name":"Sealcoat Crew 1","crewsDivisionId":6,"isActive":true,"order":0,"color":"#21e70c","divisionName":"The Warehouse","officeId":23},{"id":22,"name":"Sealcoat Crew 2","crewsDivisionId":6,"isActive":true,"order":1,"color":"#ffff00","divisionName":"The Warehouse","officeId":23},{"id":23,"name":"Structural Crew 1","crewsDivisionId":7,"isActive":true,"order":2,"color":"#0080ff","divisionName":"Vance Refrigeration","officeId":23},{"id":24,"name":"Structural Crew 2","crewsDivisionId":7,"isActive":true,"order":3,"color":null,"divisionName":"Vance Refrigeration","officeId":23}]`
+    );
     currentSchedulerView: UserSchedulerView = "week";
     timeScale: TimeScaleModel = { interval: 720, slotCount: 1 };
 
