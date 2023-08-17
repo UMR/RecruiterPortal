@@ -6,10 +6,9 @@ import { StorageService } from '../../../common/services/storage.service';
 
 @Injectable()
 export class EmploymentService {
-    private getEmploymentsByUserIdURI: string = `${resourceServerUrl}/api/employment/get-emploments-by-userid`;
-    private getImportedEmploymentInfoURI: string = `${resourceServerUrl}/api/employment/get-imported-employment`;
-    private deleteEmpInfoURI: string = `${resourceServerUrl}/api/employment/delete-imported-employment`;
-    private deleteImportedEmpInfoURI: string = `${resourceServerUrl}/api/employment/delete-imported-employment`;
+
+    private getEmploymentsByUserIdURI: string = `${resourceServerUrl}/api/employment/get-emploments-by-userid`;        
+    private deleteEmploymentByIdURI: string = `${resourceServerUrl}/api/employment/delete-employment-by-id`;   
 
     constructor(private httpClient: HttpClient, private storageService: StorageService) {
 
@@ -19,16 +18,8 @@ export class EmploymentService {
         return this.httpClient.get(`${this.getEmploymentsByUserIdURI}/${this.storageService.getApplicantId}`);
     }
 
-    getImportedEmploymentHistory() {
-        return this.httpClient.get(`${this.getImportedEmploymentInfoURI}/${this.storageService.getApplicantId}`);
-    }
-
-    deleteEmpInfo(id: any) {
-        return this.httpClient.delete(`${this.deleteEmpInfoURI}/${id}`);
-    }
-
-    deleteImportedEmpInfo(id: any) {
-        return this.httpClient.delete(`${this.deleteImportedEmpInfoURI}/${id}`);
+    deleteEmplomentById(id: any) {
+        return this.httpClient.delete(`${this.deleteEmploymentByIdURI}/${id}`);
     }
 
 }

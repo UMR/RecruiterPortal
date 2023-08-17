@@ -54,7 +54,7 @@ export class AddEditComponent implements OnInit {
             .subscribe(data => {
                 console.log(data);
                 this.empForm.patchValue({
-                    companyName:data.body.CompanyName,
+                    companyName: data.body.CompanyName,
                     supervisor: data.body.Supervisor,
                     companyPhone: data.body.CompanyPhone,
                     jobTItle:data.body.JobTitle,
@@ -97,7 +97,6 @@ export class AddEditComponent implements OnInit {
             Responisiblities: this.empForm.controls.responisiblities.value
         };
 
-        this.employmentModal = [];
         if (!this.empForm.invalid) {
             this.isLoading = true;
             if (this.userCompanyId != null) {

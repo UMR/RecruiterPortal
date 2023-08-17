@@ -21,7 +21,7 @@ namespace RecruiterPortal.API.Controllers
             try
             {
                 IEnumerable<UserCompany> employments = EmploymentManager.GetEmploymentsByUserId(userId);
-                List<EmploymentModel> employmentModels = new List<EmploymentModel>();
+                List<EmploymentModel> employmentsModel = new List<EmploymentModel>();
 
                 if (employments != null && employments.Count() > 0)
                 {
@@ -34,6 +34,7 @@ namespace RecruiterPortal.API.Controllers
                         employment.Supervisor = employ.Supervisor;
                         employment.CompanyPhone = employ.CompanyPhone;
                         employment.JobTitle = employ.JobTItle;
+                        employment.PositionID = employ.EmpositionId;
                         employment.Responisiblities = employ.Responisiblities;
                         employment.StartingSalary = employ.StartingSalary;
                         employment.EndingSalary = employ.EndingSalary;
@@ -41,10 +42,10 @@ namespace RecruiterPortal.API.Controllers
                         employment.ToDate = employ.ToDate.HasValue ? employ.ToDate.Value.ToString("MM-dd-yyyy") : "";
                         employment.LeaveReason = employ.LeaveReason;
                         employment.CanContactThisEmployer = employ.CanContactThisEmployer;
-                        employmentModels.Add(employment);
+                        employmentsModel.Add(employment);
                     }
                 }
-                return Ok(employmentModels);
+                return Ok(employmentsModel);
             }
             catch (Exception ex)
             {
@@ -72,6 +73,7 @@ namespace RecruiterPortal.API.Controllers
                     employmentModel.Supervisor = employment.Supervisor;
                     employmentModel.CompanyPhone = employment.CompanyPhone;
                     employmentModel.JobTitle = employment.JobTItle;
+                    employmentModel.PositionID = employment.EmpositionId;
                     employmentModel.Responisiblities = employment.Responisiblities;
                     employmentModel.StartingSalary = employment.StartingSalary;
                     employmentModel.EndingSalary = employment.EndingSalary;
@@ -136,8 +138,8 @@ namespace RecruiterPortal.API.Controllers
             }
         }
 
-        [HttpPut]
-        public IActionResult UpdateEmploymentInfo(EmploymentModel employment)
+        [HttpPut("update-employment")]
+        public IActionResult UpdateEmployment(EmploymentModel employment)
         {
             try
             {
@@ -182,6 +184,20 @@ namespace RecruiterPortal.API.Controllers
             }
         }
 
+        [HttpDelete("delete-employment-by-id/{id}")]
+        public IActionResult DeleteEmployment(long id)
+        {
+            try
+            {                
+                EmploymentManager.DeleteEmploment(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
 
         [Route("institute")]
         [HttpGet]

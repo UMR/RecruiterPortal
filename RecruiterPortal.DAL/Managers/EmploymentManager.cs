@@ -23,7 +23,7 @@ namespace RecruiterPortalDAL.Managers
                 throw new Exception(ex.Message);
             }
         }
-        public static void UpdateEmployment(UserCompany emergencyInfo)
+        public static int UpdateEmployment(UserCompany emergencyInfo)
         {
             string spName = "sp_UpdateUserCompany";
 
@@ -31,7 +31,26 @@ namespace RecruiterPortalDAL.Managers
             {
                 GenericRepository<UserCompany> employInfo = new GenericRepository<UserCompany>();
                 SqlParameter[] sqlParameters = employInfo.GetSqlParametersFromObject(emergencyInfo, spName);
-                employInfo.Update(spName, sqlParameters);
+                var result = employInfo.Update(spName, sqlParameters);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public static int DeleteEmploment(long userCompanyId)
+        {
+            string spName = "sp_DeleteUserCompanyByCompanyID";
+
+            try
+            {
+                GenericRepository<UserCompany> employInfo = new GenericRepository<UserCompany>();
+                dynamic expandoObject = new ExpandoObject();
+                expandoObject.UserCompanyID = userCompanyId;
+                SqlParameter[] sqlParameters = employInfo.GetSqlParametersFromExpandoObject(expandoObject, spName, "@");
+                var result = employInfo.Delete(spName, sqlParameters);
+                return result;
             }
             catch (Exception ex)
             {
@@ -72,26 +91,7 @@ namespace RecruiterPortalDAL.Managers
             {
                 throw new Exception(ex.Message);
             }
-        }
-
-        public static int DeleteEmploment(long userCompanyId)
-        {
-            string spName = "sp_DeleteUserCompanyByCompanyID";
-
-            try
-            {
-                GenericRepository<UserCompany> employInfo = new GenericRepository<UserCompany>();
-                dynamic expandoObject = new ExpandoObject();
-                expandoObject.UserID = userCompanyId;
-                SqlParameter[] sqlParameters = employInfo.GetSqlParametersFromExpandoObject(expandoObject, spName, "@");                
-                var result = employInfo.Delete(spName, sqlParameters); 
-                return result;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
+        }        
 
         public static DataTable GetEmployDataTable(long UserID)
         {
