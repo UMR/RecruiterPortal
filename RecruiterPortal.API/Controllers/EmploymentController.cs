@@ -4,7 +4,6 @@ using RecruiterPortal.DAL.Managers;
 using RecruiterPortal.DAL.SqlModels;
 using RecruiterPortalDAL.Managers;
 using RecruiterPortalDAL.Models;
-using Serilog;
 
 namespace RecruiterPortal.API.Controllers
 {
@@ -46,6 +45,43 @@ namespace RecruiterPortal.API.Controllers
                     }
                 }
                 return Ok(employmentModels);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+
+        [Route("get-emploment-by-id/{id}")]
+        [HttpGet]
+        public IActionResult GetEmploymentByEmploymentId(long id)
+        {
+            try
+            {
+                UserCompany employment = EmploymentManager.GetEmploymentById(id);
+                EmploymentModel employmentModel = new EmploymentModel();
+
+                if (employment != null)
+                {
+                    employmentModel.ID = employment.UserCompanyId.ToString();
+                    employmentModel.CompanyName = employment.CompanyName;
+                    employmentModel.InstituteID = employment.EminstituteId.Value;
+                    employmentModel.CompanyAddress = employment.CompanyAddress;
+                    employmentModel.Supervisor = employment.Supervisor;
+                    employmentModel.CompanyPhone = employment.CompanyPhone;
+                    employmentModel.JobTitle = employment.JobTItle;
+                    employmentModel.Responisiblities = employment.Responisiblities;
+                    employmentModel.StartingSalary = employment.StartingSalary;
+                    employmentModel.EndingSalary = employment.EndingSalary;
+                    employmentModel.FromDate = employment.FromDate.HasValue ? employment.FromDate.Value.ToString("MM-dd-yyyy") : "";
+                    employmentModel.ToDate = employment.ToDate.HasValue ? employment.ToDate.Value.ToString("MM-dd-yyyy") : "";
+                    employmentModel.LeaveReason = employment.LeaveReason;
+                    employmentModel.CanContactThisEmployer = employment.CanContactThisEmployer;
+                }
+
+                return Ok(employmentModel);
             }
             catch (Exception ex)
             {
@@ -105,7 +141,7 @@ namespace RecruiterPortal.API.Controllers
         {
             try
             {
-                UserCompany userCompany = new UserCompany();                
+                UserCompany userCompany = new UserCompany();
                 userCompany.CompanyName = employment.CompanyName;
                 userCompany.EminstituteId = employment.InstituteID;
                 userCompany.CompanyAddress = employment.CompanyAddress;

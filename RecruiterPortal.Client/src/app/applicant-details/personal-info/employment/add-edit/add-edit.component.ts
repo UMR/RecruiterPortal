@@ -26,7 +26,7 @@ export class AddEditComponent implements OnInit {
         this.activeRoute.paramMap.subscribe(params => {
             this.userCompanyId = params.get('id');
             if (this.userCompanyId != null) {
-                this.getUserCompany(this.userCompanyId);
+                this.getEmploymentById(this.userCompanyId);
             }
         });
 
@@ -49,22 +49,16 @@ export class AddEditComponent implements OnInit {
 
     get f() { return this.empForm.controls; }
 
-    getUserCompany(userId: string) {
-        this.addEditService.getEmploymentById(userId)
+    getEmploymentById(employmentId: string) {
+        this.addEditService.getEmploymentById(employmentId)
             .subscribe(data => {
                 console.log(data);
                 this.empForm.patchValue({
-                    companyName: {
-                        Text: data.body.CompanyName
-                    },
-                    //companyAddress: data.body.CompanyAddress,
+                    companyName:data.body.CompanyName,
                     supervisor: data.body.Supervisor,
                     companyPhone: data.body.CompanyPhone,
-                    jobTItle: {
-                        Text: data.body.JobTItle
-                    },
+                    jobTItle:data.body.JobTitle,
                     startingSalary: data.body.StartingSalary,
-                    //endingSalary: data.body.EndingSalary,
                     fromDate: data.body.FromDate ? new Date(data.body.FromDate) : null,
                     toDate: data.body.ToDate ? new Date(data.body.ToDate) : null,
                     leaveReason: data.body.LeaveReason,
@@ -88,14 +82,14 @@ export class AddEditComponent implements OnInit {
         this.submitted = true;
         const employmentModel = {
             ID: this.userCompanyId,
-            InstituteID: this.empForm.controls.instituteId.value,            
+            InstituteID: this.empForm.controls.instituteId.value,
             PositionID: this.empForm.controls.positionId.value,
             ApplicantID: this.storageService.getApplicantId,
-            CompanyPhone: this.empForm.controls.companyPhone.value,            
+            CompanyPhone: this.empForm.controls.companyPhone.value,
             Supervisor: this.empForm.controls.supervisor.value,
             CompanyName: this.empForm.controls.companyName.value,
             JobTitle: this.empForm.controls.jobTItle.value,
-            StartingSalary: this.empForm.controls.startingSalary.value,            
+            StartingSalary: this.empForm.controls.startingSalary.value,
             FromDate: this.empForm.controls.fromDate.value ? new Date(this.empForm.controls.fromDate.value).toLocaleString() : '',
             ToDate: this.empForm.controls.toDate.value ? new Date(this.empForm.controls.toDate.value).toLocaleString() : '',
             LeaveReason: this.empForm.controls.leaveReason.value,

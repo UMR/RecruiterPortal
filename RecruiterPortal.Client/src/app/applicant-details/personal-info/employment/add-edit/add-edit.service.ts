@@ -20,7 +20,7 @@ export class AddEditService {
     }
 
     getEmploymentById(id: any): Observable<HttpResponse<any>> {
-        return this.httpClient.get(this.employmentURI + "/" + id, { observe: 'response' });
+        return this.httpClient.get(`${this.employmentURI}/get-emploment-by-id/${id}`, { observe: 'response' });
     }
 
     updaeteEmployment(employment): Observable<HttpResponse<any>> {
