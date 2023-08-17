@@ -107,12 +107,12 @@
                 <div class="media-body">
                     <h5 class="mb-2 mt-3 user-name">{{username}}</h5>
                     <!--<h6><a [routerLink]="['/login']" (click)="logout()"><i class="fa fa-power-off mr-2"></i>Logout</a></h6>-->
-                    <ul class="list-group">
-                        <li class="list-group-item" [routerLink]="['/agency-profile']" *ngIf="isAgencyOwner"><a>Agency Profile</a></li>
-                        <li class="list-group-item" [routerLink]="['/user-profile']"><a>User Profile</a></li>
-                        <li class="list-group-item" [routerLink]="['/user-management']" *ngIf="isAgencyOwner"><a>Manage Users</a></li>
-                        <li class="list-group-item" [routerLink]="['/change-password']"><a>Change Password</a></li>
-                        <li class="list-group-item" [routerLink]="['/login']"><a (click)="logout()"><i class="fa fa-power-off mr-2"></i>Logout</a></li>
+                    <ul class="list-group" style="list-style:none">
+                        <li><a class="dropdown-item" [routerLink]="['/agency-profile']" *ngIf="isAgencyOwner">Agency Profile</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['/user-profile']">User Profile</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['/user-management']" *ngIf="isAgencyOwner">Manage Users</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['/change-password']">Change Password</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['/login']" (click)="logout()"><i class="fa fa-power-off mr-2"></i>Logout</a></li>
                     </ul>
                 </div>
             </div>
