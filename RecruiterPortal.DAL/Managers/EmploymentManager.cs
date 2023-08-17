@@ -8,7 +8,7 @@ namespace RecruiterPortalDAL.Managers
 {
     public class EmploymentManager
     {
-        public static void InsertEmploy(UserCompany empInfo)
+        public static void InsertEmployment(UserCompany empInfo)
         {
             string spName = "sp_InsertUserCompany";
 
@@ -23,7 +23,7 @@ namespace RecruiterPortalDAL.Managers
                 throw new Exception(ex.Message);
             }
         }
-        public static void UpdateEmploy(UserCompany emergencyInfo)
+        public static void UpdateEmployment(UserCompany emergencyInfo)
         {
             string spName = "sp_UpdateUserCompany";
 
@@ -38,34 +38,61 @@ namespace RecruiterPortalDAL.Managers
                 throw new Exception(ex.Message);
             }
         }
-        public static IEnumerable<UserCompany> GetEmploy(long UserID)
+        public static IEnumerable<UserCompany> GetEmploymentsByUserId(long userId)
         {
             string spName = "sp_GetUserCompanyByUserID";
 
             try
             {
-                SqlParameter[] sqlParameters = new GenericRepository<UserCompany>().GetSqlParametersFromStoredProcedure(spName);
-
-                foreach (SqlParameter sqlParameter in sqlParameters)
-                {
-
-                    if ("@" + nameof(UserID) == sqlParameter.ParameterName)
-                    {
-                        sqlParameter.Value = UserID;
-                    }
-                    else
-                    {
-                        sqlParameter.Value = DBNull.Value;
-                    }
-                }
-                return new GenericRepository<UserCompany>().GetAll(spName, sqlParameters);
+                GenericRepository<UserCompany> employInfo = new GenericRepository<UserCompany>();
+                dynamic expandoObject = new ExpandoObject();
+                expandoObject.UserID = userId;
+                SqlParameter[] sqlParameters = employInfo.GetSqlParametersFromExpandoObject(expandoObject,spName,"@");                
+                return employInfo.GetAll(spName, sqlParameters);
 
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
+        }        
+        public static UserCompany GetEmploymentById(long userCompanyId)
+        {
+            string spName = "sp_GetUserCompanyByUserCompanyID";
+
+            try
+            {
+                GenericRepository<UserCompany> employInfo = new GenericRepository<UserCompany>();
+                dynamic expandoObject = new ExpandoObject();
+                expandoObject.UserCompanyID = userCompanyId;
+                SqlParameter[] sqlParameters = employInfo.GetSqlParametersFromExpandoObject(expandoObject, spName, "@");
+                return employInfo.GetOne(spName, sqlParameters);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
+
+        public static int DeleteEmploment(long userCompanyId)
+        {
+            string spName = "sp_DeleteUserCompanyByCompanyID";
+
+            try
+            {
+                GenericRepository<UserCompany> employInfo = new GenericRepository<UserCompany>();
+                dynamic expandoObject = new ExpandoObject();
+                expandoObject.UserID = userCompanyId;
+                SqlParameter[] sqlParameters = employInfo.GetSqlParametersFromExpandoObject(expandoObject, spName, "@");                
+                var result = employInfo.Delete(spName, sqlParameters); 
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public static DataTable GetEmployDataTable(long UserID)
         {
             string spName = "sp_GetUserCompanyByUserID";
@@ -84,63 +111,6 @@ namespace RecruiterPortalDAL.Managers
                 throw new Exception(ex.Message);
             }
             return userCompanyDataTable;
-        }
-        public static IEnumerable<UserCompany> GetEmployByEmpId(long UserCompanyID)
-        {
-            string spName = "sp_GetUserCompanyByUserCompanyID";
-
-            try
-            {
-                SqlParameter[] sqlParameters = new GenericRepository<UserCompany>().GetSqlParametersFromStoredProcedure(spName);
-
-                foreach (SqlParameter sqlParameter in sqlParameters)
-                {
-
-                    if ("@" + nameof(UserCompanyID) == sqlParameter.ParameterName)
-                    {
-                        sqlParameter.Value = UserCompanyID;
-                    }
-                    else
-                    {
-                        sqlParameter.Value = DBNull.Value;
-                    }
-                }
-                return new GenericRepository<UserCompany>().GetAll(spName, sqlParameters);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        public static int DeleteEmploment(long UserCompanyID)
-        {
-            string spName = "sp_DeleteUserCompanyByCompanyID";
-
-            try
-            {
-                SqlParameter[] sqlParameters = new GenericRepository<UserEmergencyInfo>().GetSqlParametersFromStoredProcedure(spName);
-
-                foreach (SqlParameter sqlParameter in sqlParameters)
-                {
-
-                    if ("@" + nameof(UserCompanyID) == sqlParameter.ParameterName)
-                    {
-                        sqlParameter.Value = UserCompanyID;
-                    }
-                    else
-                    {
-                        sqlParameter.Value = DBNull.Value;
-                    }
-                }
-                var result = new GenericRepository<UserCompany>().Delete(spName, sqlParameters);
-                return result;
-
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
         }
     }
 }

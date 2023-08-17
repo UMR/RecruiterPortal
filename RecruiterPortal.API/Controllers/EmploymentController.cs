@@ -16,6 +16,44 @@ namespace RecruiterPortal.API.Controllers
         {
         }
 
+        [HttpGet("get-emploments-by-userid/{userId}")]
+        public IActionResult GetEmployment(long userId)
+        {
+            try
+            {
+                IEnumerable<UserCompany> employments = EmploymentManager.GetEmploymentsByUserId(userId);
+                List<EmploymentModel> employmentModels = new List<EmploymentModel>();
+
+                if (employments != null && employments.Count() > 0)
+                {
+                    foreach (var employ in employments)
+                    {
+                        EmploymentModel employment = new EmploymentModel();
+                        employment.ID = employ.UserCompanyId.ToString();
+                        employment.CompanyName = employ.CompanyName;
+                        employment.CompanyAddress = employ.CompanyAddress;
+                        employment.Supervisor = employ.Supervisor;
+                        employment.CompanyPhone = employ.CompanyPhone;
+                        employment.JobTitle = employ.JobTItle;
+                        employment.Responisiblities = employ.Responisiblities;
+                        employment.StartingSalary = employ.StartingSalary;
+                        employment.EndingSalary = employ.EndingSalary;
+                        employment.FromDate = employ.FromDate.HasValue ? employ.FromDate.Value.ToString("MM-dd-yyyy") : "";
+                        employment.ToDate = employ.ToDate.HasValue ? employ.ToDate.Value.ToString("MM-dd-yyyy") : "";
+                        employment.LeaveReason = employ.LeaveReason;
+                        employment.CanContactThisEmployer = employ.CanContactThisEmployer;
+                        employmentModels.Add(employment);
+                    }
+                }
+                return Ok(employmentModels);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         [HttpPost("insert-employment")]
         public IActionResult SaveEmployment(EmploymentModel employment)
         {
@@ -52,7 +90,53 @@ namespace RecruiterPortal.API.Controllers
                 userCompany.CanContactThisEmployer = employment.CanContactThisEmployer;
                 userCompany.Responisiblities = employment.Responisiblities;
                 userCompany.UserId = employment.ApplicantID;
-                EmploymentManager.InsertEmploy(userCompany);
+                EmploymentManager.InsertEmployment(userCompany);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPut]
+        public IActionResult UpdateEmploymentInfo(EmploymentModel employment)
+        {
+            try
+            {
+                UserCompany userCompany = new UserCompany();                
+                userCompany.CompanyName = employment.CompanyName;
+                userCompany.EminstituteId = employment.InstituteID;
+                userCompany.CompanyAddress = employment.CompanyAddress;
+                userCompany.Supervisor = employment.Supervisor;
+                userCompany.CompanyPhone = employment.CompanyPhone;
+                userCompany.JobTItle = employment.JobTitle;
+                userCompany.EmpositionId = employment.PositionID;
+                userCompany.StartingSalary = employment.StartingSalary;
+                userCompany.EndingSalary = employment.EndingSalary;
+                if (String.IsNullOrEmpty(employment.FromDate))
+                {
+                    userCompany.FromDate = null;
+                }
+                else
+                {
+                    userCompany.FromDate = DateTime.Parse(employment.FromDate);
+                }
+
+                if (String.IsNullOrEmpty(employment.ToDate))
+                {
+                    userCompany.ToDate = null;
+                }
+                else
+                {
+                    userCompany.ToDate = DateTime.Parse(employment.ToDate);
+                }
+                userCompany.LeaveReason = employment.LeaveReason;
+                userCompany.CanContactThisEmployer = employment.CanContactThisEmployer;
+                userCompany.Responisiblities = employment.Responisiblities;
+                userCompany.UserId = employment.ApplicantID;
+                EmploymentManager.UpdateEmployment(userCompany);
                 return Ok();
             }
             catch (Exception ex)

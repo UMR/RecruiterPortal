@@ -6,25 +6,29 @@ import { StorageService } from '../../../common/services/storage.service';
 
 @Injectable()
 export class EmploymentService {
-  private getEmploymentInfoURI: string = `${resourceServerUrl}/api/employment/get-employment`;
-  private getImportedEmploymentInfoURI: string = `${resourceServerUrl}/api/employment/get-imported-employment`;
-  private deleteEmpInfoURI: string = `${resourceServerUrl}/api/employment/delete-imported-employment`;
-  private deleteImportedEmpInfoURI: string = `${resourceServerUrl}/api/employment/delete-imported-employment`;
+    private getEmploymentsByUserIdURI: string = `${resourceServerUrl}/api/employment/get-emploments-by-userid`;
+    private getImportedEmploymentInfoURI: string = `${resourceServerUrl}/api/employment/get-imported-employment`;
+    private deleteEmpInfoURI: string = `${resourceServerUrl}/api/employment/delete-imported-employment`;
+    private deleteImportedEmpInfoURI: string = `${resourceServerUrl}/api/employment/delete-imported-employment`;
 
-  constructor(private httpClient: HttpClient, private storageService: StorageService) {
+    constructor(private httpClient: HttpClient, private storageService: StorageService) {
 
-  }
-  getEmpInfo() {
-    return this.httpClient.get(`${this.getEmploymentInfoURI}/${this.storageService.getApplicantId}`);
-  }
-  getImportedEmploymentHistory() {
-    return this.httpClient.get(`${this.getImportedEmploymentInfoURI}/${this.storageService.getApplicantId}`);
-  }
-  deleteEmpInfo(id: any) {
-    return this.httpClient.delete(`${this.deleteEmpInfoURI}/${id}`);
-  }
-  deleteImportedEmpInfo(id: any) {
-    return this.httpClient.delete(`${this.deleteImportedEmpInfoURI}/${id}`);
-  }
+    }
+
+    getEmploymentsByUserId() {
+        return this.httpClient.get(`${this.getEmploymentsByUserIdURI}/${this.storageService.getApplicantId}`);
+    }
+
+    getImportedEmploymentHistory() {
+        return this.httpClient.get(`${this.getImportedEmploymentInfoURI}/${this.storageService.getApplicantId}`);
+    }
+
+    deleteEmpInfo(id: any) {
+        return this.httpClient.delete(`${this.deleteEmpInfoURI}/${id}`);
+    }
+
+    deleteImportedEmpInfo(id: any) {
+        return this.httpClient.delete(`${this.deleteImportedEmpInfoURI}/${id}`);
+    }
 
 }
