@@ -144,6 +144,7 @@ namespace RecruiterPortal.API.Controllers
             try
             {
                 UserCompany userCompany = new UserCompany();
+                userCompany.UserCompanyId = Convert.ToInt64(employment.ID);
                 userCompany.CompanyName = employment.CompanyName;
                 userCompany.EminstituteId = employment.InstituteID;
                 userCompany.CompanyAddress = employment.CompanyAddress;
