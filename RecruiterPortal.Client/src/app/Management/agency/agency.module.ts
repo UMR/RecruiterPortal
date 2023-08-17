@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { AgencyRoutingModule } from './agency-routing.module';
 import { AgencyComponent } from './agency.component';
 import { SharedModule } from '../../common/shared.module';
+import { LoadingImageModule } from '../../common/loading-image.module';
+import { ToastModule } from 'primeng/toast';
+import { TableModule } from 'primeng/components/table/table';
 
 
 @NgModule({
@@ -11,7 +14,10 @@ import { SharedModule } from '../../common/shared.module';
     imports: [
         CommonModule,
         AgencyRoutingModule,
-        SharedModule
+        SharedModule,
+        LoadingImageModule,
+        ToastModule,
+        TableModule
     ]
 })
 export class AgencyModule { }

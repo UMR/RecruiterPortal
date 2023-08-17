@@ -3,8 +3,42 @@
     <applicant-portal-header (onToggleButtonClicked)="(showHideMenu)()" isVisibleToggleButton=0></applicant-portal-header>
     <section class="main-content">
         <div class="container-fluid">
-            <h1>agency works!</h1>
+            <p-table #agencyTable [responsive]="true"
+                     [value]="agencies"
+                     selectionMode="single"
+                     [(selection)]="selectedAgency"
+                     dataKey="agencyId"
+                     [paginator]="true"
+                     [rows]="rows"
+                     [columns]="cols"
+                     [totalRecords]="totalAgency"
+                     [lazy]="true"
+                     (onLazyLoad)="loadAgencyLazy($event)"
+                     [rowsPerPageOptions]="[10,15,20]"
+                     [showCurrentPageReport]="true"
+                     currentPageReportTemplate="Total Records {{totalAgecny}}">
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th>Agency Name</th>
+                        <th>Agency URL Prefix</th>
+                        <th>Agency Email</th>
+                        <th>Agency Phone</th>
+                        <th>Contact Person</th>
+                        <th>Contact Person Phone</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-applicant let-rowData let-columns="columns">
+                    <tr [pSelectableRow]="applicant">
+                        <td *ngFor="let col of columns">
+                            <span class="p-column-title" style="padding-bottom: 2px; font-weight: bold;">{{col.header}}:&nbsp;</span>{{rowData[col.field]}}
+                        </td>
+                        <td class="text-center"><a (click)="onEdit(agency.agencyId)"><i class="pi pi-pencil"></i></a></td>
+                    </tr>
+                </ng-template>
+            </p-table>
         </div>
     </section>
 </div>
-
+<p-toast key="toastKey1"></p-toast>
