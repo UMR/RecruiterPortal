@@ -428,5 +428,6 @@
     <None Include="2023-08-16\01_AZ_01_CREATE_TABLE_Position.sql" />
     <None Include="2023-08-16\02_AZ_02_ALTER_PROCEDURE_GetPosition.sql" />
     <None Include="Special\05_AZ_05_Position_Insert_Data.sql" />
+    <None Include="Special\status.txt" />
   </ItemGroup>
 </Project>
