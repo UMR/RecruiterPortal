@@ -50,7 +50,7 @@ export class EditMilitaryComponent implements OnInit {
         this.editMilitaryService.getUserMilitary(this.service.getApplicantId)
             .subscribe(data => {
                 if (data.status === 200) {
-                    this.userMilitary = data.body;
+                    this.userMilitary = data.body;                    
                     this.onDischargeChange();
                     this.fillUserMilitary();
                 }
@@ -89,8 +89,7 @@ export class EditMilitaryComponent implements OnInit {
                 this.militaryFormGroup.get('toDate').setValue(toDate);
             }
             this.militaryFormGroup.get('rankDischarge').setValue(this.userMilitary.RankAtDischarge);
-            if (this.userMilitary.DischargeType == 0 || this.userMilitary.DischargeType == 1) {
-                console.log('tr');
+            if (this.userMilitary.DischargeType == 0 || this.userMilitary.DischargeType == 1) {                
                 let dischargeType = this.userMilitary.DischargeType ? 1 : 0;
                 this.militaryFormGroup.get('typeDischarge').setValue(dischargeType);
             }
@@ -107,8 +106,7 @@ export class EditMilitaryComponent implements OnInit {
         }
     }
 
-    onSave() {
-        console.log(this.userMilitary);
+    onSave() {        
         if (this.userMilitary) {
             this.userMilitaryID = this.userMilitary.UserMilitaryID;
         }

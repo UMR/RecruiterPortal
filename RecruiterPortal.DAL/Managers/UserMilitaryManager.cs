@@ -38,67 +38,9 @@ namespace RecruiterPortalDAL.Managers
 
             try
             {
-                SqlParameter[] sqlParameters = new GenericRepository<UserMilitary>().GetSqlParametersFromStoredProcedure(spName);
-
-                foreach (SqlParameter sqlParameter in sqlParameters)
-                {
-                    if ("@p_" + nameof(userMilitary.UserMilitaryId).ToLower() == sqlParameter.ParameterName.ToLower())
-                    {
-                        sqlParameter.Value = userMilitary.UserMilitaryId;
-                    }
-                    else if ("@p_" + nameof(userMilitary.Branch).ToLower() == sqlParameter.ParameterName.ToLower())
-                    {
-                        sqlParameter.Value = userMilitary.Branch;
-                    }
-                    else if ("@p_" + nameof(userMilitary.FromDate) == sqlParameter.ParameterName)
-                    {
-                        if (userMilitary.FromDate != null)
-                        {
-                            sqlParameter.Value = userMilitary.FromDate;
-                        }
-                        else
-                        {
-                            sqlParameter.Value = DBNull.Value;
-                        }
-                    }
-                    else if ("@p_" + nameof(userMilitary.ToDate) == sqlParameter.ParameterName)
-                    {
-                        if (userMilitary.ToDate != null)
-                        {
-                            sqlParameter.Value = userMilitary.ToDate;
-                        }
-                        else
-                        {
-                            sqlParameter.Value = DBNull.Value;
-                        }
-                    }
-                    else if ("@p_" + nameof(userMilitary.RankAtDischarge) == sqlParameter.ParameterName)
-                    {
-                        sqlParameter.Value = userMilitary.RankAtDischarge;
-                    }
-                    else if ("@p_" + nameof(userMilitary.TypeOfDischarge) == sqlParameter.ParameterName)
-                    {
-                        if (userMilitary.TypeOfDischarge != null)
-                        {
-                            sqlParameter.Value = userMilitary.TypeOfDischarge;
-                        }
-                        else 
-                        {
-                            sqlParameter.Value = DBNull.Value;
-                        }
-                    }
-                    else if ("@p_" + nameof(userMilitary.DisonourComment) == sqlParameter.ParameterName)
-                    {
-                        sqlParameter.Value = userMilitary.DisonourComment;
-                    }
-                    else if ("@p_" + nameof(userMilitary.UserId) == sqlParameter.ParameterName)
-                    {
-                        sqlParameter.Value = userMilitary.UserId;
-                    }
-                }
-
-                return new GenericRepository<UserMilitary>().Update(spName, sqlParameters);
-
+                GenericRepository<UserMilitary> userMilitartRepo = new GenericRepository<UserMilitary>();
+                SqlParameter[] sqlParameters = userMilitartRepo.GetSqlParametersFromObject(userMilitary,spName, "@p_");
+                return userMilitartRepo.Update(spName, sqlParameters);
             }
             catch (Exception ex)
             {
