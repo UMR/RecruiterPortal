@@ -164,16 +164,16 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             try
             {
-                IEnumerable<Country> view_CountryNameList;
+                IEnumerable<Country> countries;
                 if (countryName == "all")
                 {
-                    view_CountryNameList = CountryManager.GetCountryName("");
+                    countries = CountryManager.GetCountryName("");
                 }
                 else
                 {
-                    view_CountryNameList = CountryManager.GetCountryName(countryName);
+                    countries = CountryManager.GetCountryName(countryName);
                 }
-                return Ok(new ResponseModels<IEnumerable<Country>>(view_CountryNameList));
+                return Ok(new ResponseModels<IEnumerable<Country>>(countries));
             }
             catch (Exception ex)
             {

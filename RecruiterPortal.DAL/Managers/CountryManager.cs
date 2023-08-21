@@ -12,13 +12,13 @@ namespace RecruiterPortalDAL.Managers
             string spName = "sp_GetCountryName";
             try
             {
-                GenericRepository<Country> view_Country_NameRepo = new GenericRepository<Country>();
+                GenericRepository<Country> countryRepo = new GenericRepository<Country>();
                 dynamic expandoObject = new ExpandoObject();
                 expandoObject.CountryName = countryName;
-                SqlParameter[] sqlParameters = view_Country_NameRepo.GetSqlParametersFromExpandoObject(expandoObject, spName);
-                IEnumerable<Country> view_CountryNameList = view_Country_NameRepo.GetAll(spName, sqlParameters); ;
+                SqlParameter[] sqlParameters = countryRepo.GetSqlParametersFromExpandoObject(expandoObject, spName);
+                IEnumerable<Country> countries = countryRepo.GetAll(spName, sqlParameters);
 
-                return view_CountryNameList;
+                return countries;
             }
             catch (Exception ex)
             {
