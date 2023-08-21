@@ -7,7 +7,7 @@ import { resourceServerUrl } from '../../common/constants/auth-keys';
 })
 export class AgencyService {
 
-    private getAgencyURI: string = `${resourceServerUrl}/api/applicant-info/get-all-applicant`;
+    private getAgencyURI: string = `${resourceServerUrl}/api/agency/get`;
 
     constructor(private httpClient: HttpClient) { }
     getAgency() {
