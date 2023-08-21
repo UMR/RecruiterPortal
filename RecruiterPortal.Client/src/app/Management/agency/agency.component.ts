@@ -36,7 +36,7 @@ export class AgencyComponent implements OnInit {
                 console.log(response);
                 if (response.status === 200) {
                     this.agencies = (response.body as any).agencies;
-                    this.totalAgency = (response.body as any).totalAgency;
+                    this.totalAgency = (response.body as any).agencyCount;
                 }
             },
                 err => {
@@ -46,5 +46,13 @@ export class AgencyComponent implements OnInit {
                 () => {
                     this.isLoading = false;
                 });
+    }
+
+    onEdit(agencyId) {
+        console.log(agencyId);
+    }
+
+    onDelete(agencyId) {
+        console.log(agencyId);
     }
 }

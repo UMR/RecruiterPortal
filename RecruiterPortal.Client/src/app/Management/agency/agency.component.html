@@ -29,13 +29,16 @@
                         <th>Action</th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-applicant let-rowData let-columns="columns">
-                    <tr [pSelectableRow]="applicant">
-                        <td *ngFor="let col of columns">
-                            <span class="p-column-title" style="padding-bottom: 2px; font-weight: bold;">{{col.header}}:&nbsp;</span>{{rowData[col.field]}}
-                        </td>
-                        <td class="text-center"><a (click)="onEdit(agency.agencyId)"><i class="pi pi-pencil"></i></a></td>
-                    </tr>
+                <ng-template pTemplate="body" let-agency let-rowData let-columns="columns">
+                    <tr [pSelectableRow]="agency">
+                        <td>{{agency.AgencyName}}</td>
+                        <td>{{agency.Urlprefix}}</td>
+                        <td>{{agency.AgencyEmail}}</td>
+                        <td>{{agency.AgencyPhone}}</td>
+                        <td>{{agency.AgencyContactPerson}}</td>
+                        <td>{{agency.AgencyContactPersonPhone}}</td>
+                        <td>{{agency.IsActive}}</td>
+                        <td><a (click)="onEdit(agency.AgencyId)"><i class="pi pi-pencil"></i></a><a style="color:red" (click)="onDelete(agency.AgencyId)"><i class="pi pi-trash"></i></a></td>                    </tr>
                 </ng-template>
             </p-table>
         </div>

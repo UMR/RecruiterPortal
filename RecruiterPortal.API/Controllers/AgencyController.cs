@@ -23,16 +23,30 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
             try
             {
+                List<AgencyModel> agencyModelList = new List<AgencyModel>();
                 DataTable agencyDt = AgencyManager.GetAgencies();
-                AgencyModel agencyModel = null;
-
+                int agencyCount = 0;
                 if (agencyDt != null && agencyDt.Rows.Count > 0)
                 {
-                    agencyModel = new AgencyModel();
-                    base.MapObjects(agencyDt, agencyModel);
-                }
+                    agencyCount=agencyDt.Rows.Count;    
+                    foreach (DataRow oRow in agencyDt.Rows)
+                    {
+                        AgencyModel agency = new AgencyModel();
 
-                return Ok(agencyModel);
+                        agency.AgencyAddress = oRow["AgencyAddress"].ToString(); 
+                        agency.AgencyContactPerson = oRow["AgencyContactPerson"].ToString();
+                        agency.AgencyContactPersonPhone = oRow["AgencyContactPersonPhone"].ToString();
+                        agency.AgencyEmail = oRow["AgencyEmail"].ToString();
+                        agency.AgencyName = oRow["AgencyName"].ToString();
+                        agency.AgencyPhone = oRow["AgencyPhone"].ToString();
+                        agency.Urlprefix = oRow["Urlprefix"].ToString();
+                        agency.IsActive = Convert.ToBoolean(oRow["IsActive"].ToString());
+                        agency.AgencyId = Convert.ToInt64(oRow["AgencyId"].ToString());
+                        agencyModelList.Add(agency);
+                    }
+                }
+                return Ok(new { agencies = agencyModelList, totalApplicants = agencyCount });
+                //return Ok(agencyModelList);
             }
             catch (Exception ex)
             {
