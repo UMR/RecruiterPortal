@@ -24,13 +24,13 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
             try
             {
-                AgreementFrom userUSCI = AgreementFormManager.GetAgreementByUserID(applicantId);
+                AgreementFrom agreement = AgreementFormManager.GetAgreementByUserID(applicantId);
                 AgreementModel agreemetModel = null;
 
-                if (userUSCI != null)
+                if (agreement != null)
                 {
                     agreemetModel = new AgreementModel();
-                    base.MapObjects(userUSCI, agreemetModel);
+                    base.MapObjects(agreement, agreemetModel);
                 }
 
                 return Ok(agreemetModel);
