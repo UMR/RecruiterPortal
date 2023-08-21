@@ -67,15 +67,15 @@ const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
-        path: 'agency', loadChildren: './management/agency/agency.module#AgencyModule'
+        path: 'agency', loadChildren: () => import('./management/agency/agency.module').then(m => m.AgencyModule)
     },
     {
         canActivate: [AuthGuard],
-        path: 'role', loadChildren: './management/role/role.module#RoleModule'
+        path: 'role', loadChildren: () => import('./management/role/role.module').then(m => m.RoleModule)
     },
     {
         canActivate: [AuthGuard],
-        path: 'user', loadChildren: './management/user/user.module#UserModule'
+        path: 'user', loadChildren: () => import('./management/user/user.module').then(m => m.UserModule)
     },
     {
         canActivate: [AuthGuard],
