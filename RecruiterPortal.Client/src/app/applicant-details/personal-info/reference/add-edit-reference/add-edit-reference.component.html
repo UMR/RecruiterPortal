@@ -1,63 +1,94 @@
 <loading-image [is-loading]="isLoading"></loading-image>
 <div class="card portal-card">
   <div class="card-body px-3 py-3">
-    <form [formGroup]="refFormGroup" novalidate>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="name" class="form-label">Name</label>
-            <input id="name" name="name" type="text" class="form-control" autofocus autocomplete="off" tabindex="1" maxlength="50" formControlName="name" pTooltip="Maximum 50 characters" tooltipPosition="top" tooltipEvent="focus" required>
+      <form [formGroup]="refFormGroup" novalidate>
+          <div class="row">
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="lastName" class="form-label">Last Name</label>
+                      <input id="lastName" name="lastName" type="text" class="form-control" autofocus autocomplete="off" tabindex="1" maxlength="30" formControlName="lastName" pTooltip="Maximum 30 characters" tooltipPosition="top" tooltipEvent="focus" required>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="firstName" class="form-label">First Name</label>
+                      <input id="firstName" name="firstName" type="text" class="form-control" autocomplete="off" tabindex="2" maxlength="30" formControlName="firstName" pTooltip="Maximum 30 characters" tooltipPosition="top" tooltipEvent="focus" required>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="middleName" class="form-label">Middle Name</label>
+                      <input id="middleName" name="middleName" type="text" class="form-control" autocomplete="off" tabindex="3" maxlength="30" formControlName="middleName" pTooltip="Maximum 30 characters" tooltipPosition="top" tooltipEvent="focus">
+                  </div>
+              </div>
           </div>
-        </div>
-        <div class="col-md-6">
+          <div class="row">
+              <!--<div class="col-md-4">
           <div class="form-group">
             <label for="phone" class="form-label">Phone</label>
             <input id="phone" name="phone" type="text" class="form-control" autocomplete="off" tabindex="4" maxlength="25" formControlName="phone" pTooltip="Maximum 25 characters" tooltipPosition="top" tooltipEvent="focus" E164PhoneNumber="true" required>
           </div>
-        </div>
-        <!--<div class="col-md-4">
-          <div class="form-group">
-            <label for="firstName" class="form-label">First Name</label>
-            <input id="firstName" name="firstName" type="text" class="form-control" autocomplete="off" tabindex="2" maxlength="30" formControlName="firstName" pTooltip="Maximum 30 characters" tooltipPosition="top" tooltipEvent="focus" required>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-group">
-            <label for="middleName" class="form-label">Middle Name</label>
-            <input id="middleName" name="middleName" type="text" class="form-control" autocomplete="off" tabindex="3" maxlength="30" formControlName="middleName" pTooltip="Maximum 30 characters" tooltipPosition="top" tooltipEvent="focus">
-          </div>
         </div>-->
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="relationship" class="form-label">Relationship</label>
-            <select id="relationship" name="relationship" class="form-control" formControlName="relationship" placeholder="Type of Relationship"
-                    tabindex="5">
-              <option value="">----Select Relationship----</option>
-              <option value="Academic Reference">Academic Reference</option>
-              <option value="Professional Reference">Professional Reference</option>
-              <option value="Other">Other</option>
-            </select>
-            <!--<input id="relationship" name="relationship" type="text" class="form-control" autocomplete="off" tabindex="5" maxlength="30" formControlName="relationship" pTooltip="Maximum 30 characters" tooltipPosition="top" tooltipEvent="focus">-->
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="referenceType" class="form-label">Reference Type</label>
+                      <select id="referenceType" name="referenceType" class="form-control" formControlName="referenceType" placeholder="Select a Reference Type" required
+                              tabindex="5">
+                          <option value="">-- Select Reference Type --</option>
+                          <option value="Professional Reference">Professional</option>
+                          <option value="Academic Reference">Personal</option>
+                      </select>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="relationship" class="form-label">Relationship</label>
+                      <!-- <input id="relationship" name="relationship" type="text" class="form-control" autocomplete="off" tabindex="5" maxlength="30" formControlName="relationship" pTooltip="Maximum 30 characters" tooltipPosition="top" tooltipEvent="focus">-->
+
+                      <select id="relationship" name="relationship" class="form-control" formControlName="relationship" placeholder="Select a Relationship"
+                              tabindex="5">
+                          <option value="">---- Select Relationship ----</option>
+                          <option *ngIf="refFormGroup.get('referenceType').value=='Professional Reference'" value="Former Employer">Former Employer</option>
+                          <option *ngIf="refFormGroup.get('referenceType').value=='Professional Reference'" value="Colleague">Colleague</option>
+                          <option *ngIf="refFormGroup.get('referenceType').value=='Professional Reference'" value="Teacher">Teacher</option>
+                          <option *ngIf="refFormGroup.get('referenceType').value=='Professional Reference'" value="Advisor">Advisor</option>
+                          <option *ngIf="refFormGroup.get('referenceType').value=='Professional Reference'" value="Supervisor">Supervisor</option>
+                          <option *ngIf="refFormGroup.get('referenceType').value=='Academic Reference'" value="Family">Family</option>
+                          <option *ngIf="refFormGroup.get('referenceType').value=='Academic Reference'" value="Friend">Friend</option>
+                          <option *ngIf="refFormGroup.get('referenceType').value=='Academic Reference' || refFormGroup.get('referenceType').value=='Professional Reference'" value="Other">Others</option>
+                      </select>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="company" class="form-label">Company</label>
+                      <input id="company" name="company" type="text" class="form-control" autocomplete="off" tabindex="6" maxlength="500" formControlName="company" pTooltip="Maximum 500 characters" tooltipPosition="top" tooltipEvent="focus">
+                  </div>
+              </div>
           </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="company" class="form-label">Company</label>
-            <input id="company" name="company" type="text" class="form-control" autocomplete="off" tabindex="6" maxlength="500" formControlName="company" pTooltip="Maximum 500 characters" tooltipPosition="top" tooltipEvent="focus">
+          <div class="row">
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="phone" class="form-label">Phone</label>
+                      <input id="phone" name="phone" type="text" class="form-control" autocomplete="off" tabindex="4" maxlength="25" formControlName="phone" pTooltip="Maximum 25 characters" tooltipPosition="top" tooltipEvent="focus" E164PhoneNumber="true" required>
+                  </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label for="email" class="form-label">Email</label>
+                      <input id="email" name="email" type="text" class="form-control" autocomplete="off" tabindex="5" maxlength="30" formControlName="email" pTooltip="Maximum 50 characters" tooltipPosition="top" tooltipEvent="focus" required>
+                  </div>
+              </div>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-group">
-            <label for="address" class="form-label">Address</label>
-            <input id="address" name="address" type="text" class="form-control" autocomplete="off" tabindex="7" maxlength="50" formControlName="address" pTooltip="Maximum 50 characters" tooltipPosition="top" tooltipEvent="focus">
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="form-group">
+                      <label for="address" class="form-label">Address</label>
+                      <input id="address" name="address" type="text" class="form-control" autocomplete="off" tabindex="7" maxlength="50" formControlName="address" pTooltip="Maximum 50 characters" tooltipPosition="top" tooltipEvent="focus">
+                  </div>
+              </div>
           </div>
-        </div>
-      </div>
-    </form>
+      </form>
   </div>
   <div class="card-footer">
     <ul class="list-inline mb-0 d-flex justify-content-between">
