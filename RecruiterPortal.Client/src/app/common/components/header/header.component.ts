@@ -22,25 +22,25 @@ export class HeaderComponent {
   }
 
   ngOnInit() {
-    this.agencyProfileService.isAgencyOwner()
-      .subscribe(response => {
-        if (response.status === 200) {
-          this.isAgencyOwner = response.body;
-        }
-      });
+    //this.agencyProfileService.isAgencyOwner()
+    //  .subscribe(response => {
+    //    if (response.status === 200) {
+    //      this.isAgencyOwner = response.body;
+    //    }
+    //  });
 
-    this.userProfileService.getCurrentUser()
-      .subscribe(response => {
-        if (response.status === 200) {          
-          this.userProfileService.setUsername(response.body.LastName + ' ' + response.body.FirstName);          
-        }
-      });    
+    //this.userProfileService.getCurrentUser()
+    //  .subscribe(response => {
+    //    if (response.status === 200) {          
+    //      this.userProfileService.setUsername(response.body.LastName + ' ' + response.body.FirstName);          
+    //    }
+    //  });    
 
-    this.userProfileService.selectedUsername$.subscribe(username => {
-      if (username) {
-        this.username = username;
-      }
-    });
+    //this.userProfileService.selectedUsername$.subscribe(username => {
+    //  if (username) {
+    //    this.username = username;
+    //  }
+    //});
 
     //if (this.route.snapshot.data['home']) {
     //  this.userProfileService.setUser(this.route.snapshot.data['home'][0].body);
