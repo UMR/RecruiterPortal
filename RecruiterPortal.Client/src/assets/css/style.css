@@ -292,7 +292,7 @@ p-footer > .btn-cancel {
 #sidebar-wrapper {
   margin-top: 56px;
   /*min-height: calc(100vh - 56px);*/
-  min-height: calc(100vh - -56px);
+  min-height: calc(100vh -56px);
   margin-left: -12rem;
   -webkit-transition: margin .25s ease-out;
   -moz-transition: margin .25s ease-out;
