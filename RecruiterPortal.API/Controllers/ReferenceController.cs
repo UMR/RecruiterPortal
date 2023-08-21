@@ -55,7 +55,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
         [Route("user-reference-by-id/{userReferenceId}")]
         [HttpGet]
-        public IActionResult GetUserReferenceByUserId(long userReferenceId)
+        public IActionResult GetUserReferenceById(long userReferenceId)
         {
             try
             {

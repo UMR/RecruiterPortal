@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
-import { applicantId } from '../../../../common/constants/auth-keys';
 import { StorageService } from '../../../../common/services/storage.service';
 import { ReferenceService } from '../reference.service';
 
@@ -82,9 +81,6 @@ export class AddEditReferenceComponent implements OnInit {
     }
 
     onSave() {
-
-        console.log(applicantId);
-
         const model: any = {
             userReferenceID: this.userReferenceId ? +this.userReferenceId : 0,
             refLastName: this.refFormGroup.get('lastName').value,

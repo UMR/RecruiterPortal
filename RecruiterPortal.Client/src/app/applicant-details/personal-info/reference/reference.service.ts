@@ -1,45 +1,43 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { resourceServerUrl } from '../../../common/constants/auth-keys';
 
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ReferenceService {
+    constructor(private http: HttpClient) {
+    }
 
-  private getAllUserReferenceByUserIdURI: string = `${resourceServerUrl}/api/user-reference/applicant-reference/`;
-  private getUserReferenceByIdURI: string = `${resourceServerUrl}/api/user-reference/`;
-  private saveUserReferenceURI: string = `${resourceServerUrl}/api/user-reference/save`;
-  private updateUserReferenceURI: string = `${resourceServerUrl}/api/user-reference/update`;
-  private deleteUserReferenceURI: string = `${resourceServerUrl}/api/user-reference/delete/`;
+    getAllUserReferenceByUserId(applicantId: number): Observable<HttpResponse<any>> {
+        const URI = `${resourceServerUrl}/api/user-reference/applicant-reference/${applicantId}`;
+        return this.http.get(URI, { observe: 'response' });
+    }
 
-  constructor(private http: HttpClient) {
-  }
+    getUserReferenceById(id: any): Observable<HttpResponse<any>> {
+        const URI = `${resourceServerUrl}/api/user-reference/user-reference-by-id/${id}`;
+        return this.http.get(URI, { observe: 'response' });
+    }
 
-  getAllUserReferenceByUserId(applicantId: number): Observable<HttpResponse<any>> {
-    return this.http.get(this.getAllUserReferenceByUserIdURI + applicantId, { observe: 'response' });
-  }
+    save(userReference: any): Observable<HttpResponse<any>> {
+        const URI = `${resourceServerUrl}/api/user-reference/save`;
+        return this.http.post(URI, userReference, {
+            headers: new HttpHeaders()
+                .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
+        });
+    }
+    update(userReference): Observable<HttpResponse<any>> {
+        const URI = `${resourceServerUrl}/api/user-reference/update`;
+        return this.http.put(URI, userReference, {
+            headers: new HttpHeaders()
+                .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
+        });
+    }
 
-  getUserReferenceById(id: any): Observable<HttpResponse<any>> {
-    return this.http.get(this.getUserReferenceByIdURI + "/" + id, { observe: 'response' });
-  }
-
-  save(userReference: any): Observable<HttpResponse<any>> {
-    return this.http.post(this.saveUserReferenceURI, userReference, {
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
-    });
-  }
-  update(userReference): Observable<HttpResponse<any>> {
-    return this.http.put(this.updateUserReferenceURI, userReference, {
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
-    });
-  }
-
-  delete(userReferenceId: number) {
-    return this.http.delete(this.deleteUserReferenceURI + userReferenceId);
-  }
+    delete(userReferenceId: number) {
+        const URI: string = `${resourceServerUrl}/api/user-reference/delete/${userReferenceId}`;
+        return this.http.delete(URI);
+    }
 }
