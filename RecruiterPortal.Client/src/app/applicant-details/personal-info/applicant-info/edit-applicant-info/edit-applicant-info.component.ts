@@ -54,10 +54,8 @@ export class EditApplicantInfoComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.editApplicantInfoService.getApplicantInfo().subscribe(data => {
-            console.log(data);
-            this.editApplicantInfoModel = data.body[0] as EditApplicantInfoModel;
-            //console.log(data.body.Data);
+        this.editApplicantInfoService.getApplicantInfo().subscribe(data => {            
+            this.editApplicantInfoModel = data.body[0] as EditApplicantInfoModel;            
             this.editApplicantInfoFormGroup.setValue({
                 lastName: this.checkNullOrUndefined(this.editApplicantInfoModel.LastName),
                 firstName: this.checkNullOrUndefined(this.editApplicantInfoModel.FirstName),
@@ -73,8 +71,7 @@ export class EditApplicantInfoComponent implements OnInit {
                 phoneId: this.checkNullOrUndefined(this.editApplicantInfoModel.ApplicantPhoneID),
                 ssn: this.checkNullOrUndefined(this.editApplicantInfoModel.SSN),
                 dateAvailable: this.editApplicantInfoModel.DateAvailable ? new Date(this.editApplicantInfoModel.DateAvailable) : null,
-                desiredSalary: this.checkNullOrUndefined(this.editApplicantInfoModel.DesiredSalary),
-                //positionAppliedFor: { Text: this.checkNullOrUndefined(this.editApplicantInfoModel.PositionAppliedFor) },
+                desiredSalary: this.checkNullOrUndefined(this.editApplicantInfoModel.DesiredSalary),                
                 positionAppliedFor: { PositionName: this.checkNullOrUndefined(this.editApplicantInfoModel.PositionAppliedFor) },
                 positionAppliedForId: this.checkNullOrUndefined(this.editApplicantInfoModel.DesiredPositionId),
                 isUSCitizen: this.setRadioButtonData(this.editApplicantInfoModel.IsUSCitizen),
@@ -98,10 +95,7 @@ export class EditApplicantInfoComponent implements OnInit {
             if (this.editApplicantInfoFormGroup.get('isUSCitizen').value != 'NO') {
                 //this.editApplicantInfoFormGroup.patchValue({ isAuthorized: '' });
                 this.editApplicantInfoFormGroup.controls['isAuthorized'].disable();
-            }
-            //if (this.editApplicantInfoFormGroup.get('zipCode').value.zipCode == '') {
-            //    this.editApplicantInfoFormGroup.controls['zipCode'].setErrors({ 'incorrect': true });
-            //}
+            }            
         },
             err => { this.isLoading = false; this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get applicant info', detail: '' }); },
             () => { this.isLoading = false; });
@@ -118,14 +112,11 @@ export class EditApplicantInfoComponent implements OnInit {
         applicantInfoModel.ZipCode = this.editApplicantInfoFormGroup.get('zipCode').value ? this.editApplicantInfoFormGroup.get('zipCode').value.ZipCode : "";
         applicantInfoModel.City = this.editApplicantInfoFormGroup.get('city').value ? this.editApplicantInfoFormGroup.get('city').value.trim() : "";
         applicantInfoModel.State = this.editApplicantInfoFormGroup.get('state').value ? this.editApplicantInfoFormGroup.get('state').value.trim() : "";
-        applicantInfoModel.Email = this.editApplicantInfoFormGroup.get('email').value ? this.editApplicantInfoFormGroup.get('email').value.trim() : "";
-        applicantInfoModel.ApplicantEmailID = this.editApplicantInfoFormGroup.get('emailId').value ? this.editApplicantInfoFormGroup.get('emailId').value.trim() : "";
-        applicantInfoModel.Phone = this.editApplicantInfoFormGroup.get('phone').value ? this.editApplicantInfoFormGroup.get('phone').value.trim() : "";
-        applicantInfoModel.ApplicantPhoneID = this.editApplicantInfoFormGroup.get('phoneId').value ? this.editApplicantInfoFormGroup.get('phoneId').value.trim() : "";
+        applicantInfoModel.Email = this.editApplicantInfoFormGroup.get('email').value ? this.editApplicantInfoFormGroup.get('email').value.trim() : "";        
+        applicantInfoModel.Phone = this.editApplicantInfoFormGroup.get('phone').value ? this.editApplicantInfoFormGroup.get('phone').value.trim() : "";        
         applicantInfoModel.SSN = this.editApplicantInfoFormGroup.get('ssn').value ? this.editApplicantInfoFormGroup.get('ssn').value.trim() : "";
         applicantInfoModel.DateAvailable = this.editApplicantInfoFormGroup.get('dateAvailable').value == "" ? null : this.getUTCFormatedDate(this.editApplicantInfoFormGroup.get('dateAvailable').value);
-        applicantInfoModel.DesiredSalary = this.editApplicantInfoFormGroup.get('desiredSalary').value ? this.editApplicantInfoFormGroup.get('desiredSalary').value.trim() : "";
-        //applicantInfoModel.PositionAppliedFor = this.editApplicantInfoFormGroup.get('positionAppliedFor').value.position_Name;
+        applicantInfoModel.DesiredSalary = this.editApplicantInfoFormGroup.get('desiredSalary').value ? this.editApplicantInfoFormGroup.get('desiredSalary').value.trim() : "";        
         applicantInfoModel.PositionAppliedFor = this.editApplicantInfoFormGroup.get('positionAppliedFor').value ? this.editApplicantInfoFormGroup.get('positionAppliedFor').value.PositionName : "";
         applicantInfoModel.IsUSCitizen = this.getBooleanValue(this.editApplicantInfoFormGroup.get('isUSCitizen').value ? this.editApplicantInfoFormGroup.get('isUSCitizen').value.trim() : "");
         applicantInfoModel.IsAuthorized = this.getBooleanValue(this.editApplicantInfoFormGroup.get('isAuthorized').value ? this.editApplicantInfoFormGroup.get('isAuthorized').value.trim() : "");
@@ -136,8 +127,6 @@ export class EditApplicantInfoComponent implements OnInit {
         applicantInfoModel.Gender = this.editApplicantInfoFormGroup.get('gender').value;
         applicantInfoModel.CountryOfBirth = this.editApplicantInfoFormGroup.get('countryOfBirth').value.CountryName;
         applicantInfoModel.CountryFromApplied = this.editApplicantInfoFormGroup.get('countryFromApplied').value.CountryName;
-
-        console.log(applicantInfoModel);
 
         this.isLoading = true;
         this.editApplicantInfoService.updateApplicantInfo(applicantInfoModel)

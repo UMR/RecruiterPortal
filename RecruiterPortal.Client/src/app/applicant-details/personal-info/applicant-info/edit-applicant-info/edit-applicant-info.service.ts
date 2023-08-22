@@ -10,8 +10,7 @@ export class EditApplicantInfoService {
 
     private applicantInfoDetailsURI: string = `${resourceServerUrl}/api/applicant-info/details/`;
     private applicantInfoUpdateURI: string = `${resourceServerUrl}/api/applicant-info/update`;
-    private zipcodeCityStateURI: string = `${resourceServerUrl}/api/applicant-info/zipcode-city-state/`;
-    private countryNameURI: string = `${resourceServerUrl}/api/applicant-info/country-name/`;
+    private zipcodeCityStateURI: string = `${resourceServerUrl}/api/applicant-info/zipcode-city-state/`;    
     private getEmploymentApplicantionByApplicantIdURI: string = `${resourceServerUrl}/api/applicant-info/file/`;
 
     constructor(private http: HttpClient, private storageService: StorageService) { }
@@ -25,8 +24,7 @@ export class EditApplicantInfoService {
             'Content-Type': 'application/json',
             'Accept': 'application/pdf'
         })
-        return this.http.get(this.getEmploymentApplicantionByApplicantIdURI + this.storageService.getApplicantId, { headers: headerOptions, responseType: 'blob' as 'blob', observe: 'response' });
-        //return this.http.get(this.getEmploymentApplicantionByApplicantIdURI + this.storageService.getApplicantId, { observe: 'response' });
+        return this.http.get(this.getEmploymentApplicantionByApplicantIdURI + this.storageService.getApplicantId, { headers: headerOptions, responseType: 'blob' as 'blob', observe: 'response' });        
     }
 
     updateApplicantInfo(editApplicantInfoModel: EditApplicantInfoModel): Observable<HttpResponse<any>> {
