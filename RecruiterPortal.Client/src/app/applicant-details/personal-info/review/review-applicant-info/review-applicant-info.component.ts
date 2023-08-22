@@ -13,9 +13,10 @@ export class ReviewApplicantInfoComponent implements OnInit {
     constructor(private applicantInfoService: ReviewApplicantInfoService) { }
 
     ngOnInit() {
-        this.applicantInfoService.getApplicantInfo().subscribe(data => {
-            console.log(data);
-            this.editApplicantInfoModel = data.body.Data[0] as EditApplicantInfoModel;
+        this.applicantInfoService.getApplicantInfo().subscribe(response => {
+            if (response.status === 200) {
+                this.editApplicantInfoModel = response.body[0] as EditApplicantInfoModel;
+            }
         },
             err => {
                 console.log(err);

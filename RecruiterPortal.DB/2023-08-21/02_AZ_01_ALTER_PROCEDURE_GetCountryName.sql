@@ -1,6 +1,6 @@
 ﻿USE [UMRRecruitmentApplicant]
 GO
-/****** Object:  StoredProcedure [dbo].[sp_GetCountryName]    Script Date: 8/21/2023 8:02:40 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_GetCountryName]    Script Date: 8/22/2023 2:31:46 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -20,7 +20,7 @@ BEGIN
 	SET NOCOUNT ON;
 
     IF (@CountryName IS NOT NULL)
-		SELECT TOP 10 * FROM Country WHERE CountryName LIKE ''+@CountryName+'%' ORDER BY CountryName
+		SELECT TOP 10 * FROM Country WHERE CountryName LIKE @CountryName + '%' ORDER BY CountryName
 	ELSE
 		SELECT TOP 100 * FROM Country ORDER BY CountryName
 

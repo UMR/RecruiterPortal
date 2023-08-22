@@ -1,8 +1,6 @@
-﻿INSERT INTO [UMRRecruitmentApplicant].[dbo].[Position]
-           ([PositionName]           
-           ,[CreatedBy]
-           ,[CreatedDate]
-           ,[UpdatedBy]
-           ,[UpdatedDate])
+﻿
+INSERT INTO [UMRRecruitmentApplicant].[dbo].[Country] ([CountryName],[Description],[CreatedBy],[CreatedDate],[UpdatedBy],[UpdatedDate])
 
-SELECT PositionName, CreatedBy, CreatedDate, UpdatedBy, UpdatedDate FROM [UMRRecruitementDB_New].[dbo].[Position]
+SELECT [CountryName],[Description],[CreatedBy],[CreatedDate],[UpdatedBy],[UpdatedDate] FROM [UMRRecruitementDB_New].[dbo].[Country]
+
+
