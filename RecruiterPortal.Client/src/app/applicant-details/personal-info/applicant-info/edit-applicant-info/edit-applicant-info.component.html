@@ -1,280 +1,239 @@
 <loading-image [is-loading]="isLoading"></loading-image>
 <div class="tab-pane show active" id="v-pills-applicant" role="tabpanel" aria-labelledby="v-pills-applicant-tab">
-  <div class="card portal-card">
-    <form (ngSubmit)="onSubmit()" [formGroup]="editApplicantInfoFormGroup" novalidate>
-      <div class="card-body px-3 py-3">
-        <div class="row">
-          <div class="col">
-            <div class="form-group">
-              <label for="lastname" class="form-label">Last Name</label>
-              <input id="lastname" name="lastname" type="text" class="form-control" autocomplete="off" autofocus
-                     formControlName="lastName" required tabindex="1" trimmed />
-            </div>
-          </div>
-          <div class="col">
-            <div class="form-group">
-              <label for="firstname" class="form-label">First Name</label>
-              <input id="firstname" name="firstname" type="text" class="form-control" autocomplete="off"
-                     formControlName="firstName" required tabindex="2" trimmed />
-            </div>
-          </div>
-          <div class="col">
-            <div class="form-group">
-              <label for="middlename" class="form-label">Middle Name</label>
-              <input id="middlename" name="middlename" type="text" class="form-control" autocomplete="off"
-                     formControlName="middleName" tabindex="3" trimmed />
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="Phone" class="form-label">Phone</label>
-              <input id="Phone" name="Phone" type="text" class="form-control" autocomplete="off"
-                     formControlName="phone" required tabindex="4" trimmed E164PhoneNumber="true" maxlength="25" />
-              <input type="hidden" id="PhoneId" name="PhoneId" formControlName="phoneId">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="email" class="form-label">Email</label>
-              <input id="email" name="email" type="email" class="form-control" autocomplete="off"
-                     formControlName="email" required tabindex="5" trimmed />
-              <input type="hidden" id="EmailId" name="EmailId" formControlName="emailId">
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="date-available" class="form-label">Date Of Birth</label>
-              <p-calendar id="date-available" name="date-available" placeholder="MM-DD-YYYY"
-                          formControlName="dateOfBirth"
-                          tabindex="6"
-                          dateFormat="mm-dd-yy"
-                          [monthNavigator]="true"
-                          [yearNavigator]="true"
-                          yearRange="1900:2030"
-                          [showIcon]="true">
-              </p-calendar>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="gender" class="form-label">Gender</label>
-              <select id="gender" name="gender" class="form-control" formControlName="gender" placeholder="Gender" tabindex="7">
-                <option value="">----Select----</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Others">Others</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="countryOfBirth" class="form-label">Country Of Birth</label>
-              <!--<p-autoComplete formControlName="countryOfBirth" [suggestions]="countryNames" class="form-control"
-                  (completeMethod)="countrySearch($event)" field="CountryName"></p-autoComplete>-->
-              <p-autoComplete formControlName="countryOfBirth" [suggestions]="countryNames" class="form-control"
-                              [dropdown]="true" (completeMethod)="countrySearch($event)" field="CountryName">
-              </p-autoComplete>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="countryFromApplied" class="form-label">Country Applied From</label>
-              <!--<p-autoComplete formControlName="countryFromApplied" [suggestions]="countryNames" class="form-control"
-                              (completeMethod)="countrySearch($event)" field="CountryName"></p-autoComplete>-->
-              <p-autoComplete formControlName="countryFromApplied" [suggestions]="countryNames" class="form-control"
-                              [dropdown]="true" (completeMethod)="countrySearch($event)" field="CountryName">
-              </p-autoComplete>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12 col-md-8 col-lg-8">
-            <div class="form-group">
-              <label for="street-address" class="form-label">Street Address</label>
-              <input id="street-address" name="street-address" type="text" class="form-control" autocomplete="off"
-                     formControlName="streetAddress" tabindex="10" trimmed />
-            </div>
-          </div>
-          <div class="col-sm-12 col-md-4 col-lg-4">
-            <div class="form-group">
-              <label for="apartment" class="form-label">Apartment/Unit #</label>
-              <input id="apartment" name="apartment" type="text" class="form-control" autocomplete="off"
-                     formControlName="apartment" tabindex="11" trimmed />
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="zipcode" class="form-label">Zip Code</label>
-              <!--<p-autoComplete formControlName="zipCode" [suggestions]="zipCodeResults" class="form-control"
-                              (completeMethod)="onZipCodeSearch($event)" field="ZipCode"
-                              forceSelection="true" (onSelect)="onZipCodeSelect($event)" tabindex="12">
-                <ng-template let-zipCode pTemplate="item">
-                  <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.ZipCode}},</div>
-                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.City}},</div>
-                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.StateAbbr}}</div>
-                  </div>
-                </ng-template>
-              </p-autoComplete>-->
-              <p-autoComplete formControlName="zipCode" [suggestions]="zipCodeResults" class="form-control"
-                              [dropdown]="true" (completeMethod)="onZipCodeSearch($event)" field="ZipCode"
-                              forceSelection="true" (onSelect)="onZipCodeSelect($event)" (onClear)="onZipCodeClear()" tabindex="12">
-                <ng-template let-zipCode pTemplate="item">
-                  <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.ZipCode}},</div>
-                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.City}},</div>
-                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.StateAbbr}}</div>
-                  </div>
-                </ng-template>
-              </p-autoComplete>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="city" class="form-label">City</label>
-              <input id="city" name="city" type="text" class="form-control" autocomplete="off"
-                     formControlName="city" tabindex="13" trimmed />
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="state" class="form-label">State</label>
-              <input id="state" name="state" type="text" class="form-control" autocomplete="off"
-                     formControlName="state" tabindex="14" trimmed />
-            </div>
-          </div>
-        </div>
+    <div class="card portal-card">
+        <form (ngSubmit)="onSubmit()" [formGroup]="editApplicantInfoFormGroup" novalidate>
+            <div class="card-body px-3 py-3">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="lastname" class="form-label">Last Name</label>
+                            <input id="lastname" name="lastname" type="text" class="form-control" autocomplete="off" autofocus
+                                   formControlName="lastName" required tabindex="1" trimmed />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="firstname" class="form-label">First Name</label>
+                            <input id="firstname" name="firstname" type="text" class="form-control" autocomplete="off"
+                                   formControlName="firstName" required tabindex="2" trimmed />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="middlename" class="form-label">Middle Name</label>
+                            <input id="middlename" name="middlename" type="text" class="form-control" autocomplete="off"
+                                   formControlName="middleName" tabindex="3" trimmed />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">                                     
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="date-available" class="form-label">Date Of Birth</label>
+                            <p-calendar id="date-available" name="date-available" placeholder="MM-DD-YYYY"
+                                        formControlName="dateOfBirth"
+                                        tabindex="6"
+                                        dateFormat="mm-dd-yy"
+                                        [monthNavigator]="true"
+                                        [yearNavigator]="true"
+                                        yearRange="1900:2030"
+                                        [showIcon]="true">
+                            </p-calendar>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="gender" class="form-label">Gender</label>
+                            <select id="gender" name="gender" class="form-control" formControlName="gender" placeholder="Gender" tabindex="7">
+                                <option value="">----Select----</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="countryOfBirth" class="form-label">Country Of Birth</label>
+                            <p-autoComplete formControlName="countryOfBirth" [suggestions]="countryNames" class="form-control"
+                                            [dropdown]="true" (completeMethod)="countrySearch($event)" field="CountryName">
+                            </p-autoComplete>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="countryFromApplied" class="form-label">Country Applied From</label>
+                            <p-autoComplete formControlName="countryFromApplied" [suggestions]="countryNames" class="form-control"
+                                            [dropdown]="true" (completeMethod)="countrySearch($event)" field="CountryName">
+                            </p-autoComplete>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-8 col-lg-8">
+                        <div class="form-group">
+                            <label for="street-address" class="form-label">Street Address</label>
+                            <input id="street-address" name="street-address" type="text" class="form-control" autocomplete="off"
+                                   formControlName="streetAddress" tabindex="10" trimmed />
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-4">
+                        <div class="form-group">
+                            <label for="apartment" class="form-label">Apartment/Unit #</label>
+                            <input id="apartment" name="apartment" type="text" class="form-control" autocomplete="off"
+                                   formControlName="apartment" tabindex="11" trimmed />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="zipcode" class="form-label">Zip Code</label>
+                            <p-autoComplete formControlName="zipCode" [suggestions]="zipCodeResults" class="form-control"
+                                            [dropdown]="true" (completeMethod)="onZipCodeSearch($event)" field="ZipCode"
+                                            forceSelection="true" (onSelect)="onZipCodeSelect($event)" (onClear)="onZipCodeClear()" tabindex="12">
+                                <ng-template let-zipCode pTemplate="item">
+                                    <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                                        <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.ZipCode}},</div>
+                                        <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.City}},</div>
+                                        <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{zipCode.StateAbbr}}</div>
+                                    </div>
+                                </ng-template>
+                            </p-autoComplete>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="city" class="form-label">City</label>
+                            <input id="city" name="city" type="text" class="form-control" autocomplete="off"
+                                   formControlName="city" tabindex="13" trimmed />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="state" class="form-label">State</label>
+                            <input id="state" name="state" type="text" class="form-control" autocomplete="off"
+                                   formControlName="state" tabindex="14" trimmed />
+                        </div>
+                    </div>
+                </div>
 
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="date-available" class="form-label">Date Available</label>
-              <p-calendar id="date-available" name="date-available" placeholder="MM-DD-YYYY"
-                          formControlName="dateAvailable"
-                          tabindex="15"
-                          dateFormat="mm-dd-yy"
-                          [monthNavigator]="true"
-                          [yearNavigator]="true"
-                          yearRange="1900:2030"
-                          [showIcon]="true">
-              </p-calendar>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="date-available" class="form-label">Date Available</label>
+                            <p-calendar id="date-available" name="date-available" placeholder="MM-DD-YYYY"
+                                        formControlName="dateAvailable"
+                                        tabindex="15"
+                                        dateFormat="mm-dd-yy"
+                                        [monthNavigator]="true"
+                                        [yearNavigator]="true"
+                                        yearRange="1900:2030"
+                                        [showIcon]="true">
+                            </p-calendar>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="desire-salary" class="form-label">Desired Salary</label>
+                            <input id="desire-salary" name="desire-salary" type="text" class="form-control" autocomplete="off"
+                                   formControlName="desiredSalary" tabindex="16" trimmed OnlyNumber="true" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="position-applied" class="form-label">Position Applied For</label>                            
+                            <p-autoComplete formControlName="positionAppliedFor" [suggestions]="positionResults"
+                                            class="form-control" [dropdown]="true" (completeMethod)="onPositionSearch($event)"
+                                            field="PositionName">
+                            </p-autoComplete>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="portal-card-list">
+                            <p><strong>Are you a citizen of the United States?</strong><span class="required"> *required</span></p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="citizen-yes" name="isUSCitizen" class="custom-control-input" value="YES" checked
+                                       formControlName="isUSCitizen" tabindex="18" (change)="onIsUSCitizenChange($event)" />
+                                <label for="citizen-yes" class="custom-control-label text-success">YES</label>
+                            </div>
+                            <div class="list-inline-item custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="citizen-no" name="isUSCitizen" class="custom-control-input" value="NO"
+                                       formControlName="isUSCitizen" tabindex="19" (change)="onIsUSCitizenChange($event)" />
+                                <label for="citizen-no" class="custom-control-label text-danger">NO</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="ssn" class="form-label">SSN</label>
+                                <p-inputMask id="ssn" name="ssn" class="form-control" autocomplete="off"
+                                             formControlName="ssn" tabindex="20" mask="999-99-9999" placeholder="999-99-9999" unmask="true"
+                                             [style]="{'width':'100%','border':'none','margin-top':'-10px','font-size':'18px'}"></p-inputMask>
+                            </div>
+                        </div>
+                        <div class="portal-card-list">
+                            <p><strong>Are you authorized to work in the U.S?</strong><span class="required"> *required</span></p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="authorized-yes" name="isAuthorized" class="custom-control-input" value="YES" checked
+                                       formControlName="isAuthorized" tabindex="21" />
+                                <label for="authorized-yes" class="custom-control-label text-success">YES</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="authorized-no" name="isAuthorized" class="custom-control-input" value="NO"
+                                       formControlName="isAuthorized" tabindex="22" />
+                                <label for="authorized-no" class="custom-control-label text-danger">NO</label>
+                            </div>
+                        </div>
+                        <div class="portal-card-list">
+                            <p><strong>Have you ever worked for this company?</strong><span class="required"> *required</span></p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="worked-yes" name="isOldClient" class="custom-control-input" value="YES"
+                                       formControlName="isOldClient" tabindex="19" />
+                                <label for="worked-yes" class="custom-control-label text-success">YES</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="worked-no" name="isOldClient" class="custom-control-input" value="NO" checked
+                                       formControlName="isOldClient" tabindex="23" />
+                                <label for="worked-no" class="custom-control-label text-danger">NO</label>
+                            </div>
+                        </div>
+                        <div class="portal-card-list">
+                            <p><strong>Have you ever been convicted of a felony?</strong><span class="required"> *required</span></p>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="felony-yes" name="isConvict" class="custom-control-input" value="YES"
+                                       formControlName="isConvict" (change)="onIsConvictChange($event)" tabindex="24" />
+                                <label for="felony-yes" class="custom-control-label text-success">YES</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="felony-no" name="isConvict" class="custom-control-input" value="NO" checked
+                                       formControlName="isConvict" (change)="onIsConvictChange($event)" tabindex="25" />
+                                <label for="felony-no" class="custom-control-label text-danger">NO</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="conviction-detail" class="form-label">If yes, explain:</label>
+                            <input id="conviction-detail" name="conviction-detail" type="text" class="form-control" autocomplete="off"
+                                   formControlName="convictionDetail" tabindex="26" required trimmed />
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="desire-salary" class="form-label">Desired Salary</label>
-              <input id="desire-salary" name="desire-salary" type="text" class="form-control" autocomplete="off"
-                     formControlName="desiredSalary" tabindex="16" trimmed OnlyNumber="true" />
+            <div class="card-footer">
+                <ul class="list-inline mb-0 d-flex justify-content-between">
+                    <li class="list-inline-item">
+                        <a [routerLink]="['/personal-info/applicant-info']" routerLinkActive="active" class="btn btn-primary btn-portal-border" tabindex="28">Back</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <button type="button" (click)="onClear()" class="btn btn-primary btn-portal-border" tabindex="29">Clear</button>
+                    </li>
+                    <li class="list-inline-item">
+                        <button type="submit" class="btn btn-primary btn-portal" [disabled]="!editApplicantInfoFormGroup.valid" tabindex="27">Save</button>
+                    </li>
+                </ul>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="position-applied" class="form-label">Position Applied For</label>
-              <!--<p-autoComplete formControlName="positionAppliedFor" [suggestions]="positionResults" class="form-control"
-                              (completeMethod)="onPositionSearch($event)" field="Text"
-                              forceSelection="true" (onSelect)="onPositionSelect($event)" tabindex="17">
-                <ng-template let-position pTemplate="item">
-                  <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{position.Text}}</div>
-                  </div>
-                </ng-template>
-              </p-autoComplete>
-              <input type="hidden" id="position-appliedId" name="position-appliedId" formControlName="positionAppliedForId">-->
-              <p-autoComplete formControlName="positionAppliedFor" [suggestions]="positionResults"
-                              class="form-control" [dropdown]="true" (completeMethod)="onPositionSearch($event)"
-                              field="PositionName" >
-              </p-autoComplete>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="portal-card-list">
-              <p><strong>Are you a citizen of the United States?</strong><span class="required"> *required</span></p>
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="citizen-yes" name="isUSCitizen" class="custom-control-input" value="YES" checked
-                       formControlName="isUSCitizen" tabindex="18" (change)="onIsUSCitizenChange($event)" />
-                <label for="citizen-yes" class="custom-control-label text-success">YES</label>
-              </div>
-              <div class="list-inline-item custom-control custom-radio custom-control-inline">
-                <input type="radio" id="citizen-no" name="isUSCitizen" class="custom-control-input" value="NO"
-                       formControlName="isUSCitizen" tabindex="19" (change)="onIsUSCitizenChange($event)" />
-                <label for="citizen-no" class="custom-control-label text-danger">NO</label>
-              </div>
-              <div class="form-group">
-                <label for="ssn" class="form-label">SSN</label>
-                <p-inputMask id="ssn" name="ssn" class="form-control" autocomplete="off"
-                             formControlName="ssn" tabindex="20" mask="999-99-9999" placeholder="999-99-9999" unmask="true"
-                             [style]="{'width':'100%','border':'none','margin-top':'-10px','font-size':'18px'}"></p-inputMask>
-              </div>
-            </div>
-            <div class="portal-card-list">
-              <p><strong>Are you authorized to work in the U.S?</strong><span class="required"> *required</span></p>
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="authorized-yes" name="isAuthorized" class="custom-control-input" value="YES" checked
-                       formControlName="isAuthorized" tabindex="21" />
-                <label for="authorized-yes" class="custom-control-label text-success">YES</label>
-              </div>
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="authorized-no" name="isAuthorized" class="custom-control-input" value="NO"
-                       formControlName="isAuthorized" tabindex="22" />
-                <label for="authorized-no" class="custom-control-label text-danger">NO</label>
-              </div>
-            </div>
-            <div class="portal-card-list">
-              <p><strong>Have you ever worked for this company?</strong><span class="required"> *required</span></p>
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="worked-yes" name="isOldClient" class="custom-control-input" value="YES"
-                       formControlName="isOldClient" tabindex="19" />
-                <label for="worked-yes" class="custom-control-label text-success">YES</label>
-              </div>
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="worked-no" name="isOldClient" class="custom-control-input" value="NO" checked
-                       formControlName="isOldClient" tabindex="23" />
-                <label for="worked-no" class="custom-control-label text-danger">NO</label>
-              </div>
-            </div>
-            <div class="portal-card-list">
-              <p><strong>Have you ever been convicted of a felony?</strong><span class="required"> *required</span></p>
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="felony-yes" name="isConvict" class="custom-control-input" value="YES"
-                       formControlName="isConvict" (change)="onIsConvictChange($event)" tabindex="24" />
-                <label for="felony-yes" class="custom-control-label text-success">YES</label>
-              </div>
-              <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="felony-no" name="isConvict" class="custom-control-input" value="NO" checked
-                       formControlName="isConvict" (change)="onIsConvictChange($event)" tabindex="25" />
-                <label for="felony-no" class="custom-control-label text-danger">NO</label>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="conviction-detail" class="form-label">If yes, explain:</label>
-              <input id="conviction-detail" name="conviction-detail" type="text" class="form-control" autocomplete="off"
-                     formControlName="convictionDetail" tabindex="26" required trimmed />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer">
-        <ul class="list-inline mb-0 d-flex justify-content-between">
-          <li class="list-inline-item">
-            <a [routerLink]="['/personal-info/applicant-info']" routerLinkActive="active" class="btn btn-primary btn-portal-border" tabindex="28">Back</a>
-          </li>
-          <li class="list-inline-item">
-            <button type="button" (click)="onClear()" class="btn btn-primary btn-portal-border" tabindex="29">Clear</button>
-          </li>
-          <li class="list-inline-item">
-            <button type="submit" class="btn btn-primary btn-portal" [disabled]="!editApplicantInfoFormGroup.valid" tabindex="27">Save</button>
-          </li>
-        </ul>
-      </div>
-    </form>
-  </div>
+        </form>
+    </div>
 </div>
 <p-toast key="toastKey1" [baseZIndex]="5000"></p-toast>

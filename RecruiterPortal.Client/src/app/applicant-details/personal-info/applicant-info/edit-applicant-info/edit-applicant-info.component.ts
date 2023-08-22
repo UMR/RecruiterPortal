@@ -46,10 +46,7 @@ export class EditApplicantInfoComponent implements OnInit {
             dateOfBirth: [''],
             gender: ['', Validators.maxLength(50)],
             countryOfBirth: ['', Validators.maxLength(50)],
-            countryFromApplied: ['', Validators.maxLength(50)],
-            emailId: [''],
-            phoneId: [''],
-            positionAppliedForId: [''],
+            countryFromApplied: ['', Validators.maxLength(50)],                        
         });
     }
 
@@ -65,15 +62,12 @@ export class EditApplicantInfoComponent implements OnInit {
                 zipCode: { ZipCode: this.checkNullOrUndefined(this.editApplicantInfoModel.ZipCode) },
                 city: this.checkNullOrUndefined(this.editApplicantInfoModel.City),
                 state: this.checkNullOrUndefined(this.editApplicantInfoModel.State),
-                email: this.checkNullOrUndefined(this.editApplicantInfoModel.Email),
-                emailId: this.checkNullOrUndefined(this.editApplicantInfoModel.ApplicantEmailID),
+                email: this.checkNullOrUndefined(this.editApplicantInfoModel.Email),                
                 phone: this.checkNullOrUndefined(this.editApplicantInfoModel.Phone),
-                phoneId: this.checkNullOrUndefined(this.editApplicantInfoModel.ApplicantPhoneID),
-                ssn: this.checkNullOrUndefined(this.editApplicantInfoModel.SSN),
+                ssn: this.checkNullOrUndefined(this.editApplicantInfoModel.ssn),
                 dateAvailable: this.editApplicantInfoModel.DateAvailable ? new Date(this.editApplicantInfoModel.DateAvailable) : null,
                 desiredSalary: this.checkNullOrUndefined(this.editApplicantInfoModel.DesiredSalary),                
-                positionAppliedFor: { PositionName: this.checkNullOrUndefined(this.editApplicantInfoModel.PositionAppliedFor) },
-                positionAppliedForId: this.checkNullOrUndefined(this.editApplicantInfoModel.DesiredPositionId),
+                positionAppliedFor: { PositionName: this.checkNullOrUndefined(this.editApplicantInfoModel.PositionAppliedFor) },                
                 isUSCitizen: this.setRadioButtonData(this.editApplicantInfoModel.IsUSCitizen),
                 isAuthorized: this.setRadioButtonData(this.editApplicantInfoModel.IsAuthorized),
                 isOldClient: this.setRadioButtonData(this.editApplicantInfoModel.IsOldClient),
@@ -87,13 +81,8 @@ export class EditApplicantInfoComponent implements OnInit {
             if (this.editApplicantInfoFormGroup.get('isConvict').value != 'YES') {
                 this.editApplicantInfoFormGroup.patchValue({ convictionDetail: '' });
                 this.editApplicantInfoFormGroup.controls['convictionDetail'].disable();
-            }
-            if (this.editApplicantInfoFormGroup.get('isUSCitizen').value != 'YES') {
-                //this.editApplicantInfoFormGroup.patchValue({ ssn: '' });
-                //this.editApplicantInfoFormGroup.controls['ssn'].disable();
-            }
-            if (this.editApplicantInfoFormGroup.get('isUSCitizen').value != 'NO') {
-                //this.editApplicantInfoFormGroup.patchValue({ isAuthorized: '' });
+            }            
+            if (this.editApplicantInfoFormGroup.get('isUSCitizen').value != 'NO') {                
                 this.editApplicantInfoFormGroup.controls['isAuthorized'].disable();
             }            
         },
@@ -114,7 +103,7 @@ export class EditApplicantInfoComponent implements OnInit {
         applicantInfoModel.State = this.editApplicantInfoFormGroup.get('state').value ? this.editApplicantInfoFormGroup.get('state').value.trim() : "";
         applicantInfoModel.Email = this.editApplicantInfoFormGroup.get('email').value ? this.editApplicantInfoFormGroup.get('email').value.trim() : "";        
         applicantInfoModel.Phone = this.editApplicantInfoFormGroup.get('phone').value ? this.editApplicantInfoFormGroup.get('phone').value.trim() : "";        
-        applicantInfoModel.SSN = this.editApplicantInfoFormGroup.get('ssn').value ? this.editApplicantInfoFormGroup.get('ssn').value.trim() : "";
+        applicantInfoModel.ssn = this.editApplicantInfoFormGroup.get('ssn').value ? this.editApplicantInfoFormGroup.get('ssn').value.trim() : "";
         applicantInfoModel.DateAvailable = this.editApplicantInfoFormGroup.get('dateAvailable').value == "" ? null : this.getUTCFormatedDate(this.editApplicantInfoFormGroup.get('dateAvailable').value);
         applicantInfoModel.DesiredSalary = this.editApplicantInfoFormGroup.get('desiredSalary').value ? this.editApplicantInfoFormGroup.get('desiredSalary').value.trim() : "";        
         applicantInfoModel.PositionAppliedFor = this.editApplicantInfoFormGroup.get('positionAppliedFor').value ? this.editApplicantInfoFormGroup.get('positionAppliedFor').value.PositionName : "";
@@ -232,13 +221,7 @@ export class EditApplicantInfoComponent implements OnInit {
             city: $event.City,
             state: $event.StateName
         });
-    }
-
-    onPositionSelect($event) {
-        this.editApplicantInfoFormGroup.patchValue({
-            positionAppliedForId: $event.Value
-        });
-    }
+    }    
 
     countrySearch($event) {
         this.editApplicantInfoService.getCountryName($event.query).subscribe(response => {            
@@ -247,23 +230,19 @@ export class EditApplicantInfoComponent implements OnInit {
             }
         });
     }
+
     onIsUSCitizenChange($event) {
-        if ($event.target.value == 'YES') {
-            //this.editApplicantInfoFormGroup.controls['ssn'].enable();
+        if ($event.target.value == 'YES') {            
             this.editApplicantInfoFormGroup.patchValue({ isAuthorized: 'YES' });
             this.editApplicantInfoFormGroup.controls['isAuthorized'].disable();
         }
         else if ($event.target.value == 'NO') {
             this.editApplicantInfoFormGroup.patchValue({ isAuthorized: '' });
             this.editApplicantInfoFormGroup.controls['isAuthorized'].enable();
-            //this.editApplicantInfoFormGroup.patchValue({ ssn: '' });
-            //this.editApplicantInfoFormGroup.controls['ssn'].disable();
         }
         else {
             this.editApplicantInfoFormGroup.patchValue({ isAuthorized: '' });
-            this.editApplicantInfoFormGroup.controls['isAuthorized'].disable();
-            //this.editApplicantInfoFormGroup.patchValue({ ssn: '' });
-            //this.editApplicantInfoFormGroup.controls['ssn'].disable();
+            this.editApplicantInfoFormGroup.controls['isAuthorized'].disable();                        
         }
     }
 }
