@@ -10,6 +10,7 @@ export class AgencyService {
     private getAgencyURI: string = `${resourceServerUrl}/api/agency/get`;
 
     constructor(private httpClient: HttpClient) { }
+
     getAgency() {
         return this.httpClient.get(this.getAgencyURI, { observe: 'response' });
     }

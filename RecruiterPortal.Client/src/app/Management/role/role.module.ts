@@ -5,6 +5,7 @@ import { RoleRoutingModule } from './role-routing.module';
 import { RoleComponent } from './role.component';
 import { SharedModule } from '../../common/shared.module';
 import { TableModule } from 'primeng/components/table/table';
+import { RoleService } from './role.service';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { TableModule } from 'primeng/components/table/table';
         RoleRoutingModule,
         SharedModule,
         TableModule
-    ]
+    ],
+    providers: [RoleService]
 })
 export class RoleModule { }
