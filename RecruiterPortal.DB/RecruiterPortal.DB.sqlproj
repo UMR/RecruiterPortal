@@ -434,5 +434,6 @@
     <None Include="2023-08-21\02_AZ_01_ALTER_PROCEDURE_GetCountryName.sql" />
     <None Include="2023-08-21\03_SR_03_CREATE_TABLE_ROLE.sql" />
     <None Include="2023-08-21\04_SR_02_SP_GetRole.sql" />
+    <None Include="Special\06_AZ_06_Zipcode_Insert_Data.sql" />
   </ItemGroup>
 </Project>
