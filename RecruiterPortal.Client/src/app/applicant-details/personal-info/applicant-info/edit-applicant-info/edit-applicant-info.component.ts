@@ -75,7 +75,7 @@ export class EditApplicantInfoComponent implements OnInit {
                 dateAvailable: this.editApplicantInfoModel.DateAvailable ? new Date(this.editApplicantInfoModel.DateAvailable) : null,
                 desiredSalary: this.checkNullOrUndefined(this.editApplicantInfoModel.DesiredSalary),
                 //positionAppliedFor: { Text: this.checkNullOrUndefined(this.editApplicantInfoModel.PositionAppliedFor) },
-                positionAppliedFor: { Text: this.checkNullOrUndefined(this.editApplicantInfoModel.PositionAppliedFor) },
+                positionAppliedFor: { PositionName: this.checkNullOrUndefined(this.editApplicantInfoModel.PositionAppliedFor) },
                 positionAppliedForId: this.checkNullOrUndefined(this.editApplicantInfoModel.DesiredPositionId),
                 isUSCitizen: this.setRadioButtonData(this.editApplicantInfoModel.IsUSCitizen),
                 isAuthorized: this.setRadioButtonData(this.editApplicantInfoModel.IsAuthorized),
@@ -126,8 +126,7 @@ export class EditApplicantInfoComponent implements OnInit {
         applicantInfoModel.DateAvailable = this.editApplicantInfoFormGroup.get('dateAvailable').value == "" ? null : this.getUTCFormatedDate(this.editApplicantInfoFormGroup.get('dateAvailable').value);
         applicantInfoModel.DesiredSalary = this.editApplicantInfoFormGroup.get('desiredSalary').value ? this.editApplicantInfoFormGroup.get('desiredSalary').value.trim() : "";
         //applicantInfoModel.PositionAppliedFor = this.editApplicantInfoFormGroup.get('positionAppliedFor').value.position_Name;
-        applicantInfoModel.PositionAppliedFor = this.editApplicantInfoFormGroup.get('positionAppliedFor').value ? this.editApplicantInfoFormGroup.get('positionAppliedFor').value.Text : "";
-        applicantInfoModel.DesiredPositionId = this.editApplicantInfoFormGroup.get('positionAppliedFor').value.Value;
+        applicantInfoModel.PositionAppliedFor = this.editApplicantInfoFormGroup.get('positionAppliedFor').value ? this.editApplicantInfoFormGroup.get('positionAppliedFor').value.PositionName : "";
         applicantInfoModel.IsUSCitizen = this.getBooleanValue(this.editApplicantInfoFormGroup.get('isUSCitizen').value ? this.editApplicantInfoFormGroup.get('isUSCitizen').value.trim() : "");
         applicantInfoModel.IsAuthorized = this.getBooleanValue(this.editApplicantInfoFormGroup.get('isAuthorized').value ? this.editApplicantInfoFormGroup.get('isAuthorized').value.trim() : "");
         applicantInfoModel.IsOldClient = this.getBooleanValue(this.editApplicantInfoFormGroup.get('isOldClient').value ? this.editApplicantInfoFormGroup.get('isOldClient').value.trim() : "");
@@ -137,6 +136,8 @@ export class EditApplicantInfoComponent implements OnInit {
         applicantInfoModel.Gender = this.editApplicantInfoFormGroup.get('gender').value;
         applicantInfoModel.CountryOfBirth = this.editApplicantInfoFormGroup.get('countryOfBirth').value.CountryName;
         applicantInfoModel.CountryFromApplied = this.editApplicantInfoFormGroup.get('countryFromApplied').value.CountryName;
+
+        console.log(applicantInfoModel);
 
         this.isLoading = true;
         this.editApplicantInfoService.updateApplicantInfo(applicantInfoModel)
@@ -221,15 +222,16 @@ export class EditApplicantInfoComponent implements OnInit {
     onZipCodeSearch($event) {
         this.editApplicantInfoService.getZipCodeCityStateByZipCode($event.query).subscribe(data => {
             this.zipCodeResults = data.body.Data;
-            //console.log(this.zipCodeResults);
         },
             err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get zip code', detail: '' }); },
             () => { });
     }
 
     onPositionSearch($event) {
-        this.editApplicantInfoService.getPositionByPositionName($event.query).subscribe(data => {
-            this.positionResults = data.body.Data;
+        this.editApplicantInfoService.getPositionByPositionName($event.query).subscribe(response => {
+            if (response.status === 200) {
+                this.positionResults = response.body;
+            }
         },
             err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get position', detail: '' }); },
             () => { });
@@ -250,9 +252,10 @@ export class EditApplicantInfoComponent implements OnInit {
     }
 
     countrySearch($event) {
-        this.editApplicantInfoService.getCountryName($event.query).subscribe(data => {
-            //console.log(data.body.Data);
-            this.countryNames = data.body.Data;
+        this.editApplicantInfoService.getCountryName($event.query).subscribe(response => {            
+            if (response.status === 200) {
+                this.countryNames = response.body;
+            }
         });
     }
     onIsUSCitizenChange($event) {

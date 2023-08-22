@@ -16,7 +16,7 @@ namespace RecruiterPortalDAL.Managers
                 dynamic expandoObject = new ExpandoObject();
                 expandoObject.PositionName = name;
                 SqlParameter[] sqlParameters = positionRepo.GetSqlParametersFromExpandoObject(expandoObject, spName);
-                IEnumerable<Position> positionList = positionRepo.GetAll(spName, sqlParameters); ;
+                IEnumerable<Position> positionList = positionRepo.GetAll(spName, sqlParameters); 
 
                 return positionList;
             }

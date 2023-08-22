@@ -432,5 +432,6 @@
     <None Include="Special\status.txt" />
     <None Include="2023-08-21\01_SR_01_SP_All_GET_Agency.sql" />
     <None Include="2023-08-21\02_AZ_01_ALTER_PROCEDURE_GetCountryName.sql" />
+    <None Include="Special\06_AZ_06_Country_Insert_Data.sql" />
   </ItemGroup>
 </Project>

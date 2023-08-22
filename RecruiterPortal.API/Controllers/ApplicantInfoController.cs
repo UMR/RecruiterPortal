@@ -158,22 +158,14 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
         }
 
-        [Route("country-name/{countryName}")]
+        [Route("country-name")]
         [HttpGet]
-        public IActionResult GetCountryName(string countryName)
+        public IActionResult GetCountryName(string text)
         {
             try
             {
-                IEnumerable<Country> countries;
-                if (countryName == "all")
-                {
-                    countries = CountryManager.GetCountryName("");
-                }
-                else
-                {
-                    countries = CountryManager.GetCountryName(countryName);
-                }
-                return Ok(new ResponseModels<IEnumerable<Country>>(countries));
+                IEnumerable<Country> countries = CountryManager.GetCountryName(text);                
+                return Ok(countries);
             }
             catch (Exception ex)
             {
@@ -250,17 +242,17 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             try
             {
-                IEnumerable<LookupZipCode> view_LookUp_ZipCodeList;
+                IEnumerable<LookupZipCode> zipcodes;
                 if (zipCode == "all")
                 {
-                    view_LookUp_ZipCodeList = ZipCodeManager.GetZipCodeCityStateByZipCode("");
+                    zipcodes = ZipCodeManager.GetZipCodeCityStateByZipCode("");
                 }
                 else
                 {
-                    view_LookUp_ZipCodeList = ZipCodeManager.GetZipCodeCityStateByZipCode(zipCode);
+                    zipcodes = ZipCodeManager.GetZipCodeCityStateByZipCode(zipCode);
                 }
 
-                return Ok(new ResponseModels<IEnumerable<LookupZipCode>>(view_LookUp_ZipCodeList));
+                return Ok(new ResponseModels<IEnumerable<LookupZipCode>>(zipcodes));
             }
             catch (Exception ex)
             {
