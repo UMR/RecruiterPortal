@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class UserService {
-    private getRecruiterURI: string = `${resourceServerUrl}/api/role/recruiter`;
+    private getRecruiterURI: string = `${resourceServerUrl}/api/recruiter/get`;
 
     constructor(private httpClient: HttpClient) { }
 
