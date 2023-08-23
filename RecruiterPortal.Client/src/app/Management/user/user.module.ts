@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
 import { SharedModule } from '../../common/shared.module';
+import { TableModule } from 'primeng/components/table/table';
+import { UserService } from './user.service';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { SharedModule } from '../../common/shared.module';
     imports: [
         CommonModule,
         UserRoutingModule,
-        SharedModule
-    ]
+        SharedModule,
+        TableModule
+    ],
+    providers: [UserService]
 })
 export class UserModule { }

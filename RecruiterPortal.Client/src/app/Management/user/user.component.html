@@ -2,8 +2,27 @@
     <applicant-portal-header (onToggleButtonClicked)="(showHideMenu)()" isVisibleToggleButton=0></applicant-portal-header>
     <section class="main-content">
         <div class="container-fluid">
-            <h1>user works!</h1>
+            <div class="container-fluid">
+                <p-table [value]="roles">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Role Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-role>
+                        <tr>
+                            <td>{{ role.RoleName }}</td>
+                            <td>
+                                <a (click)="onEdit(role)"><i class="pi pi-pencil"></i></a>
+                                <a style="color:red" (click)="onDelete(role)"><i class="pi pi-trash"></i></a>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
         </div>
     </section>
 </div>
+
 
