@@ -23,12 +23,15 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             try
             {
                 IEnumerable<Role> roles = RoleManager.GetRole();
-                List<string> roleList = new List<string>();
+                List<RoleModel> roleList = new List<RoleModel>();
                 foreach (Role role in roles)
                 {
-                    roleList.Add(role.RoleName);
+                    RoleModel roleModel = new RoleModel();
+                    roleModel.RoleId = role.RoleId;
+                    roleModel.RoleName = role.RoleName;
+                    roleList.Add(roleModel);
                 }
-                return Ok(roleList.ToArray());
+                return Ok(roleList);
             }
             catch (Exception ex)
             {
