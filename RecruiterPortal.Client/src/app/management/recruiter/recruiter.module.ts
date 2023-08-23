@@ -17,7 +17,6 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { KeyFilterModule } from 'primeng/keyfilter';
 
-
 @NgModule({
     declarations: [RecruiterComponent],
     imports: [

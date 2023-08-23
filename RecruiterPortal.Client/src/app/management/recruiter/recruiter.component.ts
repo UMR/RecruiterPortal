@@ -21,10 +21,17 @@ export class RecruiterComponent implements OnInit {
     private pageNumber: number;
     public selectedRecruiter: any;
     public submitted: boolean = false;
-    public isActive: any = [];
     public addEditTxt: string = "Add";
     public recruiter: any;
     public recruiterDialog: boolean = false;
+
+    public loginId: string = "";
+    public firstName: string = "";
+    public lastName: string = "";
+    public email: string = "";
+    public telephone: string = "";
+    public isActive: boolean = true;
+    
 
     constructor(private recruiterService: RecruiterService, private messageService: MessageService, private confirmationService: ConfirmationService) {
         this.getRecruiters();
@@ -143,7 +150,7 @@ export class RecruiterComponent implements OnInit {
         //console.log(id, value);
     }
 
-    openNewAgency() {
+    openNewRecruiter() {
         this.addEditTxt = "Add";
         this.recruiter = {};
         this.submitted = false;
