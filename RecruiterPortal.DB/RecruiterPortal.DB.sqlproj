@@ -125,6 +125,7 @@
     <Folder Include="2023-08-15" />
     <Folder Include="2023-08-16" />
     <Folder Include="2023-08-21" />
+    <Folder Include="2023-08-23" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="2019-11-04\01_TR_01_CREATE_DATABASE.sql" />
@@ -435,5 +436,6 @@
     <None Include="2023-08-21\03_SR_03_CREATE_TABLE_ROLE.sql" />
     <None Include="2023-08-21\04_SR_02_SP_GetRole.sql" />
     <None Include="Special\06_AZ_06_Zipcode_Insert_Data.sql" />
+    <None Include="2023-08-23\01_SR_01_CREATE_SP_All_GET_Recruiter.sql" />
   </ItemGroup>
 </Project>

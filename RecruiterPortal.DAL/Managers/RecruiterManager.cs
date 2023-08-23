@@ -2,6 +2,7 @@
 using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
 using RecruiterPortal.DAL.Utility;
+using System.Data;
 using System.Dynamic;
 
 namespace RecruiterPortal.DAL.Managers
@@ -64,6 +65,24 @@ namespace RecruiterPortal.DAL.Managers
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public static DataTable GetAllRecruiter()
+        {
+            string spName = "SP_All_GET_Recruiter";
+            GenericRepository<Recruiter> agencyRepo = new GenericRepository<Recruiter>();
+            SqlParameter[] sqlParameters = agencyRepo.GetSqlParametersFromStoredProcedure(spName);
+            DataTable agencyDt = null;
+            try
+            {
+                agencyDt = agencyRepo.LoadDataTable(spName, sqlParameters);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return agencyDt;
         }
     }
 }

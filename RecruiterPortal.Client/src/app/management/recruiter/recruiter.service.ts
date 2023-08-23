@@ -5,12 +5,12 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class RecruiterService {
     private getRecruiterURI: string = `${resourceServerUrl}/api/recruiter/get`;
 
     constructor(private httpClient: HttpClient) { }
 
-    getUser() {
+    getRecruiter() {
         return this.httpClient.get(this.getRecruiterURI, { observe: 'response' });
     }
 }
