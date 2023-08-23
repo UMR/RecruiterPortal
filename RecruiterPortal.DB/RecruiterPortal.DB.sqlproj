@@ -437,5 +437,6 @@
     <None Include="2023-08-21\04_SR_02_SP_GetRole.sql" />
     <None Include="Special\06_AZ_06_Zipcode_Insert_Data.sql" />
     <None Include="2023-08-23\01_SR_01_CREATE_SP_All_GET_Recruiter.sql" />
+    <None Include="Special\07_AZ_07_State_Insert_Data.sql" />
   </ItemGroup>
 </Project>

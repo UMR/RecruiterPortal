@@ -46,13 +46,13 @@ export class EditApplicantInfoComponent implements OnInit {
             dateOfBirth: [''],
             gender: ['', Validators.maxLength(50)],
             countryOfBirth: ['', Validators.maxLength(50)],
-            countryFromApplied: ['', Validators.maxLength(50)],                        
+            countryFromApplied: ['', Validators.maxLength(50)],
         });
     }
 
     ngOnInit() {
-        this.editApplicantInfoService.getApplicantInfo().subscribe(data => {            
-            this.editApplicantInfoModel = data.body[0] as EditApplicantInfoModel;            
+        this.editApplicantInfoService.getApplicantInfo().subscribe(data => {
+            this.editApplicantInfoModel = data.body[0] as EditApplicantInfoModel;
             this.editApplicantInfoFormGroup.setValue({
                 lastName: this.checkNullOrUndefined(this.editApplicantInfoModel.LastName),
                 firstName: this.checkNullOrUndefined(this.editApplicantInfoModel.FirstName),
@@ -62,12 +62,12 @@ export class EditApplicantInfoComponent implements OnInit {
                 zipCode: { ZipCode: this.checkNullOrUndefined(this.editApplicantInfoModel.ZipCode) },
                 city: this.checkNullOrUndefined(this.editApplicantInfoModel.City),
                 state: this.checkNullOrUndefined(this.editApplicantInfoModel.State),
-                email: this.checkNullOrUndefined(this.editApplicantInfoModel.Email),                
+                email: this.checkNullOrUndefined(this.editApplicantInfoModel.Email),
                 phone: this.checkNullOrUndefined(this.editApplicantInfoModel.Phone),
                 ssn: this.checkNullOrUndefined(this.editApplicantInfoModel.ssn),
                 dateAvailable: this.editApplicantInfoModel.DateAvailable ? new Date(this.editApplicantInfoModel.DateAvailable) : null,
-                desiredSalary: this.checkNullOrUndefined(this.editApplicantInfoModel.DesiredSalary),                
-                positionAppliedFor: { PositionName: this.checkNullOrUndefined(this.editApplicantInfoModel.PositionAppliedFor) },                
+                desiredSalary: this.checkNullOrUndefined(this.editApplicantInfoModel.DesiredSalary),
+                positionAppliedFor: { PositionName: this.checkNullOrUndefined(this.editApplicantInfoModel.PositionAppliedFor) },
                 isUSCitizen: this.setRadioButtonData(this.editApplicantInfoModel.IsUSCitizen),
                 isAuthorized: this.setRadioButtonData(this.editApplicantInfoModel.IsAuthorized),
                 isOldClient: this.setRadioButtonData(this.editApplicantInfoModel.IsOldClient),
@@ -81,10 +81,10 @@ export class EditApplicantInfoComponent implements OnInit {
             if (this.editApplicantInfoFormGroup.get('isConvict').value != 'YES') {
                 this.editApplicantInfoFormGroup.patchValue({ convictionDetail: '' });
                 this.editApplicantInfoFormGroup.controls['convictionDetail'].disable();
-            }            
-            if (this.editApplicantInfoFormGroup.get('isUSCitizen').value != 'NO') {                
+            }
+            if (this.editApplicantInfoFormGroup.get('isUSCitizen').value != 'NO') {
                 this.editApplicantInfoFormGroup.controls['isAuthorized'].disable();
-            }            
+            }
         },
             err => { this.isLoading = false; this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get applicant info', detail: '' }); },
             () => { this.isLoading = false; });
@@ -101,11 +101,11 @@ export class EditApplicantInfoComponent implements OnInit {
         applicantInfoModel.ZipCode = this.editApplicantInfoFormGroup.get('zipCode').value ? this.editApplicantInfoFormGroup.get('zipCode').value.ZipCode : "";
         applicantInfoModel.City = this.editApplicantInfoFormGroup.get('city').value ? this.editApplicantInfoFormGroup.get('city').value.trim() : "";
         applicantInfoModel.State = this.editApplicantInfoFormGroup.get('state').value ? this.editApplicantInfoFormGroup.get('state').value.trim() : "";
-        applicantInfoModel.Email = this.editApplicantInfoFormGroup.get('email').value ? this.editApplicantInfoFormGroup.get('email').value.trim() : "";        
-        applicantInfoModel.Phone = this.editApplicantInfoFormGroup.get('phone').value ? this.editApplicantInfoFormGroup.get('phone').value.trim() : "";        
+        applicantInfoModel.Email = this.editApplicantInfoFormGroup.get('email').value ? this.editApplicantInfoFormGroup.get('email').value.trim() : "";
+        applicantInfoModel.Phone = this.editApplicantInfoFormGroup.get('phone').value ? this.editApplicantInfoFormGroup.get('phone').value.trim() : "";
         applicantInfoModel.ssn = this.editApplicantInfoFormGroup.get('ssn').value ? this.editApplicantInfoFormGroup.get('ssn').value.trim() : "";
         applicantInfoModel.DateAvailable = this.editApplicantInfoFormGroup.get('dateAvailable').value == "" ? null : this.getUTCFormatedDate(this.editApplicantInfoFormGroup.get('dateAvailable').value);
-        applicantInfoModel.DesiredSalary = this.editApplicantInfoFormGroup.get('desiredSalary').value ? this.editApplicantInfoFormGroup.get('desiredSalary').value.trim() : "";        
+        applicantInfoModel.DesiredSalary = this.editApplicantInfoFormGroup.get('desiredSalary').value ? this.editApplicantInfoFormGroup.get('desiredSalary').value.trim() : "";
         applicantInfoModel.PositionAppliedFor = this.editApplicantInfoFormGroup.get('positionAppliedFor').value ? this.editApplicantInfoFormGroup.get('positionAppliedFor').value.PositionName : "";
         applicantInfoModel.IsUSCitizen = this.getBooleanValue(this.editApplicantInfoFormGroup.get('isUSCitizen').value ? this.editApplicantInfoFormGroup.get('isUSCitizen').value.trim() : "");
         applicantInfoModel.IsAuthorized = this.getBooleanValue(this.editApplicantInfoFormGroup.get('isAuthorized').value ? this.editApplicantInfoFormGroup.get('isAuthorized').value.trim() : "");
@@ -187,22 +187,12 @@ export class EditApplicantInfoComponent implements OnInit {
         this.editApplicantInfoFormGroup.controls['convictionDetail'].disable();
     }
 
-    onIsConvictChange($event) {
-        if ($event.target.value != 'YES') {
-            this.editApplicantInfoFormGroup.patchValue({ convictionDetail: '' });
-            this.editApplicantInfoFormGroup.controls['convictionDetail'].disable();
-        }
-        else {
-            this.editApplicantInfoFormGroup.controls['convictionDetail'].enable();
-        }
-    }
-
-    onZipCodeSearch($event) {
-        this.editApplicantInfoService.getZipCodeCityStateByZipCode($event.query).subscribe(data => {
-            this.zipCodeResults = data.body.Data;
-        },
-            err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get zip code', detail: '' }); },
-            () => { });
+    countrySearch($event) {
+        this.editApplicantInfoService.getCountryName($event.query).subscribe(response => {
+            if (response.status === 200) {
+                this.countryNames = response.body;
+            }
+        });
     }
 
     onPositionSearch($event) {
@@ -215,24 +205,45 @@ export class EditApplicantInfoComponent implements OnInit {
             () => { });
     }
 
+    onZipCodeSearch($event) {
+        this.editApplicantInfoService.getZipCodeCityStateByZipCode($event.query).subscribe(response => {            
+            if (response.status === 200) {
+                this.zipCodeResults = response.body;
+            }
+        },
+            err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get zip code', detail: '' }); },
+            () => { });
+    }    
+
     onZipCodeSelect($event) {
+        console.log($event)
         this.editApplicantInfoFormGroup.patchValue({
-            //zipCode: $event.ZipCode,
+            zipCode: $event.ZipCode,
             city: $event.City,
             state: $event.StateName
         });
-    }    
+    }
 
-    countrySearch($event) {
-        this.editApplicantInfoService.getCountryName($event.query).subscribe(response => {            
-            if (response.status === 200) {
-                this.countryNames = response.body;
-            }
+    onZipCodeClear() {
+        this.editApplicantInfoFormGroup.patchValue({
+            city: '',
+            state: ''
         });
+    }  
+
+
+    onIsConvictChange($event) {
+        if ($event.target.value != 'YES') {
+            this.editApplicantInfoFormGroup.patchValue({ convictionDetail: '' });
+            this.editApplicantInfoFormGroup.controls['convictionDetail'].disable();
+        }
+        else {
+            this.editApplicantInfoFormGroup.controls['convictionDetail'].enable();
+        }
     }
 
     onIsUSCitizenChange($event) {
-        if ($event.target.value == 'YES') {            
+        if ($event.target.value == 'YES') {
             this.editApplicantInfoFormGroup.patchValue({ isAuthorized: 'YES' });
             this.editApplicantInfoFormGroup.controls['isAuthorized'].disable();
         }
@@ -242,7 +253,7 @@ export class EditApplicantInfoComponent implements OnInit {
         }
         else {
             this.editApplicantInfoFormGroup.patchValue({ isAuthorized: '' });
-            this.editApplicantInfoFormGroup.controls['isAuthorized'].disable();                        
+            this.editApplicantInfoFormGroup.controls['isAuthorized'].disable();
         }
     }
 }

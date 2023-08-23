@@ -9,8 +9,7 @@ import { StorageService } from '../../../../common/services/storage.service';
 export class EditApplicantInfoService {
 
     private applicantInfoDetailsURI: string = `${resourceServerUrl}/api/applicant-info/details/`;
-    private applicantInfoUpdateURI: string = `${resourceServerUrl}/api/applicant-info/update`;
-    private zipcodeCityStateURI: string = `${resourceServerUrl}/api/applicant-info/zipcode-city-state/`;    
+    private applicantInfoUpdateURI: string = `${resourceServerUrl}/api/applicant-info/update`;    
     private getEmploymentApplicantionByApplicantIdURI: string = `${resourceServerUrl}/api/applicant-info/file/`;
 
     constructor(private http: HttpClient, private storageService: StorageService) { }
@@ -24,7 +23,7 @@ export class EditApplicantInfoService {
             'Content-Type': 'application/json',
             'Accept': 'application/pdf'
         })
-        return this.http.get(this.getEmploymentApplicantionByApplicantIdURI + this.storageService.getApplicantId, { headers: headerOptions, responseType: 'blob' as 'blob', observe: 'response' });        
+        return this.http.get(this.getEmploymentApplicantionByApplicantIdURI + this.storageService.getApplicantId, { headers: headerOptions, responseType: 'blob' as 'blob', observe: 'response' });
     }
 
     updateApplicantInfo(editApplicantInfoModel: EditApplicantInfoModel): Observable<HttpResponse<any>> {
@@ -32,12 +31,8 @@ export class EditApplicantInfoService {
     }
 
     getZipCodeCityStateByZipCode(zipCode: string = ""): Observable<HttpResponse<any>> {
-        if (zipCode != "") {
-            return this.http.get(encodeURI(this.zipcodeCityStateURI + zipCode), { observe: 'response' });
-        }
-        else {
-            return this.http.get(encodeURI(this.zipcodeCityStateURI + "all"), { observe: 'response' });
-        }
+        const URI = `${resourceServerUrl}/api/applicant-info/zipcode-city-state?zipCode=${zipCode}`;
+        return this.http.get(encodeURI(URI), { observe: 'response' });
     }
 
     getPositionByPositionName(posotion: string): Observable<HttpResponse<any>> {

@@ -8,18 +8,18 @@ namespace RecruiterPortalDAL.Managers
 {
     public class ZipCodeManager
     {
-        public static IEnumerable<LookupZipCode> GetZipCodeCityStateByZipCode(string Zipcode)
+        public static IEnumerable<ViewLookUpZipCode> GetZipCodeCityStateByZipCode(string Zipcode)
         {
             string spName = "sp_GetZipCodeByZipCode";
             try
             {
-                GenericRepository<LookupZipCode> view_LookUp_ZipCodeRepo = new GenericRepository<LookupZipCode>();
+                GenericRepository<ViewLookUpZipCode> zipCodeRepo = new GenericRepository<ViewLookUpZipCode>();
                 dynamic expandoObject = new ExpandoObject();
                 expandoObject.Zipcode = Zipcode;
-                SqlParameter[] sqlParameters = view_LookUp_ZipCodeRepo.GetSqlParametersFromExpandoObject(expandoObject, spName);
-                IEnumerable<LookupZipCode> view_LookUp_ZipCodeList = view_LookUp_ZipCodeRepo.GetAll(spName, sqlParameters); ;
+                SqlParameter[] sqlParameters = zipCodeRepo.GetSqlParametersFromExpandoObject(expandoObject, spName);
+                IEnumerable<ViewLookUpZipCode> zipCodes = zipCodeRepo.GetAll(spName, sqlParameters); ;
 
-                return view_LookUp_ZipCodeList;
+                return zipCodes;
             }
             catch (Exception ex)
             {
