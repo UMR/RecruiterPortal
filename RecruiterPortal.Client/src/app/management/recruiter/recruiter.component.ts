@@ -27,7 +27,7 @@ export class RecruiterComponent implements OnInit {
     public recruiterDialog: boolean = false;
 
     constructor(private recruiterService: RecruiterService, private messageService: MessageService, private confirmationService: ConfirmationService) {
-        this.getAgencies();
+        this.getRecruiters();
     }
 
     ngOnInit() {
@@ -37,9 +37,9 @@ export class RecruiterComponent implements OnInit {
         this.pageNumber = Math.ceil((event.first + 1) / event.rows);
         this.take = event.rows;
         this.skip = event.rows * (this.pageNumber - 1);
-        this.getAgencies();
+        this.getRecruiters();
     }
-    getAgencies() {
+    getRecruiters() {
         this.isLoading = true;
         this.recruiterService.getRecruiter()
             .subscribe(response => {
