@@ -33,7 +33,7 @@ namespace RecruiterPortal.API.Controllers
                         employment.CompanyAddress = employ.CompanyAddress;
                         employment.Supervisor = employ.Supervisor;
                         employment.CompanyPhone = employ.CompanyPhone;
-                        employment.JobTitle = employ.JobTItle;
+                        employment.JobTitle = employ.JobTitle;
                         employment.PositionID = employ.EmpositionId;
                         employment.Responisiblities = employ.Responisiblities;
                         employment.StartingSalary = employ.StartingSalary;
@@ -72,7 +72,7 @@ namespace RecruiterPortal.API.Controllers
                     employmentModel.CompanyAddress = employment.CompanyAddress;
                     employmentModel.Supervisor = employment.Supervisor;
                     employmentModel.CompanyPhone = employment.CompanyPhone;
-                    employmentModel.JobTitle = employment.JobTItle;
+                    employmentModel.JobTitle = employment.JobTitle;
                     employmentModel.PositionID = employment.EmpositionId;
                     employmentModel.Responisiblities = employment.Responisiblities;
                     employmentModel.StartingSalary = employment.StartingSalary;
@@ -102,7 +102,7 @@ namespace RecruiterPortal.API.Controllers
                 userCompany.EminstituteId = employment.InstituteID;
                 userCompany.Supervisor = employment.Supervisor;
                 userCompany.CompanyPhone = employment.CompanyPhone;
-                userCompany.JobTItle = employment.JobTitle;
+                userCompany.JobTitle = employment.JobTitle;
                 userCompany.EmpositionId = employment.PositionID;
                 userCompany.StartingSalary = employment.StartingSalary;
                 userCompany.EndingSalary = employment.EndingSalary;
@@ -150,7 +150,7 @@ namespace RecruiterPortal.API.Controllers
                 userCompany.CompanyAddress = employment.CompanyAddress;
                 userCompany.Supervisor = employment.Supervisor;
                 userCompany.CompanyPhone = employment.CompanyPhone;
-                userCompany.JobTItle = employment.JobTitle;
+                userCompany.JobTitle = employment.JobTitle;
                 userCompany.EmpositionId = employment.PositionID;
                 userCompany.StartingSalary = employment.StartingSalary;
                 userCompany.EndingSalary = employment.EndingSalary;

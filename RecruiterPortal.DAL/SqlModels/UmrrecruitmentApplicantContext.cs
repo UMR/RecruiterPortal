@@ -802,7 +802,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
             entity.Property(e => e.EmpositionId).HasColumnName("EMPositionID");
             entity.Property(e => e.EndingSalary).HasMaxLength(200);
             entity.Property(e => e.FromDate).HasColumnType("datetime");
-            entity.Property(e => e.JobTItle)
+            entity.Property(e => e.JobTitle)
                 .IsRequired()
                 .HasMaxLength(500)
                 .HasColumnName("JobTItle");
@@ -1324,14 +1324,14 @@ public partial class UmrrecruitmentApplicantContext : DbContext
                 .HasMaxLength(50);
             entity.Property(e => e.Decommissioned).HasColumnName("decommissioned");
             entity.Property(e => e.Description).HasMaxLength(50);
-            entity.Property(e => e.SateCode)
+            entity.Property(e => e.StateAbbr)
+                .IsRequired()
+                .HasMaxLength(50);
+            entity.Property(e => e.StateCode)
                 .IsRequired()
                 .HasMaxLength(3)
                 .IsUnicode(false)
                 .IsFixedLength();
-            entity.Property(e => e.StateAbbr)
-                .IsRequired()
-                .HasMaxLength(50);
             entity.Property(e => e.StateName)
                 .IsRequired()
                 .HasMaxLength(50);
