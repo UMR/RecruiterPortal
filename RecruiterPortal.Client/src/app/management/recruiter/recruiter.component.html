@@ -79,15 +79,15 @@
     </div>
 
     <p-footer>
-        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-success p-modal-save-btn" (click)="saveAgency()"></button>
+        <button pButton pRipple label="Cancel" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" class="p-button-text p-button-success p-modal-save-btn" (click)="saveAgency()"></button>
     </p-footer>
 </p-dialog>
 
 <p-confirmDialog [style]="{ width: '450px' }" #cd>
     <ng-template pTemplate="footer">
-        <button type="button" pButton icon="pi pi-times" label="No" class="btn-no" (click)="cd.reject()"></button>
-        <button type="button" pButton icon="pi pi-check" label="Yes" class="btn-yes" (click)="cd.accept()"></button>
+        <button type="button" icon="pi pi-times" label="No" class="btn-no" (click)="cd.reject()"></button>
+        <button type="button" icon="pi pi-check" label="Yes" class="btn-yes" (click)="cd.accept()"></button>
     </ng-template>
 </p-confirmDialog>
 <p-toast key="toastKey1"></p-toast>
