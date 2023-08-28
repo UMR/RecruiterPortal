@@ -51,5 +51,40 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        [Route("save")]
+        [HttpPost]
+        public IActionResult AddRecruiter(RecruiterModel recruiterModel)
+        {
+
+            try
+            {
+                List<RecruiterModel> recruiterModelList = new List<RecruiterModel>();
+                DataTable recruiterDt = RecruiterManager.GetAllRecruiter();
+                int recruiterCount = 0;
+                if (recruiterDt != null && recruiterDt.Rows.Count > 0)
+                {
+                    recruiterCount = recruiterDt.Rows.Count;
+                    foreach (DataRow oRow in recruiterDt.Rows)
+                    {
+                        RecruiterModel recruiter = new RecruiterModel();
+
+                        recruiter.LoginId = oRow["LoginId"].ToString();
+                        recruiter.FirstName = oRow["FirstName"].ToString();
+                        recruiter.LastName = oRow["LastName"].ToString();
+                        recruiter.Email = oRow["Email"].ToString();
+                        recruiter.Telephone = oRow["Telephone"].ToString();
+                        recruiter.IsActive = Convert.ToBoolean(oRow["IsActive"].ToString());
+                        recruiterModelList.Add(recruiter);
+                    }
+                }
+                return Ok(new { recruiters = recruiterModelList, count = recruiterCount });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

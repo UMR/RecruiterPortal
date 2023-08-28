@@ -69,7 +69,7 @@ namespace RecruiterPortal.DAL.Managers
 
         public static DataTable GetAllRecruiter()
         {
-            string spName = "SP_All_GET_Recruiter";
+            string spName = "SP_GET_All_Recruiter";
             GenericRepository<Recruiter> agencyRepo = new GenericRepository<Recruiter>();
             SqlParameter[] sqlParameters = agencyRepo.GetSqlParametersFromStoredProcedure(spName);
             DataTable agencyDt = null;
@@ -83,6 +83,21 @@ namespace RecruiterPortal.DAL.Managers
             }
 
             return agencyDt;
+        }
+        public static void SaveRecruiter(Recruiter recruiter)
+        {
+            string spName = "sp_InsertRecruiter";
+
+            try
+            {
+                GenericRepository<Recruiter> recruiterRepo = new GenericRepository<Recruiter>();
+                SqlParameter[] sqlParameters = recruiterRepo.GetSqlParametersFromObject(recruiter, spName);
+                recruiterRepo.Insert(spName, sqlParameters);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
