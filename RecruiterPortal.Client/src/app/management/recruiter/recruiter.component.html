@@ -51,18 +51,18 @@
 
     <div class="field">
         <label for="loginId">Login Id: </label>
-        <input [(ngModel)]="loginId" [pKeyFilter]="'alpha'" required id="loginId" maxlength="50" />
+        <input pInputText [pKeyFilter]="'alphanum'" [(ngModel)]="loginId"  required id="loginId" maxlength="50" />
         <small class="p-error" *ngIf="submitted && !loginId">Login Id is required.</small>
     </div>
 
     <div class="field">
         <label for="firstName">First Name: </label>
-        <input type="text" id="firstName" [(ngModel)]="firstName" required maxlength="100" />
+        <input pInputText [pKeyFilter]="'alpha'"  id="firstName" [(ngModel)]="firstName" required maxlength="100" />
         <small class="p-error" *ngIf="submitted && !firstName">First Name is required.</small>
     </div>
     <div class="field">
         <label for="lastName">Last Name: </label>
-        <input type="text" id="lastName" [(ngModel)]="lastName" required maxlength="100" />
+        <input pInputText [pKeyFilter]="'alpha'" id="lastName" [(ngModel)]="lastName" required maxlength="100" />
         <small class="p-error" *ngIf="submitted && !lastName">Last Name is required.</small>
     </div>
     <div class="field">
