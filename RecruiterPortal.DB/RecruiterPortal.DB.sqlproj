@@ -9,8 +9,7 @@
     <ProjectGuid>{90fe67b0-fe7f-4b6b-9434-a9331f0390c5}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
-    <RootPath>
-    </RootPath>
+    <RootPath />
     <RootNamespace>RecruiterPortal.DB</RootNamespace>
     <AssemblyName>RecruiterPortal.DB</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
@@ -48,7 +47,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
-    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
     <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
     <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
   </PropertyGroup>
@@ -438,5 +436,7 @@
     <None Include="Special\06_AZ_06_Zipcode_Insert_Data.sql" />
     <None Include="2023-08-23\01_SR_01_CREATE_SP_All_GET_Recruiter.sql" />
     <None Include="Special\07_AZ_07_State_Insert_Data.sql" />
+    <None Include="2023-08-23\03_AZ_02_ALTER_PROCEDURE_sp_GetZipCodeByZipCode.sql" />
+    <None Include="2023-08-23\02_AZ_01_ALTER_VIEW_View_LookUp_ZipCode.sql" />
   </ItemGroup>
 </Project>
