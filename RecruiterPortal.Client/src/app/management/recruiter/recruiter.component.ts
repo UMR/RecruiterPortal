@@ -22,8 +22,9 @@ export class RecruiterComponent implements OnInit {
     public selectedRecruiter: any;
     public submitted: boolean = false;
     public addEditTxt: string = "Add";
-    public recruiter: any;
-    public recruiterDialog: boolean = false;
+    public recruiterArr: any;
+    public recruiterDialog: boolean = true;
+    
 
     public loginId: string = "";
     public firstName: string = "";
@@ -31,6 +32,11 @@ export class RecruiterComponent implements OnInit {
     public email: string = "";
     public telephone: string = "";
     public isActive: boolean = true;
+
+    public recruiter: boolean = false;
+    public supervisor: boolean = false;
+    public manager: boolean = false;
+    public administrator: boolean = false;
     
 
     constructor(private recruiterService: RecruiterService, private messageService: MessageService, private confirmationService: ConfirmationService) {
@@ -67,7 +73,7 @@ export class RecruiterComponent implements OnInit {
 
     onEdit(agency: AgencyModel) {
         this.addEditTxt = "Edit";
-        this.recruiter = { ...agency };
+        //this.recruiter = { ...agency };
         this.recruiterDialog = true;
     }
 
@@ -92,8 +98,8 @@ export class RecruiterComponent implements OnInit {
     saveAgency() {
         this.submitted = true;
 
-        if (this.recruiter.agencyName.trim()) {
-            if (this.recruiter.agencyId) {
+        if (this.recruiterArr.agencyName.trim()) {
+            if (this.recruiterArr.agencyId) {
                 //this.agencys[this.findIndexById(this.agency.agencyId)] = this.agency;
                 //this.agencyService.updateAgency(this.agency.agencyId, this.agency).subscribe(res => {
                 //    console.log(res);
@@ -120,7 +126,7 @@ export class RecruiterComponent implements OnInit {
 
             this.recruiters = [...this.recruiters];
             this.recruiterDialog = false;
-            this.recruiter = {};
+            this.recruiterArr = {};
         }
     }
 
@@ -152,7 +158,7 @@ export class RecruiterComponent implements OnInit {
 
     openNewRecruiter() {
         this.addEditTxt = "Add";
-        this.recruiter = {};
+        this.recruiterArr = {};
         this.submitted = false;
         this.recruiterDialog = true;
     }

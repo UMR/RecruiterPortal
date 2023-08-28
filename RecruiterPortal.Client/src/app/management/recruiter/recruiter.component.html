@@ -47,7 +47,7 @@
         </div>
     </section>
 </div>
-<p-dialog [(visible)]="recruiterDialog" [style]="{ width: '450px' }" header="{{addEditTxt}} User" [modal]="true" [draggable]="false" [resizable]="false">
+<p-dialog [(visible)]="recruiterDialog" [style]="{ width: '550px' }" header="{{addEditTxt}} Recruiter" [modal]="true" [draggable]="false" [resizable]="false">
 
     <div class="field">
         <label for="loginId">Login Id: </label>
@@ -67,17 +67,31 @@
     </div>
     <div class="field">
         <label for="email">Email</label>
-        <input type="text" pInputText id="email" [(ngModel)]="email" maxlength="100" />
+        <input type="text" pInputText id="email" [(ngModel)]="email" required maxlength="100" />
     </div>
     <div class="field">
         <label for="telephone">Telephone</label>
-        <p-inputMask mask="(999) 999-9999" [(ngModel)]="val4" placeholder="(999) 999-9999"></p-inputMask>
+        <p-inputMask mask="(999) 999-9999" [(ngModel)]="val4" placeholder="(999) 999-9999" [style]="{'width':'100%'}"></p-inputMask>
     </div>
     <div>
-        <label for="name" style="margin-right:12px">Active</label>
         <input type="checkbox" id="name" [(ngModel)]="isActive" />
+        <label for="name" style="margin-left:12px">Active</label>
     </div>
 
+    <label style="margin:12px 0">Assign Role</label>
+    <div>
+        <input type="checkbox" id="recruiter" [(ngModel)]="recruiter" style="margin-right:8px"/>
+        <label for="recruiter" style="margin-right:12px">Recruiter</label>
+
+        <input type="checkbox" id="supervisor" [(ngModel)]="supervisor"  style="margin-right:8px"/>
+        <label for="supervisor" style="margin-right:12px">Supervisor</label>
+
+        <input type="checkbox" id="manager" [(ngModel)]="manager"  style="margin-right:8px"/>
+        <label for="manager" style="margin-right:12px">Hiring Manager</label>
+
+        <input type="checkbox" id="administrator" [(ngModel)]="administrator"  style="margin-right:8px"/>
+        <label for="administrator" style="margin-right:12px">Administrator</label>
+    </div>
     <p-footer>
         <button pButton pRipple label="Cancel" class="p-button-text" (click)="hideDialog()"></button>
         <button pButton pRipple label="Save" class="p-button-text p-button-success p-modal-save-btn" (click)="saveAgency()"></button>
