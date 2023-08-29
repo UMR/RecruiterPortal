@@ -30,7 +30,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 infoModel.EmrHomePhone = emergencyInfo.EmrHomePhone;
                 infoModel.EmrCellPhone = emergencyInfo.EmrCellPhone;
                 infoModel.EmrWorkPhone = emergencyInfo.EmrWorkPhone;
-                infoModel.UserId = Convert.ToInt64(emergencyInfo.UserID);
+                infoModel.UserId = emergencyInfo.UserId;
                 infoModel.EmrType = Convert.ToByte(EnumEmergencyInfo.Primary);
                 if (GetEmrInfoByIdAndType(infoModel.UserId, infoModel.EmrType))
                 {
@@ -62,7 +62,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 infoModel.EmrHomePhone = emergencyInfo.EmrHomePhone;
                 infoModel.EmrCellPhone = emergencyInfo.EmrCellPhone;
                 infoModel.EmrWorkPhone = emergencyInfo.EmrWorkPhone;
-                infoModel.UserId = Convert.ToInt64(emergencyInfo.UserID);
+                infoModel.UserId = emergencyInfo.UserId;
                 infoModel.EmrType = Convert.ToByte(EnumEmergencyInfo.Secondary);
                 if (GetEmrInfoByIdAndType(infoModel.UserId, infoModel.EmrType))
                 {

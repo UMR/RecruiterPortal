@@ -13,7 +13,7 @@ namespace RecruiterPortalDAL.Models
         public string EmrCellPhone { get; set; }
         public string EmrHomePhone { get; set; }
         public string EmrType { get; set; }
-        public string UserID { get; set; }
+        public long UserId { get; set; }
         public string EmrWorkPhone { get; set; }
     }
 }
