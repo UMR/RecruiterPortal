@@ -16,5 +16,6 @@
         public int? UpdatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public long? AgencyId { get; set; }
+        public string RecruiterRole { get; set; }
     }
 }

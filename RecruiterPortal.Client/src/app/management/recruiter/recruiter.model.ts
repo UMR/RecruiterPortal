@@ -13,4 +13,5 @@
     UpdatedBy: number;
     UpdatedDate: Date
     AgencyId: number;
+    RecruiterRole: string;
 }

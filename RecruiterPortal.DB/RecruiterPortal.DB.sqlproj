@@ -441,5 +441,6 @@
     <None Include="2023-08-23\02_AZ_01_ALTER_VIEW_View_LookUp_ZipCode.sql" />
     <None Include="2023-08-28\01_SR_01_CREATE_SP_GET_All_Recruiter.sql" />
     <None Include="2023-08-28\02_SR_02_CREATE_sp_InsertRecruiter.sql" />
+    <None Include="2023-08-28\03_SR_03_CREATE_sp_InsertRecruiterRole.sql" />
   </ItemGroup>
 </Project>

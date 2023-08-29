@@ -100,6 +100,32 @@ export class RecruiterComponent implements OnInit {
     saveAgency() {
         this.submitted = true;
 
+        let recruiterRole: string = "";
+        if (recruiterRole == "" && this.recruiter) {
+            recruiterRole = "recruiter";
+        }
+        else if (recruiterRole != "" && this.recruiter) {
+            recruiterRole = recruiterRole + "," + "recruiter";
+        }
+        if (recruiterRole == "" && this.supervisor) {
+            recruiterRole = recruiterRole + "," + "supervisor";
+        }
+        else if (recruiterRole != "" && this.supervisor) {
+            recruiterRole = recruiterRole + "," + "supervisor";
+        }
+        if (recruiterRole == "" && this.manager) {
+            recruiterRole = "manager";
+        }
+        else if (recruiterRole != "" && this.manager) {
+            recruiterRole = recruiterRole + "," + "manager";
+        }
+        if (recruiterRole == "" && this.administrator) {
+            recruiterRole = "administrator";
+        }
+        else if (recruiterRole != "" && this.administrator) {
+            recruiterRole = recruiterRole + "," + "administrator";
+        }
+
         const recruiterFormModel = new RecruiterModel();
         recruiterFormModel.LoginId = this.loginId;
         recruiterFormModel.FirstName = this.firstName;
@@ -109,6 +135,8 @@ export class RecruiterComponent implements OnInit {
         recruiterFormModel.Telephone = this.telephone;
         recruiterFormModel.IsActive = this.isActive;
         recruiterFormModel.AgencyId = 1;
+        recruiterFormModel.RecruiterRole = recruiterRole;
+
 
         this.recruiterService.addRecruiter(recruiterFormModel).subscribe(res => {
             console.log(res);

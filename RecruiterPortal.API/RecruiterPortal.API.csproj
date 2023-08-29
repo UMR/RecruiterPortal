@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Controllers\RecruiterController.cs~RF419907.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
     <PackageReference Include="iTextSharp" Version="5.5.13.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

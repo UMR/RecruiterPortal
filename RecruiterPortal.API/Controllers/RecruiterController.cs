@@ -64,17 +64,73 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     BadRequest(ModelState);
                 }
 
-                Recruiter recruiter = new Recruiter();
-                recruiter.LoginId = recruiterModel.LoginId;
-                recruiter.Password=recruiterModel.Password;
-                recruiter.FirstName = recruiterModel.FirstName;
-                recruiter.LastName = recruiterModel.LastName;
-                recruiter.Email = recruiterModel.Email;
-                recruiter.Telephone = recruiterModel.Telephone;
-                recruiter.IsActive = recruiterModel.IsActive;
-                recruiter.AgencyId = recruiterModel.AgencyId;
-                RecruiterManager.SaveRecruiter(recruiter);
-                return Ok();
+                if (RecruiterManager.GetRecruiterByLoginid(recruiterModel.LoginId) == null)
+                {
+                    Recruiter recruiter = new Recruiter();
+                    recruiter.LoginId = recruiterModel.LoginId;
+                    recruiter.Password = recruiterModel.Password;
+                    recruiter.FirstName = recruiterModel.FirstName;
+                    recruiter.LastName = recruiterModel.LastName;
+                    recruiter.Email = recruiterModel.Email;
+                    recruiter.Telephone = recruiterModel.Telephone;
+                    recruiter.IsActive = recruiterModel.IsActive;
+                    recruiter.AgencyId = recruiterModel.AgencyId;
+                    recruiter.CreatedBy = Convert.ToInt32(GetCurrentUser().UserId);
+                    recruiter.CreatedDate = DateTime.Now;
+                    RecruiterManager.SaveRecruiter(recruiter);
+
+                    Recruiter rec = RecruiterManager.GetRecruiterByLoginid(recruiterModel.LoginId);
+                    if (rec != null && recruiterModel.RecruiterRole != String.Empty)
+                    {
+                        var splitRole = recruiterModel.RecruiterRole.Split(",");
+                        if (splitRole.Length > 0)
+                        {
+                            foreach (var item in splitRole)
+                            {
+                                RecruiterRole recruiterRole = new RecruiterRole();
+                                if (item== "recruiter")
+                                {
+                                    recruiterRole.RoleId = 1;
+                                    recruiterRole.UserId = rec.UserId;
+                                    recruiterRole.CreatedBy = Convert.ToInt32(GetCurrentUser().UserId);
+                                    recruiterRole.CreatedDate = DateTime.Now;
+                                    RoleManager.SaveUserRole(recruiterRole);
+                                }
+                                if (item == "supervisor")
+                                {
+                                    recruiterRole.RoleId = 2;
+                                    recruiterRole.UserId = rec.UserId;
+                                    recruiterRole.CreatedBy = Convert.ToInt32(GetCurrentUser().UserId);
+                                    recruiterRole.CreatedDate = DateTime.Now;
+                                    RoleManager.SaveUserRole(recruiterRole);
+                                }
+                                if (item == "manager")
+                                {
+                                    recruiterRole.RoleId = 3;
+                                    recruiterRole.UserId = rec.UserId;
+                                    recruiterRole.CreatedBy = Convert.ToInt32(GetCurrentUser().UserId);
+                                    recruiterRole.CreatedDate = DateTime.Now;
+                                    RoleManager.SaveUserRole(recruiterRole);
+                                }
+                                if (item == "administrator")
+                                {
+                                    recruiterRole.RoleId = 4;
+                                    recruiterRole.UserId = rec.UserId;
+                                    recruiterRole.CreatedBy = Convert.ToInt32(GetCurrentUser().UserId);
+                                    recruiterRole.CreatedDate = DateTime.Now;
+                                    RoleManager.SaveUserRole(recruiterRole);
+                                }
+
+                            }
+                        }
+                    }
+
+                    return Ok();
+                }
+                else
+                {
+                    return Ok("Login Id already exist");
+                }
             }
             catch (Exception ex)
             {
