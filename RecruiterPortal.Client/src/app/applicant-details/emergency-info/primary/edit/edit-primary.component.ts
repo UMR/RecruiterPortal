@@ -96,8 +96,7 @@ export class PrimaryEditComponent implements OnInit {
                         this.router.navigate(['/emergency-info']);
                     }
                 },
-                    err => {
-                        console.log(err);
+                    err => {                        
                         this.isLoading = false;
                         this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to Saved', detail: '' });
                     },

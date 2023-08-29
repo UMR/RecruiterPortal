@@ -14,8 +14,8 @@ export class SecondaryEditComponent implements OnInit {
     public isLoading: boolean = false;
     public infoForm: FormGroup;
     public submitted: boolean = false;
-    public secondaryInfoModel: EmergencyInfoModel[] = [];
-    public secondaryInfo: EmergencyInfoModel[] = [];
+    public secondaryInfoModel: EmergencyInfoModel;
+    public secondaryInfo: EmergencyInfoModel;
     public applicantEmergencyInfoId: number = 0;
 
     constructor(private messageService: MessageService,
@@ -25,9 +25,10 @@ export class SecondaryEditComponent implements OnInit {
         private storageService: StorageService) { }
 
     ngOnInit() {
-        this.getData();
+        this.getSecondaryEmergencyInfo();
         this.setInitialForm();
     }
+
     setInitialForm() {
         this.infoForm = this.fb.group({
             lastName: ["", Validators.required],
@@ -38,25 +39,28 @@ export class SecondaryEditComponent implements OnInit {
             workPhone: [""],
         });
     }
-    getData() {
+
+    getSecondaryEmergencyInfo() {
         this.emergencyInfoService.getEmergencyInfoByApplicantId(this.storageService.getApplicantId)
             .subscribe(response => {
-                const data = (response as any).Data;
-                if (data) {
-                    for (let i = 0; i < data.length; i++) {
-                        if (data[i].EmrType && +data[i].EmrType === 2) {
-                            this.secondaryInfo = data[i];
-                            if ((this.secondaryInfo as any).ApplicantEmergencyInfoID) {
-                                this.applicantEmergencyInfoId = +(this.secondaryInfo as any).ApplicantEmergencyInfoID;
+                if (response.status === 200) {
+                    const data = response.body;
+                    if (data && data.length > 0) {
+                        for (let i = 0; i < data.length; i++) {
+                            if (data[i].EmrType && +data[i].EmrType === 2) {
+                                this.secondaryInfo = data[i];
+                                if ((this.secondaryInfo as any).ApplicantEmergencyInfoID) {
+                                    this.applicantEmergencyInfoId = +(this.secondaryInfo as any).ApplicantEmergencyInfoID;
+                                }
+                                this.infoForm.patchValue({
+                                    firstName: (this.secondaryInfo as any).EmrFirstName,
+                                    lastName: (this.secondaryInfo as any).EmrLastName,
+                                    relationship: (this.secondaryInfo as any).NatureOfRelationship,
+                                    homePhone: (this.secondaryInfo as any).EmrHomePhone,
+                                    cellPhone: (this.secondaryInfo as any).EmrCellPhone,
+                                    workPhone: (this.secondaryInfo as any).EmrWorkPhone,
+                                });
                             }
-                            this.infoForm.patchValue({
-                                firstName: (this.secondaryInfo as any).EmrFirstName,
-                                lastName: (this.secondaryInfo as any).EmrLastName,
-                                relationship: (this.secondaryInfo as any).NatureOfRelationship,
-                                homePhone: (this.secondaryInfo as any).EmrHomePhone,
-                                cellPhone: (this.secondaryInfo as any).EmrCellPhone,
-                                workPhone: (this.secondaryInfo as any).EmrWorkPhone,
-                            });
                         }
                     }
                 }
@@ -72,11 +76,10 @@ export class SecondaryEditComponent implements OnInit {
 
     get f() { return this.infoForm.controls; }
 
-    onSubmitPrimaryInfo() {
-        this.submitted = true;
-        this.secondaryInfoModel = [];
-        if (!this.infoForm.invalid) {
-            this.secondaryInfoModel.push({
+    onSubmitSecondaryInfo() {
+        this.submitted = true;        
+        if (this.infoForm.valid) {
+            this.secondaryInfoModel = {
                 ApplicantEmergencyInfoID: this.applicantEmergencyInfoId,
                 ApplicantID: this.storageService.getApplicantId,
                 EmrLastName: this.infoForm.get('lastName').value,
@@ -87,9 +90,9 @@ export class SecondaryEditComponent implements OnInit {
                 EmrWorkPhone: this.infoForm.get('workPhone').value,
                 EmrType: "2",
                 UserID: this.storageService.getApplicantId
-            })
+            };
             this.isLoading = true;
-            this.emergencyInfoService.insertSecondaryEmergencyInfo(this.secondaryInfoModel[0])
+            this.emergencyInfoService.insertSecondaryEmergencyInfo(this.secondaryInfoModel)
                 .subscribe(data => {
                     if (data.status === 200) {
                         this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Successfully Saved', detail: '' });
@@ -97,7 +100,7 @@ export class SecondaryEditComponent implements OnInit {
                         this.router.navigate(['/emergency-info/secondary']);
                     }
                 },
-                    err => {
+                    err => {                        
                         this.isLoading = false;
                         this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to Saved', detail: '' });
                     },
@@ -106,6 +109,7 @@ export class SecondaryEditComponent implements OnInit {
                     });
         }
     }
+
     onClear() {
         this.infoForm.reset()
     }
