@@ -108,6 +108,7 @@ export class RecruiterComponent implements OnInit {
         recruiterFormModel.Email = this.email;
         recruiterFormModel.Telephone = this.telephone;
         recruiterFormModel.IsActive = this.isActive;
+        recruiterFormModel.AgencyId = 1;
 
         this.recruiterService.addRecruiter(recruiterFormModel).subscribe(res => {
             console.log(res);
