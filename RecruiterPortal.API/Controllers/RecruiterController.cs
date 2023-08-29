@@ -66,12 +66,14 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
                 Recruiter recruiter = new Recruiter();
                 recruiter.LoginId = recruiterModel.LoginId;
+                recruiter.Password=recruiterModel.Password;
                 recruiter.FirstName = recruiterModel.FirstName;
                 recruiter.LastName = recruiterModel.LastName;
                 recruiter.Email = recruiterModel.Email;
                 recruiter.Telephone = recruiterModel.Telephone;
                 recruiter.IsActive = recruiterModel.IsActive;
                 recruiter.AgencyId = recruiterModel.AgencyId;
+                RecruiterManager.SaveRecruiter(recruiter);
                 return Ok();
             }
             catch (Exception ex)

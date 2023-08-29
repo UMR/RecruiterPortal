@@ -51,13 +51,24 @@
 
     <div class="field">
         <label for="loginId">Login Id: </label>
-        <input pInputText [pKeyFilter]="'alphanum'" [(ngModel)]="loginId"  required id="loginId" maxlength="50" />
+        <input pInputText [pKeyFilter]="'alphanum'" [(ngModel)]="loginId" required id="loginId" maxlength="50" />
         <small class="p-error" *ngIf="submitted && !loginId">Login Id is required.</small>
     </div>
 
     <div class="field">
+        <label for="password">Password: </label>
+        <input type="password" [(ngModel)]="password" required id="password" maxlength="50" />
+        <small class="p-error" *ngIf="submitted && !password">Password is required.</small>
+    </div>
+    <div class="field">
+        <label for="confirmPass">Confirm Password: </label>
+        <input type="password" [(ngModel)]="confirmPass" required id="confirmPass" maxlength="50" />
+        <small class="p-error" *ngIf="submitted && !confirmPass">Confirm password required.</small>
+    </div>
+
+    <div class="field">
         <label for="firstName">First Name: </label>
-        <input pInputText [pKeyFilter]="'alpha'"  id="firstName" [(ngModel)]="firstName" required maxlength="100" />
+        <input pInputText [pKeyFilter]="'alpha'" id="firstName" [(ngModel)]="firstName" required maxlength="100" />
         <small class="p-error" *ngIf="submitted && !firstName">First Name is required.</small>
     </div>
     <div class="field">
@@ -80,16 +91,16 @@
 
     <label style="margin:12px 0">Assign Role</label>
     <div>
-        <input type="checkbox" id="recruiter" [(ngModel)]="recruiter" style="margin-right:8px"/>
+        <input type="checkbox" id="recruiter" [(ngModel)]="recruiter" style="margin-right:8px" />
         <label for="recruiter" style="margin-right:12px">Recruiter</label>
 
-        <input type="checkbox" id="supervisor" [(ngModel)]="supervisor"  style="margin-right:8px"/>
+        <input type="checkbox" id="supervisor" [(ngModel)]="supervisor" style="margin-right:8px" />
         <label for="supervisor" style="margin-right:12px">Supervisor</label>
 
-        <input type="checkbox" id="manager" [(ngModel)]="manager"  style="margin-right:8px"/>
+        <input type="checkbox" id="manager" [(ngModel)]="manager" style="margin-right:8px" />
         <label for="manager" style="margin-right:12px">Hiring Manager</label>
 
-        <input type="checkbox" id="administrator" [(ngModel)]="administrator"  style="margin-right:8px"/>
+        <input type="checkbox" id="administrator" [(ngModel)]="administrator" style="margin-right:8px" />
         <label for="administrator" style="margin-right:12px">Administrator</label>
     </div>
     <p-footer>

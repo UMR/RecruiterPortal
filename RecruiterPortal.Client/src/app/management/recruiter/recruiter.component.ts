@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RecruiterService } from './recruiter.service';
 import { LazyLoadEvent, MessageService, ConfirmationService } from 'primeng/api';
 import { AgencyModel } from '../agency/agency.model';
+import { RecruiterModel } from './recruiter.model';
 
 @Component({
     selector: 'app-recruiter',
@@ -24,9 +25,10 @@ export class RecruiterComponent implements OnInit {
     public addEditTxt: string = "Add";
     public recruiterArr: any;
     public recruiterDialog: boolean = true;
-    
+
 
     public loginId: string = "";
+    public password: string = "";
     public firstName: string = "";
     public lastName: string = "";
     public email: string = "";
@@ -37,7 +39,7 @@ export class RecruiterComponent implements OnInit {
     public supervisor: boolean = false;
     public manager: boolean = false;
     public administrator: boolean = false;
-    
+
 
     constructor(private recruiterService: RecruiterService, private messageService: MessageService, private confirmationService: ConfirmationService) {
         this.getRecruiters();
@@ -64,7 +66,7 @@ export class RecruiterComponent implements OnInit {
             },
                 err => {
                     this.isLoading = false;
-                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get agency', detail: '' });
+                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get recruiter', detail: '' });
                 },
                 () => {
                     this.isLoading = false;
@@ -97,6 +99,25 @@ export class RecruiterComponent implements OnInit {
     }
     saveAgency() {
         this.submitted = true;
+
+        const recruiterFormModel = new RecruiterModel();
+        recruiterFormModel.LoginId = this.loginId;
+        recruiterFormModel.FirstName = this.firstName;
+        recruiterFormModel.LastName = this.lastName;
+        recruiterFormModel.Password = this.password;
+        recruiterFormModel.Email = this.email;
+        recruiterFormModel.Telephone = this.telephone;
+        recruiterFormModel.IsActive = this.isActive;
+
+        this.recruiterService.addRecruiter(recruiterFormModel).subscribe(res => {
+            console.log(res);
+            this.getRecruiters();
+            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Recruiter add successfully', life: 3000 });
+        },
+            error => {
+                this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Recruiter Add Faild', life: 3000 });
+            },
+            () => { })
 
         if (this.recruiterArr.agencyName.trim()) {
             if (this.recruiterArr.agencyId) {
