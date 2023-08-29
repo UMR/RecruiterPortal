@@ -59,26 +59,19 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
             try
             {
-                List<RecruiterModel> recruiterModelList = new List<RecruiterModel>();
-                DataTable recruiterDt = RecruiterManager.GetAllRecruiter();
-                int recruiterCount = 0;
-                if (recruiterDt != null && recruiterDt.Rows.Count > 0)
+                if (!ModelState.IsValid)
                 {
-                    recruiterCount = recruiterDt.Rows.Count;
-                    foreach (DataRow oRow in recruiterDt.Rows)
-                    {
-                        RecruiterModel recruiter = new RecruiterModel();
-
-                        recruiter.LoginId = oRow["LoginId"].ToString();
-                        recruiter.FirstName = oRow["FirstName"].ToString();
-                        recruiter.LastName = oRow["LastName"].ToString();
-                        recruiter.Email = oRow["Email"].ToString();
-                        recruiter.Telephone = oRow["Telephone"].ToString();
-                        recruiter.IsActive = Convert.ToBoolean(oRow["IsActive"].ToString());
-                        recruiterModelList.Add(recruiter);
-                    }
+                    BadRequest(ModelState);
                 }
-                return Ok(new { recruiters = recruiterModelList, count = recruiterCount });
+
+                Recruiter recruiter = new Recruiter();
+                recruiter.LoginId = recruiterModel.LoginId;
+                recruiter.FirstName = recruiterModel.FirstName;
+                recruiter.LastName = recruiterModel.LastName;
+                recruiter.Email = recruiterModel.Email;
+                recruiter.Telephone = recruiterModel.Telephone;
+                recruiter.IsActive = recruiterModel.IsActive;
+                return Ok();
             }
             catch (Exception ex)
             {
