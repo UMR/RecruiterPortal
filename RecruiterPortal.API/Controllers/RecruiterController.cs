@@ -71,6 +71,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 recruiter.Email = recruiterModel.Email;
                 recruiter.Telephone = recruiterModel.Telephone;
                 recruiter.IsActive = recruiterModel.IsActive;
+                recruiter.AgencyId = recruiterModel.AgencyId;
                 return Ok();
             }
             catch (Exception ex)
