@@ -5,6 +5,7 @@ using RecruiterPortal.DAL.SqlModels;
 using RecruiterPortalDAL.Managers;
 using RecruiterPortalDAL.Models;
 using System.Data;
+using System.Text.Json;
 using static RecruiterPortal.DAL.Utility.Utility;
 
 namespace ApplicantPortalAPI.ResourceServer.Controllers
@@ -79,13 +80,15 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     nurseFormModel.CreatedDate = nurseForm.CreatedDate;
                 }
 
-                return Ok(nurseFormModel);
+                string json = JsonSerializer.Serialize(nurseFormModel, new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+
+                return Ok(json);
             }
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-            }            
+            }
         }
 
         [Route("save-nurse-form")]

@@ -1,5 +1,5 @@
 export class AddEditNurseFormModel {
-  applicantId: number;
+  userId: number;
   nurseFormID: number;
   applyingForJobType: string;
   applyingForPosition: string;
