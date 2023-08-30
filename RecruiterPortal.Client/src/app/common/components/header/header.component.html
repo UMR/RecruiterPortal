@@ -50,7 +50,7 @@
                 </div>
             </a>
         </li>
-        <li class="list-inline-item">
+        <li class="list-inline-item" *ngIf="isAdministrator || isSupervisor || isManager">
             <a class="navbar-brand" [routerLink]="['/reports']">
                 <div class="row">
                     <div class="col pr-2">
@@ -75,7 +75,7 @@
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" [routerLink]="['/agency']"> Agencies</a></li>
                 <li><a class="dropdown-item" [routerLink]="['/role']"> Roles  </a></li>
-                <li><a class="dropdown-item" [routerLink]="['/recruiter']"> Recruiters   </a></li>
+                <li *ngIf="isAdministrator"><a class="dropdown-item" [routerLink]="['/recruiter']"> Recruiters   </a></li>
             </ul>
         </li>
         <li class="list-inline-item dropdown">
