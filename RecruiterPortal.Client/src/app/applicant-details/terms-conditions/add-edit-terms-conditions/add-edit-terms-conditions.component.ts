@@ -201,7 +201,7 @@ export class AddEditTermsConditionsComponent implements OnInit {
         }
         else {
             const termsConditions = {
-                applicantId: this.storageService.getApplicantId,
+                userID: this.storageService.getApplicantId,
                 termsConditionsId: this.termsConditionsId,
                 effectiveDate: this.addEditTermsConditionsFormGroup.controls.effectiveDate.value ? new Date(this.addEditTermsConditionsFormGroup.controls.effectiveDate.value).toLocaleString() : '',
                 facilityName: this.checkNullOrUndefined(this.addEditTermsConditionsFormGroup.controls.facilityName.value),
