@@ -7,6 +7,7 @@ using RecruiterPortalDAL.Models;
 using RecruiterPortalDAL.Managers;
 using RecruiterPortal.DAL.SqlModels;
 using static RecruiterPortal.DAL.Utility.Utility;
+using System.Text.Json;
 
 namespace ApplicantPortalAPI.ResourceServer.Controllers
 {
@@ -31,8 +32,9 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 if (userHepaBHIPPA != null)
                 {
                     userHepaBHIPPAModel = new HepaBHIPPAModel();
+                    userHepaBHIPPAModel.HepaBHIPPAID = userHepaBHIPPA.HepaBhippaid;
                     base.MapObjects(userHepaBHIPPA, userHepaBHIPPAModel);
-                }
+                }                
 
                 return Ok(userHepaBHIPPAModel);
             }
@@ -40,7 +42,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             {
                 _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-            }            
+            }
         }
 
         [Route("save")]
@@ -53,6 +55,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 if (ModelState.IsValid)
                 {
                     HepaBhippa userHepaBHIPPA = new HepaBhippa();
+                    userHepaBHIPPA.HepaBhippaid = userHepaBHIPPAModel.HepaBHIPPAID;
                     userHepaBHIPPA.HasHepaConcent = userHepaBHIPPAModel.HasHepaConcent;
                     userHepaBHIPPA.HasHepaSheet = userHepaBHIPPAModel.HasHepaSheet;
                     userHepaBHIPPA.HasHepaTraining = userHepaBHIPPAModel.HasHepaTraining;
@@ -64,7 +67,6 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     userHepaBHIPPA.WitnessName = userHepaBHIPPAModel.WitnessName;
                     userHepaBHIPPA.WitnessSignatureDate = userHepaBHIPPAModel.WitnessSignatureDate;
                     userHepaBHIPPA.ComplianceOfficer = userHepaBHIPPAModel.ComplianceOfficer;
-                    //base.MapObjects(userHepaBHIPPAModel, userHepaBHIPPA);
                     userHepaBHIPPA.UserId = userHepaBHIPPAModel.UserID;
 
                     HepaBhippa isExist = HepaBHIPPAManager.GetByUserID(userHepaBHIPPAModel.UserID);
@@ -222,8 +224,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     DataTable dtGeneratedFile = GeneratedFilesManager.GetGeneratedFileByUserIdAndFileType(applicantId, ((int)EnumFileType.HippaForm).ToString());
                     if (dtGeneratedFile != null && dtGeneratedFile.Rows.Count > 0)
                     {
-                        long generatedFileId = Convert.ToInt64(dtGeneratedFile.Rows[0]["GeneratedFileID"].ToString());
-                        //string msg = string.Empty;
+                        long generatedFileId = Convert.ToInt64(dtGeneratedFile.Rows[0]["GeneratedFileID"].ToString());                        
                         result = UpdateGeneratedFile(pdfTermplateId, data, templateFIleName, generatedFileId, applicantId, fileTypeCode);
                     }
                     else
@@ -286,9 +287,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     DataTable dtGeneratedFile = GeneratedFilesManager.GetGeneratedFileByUserIdAndFileType(applicantId, fileTypeCode.ToString());
                     if (dtGeneratedFile != null && dtGeneratedFile.Rows.Count > 0)
                     {
-
-                        long generatedFileId = Convert.ToInt64(dtGeneratedFile.Rows[0]["GeneratedFileID"].ToString());
-                        //string msg = string.Empty;
+                        long generatedFileId = Convert.ToInt64(dtGeneratedFile.Rows[0]["GeneratedFileID"].ToString());                        
                         result = UpdateGeneratedFile(pdfTermplateId, data, templateFIleName, generatedFileId, applicantId, fileTypeCode);
                     }
                     else
