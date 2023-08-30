@@ -29,12 +29,13 @@ export class HeaderComponent {
     //    }
     //  });
 
-    //this.userProfileService.getCurrentUser()
-    //  .subscribe(response => {
-    //    if (response.status === 200) {          
-    //      this.userProfileService.setUsername(response.body.LastName + ' ' + response.body.FirstName);          
-    //    }
-    //  });    
+    this.userProfileService.getUserRoles()
+        .subscribe(response => {
+            console.log(response);
+        if (response.status === 200) {          
+          this.userProfileService.setUsername(response.body.LastName + ' ' + response.body.FirstName);          
+        }
+      });    
 
     //this.userProfileService.selectedUsername$.subscribe(username => {
     //  if (username) {

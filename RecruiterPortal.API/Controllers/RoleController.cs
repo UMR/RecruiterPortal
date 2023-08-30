@@ -39,5 +39,32 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        [Route("get-user-roles")]
+        [HttpGet]
+        public IActionResult GetRoleByUser()
+        {
+            try
+            {
+                DataTable roles = RoleManager.GetUserRoles(GetCurrentUser().UserId);
+                List<Role> roleList = new List<Role>();
+                if (roles != null && roles.Rows.Count > 0)
+                {
+                    foreach (DataRow role in roles.Rows)
+                    {
+                        Role roleModel = new Role();
+                        roleModel.RoleName = role["RoleName"].ToString();
+                        roleModel.RoleKey = role["RoleKey"].ToString(); ;
+                        roleList.Add(roleModel);
+                    }
+                }
+                return Ok(roleList);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

@@ -6,45 +6,50 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable()
 export class UserProfileService {
 
-  //public username: string = '';
-  private username$ = new BehaviorSubject<any>(undefined);
-  public selectedUsername$ = this.username$.asObservable();
-  private getCurrentUserURI: string = `${resourceServerUrl}/api/user/get-current-user`;
-  private getUserByUserIdURI: string = `${resourceServerUrl}/api/user/get-user-by-userid`;
-  private updateUserProfileURI: string = `${resourceServerUrl}/api/user/edit-user-profile`;
-  private userEmailExistURI: string = `${resourceServerUrl}/api/user/email_exist`;
+    //public username: string = '';
+    private username$ = new BehaviorSubject<any>(undefined);
+    public selectedUsername$ = this.username$.asObservable();
+    private getCurrentUserURI: string = `${resourceServerUrl}/api/user/get-current-user`;
+    private getCurrentUserRolesURI: string = `${resourceServerUrl}/api/role/get-user-roles`;
+    private getUserByUserIdURI: string = `${resourceServerUrl}/api/user/get-user-by-userid`;
+    private updateUserProfileURI: string = `${resourceServerUrl}/api/user/edit-user-profile`;
+    private userEmailExistURI: string = `${resourceServerUrl}/api/user/email_exist`;
 
-  constructor(private httpClient: HttpClient) {
-    
-  }  
+    constructor(private httpClient: HttpClient) {
 
-  setUsername(username: any){
-    this.username$.next(username);
-    //this.username = username;
-  }  
+    }
 
-  getCurrentUser(): Observable<HttpResponse<any>> {
-    return this.httpClient.get(this.getCurrentUserURI, { observe: 'response' });
-  }
+    setUsername(username: any) {
+        this.username$.next(username);
+        //this.username = username;
+    }
 
-  getUserByUserId(): Observable<HttpResponse<any>> {
-    return this.httpClient.get(`${this.getUserByUserIdURI}`, { observe: 'response' });
-  }
+    getCurrentUser(): Observable<HttpResponse<any>> {
+        return this.httpClient.get(this.getCurrentUserURI, { observe: 'response' });
+    }
 
-  updateUserProfile(userModel: any): Observable<HttpResponse<any>> {
-    return this.httpClient.put(this.updateUserProfileURI, userModel, {
-      headers: new HttpHeaders()
-        .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
-    });
-  }
+    getUserRoles(): Observable<HttpResponse<any>> {
+        return this.httpClient.get(this.getCurrentUserRolesURI, { observe: 'response' });
+    }
 
-  isEmailExist(email: string): Observable<HttpResponse<any>> {
-    return this.httpClient.get(this.userEmailExistURI,
-      {
-        params: new HttpParams()
-          .set('email', email)
-        , observe: 'response'
-      });
-  }
+    getUserByUserId(): Observable<HttpResponse<any>> {
+        return this.httpClient.get(`${this.getUserByUserIdURI}`, { observe: 'response' });
+    }
+
+    updateUserProfile(userModel: any): Observable<HttpResponse<any>> {
+        return this.httpClient.put(this.updateUserProfileURI, userModel, {
+            headers: new HttpHeaders()
+                .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
+        });
+    }
+
+    isEmailExist(email: string): Observable<HttpResponse<any>> {
+        return this.httpClient.get(this.userEmailExistURI,
+            {
+                params: new HttpParams()
+                    .set('email', email)
+                , observe: 'response'
+            });
+    }
 
 }

@@ -15,7 +15,7 @@ export class AuthService {
     private isUserVerifiedUrl: string = `${resourceServerUrl}/api/base/is-user-verified`;
     public redirectUrl: string;
     public logoutMessage: string;
-    http: HttpClient;
+    public http: HttpClient;
 
     constructor(private httpBackend: HttpBackend, private httpClient: HttpClient, private umrCookieService: UmrCookieService, private router: Router,
         private storageService: StorageService) {

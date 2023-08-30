@@ -9,6 +9,8 @@ public partial class Role
 
     public string RoleName { get; set; }
 
+    public string RoleKey { get; set; }
+
     public int? Rank { get; set; }
 
     public int? CreatedBy { get; set; }
