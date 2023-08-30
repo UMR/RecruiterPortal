@@ -7,5 +7,5 @@ export class AddEditAgreementModel {
   StateName: string;
   Notary: string;
   Date: any;
-  ApplicantId: string;
+  UserId: string;
 }

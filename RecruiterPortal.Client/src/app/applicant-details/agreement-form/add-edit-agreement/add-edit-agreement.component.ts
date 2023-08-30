@@ -71,7 +71,7 @@ export class AddEditAgreementComponent implements OnInit {
             if (this.agreementId != "") {
                 agreeModel.AgreementID = this.agreementId;
             }
-            agreeModel.ApplicantId = this.service.getApplicantId.toString();
+            agreeModel.UserId = this.service.getApplicantId.toString();
             agreeModel.ContractorName = this.addEditAgreementFormGroup.get('contractorName').value;
             agreeModel.StreetAddress = this.addEditAgreementFormGroup.get('streetAdress').value;
             if (this.addEditAgreementFormGroup.get('zipCode').value != "") {
