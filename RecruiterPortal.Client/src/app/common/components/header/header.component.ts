@@ -27,6 +27,7 @@ export class HeaderComponent {
     }
 
     ngOnInit() {
+        this.getUserRole();
         //this.agencyProfileService.isAgencyOwner()
         //  .subscribe(response => {
         //    if (response.status === 200) {
@@ -34,6 +35,29 @@ export class HeaderComponent {
         //    }
         //  });
 
+
+
+        //this.userProfileService.selectedUsername$.subscribe(username => {
+        //  if (username) {
+        //    this.username = username;
+        //  }
+        //});
+
+        //if (this.route.snapshot.data['home']) {
+        //  this.userProfileService.setUser(this.route.snapshot.data['home'][0].body);
+        //  this.userProfileService.selectedUser$.subscribe(user => {
+        //    console.log(user);
+        //    this.fullName = user.LastName + user.FirstName;
+        //  });
+        //  this.isAgencyOwner = true;
+
+        //  //this.user = this.route.snapshot.data['home'][0].body;
+        //  //this.isAgencyOwner = this.route.snapshot.data['home'][1].body;
+        //  //this.fullName = this.user.LastName + this.user.FirstName;
+        //}
+    }
+
+    getUserRole() {
         this.userProfileService.getUserRoles()
             .subscribe(response => {
                 console.log(response);
@@ -54,25 +78,6 @@ export class HeaderComponent {
                     }
                 }
             });
-
-        //this.userProfileService.selectedUsername$.subscribe(username => {
-        //  if (username) {
-        //    this.username = username;
-        //  }
-        //});
-
-        //if (this.route.snapshot.data['home']) {
-        //  this.userProfileService.setUser(this.route.snapshot.data['home'][0].body);
-        //  this.userProfileService.selectedUser$.subscribe(user => {
-        //    console.log(user);
-        //    this.fullName = user.LastName + user.FirstName;
-        //  });
-        //  this.isAgencyOwner = true;
-
-        //  //this.user = this.route.snapshot.data['home'][0].body;
-        //  //this.isAgencyOwner = this.route.snapshot.data['home'][1].body;
-        //  //this.fullName = this.user.LastName + this.user.FirstName;
-        //}
     }
 
     logout() {
