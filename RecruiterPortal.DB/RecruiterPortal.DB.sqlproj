@@ -427,7 +427,7 @@
     <None Include="2023-08-15\03_AZ_03_ALTER_PROCEDURE_GetInstitution.sql" />
     <None Include="2023-08-16\01_AZ_01_CREATE_TABLE_Position.sql" />
     <None Include="2023-08-16\02_AZ_02_ALTER_PROCEDURE_GetPosition.sql" />
-    <None Include="Special\05_AZ_05_Position_Insert_Data.sql" />
+    <None Include="Special\05_AZ_05_Country_Insert_Data.sql" />
     <None Include="Special\status.txt" />
     <None Include="2023-08-21\01_SR_01_SP_All_GET_Agency.sql" />
     <None Include="2023-08-21\02_AZ_01_ALTER_PROCEDURE_GetCountryName.sql" />
@@ -442,5 +442,6 @@
     <None Include="2023-08-28\02_SR_02_CREATE_sp_InsertRecruiter.sql" />
     <None Include="2023-08-28\03_SR_03_CREATE_sp_InsertRecruiterRole.sql" />
     <None Include="2023-08-28\04_SR_04_CREATE_get_user_role.sql" />
+    <None Include="Special\08_AZ_08_Position_Insert_Data.sql" />
   </ItemGroup>
 </Project>
