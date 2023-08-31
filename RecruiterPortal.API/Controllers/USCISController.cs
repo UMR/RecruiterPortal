@@ -31,8 +31,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 {
                     userUSCISModel = new USCISModel();
                     userUSCISModel.USCISID = userUSCI.Uscisid;
-                    userUSCISModel.USCISID = userUSCI.Uscisid;
-                    userUSCISModel.USCISID = userUSCI.Uscisid;
+                    userUSCISModel.I94AdmissionNumber = userUSCI.I94admissionNumber;
+                    userUSCISModel.USCISNumber = userUSCI.Uscisnumber;
                     base.MapObjects(userUSCI, userUSCISModel);
                 }
 
