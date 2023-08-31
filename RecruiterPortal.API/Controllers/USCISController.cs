@@ -30,6 +30,9 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 if (userUSCI != null)
                 {
                     userUSCISModel = new USCISModel();
+                    userUSCISModel.USCISID = userUSCI.Uscisid;
+                    userUSCISModel.USCISID = userUSCI.Uscisid;
+                    userUSCISModel.USCISID = userUSCI.Uscisid;
                     base.MapObjects(userUSCI, userUSCISModel);
                 }
 
@@ -49,35 +52,36 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
             try
             {
-                if (ModelState.IsValid)
+                if (!ModelState.IsValid) 
+                    return BadRequest();
+
+                Usci userUSCI = new Usci();
+                base.MapObjects(userUSCISModel, userUSCI);
+                userUSCI.I94admissionNumber = userUSCISModel.I94AdmissionNumber;
+                userUSCI.Uscisnumber = userUSCISModel.USCISNumber;
+                userUSCI.UserId = userUSCISModel.UserID;
+                userUSCI.Uscisid = userUSCISModel.USCISID;
+
+                Usci isExist = USCISManager.GetByUserID(userUSCISModel.UserID);
+
+                if (isExist == null)
                 {
-                    Usci userUSCI = new Usci();
-                    base.MapObjects(userUSCISModel, userUSCI);
-                    userUSCI.UserId = userUSCISModel.UserID;
-
-                    Usci isExist = USCISManager.GetByUserID(userUSCISModel.UserID);
-
-                    if (isExist == null)
-                    {
-                        USCISManager.SaveUSCIS(userUSCI);
-                        //UserManager.SendMailToRecruiterDBModified(base.GetCurrentUser().UserID, "USCIS");
-                    }
-                    else
-                    {
-                        USCISManager.UpdateUSCIS(userUSCI);
-                        //UserManager.SendMailToRecruiterDBModified(base.GetCurrentUser().UserID, "USCIS");
-                    }
-
-                    return Ok();
+                    USCISManager.SaveUSCIS(userUSCI);
+                    //UserManager.SendMailToRecruiterDBModified(base.GetCurrentUser().UserID, "USCIS");
                 }
+                else
+                {
+                    USCISManager.UpdateUSCIS(userUSCI);
+                    //UserManager.SendMailToRecruiterDBModified(base.GetCurrentUser().UserID, "USCIS");
+                }
+
+                return Ok();
             }
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-            }
-
-            return BadRequest();
+            }            
         }
 
         [Route("delete/{id}")]

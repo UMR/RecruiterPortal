@@ -34,7 +34,8 @@ namespace RecruiterPortalDAL.Managers
             {
                 GenericRepository<Usci> userUSCISRepo = new GenericRepository<Usci>();
                 SqlParameter[] sqlParameters = userUSCISRepo.GetSqlParametersFromObject(userUSCIS, spName, "@");
-                return userUSCISRepo.Update(spName, sqlParameters);
+                var result = userUSCISRepo.Update(spName, sqlParameters);
+                return result;
 
             }
             catch (Exception ex)

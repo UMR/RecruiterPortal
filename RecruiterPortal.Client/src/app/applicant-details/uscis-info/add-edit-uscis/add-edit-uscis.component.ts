@@ -57,9 +57,10 @@ export class AddEditUscisComponent implements OnInit {
         this.isLoading = true;
         this.editUSCISService.getUserUSCIS()
             .subscribe(data => {
-                if (data.status === 200 && data.body != null) {
-                    this.userUSCIS = data.body;
-                    this.userUSCISId = this.userUSCIS || this.userUSCIS.USCISID ? +this.userUSCIS.USCISID : 0;
+                if (data.status === 200 && data.body) {
+                    console.log(data.body);
+                    this.userUSCIS = data.body;                    
+                    this.userUSCISId = this.userUSCIS.USCISID ? +this.userUSCIS.USCISID : 0;
                     this.fillUpUSCISInfo();
                 }
             },
@@ -96,8 +97,7 @@ export class AddEditUscisComponent implements OnInit {
 
     }
 
-    onClear() {
-        console.log('Helo');
+    onClear() {        
         this.addEditUSCISGroup.setValue({
             uSCISNumber: '',
             workAuthExpiryDate: '',
@@ -155,8 +155,10 @@ export class AddEditUscisComponent implements OnInit {
                     new Date(this.addEditUSCISGroup.controls.expirationDate.value).getDate())) : Date,
                 isNonCitizen: this.getBooleanValue(this.addEditUSCISGroup.get('isNonCitizen').value.trim()),
                 isLawFullPermanent: this.getBooleanValue(this.addEditUSCISGroup.get('isLawFullPermanent').value.trim()),
-                applicantID: this.storageService.getApplicantId
+                userID: this.storageService.getApplicantId
             };
+
+            console.log(model);
 
             this.isLoading = true;
             if (this.userUSCISId && this.isEmpty()) {
