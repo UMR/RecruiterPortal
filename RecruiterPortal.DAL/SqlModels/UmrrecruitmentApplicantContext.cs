@@ -576,12 +576,12 @@ public partial class UmrrecruitmentApplicantContext : DbContext
         {
             entity.ToTable("Position");
 
-            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.PositionId).HasColumnName("PositionID");
             entity.Property(e => e.PositionName)
                 .IsRequired()
-                .HasMaxLength(250)
-                .IsUnicode(false);
-            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("Position_Name");
         });
 
         modelBuilder.Entity<Race>(entity =>
@@ -942,7 +942,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
         {
             entity.HasKey(e => e.LicenseId).HasName("PK_License");
 
-            entity.ToTable("UserLicense");
+            entity.ToTable("UserLicense", tb => tb.HasTrigger("Update_ChangeTracker_UserLicense"));
 
             entity.Property(e => e.LicenseId).HasColumnName("LicenseID");
             entity.Property(e => e.CreatedDate)
@@ -973,7 +973,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
 
         modelBuilder.Entity<UserMilitary>(entity =>
         {
-            entity.ToTable("UserMilitary");
+            entity.ToTable("UserMilitary", tb => tb.HasTrigger("Update_ChangeTracker_UserMilitary"));
 
             entity.Property(e => e.UserMilitaryId).HasColumnName("UserMilitaryID");
             entity.Property(e => e.Branch).HasMaxLength(500);
