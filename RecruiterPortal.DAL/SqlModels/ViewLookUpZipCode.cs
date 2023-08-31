@@ -5,7 +5,7 @@ namespace RecruiterPortal.DAL.SqlModels;
 
 public partial class ViewLookUpZipCode
 {
-    public string SateCode { get; set; }
+    public string StateCode { get; set; }
 
     public string StateName { get; set; }
 
