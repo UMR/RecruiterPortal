@@ -576,12 +576,12 @@ public partial class UmrrecruitmentApplicantContext : DbContext
         {
             entity.ToTable("Position");
 
-            entity.Property(e => e.PositionId).HasColumnName("PositionID");
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
             entity.Property(e => e.PositionName)
                 .IsRequired()
-                .HasMaxLength(100)
-                .IsUnicode(false)
-                .HasColumnName("Position_Name");
+                .HasMaxLength(250)
+                .IsUnicode(false);
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
         });
 
         modelBuilder.Entity<Race>(entity =>
