@@ -24,7 +24,7 @@ export class RecruiterComponent implements OnInit {
     public submitted: boolean = false;
     public addEditTxt: string = "Add";
     public recruiterArr: any;
-    public recruiterDialog: boolean = true;
+    public recruiterDialog: boolean = false;
 
 
     public loginId: string = "";

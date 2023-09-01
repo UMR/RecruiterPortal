@@ -62,8 +62,11 @@ export class AuthService {
                             this.redirectUrl = null;
                         }
                         else {
-                            this.router.navigate(['view-by-applicant']);
+                            this.router.navigate(['dashboard']);
                         }
+                        //else {
+                        //    this.router.navigate(['view-by-applicant']);
+                        //}
                     });
             });
     }
