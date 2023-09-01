@@ -13,5 +13,5 @@ GO
 CREATE PROCEDURE [dbo].[sp_GetRole]  
 AS 
 BEGIN      
-	SELECT * FROM [Roles];
+	SELECT * FROM [Roles] where RoleKey <> 'admin';
 END
