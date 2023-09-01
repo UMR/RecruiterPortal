@@ -21,6 +21,7 @@ export class HeaderComponent {
     public isSupervisor: boolean = false;
     public isManager: boolean = false;
     public isAdministrator: boolean = false;
+    public isAdmin: boolean = false;
 
     constructor(private authService: AuthService, private route: ActivatedRoute, private userProfileService: UserProfileService, public agencyProfileService: AgencyProfileService) {
 
@@ -74,6 +75,9 @@ export class HeaderComponent {
                         }
                         if (response.body[i].RoleKey == 'administrator') {
                             this.isAdministrator = true;
+                        }
+                        if (response.body[i].RoleKey == 'admin') {
+                            this.isAdmin = true;
                         }
                     }
                 }
