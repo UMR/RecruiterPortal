@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Data;
-using iTextSharp.text.pdf;
-using RecruiterPortal.DAL.SqlModels;
+﻿using iTextSharp.text.pdf;
+using Microsoft.AspNetCore.Mvc;
 using RecruiterPortal.API.Controllers;
+using RecruiterPortal.DAL.SqlModels;
 using RecruiterPortalDAL.Managers;
 using RecruiterPortalDAL.Models;
+using System.Data;
 using static RecruiterPortal.DAL.Utility.Utility;
 
 namespace ApplicantPortalAPI.ResourceServer.Controllers
@@ -87,8 +87,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 if (ModelState.IsValid)
                 {
                     Cbcform cbc = new Cbcform();
-                    cbc.UserId = cbcModel.UserID;
-                    //cbc.UserID = cbcModel.UserID;
+                    cbc.UserId = cbcModel.UserID;                    
                     cbc.AliasAka = cbcModel.Alias_AKA;
                     cbc.HomePhone = cbcModel.HomePhone;
                     cbc.AgencyIdentification = cbcModel.AgencyIdentification;
@@ -129,7 +128,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                         cbc.CreatedBy = cbcModel.CreatedBy;
                         cbc.CreatedDate = DateTime.Now;
                         CBCManager.SaveCBC(cbc);
-                        UserManager.SendMailToRecruiterDBModified(cbcModel.UserID, "CBC");
+                        //UserManager.SendMailToRecruiterDBModified(cbcModel.UserID, "CBC");
                     }
                     else
                     {
@@ -137,7 +136,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                         cbc.UpdatedBy = cbcModel.UpdatedBy;
                         cbc.UpdatedDate = DateTime.Now;
                         CBCManager.UpdateCBC(cbc);
-                        UserManager.SendMailToRecruiterDBModified(cbcModel.UserID, "CBC");
+                        //UserManager.SendMailToRecruiterDBModified(cbcModel.UserID, "CBC");
                     }
 
                     return Ok();
