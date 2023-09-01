@@ -19,8 +19,7 @@ export class AddEditCBCComponent implements OnInit {
   public editcbcModel: AddEditCBCModel = new AddEditCBCModel();
   public addEditCBCFormGroup: FormGroup;
   public isLoading: boolean = false;
-  public submitted: boolean = false;
-  //public employmentModal: EmploymentModel[] = [];
+  public submitted: boolean = false;  
   private userEducationId;
   public zipCodeResults: string[];
   institutionTypes: any[];
@@ -71,7 +70,7 @@ export class AddEditCBCComponent implements OnInit {
         if (data.status === 200 && data.body !== null) {
           this.cbcid = data.body.cbcid;
           this.addEditCBCFormGroup.setValue({
-            agencyIdentification: data.body.AgencyIdentification,// data.body.AgencyIdentification),
+            agencyIdentification: data.body.AgencyIdentification,
             pfi: data.body.LTHHP_PFI,
             license: data.body.LHCSA_License,
             agencyName: data.body.AgencyName,
@@ -107,8 +106,7 @@ export class AddEditCBCComponent implements OnInit {
           this.pfiLicenseEnableDisable(data.body.AgencyIdentification, data.body.LTHHP_PFI, data.body.LHCSA_License);
         }
       },
-        err => {
-          console.log(err);
+        err => {          
           this.isLoading = false;
           this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get CBC info', detail: '' });
         },
@@ -191,14 +189,12 @@ export class AddEditCBCComponent implements OnInit {
     cbcModel.ParentorLegalGuardian = this.addEditCBCFormGroup.get('guardianSign').value;
     cbcModel.HomePhone = this.addEditCBCFormGroup.get('homePhone').value;
     cbcModel.Title = this.addEditCBCFormGroup.get('title').value;
-
-
-    //cbcModel.institutionType = +this.addEditCBCFormGroup.get('isntitutionType').value;
+    
     this.isLoading = true;
     this.addEditCBCService.saveCBCInfo(cbcModel)
       .subscribe(result => {
         if (result.status === 200) {
-          this.router.navigate(['/cbc-form-info/'/*, { updateSuccessful: 1 }*/]);
+          this.router.navigate(['/cbc-form-info/']);
         }
         else {
           this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to update CBC info', detail: '' });
@@ -283,7 +279,7 @@ export class AddEditCBCComponent implements OnInit {
   }
   onZipCodeSearch($event) {
     this.addEditCBCService.getZipCodeCityStateByZipCode($event.query).subscribe(data => {
-      this.zipCodeResults = data.body.Data;
+      this.zipCodeResults = data.body;
     },
       err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get zip code', detail: '' }); },
       () => { });
