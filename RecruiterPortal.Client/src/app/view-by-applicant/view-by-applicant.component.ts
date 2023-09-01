@@ -27,6 +27,8 @@ export class ViewByApplicantComponent implements OnInit {
     public rows: number = 15;
     private take: number;
     private skip: number;
+    private takeDefaultValue: number = 15;
+    private skipDefaultValue: number = 0;
     private pageNumber: number;
     public selectedApplicant: any;
     @ViewChild('applicantTable', { static: false }) applicantTable: Table;
@@ -103,7 +105,6 @@ export class ViewByApplicantComponent implements OnInit {
 
     onApplicantEmailSearch($event) {
         this.viewByApplicantService.getApplicantEmail($event.query).subscribe(response => {
-            console.log(response.body);
             if (response.status === 200) {
                 this.applicantEmailResults = response.body;
             }
@@ -118,7 +119,6 @@ export class ViewByApplicantComponent implements OnInit {
     }
 
     onApplicantStatusChange(event) {
-        console.log(event.target.value);
         this.selectedApplicantStatus = event.target.value;
         this.getApplicants();
     }
@@ -131,7 +131,7 @@ export class ViewByApplicantComponent implements OnInit {
         const applicantLastName = this.viewByApplicantFormGroup.controls.applicantLastName.value ? this.viewByApplicantFormGroup.controls.applicantLastName.value : '';
         const applicantEmail = this.viewByApplicantFormGroup.controls.applicantEmail.value ? this.viewByApplicantFormGroup.controls.applicantEmail.value : '';
         //const applicantStatus = this.viewByApplicantFormGroup.controls.applicantStatus.value ? this.viewByApplicantFormGroup.controls.applicantStatus.value : '';
-       
+
 
         const model = {
             firstName: applicantFirstName,
@@ -142,9 +142,9 @@ export class ViewByApplicantComponent implements OnInit {
             take: this.take,
             skip: this.skip,
         }
+        console.log(model);
         this.viewByApplicantService.getViewByApplicantSearch(model)
             .subscribe(response => {
-                console.log(response);
                 if (response.status === 200) {
                     this.applicants = (response.body as any).applicants;
                     this.totalApplicants = (response.body as any).totalApplicants;
@@ -170,6 +170,8 @@ export class ViewByApplicantComponent implements OnInit {
     }
 
     onSubmit() {
+        this.take = this.takeDefaultValue;
+        this.skip = this.skipDefaultValue;
         this.getApplicants();
     }
 
