@@ -125,6 +125,7 @@
     <Folder Include="2023-08-21" />
     <Folder Include="2023-08-23" />
     <Folder Include="2023-08-28" />
+    <Folder Include="2023-09-01" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="2019-11-04\01_TR_01_CREATE_DATABASE.sql" />
@@ -443,5 +444,6 @@
     <None Include="2023-08-28\03_SR_03_CREATE_sp_InsertRecruiterRole.sql" />
     <None Include="2023-08-28\04_SR_04_CREATE_get_user_role.sql" />
     <None Include="Special\08_AZ_08_Position_Insert_Data.sql" />
+    <None Include="2023-09-01\01_AZ_01_ALTER _PROCEDURE_sp_UpdateUserCBC.sql" />
   </ItemGroup>
 </Project>

@@ -190,6 +190,8 @@ export class AddEditCBCComponent implements OnInit {
         cbcModel.HomePhone = this.addEditCBCFormGroup.get('homePhone').value;
         cbcModel.Title = this.addEditCBCFormGroup.get('title').value;
 
+        console.log(cbcModel);
+
         this.isLoading = true;
         this.addEditCBCService.saveCBCInfo(cbcModel)
             .subscribe(result => {
