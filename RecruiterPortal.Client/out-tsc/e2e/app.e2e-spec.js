@@ -10,7 +10,7 @@ describe('workspace-project App', function () {
     });
     it('should display welcome message', function () {
         page.navigateTo();
-        expect(page.getTitleText()).toEqual('umrrecruitment-basic-web-client app is running!');
+        expect(page.getTitleText()).toEqual('recruiter-portal app is running!');
     });
     afterEach(function () { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
         var logs;

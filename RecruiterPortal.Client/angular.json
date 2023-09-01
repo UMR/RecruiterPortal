@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "umrrecruitment-basic-web-client": {
+    "recruiter-portal": {
       "projectType": "application",
       "schematics": {},
       "root": "",
