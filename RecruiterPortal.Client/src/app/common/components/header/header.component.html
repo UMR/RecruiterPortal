@@ -23,14 +23,45 @@
                 </div>
             </a>
         </li>
-        <li class="list-inline-item">
-            <a class="navbar-brand" [routerLink]="['/view-by-applicant']">
-                <div class="row">
-                    <div class="col pr-2">
-                        <h6>Applicant List</h6>
-                    </div>
-                </div>
+        <li class="list-inline-item dropdown">
+            <a class="navbar-brand dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown">
+                <h6>Applicant <i class="fa fa-caret-down"></i> </h6>
             </a>
+
+
+            <ul class="dropdown-menu">
+                <li style="margin-left:8px">
+                    <p>
+                        Applicant List
+                    </p>
+                    <ul style="padding-left:8px">
+                        <li style="list-style:none">
+                            <a class="dropdown-item" [routerLink]="['/view-by-applicant']"> Search</a>
+                        </li>
+                        <li style="list-style:none">
+                            <a class="dropdown-item" [routerLink]="['/view-by-applicant']"> Add Applicant</a>
+                        </li>
+                    </ul>
+                </li>
+                <li style="margin-left: 8px; margin-top: 24px;">
+                    <p> View By Status</p>
+                    <ul style="padding-left:8px">
+                        <li style="list-style:none"><a class="dropdown-item" href="#"> Lead</a></li>
+                        <li style="list-style:none"><a class="dropdown-item" href="#"> Paper-screened </a></li>
+                        <li style="list-style:none"><a class="dropdown-item" href="#"> Dial  </a></li>
+                        <li style="list-style:none"><a class="dropdown-item" href="#"> Connect </a></li>
+                        <li style="list-style:none"><a class="dropdown-item" href="#"> Phone-screened </a></li>
+                        <li style="list-style:none"><a class="dropdown-item" href="#"> Send-out   </a></li>
+                        <li style="list-style:none"><a class="dropdown-item" href="#"> Pending   </a></li>
+                        <li style="list-style:none"><a class="dropdown-item" href="#"> Hired    </a></li>
+                        <li style="list-style:none"><a class="dropdown-item" href="#"> Do Not Contact   </a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!--<label>View By Status</label>-->
+            <!--<ul class="dropdown-menu">
+                <li><a class="dropdown-item" [routerLink]="['/agency']"> Agencies</a></li>
+            </ul>-->
         </li>
         <li class="list-inline-item">
             <a class="navbar-brand" [routerLink]="['/job-orders']">
@@ -73,12 +104,12 @@
                 <h6>Management <i class="fa fa-caret-down"></i> </h6>
             </a>
             <ul class="dropdown-menu">
-                <li  *ngIf="isAdmin"><a class="dropdown-item" [routerLink]="['/agency']"> Agencies</a></li>
+                <li *ngIf="isAdmin"><a class="dropdown-item" [routerLink]="['/agency']"> Agencies</a></li>
                 <li><a class="dropdown-item" [routerLink]="['/role']"> Roles  </a></li>
                 <li *ngIf="isAdministrator || isAdmin"><a class="dropdown-item" [routerLink]="['/recruiter']"> Recruiters   </a></li>
             </ul>
         </li>
-        <li class="list-inline-item dropdown">
+        <!--<li class="list-inline-item dropdown">
             <a class="navbar-brand dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown">
                 <h6>Status <i class="fa fa-caret-down"></i> </h6>
             </a>
@@ -93,7 +124,7 @@
                 <li><a class="dropdown-item" href="#"> Hired    </a></li>
                 <li><a class="dropdown-item" href="#"> Do Not Contact   </a></li>
             </ul>
-        </li>
+        </li>-->
         <li class="list-inline-item d-md-none d-lg-none" *ngIf="isVisibleToggleButton == 1">
             <a href="" (click)="menuToggle($event)"><span id="menu-toggle" class="navbar-toggler-icon"></span></a>
         </li>
