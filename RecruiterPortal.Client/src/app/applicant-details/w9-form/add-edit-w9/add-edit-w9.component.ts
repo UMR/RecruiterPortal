@@ -48,7 +48,7 @@ export class AddEditW9Component implements OnInit {
     ngOnInit() {
         this.addEditW9Service.getW9Info(this.service.getApplicantId)
             .subscribe(data => {
-                if (data.status === 200 && data.body !== null) {
+                if (data.status === 200 && data.body) {                    
                     this.wId = data.body.WID;
                     this.addEditW9FormGroup.setValue({
                         name: data.body.Name,
@@ -70,12 +70,10 @@ export class AddEditW9Component implements OnInit {
                     });
 
                     if (data.body.CompanyLiability) {
-                        this.isDisable = true;
-                        //this.addEditW9FormGroup.patchValue({ companyLiability: true })
+                        this.isDisable = true;                        
                     }
                     else {
-                        this.isDisable = null;
-                        //this.addEditW9FormGroup.patchValue({ companyLiability: "NO" })
+                        this.isDisable = null;                        
                     }
                     if (data.body.CCorporation == true) {
                         this.addEditW9FormGroup.patchValue({ taxClassification: "cCor" })
@@ -152,7 +150,7 @@ export class AddEditW9Component implements OnInit {
             w9Model.ReportingCode = this.addEditW9FormGroup.get('FATCACode').value;
             w9Model.StreetAddress = this.addEditW9FormGroup.get('stAddress').value;
             w9Model.AptNo = this.addEditW9FormGroup.get('aptNo').value;
-            if (this.addEditW9FormGroup.get('zipCode').value != "") {
+            if (this.addEditW9FormGroup.get('zipCode').value) {
                 w9Model.ZipCode = this.addEditW9FormGroup.get('zipCode').value.ZipCode;
             }
             w9Model.City = this.addEditW9FormGroup.get('city').value;
@@ -166,7 +164,7 @@ export class AddEditW9Component implements OnInit {
             this.addEditW9Service.saveW9Info(w9Model)
                 .subscribe(result => {
                     if (result.status === 200) {
-                        this.router.navigate(['/w9-form-info/'/*, { updateSuccessful: 1 }*/]);
+                        this.router.navigate(['/w9-form-info/']);
                     }
                     else {
                         this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to update w9 form info', detail: '' });

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RecruiterPortalDAL.Models
 {
-    public class W9Model
+    public class W9FormModel
     {
         public long WID { get; set; }
         public string Name { get; set; }

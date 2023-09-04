@@ -21,16 +21,17 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         [HttpGet]
         public IActionResult GetUserW9FormByUserId(int applicantId)
         {
-
             try
             {
-                W9from userUSCI = W9FormManager.GetW9FormByUserID(applicantId);
-                W9Model w9Model = null;
+                W9from w9Form = W9FormManager.GetW9FormByUserID(applicantId);
+                W9FormModel w9Model = null;
 
-                if (userUSCI != null)
+                if (w9Form != null)
                 {
-                    w9Model = new W9Model();
-                    base.MapObjects(userUSCI, w9Model);
+                    w9Model = new W9FormModel();
+                    base.MapObjects(w9Form, w9Model);
+                    w9Model.WID = w9Form.Wid;
+                    w9Model.SSN = w9Form.Ssn;
                 }
 
                 return Ok(w9Model);
@@ -39,48 +40,45 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             {
                 _logger.LogError("");
                 return StatusCode(500, ex.Message);
-            }
-
-            return BadRequest();
+            }            
         }
 
         [Route("save")]
         [HttpPost]
-        public IActionResult Save(W9Model w9Model)
+        public IActionResult Save(W9FormModel w9Model)
         {
-
             try
             {
-                if (ModelState.IsValid)
+                if (!ModelState.IsValid)
                 {
-                    W9from W9From = new W9from();
-                    base.MapObjects(w9Model, W9From);
-                    W9From.UserId = w9Model.UserID;
-
-                    W9from isExist = W9FormManager.GetW9FormByUserID(w9Model.UserID);
-
-                    if (isExist == null)
-                    {
-                        W9FormManager.SaveW9Form(W9From);
-                        //UserManager.SendMailToRecruiterDBModified(base.GetCurrentUser().UserID, "W9");
-                    }
-                    else
-                    {
-                        W9FormManager.UpdateW9Form(W9From);
-                        //UserManager.SendMailToRecruiterDBModified(base.GetCurrentUser().UserID, "W9");
-                    }
-
-                    return Ok();
+                    return BadRequest();                    
                 }
+
+                W9from w9From = new W9from();
+                base.MapObjects(w9Model, w9From);
+                w9From.UserId = w9Model.UserID;
+                w9From.Wid = w9Model.WID;
+                w9From.Ssn = w9Model.SSN;
+
+                W9from isExist = W9FormManager.GetW9FormByUserID(w9Model.UserID);
+                if (isExist == null)
+                {
+                    W9FormManager.SaveW9Form(w9From);
+                    //UserManager.SendMailToRecruiterDBModified(base.GetCurrentUser().UserID, "W9");
+                }
+                else
+                {
+                    W9FormManager.UpdateW9Form(w9From);
+                    //UserManager.SendMailToRecruiterDBModified(base.GetCurrentUser().UserID, "W9");
+                }
+
+                return Ok();
             }
             catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
-            }
-
-            return BadRequest();
+            }            
         }
-
 
         [HttpGet]
         [Route("file/{applicantId}")]
