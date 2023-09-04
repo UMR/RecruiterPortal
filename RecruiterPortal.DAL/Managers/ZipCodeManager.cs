@@ -36,7 +36,7 @@ namespace RecruiterPortalDAL.Managers
                 dynamic expandoObject = new ExpandoObject();
                 expandoObject.IssueAuthority = text;
                 SqlParameter[] sqlParameters = view_IssueAuthority.GetSqlParametersFromExpandoObject(expandoObject, spName);
-                IEnumerable<ViewIssuingAuthority> view_IssueAuthorityList = view_IssueAuthority.GetAll(spName, sqlParameters); ;
+                IEnumerable<ViewIssuingAuthority> view_IssueAuthorityList = view_IssueAuthority.GetAll(spName, sqlParameters);
 
                 return view_IssueAuthorityList;
             }

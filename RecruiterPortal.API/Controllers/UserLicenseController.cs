@@ -15,13 +15,13 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
         }
 
-        [Route("get-all/{applicantId}")]
+        [Route("get-all")]
         [HttpGet]
         public IActionResult GetUserLicenseByUserID(int applicantId)
         {
             try
             {
-                IEnumerable<UserLicense> userLicenses = UserLicenseManager.GetUserLicenseByUserId(applicantId);
+                 IEnumerable<UserLicense> userLicenses = UserLicenseManager.GetUserLicenseByUserId(applicantId);
                 List<UserLicenseModel> userLicenseList = new List<UserLicenseModel>();
 
                 if (userLicenses != null && userLicenses.Count() > 0)
