@@ -21,5 +21,5 @@ export class AddEditW9Model {
   SSN: string;
   EmployerIdNo: string;
   Date: any;
-  ApplicantId: string;
+  UserId: string;
 }

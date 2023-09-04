@@ -5,8 +5,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class TermsConditionsService {
-
-    private zipcodeCityStateURI: string = `${resourceServerUrl}/api/applicant-info/zipcode-city-state/`;
+    
     private getTermsConditionsByApplicantIdURI: string = `${resourceServerUrl}/api/terms-conditions/get-terms-conditions`;
     private getTermsConditionsFileByApplicantIdURI: string = `${resourceServerUrl}/api/terms-conditions/get-terms-conditions-file`;
     private saveTermsConditionsURI: string = `${resourceServerUrl}/api/terms-conditions/save-terms-conditions`;
