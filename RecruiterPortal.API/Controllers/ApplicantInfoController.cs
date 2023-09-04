@@ -252,14 +252,20 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
         }
 
-        [Route("issuing-authority/{text}")]
+        [Route("issuing-authority")]
         [HttpGet]
         public IActionResult GetIssueingAuthorityByText(string text)
         {
             try
             {
-                IEnumerable<ViewIssuingAuthority> view_IssueAuthority = ZipCodeManager.GetIssueingAuthorityByText(text);
-                return Ok(new ResponseModels<IEnumerable<ViewIssuingAuthority>>(view_IssueAuthority));
+                string filterText = string.Empty;
+                if (string.IsNullOrEmpty(text)) 
+                {
+                    filterText = "AllIssueAuthority";
+                }
+
+                IEnumerable<ViewIssuingAuthority> issueAuthorities = ZipCodeManager.GetIssueingAuthorityByText(filterText);
+                return Ok(issueAuthorities);
             }
             catch (Exception ex)
             {
