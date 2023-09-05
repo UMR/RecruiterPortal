@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
 using System.Data;
@@ -50,6 +51,22 @@ namespace RecruiterPortalDAL.Managers
                 throw new Exception(ex.Message);
             }
         }
+
+        public static List<string> GetRoleNamesByRecruiterId(long recruiterId) 
+        {
+            List<string> roles = new List<string>();
+            DataTable dtRole = GetUserRoles(recruiterId);
+            if (dtRole != null && dtRole.Rows.Count > 0) 
+            {
+                foreach (DataRow dr in dtRole.Rows)
+                {
+                    roles.Add(dr["RoleName"].ToString());
+                }                
+            }
+
+            return roles;   
+        }
+
         public static void SaveUserRole(RecruiterRole recruiterRole)
         {
             string spName = "sp_InsertRecruiterRole";

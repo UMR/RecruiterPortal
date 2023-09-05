@@ -3,6 +3,7 @@ using IdentityServer4.Models;
 using IdentityServer4.Services;
 using RecruiterPortal.Common;
 using RecruiterPortal.DAL.Managers;
+using RecruiterPortalDAL.Managers;
 using System.Dynamic;
 using System.Security.Claims;
 
@@ -25,6 +26,7 @@ namespace RecruiterPortal.Auth.Services
             {
                 var claims = new ClaimsIdentity();
                 var recruiter = RecruiterManager.GetRecruiterByLoginid(context.Subject.GetSubjectId());
+                var roleNames = RoleManager.GetRoleNamesByRecruiterId(recruiter.UserId);
                 dynamic currentUserDynamic = new ExpandoObject();
 
                 if (recruiter != null)
@@ -55,7 +57,7 @@ namespace RecruiterPortal.Auth.Services
             }
 
             return Task.FromResult(0);
-        }
+        }        
 
         public async Task IsActiveAsync(IsActiveContext context)
         {
