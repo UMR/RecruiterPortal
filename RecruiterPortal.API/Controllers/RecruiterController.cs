@@ -39,6 +39,11 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                         recruiter.LastName = oRow["LastName"].ToString();
                         recruiter.Email = oRow["Email"].ToString();
                         recruiter.Telephone = oRow["Telephone"].ToString();
+                        var roleList = RoleManager.GetRoleNamesByRecruiterId(Convert.ToInt64(oRow["UserId"].ToString()));
+                        if (roleList != null)
+                        {
+                            recruiter.RecruiterRole = string.Join(",", roleList.ToArray());
+                        }
                         recruiter.IsActive = Convert.ToBoolean(oRow["IsActive"].ToString());
                         recruiterModelList.Add(recruiter);
                     }
@@ -88,7 +93,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                             foreach (var item in splitRole)
                             {
                                 RecruiterRole recruiterRole = new RecruiterRole();
-                                if (item== "recruiter")
+                                if (item == "recruiter")
                                 {
                                     recruiterRole.RoleId = 1;
                                     recruiterRole.UserId = rec.UserId;

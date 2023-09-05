@@ -60,7 +60,7 @@ namespace RecruiterPortalDAL.Managers
             {
                 foreach (DataRow dr in dtRole.Rows)
                 {
-                    roles.Add(dr["RoleName"].ToString());
+                    roles.Add(dr["RoleKey"].ToString());
                 }                
             }
 
