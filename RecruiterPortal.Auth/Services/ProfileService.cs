@@ -38,6 +38,7 @@ namespace RecruiterPortal.Auth.Services
                     currentUserDynamic.IsActive = recruiter.IsActive;
                     currentUserDynamic.CreatedDate = recruiter.CreatedDate;
                     currentUserDynamic.AgencyId = recruiter.AgencyId;
+                    currentUserDynamic.Roles = roleNames;
                 }
 
                 if (currentUserDynamic != null)
