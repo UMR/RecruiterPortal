@@ -35,6 +35,7 @@ namespace RecruiterPortal.API.Controllers
                 return StatusCode(500);
             }
         }
+
         [Route("is-user-verified")]
         [HttpGet]
         public IActionResult IsCurrentUserVerified()
@@ -50,6 +51,21 @@ namespace RecruiterPortal.API.Controllers
                 return StatusCode(500);
             }
         }
+
+        [NonAction]
+        internal long UserId()
+        {
+            var currentUser = GetCurrentUser();
+            return currentUser.UserId;
+        }
+
+        [NonAction]
+        internal int AgencyId()
+        {
+            var currentUser = GetCurrentUser();
+            return currentUser.AgencyId.Value;
+        }
+
         [NonAction]
         internal User GetCurrentUser()
         {
