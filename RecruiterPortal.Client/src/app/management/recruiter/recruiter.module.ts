@@ -11,11 +11,11 @@ import { TableModule } from 'primeng/components/table/table';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { CheckboxModule } from 'primeng/checkbox';
-import { FormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [RecruiterComponent],
@@ -32,7 +32,8 @@ import { KeyFilterModule } from 'primeng/keyfilter';
         DialogModule,
         InputMaskModule,
         InputTextareaModule,
-        KeyFilterModule
+        KeyFilterModule,
+        ReactiveFormsModule
     ],
     providers: [RecruiterService, ConfirmationService, MessageService]
 })

@@ -4,10 +4,10 @@
     display: block;
 }
 
-:host ::ng-deep .pi {
+/*:host ::ng-deep .pi {
     font-size: 0.8rem;
 }
-
+*/
 .p-unselectable-text {
     user-select: none !important;
 }

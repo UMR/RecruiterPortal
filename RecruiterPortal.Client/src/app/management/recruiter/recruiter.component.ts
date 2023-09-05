@@ -3,6 +3,7 @@ import { RecruiterService } from './recruiter.service';
 import { LazyLoadEvent, MessageService, ConfirmationService } from 'primeng/api';
 import { AgencyModel } from '../agency/agency.model';
 import { RecruiterModel } from './recruiter.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-recruiter',
@@ -26,28 +27,56 @@ export class RecruiterComponent implements OnInit {
     public recruiterArr: any;
     public recruiterDialog: boolean = false;
 
-
-    public loginId: string = "";
-    public password: string = "";
-    public firstName: string = "";
-    public lastName: string = "";
-    public email: string = "";
-    public telephone: string = "";
-    public isActive: boolean = true;
-
-    public recruiter: boolean = false;
-    public supervisor: boolean = false;
-    public manager: boolean = false;
-    public administrator: boolean = false;
+    public isRecruiter: boolean = false;
+    public isSupervisor: boolean = false;
+    public isManager: boolean = false;
+    public isAdministrator: boolean = false;
+    public regForm: FormGroup;
+    private emailRegEx = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
 
 
-    constructor(private recruiterService: RecruiterService, private messageService: MessageService, private confirmationService: ConfirmationService) {
+    constructor(private recruiterService: RecruiterService, private messageService: MessageService, private fb: FormBuilder,
+        private confirmationService: ConfirmationService) {
         this.getRecruiters();
     }
 
     ngOnInit() {
-
+        this.regForm = this.fb.group({
+            loginId: ["", Validators.required],
+            telephone: ["", Validators.required],
+            firstName: ["", Validators.required],
+            lastName: ["", Validators.required],
+            isActive: [false, Validators.required],
+            isRecruiter: [false, Validators.required],
+            isSupervisor: [false, Validators.required],
+            isManager: [false, Validators.required],
+            isAdministrator: [false, Validators.required],
+            email: ["", [Validators.required, Validators.pattern(this.emailRegEx)]],
+            password: ["", [Validators.required, Validators.minLength(4)]],
+            confirmPassword: ["", Validators.required],
+        }, {
+            validator: this.MustMatch('password', 'confirmPassword')
+        });
     }
+
+    MustMatch(controlName: string, matchingControlName: string) {
+        return (formGroup: FormGroup) => {
+            const control = formGroup.controls[controlName];
+            const matchingControl = formGroup.controls[matchingControlName];
+
+            if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+                return;
+            }
+            if (control.value !== matchingControl.value) {
+                matchingControl.setErrors({ mustMatch: true });
+            } else {
+                matchingControl.setErrors(null);
+            }
+        }
+    }
+
+    get f() { return this.regForm.controls; }
+
     loadAgencyLazy(event: LazyLoadEvent) {
         this.pageNumber = Math.ceil((event.first + 1) / event.rows);
         this.take = event.rows;
@@ -73,15 +102,26 @@ export class RecruiterComponent implements OnInit {
                 });
     }
 
-    onEdit(agency: AgencyModel) {
+    onEdit(recruiter: any) {
+        console.log(recruiter);
         this.addEditTxt = "Edit";
-        //this.recruiter = { ...agency };
+        this.regForm.controls.loginId.setValue(recruiter.LoginId);
+        this.regForm.controls.firstName.setValue(recruiter.FirstName);
+        this.regForm.controls.lastName.setValue(recruiter.LastName);
+        this.regForm.controls.telephone.setValue(recruiter.Telephone);
+        this.regForm.controls.isRecruiter.setValue(recruiter.Recruiter);
+        this.regForm.controls.isSupervisor.setValue(recruiter.isSupervisor);
+        this.regForm.controls.isManager.setValue(recruiter.isManager);
+        this.regForm.controls.isAdministrator.setValue(recruiter.isAdministrator);
+        this.regForm.controls.email.setValue(recruiter.Email);
+
         this.recruiterDialog = true;
     }
 
-    onDelete(agency: AgencyModel) {
+    onDelete(recruiter: any) {
+        console.log(recruiter);
         this.confirmationService.confirm({
-            message: 'Are you sure you want to delete ' + agency.AgencyName + ' agency ?',
+            message: 'Are you sure you want to change ' + recruiter.FirstName + ' ' + recruiter.LastName + ' status?',
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
@@ -101,41 +141,41 @@ export class RecruiterComponent implements OnInit {
         this.submitted = true;
 
         let recruiterRole: string = "";
-        if (recruiterRole == "" && this.recruiter) {
+        if (recruiterRole == "" && this.regForm.get('isRecruiter').value) {
             recruiterRole = "recruiter";
         }
-        else if (recruiterRole != "" && this.recruiter) {
+        else if (recruiterRole != "" && this.regForm.get('isRecruiter').value) {
             recruiterRole = recruiterRole + "," + "recruiter";
         }
-        if (recruiterRole == "" && this.supervisor) {
+        if (recruiterRole == "" && this.regForm.get('isSupervisor').value) {
             recruiterRole = recruiterRole + "," + "supervisor";
         }
-        else if (recruiterRole != "" && this.supervisor) {
+        else if (recruiterRole != "" && this.regForm.get('isSupervisor').value) {
             recruiterRole = recruiterRole + "," + "supervisor";
         }
-        if (recruiterRole == "" && this.manager) {
+        if (recruiterRole == "" && this.regForm.get('isManager').value) {
             recruiterRole = "manager";
         }
-        else if (recruiterRole != "" && this.manager) {
+        else if (recruiterRole != "" && this.regForm.get('isManager').value) {
             recruiterRole = recruiterRole + "," + "manager";
         }
-        if (recruiterRole == "" && this.administrator) {
+        if (recruiterRole == "" && this.regForm.get('isAdministrator').value) {
             recruiterRole = "administrator";
         }
-        else if (recruiterRole != "" && this.administrator) {
+        else if (recruiterRole != "" && this.isAdministrator) {
             recruiterRole = recruiterRole + "," + "administrator";
         }
 
         const recruiterFormModel = new RecruiterModel();
-        recruiterFormModel.LoginId = this.loginId;
-        recruiterFormModel.FirstName = this.firstName;
-        recruiterFormModel.LastName = this.lastName;
-        recruiterFormModel.Password = this.password;
-        recruiterFormModel.Email = this.email;
-        recruiterFormModel.Telephone = this.telephone;
-        recruiterFormModel.IsActive = this.isActive;
-        recruiterFormModel.AgencyId = 1;
-        recruiterFormModel.RecruiterRole = recruiterRole;
+        recruiterFormModel.LoginId = this.regForm.get('loginId').value;
+        recruiterFormModel.FirstName = this.regForm.get('firstName').value;
+        recruiterFormModel.LastName = this.regForm.get('lastName').value;
+        recruiterFormModel.Password = this.regForm.get('password').value;
+        recruiterFormModel.Email = this.regForm.get('email').value;
+        recruiterFormModel.Telephone = this.regForm.get('telephone').value;
+        recruiterFormModel.IsActive = this.regForm.get('isActive').value;
+        recruiterFormModel.AgencyId = 0,
+            recruiterFormModel.RecruiterRole = recruiterRole;
 
 
         this.recruiterService.addRecruiter(recruiterFormModel).subscribe(res => {
@@ -147,39 +187,14 @@ export class RecruiterComponent implements OnInit {
                 this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Recruiter Add Faild', life: 3000 });
             },
             () => { })
+        this.recruiters = [...this.recruiters];
+        this.recruiterDialog = false;
+        this.recruiterArr = {};
 
-        if (this.recruiterArr.agencyName.trim()) {
-            if (this.recruiterArr.agencyId) {
-                //this.agencys[this.findIndexById(this.agency.agencyId)] = this.agency;
-                //this.agencyService.updateAgency(this.agency.agencyId, this.agency).subscribe(res => {
-                //    console.log(res);
-                //    this.getAgencies();
-                //    this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Agency Updated', life: 3000 });
-                //},
-                //    error => {
-                //        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Agency Updated Faild', life: 3000 });
-                //    },
-                //    () => { })
-
-            } else {
-                //this.agency.agencyId = this.createId();
-                //this.agencyService.addAgency(this.agency).subscribe(res => {
-                //    this.getAgencies();
-                //    this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Agency Created', life: 3000 });
-                //},
-                //    err => {
-                //        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Agency Created Faild', life: 3000 });
-                //    },
-                //    () => { })
-
-            }
-
-            this.recruiters = [...this.recruiters];
-            this.recruiterDialog = false;
-            this.recruiterArr = {};
-        }
     }
+    onRecruiterSubmit() {
 
+    }
     hideDialog() {
         this.recruiterDialog = false;
         this.submitted = false;

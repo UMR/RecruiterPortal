@@ -49,64 +49,76 @@
 </div>
 <p-dialog [(visible)]="recruiterDialog" [style]="{ width: '550px' }" header="{{addEditTxt}} Recruiter" [modal]="true" [draggable]="false" [resizable]="false">
 
-    <div class="field">
-        <label for="loginId">Login Id: </label>
-        <input pInputText [pKeyFilter]="'alphanum'" [(ngModel)]="loginId" required id="loginId" maxlength="50" />
-        <small class="p-error" *ngIf="submitted && !loginId">Login Id is required.</small>
-    </div>
+    <form [formGroup]="regForm" (ngSubmit)="onRecruiterSubmit()">
+        <div class="field">
+            <label for="loginId">Login Id: </label>
+            <input pInputText [pKeyFilter]="'alphanum'" formControlName="loginId" required id="loginId" maxlength="50" />
+            <small class="p-error" *ngIf="submitted && !loginId">Login Id is required.</small>
+        </div>
 
-    <div class="field">
-        <label for="password">Password: </label>
-        <input type="password" [(ngModel)]="password" required id="password" maxlength="50" />
-        <small class="p-error" *ngIf="submitted && !password">Password is required.</small>
-    </div>
-    <div class="field">
-        <label for="confirmPass">Confirm Password: </label>
-        <input type="password" [(ngModel)]="confirmPass" required id="confirmPass" maxlength="50" />
-        <small class="p-error" *ngIf="submitted && !confirmPass">Confirm password required.</small>
-    </div>
+        <div class="field">
+            <label for="password">Password: </label>
+            <input type="password"  formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required id="password" maxlength="50" />
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Password is required</div>
+                <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+            </div>
+        </div>
+        <div class="field">
+            <label for="confirmPass">Confirm Password: </label>
+            <input type="password" formControlName="confirmPassword" required id="confirmPass" maxlength="50" />
+            <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+            </div>
+        </div>
 
-    <div class="field">
-        <label for="firstName">First Name: </label>
-        <input pInputText [pKeyFilter]="'alpha'" id="firstName" [(ngModel)]="firstName" required maxlength="100" />
-        <small class="p-error" *ngIf="submitted && !firstName">First Name is required.</small>
-    </div>
-    <div class="field">
-        <label for="lastName">Last Name: </label>
-        <input pInputText [pKeyFilter]="'alpha'" id="lastName" [(ngModel)]="lastName" required maxlength="100" />
-        <small class="p-error" *ngIf="submitted && !lastName">Last Name is required.</small>
-    </div>
-    <div class="field">
-        <label for="email">Email</label>
-        <input type="text" pInputText id="email" [(ngModel)]="email" required maxlength="100" />
-    </div>
-    <div class="field">
-        <label for="telephone">Telephone</label>
-        <p-inputMask mask="(999) 999-9999" [(ngModel)]="telephone" placeholder="(999) 999-9999" [style]="{'width':'100%'}"></p-inputMask>
-    </div>
-    <div>
-        <input type="checkbox" id="name" [(ngModel)]="isActive" />
-        <label for="name" style="margin-left:12px">Active</label>
-    </div>
+        <div class="field">
+            <label for="firstName">First Name: </label>
+            <input pInputText [pKeyFilter]="'alpha'" id="firstName" formControlName="firstName" required maxlength="100" />
+            <small class="p-error" *ngIf="submitted && !firstName">First Name is required.</small>
+        </div>
+        <div class="field">
+            <label for="lastName">Last Name: </label>
+            <input pInputText [pKeyFilter]="'alpha'" id="lastName" formControlName="lastName" required maxlength="100" />
+            <small class="p-error" *ngIf="submitted && !lastName">Last Name is required.</small>
+        </div>
+        <div class="field">
+            <label for="email">Email</label>
+            <input type="text" pInputText id="email" formControlName="email" required maxlength="100" />
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+                <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+            </div>
+        </div>
+        <div class="field">
+            <label for="telephone">Telephone</label>
+            <p-inputMask mask="(999) 999-9999" formControlName="telephone" placeholder="(999) 999-9999" [style]="{'width':'100%'}"></p-inputMask>
+        </div>
+        <div>
+            <input type="checkbox" id="name" formControlName="isActive" />
+            <label for="name" style="margin-left:12px">Active</label>
+        </div>
 
-    <label style="margin:12px 0">Assign Role</label>
-    <div>
-        <input type="checkbox" id="recruiter" [(ngModel)]="recruiter" style="margin-right:8px" />
-        <label for="recruiter" style="margin-right:12px">Recruiter</label>
+        <label style="margin:12px 0">Assign Role</label>
+        <div>
+            <input type="checkbox" id="recruiter" formControlName = "isRecruiter" style="margin-right:8px" />
+            <label for="recruiter" style="margin-right:12px">Recruiter</label>
 
-        <input type="checkbox" id="supervisor" [(ngModel)]="supervisor" style="margin-right:8px" />
-        <label for="supervisor" style="margin-right:12px">Supervisor</label>
+            <input type="checkbox" id="supervisor" formControlName="isSupervisor" style="margin-right:8px" />
+            <label for="supervisor" style="margin-right:12px">Supervisor</label>
 
-        <input type="checkbox" id="manager" [(ngModel)]="manager" style="margin-right:8px" />
-        <label for="manager" style="margin-right:12px">Hiring Manager</label>
+            <input type="checkbox" id="manager" formControlName="isManager" style="margin-right:8px" />
+            <label for="manager" style="margin-right:12px">Hiring Manager</label>
 
-        <input type="checkbox" id="administrator" [(ngModel)]="administrator" style="margin-right:8px" />
-        <label for="administrator" style="margin-right:12px">Administrator</label>
-    </div>
-    <p-footer>
-        <button pButton pRipple label="Cancel" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Save" class="p-button-text p-button-success p-modal-save-btn" (click)="saveAgency()"></button>
-    </p-footer>
+            <input type="checkbox" id="administrator" formControlName="isAdministrator" style="margin-right:8px" />
+            <label for="administrator" style="margin-right:12px">Administrator</label>
+        </div>
+        <p-footer>
+            <button pButton pRipple label="Cancel" class="p-button-text" (click)="hideDialog()"></button>
+            <button pButton pRipple label="Save" class="p-button-text p-button-success p-modal-save-btn" (click)="saveAgency()"></button>
+        </p-footer>
+    </form>
 </p-dialog>
 
 <p-confirmDialog [style]="{ width: '450px' }" #cd>
