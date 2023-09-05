@@ -380,8 +380,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
             pdfFormFields.SetField("LastName", GetApplicantLastName());
             pdfFormFields.SetField("FirstName", GetApplicantFirstName());
-            pdfFormFields.SetField("MaidenName", GetApplicantMiddleName());
-            pdfFormFields.SetField("MN", GetApplicantMiddleName());
+            //pdfFormFields.SetField("MaidenName", GetApplicantMiddleName());
+            //pdfFormFields.SetField("MN", GetApplicantMiddleName());
             pdfFormFields.SetField("StreetName", dtApplicant.Rows[0]["StreetAddress"].ToString());
             pdfFormFields.SetField("Apt", dtApplicant.Rows[0]["Apartment"].ToString());
             pdfFormFields.SetField("Street", dtApplicant.Rows[0]["StreetAddress"].ToString());
@@ -439,8 +439,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
             pdfFormFields.SetField("LastName1", GetApplicantLastName());
             pdfFormFields.SetField("FirstName1", GetApplicantFirstName());
-            pdfFormFields.SetField("MaidenName1", GetApplicantMiddleName());
-            pdfFormFields.SetField("MN1", GetApplicantMiddleName());
+            //pdfFormFields.SetField("MaidenName1", GetApplicantMiddleName());
+            //pdfFormFields.SetField("MN1", GetApplicantMiddleName());
             pdfFormFields.SetField("StreetAddress", dtApplicant.Rows[0]["StreetAddress"].ToString());
             pdfFormFields.SetField("City1", dtApplicant.Rows[0]["City"].ToString());
             if (!string.IsNullOrEmpty(dtApplicant.Rows[0]["State"].ToString()))

@@ -270,7 +270,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
             pdfFormFields.SetField("Last", GetApplicantLastName());
             pdfFormFields.SetField("First", GetApplicantFirstName());
-            pdfFormFields.SetField("Middle", GetApplicantMiddleName());
+            //pdfFormFields.SetField("Middle", GetApplicantMiddleName());
             if (!string.IsNullOrEmpty(dataRow["ssn"].ToString()))
             {
                 string ssn = dataRow["ssn"].ToString();

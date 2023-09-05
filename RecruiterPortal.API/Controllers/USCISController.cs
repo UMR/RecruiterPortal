@@ -203,7 +203,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             DataTable dt = UserManager.GetUserDetailsByID(applicantId);
             pdfFormFields.SetField("Last Name Family Name", GetApplicantLastName());
             pdfFormFields.SetField("First Name Given Name", GetApplicantFirstName());
-            pdfFormFields.SetField("Middle Initial", GetApplicantMiddleName());
+            //pdfFormFields.SetField("Middle Initial", GetApplicantMiddleName());
             //pdfFormFields.SetField("Date", DateTime.Today.ToString("MM/dd/yyyy"));
             //pdfFormFields.SetField("Signature", dt.Rows[0]["ApplicantName"].ToString().Trim());
             //pdfFormFields.SetField("Date_2", DateTime.Today.ToString("MM/dd/yyyy"));
@@ -374,7 +374,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
             pdfFormFields.SetField("Last Name Family Name_3", GetApplicantLastName());
             pdfFormFields.SetField("First Name Given Name_3", GetApplicantFirstName());
-            pdfFormFields.SetField("MI", GetApplicantMiddleName());
+            //pdfFormFields.SetField("MI", GetApplicantMiddleName());
             if (drBasic["IsUSCitizen"] != null && drBasic["IsUSCitizen"] != DBNull.Value)
             {
                 bool isUSCitizen = Convert.ToBoolean(drBasic["IsUSCitizen"].ToString());
@@ -399,7 +399,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             {
                 pdfFormFields.SetField("Last Name Family Name_4", GetApplicantLastName());
                 pdfFormFields.SetField("First Name Given Name_4", GetApplicantFirstName());
-                pdfFormFields.SetField("Middle Initial_2", GetApplicantMiddleName());
+                //pdfFormFields.SetField("Middle Initial_2", GetApplicantMiddleName());
                 pdfFormFields.SetField("Date mmddyyyy", DateTime.Today.ToString("MM/dd/yyyy"));
 
                 if (!string.IsNullOrEmpty(dataUSCIS["ExpirationDate"].ToString()))

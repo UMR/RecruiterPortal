@@ -32,10 +32,13 @@ namespace RecruiterPortal.Auth.Services
                 if (recruiter != null)
                 {
                     currentUserDynamic.UserId = recruiter.UserId;
+                    currentUserDynamic.LoginId = recruiter.LoginId;
                     currentUserDynamic.FirstName = recruiter.FirstName;                    
                     currentUserDynamic.LastName = recruiter.LastName;
                     currentUserDynamic.Email = recruiter.Email;
+                    currentUserDynamic.Telephone = recruiter.Telephone;
                     currentUserDynamic.IsActive = recruiter.IsActive;
+                    currentUserDynamic.CreatedBy = recruiter.CreatedBy;
                     currentUserDynamic.CreatedDate = recruiter.CreatedDate;
                     currentUserDynamic.AgencyId = recruiter.AgencyId;
                     currentUserDynamic.Roles = roleNames;

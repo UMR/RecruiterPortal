@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.SqlModels;
 using RecruiterPortalDAL.Managers;
 using System.ComponentModel;
@@ -42,7 +43,7 @@ namespace RecruiterPortal.API.Controllers
         {
             try
             {
-                bool isVerified = GetCurrentUser().IsVerified;
+                bool isVerified = GetCurrentUser().IsActive;
                 return Ok(isVerified);
             }
             catch (Exception ex)
@@ -63,21 +64,21 @@ namespace RecruiterPortal.API.Controllers
         internal int AgencyId()
         {
             var currentUser = GetCurrentUser();
-            return currentUser.AgencyId.Value;
+            return Convert.ToInt32(currentUser.AgencyId);
         }
 
         [NonAction]
-        internal User GetCurrentUser()
+        internal CurrentRecruiter GetCurrentUser()
         {
             var caller = User as ClaimsPrincipal;
             var recruiterClaim = caller.FindFirst("RecruiterClaim");
-            User currentUser = null;
+            CurrentRecruiter currentRecruiter = null;
             if (recruiterClaim != null && !string.IsNullOrEmpty(recruiterClaim.Value))
             {
                 dynamic jsonObject = JsonConvert.DeserializeObject<dynamic>(recruiterClaim.Value);
-                currentUser = JsonConvert.DeserializeObject<User>(recruiterClaim.Value);
+                currentRecruiter = JsonConvert.DeserializeObject<CurrentRecruiter>(recruiterClaim.Value);
             }
-            return currentUser;
+            return currentRecruiter;
         }
 
         #region Pdf Helpers
@@ -195,11 +196,11 @@ namespace RecruiterPortal.API.Controllers
         {
             return GetCurrentUser().LastName;
         }
-        [NonAction]
-        public string GetApplicantMiddleName()
-        {
-            return GetCurrentUser().MiddleName;
-        }
+        //[NonAction]
+        //public string GetApplicantMiddleName()
+        //{
+        //    return GetCurrentUser().MiddleName;
+        //}
         [NonAction]
         public string GetApplicantEmail()
         {
@@ -268,14 +269,14 @@ namespace RecruiterPortal.API.Controllers
         protected string GetApplicantName()
         {
             string applicantName = string.Empty;
-            if (!string.IsNullOrEmpty(GetCurrentUser().MiddleName))
-            {
-                applicantName = GetCurrentUser().FirstName + " " + GetCurrentUser().MiddleName + " " + GetCurrentUser().LastName;
-            }
-            else
-            {
-                applicantName = GetCurrentUser().FirstName + " " + GetCurrentUser().LastName;
-            }
+            //if (!string.IsNullOrEmpty(GetCurrentUser().MiddleName))
+            //{
+            //    applicantName = GetCurrentUser().FirstName + " " + GetCurrentUser().MiddleName + " " + GetCurrentUser().LastName;
+            //}
+            //else
+            //{
+            //    applicantName = GetCurrentUser().FirstName + " " + GetCurrentUser().LastName;
+            //}
             return applicantName;
         }
 
