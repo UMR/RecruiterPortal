@@ -128,6 +128,7 @@
     <Folder Include="2023-09-01" />
     <Folder Include="2023-09-04" />
     <Folder Include="2023-09-05" />
+    <Folder Include="2023-09-06" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="2019-11-04\01_TR_01_CREATE_DATABASE.sql" />
@@ -452,5 +453,6 @@
     <None Include="2023-09-01\02_AZ_02_ALTER_VIEW_View_IssueAuthority.sql" />
     <None Include="2023-09-01\03_AZ_03_ALTER_PROCEDURE_sp_GetIssueingAuthorityByText.sql" />
     <None Include="2023-09-05\01_SR_01_ALTER_sp_InsertRecruiter.sql" />
+    <None Include="2023-09-06\01_AZ_01_CREATE_TABLE_Job.sql" />
   </ItemGroup>
 </Project>
