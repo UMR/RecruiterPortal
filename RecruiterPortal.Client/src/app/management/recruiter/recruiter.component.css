@@ -1,29 +1,35 @@
-:host ::ng-deep .p-dialog .product-image {
-    width: 150px;
-    margin: 0 auto 2rem auto;
-    display: block;
-}
-
-/*:host ::ng-deep .pi {
-    font-size: 0.8rem;
-}
-*/
-.p-unselectable-text {
-    user-select: none !important;
-}
-
-.add-new-btn {
-    float: left;
-    margin-right: 8px;
-    background: #22C55E;
-    color: white;
+.btn-add {
+    width: 200px;
+    margin-bottom: 12px;
+    background-color: green;
     border: none;
-    padding: 4px 16px;
-    border-radius: 4px;
 }
 
-    .add-new-btn:hover {
-        background-color: #218838;
+    .btn-add:hover {
+        background-color: #339933 !important;
+    }
+
+.btn-save {
+    width: 100px;
+    float: right;
+    background-color: green;
+    border: none;
+}
+
+    .btn-save:hover {
+        background-color: #339933 !important;
+    }
+
+.btn-clear {
+    margin-right: 8px;
+    width: 100px;
+    background-color: #808080;
+    color: black;
+    border:none;
+}
+
+    .btn-clear:hover {
+        background-color: #808080 !important;
     }
 
 .field {
@@ -36,17 +42,10 @@
         margin-bottom: 0.5rem;
     }
 
-:host ::ng-deep .p-inputtext {
-    width: 100%;
-    padding: 3px 2px;
-    border-radius: 0px;
-    border: 1px solid;
+.input-text {
+    padding: 4px 4px;
+    font-size: 16px;
 }
-
-    :host ::ng-deep .p-inputtext:focus {
-        box-shadow: none;
-        border-color: black;
-    }
 
 :host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page {
     min-width: 2rem;

@@ -25,7 +25,7 @@ export class RecruiterComponent implements OnInit {
     public submitted: boolean = false;
     public addEditTxt: string = "Add";
     public recruiterArr: any;
-    public recruiterDialog: boolean = false;
+    public recruiterDialog: boolean = true;
 
     public isRecruiter: boolean = false;
     public isSupervisor: boolean = false;
@@ -33,6 +33,7 @@ export class RecruiterComponent implements OnInit {
     public isAdministrator: boolean = false;
     public regForm: FormGroup;
     private emailRegEx = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
+    public isEditMode: boolean = false;
 
 
     constructor(private recruiterService: RecruiterService, private messageService: MessageService, private fb: FormBuilder,
@@ -47,11 +48,11 @@ export class RecruiterComponent implements OnInit {
             firstName: ["", Validators.required],
             lastName: ["", Validators.required],
             isActive: [false, Validators.required],
-            isRecruiter: [false, Validators.required],
-            isSupervisor: [false, Validators.required],
-            isManager: [false, Validators.required],
-            isAdministrator: [false, Validators.required],
-            email: ["", [Validators.required, Validators.pattern(this.emailRegEx)]],
+            isRecruiter: [false],
+            isSupervisor: [false],
+            isManager: [false],
+            isAdministrator: [false],
+            email: ["", [Validators.pattern(this.emailRegEx)]],
             password: ["", [Validators.required, Validators.minLength(4)]],
             confirmPassword: ["", Validators.required],
         }, {
@@ -104,17 +105,31 @@ export class RecruiterComponent implements OnInit {
 
     onEdit(recruiter: any) {
         console.log(recruiter);
+        this.regForm.controls['password'].clearValidators();
+        this.regForm.controls['password'].updateValueAndValidity();
+        this.regForm.controls['confirmPassword'].clearValidators();
+        this.regForm.controls['confirmPassword'].updateValueAndValidity();
         this.addEditTxt = "Edit";
+        this.isEditMode = true;
         this.regForm.controls.loginId.setValue(recruiter.LoginId);
         this.regForm.controls.firstName.setValue(recruiter.FirstName);
         this.regForm.controls.lastName.setValue(recruiter.LastName);
         this.regForm.controls.telephone.setValue(recruiter.Telephone);
-        this.regForm.controls.isRecruiter.setValue(recruiter.Recruiter);
-        this.regForm.controls.isSupervisor.setValue(recruiter.isSupervisor);
-        this.regForm.controls.isManager.setValue(recruiter.isManager);
-        this.regForm.controls.isAdministrator.setValue(recruiter.isAdministrator);
+        this.regForm.controls.isActive.setValue(recruiter.IsActive);
         this.regForm.controls.email.setValue(recruiter.Email);
+        if (recruiter.RecruiterRole.includes('recruiter')) {
+            this.regForm.controls.isRecruiter.setValue(true);
+        }
+        if (recruiter.RecruiterRole.includes('supervisor')) {
+            this.regForm.controls.isSupervisor.setValue(true);
 
+        }
+        if (recruiter.RecruiterRole.includes('manager')) {
+            this.regForm.controls.isManager.setValue(true);
+        }
+        if (recruiter.RecruiterRole.includes('administrator')) {
+            this.regForm.controls.isAdministrator.setValue(true);
+        }
         this.recruiterDialog = true;
     }
 
@@ -137,6 +152,7 @@ export class RecruiterComponent implements OnInit {
             }
         });
     }
+
     saveAgency() {
         this.submitted = true;
 
@@ -192,36 +208,25 @@ export class RecruiterComponent implements OnInit {
         this.recruiterArr = {};
 
     }
-    onRecruiterSubmit() {
 
+    onRecruiterSubmit() {
+        this.saveAgency();
     }
+
+    onClickClear() {
+        this.regForm.reset();
+    }
+
     hideDialog() {
+        this.isEditMode = false;
         this.recruiterDialog = false;
         this.submitted = false;
-    }
-
-    changeStatus(id: any, value: boolean) {
-        let updateAgency = {
-            agencyId: id,
-            isActive: !value
-        }
-        //this.agencyService.updateAgencyStatus(id, updateAgency)
-        //    .subscribe(res => {
-        //        console.log(res);
-        //        if ((res.body as any).success) {
-        //            this.getAllAgency();
-        //            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Agency Updated', life: 3000 });
-        //        }
-        //        else {
-        //            this.messageService.add({ severity: 'error', summary: 'Error', detail: (res.body as any).errors[0], life: 3000 });
-        //        }
-        //    },
-        //        err => { },
-        //        () => { });
-        //console.log(id, value);
+        this.regForm.reset();
     }
 
     openNewRecruiter() {
+        this.regForm.reset();
+        this.isEditMode = false;
         this.addEditTxt = "Add";
         this.recruiterArr = {};
         this.submitted = false;

@@ -23,9 +23,8 @@ export class HeaderComponent {
     public isAdministrator: boolean = false;
     public isAdmin: boolean = false;
 
-    constructor(private authService: AuthService, private route: ActivatedRoute, private userProfileService: UserProfileService, public agencyProfileService: AgencyProfileService) {
-
-    }
+    constructor(private authService: AuthService, private route: ActivatedRoute, private userProfileService: UserProfileService,
+        public agencyProfileService: AgencyProfileService) { }
 
     ngOnInit() {
         this.getUserRole();
