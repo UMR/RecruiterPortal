@@ -25,6 +25,14 @@ export class StorageService {
         sessionStorage.setItem("manager", JSON.stringify(data));
     }
 
+    setIsAdministrator(data: boolean) {
+        sessionStorage.setItem("administrator", JSON.stringify(data));
+    }
+
+    setIsAdmin(data: boolean) {
+        sessionStorage.setItem("admin", JSON.stringify(data));
+    }
+
     get getIsRecruiter(): boolean {
         const data = sessionStorage.getItem("recruiter");
         if (data) {
@@ -41,6 +49,21 @@ export class StorageService {
     }
     get getIsManager(): boolean {
         const data = sessionStorage.getItem("manager");
+        if (data) {
+            return true;
+        }
+        return false;
+    }
+
+    get getIsAdministrator(): boolean {
+        const data = sessionStorage.getItem("administrator");
+        if (data) {
+            return true;
+        }
+        return false;
+    }
+    get getIsAdmin(): boolean {
+        const data = sessionStorage.getItem("admin");
         if (data) {
             return true;
         }
