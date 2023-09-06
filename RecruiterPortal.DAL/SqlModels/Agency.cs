@@ -33,5 +33,7 @@ public partial class Agency
 
     public string AgencyLoginId { get; set; }
 
+    public virtual ICollection<Job> Jobs { get; set; } = new List<Job>();
+
     public virtual ICollection<Recruiter> Recruiters { get; set; } = new List<Recruiter>();
 }
