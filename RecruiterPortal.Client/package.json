@@ -27,6 +27,7 @@
     "@syncfusion/ej2-angular-schedule": "18.3.47",
     "@angular/router": "~8.2.13",
     "angular2-cookie": "1.2.6",
+    "jwt-decode": "^3.1.2",
     "chart.js": "2.7.3",
     "primeng": "8.1.1",
     "primeicons": "2.0.0",

@@ -9,6 +9,7 @@ import { getToken, getTokenFromRefreshToken, revokeToken } from './helpers/http-
 import { authCookieKey } from './constants/auth-keys';
 import { resourceServerUrl, currentUserVerificationStatus } from './constants/auth-keys';
 import { StorageService } from './services/storage.service';
+import jwt_decode from 'jwt-decode';
 
 @Injectable()
 export class AuthService {
@@ -101,7 +102,16 @@ export class AuthService {
         });
     }
 
-    private saveAuthInfo(value, isAccessToken: boolean = false) {
+    private saveAuthInfo(value, isAccessToken: boolean = false) {        
+        if (value.access_token) {
+            const decodedToken = jwt_decode(value.access_token);
+            const roleArray = JSON.parse(decodedToken["RecruiterClaim"]).Roles;            
+            if (roleArray && roleArray.length > 0) {
+                if (roleArray.includes('recruiter')) {
+                    this.storageService.setIsRecruiter(true);                    
+                }                
+            }
+        }
         this.umrCookieService.setSerializedObject(authCookieKey, value);
         if (!this.isLoggedIn) {
             this.logoutMessage = 'Your browser does not accept cookies. cookies are required to use this site';
