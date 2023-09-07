@@ -59,7 +59,7 @@
         <div class="field" *ngIf="!isEditMode">
             <label for="password">Password: </label>
             <input type="password"  formControlName="password" class="input-text" autocomplete="off"
-                   [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required id="password" maxlength="50" />
+                   [ngClass]="{ 'is-invalid': submitted && f.password.errors }" id="password" maxlength="50" />
             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                 <div *ngIf="f.password.errors.required">Password is required</div>
                 <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
@@ -67,7 +67,7 @@
         </div>
         <div class="field" *ngIf="!isEditMode">
             <label for="confirmPass">Confirm Password: </label>
-            <input type="password" formControlName="confirmPassword" class="input-text" required autocomplete="off" id="confirmPass" maxlength="50" />
+            <input type="password" formControlName="confirmPassword" class="input-text" autocomplete="off" id="confirmPass" maxlength="50" />
             <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
                 <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
                 <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
