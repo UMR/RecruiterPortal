@@ -2,16 +2,17 @@
 using RecruiterPortal.DAL.SqlModels;
 using System.Data;
 using System.Dynamic;
+using System.Linq.Expressions;
 
 namespace RecruiterPortal.DAL.Repository
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private Repository<T> _repo = null;        
+        private Repository<T> _repo = null;
 
         public GenericRepository()
         {
-            _repo = new Repository<T>(new UmrrecruitmentApplicantContext());            
+            _repo = new Repository<T>(new UmrrecruitmentApplicantContext());
         }
 
         public IEnumerable<T> GetAll(string storedProcedureName, SqlParameter[] parameters = null)
@@ -44,6 +45,36 @@ namespace RecruiterPortal.DAL.Repository
             _repo.StoredProcedure(storedProcedureName, parameters);
         }
 
+        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _repo.GetAllAsync(predicate);
+        }
+
+        public async Task<IEnumerable<T>> GetPageAsync(Expression<Func<T, bool>> predicate, int page, int pageSize)
+        {
+            return await _repo.GetPageAsync(predicate, page, pageSize);
+        }
+
+        public async Task<T> GetByIdAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _repo.GetByIdAsync(predicate);
+        }
+
+        public async Task<T> SaveAsync(T entity)
+        {
+            return await _repo.SaveAsync(entity);
+        }
+
+        public async Task<int> UpdateAsync(T entity)
+        {
+            return await _repo.UpdateAsync(entity);
+        }
+
+        public async Task<int> DeleteAsync(T entity)
+        {
+            return await _repo.DeleteAsync(entity);
+        }
+
         public bool DoesExist(string storedProcedureName, SqlParameter[] parameters = null)
         {
             return _repo.StoredProcedure(storedProcedureName, parameters).Any();
@@ -51,7 +82,7 @@ namespace RecruiterPortal.DAL.Repository
 
         public DataTable LoadDataTable(string storedProcedureName, SqlParameter[] parameters = null)
         {
-           return _repo.LoadDataSetStoredProcedure(storedProcedureName, parameters);
+            return _repo.LoadDataSetStoredProcedure(storedProcedureName, parameters);
         }
         public DataSet LoadDataSetTable(string storedProcedureName, SqlParameter[] parameters = null)
         {
@@ -102,7 +133,7 @@ namespace RecruiterPortal.DAL.Repository
                 {
                     if (preFix + item.Name.ToLower() == sqlParameter.ParameterName.ToLower())
                     {
-                        if(item.GetValue(obj) == null)
+                        if (item.GetValue(obj) == null)
                         {
                             sqlParameter.Value = DBNull.Value;
                         }
@@ -161,7 +192,7 @@ namespace RecruiterPortal.DAL.Repository
         }
 
 
-        public SqlParameter[] GetSqlParametersFromParamArray(  string spName, string preFix = "", params object[] paramList)
+        public SqlParameter[] GetSqlParametersFromParamArray(string spName, string preFix = "", params object[] paramList)
         {
             List<SqlParameter> parameters = _repo.StoredProcedureParams(spName).ToList<SqlParameter>();
 
@@ -169,7 +200,7 @@ namespace RecruiterPortal.DAL.Repository
             {
                 foreach (var item in paramList)
                 {
-                    if(preFix+nameof(item) == sqlParameter.ParameterName)
+                    if (preFix + nameof(item) == sqlParameter.ParameterName)
                     {
                         sqlParameter.Value = item;
                     }

@@ -59,12 +59,14 @@ namespace RecruiterPortal.API.Controllers
             var currentUser = GetCurrentUser();
             return currentUser.RecruiterId;
         }
-
-        [NonAction]
-        internal int AgencyId()
+        
+        protected long AgencyId
         {
-            var currentUser = GetCurrentUser();
-            return Convert.ToInt32(currentUser.AgencyId);
+            get
+            {
+                var currentUser = GetCurrentUser();
+                return Convert.ToInt32(currentUser.AgencyId);
+            }
         }
 
         [NonAction]

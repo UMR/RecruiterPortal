@@ -2,17 +2,18 @@
 using Microsoft.EntityFrameworkCore;
 using RecruiterPortal.DAL.Utility;
 using System.Data;
+using System.Linq.Expressions;
 using System.Transactions;
 
 namespace RecruiterPortal.DAL.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        public DbContext context;        
+        public DbContext context;
 
         public Repository(DbContext context)
         {
-            this.context = context;            
+            this.context = context;
         }
 
         public void Dispose()
@@ -59,7 +60,7 @@ namespace RecruiterPortal.DAL.Repository
                 command.ExecuteNonQuery();
             }
             catch (Exception ex)
-            {                 
+            {
                 throw new Exception(ex.Message);
             }
         }
@@ -87,13 +88,13 @@ namespace RecruiterPortal.DAL.Repository
                 }
 
                 using (var reader = command.ExecuteReader())
-                {                                        
+                {
                     return reader.Cast<T>();
                 }
 
             }
             catch (Exception ex)
-            {                
+            {
                 throw new Exception(ex.Message);
             }
         }
@@ -153,6 +154,97 @@ namespace RecruiterPortal.DAL.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        public async Task<T> SaveAsync(T entity)
+        {
+            try
+            {
+                using (context)
+                {
+                    using (TransactionScope ts = new TransactionScope())
+                    {
+                        await context.AddAsync(entity);
+                        ts.Complete();
+                        await context.SaveChangesAsync();
+                        return entity;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<int> UpdateAsync(T entity)
+        {
+            try
+            {
+                using (context)
+                {
+                    using (TransactionScope ts = new TransactionScope())
+                    {
+                        context.Entry(entity).State = EntityState.Modified;
+                        context.Update(entity);
+                        ts.Complete();
+                        return await context.SaveChangesAsync();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<int> DeleteAsync(T entity)
+        {
+            try
+            {
+                using (context)
+                {
+                    using (TransactionScope ts = new TransactionScope())
+                    {
+                        context.Entry(entity).State = EntityState.Deleted;
+                        ts.Complete();
+                        return await context.SaveChangesAsync();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> predicate)
+        {
+            try
+            {
+                using (context)
+                {                    
+                    return await context.Set<T>().Where(predicate).ToListAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<T> GetByIdAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await context.Set<T>().FirstOrDefaultAsync(predicate);
+        }
+
+        public async Task<IEnumerable<T>> GetPageAsync(Expression<Func<T, bool>> predicate, int page, int pageSize)
+        {
+            var query = context.Set<T>().Where(predicate)
+                             .Skip((page - 1) * pageSize)
+                             .Take(pageSize);
+
+            return await query.ToListAsync();
+        }       
 
         public List<SqlParameter> NonQueryStoredProcedure(string storedProcedureName, SqlParameter[] parameters = null)
         {
@@ -271,7 +363,7 @@ namespace RecruiterPortal.DAL.Repository
             DataTable dataTabel = new DataTable();
 
             try
-            {                
+            {
                 if (parameters != null)
                 {
                     for (int i = 0; i < parameters.Length; i++)
