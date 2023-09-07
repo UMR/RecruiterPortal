@@ -1,51 +1,52 @@
-﻿using Microsoft.Data.SqlClient;
-using RecruiterPortal.DAL.Repository;
+﻿using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
-using System.Dynamic;
 
 namespace RecruiterPortal.DAL.Managers
 {
     public class JobManager
     {
-        public static int Insert(Job job)
+        public static async Task<Job> Insert(Job job)
         {
-            string spName = "sp_InsertJob";
             try
             {
-                GenericRepository<Job> jobRepo = new GenericRepository<Job>();
-                SqlParameter[] sqlParameters = jobRepo.GetSqlParametersFromObject(job, spName, "@");
-                jobRepo.Insert(spName, sqlParameters);
-                return 1;
+                GenericRepository<Job> repository = new GenericRepository<Job>();
+                return await repository.SaveAsync(job);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-        public static int Update(Job job)
+        public static async Task<int> Update(Job job)
         {
-            string spName = "sp_UpdateJob";
             try
             {
-                GenericRepository<Job> jobRepo = new GenericRepository<Job>();
-                SqlParameter[] sqlParameters = jobRepo.GetSqlParametersFromObject(job, spName, "@");
-                return jobRepo.Update(spName, sqlParameters);
+                GenericRepository<Job> repository = new GenericRepository<Job>();
+                return await repository.UpdateAsync(job);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-        public static IEnumerable<Job> GetJobByAgencyId(long agencyId)
+        public static async Task<int> Delete(Job job)
         {
-            string spName = "sp_GetJobByAgencyId";
             try
             {
-                GenericRepository<Job> jobRepo = new GenericRepository<Job>();
-                dynamic expandoObject = new ExpandoObject();
-                expandoObject.AgencyId = agencyId;
-                SqlParameter[] sqlParameters = jobRepo.GetSqlParametersFromExpandoObject(expandoObject, spName, "@");
-                return jobRepo.GetAll(spName, sqlParameters);
+                GenericRepository<Job> repository = new GenericRepository<Job>();
+                return await repository.DeleteAsync(job);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public static async Task<IEnumerable<Job>> GetJobByAgencyId(long agencyId, int page, int pageSize)
+        {
+            try
+            {
+                GenericRepository<Job> repository = new GenericRepository<Job>();
+                return await repository.GetPageAsync(p => p.AgencyId == agencyId, page, pageSize);
             }
             catch (Exception ex)
             {
@@ -53,16 +54,12 @@ namespace RecruiterPortal.DAL.Managers
             }
         }
 
-        public static Job GetJobById(int jobId)
+        public static async Task<IEnumerable<Job>> GetJobById(int jobId)
         {
-            string spName = "sp_GetJobById";
             try
             {
-                GenericRepository<Job> jobRepo = new GenericRepository<Job>();
-                dynamic expandoObject = new ExpandoObject();
-                expandoObject.JobId = jobId;
-                SqlParameter[] sqlParameters = jobRepo.GetSqlParametersFromExpandoObject(expandoObject, spName, "@");
-                return jobRepo.GetOne(spName, sqlParameters);
+                GenericRepository<Job> repository = new GenericRepository<Job>();
+                return await repository.GetAllAsync(p => p.JobId == jobId);
             }
             catch (Exception ex)
             {
