@@ -31,7 +31,7 @@ namespace RecruiterPortal.Auth.Services
 
                 if (recruiter != null)
                 {
-                    currentUserDynamic.UserId = recruiter.RecruiterId;
+                    currentUserDynamic.RecruiterId = recruiter.RecruiterId;
                     currentUserDynamic.LoginId = recruiter.LoginId;
                     currentUserDynamic.FirstName = recruiter.FirstName;                    
                     currentUserDynamic.LastName = recruiter.LastName;
