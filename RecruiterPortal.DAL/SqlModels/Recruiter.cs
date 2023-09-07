@@ -38,4 +38,8 @@ public partial class Recruiter
     public long? ApplicantTypeId { get; set; }
 
     public virtual Agency Agency { get; set; }
+
+    public virtual ICollection<Job> JobCreatedByNavigations { get; set; } = new List<Job>();
+
+    public virtual ICollection<Job> JobUpdatedByNavigations { get; set; } = new List<Job>();
 }

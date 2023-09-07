@@ -1,7 +1,7 @@
 ﻿USE [UMRRecruitmentApplicant]
 GO
 
-/****** Object:  Table [dbo].[Job]    Script Date: 9/6/2023 6:53:39 PM ******/
+/****** Object:  Table [dbo].[Job]    Script Date: 9/7/2023 2:05:19 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -35,14 +35,14 @@ ALTER TABLE [dbo].[Job] CHECK CONSTRAINT [FK_Job_Agency]
 GO
 
 ALTER TABLE [dbo].[Job]  WITH CHECK ADD  CONSTRAINT [FK_Job_Recruiter] FOREIGN KEY([CreatedBy])
-REFERENCES [dbo].[Recruiter] ([UserID])
+REFERENCES [dbo].[Recruiter] ([RecruiterID])
 GO
 
 ALTER TABLE [dbo].[Job] CHECK CONSTRAINT [FK_Job_Recruiter]
 GO
 
 ALTER TABLE [dbo].[Job]  WITH CHECK ADD  CONSTRAINT [FK_Job_Recruiter1] FOREIGN KEY([UpdatedBy])
-REFERENCES [dbo].[Recruiter] ([UserID])
+REFERENCES [dbo].[Recruiter] ([RecruiterID])
 GO
 
 ALTER TABLE [dbo].[Job] CHECK CONSTRAINT [FK_Job_Recruiter1]

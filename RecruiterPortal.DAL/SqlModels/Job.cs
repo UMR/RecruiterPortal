@@ -28,4 +28,8 @@ public partial class Job
     public DateTime? UpdatedDate { get; set; }
 
     public virtual Agency Agency { get; set; }
+
+    public virtual Recruiter CreatedByNavigation { get; set; }
+
+    public virtual Recruiter UpdatedByNavigation { get; set; }
 }

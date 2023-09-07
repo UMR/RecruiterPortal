@@ -462,6 +462,14 @@ public partial class UmrrecruitmentApplicantContext : DbContext
                 .HasForeignKey(d => d.AgencyId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Job_Agency");
+
+            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.JobCreatedByNavigations)
+                .HasForeignKey(d => d.CreatedBy)
+                .HasConstraintName("FK_Job_Recruiter");
+
+            entity.HasOne(d => d.UpdatedByNavigation).WithMany(p => p.JobUpdatedByNavigations)
+                .HasForeignKey(d => d.UpdatedBy)
+                .HasConstraintName("FK_Job_Recruiter1");
         });
 
         modelBuilder.Entity<LookupZipCode>(entity =>
@@ -620,6 +628,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
         {
             entity.ToTable("Recruiter");
 
+            entity.Property(e => e.RecruiterId).HasColumnName("RecruiterID");
             entity.Property(e => e.AgencyId).HasColumnName("AgencyID");
             entity.Property(e => e.ApplicantTypeId).HasColumnName("ApplicantTypeID");
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -657,6 +666,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
             entity.HasNoKey();
 
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.RecruiterId).HasColumnName("RecruiterID");
             entity.Property(e => e.RoleId).HasColumnName("RoleID");
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
         });
@@ -954,7 +964,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
         {
             entity.HasKey(e => e.LicenseId).HasName("PK_License");
 
-            entity.ToTable("UserLicense", tb => tb.HasTrigger("Update_ChangeTracker_UserLicense"));
+            entity.ToTable("UserLicense");
 
             entity.Property(e => e.LicenseId).HasColumnName("LicenseID");
             entity.Property(e => e.CreatedDate)
@@ -985,7 +995,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
 
         modelBuilder.Entity<UserMilitary>(entity =>
         {
-            entity.ToTable("UserMilitary", tb => tb.HasTrigger("Update_ChangeTracker_UserMilitary"));
+            entity.ToTable("UserMilitary");
 
             entity.Property(e => e.UserMilitaryId).HasColumnName("UserMilitaryID");
             entity.Property(e => e.Branch).HasMaxLength(500);
