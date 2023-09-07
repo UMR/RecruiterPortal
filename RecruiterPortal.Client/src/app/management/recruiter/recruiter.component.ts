@@ -105,10 +105,12 @@ export class RecruiterComponent implements OnInit {
 
     onEdit(recruiter: any) {
         console.log(recruiter);
-        this.regForm.controls['password'].clearValidators();
-        this.regForm.controls['password'].updateValueAndValidity();
-        this.regForm.controls['confirmPassword'].clearValidators();
-        this.regForm.controls['confirmPassword'].updateValueAndValidity();
+        //this.regForm.controls['password'].clearValidators();
+        //this.regForm.controls['password'].updateValueAndValidity();
+        //this.regForm.controls['confirmPassword'].clearValidators();
+        //this.regForm.controls['confirmPassword'].updateValueAndValidity();
+        this.regForm.controls['password'].disable();
+        this.regForm.controls['confirmPassword'].disable();
         this.addEditTxt = "Edit";
         this.isEditMode = true;
         this.regForm.controls.loginId.setValue(recruiter.LoginId);
@@ -226,6 +228,8 @@ export class RecruiterComponent implements OnInit {
 
     openNewRecruiter() {
         this.regForm.reset();
+        this.regForm.controls['password'].enable();
+        this.regForm.controls['confirmPassword'].enable();
         this.isEditMode = false;
         this.addEditTxt = "Add";
         this.recruiterArr = {};
