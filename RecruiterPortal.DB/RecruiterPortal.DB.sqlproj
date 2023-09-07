@@ -458,5 +458,6 @@
     <None Include="2023-09-06\02_SR_02_ALTER_TABLE.sql" />
     <None Include="2023-09-07\01_SR_01_Create_Table_Status.sql" />
     <None Include="2023-09-07\02_SR_02_ALTER_SP_GETRole.sql" />
+    <None Include="2023-09-07\03_SR_03_Alter_SP_GetAllApplicantByFilter.sql" />
   </ItemGroup>
 </Project>
