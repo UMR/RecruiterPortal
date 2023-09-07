@@ -96,7 +96,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                                 if (item == "recruiter")
                                 {
                                     recruiterRole.RoleId = 1;
-                                    recruiterRole.UserId = rec.UserId;
+                                    recruiterRole.RecruiterId = rec.RecruiterId;
                                     recruiterRole.CreatedBy = Convert.ToInt32(GetCurrentUser().UserId);
                                     recruiterRole.CreatedDate = DateTime.Now;
                                     RoleManager.SaveUserRole(recruiterRole);
@@ -104,7 +104,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                                 if (item == "supervisor")
                                 {
                                     recruiterRole.RoleId = 2;
-                                    recruiterRole.UserId = rec.UserId;
+                                    recruiterRole.RecruiterId = rec.RecruiterId;
                                     recruiterRole.CreatedBy = Convert.ToInt32(GetCurrentUser().UserId);
                                     recruiterRole.CreatedDate = DateTime.Now;
                                     RoleManager.SaveUserRole(recruiterRole);
@@ -112,7 +112,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                                 if (item == "manager")
                                 {
                                     recruiterRole.RoleId = 3;
-                                    recruiterRole.UserId = rec.UserId;
+                                    recruiterRole.RecruiterId = rec.RecruiterId;
                                     recruiterRole.CreatedBy = Convert.ToInt32(GetCurrentUser().UserId);
                                     recruiterRole.CreatedDate = DateTime.Now;
                                     RoleManager.SaveUserRole(recruiterRole);
@@ -120,7 +120,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                                 if (item == "administrator")
                                 {
                                     recruiterRole.RoleId = 4;
-                                    recruiterRole.UserId = rec.UserId;
+                                    recruiterRole.RecruiterId = rec.RecruiterId;
                                     recruiterRole.CreatedBy = Convert.ToInt32(GetCurrentUser().UserId);
                                     recruiterRole.CreatedDate = DateTime.Now;
                                     RoleManager.SaveUserRole(recruiterRole);

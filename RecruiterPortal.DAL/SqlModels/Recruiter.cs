@@ -5,7 +5,7 @@ namespace RecruiterPortal.DAL.SqlModels;
 
 public partial class Recruiter
 {
-    public int UserId { get; set; }
+    public int RecruiterId { get; set; }
 
     public string LoginId { get; set; }
 
@@ -38,8 +38,4 @@ public partial class Recruiter
     public long? ApplicantTypeId { get; set; }
 
     public virtual Agency Agency { get; set; }
-
-    public virtual ICollection<Job> JobCreatedByNavigations { get; set; } = new List<Job>();
-
-    public virtual ICollection<Job> JobUpdatedByNavigations { get; set; } = new List<Job>();
 }

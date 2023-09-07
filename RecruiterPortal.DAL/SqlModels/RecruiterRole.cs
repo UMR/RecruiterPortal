@@ -5,7 +5,7 @@ namespace RecruiterPortal.DAL.SqlModels;
 
 public partial class RecruiterRole
 {
-    public int UserId { get; set; }
+    public int RecruiterId { get; set; }
 
     public int RoleId { get; set; }
 

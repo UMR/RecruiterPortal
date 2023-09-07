@@ -26,12 +26,12 @@ namespace RecruiterPortal.Auth.Services
             {
                 var claims = new ClaimsIdentity();
                 var recruiter = RecruiterManager.GetRecruiterByLoginid(context.Subject.GetSubjectId());
-                var roleNames = RoleManager.GetRoleNamesByRecruiterId(recruiter.UserId);
+                var roleNames = RoleManager.GetRoleNamesByRecruiterId(recruiter.RecruiterId);
                 dynamic currentUserDynamic = new ExpandoObject();
 
                 if (recruiter != null)
                 {
-                    currentUserDynamic.UserId = recruiter.UserId;
+                    currentUserDynamic.UserId = recruiter.RecruiterId;
                     currentUserDynamic.LoginId = recruiter.LoginId;
                     currentUserDynamic.FirstName = recruiter.FirstName;                    
                     currentUserDynamic.LastName = recruiter.LastName;
