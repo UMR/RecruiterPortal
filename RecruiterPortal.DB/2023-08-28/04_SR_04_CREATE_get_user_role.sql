@@ -10,9 +10,9 @@ GO
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE [dbo].[sp_Get_User_Roles]  
+ALTER PROCEDURE [dbo].[sp_Get_User_Roles]  
    @p_UserId int
 AS 
 BEGIN      
-	SELECT R.* FROM RecruiterRoles as RR Join Roles AS R On RR.RoleID = R.RoleID WHERE  UserID = @p_UserId;
+	SELECT R.* FROM RecruiterRoles as RR Join Roles AS R On RR.RoleID = R.RoleID WHERE  RecruiterId = @p_UserId;
 END

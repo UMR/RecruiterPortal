@@ -1,13 +1,12 @@
-﻿
-USE [UMRRecruitmentApplicant]
+﻿USE [UMRRecruitmentApplicant]
 GO
-/****** Object:  StoredProcedure [dbo].[sp_InsertRecruiterRole]    Script Date: 8/29/2023 8:12:59 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_InsertRecruiterRole]    Script Date: 9/7/2023 4:05:28 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [dbo].[sp_InsertRecruiterRole]
+ALTER PROCEDURE [dbo].[sp_InsertRecruiterRole]
 (
 	@UserID int,
 	@RoleID int,
@@ -18,7 +17,7 @@ AS
 	SET NOCOUNT OFF;
 
 INSERT INTO [dbo].[RecruiterRoles]
-           ([UserID]
+           ([RecruiterId]
            ,[RoleID]
            ,[CreatedBy]
            ,[CreatedDate])
@@ -27,4 +26,3 @@ INSERT INTO [dbo].[RecruiterRoles]
            ,@RoleID
            ,@CreatedBy
            ,@CreatedDate)
-GO

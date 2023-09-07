@@ -47,4 +47,4 @@ INSERT INTO [dbo].[Recruiter]
            ,@CreatedBy
            ,@CreatedDate
            ,14400
-           ,(SELECT [AgencyID] FROM [Recruiter] where UserId=@CreatedBy))
+           ,(SELECT [AgencyID] FROM [Recruiter] where RecruiterId=@CreatedBy))

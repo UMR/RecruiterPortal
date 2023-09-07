@@ -1,13 +1,12 @@
-﻿
-USE [UMRRecruitmentApplicant]
+﻿USE [UMRRecruitmentApplicant]
 GO
-/****** Object:  StoredProcedure [dbo].[sp_InsertRecruiter]    Script Date: 8/28/2023 8:12:59 PM ******/
+/****** Object:  StoredProcedure [dbo].[sp_InsertRecruiter]    Script Date: 9/7/2023 4:04:17 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [dbo].[sp_InsertRecruiter]
+ALTER PROCEDURE [dbo].[sp_InsertRecruiter]
 (
 	@LoginId nvarchar(50),
 	@FirstName nvarchar(50),
@@ -48,7 +47,4 @@ INSERT INTO [dbo].[Recruiter]
            ,@CreatedBy
            ,@CreatedDate
            ,14400
-           ,@AgencyID)
-GO
-
-
+           ,(SELECT [AgencyID] FROM [Recruiter] where RecruiterId=@CreatedBy))
