@@ -25,13 +25,13 @@ namespace RecruiterPortalDAL.Managers
             }
         }
 
-        public static DataTable GetUserRoles(Int64 p_UserId)
+        public static DataTable GetUserRoles(Int64 p_RecruiterId)
         {
             string spName = "sp_Get_User_Roles";
             try
             {
                 dynamic expandoObject = new ExpandoObject();
-                expandoObject.p_UserId = p_UserId;
+                expandoObject.p_RecruiterId = p_RecruiterId;
                 GenericRepository<Role> roleRepo = new GenericRepository<Role>();
                 SqlParameter[] sqlParameters = roleRepo.GetSqlParametersFromExpandoObject(expandoObject, spName);
                 DataTable roleDataTable = null;

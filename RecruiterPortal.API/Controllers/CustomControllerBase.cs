@@ -54,10 +54,10 @@ namespace RecruiterPortal.API.Controllers
         }
 
         [NonAction]
-        internal long UserId()
+        internal long RecruiterId()
         {
             var currentUser = GetCurrentUser();
-            return currentUser.UserId;
+            return currentUser.RecruiterId;
         }
 
         [NonAction]

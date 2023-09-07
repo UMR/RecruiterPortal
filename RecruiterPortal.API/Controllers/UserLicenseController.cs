@@ -83,7 +83,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             try
             {
                 //Enum.TryParse(fileType.ToString(), out EnumFileType enumFileType);
-                IEnumerable<UserLicense> userLicenses = UserLicenseManager.GetUserLicenseByFileType(base.GetCurrentUser().UserId, fileType);
+                IEnumerable<UserLicense> userLicenses = UserLicenseManager.GetUserLicenseByFileType(base.GetCurrentUser().RecruiterId, fileType);
                 List<UserLicenseModel> userLicenseList = new List<UserLicenseModel>();
 
                 if (userLicenses != null && userLicenses.Count() > 0)

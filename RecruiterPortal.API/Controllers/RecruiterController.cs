@@ -80,7 +80,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     recruiter.Telephone = recruiterModel.Telephone;
                     recruiter.IsActive = recruiterModel.IsActive;
                     recruiter.AgencyId = recruiterModel.AgencyId;
-                    recruiter.CreatedBy = Convert.ToInt32(GetCurrentUser().UserId);
+                    recruiter.CreatedBy = Convert.ToInt32(GetCurrentUser().RecruiterId);
                     recruiter.CreatedDate = DateTime.Now;
                     RecruiterManager.SaveRecruiter(recruiter);
 
@@ -97,7 +97,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                                 {
                                     recruiterRole.RoleId = 1;
                                     recruiterRole.RecruiterId = rec.RecruiterId;
-                                    recruiterRole.CreatedBy = Convert.ToInt32(GetCurrentUser().UserId);
+                                    recruiterRole.CreatedBy = Convert.ToInt32(GetCurrentUser().RecruiterId);
                                     recruiterRole.CreatedDate = DateTime.Now;
                                     RoleManager.SaveUserRole(recruiterRole);
                                 }
@@ -105,7 +105,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                                 {
                                     recruiterRole.RoleId = 2;
                                     recruiterRole.RecruiterId = rec.RecruiterId;
-                                    recruiterRole.CreatedBy = Convert.ToInt32(GetCurrentUser().UserId);
+                                    recruiterRole.CreatedBy = Convert.ToInt32(GetCurrentUser().RecruiterId);
                                     recruiterRole.CreatedDate = DateTime.Now;
                                     RoleManager.SaveUserRole(recruiterRole);
                                 }
@@ -113,7 +113,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                                 {
                                     recruiterRole.RoleId = 3;
                                     recruiterRole.RecruiterId = rec.RecruiterId;
-                                    recruiterRole.CreatedBy = Convert.ToInt32(GetCurrentUser().UserId);
+                                    recruiterRole.CreatedBy = Convert.ToInt32(GetCurrentUser().RecruiterId);
                                     recruiterRole.CreatedDate = DateTime.Now;
                                     RoleManager.SaveUserRole(recruiterRole);
                                 }
@@ -121,7 +121,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                                 {
                                     recruiterRole.RoleId = 4;
                                     recruiterRole.RecruiterId = rec.RecruiterId;
-                                    recruiterRole.CreatedBy = Convert.ToInt32(GetCurrentUser().UserId);
+                                    recruiterRole.CreatedBy = Convert.ToInt32(GetCurrentUser().RecruiterId);
                                     recruiterRole.CreatedDate = DateTime.Now;
                                     RoleManager.SaveUserRole(recruiterRole);
                                 }

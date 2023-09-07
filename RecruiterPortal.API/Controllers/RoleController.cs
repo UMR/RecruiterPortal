@@ -46,7 +46,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             try
             {
-                DataTable roles = RoleManager.GetUserRoles(GetCurrentUser().UserId);
+                DataTable roles = RoleManager.GetUserRoles(GetCurrentUser().RecruiterId);
                 List<Role> roleList = new List<Role>();
                 if (roles != null && roles.Rows.Count > 0)
                 {

@@ -74,7 +74,7 @@ namespace RecruiterPortal.API.Controllers
             {
                 UserVerification userVerfication = new UserVerification();
                 userVerfication.VerficationCode = verificationCode.VerificationCode;
-                userVerfication.UserId = GetCurrentUser().UserId;
+                userVerfication.UserId = GetCurrentUser().RecruiterId;
                 var count = VerificationManager.Verifiy(userVerfication);
 
                 return Ok(count == 2 ? true : false);
@@ -92,7 +92,7 @@ namespace RecruiterPortal.API.Controllers
         {
             try
             {
-                VerificationManager.ResendVerificationCode(GetCurrentUser().UserId, GetCurrentUser().Email);
+                VerificationManager.ResendVerificationCode(GetCurrentUser().RecruiterId, GetCurrentUser().Email);
                 return Ok();
             }
             catch (Exception ex)
