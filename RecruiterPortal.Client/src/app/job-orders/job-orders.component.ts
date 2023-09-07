@@ -52,4 +52,11 @@ export class JobOrdersComponent implements OnInit {
                     this.isLoading = false;
                 });
     }
+
+    onEdit(job) {
+
+    }
+
+    onDelete(job) {
+    }
 }
