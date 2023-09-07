@@ -24,4 +24,11 @@ export class RecruiterService {
         });
     }
 
+    updateRecruiter(recruiter: RecruiterModel): Observable<HttpResponse<any>> {
+        return this.httpClient.post(this.addRecruiterURI, recruiter, {
+            headers: new HttpHeaders()
+                .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
+        });
+    }
+
 }

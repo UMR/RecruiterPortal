@@ -99,5 +99,20 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
+        public static void UpdateRecruiter(Recruiter recruiter)
+        {
+            string spName = "sp_UpdateRecruiter";
+
+            try
+            {
+                GenericRepository<Recruiter> recruiterRepo = new GenericRepository<Recruiter>();
+                SqlParameter[] sqlParameters = recruiterRepo.GetSqlParametersFromObject(recruiter, spName);
+                recruiterRepo.Update(spName, sqlParameters);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

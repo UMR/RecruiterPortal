@@ -196,15 +196,28 @@ export class RecruiterComponent implements OnInit {
             recruiterFormModel.RecruiterRole = recruiterRole;
 
 
-        this.recruiterService.addRecruiter(recruiterFormModel).subscribe(res => {
-            console.log(res);
-            this.getRecruiters();
-            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Recruiter add successfully', life: 3000 });
-        },
-            error => {
-                this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Recruiter Add Faild', life: 3000 });
+        if (!this.isEditMode) {
+            this.recruiterService.addRecruiter(recruiterFormModel).subscribe(res => {
+                console.log(res);
+                this.getRecruiters();
+                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Recruiter add successfully', life: 3000 });
             },
-            () => { })
+                error => {
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Recruiter Add Faild', life: 3000 });
+                },
+                () => { })
+        }
+        else {
+            this.recruiterService.updateRecruiter(recruiterFormModel).subscribe(res => {
+                console.log(res);
+                this.getRecruiters();
+                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Recruiter update successfully', life: 3000 });
+            },
+                error => {
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Recruiter update Faild', life: 3000 });
+                },
+                () => { })
+        }
         this.recruiters = [...this.recruiters];
         this.recruiterDialog = false;
         this.recruiterArr = {};
