@@ -46,7 +46,7 @@ export class ViewByApplicantComponent implements OnInit {
             { field: 'LastName', header: 'Applicant Last Name' },
             { field: 'FirstName', header: 'Applicant First Name' },
             { field: 'Email', header: 'Applicant Email' },
-            { field: 'ApplicantMobilePhone', header: 'Applicant Mobile Phone' }
+            { field: 'ApplicantMobilePhone', header: 'Applicant Status' }
         ];
         this.selectedApplicantStatus = "1";
     }
