@@ -454,5 +454,6 @@
     <None Include="2023-09-01\03_AZ_03_ALTER_PROCEDURE_sp_GetIssueingAuthorityByText.sql" />
     <None Include="2023-09-05\01_SR_01_ALTER_sp_InsertRecruiter.sql" />
     <None Include="2023-09-06\01_AZ_01_CREATE_TABLE_Job.sql" />
+    <None Include="2023-09-06\02_SR_02_ALTER_TABLE.sql" />
   </ItemGroup>
 </Project>
