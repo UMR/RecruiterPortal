@@ -1,7 +1,7 @@
 ﻿USE [UMRRecruitmentApplicant]
 GO
 
-/****** Object:  Table [dbo].[Job]    Script Date: 9/7/2023 2:05:19 PM ******/
+/****** Object:  Table [dbo].[Job]    Script Date: 9/7/2023 8:52:50 PM ******/
 SET ANSI_NULLS ON
 GO
 
