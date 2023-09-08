@@ -2,7 +2,7 @@
 {
     public class RecruiterModel
     {
-        public int UserId { get; set; }
+        public int RecruiterId { get; set; }
         public string LoginId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

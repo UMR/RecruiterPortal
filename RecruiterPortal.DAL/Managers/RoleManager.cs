@@ -82,7 +82,24 @@ namespace RecruiterPortalDAL.Managers
                 throw new Exception(ex.Message);
             }
         }
+        public static int DeleteRecruiterRole(long recruiterId)
+        {
+            string spName = "sp_DeleteRecruiterRoleByRecruiterId";
 
+            try
+            {
+                GenericRepository<UserCompany> employInfo = new GenericRepository<UserCompany>();
+                dynamic expandoObject = new ExpandoObject();
+                expandoObject.RecruiterId = recruiterId;
+                SqlParameter[] sqlParameters = employInfo.GetSqlParametersFromExpandoObject(expandoObject, spName, "@");
+                var result = employInfo.Delete(spName, sqlParameters);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
     }
 }

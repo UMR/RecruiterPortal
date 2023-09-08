@@ -10,6 +10,7 @@ import { RecruiterModel } from './recruiter.model';
 export class RecruiterService {
     private getRecruiterURI: string = `${resourceServerUrl}/api/recruiter/get`;
     private addRecruiterURI: string = `${resourceServerUrl}/api/recruiter/save`;
+    private updateRecruiterURI: string = `${resourceServerUrl}/api/recruiter/update`;
 
     constructor(private httpClient: HttpClient) { }
 
@@ -25,7 +26,7 @@ export class RecruiterService {
     }
 
     updateRecruiter(recruiter: RecruiterModel): Observable<HttpResponse<any>> {
-        return this.httpClient.post(this.addRecruiterURI, recruiter, {
+        return this.httpClient.post(this.updateRecruiterURI, recruiter, {
             headers: new HttpHeaders()
                 .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
         });

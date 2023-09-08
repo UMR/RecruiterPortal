@@ -47,7 +47,6 @@ namespace RecruiterPortal.DAL.Managers
 
             return isValidRecruiter;
         }
-
         public static Recruiter GetRecruiterByLoginid(string loginId)
         {
             string spName = "sp_GetRecruiterByLoginid";
@@ -66,7 +65,24 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
+        public static Recruiter GetRecruiterByRecruiterId(string recruiterId)
+        {
+            string spName = "sp_GetRecruiterByRecruiterId";
 
+            try
+            {
+                GenericRepository<Recruiter> recruiterRepo = new GenericRepository<Recruiter>();
+                dynamic expandoObject = new ExpandoObject();
+                expandoObject.RecruiterId = recruiterId;
+                SqlParameter[] sqlParameters = recruiterRepo.GetSqlParametersFromExpandoObject(expandoObject, spName, "@");
+
+                return recruiterRepo.GetOne(spName, sqlParameters);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public static DataTable GetAllRecruiter()
         {
             string spName = "SP_GET_All_Recruiter";

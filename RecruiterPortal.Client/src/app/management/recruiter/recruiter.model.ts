@@ -1,5 +1,5 @@
 ﻿export class RecruiterModel {
-    UserId: number;
+    RecruiterId: number;
     LoginId: string;
     FirstName: string
     LastName: string

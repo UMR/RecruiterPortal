@@ -18,6 +18,7 @@ export class RecruiterComponent implements OnInit {
     public selectedRecruiterId: number;
     public cols: any[];
     public rows: number = 15;
+    private recruiterId: number = 0;
     private take: number;
     private skip: number;
     private pageNumber: number;
@@ -25,7 +26,7 @@ export class RecruiterComponent implements OnInit {
     public submitted: boolean = false;
     public addEditTxt: string = "Add";
     public recruiterArr: any;
-    public recruiterDialog: boolean = true;
+    public recruiterDialog: boolean = false;
 
     public isRecruiter: boolean = false;
     public isSupervisor: boolean = false;
@@ -109,6 +110,7 @@ export class RecruiterComponent implements OnInit {
         //this.regForm.controls['password'].updateValueAndValidity();
         //this.regForm.controls['confirmPassword'].clearValidators();
         //this.regForm.controls['confirmPassword'].updateValueAndValidity();
+        this.regForm.controls['loginId'].disable();
         this.regForm.controls['password'].disable();
         this.regForm.controls['confirmPassword'].disable();
         this.addEditTxt = "Edit";
@@ -119,6 +121,8 @@ export class RecruiterComponent implements OnInit {
         this.regForm.controls.telephone.setValue(recruiter.Telephone);
         this.regForm.controls.isActive.setValue(recruiter.IsActive);
         this.regForm.controls.email.setValue(recruiter.Email);
+        this.recruiterId = recruiter.RecruiterId;
+
         if (recruiter.RecruiterRole.includes('recruiter')) {
             this.regForm.controls.isRecruiter.setValue(true);
         }
@@ -136,7 +140,6 @@ export class RecruiterComponent implements OnInit {
     }
 
     onDelete(recruiter: any) {
-        console.log(recruiter);
         this.confirmationService.confirm({
             message: 'Are you sure you want to change ' + recruiter.FirstName + ' ' + recruiter.LastName + ' status?',
             header: 'Confirm',
@@ -192,8 +195,8 @@ export class RecruiterComponent implements OnInit {
         recruiterFormModel.Email = this.regForm.get('email').value;
         recruiterFormModel.Telephone = this.regForm.get('telephone').value;
         recruiterFormModel.IsActive = this.regForm.get('isActive').value;
-        recruiterFormModel.AgencyId = 0,
-            recruiterFormModel.RecruiterRole = recruiterRole;
+        recruiterFormModel.AgencyId = 0;
+        recruiterFormModel.RecruiterRole = recruiterRole;
 
 
         if (!this.isEditMode) {
@@ -208,6 +211,7 @@ export class RecruiterComponent implements OnInit {
                 () => { })
         }
         else {
+            recruiterFormModel.RecruiterId = this.recruiterId;
             this.recruiterService.updateRecruiter(recruiterFormModel).subscribe(res => {
                 console.log(res);
                 this.getRecruiters();
@@ -241,6 +245,8 @@ export class RecruiterComponent implements OnInit {
 
     openNewRecruiter() {
         this.regForm.reset();
+        this.recruiterId = 0;
+        this.regForm.controls['loginId'].enable();
         this.regForm.controls['password'].enable();
         this.regForm.controls['confirmPassword'].enable();
         this.isEditMode = false;
