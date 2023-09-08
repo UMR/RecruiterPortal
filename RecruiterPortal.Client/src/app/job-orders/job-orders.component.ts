@@ -3,6 +3,7 @@ import { MessageService, ConfirmationService, LazyLoadEvent } from 'primeng/api'
 
 import { JobService } from './job-orders.service';
 import { Table } from 'primeng/components/table/table';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-job-orders',
@@ -24,12 +25,14 @@ export class JobOrdersComponent implements OnInit {
     public submitted: boolean = false;
     public jobDialog: boolean = false;
     public addEditTitle: string;
+    public jobFormGroup: FormGroup;
 
-    constructor(private messageService: MessageService, private confirmationService: ConfirmationService, private jobService: JobService) {
+    constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private jobService: JobService) {
         this.addEditTitle = "Add";
     }
 
     ngOnInit() {
+        this.createJobFormGroup();
     }
 
     loadJobLazy(event: LazyLoadEvent) {
@@ -37,6 +40,15 @@ export class JobOrdersComponent implements OnInit {
         this.take = event.rows;
         this.skip = event.rows * (this.pageNumber - 1);
         this.getJobs();
+    }
+
+    createJobFormGroup() {
+        this.jobFormGroup = this.fb.group({            
+            jobTitile: ['', Validators.compose([Validators.maxLength(500)])],
+            postion: ['', Validators.compose([Validators.required])],
+            institution: ['', Validators.compose([Validators.required])],
+            jobDescription: ['', Validators.compose([Validators.required])]            
+        });
     }
 
     getJobs() {
@@ -59,7 +71,7 @@ export class JobOrdersComponent implements OnInit {
     }
 
     openNewJob() {
-        this.addEditTitle = "Add";        
+        this.addEditTitle = "Add";
         this.submitted = false;
         this.jobDialog = true;
     }

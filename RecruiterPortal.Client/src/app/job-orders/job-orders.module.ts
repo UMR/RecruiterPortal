@@ -4,9 +4,10 @@ import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/components/table/table';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { LoadingImageModule } from '../common/loading-image.module';
+import { EditorModule } from 'primeng/editor';
 
 import { JobOrdersRoutingModule } from './job-orders-routing.module';
 import { JobOrdersComponent } from './job-orders.component';
@@ -23,7 +24,9 @@ import { SharedModule } from '../common/shared.module';
         TableModule,
         ConfirmDialogModule,
         FormsModule,
-        DialogModule        
+        ReactiveFormsModule,
+        DialogModule,
+        EditorModule
     ],
     providers: [ConfirmationService, MessageService]
 })
