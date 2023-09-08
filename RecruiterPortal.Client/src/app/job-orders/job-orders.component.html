@@ -73,13 +73,24 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <p-editor [style]="{ height: '600px' }" formControlName="jobDescription"></p-editor>
+                <p-editor [style]="{ height: '500px' }" formControlName="jobDescription"></p-editor>
             </div>
         </div>
-        <ng-template pTemplate="footer">
-            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-success p-modal-save-btn"></button>
-        </ng-template>
+        <div class="row">
+            <div class="com-md-12">
+                <ul class="list-inline mb-0 d-flex justify-content-between mt-2 ml-2">
+                    <li class="list-inline-item">
+                        <button type="button" class="btn btn-primary btn-portal-border" (click)="hideDialog()">Close</button>
+                    </li>
+                    <li class="list-inline-item">
+                        <button type="button" class="btn btn-primary btn-portal-border">Clear</button>
+                    </li>
+                    <li class="list-inline-item">
+                        <button type="submit" class="btn btn-primary btn-portal">Save</button>
+                    </li>
+                </ul>
+            </div>
+        </div>        
     </form>
 </p-dialog>
 
