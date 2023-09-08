@@ -80,8 +80,10 @@ export class AuthService {
     }
 
     logout() {
-        localStorage.removeItem(currentUserVerificationStatus);
-        this.storageService.removeApplicantId();
+        //localStorage.removeItem(currentUserVerificationStatus);
+        //this.storageService.removeApplicantId();
+        localStorage.clear();
+        sessionStorage.clear();
         const tokenInfo = this.getTokenInfo();
         if (tokenInfo && tokenInfo.refresh_token) {
             const refreshToken = tokenInfo.refresh_token;
@@ -109,7 +111,19 @@ export class AuthService {
             if (roleArray && roleArray.length > 0) {
                 if (roleArray.includes('recruiter')) {
                     this.storageService.setIsRecruiter(true);                    
-                }                
+                }
+                if (roleArray.includes('supervisor')) {
+                    this.storageService.setIsSupervisor(true);
+                }
+                if (roleArray.includes('manager')) {
+                    this.storageService.setIsManager(true);
+                }
+                if (roleArray.includes('administrator')) {
+                    this.storageService.setIsAdministrator(true);
+                }
+                if (roleArray.includes('admin')) {
+                    this.storageService.setIsAdmin(true);
+                }
             }
         }
         this.umrCookieService.setSerializedObject(authCookieKey, value);

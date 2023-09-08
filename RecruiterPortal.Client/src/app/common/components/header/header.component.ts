@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AgencyProfileService } from '../../../agency-profile/agency-profile.service';
 import { UserProfileService } from '../../../user-profile/user-profile.service';
 import { AuthService } from '../../auth.service';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
     selector: 'applicant-portal-header',
@@ -23,11 +24,16 @@ export class HeaderComponent {
     public isAdministrator: boolean = false;
     public isAdmin: boolean = false;
 
-    constructor(private authService: AuthService, private route: ActivatedRoute, private userProfileService: UserProfileService,
-        public agencyProfileService: AgencyProfileService) { }
+    constructor(private authService: AuthService, private route: ActivatedRoute, private storageService: StorageService,
+        private userProfileService: UserProfileService, public agencyProfileService: AgencyProfileService) { }
 
     ngOnInit() {
-        this.getUserRole();
+        this.isAdmin = this.storageService.getIsAdmin;
+        this.isRecruiter = this.storageService.getIsRecruiter;
+        this.isSupervisor = this.storageService.getIsSupervisor;
+        this.isManager = this.storageService.getIsManager;
+        this.isAdministrator = this.storageService.getIsAdministrator;
+        //this.getUserRole();
         //this.agencyProfileService.isAgencyOwner()
         //  .subscribe(response => {
         //    if (response.status === 200) {
