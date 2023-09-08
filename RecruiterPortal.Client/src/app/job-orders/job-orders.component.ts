@@ -21,8 +21,13 @@ export class JobOrdersComponent implements OnInit {
     private skip: number;
     private pageNumber: number;
     public selectedJob: any;
+    public submitted: boolean = false;
+    public jobDialog: boolean = false;
+    public addEditTitle: string;
 
-    constructor(private messageService: MessageService, private confirmationService: ConfirmationService, private jobService: JobService) { }
+    constructor(private messageService: MessageService, private confirmationService: ConfirmationService, private jobService: JobService) {
+        this.addEditTitle = "Add";
+    }
 
     ngOnInit() {
     }
@@ -53,10 +58,21 @@ export class JobOrdersComponent implements OnInit {
                 });
     }
 
+    openNewJob() {
+        this.addEditTitle = "Add";        
+        this.submitted = false;
+        this.jobDialog = true;
+    }
+
     onEdit(job) {
 
     }
 
     onDelete(job) {
+    }
+
+    hideDialog() {
+        this.jobDialog = false;
+        this.submitted = false;
     }
 }

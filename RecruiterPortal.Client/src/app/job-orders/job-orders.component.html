@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="grid">
                 <div class="col-12">
-                    <button pButton pRipple label="Add New" class="p-button-success" (click)="openNewAgency()"></button>
+                    <button pButton pRipple label="Add New" class="p-button-success" (click)="openNewJob()"></button>
                 </div>
             </div>
             <div class="container-fluid mt-2">
@@ -27,7 +27,7 @@
                             <th>Job Title</th>
                             <th>Position</th>
                             <th>Institute</th>
-                            <th>Status</th>                            
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </ng-template>
@@ -45,3 +45,37 @@
         </div>
     </section>
 </div>
+
+<p-dialog [(visible)]="jobDialog" [style]="{ width: '1000px' }" header="{{addEditTxt}} Job" [modal]="true" [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="content">
+        <div class="field">
+            <label for="jobTitile">Title</label>
+            <input type="text" id="jobTitile" name="jobTitile" required autofocus maxlength="100" />
+            <small class="p-error" *ngIf="submitted">Title is required.</small>
+        </div>
+        <div class="field">
+            <label for="postion">Postion</label>
+            <input type="text" id="postion" name="postion" maxlength="50" />
+            <small class="p-error" *ngIf="submitted">Postion is required.</small>
+        </div>
+        <div class="field">
+            <label for="institution">Institution</label>
+            <input type="text" id="institution" name="institution" maxlength="100" />
+            <small class="p-error" *ngIf="submitted">Institution is required.</small>
+        </div>        
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-success p-modal-save-btn"></button>
+    </ng-template>
+</p-dialog>
+
+<p-toast></p-toast>
+<p-confirmDialog [style]="{ width: '1000px' }" #cd>
+    <ng-template pTemplate="footer">
+        <button type="button" pButton icon="pi pi-times" label="No" class="btn-no" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="pi pi-check" label="Yes" class="btn-yes" (click)="cd.accept()"></button>
+    </ng-template>
+</p-confirmDialog>
+<p-toast key="toastKey1"></p-toast>
