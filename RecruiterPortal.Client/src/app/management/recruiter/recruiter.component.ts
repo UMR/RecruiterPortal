@@ -106,10 +106,6 @@ export class RecruiterComponent implements OnInit {
 
     onEdit(recruiter: any) {
         console.log(recruiter);
-        //this.regForm.controls['password'].clearValidators();
-        //this.regForm.controls['password'].updateValueAndValidity();
-        //this.regForm.controls['confirmPassword'].clearValidators();
-        //this.regForm.controls['confirmPassword'].updateValueAndValidity();
         this.regForm.controls['loginId'].disable();
         this.regForm.controls['password'].disable();
         this.regForm.controls['confirmPassword'].disable();
