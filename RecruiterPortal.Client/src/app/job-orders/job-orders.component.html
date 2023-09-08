@@ -7,7 +7,7 @@
                     <button pButton pRipple label="Add New" class="p-button-success" (click)="openNewAgency()"></button>
                 </div>
             </div>
-            <div class="container-fluid">
+            <div class="container-fluid mt-2">
                 <p-table #jobTable [responsive]="true"
                          [value]="jobs"
                          selectionMode="single"
@@ -36,7 +36,7 @@
                             <td>{{job.JobTitle}}</td>
                             <td>{{job.PositionId}}</td>
                             <td>{{job.InstituteId}}</td>
-                            <td>{{job.Status}}</td>
+                            <td>{{job.Status == 1 ? 'Active' : 'Inactive'}}</td>
                             <td><a (click)="onEdit(job)"><i class="pi pi-pencil"></i></a><a style="color:red" (click)="onDelete(job)"><i class="pi pi-trash"></i></a></td>
                         </tr>
                     </ng-template>
