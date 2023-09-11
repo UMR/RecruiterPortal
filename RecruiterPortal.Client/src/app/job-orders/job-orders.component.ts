@@ -13,6 +13,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class JobOrdersComponent implements OnInit {
     @ViewChild('jobTable', { static: false }) applicantTable: Table;
     public isLoading: boolean = false;
+    public positionResults: string[];
+    public institutionResults: any[];
     public jobs: any[] = [];
     public totalJobs: number;
     public selectedJobId: number;
@@ -50,6 +52,7 @@ export class JobOrdersComponent implements OnInit {
             jobDescription: ['', Validators.compose([Validators.required])]            
         });
     }
+    get f() { return this.jobFormGroup.controls; }
 
     getJobs() {
         this.isLoading = true;
@@ -68,6 +71,37 @@ export class JobOrdersComponent implements OnInit {
                 () => {
                     this.isLoading = false;
                 });
+    }
+
+    onPositionSearch($event) {
+        this.jobService.getPositionByPositionName($event.query).subscribe(response => {
+            this.positionResults = response.body;
+        },
+            err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get positions', detail: '' }); },
+            () => { });
+    }
+    onPositionSelect($event) {
+        this.jobFormGroup.patchValue({
+            position: $event.PositionName,
+            positionId: $event.Id
+        });
+    }
+
+    onInstitutiionSearch($event) {
+        this.jobService.getInsituteByInsituteName($event.query).subscribe(response => {
+            if (response.status === 200) {
+                this.institutionResults = response.body;
+            }
+        },
+            err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get institutes', detail: '' }); },
+            () => { });
+    }
+
+    onInstitutiionSelect($event) {
+        this.jobFormGroup.patchValue({
+            instituteId: $event.Id,
+            institution: $event.InstituteName
+        });
     }
 
     openNewJob() {

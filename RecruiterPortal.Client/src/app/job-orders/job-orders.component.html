@@ -59,14 +59,30 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="postion" class="form-label">Postion</label>
-                    <input type="text" id="postion" name="postion" class="form-control" formControlName="postion" required />
+                    <p-autoComplete formControlName="position" [suggestions]="positionResults" class="form-control"
+                                    (completeMethod)="onPositionSearch($event)" required autocomplete="off"
+                                    forceSelection="true" (onSelect)="onPositionSelect($event)" [ngClass]="{ 'is-invalid': submitted }" [dropdown]="true">
+                        <ng-template let-position pTemplate="item">
+                            <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                                <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{position.PositionName}}</div>
+                            </div>
+                        </ng-template>
+                    </p-autoComplete>
                     <small class="p-error" *ngIf="submitted">Postion is required.</small>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="institution" class="form-label">Institution</label>
-                    <input type="text" id="institution" name="institution" class="form-control" formControlName="institution" required />
+                    <p-autoComplete formControlName="institution" [suggestions]="institutionResults" class="form-control"
+                                    (completeMethod)="onInstitutiionSearch($event)" required autocomplete="off"
+                                    forceSelection="true" (onSelect)="onInstitutiionSelect($event)" [ngClass]="{ 'is-invalid': submitted }" [dropdown]="true">
+                        <ng-template let-institute pTemplate="item">
+                            <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                                <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{institute.InstituteName}}</div>
+                            </div>
+                        </ng-template>
+                    </p-autoComplete>
                     <small class="p-error" *ngIf="submitted">Institution is required.</small>
                 </div>
             </div>

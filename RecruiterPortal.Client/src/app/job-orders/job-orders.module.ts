@@ -8,10 +8,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { LoadingImageModule } from '../common/loading-image.module';
 import { EditorModule } from 'primeng/editor';
+import { AutoCompleteModule } from 'primeng/primeng';
 
 import { JobOrdersRoutingModule } from './job-orders-routing.module';
 import { JobOrdersComponent } from './job-orders.component';
 import { SharedModule } from '../common/shared.module';
+
 
 @NgModule({
     declarations: [JobOrdersComponent],
@@ -26,7 +28,8 @@ import { SharedModule } from '../common/shared.module';
         FormsModule,
         ReactiveFormsModule,
         DialogModule,
-        EditorModule
+        EditorModule,
+        AutoCompleteModule
     ],
     providers: [ConfirmationService, MessageService]
 })
