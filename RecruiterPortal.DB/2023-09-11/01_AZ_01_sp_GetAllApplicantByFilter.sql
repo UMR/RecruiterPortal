@@ -21,7 +21,7 @@ ALTER PROCEDURE [dbo].[sp_GetAllApplicantByFilter]
 	@FirstName NVARCHAR(100) = NULL,
 	@Email NVARCHAR(100) = NULL,
 	@IsVerified bit = NULL,
-	@CurrentUserId INT = NULL,
+	@CurrentRecruiterId INT = NULL,
 	@Take INT = NULL,
 	@Skip INT = NULL
 AS
@@ -31,7 +31,7 @@ BEGIN
 	SET NOCOUNT ON;
 
 SELECT COUNT(App.[UserID]) AS RowNumber FROM [UMRRecruitmentApplicant].[dbo].[User] As App
-  WHERE App.AgencyId IN (SELECT AgencyID FROM [dbo].Recruiter WHERE RecruiterID=@CurrentUserId)
+  WHERE App.AgencyId IN (SELECT AgencyID FROM [dbo].Recruiter WHERE RecruiterID=@CurrentRecruiterId)
     AND ([First_Name] LIKE '%'+ @FirstName +'%')
 	AND ([Last_Name] LIKE '%'+ @LastName +'%' )
 	AND ([Email] LIKE '%'+ @Email +'%' )
@@ -41,7 +41,7 @@ SELECT COUNT(App.[UserID]) AS RowNumber FROM [UMRRecruitmentApplicant].[dbo].[Us
     -- Select for data row count
 
 SELECT * FROM [UMRRecruitmentApplicant].[dbo].[User] As App
-  WHERE  App.AgencyId IN (SELECT AgencyID FROM [dbo].Recruiter WHERE RecruiterID=@CurrentUserId)
+  WHERE  App.AgencyId IN (SELECT AgencyID FROM [dbo].Recruiter WHERE RecruiterID=@CurrentRecruiterId)
 	AND (App.[First_Name] LIKE '%'+ @FirstName +'%')
 	AND (App.[Last_Name] LIKE '%'+ @LastName +'%' )
 	AND (App.Email LIKE '%'+ @Email +'%' )

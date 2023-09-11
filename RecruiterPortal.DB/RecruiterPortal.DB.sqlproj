@@ -130,6 +130,7 @@
     <Folder Include="2023-09-05" />
     <Folder Include="2023-09-06" />
     <Folder Include="2023-09-07" />
+    <Folder Include="2023-09-11" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="2019-11-04\01_TR_01_CREATE_DATABASE.sql" />
@@ -463,5 +464,6 @@
     <None Include="2023-09-07\05_SR_05_CREATE_sp_GetRecruiterByRecruiterId.sql" />
     <None Include="2023-09-07\06_SR_06_CREATE_sp_DeleteRecruiterRoleByRecruiterId.sql" />
     <None Include="2023-09-07\07_SR_07_ALTER_InsertRole.sql" />
+    <None Include="2023-09-11\01_AZ_01_sp_GetAllApplicantByFilter.sql" />
   </ItemGroup>
 </Project>

@@ -27,7 +27,6 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             try
             {
                 DataSet data = UserManager.GetAllUserByFilter(applicantSearchModel);
-
                 List<ApplicantInfoModel> appModelList = new List<ApplicantInfoModel>();
                 int applicantCount = 0;
 
@@ -43,7 +42,6 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     foreach (DataRow oRow in dataTable.Rows)
                     {
                         ApplicantInfoModel userReferenceModel = new ApplicantInfoModel();
-
                         userReferenceModel.Email = oRow["Email"].ToString(); ;
                         userReferenceModel.FirstName = oRow["First_Name"].ToString();
                         userReferenceModel.LastName = oRow["Last_Name"].ToString();
