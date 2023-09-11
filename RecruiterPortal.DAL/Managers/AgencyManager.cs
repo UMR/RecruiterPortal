@@ -68,5 +68,35 @@ namespace RecruiterPortalDAL.Managers
 
             return agencyDt;
         }
+        public static void SaveAgency(Agency agency)
+        {
+            string spName = "sp_InsertAgency";
+
+            try
+            {
+                GenericRepository<Agency> agencyRepo = new GenericRepository<Agency>();
+                SqlParameter[] sqlParameters = agencyRepo.GetSqlParametersFromObject(agency, spName);
+                agencyRepo.Insert(spName, sqlParameters);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public static void UpdateAgency(Agency agency)
+        {
+            string spName = "sp_UpdateAgency";
+
+            try
+            {
+                GenericRepository<Agency> agencyRepo = new GenericRepository<Agency>();
+                SqlParameter[] sqlParameters = agencyRepo.GetSqlParametersFromObject(agency, spName);
+                agencyRepo.Update(spName, sqlParameters);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

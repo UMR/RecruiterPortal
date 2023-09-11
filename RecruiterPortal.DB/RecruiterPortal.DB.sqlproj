@@ -465,5 +465,7 @@
     <None Include="2023-09-07\06_SR_06_CREATE_sp_DeleteRecruiterRoleByRecruiterId.sql" />
     <None Include="2023-09-07\07_SR_07_ALTER_InsertRole.sql" />
     <None Include="2023-09-11\01_AZ_01_sp_GetAllApplicantByFilter.sql" />
+    <None Include="2023-09-11\02_SR_02_SP_Insert_Agency.sql" />
+    <None Include="2023-09-11\03_SR_03_SP_UpdateAgency.sql" />
   </ItemGroup>
 </Project>

@@ -28,12 +28,12 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 int agencyCount = 0;
                 if (agencyDt != null && agencyDt.Rows.Count > 0)
                 {
-                    agencyCount=agencyDt.Rows.Count;    
+                    agencyCount = agencyDt.Rows.Count;
                     foreach (DataRow oRow in agencyDt.Rows)
                     {
                         AgencyModel agency = new AgencyModel();
 
-                        agency.AgencyAddress = oRow["AgencyAddress"].ToString(); 
+                        agency.AgencyAddress = oRow["AgencyAddress"].ToString();
                         agency.AgencyContactPerson = oRow["AgencyContactPerson"].ToString();
                         agency.AgencyContactPersonPhone = oRow["AgencyContactPersonPhone"].ToString();
                         agency.AgencyEmail = oRow["AgencyEmail"].ToString();
@@ -47,6 +47,75 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 }
                 return Ok(new { agencies = agencyModelList, totalApplicants = agencyCount });
                 //return Ok(agencyModelList);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [Route("save")]
+        [HttpPost]
+        public IActionResult AddAgency(AgencyModel agencyModel)
+        {
+
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    BadRequest(ModelState);
+                }
+
+
+                Agency agency = new Agency();
+                agency.AgencyName = agencyModel.AgencyName;
+                agency.Urlprefix = agencyModel.Urlprefix;
+                agency.AgencyEmail = agencyModel.AgencyEmail;
+                agency.AgencyPhone = agencyModel.AgencyPhone;
+                agency.AgencyAddress = agencyModel.AgencyAddress;
+                agency.AgencyContactPerson = agencyModel.AgencyContactPerson;
+                agency.AgencyContactPersonPhone = agencyModel.AgencyContactPersonPhone;
+                agency.IsActive = agencyModel.IsActive;
+                agency.CreatedBy = Convert.ToInt32(GetCurrentUser().RecruiterId);
+                agency.CreatedDate = DateTime.Now;
+                AgencyManager.SaveAgency(agency);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [Route("update")]
+        [HttpPost]
+        public IActionResult UpdateAgency(AgencyModel agencyModel)
+        {
+
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    BadRequest(ModelState);
+                }
+
+                Agency agency = new Agency();
+                agency.AgencyId = agencyModel.AgencyId;
+                agency.AgencyName = agencyModel.AgencyName;
+                //agency.Urlprefix = agencyModel.Urlprefix;
+                agency.AgencyEmail = agencyModel.AgencyEmail;
+                agency.AgencyPhone = agencyModel.AgencyPhone;
+                agency.AgencyAddress = agencyModel.AgencyAddress;
+                agency.AgencyContactPerson = agencyModel.AgencyContactPerson;
+                agency.AgencyContactPersonPhone = agencyModel.AgencyContactPersonPhone;
+                agency.IsActive = agencyModel.IsActive;
+                agency.UpdatedBy = Convert.ToInt32(GetCurrentUser().RecruiterId);
+                agency.UpdatedDate = DateTime.Now;
+                AgencyManager.UpdateAgency(agency);
+
+                return Ok();
             }
             catch (Exception ex)
             {
