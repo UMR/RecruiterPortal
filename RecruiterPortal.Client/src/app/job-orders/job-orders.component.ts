@@ -97,7 +97,7 @@ export class JobOrdersComponent implements OnInit {
             jobTitile: job.JobTitle,
             position: job.Position,
             positionId: job.PositionId,
-            institution: job.Institution,
+            institution: job.Institute,
             instituteId: job.InstituteId,
             jobDescription: job.JobDescription
         });

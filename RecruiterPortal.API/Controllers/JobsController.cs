@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RecruiterPortal.DAL.Managers;
+using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.SqlModels;
 
 namespace RecruiterPortal.API.Controllers
@@ -30,12 +31,11 @@ namespace RecruiterPortal.API.Controllers
 
         [Route("get-job-by-id/{id}")]
         [HttpGet]
-        public async Task<IActionResult> GetJobById(int id)
+        public IActionResult GetJobById(int id)
         {
             try
-            {
-                Job job = await JobManager.GetJobById(id);
-                return Ok(job);
+            {                
+                return Ok(JobManager.GetJobByIdWithRelated(id));
             }
             catch (Exception ex)
             {
