@@ -54,12 +54,12 @@ namespace RecruiterPortal.DAL.Managers
             }
         }
 
-        public static async Task<IEnumerable<Job>> GetJobById(int jobId)
+        public static async Task<Job> GetJobById(int jobId)
         {
             try
             {
                 GenericRepository<Job> repository = new GenericRepository<Job>();
-                return await repository.GetAllAsync(p => p.JobId == jobId);
+                return await repository.GetByIdAsync(p => p.JobId == jobId);
             }
             catch (Exception ex)
             {

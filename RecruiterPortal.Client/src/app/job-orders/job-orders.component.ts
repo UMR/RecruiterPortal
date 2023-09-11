@@ -41,24 +41,25 @@ export class JobOrdersComponent implements OnInit {
         this.pageNumber = Math.ceil((event.first + 1) / event.rows);
         this.take = event.rows;
         this.skip = event.rows * (this.pageNumber - 1);
-        this.getJobs();
+        this.getJobsByAgencyId();
     }
 
     createJobFormGroup() {
-        this.jobFormGroup = this.fb.group({            
+        this.jobFormGroup = this.fb.group({
             jobTitile: ['', Validators.compose([Validators.maxLength(500)])],
-            postion: ['', Validators.compose([Validators.required])],
+            position: ['', Validators.compose([Validators.required])],
+            positionId: [''],
             institution: ['', Validators.compose([Validators.required])],
-            jobDescription: ['', Validators.compose([Validators.required])]            
+            instituteId: [''],
+            jobDescription: ['', Validators.compose([Validators.required])]
         });
     }
     get f() { return this.jobFormGroup.controls; }
 
-    getJobs() {
+    getJobsByAgencyId() {
         this.isLoading = true;
-        this.jobService.getJobs(this.take, this.skip)
+        this.jobService.getJobsByAgencyId(this.take, this.skip)
             .subscribe(response => {
-                console.log(response);
                 if (response.status === 200) {
                     this.jobs = response.body.jobs;
                     this.totalJobs = response.body.totalJobs;
@@ -73,6 +74,35 @@ export class JobOrdersComponent implements OnInit {
                 });
     }
 
+    getJobsById() {
+        this.isLoading = true;
+        this.jobService.getJobById(this.selectedJobId)
+            .subscribe(response => {
+                if (response.status === 200) {
+                    this.selectedJob = response.body;                    
+                    this.fillupJob(this.selectedJob);
+                }
+            },
+                err => {
+                    this.isLoading = false;
+                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get job', detail: '' });
+                },
+                () => {
+                    this.isLoading = false;
+                });
+    }
+
+    fillupJob(job: any) {
+        this.jobFormGroup.patchValue({
+            jobTitile: job.JobTitle,
+            position: job.Position,
+            positionId: job.PositionId,
+            institution: job.Institution,
+            instituteId: job.InstituteId,
+            jobDescription: job.JobDescription
+        });
+    }
+
     onPositionSearch($event) {
         this.jobService.getPositionByPositionName($event.query).subscribe(response => {
             this.positionResults = response.body;
@@ -80,6 +110,7 @@ export class JobOrdersComponent implements OnInit {
             err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get positions', detail: '' }); },
             () => { });
     }
+
     onPositionSelect($event) {
         this.jobFormGroup.patchValue({
             position: $event.PositionName,
@@ -111,7 +142,16 @@ export class JobOrdersComponent implements OnInit {
     }
 
     onEdit(job) {
+        this.selectedJobId = job.JobId;
+        this.getJobsById();
+        this.jobDialog = true;
+        console.log(this.selectedJob);
+    }
 
+    save() {
+        const model = {
+
+        }
     }
 
     onDelete(job) {

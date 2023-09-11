@@ -10,9 +10,13 @@ export class JobService {
 
     constructor(private client: HttpClient) { }
 
-    getJobs(page: number, pageSize: number): Observable<HttpResponse<any>> {
-        return this.client.get(`${resourceServerUrl}/api/jobs/get_jobs?page=${page}&pageSize=${pageSize}`, { observe: 'response' });
+    getJobsByAgencyId(page: number, pageSize: number): Observable<HttpResponse<any>> {
+        return this.client.get(`${resourceServerUrl}/api/jobs/get_jobs-by-agency-id?page=${page}&pageSize=${pageSize}`, { observe: 'response' });
     }
+
+    getJobById(id: number): Observable<HttpResponse<any>> {
+        return this.client.get(`${resourceServerUrl}/api/jobs/get-job-by-id/${id}`, { observe: 'response' });
+    }    
 
     getPositionByPositionName(posotion: string): Observable<HttpResponse<any>> {
         return this.client.get(encodeURI(`${resourceServerUrl}/api/employment/position?text=${posotion}`), { observe: 'response' });

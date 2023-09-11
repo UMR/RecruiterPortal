@@ -12,14 +12,30 @@ namespace RecruiterPortal.API.Controllers
         {
         }
 
-        [Route("get_jobs")]
+        [Route("get_jobs-by-agency-id")]
         [HttpGet]
         public async Task<IActionResult> GetJobs()
         {
             try
             {                
-                IEnumerable<Job> jobsFromRepo = await JobManager.GetJobByAgencyId(AgencyId, 1, 10);
-                return Ok(new { jobs = jobsFromRepo, totalJobs = jobsFromRepo.Count() });                
+                IEnumerable<Job> jobs = await JobManager.GetJobByAgencyId(AgencyId, 1, 10);
+                return Ok(new { jobs = jobs, totalJobs = jobs.Count() });                
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [Route("get-job-by-id/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> GetJobById(int id)
+        {
+            try
+            {
+                Job job = await JobManager.GetJobById(id);
+                return Ok(job);
             }
             catch (Exception ex)
             {
