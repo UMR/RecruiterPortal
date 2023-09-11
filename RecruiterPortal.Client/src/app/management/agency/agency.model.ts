@@ -1,4 +1,4 @@
-﻿export interface AgencyModel {
+﻿export class AgencyModel {
     AgencyId: number;
     AgencyName: string;
     AgencyAddress: string;

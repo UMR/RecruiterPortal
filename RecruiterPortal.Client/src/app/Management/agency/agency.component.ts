@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LazyLoadEvent, MessageService, ConfirmationService } from 'primeng/api';
 import { AgencyService } from './agency.service';
 import { AgencyModel } from './agency.model';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
     selector: 'app-agency',
@@ -24,10 +25,24 @@ export class AgencyComponent implements OnInit {
     addEditTxt: string = "Add";
     agency: any;
     agencyDialog: boolean = false;
+    public agencyForm: FormGroup;
+    private emailRegEx = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
+    private agencyId: number = 0;
 
-    constructor(private agencyService: AgencyService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
+    constructor(private agencyService: AgencyService, private messageService: MessageService, private fb: FormBuilder,
+        private confirmationService: ConfirmationService) { }
 
     ngOnInit() {
+        this.agencyForm = this.fb.group({
+            agencyName: ["", Validators.required],
+            urlPrefix: ["", Validators.required],
+            agencyEmail: ["", [Validators.required, Validators.pattern(this.emailRegEx)]],
+            agencyPhone: [Validators.required],
+            agencyAddress: [""],
+            agencyContactPerson: [""],
+            contactPersonPhone: [""],
+            isActive: [false, Validators.required],
+        });
     }
     loadAgencyLazy(event: LazyLoadEvent) {
         this.pageNumber = Math.ceil((event.first + 1) / event.rows);
@@ -54,10 +69,21 @@ export class AgencyComponent implements OnInit {
                 });
     }
 
-    onEdit(agency: AgencyModel) {
+    onEdit(agency: any) {
+        console.log(agency);
         this.addEditTxt = "Edit";
-        this.agency = { ...agency };
         this.agencyDialog = true;
+        this.agencyForm.controls['urlPrefix'].disable();
+        this.agencyForm.controls.agencyName.setValue(agency.AgencyName);
+        this.agencyForm.controls.urlPrefix.setValue(agency.Urlprefix);
+        this.agencyForm.controls.agencyEmail.setValue(agency.AgencyEmail);
+        this.agencyForm.controls.agencyPhone.setValue(agency.AgencyPhone);
+        this.agencyForm.controls.agencyAddress.setValue(agency.AgencyAddress);
+        this.agencyForm.controls.agencyContactPerson.setValue(agency.AgencyContactPerson);
+        this.agencyForm.controls.contactPersonPhone.setValue(agency.AgencyContactPersonPhone);
+        this.agencyForm.controls.isActive.setValue(agency.IsActive);
+        this.agencyId = agency.AgencyId;
+
     }
 
     onDelete(agency: AgencyModel) {
@@ -80,42 +106,50 @@ export class AgencyComponent implements OnInit {
     }
     saveAgency() {
         this.submitted = true;
+        const agencyModel = new AgencyModel();
+        agencyModel.AgencyName = this.agencyForm.get('agencyName').value;
+        agencyModel.URLPrefix = this.agencyForm.get('urlPrefix').value;;
+        agencyModel.AgencyEmail = this.agencyForm.get('agencyEmail').value;;
+        agencyModel.AgencyPhone = this.agencyForm.get('agencyPhone').value;;
+        agencyModel.AgencyAddress = this.agencyForm.get('agencyAddress').value;;
+        agencyModel.AgencyContactPerson = this.agencyForm.get('agencyContactPerson').value;;
+        agencyModel.AgencyContactPersonPhone = this.agencyForm.get('contactPersonPhone').value;;
+        agencyModel.IsActive = this.agencyForm.get('isActive').value;;
+        
 
-        if (this.agency.agencyName.trim()) {
-            if (this.agency.agencyId) {
-                //this.agencys[this.findIndexById(this.agency.agencyId)] = this.agency;
-                //this.agencyService.updateAgency(this.agency.agencyId, this.agency).subscribe(res => {
-                //    console.log(res);
-                //    this.getAgencies();
-                //    this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Agency Updated', life: 3000 });
-                //},
-                //    error => {
-                //        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Agency Updated Faild', life: 3000 });
-                //    },
-                //    () => { })
+        if (this.agencyId != 0) {
+            this.agencyService.updateAgency(agencyModel).subscribe(res => {
+                console.log(res);
+                this.getAgencies();
+                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Agency Updated', life: 3000 });
+            },
+                error => {
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Agency Updated Faild', life: 3000 });
+                },
+                () => { })
+            this.agencyId = 0;
 
-            } else {
-                //this.agency.agencyId = this.createId();
-                //this.agencyService.addAgency(this.agency).subscribe(res => {
-                //    this.getAgencies();
-                //    this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Agency Created', life: 3000 });
-                //},
-                //    err => {
-                //        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Agency Created Faild', life: 3000 });
-                //    },
-                //    () => { })
+        } else {
 
-            }
-
-            this.agencies = [...this.agencies];
-            this.agencyDialog = false;
-            this.agency = {};
+            this.agencyService.addAgency(agencyModel).subscribe(res => {
+                this.getAgencies();
+                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Agency Created', life: 3000 });
+            },
+                err => {
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Agency Created Faild', life: 3000 });
+                },
+                () => { })
         }
+        this.agencyDialog = false;
     }
 
     hideDialog() {
         this.agencyDialog = false;
         this.submitted = false;
+    }
+    onClickClear() {
+        this.agencyId = 0;
+        this.agencyForm.reset();
     }
 
     changeStatus(id: any, value: boolean) {
@@ -140,7 +174,9 @@ export class AgencyComponent implements OnInit {
     }
 
     openNewAgency() {
+        this.agencyForm.reset();
         this.addEditTxt = "Add";
+        this.agencyForm.controls['urlPrefix'].enable();
         this.agency = {};
         this.submitted = false;
         this.agencyDialog = true;

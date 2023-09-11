@@ -10,7 +10,7 @@ import { TableModule } from 'primeng/components/table/table';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { CheckboxModule } from 'primeng/checkbox';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextareaModule } from 'primeng/inputtextarea';
@@ -29,6 +29,7 @@ import { KeyFilterModule } from 'primeng/keyfilter';
         ConfirmDialogModule,
         CheckboxModule,
         FormsModule,
+        ReactiveFormsModule,
         DialogModule,
         InputMaskModule,
         InputTextareaModule,
