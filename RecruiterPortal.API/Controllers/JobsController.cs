@@ -13,14 +13,13 @@ namespace RecruiterPortal.API.Controllers
         {
         }
 
-        [Route("get_jobs-by-agency-id")]
+        [Route("get_jobs-by-agency-id/{skip}/{take}")]
         [HttpGet]
-        public IActionResult GetJobs()
+        public IActionResult GetJobs(int skip, int take)
         {
             try
-            {                
-                var jobs = JobManager.GetJobByAgencyId(AgencyId, 1, 10);
-                return Ok(new { jobs = jobs, totalJobs = jobs.Count() });                
+            {
+                return Ok(JobManager.GetJobByAgencyId(AgencyId, skip, take));
             }
             catch (Exception ex)
             {
@@ -34,7 +33,7 @@ namespace RecruiterPortal.API.Controllers
         public IActionResult GetJobById(int id)
         {
             try
-            {                
+            {
                 return Ok(JobManager.GetJobByIdWithRelated(id));
             }
             catch (Exception ex)

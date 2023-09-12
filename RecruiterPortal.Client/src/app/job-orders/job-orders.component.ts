@@ -19,7 +19,7 @@ export class JobOrdersComponent implements OnInit {
     public totalJobs: number;
     public selectedJobId: number;
     public cols: any[];
-    public rows: number = 15;
+    public rows: number = 1;
     private take: number;
     private skip: number;
     private pageNumber: number;
@@ -41,7 +41,7 @@ export class JobOrdersComponent implements OnInit {
         this.pageNumber = Math.ceil((event.first + 1) / event.rows);
         this.take = event.rows;
         this.skip = event.rows * (this.pageNumber - 1);
-        this.getJobsByAgencyId();
+        this.getJobsByAgencyId(this.skip, this.take);
     }
 
     createJobFormGroup() {
@@ -56,13 +56,14 @@ export class JobOrdersComponent implements OnInit {
     }
     get f() { return this.jobFormGroup.controls; }
 
-    getJobsByAgencyId() {
+    getJobsByAgencyId(skip: number, take: number) {
         this.isLoading = true;
-        this.jobService.getJobsByAgencyId(this.take, this.skip)
+        this.jobService.getJobsByAgencyId(skip, take)
             .subscribe(response => {
+                console.log(response);
                 if (response.status === 200) {
-                    this.jobs = response.body.jobs;
-                    this.totalJobs = response.body.totalJobs;
+                    this.jobs = response.body.Records;
+                    this.totalJobs = response.body.TotalRecords;
                 }
             },
                 err => {
@@ -79,7 +80,7 @@ export class JobOrdersComponent implements OnInit {
         this.jobService.getJobById(this.selectedJobId)
             .subscribe(response => {
                 if (response.status === 200) {
-                    this.selectedJob = response.body;                    
+                    this.selectedJob = response.body;
                     this.fillupJob(this.selectedJob);
                 }
             },
@@ -144,8 +145,7 @@ export class JobOrdersComponent implements OnInit {
     onEdit(job) {
         this.selectedJobId = job.JobId;
         this.getJobsById();
-        this.jobDialog = true;
-        console.log(this.selectedJob);
+        this.jobDialog = true;        
     }
 
     save() {
