@@ -49,6 +49,10 @@ namespace RecruiterPortal.API.Controllers
         {
             try
             {
+                if (request.JobId > 0)
+                {
+                    return Ok(await JobManager.Update(request, AgencyId, RecruiterId));
+                }
                 return Ok(await JobManager.Insert(request, AgencyId, RecruiterId));
             }
             catch (Exception ex)

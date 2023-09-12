@@ -162,7 +162,7 @@ namespace RecruiterPortal.DAL.Repository
                 using (context)
                 {
                     await context.AddAsync(entity);
-                    await context.SaveChangesAsync();                    
+                    await context.SaveChangesAsync();
                     return entity;
                 }
             }
@@ -178,13 +178,9 @@ namespace RecruiterPortal.DAL.Repository
             {
                 using (context)
                 {
-                    using (TransactionScope ts = new TransactionScope())
-                    {
-                        context.Entry(entity).State = EntityState.Modified;
-                        context.Update(entity);
-                        ts.Complete();
-                        return await context.SaveChangesAsync();
-                    }
+                    context.Entry(entity).State = EntityState.Modified;
+                    context.Update(entity);
+                    return await context.SaveChangesAsync();
                 }
             }
             catch (Exception ex)

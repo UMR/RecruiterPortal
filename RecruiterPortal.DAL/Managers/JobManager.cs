@@ -25,9 +25,9 @@ namespace RecruiterPortal.DAL.Managers
         public static async Task<int> Insert(JobRequestModel request, long agencyId, int recruiterId)
         {
             try
-            {
-                Job job = MapJobRequest(request, agencyId, recruiterId);
+            {                
                 GenericRepository<Job> repository = new GenericRepository<Job>();
+                Job job = MapJobRequest(request, agencyId, recruiterId);
                 Job createdJob = await repository.SaveAsync(job);
                 return createdJob.JobId;
             }
@@ -36,11 +36,12 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
-        public static async Task<int> Update(Job job)
+        public static async Task<int> Update(JobRequestModel request, long agencyId, int recruiterId)
         {
             try
             {
                 GenericRepository<Job> repository = new GenericRepository<Job>();
+                Job job = MapJobRequest(request, agencyId, recruiterId);
                 return await repository.UpdateAsync(job);
             }
             catch (Exception ex)

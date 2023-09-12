@@ -95,7 +95,6 @@ export class JobOrdersComponent implements OnInit {
     }
 
     fillupJob(job: any) {
-        console.log(job);
         this.jobFormGroup.patchValue({
             jobTitile: job.JobTitle,
             status: job.Status === true ? '1' : '0',
@@ -161,12 +160,13 @@ export class JobOrdersComponent implements OnInit {
             PositionId: this.jobFormGroup.controls.positionId.value,
             InstituteId: this.jobFormGroup.controls.instituteId.value,
         }
-        if (this.selectedJobId == 0) {
+        if (this.jobFormGroup.valid) {
             this.jobService.save(jobModel).subscribe(res => {
-                console.log(res);
-                this.getJobsByAgencyId(this.skip, this.take);
-                this.selectedJobId = null;
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Job Saved', life: 3000 });
+                if (res.status === 200) {
+                    this.getJobsByAgencyId(this.skip, this.take);
+                    this.selectedJobId = null;
+                    this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Job Saved', life: 3000 });
+                }
             },
                 error => {
                     this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Job Save Failed', life: 3000 });
