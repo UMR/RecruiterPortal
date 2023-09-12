@@ -1,4 +1,5 @@
-﻿using RecruiterPortal.DAL.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
 
@@ -42,12 +43,39 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
-        public static async Task<IEnumerable<Job>> GetJobByAgencyId(long agencyId, int page, int pageSize)
+        public static IEnumerable<JobResponseModel> GetJobByAgencyId(long agencyId, int page, int pageSize)
         {
             try
             {
-                GenericRepository<Job> repository = new GenericRepository<Job>();
-                return await repository.GetPageAsync(p => p.AgencyId == agencyId, page, pageSize);
+                IEnumerable<JobResponseModel> jobs = null;
+                using (UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext())
+                {
+                    jobs = (from job in context.Jobs
+                            join pos in context.Positions
+                            on job.JobId equals pos.Id
+                            join ins in context.Institutions
+                            on job.JobId equals ins.Id
+                            where job.AgencyId == agencyId
+                            select (new JobResponseModel
+                            {
+                                JobId = job.JobId,
+                                Status = job.Status,
+                                JobTitle = job.JobTitle,
+                                JobDescription = job.JobDescription,
+                                PositionId = job.PositionId,
+                                Position = pos.PositionName,
+                                InstituteId = ins.Id,
+                                Institute = ins.InstituteName,
+                                AgencyId = job.AgencyId,
+                                CreatedBy = job.CreatedBy,
+                                CreatedDate = job.CreatedDate,
+                                UpdatedBy = job.UpdatedBy,
+                                UpdatedDate = job.UpdatedDate
+                            })
+                           ).ToList<JobResponseModel>();
+                }
+
+                return jobs;
             }
             catch (Exception ex)
             {
@@ -70,10 +98,10 @@ namespace RecruiterPortal.DAL.Managers
 
         public static JobResponseModel GetJobByIdWithRelated(int jobId)
         {
-            JobResponseModel jobResponse = null;
+            JobResponseModel response = null;
             using (UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext())
             {
-                jobResponse = (from job in context.Jobs
+                response = (from job in context.Jobs
                                join pos in context.Positions
                                on job.JobId equals pos.Id
                                join ins in context.Institutions
@@ -98,7 +126,7 @@ namespace RecruiterPortal.DAL.Managers
                        ).FirstOrDefault();
             }
 
-            return jobResponse;
+            return response;
         }
     }
 }

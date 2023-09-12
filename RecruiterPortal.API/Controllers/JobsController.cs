@@ -15,11 +15,11 @@ namespace RecruiterPortal.API.Controllers
 
         [Route("get_jobs-by-agency-id")]
         [HttpGet]
-        public async Task<IActionResult> GetJobs()
+        public IActionResult GetJobs()
         {
             try
             {                
-                IEnumerable<Job> jobs = await JobManager.GetJobByAgencyId(AgencyId, 1, 10);
+                var jobs = JobManager.GetJobByAgencyId(AgencyId, 1, 10);
                 return Ok(new { jobs = jobs, totalJobs = jobs.Count() });                
             }
             catch (Exception ex)

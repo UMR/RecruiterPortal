@@ -34,8 +34,8 @@
                     <ng-template pTemplate="body" let-job let-rowData let-columns="columns">
                         <tr [pSelectableRow]="job">
                             <td>{{job.JobTitle}}</td>
-                            <td>{{job.PositionId}}</td>
-                            <td>{{job.InstituteId}}</td>
+                            <td>{{job.Position}}</td>
+                            <td>{{job.Institute}}</td>
                             <td>{{job.Status == 1 ? 'Active' : 'Inactive'}}</td>
                             <td><a (click)="onEdit(job)"><i class="pi pi-pencil"></i></a><a style="color:red" (click)="onDelete(job)"><i class="pi pi-trash"></i></a></td>
                         </tr>
