@@ -70,7 +70,6 @@ export class AgencyComponent implements OnInit {
     }
 
     onEdit(agency: any) {
-        console.log(agency);
         this.addEditTxt = "Edit";
         this.agencyDialog = true;
         this.agencyForm.controls.agencyName.setValue(agency.AgencyName);
