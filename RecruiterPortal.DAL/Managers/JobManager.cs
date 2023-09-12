@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
@@ -43,13 +43,25 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
-        public static IEnumerable<JobResponseModel> GetJobByAgencyId(long agencyId, int page, int pageSize)
+
+
+        public static PagedResponse<JobResponseModel> GetJobByAgencyId(long agencyId, int skip, int take)
         {
             try
             {
                 IEnumerable<JobResponseModel> jobs = null;
+                int jobsCount = 0;
+
                 using (UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext())
                 {
+                    jobsCount = (from job in context.Jobs
+                                 join pos in context.Positions
+                                 on job.JobId equals pos.Id
+                                 join ins in context.Institutions
+                                 on job.JobId equals ins.Id
+                                 where job.AgencyId == agencyId
+                                 select job).Count();
+
                     jobs = (from job in context.Jobs
                             join pos in context.Positions
                             on job.JobId equals pos.Id
@@ -72,10 +84,11 @@ namespace RecruiterPortal.DAL.Managers
                                 UpdatedBy = job.UpdatedBy,
                                 UpdatedDate = job.UpdatedDate
                             })
-                           ).ToList<JobResponseModel>();
+                           ).Skip(skip).Take(take)
+                           .ToList();
                 }
 
-                return jobs;
+                return new PagedResponse<JobResponseModel> { Records = jobs, TotalRecords = jobsCount };
             }
             catch (Exception ex)
             {
@@ -102,27 +115,27 @@ namespace RecruiterPortal.DAL.Managers
             using (UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext())
             {
                 response = (from job in context.Jobs
-                               join pos in context.Positions
-                               on job.JobId equals pos.Id
-                               join ins in context.Institutions
-                               on job.JobId equals ins.Id
-                               where job.JobId == jobId
-                               select (new JobResponseModel
-                               {
-                                   JobId = job.JobId,
-                                   Status = job.Status,
-                                   JobTitle = job.JobTitle,
-                                   JobDescription = job.JobDescription,
-                                   PositionId = job.PositionId,
-                                   Position = pos.PositionName,
-                                   InstituteId = ins.Id,
-                                   Institute = ins.InstituteName,
-                                   AgencyId = job.AgencyId,
-                                   CreatedBy = job.CreatedBy,
-                                   CreatedDate = job.CreatedDate,
-                                   UpdatedBy = job.UpdatedBy,
-                                   UpdatedDate = job.UpdatedDate
-                               })
+                            join pos in context.Positions
+                            on job.JobId equals pos.Id
+                            join ins in context.Institutions
+                            on job.JobId equals ins.Id
+                            where job.JobId == jobId
+                            select (new JobResponseModel
+                            {
+                                JobId = job.JobId,
+                                Status = job.Status,
+                                JobTitle = job.JobTitle,
+                                JobDescription = job.JobDescription,
+                                PositionId = job.PositionId,
+                                Position = pos.PositionName,
+                                InstituteId = ins.Id,
+                                Institute = ins.InstituteName,
+                                AgencyId = job.AgencyId,
+                                CreatedBy = job.CreatedBy,
+                                CreatedDate = job.CreatedDate,
+                                UpdatedBy = job.UpdatedBy,
+                                UpdatedDate = job.UpdatedDate
+                            })
                        ).FirstOrDefault();
             }
 

@@ -16,7 +16,7 @@
                          [paginator]="true"
                          [rows]="rows"
                          [columns]="cols"
-                         [totalRecords]="total"
+                         [totalRecords]="totalJobs"
                          [lazy]="true"
                          (onLazyLoad)="loadJobLazy($event)"
                          [rowsPerPageOptions]="[10,15,20]"
@@ -106,7 +106,7 @@
                     </li>
                 </ul>
             </div>
-        </div>        
+        </div>
     </form>
 </p-dialog>
 
