@@ -74,7 +74,7 @@ export class AgencyComponent implements OnInit {
         this.addEditTxt = "Edit";
         this.agencyDialog = true;
         this.agencyForm.controls.agencyName.setValue(agency.AgencyName);
-        this.agencyForm.controls.urlPrefix.setValue(agency.Urlprefix);
+        this.agencyForm.controls.urlPrefix.setValue(agency.UrlPrefix);
         this.agencyForm.controls.agencyEmail.setValue(agency.AgencyEmail);
         this.agencyForm.controls.agencyPhone.setValue(agency.AgencyPhone);
         this.agencyForm.controls.agencyAddress.setValue(agency.AgencyAddress);
