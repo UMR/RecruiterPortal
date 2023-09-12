@@ -163,9 +163,9 @@ namespace RecruiterPortal.DAL.Repository
                 {
                     using (TransactionScope ts = new TransactionScope())
                     {
-                        await context.AddAsync(entity);
-                        ts.Complete();
+                        await context.AddAsync(entity);                        
                         await context.SaveChangesAsync();
+                        ts.Complete();
                         return entity;
                     }
                 }
