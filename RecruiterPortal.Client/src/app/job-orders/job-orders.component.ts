@@ -145,12 +145,31 @@ export class JobOrdersComponent implements OnInit {
     onEdit(job) {
         this.selectedJobId = job.JobId;
         this.getJobsById();
-        this.jobDialog = true;        
+        this.jobDialog = true;
     }
 
     save() {
-        const model = {
 
+        const jobModel = {
+            JobId: 0,
+            Status: true,
+            JobTitle: this.jobFormGroup.controls.jobTitile.value,
+            JobDescription: this.jobFormGroup.controls.jobDescription.value,
+            PositionId: this.jobFormGroup.controls.positionId.value,
+            InstituteId: this.jobFormGroup.controls.instituteId.value,
+        }
+
+        console.log(jobModel);
+
+        if (!this.selectedJobId) {
+            this.jobService.save(jobModel).subscribe(res => {
+                console.log(res);
+                this.getJobsByAgencyId(this.skip, this.take);
+                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Job Saved', life: 3000 });
+            },
+                error => {
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Job Save Failed', life: 3000 });
+                });
         }
     }
 

@@ -13,7 +13,7 @@ namespace RecruiterPortal.API.Controllers
         {
         }
 
-        [Route("get_jobs-by-agency-id/{skip}/{take}")]
+        [Route("get-by-agency-id/{skip}/{take}")]
         [HttpGet]
         public IActionResult GetJobs(int skip, int take)
         {
@@ -28,7 +28,7 @@ namespace RecruiterPortal.API.Controllers
             }
         }
 
-        [Route("get-job-by-id/{id}")]
+        [Route("get-by-id/{id}")]
         [HttpGet]
         public IActionResult GetJobById(int id)
         {
