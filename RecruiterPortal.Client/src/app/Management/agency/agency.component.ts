@@ -73,7 +73,6 @@ export class AgencyComponent implements OnInit {
         console.log(agency);
         this.addEditTxt = "Edit";
         this.agencyDialog = true;
-        this.agencyForm.controls['urlPrefix'].disable();
         this.agencyForm.controls.agencyName.setValue(agency.AgencyName);
         this.agencyForm.controls.urlPrefix.setValue(agency.Urlprefix);
         this.agencyForm.controls.agencyEmail.setValue(agency.AgencyEmail);
@@ -82,6 +81,7 @@ export class AgencyComponent implements OnInit {
         this.agencyForm.controls.agencyContactPerson.setValue(agency.AgencyContactPerson);
         this.agencyForm.controls.contactPersonPhone.setValue(agency.AgencyContactPersonPhone);
         this.agencyForm.controls.isActive.setValue(agency.IsActive);
+        this.agencyForm.controls['urlPrefix'].disable();
         this.agencyId = agency.AgencyId;
 
     }
@@ -104,6 +104,10 @@ export class AgencyComponent implements OnInit {
             }
         });
     }
+    onAgencySubmit() {
+        
+        this.saveAgency();
+    }
     saveAgency() {
         this.submitted = true;
         const agencyModel = new AgencyModel();
@@ -115,7 +119,9 @@ export class AgencyComponent implements OnInit {
         agencyModel.AgencyContactPerson = this.agencyForm.get('agencyContactPerson').value;;
         agencyModel.AgencyContactPersonPhone = this.agencyForm.get('contactPersonPhone').value;;
         agencyModel.IsActive = this.agencyForm.get('isActive').value;;
-        
+        agencyModel.AgencyId = this.agencyId;
+
+        console.log(this.agencyId);
 
         if (this.agencyId != 0) {
             this.agencyService.updateAgency(agencyModel).subscribe(res => {

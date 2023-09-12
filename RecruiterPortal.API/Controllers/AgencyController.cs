@@ -39,7 +39,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                         agency.AgencyEmail = oRow["AgencyEmail"].ToString();
                         agency.AgencyName = oRow["AgencyName"].ToString();
                         agency.AgencyPhone = oRow["AgencyPhone"].ToString();
-                        agency.Urlprefix = oRow["Urlprefix"].ToString();
+                        agency.UrlPrefix = oRow["URLPrefix"].ToString();
                         agency.IsActive = Convert.ToBoolean(oRow["IsActive"].ToString());
                         agency.AgencyId = Convert.ToInt64(oRow["AgencyId"].ToString());
                         agencyModelList.Add(agency);
@@ -70,7 +70,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
                 Agency agency = new Agency();
                 agency.AgencyName = agencyModel.AgencyName;
-                agency.Urlprefix = agencyModel.Urlprefix;
+                agency.Urlprefix = agencyModel.UrlPrefix;
                 agency.AgencyEmail = agencyModel.AgencyEmail;
                 agency.AgencyPhone = agencyModel.AgencyPhone;
                 agency.AgencyAddress = agencyModel.AgencyAddress;

@@ -7,7 +7,6 @@ CREATE PROCEDURE [dbo].[sp_UpdateAgency]
 	@UpdatedBy int,
 	@UpdatedDate datetime,
 	@AgencyAddress nvarchar(200),
-	@URLPrefix nvarchar(50),
 	@AgencyEmail nvarchar(100),
 	@AgencyPhone nvarchar(50),
 	@AgencyContactPerson nvarchar(50),
@@ -24,7 +23,6 @@ UPDATE [dbo].[Agency]
       ,[UpdatedBy] = @UpdatedBy
       ,[UpdatedDate] = @UpdatedDate
       ,[AgencyAddress] = @AgencyAddress
-      ,[URLPrefix] = @URLPrefix
       ,[AgencyEmail] = @AgencyEmail
       ,[AgencyPhone] = @AgencyPhone
       ,[AgencyContactPerson] = @AgencyContactPerson

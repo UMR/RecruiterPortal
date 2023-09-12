@@ -16,7 +16,7 @@
 
         public string AgencyAddress { get; set; }
 
-        public string Urlprefix { get; set; }
+        public string UrlPrefix { get; set; }
 
         public string AgencyEmail { get; set; }
 

@@ -56,7 +56,6 @@
         <div class="field">
             <label for="agencyName">Agency Name</label>
             <input type="text" pInputText id="agencyName" class="input-text" formControlName="agencyName" required autofocus maxlength="100" />
-            <small class="p-error" *ngIf="submitted && !agencyName">Agency Name is required.</small>
         </div>
         <div class="field">
             <label for="urlPrefix">Agency URL Prefix</label>
@@ -80,23 +79,25 @@
         </div>
         <div class="field">
             <label for="personPhone">Agency Contact Person Phone</label>
-            <p-inputMask mask="(999) 999-9999" required class="input-text" formControlName="contactPersonPhone" placeholder="(999) 999-9999" [style]="{'width':'100%'}"></p-inputMask>
+            <p-inputMask mask="(999) 999-9999" class="input-text" formControlName="contactPersonPhone"
+                         placeholder="(999) 999-9999" [style]="{'width':'100%'}"></p-inputMask>
         </div>
         <div>
             <input type="checkbox" id="name" formControlName="isActive" />
             <label for="name" style="margin-left:12px">Active</label>
         </div>
-    </form>
 
-    <p-footer>
-        <div>
-            <button pButton label="Cancel" class="" (click)="hideDialog()"></button>
-            <div style="float:right">
-                <button pButton label="Clear" class="btn-clear" (click)="onClickClear()" type="reset"></button>
-                <button type="submit" pButton pRipple label="Save" class="btn-save" [disabled]="agencyForm.invalid"></button>
+
+        <p-footer>
+            <div>
+                <button pButton label="Cancel" class="" (click)="hideDialog()"></button>
+                <div style="float:right">
+                    <button pButton label="Clear" class="btn-clear" (click)="onClickClear()" type="reset"></button>
+                    <button type="submit" pButton pRipple label="Save" class="btn-save" [disabled]="agencyForm.invalid"></button>
+                </div>
             </div>
-        </div>
-    </p-footer>
+        </p-footer>
+    </form>
 </p-dialog>
 
 <p-toast></p-toast>
