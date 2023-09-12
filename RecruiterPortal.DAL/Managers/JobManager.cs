@@ -10,6 +10,7 @@ namespace RecruiterPortal.DAL.Managers
         private static Job MapJobRequest(JobRequestModel request, long agencyId, int recruiterId) 
         {
             Job job = new Job();
+            job.JobId= request.JobId;
             job.Status = request.Status;
             job.JobTitle = request.JobTitle;
             job.JobDescription = request.JobDescription;
@@ -18,7 +19,6 @@ namespace RecruiterPortal.DAL.Managers
             job.AgencyId = agencyId;
             job.CreatedBy = recruiterId;
             job.CreatedDate = DateTime.Now;
-
             return job;
         }
 

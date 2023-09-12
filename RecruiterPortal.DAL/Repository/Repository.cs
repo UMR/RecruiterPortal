@@ -178,8 +178,7 @@ namespace RecruiterPortal.DAL.Repository
             {
                 using (context)
                 {
-                    context.Entry(entity).State = EntityState.Modified;
-                    context.Update(entity);
+                    context.Entry(entity).State = EntityState.Modified;                    
                     return await context.SaveChangesAsync();
                 }
             }
