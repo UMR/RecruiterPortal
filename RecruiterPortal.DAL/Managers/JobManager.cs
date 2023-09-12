@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using RecruiterPortal.DAL.Models;
+﻿using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
 
@@ -7,12 +6,23 @@ namespace RecruiterPortal.DAL.Managers
 {
     public class JobManager
     {
-        public static async Task<Job> Insert(Job job)
+        public static async Task<int> Insert(JobRequestModel request, long agencyId, int recruiterId)
         {
             try
             {
+                Job job = new Job();
+                job.Status = request.Status;
+                job.JobTitle = request.JobTitle;
+                job.JobDescription = request.JobDescription;
+                job.PositionId = request.PositionId;
+                job.InstituteId = request.InstituteId;  
+                job.AgencyId = agencyId;
+                job.CreatedBy = recruiterId;
+                job.CreatedDate = DateTime.Now;
+                
                 GenericRepository<Job> repository = new GenericRepository<Job>();
-                return await repository.SaveAsync(job);
+                Job createdJob = await repository.SaveAsync(job);
+                return createdJob.JobId;
             }
             catch (Exception ex)
             {

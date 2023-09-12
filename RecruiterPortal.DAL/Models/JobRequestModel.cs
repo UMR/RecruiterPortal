@@ -1,6 +1,6 @@
 ﻿namespace RecruiterPortal.DAL.Models;
 
-public class JobModel
+public class JobRequestModel
 {
     public int JobId { get; set; }
 

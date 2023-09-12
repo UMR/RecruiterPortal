@@ -52,12 +52,14 @@ namespace RecruiterPortal.API.Controllers
                 return StatusCode(500);
             }
         }
-
-        [NonAction]
-        internal long RecruiterId()
+        
+        protected int RecruiterId
         {
-            var currentUser = GetCurrentUser();
-            return currentUser.RecruiterId;
+            get 
+            {
+                var currentUser = GetCurrentUser();
+                return currentUser.RecruiterId;
+            }            
         }
         
         protected long AgencyId

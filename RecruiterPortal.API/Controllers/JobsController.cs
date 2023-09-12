@@ -42,5 +42,21 @@ namespace RecruiterPortal.API.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+
+        [Route("save")]
+        [HttpPost]
+        public async Task<IActionResult> Save([FromBody] JobRequestModel request)
+        {
+            try
+            {
+                return Ok(await JobManager.Insert(request, AgencyId, RecruiterId));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }
