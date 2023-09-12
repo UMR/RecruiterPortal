@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RecruiterPortal.DAL.Managers;
 using RecruiterPortal.DAL.Models;
-using RecruiterPortal.DAL.SqlModels;
 
 namespace RecruiterPortal.API.Controllers
 {

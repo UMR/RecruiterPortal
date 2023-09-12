@@ -49,7 +49,7 @@
 <p-dialog [(visible)]="jobDialog" [style]="{ width: '1000px' }" header="{{addEditTitle}} Job" [modal]="true" [draggable]="false" [resizable]="false">
     <form [formGroup]="jobFormGroup" novalidate>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-8">
                 <div class="form-group">
                     <label for="jobTitile" class="form-label">Title</label>
                     <input type="text" id="jobTitile" name="jobTitile" class="form-control" formControlName="jobTitile" required autofocus />
@@ -57,6 +57,19 @@
                 </div>
             </div>
             <div class="col-md-4">
+                <div class="form-group">
+                    <label for="status" class="form-label">Status</label>
+                    <select id="status" name="status" class="form-control" formControlName="status" placeholder="Status" tabindex="5" #applicantStatus>                        
+                        <option value="1" selected>Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <small class="p-error" *ngIf="submitted">Status is required.</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="postion" class="form-label">Postion</label>
                     <p-autoComplete formControlName="position" [suggestions]="positionResults" class="form-control"
@@ -71,7 +84,7 @@
                     <small class="p-error" *ngIf="submitted">Postion is required.</small>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="institution" class="form-label">Institution</label>
                     <p-autoComplete formControlName="institution" [suggestions]="institutionResults" class="form-control"
@@ -89,6 +102,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
+                <small class="p-error" *ngIf="submitted">Description is required.</small>
                 <p-editor [style]="{ height: '500px' }" formControlName="jobDescription"></p-editor>
             </div>
         </div>
@@ -102,7 +116,7 @@
                         <button type="button" class="btn btn-primary btn-portal-border">Clear</button>
                     </li>
                     <li class="list-inline-item">
-                        <button type="submit" class="btn btn-primary btn-portal" (click)="save()">Save</button>
+                        <button type="submit" class="btn btn-primary btn-portal" (click)="save()" [disabled]="!jobFormGroup.valid">Save</button>
                     </li>
                 </ul>
             </div>

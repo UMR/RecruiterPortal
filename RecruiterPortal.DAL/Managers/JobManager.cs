@@ -1,4 +1,5 @@
-﻿using RecruiterPortal.DAL.Models;
+﻿using Azure.Core;
+using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
 
@@ -6,20 +7,26 @@ namespace RecruiterPortal.DAL.Managers
 {
     public class JobManager
     {
+        private static Job MapJobRequest(JobRequestModel request, long agencyId, int recruiterId) 
+        {
+            Job job = new Job();
+            job.Status = request.Status;
+            job.JobTitle = request.JobTitle;
+            job.JobDescription = request.JobDescription;
+            job.PositionId = request.PositionId;
+            job.InstituteId = request.InstituteId;
+            job.AgencyId = agencyId;
+            job.CreatedBy = recruiterId;
+            job.CreatedDate = DateTime.Now;
+
+            return job;
+        }
+
         public static async Task<int> Insert(JobRequestModel request, long agencyId, int recruiterId)
         {
             try
             {
-                Job job = new Job();
-                job.Status = request.Status;
-                job.JobTitle = request.JobTitle;
-                job.JobDescription = request.JobDescription;
-                job.PositionId = request.PositionId;
-                job.InstituteId = request.InstituteId;  
-                job.AgencyId = agencyId;
-                job.CreatedBy = recruiterId;
-                job.CreatedDate = DateTime.Now;
-                
+                Job job = MapJobRequest(request, agencyId, recruiterId);
                 GenericRepository<Job> repository = new GenericRepository<Job>();
                 Job createdJob = await repository.SaveAsync(job);
                 return createdJob.JobId;

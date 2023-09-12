@@ -16,10 +16,10 @@ export class JobOrdersComponent implements OnInit {
     public positionResults: string[];
     public institutionResults: any[];
     public jobs: any[] = [];
-    public totalJobs: number;
+    public totalJobs: number = 0;
     public selectedJobId: number;
     public cols: any[];
-    public rows: number = 1;
+    public rows: number = 15;
     private take: number;
     private skip: number;
     private pageNumber: number;
@@ -47,6 +47,7 @@ export class JobOrdersComponent implements OnInit {
     createJobFormGroup() {
         this.jobFormGroup = this.fb.group({
             jobTitile: ['', Validators.compose([Validators.maxLength(500)])],
+            status: ['1', Validators.compose([Validators.required])],
             position: ['', Validators.compose([Validators.required])],
             positionId: [''],
             institution: ['', Validators.compose([Validators.required])],
@@ -94,8 +95,10 @@ export class JobOrdersComponent implements OnInit {
     }
 
     fillupJob(job: any) {
+        console.log(job);
         this.jobFormGroup.patchValue({
             jobTitile: job.JobTitle,
+            status: job.Status === true ? '1' : '0',
             position: job.Position,
             positionId: job.PositionId,
             institution: job.Institute,
@@ -137,6 +140,7 @@ export class JobOrdersComponent implements OnInit {
     }
 
     openNewJob() {
+        this.selectedJobId = 0;
         this.addEditTitle = "Add";
         this.submitted = false;
         this.jobDialog = true;
@@ -149,22 +153,19 @@ export class JobOrdersComponent implements OnInit {
     }
 
     save() {
-
         const jobModel = {
-            JobId: 0,
-            Status: true,
+            JobId: this.selectedJobId,
+            Status: this.jobFormGroup.controls.status.value == '1' ? true : false,
             JobTitle: this.jobFormGroup.controls.jobTitile.value,
             JobDescription: this.jobFormGroup.controls.jobDescription.value,
             PositionId: this.jobFormGroup.controls.positionId.value,
             InstituteId: this.jobFormGroup.controls.instituteId.value,
         }
-
-        console.log(jobModel);
-
-        if (!this.selectedJobId) {
+        if (this.selectedJobId == 0) {
             this.jobService.save(jobModel).subscribe(res => {
                 console.log(res);
                 this.getJobsByAgencyId(this.skip, this.take);
+                this.selectedJobId = null;
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Job Saved', life: 3000 });
             },
                 error => {

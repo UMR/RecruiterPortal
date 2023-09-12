@@ -161,13 +161,9 @@ namespace RecruiterPortal.DAL.Repository
             {
                 using (context)
                 {
-                    using (TransactionScope ts = new TransactionScope())
-                    {
-                        await context.AddAsync(entity);                        
-                        await context.SaveChangesAsync();
-                        ts.Complete();
-                        return entity;
-                    }
+                    await context.AddAsync(entity);
+                    await context.SaveChangesAsync();                    
+                    return entity;
                 }
             }
             catch (Exception ex)
@@ -222,7 +218,7 @@ namespace RecruiterPortal.DAL.Repository
             try
             {
                 using (context)
-                {                    
+                {
                     return await context.Set<T>().Where(predicate).ToListAsync();
                 }
             }
@@ -244,7 +240,7 @@ namespace RecruiterPortal.DAL.Repository
                              .Take(pageSize);
 
             return await query.ToListAsync();
-        }       
+        }
 
         public List<SqlParameter> NonQueryStoredProcedure(string storedProcedureName, SqlParameter[] parameters = null)
         {
