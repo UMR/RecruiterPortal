@@ -467,5 +467,6 @@
     <None Include="2023-09-11\01_AZ_01_sp_GetAllApplicantByFilter.sql" />
     <None Include="2023-09-11\02_SR_02_SP_Insert_Agency.sql" />
     <None Include="2023-09-11\03_SR_03_SP_UpdateAgency.sql" />
+    <None Include="2023-09-11\04_SR_04_Alter_UserTable.sql" />
   </ItemGroup>
 </Project>
