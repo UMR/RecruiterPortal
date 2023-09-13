@@ -131,6 +131,7 @@
     <Folder Include="2023-09-06" />
     <Folder Include="2023-09-07" />
     <Folder Include="2023-09-11" />
+    <Folder Include="2023-09-13" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="2019-11-04\01_TR_01_CREATE_DATABASE.sql" />
@@ -468,5 +469,6 @@
     <None Include="2023-09-11\02_SR_02_SP_Insert_Agency.sql" />
     <None Include="2023-09-11\03_SR_03_SP_UpdateAgency.sql" />
     <None Include="2023-09-11\04_SR_04_Alter_UserTable.sql" />
+    <None Include="2023-09-13\01_SR_01_SP_AddApplicant.sql" />
   </ItemGroup>
 </Project>

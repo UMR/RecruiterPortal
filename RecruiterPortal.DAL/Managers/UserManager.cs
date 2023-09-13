@@ -323,7 +323,39 @@ namespace RecruiterPortalDAL.Managers
                 throw new Exception(ex.Message);
             }
         }
+        public static int AddApplicant(User user)
+        {
+            string spName = "sp_AddApplicant";
 
+
+            try
+            {
+                user.Password = SHA256Hasher.GetSHA256Hash(AESEncryptor.EncryptStringToBytes_Aes(user.Password));
+                GenericRepository<User> userRepo = new GenericRepository<User>();
+                SqlParameter[] sqlParameters = userRepo.GetSqlParametersFromObject(user, spName, "@p_");
+
+                //string verificationCOde = CodeGenerator.AutoGenerate(5);
+                //foreach (SqlParameter sqlParameter in sqlParameters)
+                //{
+                //    if (sqlParameter.ParameterName == "@p_VerficationCode")
+                //    {
+                //        sqlParameter.Value = verificationCOde;
+                //    }
+                //}
+
+                List<SqlParameter> returnPrms = userRepo.Insert(spName, sqlParameters);
+                //string mailBody = "Use this code to verify your account for UMR Recruitment Service: " + verificationCOde;
+                //string mailSubject = "Verification code for UMR Recruitment Service";
+
+                //MailSender.SendEmail(user.Email, mailSubject, mailBody);
+
+                return 1;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public static bool SendMailToRecruiter(long userId)
         {
             string spName = "SP_GetMatchApplicantRecruiterMail";

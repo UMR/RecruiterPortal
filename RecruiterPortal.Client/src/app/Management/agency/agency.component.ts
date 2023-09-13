@@ -124,7 +124,6 @@ export class AgencyComponent implements OnInit {
 
         if (this.agencyId != 0) {
             this.agencyService.updateAgency(agencyModel).subscribe(res => {
-                console.log(res);
                 this.getAgencies();
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Agency Updated', life: 3000 });
             },

@@ -58,6 +58,38 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
         }
 
+        [Route("save")]
+        [HttpPost]
+        public IActionResult Registration(User user)
+        {
+            try
+            {
+                user.IsVerified = false;
+                int userId = UserManager.AddApplicant(user);
+
+                return Ok(userId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex);
+            }
+        }
+        [Route("{email}")]
+        [HttpGet]
+        public IActionResult GetUserByEmail(string email)
+        {
+            try
+            {
+                return Ok(UserManager.GetUserByEmail(email));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex);
+            }
+        }
+
         [Route("get-applicant-email")]
         [HttpGet]
         public IActionResult GetApplicantEmail(string email)

@@ -15,6 +15,7 @@ import { DialogModule } from 'primeng/dialog';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { AddApplicantService } from '../../add-applicant/add-applicant.service';
 
 
 @NgModule({
@@ -35,6 +36,6 @@ import { KeyFilterModule } from 'primeng/keyfilter';
         InputTextareaModule,
         KeyFilterModule
     ],
-    providers: [ConfirmationService, MessageService]
+    providers: [ConfirmationService, MessageService, AddApplicantService]
 })
 export class AgencyModule { }

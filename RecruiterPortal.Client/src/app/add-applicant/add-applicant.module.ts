@@ -18,8 +18,6 @@ import { ToastModule } from 'primeng/toast';
         ReactiveFormsModule,
         ToastModule
     ],
-    providers: [
-        MessageService, ConfirmationService
-    ]
+    providers: [MessageService, ConfirmationService]
 })
 export class AddApplicantModule { }
