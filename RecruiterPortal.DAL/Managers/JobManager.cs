@@ -7,10 +7,10 @@ namespace RecruiterPortal.DAL.Managers
 {
     public class JobManager
     {
-        private static Job MapJobRequest(JobRequestModel request, long agencyId, int recruiterId) 
+        private static Job MapJobRequest(JobRequestModel request, long agencyId, int recruiterId)
         {
             Job job = new Job();
-            job.JobId= request.JobId;
+            job.JobId = request.JobId;
             job.Status = request.Status;
             job.JobTitle = request.JobTitle;
             job.JobDescription = request.JobDescription;
@@ -25,7 +25,7 @@ namespace RecruiterPortal.DAL.Managers
         public static async Task<int> Insert(JobRequestModel request, long agencyId, int recruiterId)
         {
             try
-            {                
+            {
                 GenericRepository<Job> repository = new GenericRepository<Job>();
                 Job job = MapJobRequest(request, agencyId, recruiterId);
                 Job createdJob = await repository.SaveAsync(job);
@@ -49,12 +49,20 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
-        public static async Task<int> Delete(Job job)
+        public static async Task<int?> Delete(int id)
         {
             try
             {
+                int? result = null;
                 GenericRepository<Job> repository = new GenericRepository<Job>();
-                return await repository.DeleteAsync(job);
+                Job job = await repository.GetByIdAsync(j => j.JobId == id);
+                
+                if (job != null) 
+                {
+                   result =  await repository.DeleteAsync(job);
+                }
+
+                return result;
             }
             catch (Exception ex)
             {

@@ -76,9 +76,9 @@ export class JobOrdersComponent implements OnInit {
                 });
     }
 
-    getJobsById() {
+    getJobsById(selectedJobId) {
         this.isLoading = true;
-        this.jobService.getJobById(this.selectedJobId)
+        this.jobService.getJobById(selectedJobId)
             .subscribe(response => {
                 if (response.status === 200) {
                     this.selectedJob = response.body;
@@ -140,14 +140,15 @@ export class JobOrdersComponent implements OnInit {
 
     openNewJob() {
         this.selectedJobId = 0;
+        this.selectedJob = null;
         this.addEditTitle = "Add";
-        this.submitted = false;
         this.jobDialog = true;
+        this.setDefaultFields();
     }
 
     onEdit(job) {
         this.selectedJobId = job.JobId;
-        this.getJobsById();
+        this.getJobsById(this.selectedJobId);
         this.jobDialog = true;
     }
 
@@ -164,7 +165,9 @@ export class JobOrdersComponent implements OnInit {
             this.jobService.save(jobModel).subscribe(res => {
                 if (res.status === 200) {
                     this.getJobsByAgencyId(this.skip, this.take);
+                    this.setDefaultFields();
                     this.selectedJobId = null;
+                    this.jobDialog = false;
                     this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Job Saved', life: 3000 });
                 }
             },
@@ -174,16 +177,36 @@ export class JobOrdersComponent implements OnInit {
         }
     }
 
-    onDelete(job) {
-    }
-
-    clear() {
+    setDefaultFields() {
         this.jobFormGroup.reset();
         this.jobFormGroup.controls.status.setValue('1');
     }
 
+    onDelete(job) {
+        this.confirmationService.confirm({
+            message: `Are you sure you want to delete ${job.JobTitle} job?`,
+            header: 'Confirm',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+                this.jobService.delete(job.JobId).subscribe(res => {
+                    if (res.status === 200) {
+                        this.getJobsByAgencyId(this.skip, this.take);
+                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Job Deleted', life: 3000 });
+                    }
+                },
+                    err => {
+                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Job Delete Failed', life: 3000 });
+                    }
+                );
+            }
+        });
+    }
+
+    clear() {
+        this.setDefaultFields();
+    }
+
     hide() {
         this.jobDialog = false;
-        this.submitted = false;
     }
 }
