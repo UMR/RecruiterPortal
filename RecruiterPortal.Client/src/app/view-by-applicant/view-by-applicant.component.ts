@@ -198,6 +198,9 @@ export class ViewByApplicantComponent implements OnInit {
                 });
     }
 
+    onSendToClick(applicantId) {
+        console.log(applicantId)
+    }
     onClear() {
         this.viewByApplicantFormGroup.reset();
         this.viewByApplicantFormGroup.controls.applicantStatus.setValue(this.selectedApplicantStatus);
