@@ -42,7 +42,7 @@ export class AddApplicantComponent implements OnInit {
             console.log(res);
             if (res == 1) {
                 this.applicantForm.reset()
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Applicant Added Successfully', life: 3000 });
+                this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Applicant Added Successfully', detail: '' });
             }
         },
             err => {

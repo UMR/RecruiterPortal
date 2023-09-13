@@ -60,11 +60,12 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
         [Route("save")]
         [HttpPost]
-        public IActionResult Registration(User user)
+        public IActionResult AddApplicant(User user)
         {
             try
             {
                 user.IsVerified = false;
+                user.AgencyId = Convert.ToInt32(GetCurrentUser().AgencyId);
                 int userId = UserManager.AddApplicant(user);
 
                 return Ok(userId);
@@ -289,7 +290,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             try
             {
                 string filterText = string.Empty;
-                if (string.IsNullOrEmpty(text)) 
+                if (string.IsNullOrEmpty(text))
                 {
                     filterText = "AllIssueAuthority";
                 }
