@@ -26,7 +26,7 @@
                         <tr>
                             <th>Job Title</th>
                             <th>Position</th>
-                            <th>Institute</th>
+                            <th>Institution</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -46,17 +46,17 @@
     </section>
 </div>
 
-<p-dialog [(visible)]="jobDialog" [style]="{ width: '1000px' }" header="{{addEditTitle}} Job" [modal]="true" [draggable]="false" [resizable]="false">
+<p-dialog [(visible)]="jobDialog" [style]="{ width: '1200px' }" header="{{addEditTitle}} Job" [modal]="true" [draggable]="false" [resizable]="false">
     <form [formGroup]="jobFormGroup" novalidate>
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="jobTitile" class="form-label">Title</label>
                     <input type="text" id="jobTitile" name="jobTitile" class="form-control" formControlName="jobTitile" required autofocus />
                     <small class="p-error" *ngIf="submitted">Title is required.</small>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="status" class="form-label">Status</label>
                     <select id="status" name="status" class="form-control" formControlName="status" placeholder="Status" tabindex="5" #applicantStatus>                        
