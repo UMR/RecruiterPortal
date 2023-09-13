@@ -56,9 +56,30 @@ namespace RecruiterPortal.API.Controllers
                     {
                         return NotFound();
                     }
-                    return Ok(await JobManager.Update(request, AgencyId, RecruiterId));
+                    await JobManager.Update(request, AgencyId, RecruiterId);
                 }
-                return Ok(await JobManager.Insert(request, AgencyId, RecruiterId));
+                await JobManager.Insert(request, AgencyId, RecruiterId);
+                return StatusCode(200);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [Route("delete/{id}")]
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                int? result = await JobManager.Delete(id);
+                if (result == null)
+                {
+                    return NotFound();
+                }                
+                return Ok();
             }
             catch (Exception ex)
             {

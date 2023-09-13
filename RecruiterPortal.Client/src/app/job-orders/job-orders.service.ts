@@ -32,4 +32,8 @@ export class JobService {
                 .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
         });        
     }
+
+    delete(id: number): Observable<HttpResponse<any>> {
+        return this.client.delete(`${resourceServerUrl}/api/jobs/delete/${id}`, { observe: 'response' });
+    }
 }
