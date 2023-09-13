@@ -1,16 +1,10 @@
 <div id="page-content-wrapper">
-
-    <!-- Navbar Start -->
     <applicant-portal-header (onToggleButtonClicked)="(showHideMenu)()" isVisibleToggleButton=0></applicant-portal-header>
-    <!-- Navbar End -->
-    <!-- Main Content Start -->
     <section class="main-content">
         <div class="container-fluid">
             <div class="card portal-card">
                 <loading-image [is-loading]="isLoading"></loading-image>
                 <div class="card-body" style="height:auto;">
-
-                    <!--<a [routerLink]="['/personal-info']" class="text-right card-edit"><i class="fa fa-edit text-edit"></i></a>-->
                     <div class="row">
                         <div class="col-md-12">
                             <form (ngSubmit)="onSubmit()" [formGroup]="viewByApplicantFormGroup" novalidate>
@@ -93,8 +87,7 @@
                                                         {{col.header}}
                                                     </th>
                                                     <th *ngIf="selectedApplicantStatus==='1'" class="text-center">View/Edit</th>
-                                                    <th *ngIf="selectedApplicantStatus===1 && isSubmitted" class="text-center">Import</th>
-                                                    <th *ngIf="selectedApplicantStatus===2 && isSubmitted" class="text-center">Sync</th>
+                                                    <th class="text-center">Send To</th>
                                                 </tr>
                                             </ng-template>
                                             <ng-template pTemplate="body" let-applicant let-rowData let-columns="columns">
@@ -103,8 +96,7 @@
                                                         <span class="p-column-title" style="padding-bottom: 2px; font-weight: bold;">{{col.header}}:&nbsp;</span>{{rowData[col.field]}}
                                                     </td>
                                                     <td class="text-center" *ngIf="selectedApplicantStatus==='1'"><a (click)="onEdit(applicant.UserId)"><i class="pi pi-pencil"></i></a></td>
-                                                    <td class="text-center" *ngIf="selectedApplicantStatus===1 && isSubmitted"><button type="button" (click)="onImportSync(applicant.ApplicantPortalUserId)" class="btn btn-primary btn-import-sync">Import</button> </td>
-                                                    <td class="text-center" *ngIf="selectedApplicantStatus===2 && isSubmitted"><button [disabled]="selectedApplicantStatus===2 && !applicant.hasChanges" type="button" (click)="onImportSync(applicant.ApplicantPortalUserId)" class="btn btn-primary btn-import-sync">Sync</button> </td>
+                                                    <td class="text-center"><button type="button" (click)="onSendToClick(applicant.UserId)" class="btn btn-primary btn-import-sync">Send To</button> </td>
                                                 </tr>
                                             </ng-template>
                                         </p-table>
@@ -117,9 +109,25 @@
             </div>
         </div>
     </section>
-    <!-- Main Content End -->
-
 </div>
+
+<!--<p-dialog [(visible)]="agencyDialog" [style]="{ width: '450px' }" header="{{addEditTxt}} Agency" [modal]="true" [draggable]="false" [resizable]="false">
+    <form [formGroup]="agencyForm" (ngSubmit)="onAgencySubmit()">
+        <div class="field">
+            <label for="agencyName">Agency Name</label>
+            <input type="text" pInputText id="agencyName" class="input-text" formControlName="agencyName" required autofocus maxlength="100" />
+        </div>
+        <p-footer>
+            <div>
+                <button pButton label="Cancel" class="" (click)="hideDialog()"></button>
+                <div style="float:right">
+                    <button pButton label="Clear" class="btn-clear" (click)="onClickClear()" type="reset"></button>
+                    <button type="submit" pButton pRipple label="Save" class="btn-save" [disabled]="agencyForm.invalid"></button>
+                </div>
+            </div>
+        </p-footer>
+    </form>
+</p-dialog>-->
 <p-toast key="toastKey1"></p-toast>
 
 
