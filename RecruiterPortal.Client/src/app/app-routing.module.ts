@@ -51,8 +51,11 @@ const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
-        //resolve: { home: HomeResolver },
         path: 'add-applicant', loadChildren: './add-applicant/add-applicant.module#AddApplicantModule'
+    },
+    {
+        canActivate: [AuthGuard],
+        path: 'lead', loadChildren: () => import('./view-by-status/lead/lead.module').then(m => m.LeadModule)
     },
     {
         canActivate: [AuthGuard],
