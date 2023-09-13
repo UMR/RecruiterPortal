@@ -52,7 +52,10 @@ namespace RecruiterPortal.API.Controllers
                 if (request.JobId > 0)
                 {
                     var job = JobManager.GetJobById(request.JobId);
-                    if (job == null) return NotFound();
+                    if (job == null)
+                    {
+                        return NotFound();
+                    }
                     return Ok(await JobManager.Update(request, AgencyId, RecruiterId));
                 }
                 return Ok(await JobManager.Insert(request, AgencyId, RecruiterId));

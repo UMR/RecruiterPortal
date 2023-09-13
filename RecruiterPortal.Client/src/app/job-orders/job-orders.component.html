@@ -110,10 +110,10 @@
             <div class="com-md-12">
                 <ul class="list-inline mb-0 d-flex justify-content-between mt-2 ml-3">
                     <li class="list-inline-item">
-                        <button type="button" class="btn btn-primary btn-portal-border" (click)="hideDialog()">Close</button>
+                        <button type="button" class="btn btn-primary btn-portal-border" (click)="hide()">Close</button>
                     </li>
                     <li class="list-inline-item">
-                        <button type="button" class="btn btn-primary btn-portal-border">Clear</button>
+                        <button type="button" class="btn btn-primary btn-portal-border" (click)="clear()">Clear</button>
                     </li>
                     <li class="list-inline-item">
                         <button type="submit" class="btn btn-primary btn-portal" (click)="save()" [disabled]="!jobFormGroup.valid">Save</button>

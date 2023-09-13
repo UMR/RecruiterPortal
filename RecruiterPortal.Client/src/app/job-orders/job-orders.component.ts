@@ -177,7 +177,12 @@ export class JobOrdersComponent implements OnInit {
     onDelete(job) {
     }
 
-    hideDialog() {
+    clear() {
+        this.jobFormGroup.reset();
+        this.jobFormGroup.controls.status.setValue('1');
+    }
+
+    hide() {
         this.jobDialog = false;
         this.submitted = false;
     }
