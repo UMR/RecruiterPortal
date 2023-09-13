@@ -470,5 +470,6 @@
     <None Include="2023-09-11\03_SR_03_SP_UpdateAgency.sql" />
     <None Include="2023-09-11\04_SR_04_Alter_UserTable.sql" />
     <None Include="2023-09-13\01_SR_01_SP_AddApplicant.sql" />
+    <None Include="2023-09-13\02_AZ_01_CREATE_TABLE_ApplicantStatus.sql" />
   </ItemGroup>
 </Project>
