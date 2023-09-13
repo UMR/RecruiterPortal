@@ -305,7 +305,6 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
         }
 
-
         [HttpGet]
         [Route("file/{applicantId}")]
         public IActionResult GetFileForEmploynentApplication(int applicantId)
@@ -319,6 +318,30 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 {
                     FileDownloadName = fileName
                 };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [Route("position/{position}")]
+        [HttpGet]
+        public IActionResult GetPosition(string position)
+        {
+            try
+            {
+                IEnumerable<Position> positionList;
+                if (position == "all")
+                {
+                    positionList = PositionManager.GetPositions("");
+                }
+                else
+                {
+                    positionList = PositionManager.GetPositions(position);
+                }
+                return Ok(new ResponseModels<IEnumerable<Position>>(positionList));
             }
             catch (Exception ex)
             {
@@ -1234,32 +1257,6 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     pdfFormFields.SetField("MilDisType", disChargeType);
                 }
                 pdfFormFields.SetField("MilDisHonorEx", dt.Rows[0]["DisonourComment"].ToString().Trim());
-            }
-        }
-
-
-
-        [Route("position/{position}")]
-        [HttpGet]
-        public IActionResult GetPosition(string position)
-        {
-            try
-            {
-                IEnumerable<Position> positionList;
-                if (position == "all")
-                {
-                    positionList = PositionManager.GetPositions("");
-                }
-                else
-                {
-                    positionList = PositionManager.GetPositions(position);
-                }
-                return Ok(new ResponseModels<IEnumerable<Position>>(positionList));
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Something went wrong: {ex}");
-                return StatusCode(500, ex.Message);
             }
         }
     }
