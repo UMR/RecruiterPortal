@@ -110,6 +110,24 @@
         </div>
     </section>
 </div>
+
+<!--<p-dialog [(visible)]="agencyDialog" [style]="{ width: '450px' }" header="{{addEditTxt}} Agency" [modal]="true" [draggable]="false" [resizable]="false">
+    <form [formGroup]="agencyForm" (ngSubmit)="onAgencySubmit()">
+        <div class="field">
+            <label for="agencyName">Agency Name</label>
+            <input type="text" pInputText id="agencyName" class="input-text" formControlName="agencyName" required autofocus maxlength="100" />
+        </div>
+        <p-footer>
+            <div>
+                <button pButton label="Cancel" class="" (click)="hideDialog()"></button>
+                <div style="float:right">
+                    <button pButton label="Clear" class="btn-clear" (click)="onClickClear()" type="reset"></button>
+                    <button type="submit" pButton pRipple label="Save" class="btn-save" [disabled]="agencyForm.invalid"></button>
+                </div>
+            </div>
+        </p-footer>
+    </form>
+</p-dialog>-->
 <p-toast key="toastKey1"></p-toast>
 
 
