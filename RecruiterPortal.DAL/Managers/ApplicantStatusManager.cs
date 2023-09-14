@@ -22,10 +22,13 @@ namespace RecruiterPortal.DAL.Managers
             applicantStatus.CurrentSalary = request.CurrentSalary;
             applicantStatus.ExpectedSalary = request.ExpectedSalary;
             applicantStatus.ProfileStatus = request.ProfileStatus;
-            applicantStatus.Shift = request.Shift;            
-            applicantStatus.CreatedBy = recruiterId;
-            applicantStatus.CreatedDate = DateTime.Now;
+            applicantStatus.Shift = request.Shift;
             if (isInsert)
+            {
+                applicantStatus.CreatedBy = recruiterId;
+                applicantStatus.CreatedDate = DateTime.Now;
+            }
+            else
             {
                 applicantStatus.UpdatedBy = recruiterId;
                 applicantStatus.UpdatedDate = DateTime.Now;
@@ -37,7 +40,7 @@ namespace RecruiterPortal.DAL.Managers
             try
             {
                 GenericRepository<ApplicantStatus> repository = new GenericRepository<ApplicantStatus>();
-                ApplicantStatus applicantStatus = MapApplicantStatusRequest(request, agencyId, recruiterId);
+                ApplicantStatus applicantStatus = MapApplicantStatusRequest(true, request, agencyId, recruiterId);
                 ApplicantStatus createdApplicantStatus = await repository.SaveAsync(applicantStatus);
                 return createdApplicantStatus.Id;
             }
@@ -51,7 +54,7 @@ namespace RecruiterPortal.DAL.Managers
             try
             {
                 GenericRepository<ApplicantStatus> repository = new GenericRepository<ApplicantStatus>();
-                ApplicantStatus applicantStatus = MapApplicantStatusRequest(request, agencyId, recruiterId);
+                ApplicantStatus applicantStatus = MapApplicantStatusRequest(false, request, agencyId, recruiterId);
                 return await repository.UpdateAsync(applicantStatus);
             }
             catch (Exception ex)
@@ -66,7 +69,7 @@ namespace RecruiterPortal.DAL.Managers
                 int? result = null;
                 GenericRepository<ApplicantStatus> repository = new GenericRepository<ApplicantStatus>();
                 ApplicantStatus applicantStatus = await repository.GetByIdAsync(s => s.Id == id);
-                
+
                 if (applicantStatus != null)
                 {
                     result = await repository.DeleteAsync(applicantStatus);
@@ -79,7 +82,7 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
-        public static PagedResponse<JobResponseModel> GetJobByAgencyId(long agencyId, int skip, int take)
+        public static PagedResponse<JobResponseModel> GetApplicantStatusByAgencyId(long agencyId, int skip, int take)
         {
             try
             {
@@ -141,7 +144,7 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
-        public static JobResponseModel GetJobByIdWithRelated(int jobId)
+        public static JobResponseModel GetApplicantStatusRelated(int jobId)
         {
             JobResponseModel response = null;
             using (UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext())

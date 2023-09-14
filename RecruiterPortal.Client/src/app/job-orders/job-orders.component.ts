@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class JobOrdersComponent implements OnInit {
     @ViewChild('jobTable', { static: false }) applicantTable: Table;
-    public isLoading: boolean = false;
+    public isLoading: boolean = true;
     public positionResults: string[];
     public institutionResults: any[];
     public jobs: any[] = [];

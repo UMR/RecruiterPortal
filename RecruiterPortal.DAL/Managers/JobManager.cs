@@ -7,7 +7,7 @@ namespace RecruiterPortal.DAL.Managers
 {
     public class JobManager
     {
-        private static Job MapJobRequest(JobRequestModel request, long agencyId, int recruiterId)
+        private static Job MapJobRequest(bool isInsert, JobRequestModel request, long agencyId, int recruiterId)
         {
             Job job = new Job();
             job.JobId = request.JobId;
@@ -17,8 +17,16 @@ namespace RecruiterPortal.DAL.Managers
             job.PositionId = request.PositionId;
             job.InstituteId = request.InstituteId;
             job.AgencyId = agencyId;
-            job.CreatedBy = recruiterId;
-            job.CreatedDate = DateTime.Now;
+            if (isInsert)
+            {
+                job.CreatedBy = recruiterId;
+                job.CreatedDate = DateTime.Now;
+            }
+            else
+            {
+                job.UpdatedBy = recruiterId;
+                job.UpdatedDate = DateTime.Now;
+            }
             return job;
         }
         public static async Task<int> Insert(JobRequestModel request, long agencyId, int recruiterId)
@@ -26,7 +34,7 @@ namespace RecruiterPortal.DAL.Managers
             try
             {
                 GenericRepository<Job> repository = new GenericRepository<Job>();
-                Job job = MapJobRequest(request, agencyId, recruiterId);
+                Job job = MapJobRequest(true, request, agencyId, recruiterId);
                 Job createdJob = await repository.SaveAsync(job);
                 return createdJob.JobId;
             }
@@ -40,7 +48,7 @@ namespace RecruiterPortal.DAL.Managers
             try
             {
                 GenericRepository<Job> repository = new GenericRepository<Job>();
-                Job job = MapJobRequest(request, agencyId, recruiterId);
+                Job job = MapJobRequest(false, request, agencyId, recruiterId);
                 return await repository.UpdateAsync(job);
             }
             catch (Exception ex)
@@ -55,10 +63,10 @@ namespace RecruiterPortal.DAL.Managers
                 int? result = null;
                 GenericRepository<Job> repository = new GenericRepository<Job>();
                 Job job = await repository.GetByIdAsync(j => j.JobId == id);
-                
-                if (job != null) 
+
+                if (job != null)
                 {
-                   result =  await repository.DeleteAsync(job);
+                    result = await repository.DeleteAsync(job);
                 }
 
                 return result;

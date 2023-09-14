@@ -56,10 +56,9 @@ namespace RecruiterPortal.API.Controllers
                     {
                         return NotFound();
                     }
-                    await JobManager.Update(request, AgencyId, RecruiterId);
-                }
-                await JobManager.Insert(request, AgencyId, RecruiterId);
-                return StatusCode(200);
+                    return Ok( await JobManager.Update(request, AgencyId, RecruiterId));
+                }                
+                return StatusCode(200, await JobManager.Insert(request, AgencyId, RecruiterId));
             }
             catch (Exception ex)
             {
