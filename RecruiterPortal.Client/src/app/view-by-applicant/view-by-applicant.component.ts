@@ -31,6 +31,7 @@ export class ViewByApplicantComponent implements OnInit {
     private skipDefaultValue: number = 0;
     private pageNumber: number;
     public selectedApplicant: any;
+    public showDialog: boolean = false;
     @ViewChild('applicantTable', { static: false }) applicantTable: Table;
 
     constructor(private fb: FormBuilder,
@@ -199,6 +200,7 @@ export class ViewByApplicantComponent implements OnInit {
     }
 
     onSendToClick(applicantId) {
+        this.showDialog = true;
         console.log(applicantId)
     }
     onClear() {

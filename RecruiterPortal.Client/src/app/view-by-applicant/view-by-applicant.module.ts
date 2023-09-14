@@ -13,23 +13,27 @@ import { ViewByApplicantComponent } from './view-by-applicant.component';
 import { ViewByApplicantService } from './view-by-applicant.service';
 import { SharedModule } from '../common/shared.module';
 import { StorageService } from '../common/services/storage.service';
+import { DialogModule } from 'primeng/dialog';
+import { StatusModule } from '../applicant-status/status/status.module';
 
 
 @NgModule({
-  declarations: [
-    ViewByApplicantComponent
-  ],
-  imports: [
-    CommonModule,   
-    ReactiveFormsModule,    
-    LoadingImageModule,
-    ToastModule,
-    DropdownModule,
-    AutoCompleteModule,
-    TableModule,
-    ViewByApplicantRoutingModule,
-    SharedModule
-  ],
-  providers: [ViewByApplicantService, MessageService, StorageService]
+    declarations: [
+        ViewByApplicantComponent
+    ],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        LoadingImageModule,
+        ToastModule,
+        DropdownModule,
+        AutoCompleteModule,
+        TableModule,
+        ViewByApplicantRoutingModule,
+        SharedModule,
+        DialogModule,
+        StatusModule
+    ],
+    providers: [ViewByApplicantService, MessageService, StorageService]
 })
 export class ViewByApplicantModule { }
