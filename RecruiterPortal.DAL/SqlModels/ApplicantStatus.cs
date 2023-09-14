@@ -13,6 +13,8 @@ public partial class ApplicantStatus
 
     public int? InstitutionId { get; set; }
 
+    public long AgencyId { get; set; }
+
     public byte Status { get; set; }
 
     public DateTime? Date { get; set; }
@@ -38,6 +40,8 @@ public partial class ApplicantStatus
     public byte? ProfileStatus { get; set; }
 
     public string Shift { get; set; }
+
+    public virtual Agency Agency { get; set; }
 
     public virtual User Applicant { get; set; }
 

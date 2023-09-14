@@ -247,6 +247,11 @@ public partial class UmrrecruitmentApplicantContext : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
 
+            entity.HasOne(d => d.Agency).WithMany(p => p.ApplicantStatuses)
+                .HasForeignKey(d => d.AgencyId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ApplicantStatus_Agency");
+
             entity.HasOne(d => d.Applicant).WithMany(p => p.ApplicantStatuses)
                 .HasForeignKey(d => d.ApplicantId)
                 .OnDelete(DeleteBehavior.ClientSetNull)

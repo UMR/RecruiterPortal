@@ -1,7 +1,7 @@
 ﻿USE [UMRRecruitmentApplicant]
 GO
 
-/****** Object:  Table [dbo].[ApplicantStatus]    Script Date: 9/13/2023 8:56:43 PM ******/
+/****** Object:  Table [dbo].[ApplicantStatus]    Script Date: 9/14/2023 2:37:01 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -13,6 +13,7 @@ CREATE TABLE [dbo].[ApplicantStatus](
 	[ApplicantId] [bigint] NOT NULL,
 	[PositionId] [int] NULL,
 	[InstitutionId] [int] NULL,
+	[AgencyId] [bigint] NOT NULL,
 	[Status] [tinyint] NOT NULL,
 	[Date] [datetime] NULL,
 	[TotalFee] [float] NULL,
@@ -31,6 +32,13 @@ CREATE TABLE [dbo].[ApplicantStatus](
 	[ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[ApplicantStatus]  WITH CHECK ADD  CONSTRAINT [FK_ApplicantStatus_Agency] FOREIGN KEY([AgencyId])
+REFERENCES [dbo].[Agency] ([AgencyId])
+GO
+
+ALTER TABLE [dbo].[ApplicantStatus] CHECK CONSTRAINT [FK_ApplicantStatus_Agency]
 GO
 
 ALTER TABLE [dbo].[ApplicantStatus]  WITH CHECK ADD  CONSTRAINT [FK_ApplicantStatus_Institution] FOREIGN KEY([InstitutionId])

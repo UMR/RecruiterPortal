@@ -6,10 +6,11 @@ namespace RecruiterPortal.DAL.Managers
 {
     public class ApplicantStatusManager
     {
-        private static ApplicantStatus MapApplicantStatusRequest(ApplicantStatusRequestModel request, long agencyId, int recruiterId)
+        private static ApplicantStatus MapApplicantStatusRequest(bool isInsert, ApplicantStatusRequestModel request, long agencyId, int recruiterId)
         {
             ApplicantStatus applicantStatus = new ApplicantStatus();
             applicantStatus.Id = request.Id;
+            applicantStatus.AgencyId = agencyId;
             applicantStatus.ApplicantId = request.ApplicantId;
             applicantStatus.PositionId = request.PositionId;
             applicantStatus.InstitutionId = request.InstitutionId;
@@ -21,7 +22,14 @@ namespace RecruiterPortal.DAL.Managers
             applicantStatus.CurrentSalary = request.CurrentSalary;
             applicantStatus.ExpectedSalary = request.ExpectedSalary;
             applicantStatus.ProfileStatus = request.ProfileStatus;
-            applicantStatus.Shift = request.Shift;
+            applicantStatus.Shift = request.Shift;            
+            applicantStatus.CreatedBy = recruiterId;
+            applicantStatus.CreatedDate = DateTime.Now;
+            if (isInsert)
+            {
+                applicantStatus.UpdatedBy = recruiterId;
+                applicantStatus.UpdatedDate = DateTime.Now;
+            }
             return applicantStatus;
         }
         public static async Task<long> Insert(ApplicantStatusRequestModel request, long agencyId, int recruiterId)
@@ -75,7 +83,7 @@ namespace RecruiterPortal.DAL.Managers
         {
             try
             {
-                IEnumerable<JobResponseModel> jobs = null;
+                IEnumerable<JobResponseModel> jobs = Array.Empty<JobResponseModel>();
                 int jobsCount = 0;
 
                 using (UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext())
