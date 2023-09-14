@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using RecruiterPortal.DAL.Models;
+﻿using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
 
