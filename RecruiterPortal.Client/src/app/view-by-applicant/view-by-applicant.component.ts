@@ -32,7 +32,7 @@ export class ViewByApplicantComponent implements OnInit {
     private pageNumber: number;
     public selectedApplicant: any;
     public showDialog: boolean = false;
-    @ViewChild('applicantTable', { static: false }) applicantTable: Table;
+    @ViewChild('applicantTable', { static: false }) applicantTable: Table;    
 
     constructor(private fb: FormBuilder,
         private viewByApplicantService: ViewByApplicantService,
@@ -133,7 +133,6 @@ export class ViewByApplicantComponent implements OnInit {
         const applicantEmail = this.viewByApplicantFormGroup.controls.applicantEmail.value ? this.viewByApplicantFormGroup.controls.applicantEmail.value : '';
         //const applicantStatus = this.viewByApplicantFormGroup.controls.applicantStatus.value ? this.viewByApplicantFormGroup.controls.applicantStatus.value : '';
 
-
         const model = {
             firstName: applicantFirstName,
             lastName: applicantLastName,
@@ -143,7 +142,7 @@ export class ViewByApplicantComponent implements OnInit {
             take: this.take,
             skip: this.skip,
         }
-        console.log(model);
+        
         this.viewByApplicantService.getViewByApplicantSearch(model)
             .subscribe(response => {
                 if (response.status === 200) {
@@ -199,9 +198,9 @@ export class ViewByApplicantComponent implements OnInit {
                 });
     }
 
-    onSendToClick(applicantId) {
-        this.showDialog = true;
-        console.log(applicantId)
+    onSendToClick(applicant) {        
+        this.selectedApplicant = applicant;        
+        this.showDialog = true;        
     }
 
     handleHideEvent(show) {
