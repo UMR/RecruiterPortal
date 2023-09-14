@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { StatusService } from './status.service';
@@ -10,9 +10,11 @@ import { StatusService } from './status.service';
 })
 export class StatusComponent implements OnInit {
 
+    @Output() hideEvent = new EventEmitter<boolean>(); 
     public formGroup: FormGroup;
     public positionResults: string[];
     public institutionResults: any[];
+    
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private statusService: StatusService) { }
 
     ngOnInit() {
@@ -65,6 +67,6 @@ export class StatusComponent implements OnInit {
     }
 
     hide() {
-        
+        this.hideEvent.emit(false);
     }
 }

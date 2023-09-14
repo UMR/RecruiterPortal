@@ -203,6 +203,11 @@ export class ViewByApplicantComponent implements OnInit {
         this.showDialog = true;
         console.log(applicantId)
     }
+
+    handleHideEvent(show) {
+        this.showDialog = show;
+    }
+
     onClear() {
         this.viewByApplicantFormGroup.reset();
         this.viewByApplicantFormGroup.controls.applicantStatus.setValue(this.selectedApplicantStatus);

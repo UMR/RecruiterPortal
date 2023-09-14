@@ -112,7 +112,7 @@
 </div>
 
 <p-dialog [(visible)]="showDialog" [style]="{ width: '1200px' }" header="Send To" [modal]="true" [draggable]="false" [resizable]="false">
-    <app-status></app-status>
+    <app-status (hideEvent)="handleHideEvent($event)"></app-status>
 </p-dialog>
 <p-toast key="toastKey1"></p-toast>
 
