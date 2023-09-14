@@ -1,64 +1,67 @@
-﻿using Azure.Core;
-using RecruiterPortal.DAL.Models;
+﻿using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
 
 namespace RecruiterPortal.DAL.Managers
 {
-    public class JobManager
+    public class ApplicantStatusManager
     {
-        private static Job MapJobRequest(JobRequestModel request, long agencyId, int recruiterId)
+        private static ApplicantStatus MapApplicantStatusRequest(ApplicantStatusRequestModel request, long agencyId, int recruiterId)
         {
-            Job job = new Job();
-            job.JobId = request.JobId;
-            job.Status = request.Status;
-            job.JobTitle = request.JobTitle;
-            job.JobDescription = request.JobDescription;
-            job.PositionId = request.PositionId;
-            job.InstituteId = request.InstituteId;
-            job.AgencyId = agencyId;
-            job.CreatedBy = recruiterId;
-            job.CreatedDate = DateTime.Now;
-            return job;
+            ApplicantStatus applicantStatus = new ApplicantStatus();
+            applicantStatus.Id = request.Id;
+            applicantStatus.ApplicantId = request.ApplicantId;
+            applicantStatus.PositionId = request.PositionId;
+            applicantStatus.InstitutionId = request.InstitutionId;
+            applicantStatus.Status = request.Status;
+            applicantStatus.Date = request.Date;
+            applicantStatus.TotalFee = request.TotalFee;
+            applicantStatus.NetFee = request.NetFee;
+            applicantStatus.RefFee = request.RefFee;
+            applicantStatus.CurrentSalary = request.CurrentSalary;
+            applicantStatus.ExpectedSalary = request.ExpectedSalary;
+            applicantStatus.ProfileStatus = request.ProfileStatus;
+            applicantStatus.Shift = request.Shift;
+            return applicantStatus;
         }
-        public static async Task<int> Insert(JobRequestModel request, long agencyId, int recruiterId)
+        public static async Task<long> Insert(ApplicantStatusRequestModel request, long agencyId, int recruiterId)
         {
             try
             {
-                GenericRepository<Job> repository = new GenericRepository<Job>();
-                Job job = MapJobRequest(request, agencyId, recruiterId);
-                Job createdJob = await repository.SaveAsync(job);
-                return createdJob.JobId;
+                GenericRepository<ApplicantStatus> repository = new GenericRepository<ApplicantStatus>();
+                ApplicantStatus applicantStatus = MapApplicantStatusRequest(request, agencyId, recruiterId);
+                ApplicantStatus createdApplicantStatus = await repository.SaveAsync(applicantStatus);
+                return createdApplicantStatus.Id;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-        public static async Task<int> Update(JobRequestModel request, long agencyId, int recruiterId)
+        public static async Task<int> Update(ApplicantStatusRequestModel request, long agencyId, int recruiterId)
         {
             try
             {
-                GenericRepository<Job> repository = new GenericRepository<Job>();
-                Job job = MapJobRequest(request, agencyId, recruiterId);
-                return await repository.UpdateAsync(job);
+                GenericRepository<ApplicantStatus> repository = new GenericRepository<ApplicantStatus>();
+                ApplicantStatus applicantStatus = MapApplicantStatusRequest(request, agencyId, recruiterId);
+                return await repository.UpdateAsync(applicantStatus);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
-        public static async Task<int?> Delete(int id)
+        public static async Task<long?> Delete(long id)
         {
             try
             {
                 int? result = null;
-                GenericRepository<Job> repository = new GenericRepository<Job>();
-                Job job = await repository.GetByIdAsync(j => j.JobId == id);
+                GenericRepository<ApplicantStatus> repository = new GenericRepository<ApplicantStatus>();
+                ApplicantStatus applicantStatus = await repository.GetByIdAsync(s => s.Id == id);
                 
-                if (job != null) 
+                if (applicantStatus != null)
                 {
-                   result =  await repository.DeleteAsync(job);
+                    result = await repository.DeleteAsync(applicantStatus);
                 }
 
                 return result;
@@ -118,12 +121,12 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
-        public static async Task<Job> GetJobById(int jobId)
+        public static async Task<ApplicantStatus> GetApplicantStatusById(long id)
         {
             try
             {
-                GenericRepository<Job> repository = new GenericRepository<Job>();
-                return await repository.GetByIdAsync(p => p.JobId == jobId);
+                GenericRepository<ApplicantStatus> repository = new GenericRepository<ApplicantStatus>();
+                return await repository.GetByIdAsync(p => p.Id == id);
             }
             catch (Exception ex)
             {

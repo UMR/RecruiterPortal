@@ -39,6 +39,10 @@ public partial class Recruiter
 
     public virtual Agency Agency { get; set; }
 
+    public virtual ICollection<ApplicantStatus> ApplicantStatusCreatedByNavigations { get; set; } = new List<ApplicantStatus>();
+
+    public virtual ICollection<ApplicantStatus> ApplicantStatusUpdatedByNavigations { get; set; } = new List<ApplicantStatus>();
+
     public virtual ICollection<Job> JobCreatedByNavigations { get; set; } = new List<Job>();
 
     public virtual ICollection<Job> JobUpdatedByNavigations { get; set; } = new List<Job>();

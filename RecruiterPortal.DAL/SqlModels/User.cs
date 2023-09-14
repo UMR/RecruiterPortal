@@ -25,6 +25,8 @@ public partial class User
 
     public virtual ICollection<AgreementFrom> AgreementFroms { get; set; } = new List<AgreementFrom>();
 
+    public virtual ICollection<ApplicantStatus> ApplicantStatuses { get; set; } = new List<ApplicantStatus>();
+
     public virtual ICollection<Cbcform> Cbcforms { get; set; } = new List<Cbcform>();
 
     public virtual ICollection<ChangeTracker> ChangeTrackers { get; set; } = new List<ChangeTracker>();

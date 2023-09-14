@@ -23,6 +23,8 @@ public partial class UmrrecruitmentApplicantContext : DbContext
 
     public virtual DbSet<ApplicantInfoModel> ApplicantInfoModels { get; set; }
 
+    public virtual DbSet<ApplicantStatus> ApplicantStatuses { get; set; }
+
     public virtual DbSet<Cbcform> Cbcforms { get; set; }
 
     public virtual DbSet<ChangeTracker> ChangeTrackers { get; set; }
@@ -227,6 +229,44 @@ public partial class UmrrecruitmentApplicantContext : DbContext
             entity.Property(e => e.UserId).HasColumnName("UserID");
             entity.Property(e => e.Weight).HasMaxLength(10);
             entity.Property(e => e.ZipCode).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<ApplicantStatus>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK_ApplicantInstitutionStatus");
+
+            entity.ToTable("ApplicantStatus");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.CurrentSalary).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Date).HasColumnType("datetime");
+            entity.Property(e => e.ExpectedSalary).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Shift)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+
+            entity.HasOne(d => d.Applicant).WithMany(p => p.ApplicantStatuses)
+                .HasForeignKey(d => d.ApplicantId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ApplicantStatus_User");
+
+            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.ApplicantStatusCreatedByNavigations)
+                .HasForeignKey(d => d.CreatedBy)
+                .HasConstraintName("FK_ApplicantStatus_Recruiter");
+
+            entity.HasOne(d => d.Institution).WithMany(p => p.ApplicantStatuses)
+                .HasForeignKey(d => d.InstitutionId)
+                .HasConstraintName("FK_ApplicantStatus_Institution");
+
+            entity.HasOne(d => d.Position).WithMany(p => p.ApplicantStatuses)
+                .HasForeignKey(d => d.PositionId)
+                .HasConstraintName("FK_ApplicantStatus_Position");
+
+            entity.HasOne(d => d.UpdatedByNavigation).WithMany(p => p.ApplicantStatusUpdatedByNavigations)
+                .HasForeignKey(d => d.UpdatedBy)
+                .HasConstraintName("FK_ApplicantStatus_Recruiter1");
         });
 
         modelBuilder.Entity<Cbcform>(entity =>
