@@ -59,6 +59,10 @@ const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
+        path: 'paper-screened', loadChildren: () => import('./applicant-status/paper-screened/paper-screened.module').then(m => m.PaperScreenedModule)
+    },
+    {
+        canActivate: [AuthGuard],
         path: 'job-orders', loadChildren: './job-orders/job-orders.module#JobOrdersModule'
     },
     {
