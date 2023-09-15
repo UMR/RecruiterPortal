@@ -9,8 +9,8 @@
                         <img src="assets/img/logo.svg" width="30" height="30" alt="">
                     </div>
                     <!--<div class="col px-0 d-none d-md-block d-lg-block">
-                        <h6 style="padding-right: 0.5rem;">Recruiter Portal</h6>
-                    </div>-->
+                    <h6 style="padding-right: 0.5rem;">Recruiter Portal</h6>
+                </div>-->
                 </div>
             </a>
         </li>
@@ -23,6 +23,17 @@
                 </div>
             </a>
         </li>
+
+        <li class="list-inline-item">
+            <a class="navbar-brand" [routerLink]="['/job-orders']">
+                <div class="row">
+                    <div class="col pr-2">
+                        <h6>Job</h6>
+                    </div>
+                </div>
+            </a>
+        </li>
+
         <li class="list-inline-item dropdown">
             <a class="navbar-brand dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown">
                 <h6>Applicant <i class="fa fa-caret-down"></i> </h6>
@@ -36,10 +47,10 @@
                     </p>
                     <ul style="padding-left:8px">
                         <!--<li style="list-style:none">
-                            <a class="dropdown-item" [routerLink]="['/view-by-applicant']">Search</a>
-                        </li>-->
+                        <a class="dropdown-item" [routerLink]="['/view-by-applicant']">Search</a>
+                    </li>-->
                         <li style="list-style:none">
-                            <a class="dropdown-item" [routerLink]="['/view-by-applicant']">Imported Applicant  </a>
+                            <a class="dropdown-item" [routerLink]="['/view-by-applicant']">Search Applicant </a>
                         </li>
                         <li style="list-style:none">
                             <a class="dropdown-item" [routerLink]="['/add-applicant']">Add Applicant</a>
@@ -49,85 +60,94 @@
                 <li style="margin-left: 8px; margin-top: 24px;">
                     <p style="color:green"> View By Status</p>
                     <ul style="padding-left:8px">
-                        <li style="list-style:none"><a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/lead']"> Lead</a></li>
-                        <li style="list-style:none"><a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/paper-screened']"> Paper-screened </a></li>
-                        <li style="list-style:none"><a class="dropdown-item" href="#"> Dial  </a></li>
-                        <li style="list-style:none"><a class="dropdown-item" href="#"> Connect </a></li>
-                        <li style="list-style:none"><a class="dropdown-item" href="#"> Phone-screened </a></li>
-                        <li style="list-style:none"><a class="dropdown-item" href="#"> Send-out   </a></li>
-                        <li style="list-style:none"><a class="dropdown-item" href="#"> Pending   </a></li>
-                        <li style="list-style:none"><a class="dropdown-item" href="#"> Hired    </a></li>
-                        <li style="list-style:none"><a class="dropdown-item" href="#"> Do Not Contact   </a></li>
+                        <li style="list-style:none"><a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/lead']">New Lead</a></li>
+                        <li style="list-style:none"><a class="dropdown-item" href="javascript:void(0)" [routerLink]="['/paper-screened']"> Pre-screened </a></li>
+                        <li style="list-style:none"><a class="dropdown-item" href="#"> Phone Screened  </a></li>
+                        <li style="list-style:none"><a class="dropdown-item" href="#"> Final Interview </a></li>
+                        <li style="list-style:none"><a class="dropdown-item" href="#"> Offered </a></li>
+                        <li style="list-style:none"><a class="dropdown-item" href="#"> Accepted   </a></li>
+                        <li style="list-style:none"><a class="dropdown-item" href="#"> Refused   </a></li>
+                        <li style="list-style:none"><a class="dropdown-item" href="#"> Rejected    </a></li>
                     </ul>
                 </li>
             </ul>
             <!--<label>View By Status</label>-->
             <!--<ul class="dropdown-menu">
-                <li><a class="dropdown-item" [routerLink]="['/agency']"> Agencies</a></li>
-            </ul>-->
+            <li><a class="dropdown-item" [routerLink]="['/agency']"> Agencies</a></li>
+        </ul>-->
         </li>
-        <li class="list-inline-item">
-            <a class="navbar-brand" [routerLink]="['/job-orders']">
-                <div class="row">
-                    <div class="col pr-2">
-                        <h6>Job Orders</h6>
-                    </div>
-                </div>
+        <li class="list-inline-item dropdown">
+            <a class="navbar-brand dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown">
+                <h6>Touches <i class="fa fa-caret-down"></i> </h6>
             </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item">Phone</a></li>
+                <li><a class="dropdown-item">Email </a></li>
+                <li><a class="dropdown-item">SMS</a></li>
+            </ul>
         </li>
-        <li class="list-inline-item">
-            <a class="navbar-brand" [routerLink]="['/communication-center']">
-                <div class="row">
-                    <div class="col pr-2">
-                        <h6>Communication Center</h6>
-                    </div>
-                </div>
+
+        <li class="list-inline-item dropdown">
+            <a class="navbar-brand dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown">
+                <h6>Calendar <i class="fa fa-caret-down"></i> </h6>
             </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" [routerLink]="['/calendar']">Interviews</a></li>
+                <li><a class="dropdown-item" [routerLink]="['/calendar']">Follow-ups </a></li>
+            </ul>
         </li>
-        <li class="list-inline-item" *ngIf="isAdministrator || isSupervisor || isManager || isAdmin">
-            <a class="navbar-brand" [routerLink]="['/reports']">
-                <div class="row">
-                    <div class="col pr-2">
-                        <h6>Reports</h6>
-                    </div>
-                </div>
+
+        <li class="list-inline-item dropdown">
+            <a class="navbar-brand dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown">
+                <h6>Calendar <i class="fa fa-caret-down"></i> </h6>
             </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item">Institution List</a></li>
+                <li><a class="dropdown-item">Contract List </a></li>
+                <li><a class="dropdown-item">Forms </a></li>
+                <li><a class="dropdown-item">Expiry List </a></li>
+            </ul>
         </li>
-        <li class="list-inline-item">
-            <a class="navbar-brand" [routerLink]="['/calendar']">
-                <div class="row">
-                    <div class="col pr-2">
-                        <h6>Calendar</h6>
-                    </div>
-                </div>
+
+        <li class="list-inline-item dropdown">
+            <a class="navbar-brand dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown">
+                <h6>Timecards <i class="fa fa-caret-down"></i> </h6>
             </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item">Manage Profile</a></li>
+                <li><a class="dropdown-item">Recruiter History </a></li>
+                <li><a class="dropdown-item">User Settings </a></li>
+                <li><a class="dropdown-item">User Mail Settings</a></li>
+                <li><a class="dropdown-item">User Mail Configuration</a></li>
+            </ul>
         </li>
+
         <li class="list-inline-item dropdown">
             <a class="navbar-brand dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown">
                 <h6>Management <i class="fa fa-caret-down"></i> </h6>
             </a>
             <ul class="dropdown-menu">
-                <li *ngIf="isAdmin"><a class="dropdown-item" [routerLink]="['/agency']"> Agencies</a></li>
+                <li><a class="dropdown-item" [routerLink]="['/agency']"> Agencies</a></li>
                 <li><a class="dropdown-item" [routerLink]="['/role']"> Roles  </a></li>
-                <li *ngIf="isAdministrator || isAdmin"><a class="dropdown-item" [routerLink]="['/recruiter']"> Recruiters   </a></li>
+                <li><a class="dropdown-item" [routerLink]="['/recruiter']"> Recruiters   </a></li>
             </ul>
         </li>
         <!--<li class="list-inline-item dropdown">
-            <a class="navbar-brand dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown">
-                <h6>Status <i class="fa fa-caret-down"></i> </h6>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#"> Lead</a></li>
-                <li><a class="dropdown-item" href="#"> Paper-screened </a></li>
-                <li><a class="dropdown-item" href="#"> Dial  </a></li>
-                <li><a class="dropdown-item" href="#"> Connect </a></li>
-                <li><a class="dropdown-item" href="#"> Phone-screened </a></li>
-                <li><a class="dropdown-item" href="#"> Send-out   </a></li>
-                <li><a class="dropdown-item" href="#"> Pending   </a></li>
-                <li><a class="dropdown-item" href="#"> Hired    </a></li>
-                <li><a class="dropdown-item" href="#"> Do Not Contact   </a></li>
-            </ul>
-        </li>-->
+        <a class="navbar-brand dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown">
+            <h6>Status <i class="fa fa-caret-down"></i> </h6>
+        </a>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#"> Lead</a></li>
+            <li><a class="dropdown-item" href="#"> Paper-screened </a></li>
+            <li><a class="dropdown-item" href="#"> Dial  </a></li>
+            <li><a class="dropdown-item" href="#"> Connect </a></li>
+            <li><a class="dropdown-item" href="#"> Phone-screened </a></li>
+            <li><a class="dropdown-item" href="#"> Send-out   </a></li>
+            <li><a class="dropdown-item" href="#"> Pending   </a></li>
+            <li><a class="dropdown-item" href="#"> Hired    </a></li>
+            <li><a class="dropdown-item" href="#"> Do Not Contact   </a></li>
+        </ul>
+    </li>-->
         <li class="list-inline-item d-md-none d-lg-none" *ngIf="isVisibleToggleButton == 1">
             <a href="" (click)="menuToggle($event)"><span id="menu-toggle" class="navbar-toggler-icon"></span></a>
         </li>
