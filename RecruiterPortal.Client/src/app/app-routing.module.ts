@@ -55,7 +55,7 @@ const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
-        path: 'lead', loadChildren: () => import('./view-by-status/lead/lead.module').then(m => m.LeadModule)
+        path: 'lead', loadChildren: () => import('./applicant-status/lead/lead.module').then(m => m.LeadModule)
     },
     {
         canActivate: [AuthGuard],
