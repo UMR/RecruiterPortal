@@ -17,7 +17,7 @@
                  [columns]="cols"
                  [totalRecords]="totalRecords"
                  [lazy]="true"
-                 (onLazyLoad)="onLazyLoad($event)"
+                 (onLazyLoad)="loadApplicantLazy($event)"
                  [rowsPerPageOptions]="[10,15,20]"
                  [showCurrentPageReport]="true"
                  currentPageReportTemplate="Total Records {{totalRecords}}">
@@ -31,13 +31,13 @@
                     <th>Send To</th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-agency let-rowData let-columns="columns">
+            <ng-template pTemplate="body" let-applicant let-rowData let-columns="columns">
                 <tr [pSelectableRow]="agency">
-                    <td>{{agency.AgencyName}}</td>
-                    <td>{{agency.Urlprefix}}</td>
-                    <td>{{agency.AgencyEmail}}</td>
-                    <td>{{agency.AgencyPhone}}</td>
-                    <td>{{agency.AgencyContactPerson}}</td>
+                    <td>{{applicant.AgencyName}}</td>
+                    <td>{{applicant.Urlprefix}}</td>
+                    <td>{{applicant.AgencyEmail}}</td>
+                    <td>{{applicant.AgencyPhone}}</td>
+                    <td>{{applicant.AgencyContactPerson}}</td>
                     <td class="text-center"><button type="button" (click)="onSendToClick(applicant)" class="btn btn-primary btn-import-sync">Send To</button> </td>
                 </tr>
             </ng-template>

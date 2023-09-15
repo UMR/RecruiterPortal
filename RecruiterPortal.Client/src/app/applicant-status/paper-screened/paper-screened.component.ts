@@ -28,7 +28,7 @@ export class PaperScreenedComponent implements OnInit {
     ngOnInit() {
     }
 
-    loadJobLazy(event: LazyLoadEvent) {
+    loadApplicantLazy(event: LazyLoadEvent) {
         this.pageNumber = Math.ceil((event.first + 1) / event.rows);
         this.take = event.rows;
         this.skip = event.rows * (this.pageNumber - 1);
