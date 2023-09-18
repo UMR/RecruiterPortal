@@ -132,6 +132,7 @@
     <Folder Include="2023-09-07" />
     <Folder Include="2023-09-11" />
     <Folder Include="2023-09-13" />
+    <Folder Include="2023-09-18" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="2019-11-04\01_TR_01_CREATE_DATABASE.sql" />
@@ -472,5 +473,6 @@
     <None Include="2023-09-13\01_SR_01_SP_AddApplicant.sql" />
     <None Include="2023-09-13\02_AZ_01_CREATE_TABLE_ApplicantStatus.sql" />
     <None Include="Special\09_SR_01_INSERT_File_Data.sql" />
+    <None Include="2023-09-18\01_SR_01_ALTER_sp_GetPDFFileTemplateFileType.sql" />
   </ItemGroup>
 </Project>
