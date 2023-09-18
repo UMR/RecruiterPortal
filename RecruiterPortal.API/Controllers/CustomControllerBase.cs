@@ -290,20 +290,20 @@ namespace RecruiterPortal.API.Controllers
             return success;
         }
 
-        //[NonAction]
-        //protected string GetApplicantName()
-        //{
-        //    string applicantName = string.Empty;
-        //    //if (!string.IsNullOrEmpty(GetCurrentUser().MiddleName))
-        //    //{
-        //    //    applicantName = GetCurrentUser().FirstName + " " + GetCurrentUser().MiddleName + " " + GetCurrentUser().LastName;
-        //    //}
-        //    //else
-        //    //{
-        //    //    applicantName = GetCurrentUser().FirstName + " " + GetCurrentUser().LastName;
-        //    //}
-        //    return applicantName;
-        //}
+        [NonAction]
+        protected string GetApplicantName()
+        {
+            string applicantName = string.Empty;
+            //if (!string.IsNullOrEmpty(GetCurrentUser().MiddleName))
+            //{
+            //    applicantName = GetCurrentUser().FirstName + " " + GetCurrentUser().MiddleName + " " + GetCurrentUser().LastName;
+            //}
+            //else
+            //{
+            //    applicantName = GetCurrentUser().FirstName + " " + GetCurrentUser().LastName;
+            //}
+            return applicantName;
+        }
         [NonAction]
         protected string GetApplicantName(DataTable userDt)
         {
