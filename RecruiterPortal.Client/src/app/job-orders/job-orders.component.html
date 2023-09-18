@@ -5,10 +5,21 @@
         <div class="container-fluid">
             <div class="grid">
                 <div class="col-12">
-                    <button pButton pRipple label="Add New" class="p-button-success" (click)="openNewJob()"></button>
+                    <button pButton pRipple label="Add New" class="p-button-success" (click)="openNewJob()" tabindex="0"></button>
                 </div>
             </div>
             <div class="container-fluid mt-2">
+                <div class="row">                    
+                    <div class="col-3">
+                        <div class="form-group">
+                            <select id="status" name="status" class="form-control" placeholder="Status" tabindex="1" (change)="onStatusChange($event.target.value)">
+                                <option value="" selected>All</option>
+                                <option value="1">Open</option>
+                                <option value="0">Closed</option>                                
+                            </select>
+                        </div>
+                    </div>
+                </div>
                 <p-table #jobTable [responsive]="true"
                          [value]="jobs"
                          selectionMode="single"
@@ -37,7 +48,7 @@
                             <td>{{job.JobTitle}}</td>
                             <td>{{job.Position}}</td>
                             <td>{{job.Institute}}</td>
-                            <td>{{job.Status == 1 ? 'Active' : 'Inactive'}}</td>
+                            <td>{{job.Status == 1 ? 'Open' : 'Closed'}}</td>
                             <td><a (click)="onEdit(job)"><i class="pi pi-pencil"></i></a><a style="color:red" (click)="onDelete(job)"><i class="pi pi-trash"></i></a></td>
                         </tr>
                     </ng-template>
@@ -60,7 +71,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="status" class="form-label">Status</label>
-                    <select id="status" name="status" class="form-control" formControlName="status" placeholder="Status" tabindex="5" #applicantStatus>                        
+                    <select id="status" name="status" class="form-control" formControlName="status" placeholder="Status" tabindex="5" #applicantStatus>
                         <option value="1" selected>Active</option>
                         <option value="0">Inactive</option>
                     </select>

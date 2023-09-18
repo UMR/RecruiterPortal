@@ -12,13 +12,13 @@ namespace RecruiterPortal.API.Controllers
         {
         }
 
-        [Route("get-by-agency-id/{skip}/{take}")]
+        [Route("get-by-agency-id")]
         [HttpGet]
-        public IActionResult GetJobs(int skip, int take)
+        public IActionResult GetJobs(int skip, int take, bool? status = null)
         {
             try
             {
-                return Ok(JobManager.GetJobByAgencyId(AgencyId, skip, take));
+                return Ok(JobManager.GetJobByAgencyId(AgencyId, skip, take, status));
             }
             catch (Exception ex)
             {
@@ -56,8 +56,8 @@ namespace RecruiterPortal.API.Controllers
                     {
                         return NotFound();
                     }
-                    return Ok( await JobManager.Update(request, AgencyId, RecruiterId));
-                }                
+                    return Ok(await JobManager.Update(request, AgencyId, RecruiterId));
+                }
                 return StatusCode(200, await JobManager.Insert(request, AgencyId, RecruiterId));
             }
             catch (Exception ex)
@@ -77,7 +77,7 @@ namespace RecruiterPortal.API.Controllers
                 if (result == null)
                 {
                     return NotFound();
-                }                
+                }
                 return Ok();
             }
             catch (Exception ex)

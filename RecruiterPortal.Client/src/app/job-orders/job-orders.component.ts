@@ -28,6 +28,7 @@ export class JobOrdersComponent implements OnInit {
     public jobDialog: boolean = false;
     public addEditTitle: string;
     public jobFormGroup: FormGroup;
+    public status: string = "";
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private jobService: JobService) {
         this.addEditTitle = "Add";
@@ -41,7 +42,7 @@ export class JobOrdersComponent implements OnInit {
         this.pageNumber = Math.ceil((event.first + 1) / event.rows);
         this.take = event.rows;
         this.skip = event.rows * (this.pageNumber - 1);
-        this.getJobsByAgencyId(this.skip, this.take);
+        this.getJobsByAgencyId();
     }
 
     createJobFormGroup() {
@@ -57,9 +58,9 @@ export class JobOrdersComponent implements OnInit {
     }
     get f() { return this.jobFormGroup.controls; }
 
-    getJobsByAgencyId(skip: number, take: number) {
+    getJobsByAgencyId() {
         this.isLoading = true;
-        this.jobService.getJobsByAgencyId(skip, take)
+        this.jobService.getJobsByAgencyId(this.skip, this.take, this.status)
             .subscribe(response => {
                 console.log(response);
                 if (response.status === 200) {
@@ -74,6 +75,11 @@ export class JobOrdersComponent implements OnInit {
                 () => {
                     this.isLoading = false;
                 });
+    }
+
+    onStatusChange(status) {
+        this.status = status == 1 ? true : false;
+        this.getJobsByAgencyId();
     }
 
     getJobsById(selectedJobId) {
@@ -164,7 +170,7 @@ export class JobOrdersComponent implements OnInit {
         if (this.jobFormGroup.valid) {
             this.jobService.save(jobModel).subscribe(res => {
                 if (res.status === 200) {
-                    this.getJobsByAgencyId(this.skip, this.take);
+                    this.getJobsByAgencyId();
                     this.setDefaultFields();
                     this.selectedJobId = null;
                     this.jobDialog = false;
@@ -190,7 +196,7 @@ export class JobOrdersComponent implements OnInit {
             accept: () => {
                 this.jobService.delete(job.JobId).subscribe(res => {
                     if (res.status === 200) {
-                        this.getJobsByAgencyId(this.skip, this.take);
+                        this.getJobsByAgencyId();
                         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Job Deleted', life: 3000 });
                     }
                 },
