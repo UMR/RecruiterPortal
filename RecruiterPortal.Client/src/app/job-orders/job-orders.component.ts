@@ -173,8 +173,8 @@ export class JobOrdersComponent implements OnInit {
         if (this.jobFormGroup.valid) {
             this.jobService.save(jobModel).subscribe(res => {
                 if (res.status === 200) {
-                    this.getJobsByAgencyId();
-                    this.setDefaultFields();
+                    this.setDefaultFields();                    
+                    this.getJobsByAgencyId();                    
                     this.selectedJobId = null;
                     this.jobDialog = false;
                     this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Job Saved', life: 3000 });
@@ -188,7 +188,7 @@ export class JobOrdersComponent implements OnInit {
 
     setDefaultFields() {
         this.jobFormGroup.reset();
-        this.jobFormGroup.controls.status.setValue('1');
+        this.jobFormGroup.controls.status.setValue('');
     }
 
     onDelete(job) {
