@@ -257,7 +257,7 @@ namespace RecruiterPortal.API.Controllers
             return locationPhone;
         }
         [NonAction]
-        public bool AddGeneratedFile(long termplateId, byte[] fileData, string templateFIleName, long userid, int fileType)
+        public bool AddGeneratedFile(long termplateId, byte[] fileData, string templateFIleName, long userid, int fileType, string firstName)
         {
             string msg = string.Empty;
             bool success = false;
@@ -265,7 +265,7 @@ namespace RecruiterPortal.API.Controllers
             GeneratedFile generatedFile = new GeneratedFile();
             generatedFile.UserId = userid;
             generatedFile.FileData = fileData;
-            generatedFile.FileName = $"{templateFIleName}_{GetCurrentUser().FirstName}_{DateTime.Now.ToString("MMddyyyyHHmmss")}.pdf";
+            generatedFile.FileName = $"{templateFIleName}_{firstName}_{DateTime.Now.ToString("MMddyyyyHHmmss")}.pdf";
             generatedFile.TermplateId = termplateId;
             generatedFile.FileTypeCode = fileType.ToString();
             generatedFile.CreatedDate = DateTime.Now;
@@ -274,7 +274,7 @@ namespace RecruiterPortal.API.Controllers
             //return success;
         }
         [NonAction]
-        public bool UpdateGeneratedFile(long termplateId, byte[] fileData, string templateFIleName, long generatedFileId, long userId, int fileType)
+        public bool UpdateGeneratedFile(long termplateId, byte[] fileData, string templateFIleName, long generatedFileId, long userId, int fileType, string firstName)
         {
             string msg = string.Empty;
             bool success = false;
@@ -282,7 +282,7 @@ namespace RecruiterPortal.API.Controllers
             generatedFile.GeneratedFileId = generatedFileId;
             generatedFile.UserId = userId;
             generatedFile.FileData = fileData;
-            generatedFile.FileName = $"{templateFIleName}_{GetCurrentUser().FirstName}_{DateTime.Now.ToString("MMddyyyyHHmmss")}.pdf";
+            generatedFile.FileName = $"{templateFIleName}_{firstName}_{DateTime.Now.ToString("MMddyyyyHHmmss")}.pdf";
             generatedFile.TermplateId = termplateId;
             generatedFile.FileTypeCode = fileType.ToString();
             generatedFile.UpdatedDate = DateTime.Now;

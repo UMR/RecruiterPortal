@@ -151,12 +151,12 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     {
 
                         long generatedFileId = Convert.ToInt64(dtGeneratedFile.Rows[0]["GeneratedFileID"].ToString());
-                        result = UpdateGeneratedFile(pdfTermplateId, data, templateFIleName, generatedFileId, applicantId, fileTypeCode);
+                        result = UpdateGeneratedFile(pdfTermplateId, data, templateFIleName, generatedFileId, applicantId, fileTypeCode, GetApplicantFirstName(UserManager.GetUserDetailsByID(applicantId)));
                     }
                     else
                     {
                         //int generatedFileId;
-                        result = AddGeneratedFile(pdfTermplateId, data, templateFIleName, applicantId, fileTypeCode);
+                        result = AddGeneratedFile(pdfTermplateId, data, templateFIleName, applicantId, fileTypeCode, GetApplicantFirstName(UserManager.GetUserDetailsByID(applicantId)));
                     }
                     return data;
                 }

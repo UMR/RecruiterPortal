@@ -225,11 +225,11 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     if (dtGeneratedFile != null && dtGeneratedFile.Rows.Count > 0)
                     {
                         long generatedFileId = Convert.ToInt64(dtGeneratedFile.Rows[0]["GeneratedFileID"].ToString());
-                        result = UpdateGeneratedFile(pdfTermplateId, data, templateFIleName, generatedFileId, applicantId, fileTypeCode);
+                        result = UpdateGeneratedFile(pdfTermplateId, data, templateFIleName, generatedFileId, applicantId, fileTypeCode, GetApplicantFirstName(UserManager.GetUserDetailsByID(applicantId)));
                     }
                     else
                     {
-                        result = AddGeneratedFile(pdfTermplateId, data, templateFIleName, applicantId, fileTypeCode);
+                        result = AddGeneratedFile(pdfTermplateId, data, templateFIleName, applicantId, fileTypeCode, GetApplicantFirstName(UserManager.GetUserDetailsByID(applicantId)));
                     }
                     return data;
                 }
@@ -288,11 +288,11 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     if (dtGeneratedFile != null && dtGeneratedFile.Rows.Count > 0)
                     {
                         long generatedFileId = Convert.ToInt64(dtGeneratedFile.Rows[0]["GeneratedFileID"].ToString());
-                        result = UpdateGeneratedFile(pdfTermplateId, data, templateFIleName, generatedFileId, applicantId, fileTypeCode);
+                        result = UpdateGeneratedFile(pdfTermplateId, data, templateFIleName, generatedFileId, applicantId, fileTypeCode, GetApplicantFirstName(UserManager.GetUserDetailsByID(applicantId)));
                     }
                     else
                     {
-                        result = AddGeneratedFile(pdfTermplateId, data, templateFIleName, applicantId, fileTypeCode);
+                        result = AddGeneratedFile(pdfTermplateId, data, templateFIleName, applicantId, fileTypeCode, GetApplicantFirstName(UserManager.GetUserDetailsByID(applicantId)));
                     }
                     return data;
                 }
