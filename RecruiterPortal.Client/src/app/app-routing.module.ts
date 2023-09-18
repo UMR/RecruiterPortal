@@ -71,7 +71,7 @@ const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
-        path: 'reports', loadChildren: './reports/reports.module#ReportsModule'
+        path: 'institution-list', loadChildren: () => import('./reports-list/institution-list/institution-list.module').then(m => m.InstitutionListModule)
     },
     {
         canActivate: [AuthGuard],
