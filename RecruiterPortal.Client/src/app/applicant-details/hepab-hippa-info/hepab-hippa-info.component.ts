@@ -61,7 +61,7 @@ export class HepabHippaInfoComponent implements OnInit {
         this.hepabHippaInfoService.getHepaBHIPPAFile(this.storageService.getApplicantId)
             .subscribe((response: HttpResponse<Blob>) => {                
                 if (response.status === 200) {
-                    let filename: string = this.getFileName(response)                    
+                    const filename = "HepaB and Hippa.pdf";
                     let binaryData = [];
                     binaryData.push(response.body);
                     let downloadLink = document.createElement('a');

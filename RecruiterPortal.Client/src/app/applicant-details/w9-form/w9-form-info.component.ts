@@ -76,7 +76,7 @@ export class W9FormInfoComponent implements OnInit {
         this.w9Service.getW9FileByApplicantId(this.service.getApplicantId)
             .subscribe((response: HttpResponse<Blob>) => {                
                 if (response.status === 200) {
-                    let filename: string = this.getFileName(response)                    
+                    const filename = "W9-Form W-9 (Rev. October 2018).pdf";
                     let binaryData = [];
                     binaryData.push(response.body);
                     let downloadLink = document.createElement('a');

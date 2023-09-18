@@ -42,7 +42,7 @@ export class InfluenzaVaccinationComponent implements OnInit {
         this.influenzaVaccinationService.getInfluenzaVaccinationFileByApplicantId(this.storageService.getApplicantId)
             .subscribe(response => {
                 if (response.status === 200) {
-                    const filename = this.getFileName(response)
+                  const filename = "Influenza Vaccination.pdf";
                     const downloadLink = document.createElement('a');
                     downloadLink.href = window.URL.createObjectURL(response.body);
                     downloadLink.setAttribute('download', filename.trim().replace('"', '').replace('"', ''));

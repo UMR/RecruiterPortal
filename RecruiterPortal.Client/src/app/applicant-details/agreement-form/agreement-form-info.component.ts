@@ -49,7 +49,7 @@ export class AgreementFormInfoComponent implements OnInit {
       .subscribe((response: HttpResponse<Blob>) => {
         //console.log(response);
         if (response.status === 200) {
-          let filename: string = this.getFileName(response)
+            const filename = "Agreement Info.pdf";
           //console.log(filename);
           let binaryData = [];
           binaryData.push(response.body);

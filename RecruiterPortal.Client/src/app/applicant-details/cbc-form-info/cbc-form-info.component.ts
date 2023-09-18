@@ -106,7 +106,7 @@ export class CBCFormInfoComponent implements OnInit {
       .subscribe((response: HttpResponse<Blob>) => {
         //console.log(response);
         if (response.status === 200) {
-          let filename: string = this.getFileName(response)
+            let filename: string = "CBC Form.pdf";
           //console.log(filename);
           let binaryData = [];
           binaryData.push(response.body);
