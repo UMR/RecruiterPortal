@@ -421,9 +421,9 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             // DataTable dt = ApplicantManager.GetSingleApplicant(applicantID);
             DataTable dt = UserManager.GetUserDetailsByID(applicantId);
-            pdfFormFields.SetField("Full Name", GetApplicantName());
+            pdfFormFields.SetField("Full Name", GetApplicantName(UserManager.GetUserDetailsByID(applicantId)));
             pdfFormFields.SetField("Date", DateTime.Today.ToString("MM/dd/yyyy"));
-            pdfFormFields.SetField("Signature", GetApplicantName());
+            pdfFormFields.SetField("Signature", GetApplicantName(UserManager.GetUserDetailsByID(applicantId)));
             pdfFormFields.SetField("Date_2", DateTime.Today.ToString("MM/dd/yyyy"));
             string apartment = string.Empty;
             if (!string.IsNullOrEmpty(dt.Rows[0]["Apartment"].ToString()))

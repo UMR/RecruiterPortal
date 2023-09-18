@@ -40,7 +40,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             {
                 _logger.LogError("");
                 return StatusCode(500, ex.Message);
-            }            
+            }
         }
 
         [Route("save")]
@@ -51,7 +51,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return BadRequest();                    
+                    return BadRequest();
                 }
 
                 W9from w9From = new W9from();
@@ -77,7 +77,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, ex.Message);
-            }            
+            }
         }
 
         [HttpGet]
@@ -135,7 +135,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 {
                     try
                     {
-                        W9FillPdfFormFields(pdfFormFields, dtW9.Rows[0]);
+                        W9FillPdfFormFields(applicantId, pdfFormFields, dtW9.Rows[0]);
                     }
                     catch (Exception ex)
                     {
@@ -174,7 +174,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
 
         [NonAction]
-        public void W9FillPdfFormFields(AcroFields pdfFormFields, DataRow dataRow)
+        public void W9FillPdfFormFields(int applicantId, AcroFields pdfFormFields, DataRow dataRow)
         {
             pdfFormFields.SetField("Name", dataRow["Name"].ToString().Trim());
             pdfFormFields.SetField("BusinessName", dataRow["BusinessName"].ToString().Trim());
@@ -237,7 +237,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 pdfFormFields.SetField("EmployerIdNo2", dataRow["EmployerIdNo"].ToString().Substring(2));
             }
 
-            pdfFormFields.SetField("SIgnature", GetApplicantName());
+            pdfFormFields.SetField("SIgnature", GetApplicantName(UserManager.GetUserDetailsByID(applicantId)));
             string date = string.Empty;
             if (dataRow["Date"].ToString() != "")
             {

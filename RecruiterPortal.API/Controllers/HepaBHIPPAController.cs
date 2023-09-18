@@ -34,7 +34,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     userHepaBHIPPAModel = new HepaBHIPPAModel();
                     userHepaBHIPPAModel.HepaBHIPPAID = userHepaBHIPPA.HepaBhippaid;
                     base.MapObjects(userHepaBHIPPA, userHepaBHIPPAModel);
-                }                
+                }
 
                 return Ok(userHepaBHIPPAModel);
             }
@@ -216,7 +216,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
                 if (dataHIPPA != null && dataHIPPA.Rows.Count > 0)
                 {
-                    FillPdfFormFieldsHIPPA(pdfFormFields, dataHIPPA.Rows[0]);
+                    FillPdfFormFieldsHIPPA(applicantId, pdfFormFields, dataHIPPA.Rows[0]);
 
                     pdfStamper.Close();
                     data = outputStream.ToArray();
@@ -224,7 +224,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     DataTable dtGeneratedFile = GeneratedFilesManager.GetGeneratedFileByUserIdAndFileType(applicantId, ((int)EnumFileType.HippaForm).ToString());
                     if (dtGeneratedFile != null && dtGeneratedFile.Rows.Count > 0)
                     {
-                        long generatedFileId = Convert.ToInt64(dtGeneratedFile.Rows[0]["GeneratedFileID"].ToString());                        
+                        long generatedFileId = Convert.ToInt64(dtGeneratedFile.Rows[0]["GeneratedFileID"].ToString());
                         result = UpdateGeneratedFile(pdfTermplateId, data, templateFIleName, generatedFileId, applicantId, fileTypeCode);
                     }
                     else
@@ -287,7 +287,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     DataTable dtGeneratedFile = GeneratedFilesManager.GetGeneratedFileByUserIdAndFileType(applicantId, fileTypeCode.ToString());
                     if (dtGeneratedFile != null && dtGeneratedFile.Rows.Count > 0)
                     {
-                        long generatedFileId = Convert.ToInt64(dtGeneratedFile.Rows[0]["GeneratedFileID"].ToString());                        
+                        long generatedFileId = Convert.ToInt64(dtGeneratedFile.Rows[0]["GeneratedFileID"].ToString());
                         result = UpdateGeneratedFile(pdfTermplateId, data, templateFIleName, generatedFileId, applicantId, fileTypeCode);
                     }
                     else
@@ -344,18 +344,18 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
         #region HIPPA
         [NonAction]
-        public void FillPdfFormFieldsHIPPA(AcroFields pdfFormFields, DataRow dataRow)
+        public void FillPdfFormFieldsHIPPA(int applicantId, AcroFields pdfFormFields, DataRow dataRow)
         {
             //DataTable dt = ApplicantManager.GetSingleApplicant(applicantID);
 
-            pdfFormFields.SetField("Employee", GetApplicantName());
+            pdfFormFields.SetField("Employee", GetApplicantName(UserManager.GetUserDetailsByID(applicantId)));
             if (!string.IsNullOrEmpty(dataRow["SignatureDate"].ToString()))
             {
                 var entryDate = Convert.ToDateTime(dataRow["SignatureDate"].ToString().Trim()).ToString("MM/dd/yyyy");
                 pdfFormFields.SetField("Date", entryDate);
             }
 
-            pdfFormFields.SetField("Signature of Employee", GetApplicantName());
+            pdfFormFields.SetField("Signature of Employee", GetApplicantName(UserManager.GetUserDetailsByID(applicantId)));
             pdfFormFields.SetField("Signature of Compliance Officer", dataRow["ComplianceOfficer"].ToString().Trim());
         }
         #endregion
@@ -367,7 +367,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             //DataTable dt = ApplicantManager.GetSingleApplicant(applicantID);
 
 
-            pdfFormFields.SetField("Name", GetApplicantName());
+            pdfFormFields.SetField("Name", GetApplicantName(UserManager.GetUserDetailsByID(applicantId)));
             DataTable dt = UserManager.GetUserDetailsByID(applicantId);
             if (dt.Rows[0]["ssn"] != null && dt.Rows[0]["ssn"] != DBNull.Value)
             {
@@ -387,7 +387,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 pdfFormFields.SetField("WitnessDate", witnessSignatureDate);
             }
 
-            pdfFormFields.SetField("SignatureEMployee", GetApplicantName());
+            pdfFormFields.SetField("SignatureEMployee", GetApplicantName(UserManager.GetUserDetailsByID(applicantId)));
             pdfFormFields.SetField("SignatureWitness", dataRow["WitnessName"].ToString().Trim());
         }
         #endregion

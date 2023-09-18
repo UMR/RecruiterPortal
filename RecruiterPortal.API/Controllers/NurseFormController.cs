@@ -364,8 +364,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     pdfFormFields.SetField("MailingAddressLine3", mailingAddress.Substring(42, mailingAddressLength));
                 }
             }
-            pdfFormFields.SetField("ApplicantsSignature", GetApplicantName());
-            pdfFormFields.SetField("PermitteesName", GetApplicantName());
+            pdfFormFields.SetField("ApplicantsSignature", GetApplicantName(UserManager.GetUserDetailsByID(applicantId)));
+            pdfFormFields.SetField("PermitteesName", GetApplicantName(UserManager.GetUserDetailsByID(applicantId)));
         }
         [NonAction]
         public void FillNurseFormPdfFormFields(int applicantId, AcroFields pdfFormFields)

@@ -177,7 +177,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
                 if (dtApplicant != null && dtApplicant.Rows.Count > 0)
                 {
-                    FillTermsAndConditionsApplicantPdfFormFields(pdfFormFields, dtApplicant.Rows[0]);
+                    FillTermsAndConditionsApplicantPdfFormFields(applicantId,pdfFormFields, dtApplicant.Rows[0]);
 
                     if (dtTermsConditions != null && dtTermsConditions.Rows.Count > 0)
                     {
@@ -276,9 +276,9 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
         }
         [NonAction]
-        public void FillTermsAndConditionsApplicantPdfFormFields(AcroFields pdfFormFields, DataRow dataRow)
+        public void FillTermsAndConditionsApplicantPdfFormFields(int applicantId,AcroFields pdfFormFields, DataRow dataRow)
         {
-            pdfFormFields.SetField("ApplicantName", GetApplicantName());
+            pdfFormFields.SetField("ApplicantName", GetApplicantName(UserManager.GetUserDetailsByID(applicantId)));
             pdfFormFields.SetField("ApplicantStreetAddress", dataRow["StreetAddress"].ToString().Trim());
             if (!string.IsNullOrEmpty(dataRow["ZipCode"].ToString()))
             {
@@ -286,7 +286,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 pdfFormFields.SetField("ApplicantCityStateZipCode", cityStateZipCode);
             }
 
-            pdfFormFields.SetField("ContractorBusinessName", GetApplicantName());
+            pdfFormFields.SetField("ContractorBusinessName", GetApplicantName(UserManager.GetUserDetailsByID(applicantId)));
             pdfFormFields.SetField("ContractorBusinessStreetAddress", dataRow["StreetAddress"].ToString().Trim());
             if (!string.IsNullOrEmpty(dataRow["ZipCode"].ToString()))
             {
@@ -294,7 +294,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 pdfFormFields.SetField("ContractorBusinessCityStateZipCode", cityStateZipCode);
             }
 
-            pdfFormFields.SetField("ContractorSignature", GetApplicantName());
+            pdfFormFields.SetField("ContractorSignature", GetApplicantName(UserManager.GetUserDetailsByID(applicantId)));
         }
 
     }

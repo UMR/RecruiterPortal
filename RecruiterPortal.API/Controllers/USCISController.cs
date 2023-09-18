@@ -180,14 +180,14 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         private void FillUSCISRecuiterInfo(int applicantId, AcroFields pdfFormFields)
         {
             DataTable dtUsers = UserManager.GetUserDetailsByID(applicantId);
-            pdfFormFields.SetField("Signature of Employer or Authorized Representative", GetApplicantName());
+            pdfFormFields.SetField("Signature of Employer or Authorized Representative", GetApplicantName(UserManager.GetUserDetailsByID(applicantId)));
             pdfFormFields.SetField("First Name of Employer or Authorized Representative", GetApplicantFirstName(UserManager.GetUserDetailsByID(applicantId)));
             pdfFormFields.SetField("Last Name of Employer or Authorized Representative", GetApplicantLastName(UserManager.GetUserDetailsByID(applicantId)));
             pdfFormFields.SetField("Todays Date mmddyyyy_3", DateTime.Today.ToString("MM/dd/yyyy"));
 
-            pdfFormFields.SetField("Signature of Employer or Authorized Representative_2", GetApplicantName());
+            pdfFormFields.SetField("Signature of Employer or Authorized Representative_2", GetApplicantName(UserManager.GetUserDetailsByID(applicantId)));
             pdfFormFields.SetField("Todays Date mmddyyyy_4", DateTime.Today.ToString("MM/dd/yyyy"));
-            pdfFormFields.SetField("Name of Employer or Authorized Representative", GetApplicantName());
+            pdfFormFields.SetField("Name of Employer or Authorized Representative", GetApplicantName(UserManager.GetUserDetailsByID(applicantId)));
 
             pdfFormFields.SetField("Employers Business or Organization Name", "Universal Medical Record");
             pdfFormFields.SetField("Employers Business or Organization Address Street Number and Name", "22 The Cross Road");
@@ -353,7 +353,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     }
                 }
 
-                pdfFormFields.SetField("Signature of Employee", GetApplicantName());
+                pdfFormFields.SetField("Signature of Employee", GetApplicantName(UserManager.GetUserDetailsByID(applicantId)));
                 pdfFormFields.SetField("Todays Date mmddyyyy", DateTime.Today.ToString("MM/dd/yyyy"));
 
                 if (dataUSCIS["TranslatorFirstName"] != null && dataUSCIS["TranslatorFirstName"] != DBNull.Value && !String.IsNullOrEmpty(dataUSCIS["TranslatorFirstName"].ToString().Trim()))

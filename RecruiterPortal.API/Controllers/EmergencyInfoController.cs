@@ -176,7 +176,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
                 if (dtApplicant != null && dtApplicant.Rows.Count > 0)
                 {
-                    FillEmergencyInfoApplicantPdfFormFields(pdfFormFields, dtApplicant.Rows[0]);
+                    FillEmergencyInfoApplicantPdfFormFields(applicantId, pdfFormFields, dtApplicant.Rows[0]);
                 }
                 if (dtPrimaryEmergencyInfo != null && dtPrimaryEmergencyInfo.Rows.Count > 0)
                 {
@@ -234,11 +234,11 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             pdfFormFields.SetField("SecondaryPhoneWork", dataRow["EmrWorkPhone"].ToString().Trim());
         }
         [NonAction]
-        private void FillEmergencyInfoApplicantPdfFormFields(AcroFields pdfFormFields, DataRow dataRow)
+        private void FillEmergencyInfoApplicantPdfFormFields(int applicantId, AcroFields pdfFormFields, DataRow dataRow)
         {
             try
             {
-                pdfFormFields.SetField("Name", GetApplicantName());
+                pdfFormFields.SetField("Name", GetApplicantName(UserManager.GetUserDetailsByID(applicantId)));
                 string address = dataRow["StreetAddress"].ToString().Trim() + ", " + dataRow["City"].ToString() + ", " + dataRow["State"].ToString() + "," + dataRow["ZipCode"].ToString();
                 pdfFormFields.SetField("Address", address);
                 string applicantTelephoneHome = dataRow["Phone"].ToString();
@@ -246,7 +246,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 string applicantPhoneCell = dataRow["Phone"].ToString();
                 pdfFormFields.SetField("CellPhone", applicantPhoneCell);
                 pdfFormFields.SetField("HomeEmailAddress", dataRow["Email"].ToString());
-                pdfFormFields.SetField("Signature", GetApplicantName());
+                pdfFormFields.SetField("Signature", GetApplicantName(UserManager.GetUserDetailsByID(applicantId)));
                 pdfFormFields.SetField("Date", DateTime.Now.ToString("MM/dd/yyyy"));
             }
             catch (Exception ex)

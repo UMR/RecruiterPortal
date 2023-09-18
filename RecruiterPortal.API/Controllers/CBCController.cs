@@ -463,7 +463,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
             ///////////////    section 2    ///////////////////////
 
-            pdfFormFields.SetField("ApplicantSignature", GetApplicantName());
+            pdfFormFields.SetField("ApplicantSignature", GetApplicantName(UserManager.GetUserDetailsByID(applicantId)));
         }
         [NonAction]
         private void FillCertInfo(int applicantId,AcroFields pdfFormFields)
