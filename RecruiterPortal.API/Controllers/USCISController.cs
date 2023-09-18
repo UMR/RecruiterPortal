@@ -42,7 +42,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             {
                 _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-            }            
+            }
         }
 
         [Route("save")]
@@ -52,7 +52,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
             try
             {
-                if (!ModelState.IsValid) 
+                if (!ModelState.IsValid)
                     return BadRequest();
 
                 Usci userUSCI = new Usci();
@@ -81,7 +81,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             {
                 _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-            }            
+            }
         }
 
         [Route("delete/{id}")]
@@ -307,116 +307,119 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             DataTable dtUSCIS = USCISManager.GetUSCISUserID(applicantId);
             //DataTable dtBasic = ApplicantManager.GetSingleApplicant(applicantID);
             DataTable dtBasic = UserManager.GetUserDetailsByID(applicantId);
-            DataRow dataUSCIS = dtUSCIS.Rows[0];
-            DataRow drBasic = dtBasic.Rows[0];
-
-            if (dataUSCIS["IsNonCitizen"] != null && dataUSCIS["IsNonCitizen"] != DBNull.Value)
+            if (dtUSCIS.Rows.Count > 0)
             {
-                bool isNonCitizen = Convert.ToBoolean(dataUSCIS["IsNonCitizen"].ToString());
+                DataRow dataUSCIS = dtUSCIS.Rows[0];
+                DataRow drBasic = dtBasic.Rows[0];
 
-                if (isNonCitizen)
+                if (dataUSCIS["IsNonCitizen"] != null && dataUSCIS["IsNonCitizen"] != DBNull.Value)
                 {
-                    pdfFormFields.SetField("undefined_2", "On");
-                }
-            }
+                    bool isNonCitizen = Convert.ToBoolean(dataUSCIS["IsNonCitizen"].ToString());
 
-            if (dataUSCIS["IsLawFullPermanent"] != null && dataUSCIS["IsLawFullPermanent"] != DBNull.Value)
-            {
-                bool isLawFullPermanent = Convert.ToBoolean(dataUSCIS["IsLawFullPermanent"].ToString());
-
-                if (isLawFullPermanent)
-                {
-                    pdfFormFields.SetField("undefined_3", "On");
-                }
-
-                if (isLawFullPermanent && dataUSCIS["USCISNumber"] != null && dataUSCIS["USCISNumber"] != DBNull.Value && !String.IsNullOrEmpty(dataUSCIS["USCISNumber"].ToString().Trim()))
-                {
-                    pdfFormFields.SetField("3 A lawful permanent resident Alien Registration NumberUSCISNumber", dataUSCIS["USCISNumber"].ToString().Trim());
-                }
-            }
-
-            if (drBasic["IsAuthorized"] != null && drBasic["IsAuthorized"] != DBNull.Value)
-            {
-                bool isAuthorised = Convert.ToBoolean(drBasic["IsAuthorized"].ToString());
-                if (isAuthorised)
-                {
-                    pdfFormFields.SetField("undefined_4", "On");
-                    pdfFormFields.SetField("1 Alien Registration NumberUSCISNumber", dataUSCIS["USCISNumber"].ToString().Trim());
-                    pdfFormFields.SetField("2 Form I94 Admission Number", dataUSCIS["I94AdmissionNumber"].ToString().Trim());
-                    pdfFormFields.SetField("undefined_5", dataUSCIS["ForeignPassort"].ToString().Trim());
-                    if (drBasic["CountryOfBirth"] != DBNull.Value)
+                    if (isNonCitizen)
                     {
-                        pdfFormFields.SetField("Number Country of", drBasic["CountryOfBirth"].ToString().Trim());
+                        pdfFormFields.SetField("undefined_2", "On");
                     }
                 }
-            }
 
-            pdfFormFields.SetField("Signature of Employee", GetApplicantName());
-            pdfFormFields.SetField("Todays Date mmddyyyy", DateTime.Today.ToString("MM/dd/yyyy"));
-
-            if (dataUSCIS["TranslatorFirstName"] != null && dataUSCIS["TranslatorFirstName"] != DBNull.Value && !String.IsNullOrEmpty(dataUSCIS["TranslatorFirstName"].ToString().Trim()))
-            {
-                pdfFormFields.SetField("A preparers andor translators assisted the employee in completing Section 1", "On");
-
-                pdfFormFields.SetField("Signature of Preparer or Translator", dataUSCIS["TranslatorFirstName"].ToString().Trim() + " " + dataUSCIS["TranslatorLastName"].ToString().Trim());
-                pdfFormFields.SetField("Todays Date mmddyyyy_2", DateTime.Today.ToString("MM/dd/yyyy"));
-                pdfFormFields.SetField("Last Name Family Name_2", dataUSCIS["TranslatorLastName"].ToString().Trim());
-                pdfFormFields.SetField("First Name Given Name_2", dataUSCIS["TranslatorFirstName"].ToString().Trim());
-                pdfFormFields.SetField("Address Street Number and Name_2", dataUSCIS["StreetAddress"].ToString().Trim());
-                pdfFormFields.SetField("City or Town_2", dataUSCIS["City"].ToString().Trim());
-                pdfFormFields.SetField("State_2", dataUSCIS["StateName"].ToString().Trim());
-                pdfFormFields.SetField("ZIP Code_2", dataUSCIS["ZipCode"].ToString().Trim());
-            }
-            else
-            {
-                pdfFormFields.SetField("Preparer andor Translator Certification check one", "On");
-            }
-
-            pdfFormFields.SetField("Last Name Family Name_3", GetApplicantLastName());
-            pdfFormFields.SetField("First Name Given Name_3", GetApplicantFirstName());
-            //pdfFormFields.SetField("MI", GetApplicantMiddleName());
-            if (drBasic["IsUSCitizen"] != null && drBasic["IsUSCitizen"] != DBNull.Value)
-            {
-                bool isUSCitizen = Convert.ToBoolean(drBasic["IsUSCitizen"].ToString());
-                if (isUSCitizen)
+                if (dataUSCIS["IsLawFullPermanent"] != null && dataUSCIS["IsLawFullPermanent"] != DBNull.Value)
                 {
-                    pdfFormFields.SetField("CitizenshipImmigration Status", "Citizen");
+                    bool isLawFullPermanent = Convert.ToBoolean(dataUSCIS["IsLawFullPermanent"].ToString());
+
+                    if (isLawFullPermanent)
+                    {
+                        pdfFormFields.SetField("undefined_3", "On");
+                    }
+
+                    if (isLawFullPermanent && dataUSCIS["USCISNumber"] != null && dataUSCIS["USCISNumber"] != DBNull.Value && !String.IsNullOrEmpty(dataUSCIS["USCISNumber"].ToString().Trim()))
+                    {
+                        pdfFormFields.SetField("3 A lawful permanent resident Alien Registration NumberUSCISNumber", dataUSCIS["USCISNumber"].ToString().Trim());
+                    }
                 }
-            }
-            //if (drBasic["VisaStatusId"] != null && drBasic["VisaStatusId"] != DBNull.Value)
-            //{
-            //    int visaID = Int32.Parse(drBasic["VisaStatusId"].ToString());
-            //    DataTable dtVisa = VisaStatusManager.GetVisaTypeByID(visaID);
-            //    if (dtVisa.Rows[0]["VisaType"] != null && dtVisa.Rows[0]["VisaType"] != DBNull.Value)
-            //    {
-            //        pdfFormFields.SetField("CitizenshipImmigration Status", dtVisa.Rows[0]["VisaType"].ToString());
-            //    }
-            //}
 
-            pdfFormFields.SetField("Additional Information", dataUSCIS["AdditionalInformation"].ToString().Trim());
-
-            if (dataUSCIS["DocumentTitle"] != null && dataUSCIS["DocumentTitle"] != DBNull.Value && !String.IsNullOrEmpty(dataUSCIS["DocumentTitle"].ToString().Trim()))
-            {
-                pdfFormFields.SetField("Last Name Family Name_4", GetApplicantLastName());
-                pdfFormFields.SetField("First Name Given Name_4", GetApplicantFirstName());
-                //pdfFormFields.SetField("Middle Initial_2", GetApplicantMiddleName());
-                pdfFormFields.SetField("Date mmddyyyy", DateTime.Today.ToString("MM/dd/yyyy"));
-
-                if (!string.IsNullOrEmpty(dataUSCIS["ExpirationDate"].ToString()))
+                if (drBasic["IsAuthorized"] != null && drBasic["IsAuthorized"] != DBNull.Value)
                 {
-                    var rehireExpirationDate = Convert.ToDateTime(dataUSCIS["ExpirationDate"].ToString().Trim()).ToString("MM/dd/yyyy");
-                    pdfFormFields.SetField("Expiration Date if any mmddyyyy_6", rehireExpirationDate);
+                    bool isAuthorised = Convert.ToBoolean(drBasic["IsAuthorized"].ToString());
+                    if (isAuthorised)
+                    {
+                        pdfFormFields.SetField("undefined_4", "On");
+                        pdfFormFields.SetField("1 Alien Registration NumberUSCISNumber", dataUSCIS["USCISNumber"].ToString().Trim());
+                        pdfFormFields.SetField("2 Form I94 Admission Number", dataUSCIS["I94AdmissionNumber"].ToString().Trim());
+                        pdfFormFields.SetField("undefined_5", dataUSCIS["ForeignPassort"].ToString().Trim());
+                        if (drBasic["CountryOfBirth"] != DBNull.Value)
+                        {
+                            pdfFormFields.SetField("Number Country of", drBasic["CountryOfBirth"].ToString().Trim());
+                        }
+                    }
                 }
-                pdfFormFields.SetField("Document Title_6", dataUSCIS["DocumentTitle"].ToString().Trim());
-                pdfFormFields.SetField("Document Number_6", dataUSCIS["DocumentNumber"].ToString().Trim());
-            }
 
-            if (!string.IsNullOrEmpty(dataUSCIS["EmploymentDate"].ToString()))
-            {
-                var employmentDate = Convert.ToDateTime(dataUSCIS["EmploymentDate"].ToString().Trim()).ToString("MM/dd/yyyy");
-                pdfFormFields.SetField("See instructions for exemptions", employmentDate);
-            }
+                pdfFormFields.SetField("Signature of Employee", GetApplicantName());
+                pdfFormFields.SetField("Todays Date mmddyyyy", DateTime.Today.ToString("MM/dd/yyyy"));
 
+                if (dataUSCIS["TranslatorFirstName"] != null && dataUSCIS["TranslatorFirstName"] != DBNull.Value && !String.IsNullOrEmpty(dataUSCIS["TranslatorFirstName"].ToString().Trim()))
+                {
+                    pdfFormFields.SetField("A preparers andor translators assisted the employee in completing Section 1", "On");
+
+                    pdfFormFields.SetField("Signature of Preparer or Translator", dataUSCIS["TranslatorFirstName"].ToString().Trim() + " " + dataUSCIS["TranslatorLastName"].ToString().Trim());
+                    pdfFormFields.SetField("Todays Date mmddyyyy_2", DateTime.Today.ToString("MM/dd/yyyy"));
+                    pdfFormFields.SetField("Last Name Family Name_2", dataUSCIS["TranslatorLastName"].ToString().Trim());
+                    pdfFormFields.SetField("First Name Given Name_2", dataUSCIS["TranslatorFirstName"].ToString().Trim());
+                    pdfFormFields.SetField("Address Street Number and Name_2", dataUSCIS["StreetAddress"].ToString().Trim());
+                    pdfFormFields.SetField("City or Town_2", dataUSCIS["City"].ToString().Trim());
+                    pdfFormFields.SetField("State_2", dataUSCIS["StateName"].ToString().Trim());
+                    pdfFormFields.SetField("ZIP Code_2", dataUSCIS["ZipCode"].ToString().Trim());
+                }
+                else
+                {
+                    pdfFormFields.SetField("Preparer andor Translator Certification check one", "On");
+                }
+
+                pdfFormFields.SetField("Last Name Family Name_3", GetApplicantLastName());
+                pdfFormFields.SetField("First Name Given Name_3", GetApplicantFirstName());
+                //pdfFormFields.SetField("MI", GetApplicantMiddleName());
+                if (drBasic["IsUSCitizen"] != null && drBasic["IsUSCitizen"] != DBNull.Value)
+                {
+                    bool isUSCitizen = Convert.ToBoolean(drBasic["IsUSCitizen"].ToString());
+                    if (isUSCitizen)
+                    {
+                        pdfFormFields.SetField("CitizenshipImmigration Status", "Citizen");
+                    }
+                }
+                //if (drBasic["VisaStatusId"] != null && drBasic["VisaStatusId"] != DBNull.Value)
+                //{
+                //    int visaID = Int32.Parse(drBasic["VisaStatusId"].ToString());
+                //    DataTable dtVisa = VisaStatusManager.GetVisaTypeByID(visaID);
+                //    if (dtVisa.Rows[0]["VisaType"] != null && dtVisa.Rows[0]["VisaType"] != DBNull.Value)
+                //    {
+                //        pdfFormFields.SetField("CitizenshipImmigration Status", dtVisa.Rows[0]["VisaType"].ToString());
+                //    }
+                //}
+
+                pdfFormFields.SetField("Additional Information", dataUSCIS["AdditionalInformation"].ToString().Trim());
+
+                if (dataUSCIS["DocumentTitle"] != null && dataUSCIS["DocumentTitle"] != DBNull.Value && !String.IsNullOrEmpty(dataUSCIS["DocumentTitle"].ToString().Trim()))
+                {
+                    pdfFormFields.SetField("Last Name Family Name_4", GetApplicantLastName());
+                    pdfFormFields.SetField("First Name Given Name_4", GetApplicantFirstName());
+                    //pdfFormFields.SetField("Middle Initial_2", GetApplicantMiddleName());
+                    pdfFormFields.SetField("Date mmddyyyy", DateTime.Today.ToString("MM/dd/yyyy"));
+
+                    if (!string.IsNullOrEmpty(dataUSCIS["ExpirationDate"].ToString()))
+                    {
+                        var rehireExpirationDate = Convert.ToDateTime(dataUSCIS["ExpirationDate"].ToString().Trim()).ToString("MM/dd/yyyy");
+                        pdfFormFields.SetField("Expiration Date if any mmddyyyy_6", rehireExpirationDate);
+                    }
+                    pdfFormFields.SetField("Document Title_6", dataUSCIS["DocumentTitle"].ToString().Trim());
+                    pdfFormFields.SetField("Document Number_6", dataUSCIS["DocumentNumber"].ToString().Trim());
+                }
+
+                if (!string.IsNullOrEmpty(dataUSCIS["EmploymentDate"].ToString()))
+                {
+                    var employmentDate = Convert.ToDateTime(dataUSCIS["EmploymentDate"].ToString().Trim()).ToString("MM/dd/yyyy");
+                    pdfFormFields.SetField("See instructions for exemptions", employmentDate);
+                }
+
+            }
         }
         [NonAction]
         private void FillUSCISIdentificationInfo(int applicantId, AcroFields pdfFormFields)

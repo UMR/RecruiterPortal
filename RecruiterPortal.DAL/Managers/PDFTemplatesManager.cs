@@ -25,8 +25,6 @@ namespace RecruiterPortalDAL.Managers
                 throw ex;
             }
             return pdfTemplate;
-
-            //return new DataTable();
         }
     }
 }
