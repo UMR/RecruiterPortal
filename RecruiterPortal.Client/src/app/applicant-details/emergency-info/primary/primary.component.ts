@@ -46,7 +46,7 @@ export class PrimaryComponent implements OnInit {
         this.emergencyInfoService.getEmergencyInfoFileByApplicantId(this.storageService.getApplicantId)
             .subscribe(response => {
                 if (response.status === 200) {
-                    const filename = this.getFileName(response)
+                    const filename = "Primary Emergency Info.pdf";
                     const downloadLink = document.createElement('a');
                     downloadLink.href = window.URL.createObjectURL(response.body);
                     downloadLink.setAttribute('download', filename.trim().replace('"', '').replace('"', ''));
