@@ -75,47 +75,89 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
-        public static PagedResponse<JobResponseModel> GetJobByAgencyId(long agencyId, int skip, int take)
+        public static PagedResponse<JobResponseModel> GetJobByAgencyId(long agencyId, int skip, int take, bool? status = null)
         {
             try
             {
                 IEnumerable<JobResponseModel> jobs = null;
-                int jobsCount = 0;
+                int jobsCount = 0;                                
 
                 using (UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext())
                 {
-                    jobsCount = (from job in context.Jobs
-                                 join pos in context.Positions
-                                 on job.JobId equals pos.Id
-                                 join ins in context.Institutions
-                                 on job.JobId equals ins.Id
-                                 where job.AgencyId == agencyId
-                                 select job).Count();
-
-                    jobs = (from job in context.Jobs
-                            join pos in context.Positions
-                            on job.JobId equals pos.Id
-                            join ins in context.Institutions
-                            on job.JobId equals ins.Id
-                            where job.AgencyId == agencyId
-                            select (new JobResponseModel
-                            {
-                                JobId = job.JobId,
-                                Status = job.Status,
-                                JobTitle = job.JobTitle,
-                                JobDescription = job.JobDescription,
-                                PositionId = job.PositionId,
-                                Position = pos.PositionName,
-                                InstituteId = ins.Id,
-                                Institute = ins.InstituteName,
-                                AgencyId = job.AgencyId,
-                                CreatedBy = job.CreatedBy,
-                                CreatedDate = job.CreatedDate,
-                                UpdatedBy = job.UpdatedBy,
-                                UpdatedDate = job.UpdatedDate
-                            })
+                    if (status == null)
+                    {
+                        jobsCount = (from job in context.Jobs
+                                     join pos in context.Positions
+                                     on job.JobId equals pos.Id
+                                     join ins in context.Institutions
+                                     on job.JobId equals ins.Id
+                                     where job.AgencyId == agencyId
+                                     select job).Count();
+                    }
+                    else
+                    {
+                        jobsCount = (from job in context.Jobs
+                                     join pos in context.Positions
+                                     on job.JobId equals pos.Id
+                                     join ins in context.Institutions
+                                     on job.JobId equals ins.Id
+                                     where job.AgencyId == agencyId && job.Status == status
+                                     select job).Count();
+                    }
+                    if (status == null)
+                    {
+                        jobs = (from job in context.Jobs
+                                join pos in context.Positions
+                                on job.JobId equals pos.Id
+                                join ins in context.Institutions
+                                on job.JobId equals ins.Id
+                                where job.AgencyId == agencyId
+                                select (new JobResponseModel
+                                {
+                                    JobId = job.JobId,
+                                    Status = job.Status,
+                                    JobTitle = job.JobTitle,
+                                    JobDescription = job.JobDescription,
+                                    PositionId = job.PositionId,
+                                    Position = pos.PositionName,
+                                    InstituteId = ins.Id,
+                                    Institute = ins.InstituteName,
+                                    AgencyId = job.AgencyId,
+                                    CreatedBy = job.CreatedBy,
+                                    CreatedDate = job.CreatedDate,
+                                    UpdatedBy = job.UpdatedBy,
+                                    UpdatedDate = job.UpdatedDate
+                                })
                            ).Skip(skip).Take(take)
                            .ToList();
+                    }
+                    else
+                    {
+                        jobs = (from job in context.Jobs
+                                join pos in context.Positions
+                                on job.JobId equals pos.Id
+                                join ins in context.Institutions
+                                on job.JobId equals ins.Id
+                                where job.AgencyId == agencyId && job.Status == status
+                                select (new JobResponseModel
+                                {
+                                    JobId = job.JobId,
+                                    Status = job.Status,
+                                    JobTitle = job.JobTitle,
+                                    JobDescription = job.JobDescription,
+                                    PositionId = job.PositionId,
+                                    Position = pos.PositionName,
+                                    InstituteId = ins.Id,
+                                    Institute = ins.InstituteName,
+                                    AgencyId = job.AgencyId,
+                                    CreatedBy = job.CreatedBy,
+                                    CreatedDate = job.CreatedDate,
+                                    UpdatedBy = job.UpdatedBy,
+                                    UpdatedDate = job.UpdatedDate
+                                })
+                           ).Skip(skip).Take(take)
+                           .ToList();
+                    }
                 }
 
                 return new PagedResponse<JobResponseModel> { Records = jobs, TotalRecords = jobsCount };

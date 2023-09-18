@@ -10,13 +10,13 @@ export class JobService {
 
     constructor(private client: HttpClient) { }
 
-    getJobsByAgencyId(skip: number, take: number): Observable<HttpResponse<any>> {
-        return this.client.get(`${resourceServerUrl}/api/jobs/get-by-agency-id/${skip}/${take}`, { observe: 'response' });
+    getJobsByAgencyId(skip: number, take: number, status: boolean): Observable<HttpResponse<any>> {
+        return this.client.get(`${resourceServerUrl}/api/jobs/get-by-agency-id?skip=${skip}&take=${take}&status=${status}`, { observe: 'response' });
     }
 
     getJobById(id: number): Observable<HttpResponse<any>> {
         return this.client.get(`${resourceServerUrl}/api/jobs/get-by-id/${id}`, { observe: 'response' });
-    }    
+    }
 
     getPositionByPositionName(posotion: string): Observable<HttpResponse<any>> {
         return this.client.get(encodeURI(`${resourceServerUrl}/api/employment/position?text=${posotion}`), { observe: 'response' });
@@ -30,7 +30,7 @@ export class JobService {
         return this.client.post(`${resourceServerUrl}/api/jobs/save`, job, {
             headers: new HttpHeaders()
                 .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
-        });        
+        });
     }
 
     delete(id: number): Observable<HttpResponse<any>> {
