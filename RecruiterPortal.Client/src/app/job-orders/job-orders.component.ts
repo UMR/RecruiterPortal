@@ -61,8 +61,7 @@ export class JobOrdersComponent implements OnInit {
     getJobsByAgencyId() {
         this.isLoading = true;
         this.jobService.getJobsByAgencyId(this.skip, this.take, this.status)
-            .subscribe(response => {
-                console.log(response);
+            .subscribe(response => {                
                 if (response.status === 200) {
                     this.jobs = response.body.Records;
                     this.totalJobs = response.body.TotalRecords;
@@ -77,8 +76,12 @@ export class JobOrdersComponent implements OnInit {
                 });
     }
 
-    onStatusChange(status) {
-        this.status = status == 1 ? true : false;
+    onStatusChange(status) {        
+        if (status) {
+            this.status = status == "1" ? "true" : "false";
+        } else {
+            this.status = "";
+        }
         this.getJobsByAgencyId();
     }
 

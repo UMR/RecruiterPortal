@@ -10,7 +10,7 @@ export class JobService {
 
     constructor(private client: HttpClient) { }
 
-    getJobsByAgencyId(skip: number, take: number, status: boolean): Observable<HttpResponse<any>> {
+    getJobsByAgencyId(skip: number, take: number, status: string): Observable<HttpResponse<any>> {
         return this.client.get(`${resourceServerUrl}/api/jobs/get-by-agency-id?skip=${skip}&take=${take}&status=${status}`, { observe: 'response' });
     }
 
