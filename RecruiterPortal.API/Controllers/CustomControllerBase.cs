@@ -14,11 +14,11 @@ namespace RecruiterPortal.API.Controllers
     [ApiController]
     public class CustomControllerBase : ControllerBase
     {
-        protected readonly ILogger<CustomControllerBase> _logger;       
+        protected readonly ILogger<CustomControllerBase> _logger;
 
         public CustomControllerBase(ILogger<CustomControllerBase> logger)
-        {            
-            _logger = logger;           
+        {
+            _logger = logger;
         }
 
         [Route("user")]
@@ -52,16 +52,16 @@ namespace RecruiterPortal.API.Controllers
                 return StatusCode(500);
             }
         }
-        
+
         protected int RecruiterId
         {
-            get 
+            get
             {
                 var currentUser = GetCurrentUser();
                 return currentUser.RecruiterId;
-            }            
+            }
         }
-        
+
         protected long AgencyId
         {
             get
@@ -170,7 +170,7 @@ namespace RecruiterPortal.API.Controllers
             Other = 3
         }
         #endregion
-        
+
         [NonAction]
         internal void MapObjects(object source, object destination)
         {
@@ -196,9 +196,30 @@ namespace RecruiterPortal.API.Controllers
             return GetCurrentUser().FirstName;
         }
         [NonAction]
+        public string GetApplicantFirstName(DataTable userDt)
+        {
+            string firstName = string.Empty;
+            if (userDt.Rows.Count > 0)
+            {
+                firstName = userDt.Rows[0]["FirstName"].ToString();
+            }
+            return firstName;
+        }
+        [NonAction]
         public string GetApplicantLastName()
         {
             return GetCurrentUser().LastName;
+        }
+
+        [NonAction]
+        public string GetApplicantLastName(DataTable userDt)
+        {
+            string lastName = string.Empty;
+            if (userDt.Rows.Count > 0)
+            {
+                lastName = userDt.Rows[0]["LastName"].ToString();
+            }
+            return lastName;
         }
         //[NonAction]
         //public string GetApplicantMiddleName()
@@ -281,6 +302,20 @@ namespace RecruiterPortal.API.Controllers
             //{
             //    applicantName = GetCurrentUser().FirstName + " " + GetCurrentUser().LastName;
             //}
+            return applicantName;
+        }
+        [NonAction]
+        protected string GetApplicantName(DataTable userDt)
+        {
+            string applicantName = string.Empty;
+            if (userDt.Rows.Count > 0 && userDt.Rows[0]["MiddleName"].ToString() != "")
+            {
+                applicantName = userDt.Rows[0]["FirstName"].ToString() + " " + userDt.Rows[0]["MiddleName"].ToString() + " " + userDt.Rows[0]["LastName"].ToString();
+            }
+            else
+            {
+                applicantName = userDt.Rows[0]["FirstName"].ToString() + " " + userDt.Rows[0]["LastName"].ToString();
+            }
             return applicantName;
         }
 

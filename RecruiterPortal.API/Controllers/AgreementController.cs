@@ -39,7 +39,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             {
                 _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
-            }            
+            }
         }
 
         [Route("save")]
@@ -71,7 +71,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong: {ex}");
-                return StatusCode(500, ex.Message);                
+                return StatusCode(500, ex.Message);
             }
 
             return BadRequest(agreement);
@@ -93,7 +93,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong: {ex}");
-                return StatusCode(500, ex.Message);                
+                return StatusCode(500, ex.Message);
             }
         }
 
@@ -112,7 +112,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 byte[] temlateFileData = dtPdfTemplate.Rows[0]["FileData"] as byte[];
                 string templateFIleName = dtPdfTemplate.Rows[0]["FIleName"].ToString();
                 templateFIleName = templateFIleName.Substring(0, templateFIleName.LastIndexOf('.'));
-                fileName = $"{templateFIleName}_{GetApplicantFirstName()}_{DateTime.Now.ToString("MMddyyyyHHmmss")}.pdf";
+                fileName = $"{templateFIleName}_{GetApplicantFirstName(UserManager.GetUserDetailsByID(applicantId))}_{DateTime.Now.ToString("MMddyyyyHHmmss")}.pdf";
 
                 Stream inputStream = new MemoryStream(temlateFileData);
                 MemoryStream outputStream = new MemoryStream();

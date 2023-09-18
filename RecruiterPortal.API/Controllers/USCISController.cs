@@ -135,7 +135,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 string templateFIleName = dtPdfTemplate.Rows[0]["FIleName"].ToString();
                 templateFIleName = templateFIleName.Substring(0, templateFIleName.LastIndexOf('.'));
 
-                fileName = $"{templateFIleName}_{GetApplicantFirstName()}_{DateTime.Now.ToString("MMddyyyyHHmmss")}.pdf";
+                fileName = $"{templateFIleName}_{GetApplicantFirstName(UserManager.GetUserDetailsByID(applicantId))}_{DateTime.Now.ToString("MMddyyyyHHmmss")}.pdf";
 
                 Stream inputStream = new MemoryStream(temlateFileData);
                 MemoryStream outputStream = new MemoryStream();
@@ -181,8 +181,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             DataTable dtUsers = UserManager.GetUserDetailsByID(applicantId);
             pdfFormFields.SetField("Signature of Employer or Authorized Representative", GetApplicantName());
-            pdfFormFields.SetField("First Name of Employer or Authorized Representative", GetApplicantFirstName());
-            pdfFormFields.SetField("Last Name of Employer or Authorized Representative", GetApplicantLastName());
+            pdfFormFields.SetField("First Name of Employer or Authorized Representative", GetApplicantFirstName(UserManager.GetUserDetailsByID(applicantId)));
+            pdfFormFields.SetField("Last Name of Employer or Authorized Representative", GetApplicantLastName(UserManager.GetUserDetailsByID(applicantId)));
             pdfFormFields.SetField("Todays Date mmddyyyy_3", DateTime.Today.ToString("MM/dd/yyyy"));
 
             pdfFormFields.SetField("Signature of Employer or Authorized Representative_2", GetApplicantName());
@@ -201,8 +201,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             //DataTable dt = ApplicantManager.GetSingleApplicant(applicantID);
             DataTable dt = UserManager.GetUserDetailsByID(applicantId);
-            pdfFormFields.SetField("Last Name Family Name", GetApplicantLastName());
-            pdfFormFields.SetField("First Name Given Name", GetApplicantFirstName());
+            pdfFormFields.SetField("Last Name Family Name", GetApplicantLastName(UserManager.GetUserDetailsByID(applicantId)));
+            pdfFormFields.SetField("First Name Given Name", GetApplicantFirstName(UserManager.GetUserDetailsByID(applicantId)));
             //pdfFormFields.SetField("Middle Initial", GetApplicantMiddleName());
             //pdfFormFields.SetField("Date", DateTime.Today.ToString("MM/dd/yyyy"));
             //pdfFormFields.SetField("Signature", dt.Rows[0]["ApplicantName"].ToString().Trim());
@@ -374,8 +374,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     pdfFormFields.SetField("Preparer andor Translator Certification check one", "On");
                 }
 
-                pdfFormFields.SetField("Last Name Family Name_3", GetApplicantLastName());
-                pdfFormFields.SetField("First Name Given Name_3", GetApplicantFirstName());
+                pdfFormFields.SetField("Last Name Family Name_3", GetApplicantLastName(UserManager.GetUserDetailsByID(applicantId)));
+                pdfFormFields.SetField("First Name Given Name_3", GetApplicantFirstName(UserManager.GetUserDetailsByID(applicantId)));
                 //pdfFormFields.SetField("MI", GetApplicantMiddleName());
                 if (drBasic["IsUSCitizen"] != null && drBasic["IsUSCitizen"] != DBNull.Value)
                 {
@@ -399,8 +399,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
                 if (dataUSCIS["DocumentTitle"] != null && dataUSCIS["DocumentTitle"] != DBNull.Value && !String.IsNullOrEmpty(dataUSCIS["DocumentTitle"].ToString().Trim()))
                 {
-                    pdfFormFields.SetField("Last Name Family Name_4", GetApplicantLastName());
-                    pdfFormFields.SetField("First Name Given Name_4", GetApplicantFirstName());
+                    pdfFormFields.SetField("Last Name Family Name_4", GetApplicantLastName(UserManager.GetUserDetailsByID(applicantId)));
+                    pdfFormFields.SetField("First Name Given Name_4", GetApplicantFirstName(UserManager.GetUserDetailsByID(applicantId)));
                     //pdfFormFields.SetField("Middle Initial_2", GetApplicantMiddleName());
                     pdfFormFields.SetField("Date mmddyyyy", DateTime.Today.ToString("MM/dd/yyyy"));
 

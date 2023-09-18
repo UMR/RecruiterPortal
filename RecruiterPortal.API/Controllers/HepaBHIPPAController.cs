@@ -126,7 +126,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
 
             byte[] file = MergedPDF(pdfByteContent);
-            fileName = $"HIPPAandHepatitisB_{GetApplicantFirstName()}_{DateTime.Now.ToString("MMddyyyyHHmmss")}.pdf";
+            fileName = $"HIPPAandHepatitisB_{GetApplicantFirstName(UserManager.GetUserDetailsByID(applicantId))}_{DateTime.Now.ToString("MMddyyyyHHmmss")}.pdf";
 
             try
             {
@@ -198,7 +198,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 string templateFIleName = dtPdfTemplate.Rows[0]["FIleName"].ToString();
                 templateFIleName = templateFIleName.Substring(0, templateFIleName.LastIndexOf('.'));
 
-                fileName = $"{templateFIleName}_{GetApplicantFirstName()}_{DateTime.Now.ToString("MMddyyyyHHmmss")}.pdf";
+                fileName = $"{templateFIleName}_{GetApplicantFirstName(UserManager.GetUserDetailsByID(applicantId))}_{DateTime.Now.ToString("MMddyyyyHHmmss")}.pdf";
 
                 Stream inputStream = new MemoryStream(temlateFileData);
                 MemoryStream outputStream = new MemoryStream();
@@ -262,7 +262,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 byte[] temlateFileData = dtPdfTemplate.Rows[0]["FileData"] as byte[];
                 string templateFIleName = dtPdfTemplate.Rows[0]["FIleName"].ToString();
                 templateFIleName = templateFIleName.Substring(0, templateFIleName.LastIndexOf('.'));
-                fileName = $"{templateFIleName}_{GetApplicantFirstName()}_{DateTime.Now.ToString("MMddyyyyHHmmss")}.pdf";
+                fileName = $"{templateFIleName}_{GetApplicantFirstName(UserManager.GetUserDetailsByID(applicantId))}_{DateTime.Now.ToString("MMddyyyyHHmmss")}.pdf";
 
                 Stream inputStream = new MemoryStream(temlateFileData);
                 MemoryStream outputStream = new MemoryStream();

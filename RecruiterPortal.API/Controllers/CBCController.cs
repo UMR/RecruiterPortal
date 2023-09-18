@@ -185,7 +185,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 byte[] temlateFileData = dtPdfTemplate.Rows[0]["FileData"] as byte[];
                 string templateFIleName = dtPdfTemplate.Rows[0]["FIleName"].ToString();
                 templateFIleName = templateFIleName.Substring(0, templateFIleName.LastIndexOf('.'));
-                fileName = $"{templateFIleName}_{GetApplicantFirstName()}_{DateTime.Now.ToString("MMddyyyyHHmmss")}.pdf";
+                fileName = $"{templateFIleName}_{GetApplicantFirstName(UserManager.GetUserDetailsByID(applicantId))}_{DateTime.Now.ToString("MMddyyyyHHmmss")}.pdf";
 
                 Stream inputStream = new MemoryStream(temlateFileData);
                 MemoryStream outputStream = new MemoryStream();
@@ -378,8 +378,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 pdfFormFields.SetField("DateofBirthD", dateParts[1]);
                 pdfFormFields.SetField("DateofBirthY", dateParts[2]);
             }
-            pdfFormFields.SetField("LastName", GetApplicantLastName());
-            pdfFormFields.SetField("FirstName", GetApplicantFirstName());
+            pdfFormFields.SetField("LastName", GetApplicantLastName(UserManager.GetUserDetailsByID(applicantId)));
+            pdfFormFields.SetField("FirstName", GetApplicantFirstName(UserManager.GetUserDetailsByID(applicantId)));
             //pdfFormFields.SetField("MaidenName", GetApplicantMiddleName());
             //pdfFormFields.SetField("MN", GetApplicantMiddleName());
             pdfFormFields.SetField("StreetName", dtApplicant.Rows[0]["StreetAddress"].ToString());
@@ -437,8 +437,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
             ///////////////    section 1    ///////////////////////
 
-            pdfFormFields.SetField("LastName1", GetApplicantLastName());
-            pdfFormFields.SetField("FirstName1", GetApplicantFirstName());
+            pdfFormFields.SetField("LastName1", GetApplicantLastName(UserManager.GetUserDetailsByID(applicantId)));
+            pdfFormFields.SetField("FirstName1", GetApplicantFirstName(UserManager.GetUserDetailsByID(applicantId)));
             //pdfFormFields.SetField("MaidenName1", GetApplicantMiddleName());
             //pdfFormFields.SetField("MN1", GetApplicantMiddleName());
             pdfFormFields.SetField("StreetAddress", dtApplicant.Rows[0]["StreetAddress"].ToString());
