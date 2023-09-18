@@ -100,6 +100,27 @@ namespace RecruiterPortal.DAL.Managers
 
             return agencyDt;
         }
+        public static DataTable IsUserEmailExist(string email, int? userId)
+        {
+            string errorStr = String.Empty;
+            string sql = "SELECT Email FROM [Users] WHERE Email=@Email";
+            DataTable dt = new DataTable();
+            //if (userId != null && userId.HasValue)
+            //{
+            //    sql += " AND UserID<>@UserId";
+            //}
+
+            //QueryParamList paramList = new QueryParamList();
+            //paramList.Add(new QueryParamObj() { ParamName = "Email", ParamValue = email, DBType = DbType.String });
+
+            //if (userId != null && userId.HasValue)
+            //{
+            //    paramList.Add(new QueryParamObj() { ParamName = "UserId", ParamValue = userId, DBType = DbType.Int32 });
+            //}
+
+            //DataTable dt = LoadDataTable(sql, paramList, "Users", ref errorStr);
+            return dt;
+        }
         public static void SaveRecruiter(Recruiter recruiter)
         {
             string spName = "sp_InsertRecruiter";

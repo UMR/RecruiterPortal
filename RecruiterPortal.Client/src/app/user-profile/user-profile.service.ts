@@ -12,8 +12,8 @@ export class UserProfileService {
     private getCurrentUserURI: string = `${resourceServerUrl}/api/user/get-current-user`;
     private getCurrentUserRolesURI: string = `${resourceServerUrl}/api/role/get-user-roles`;
     private getUserByUserIdURI: string = `${resourceServerUrl}/api/user/get-user-by-userid`;
-    private updateUserProfileURI: string = `${resourceServerUrl}/api/user/edit-user-profile`;
-    private userEmailExistURI: string = `${resourceServerUrl}/api/user/email_exist`;
+    private updateUserProfileURI: string = `${resourceServerUrl}/api/recruiter/update-profile`;
+    private userEmailExistURI: string = `${resourceServerUrl}/api/recruiter/email_exist`;
 
     constructor(private httpClient: HttpClient) {
 

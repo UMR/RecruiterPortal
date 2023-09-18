@@ -223,5 +223,63 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        [Route("update-profile")]
+        [HttpPut]
+        public IActionResult UpdateRecruiterProfile(RecruiterModel recruiterModel)
+        {
+
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    BadRequest(ModelState);
+                }
+
+                Recruiter recruiter = new Recruiter();
+                recruiter.RecruiterId = recruiterModel.RecruiterId;
+                recruiter.FirstName = recruiterModel.FirstName;
+                recruiter.LastName = recruiterModel.LastName;
+                recruiter.Email = recruiterModel.Email;
+                recruiter.Telephone = recruiterModel.Telephone;
+                recruiter.IsActive = recruiterModel.IsActive;
+                recruiter.UpdatedBy = Convert.ToInt32(GetCurrentUser().RecruiterId);
+                recruiter.UpdatedDate = DateTime.Now;
+                RecruiterManager.UpdateRecruiter(recruiter);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [Route("email_exist")]
+        [HttpGet]
+        public IActionResult IsEmailExist(string email)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(email))
+                {
+                    return BadRequest();
+                }
+
+                DataTable dtUser = RecruiterManager.IsUserEmailExist(email, base.GetCurrentUser().RecruiterId);
+
+                if (dtUser != null && dtUser.Rows.Count > 0)
+                {
+                    return Ok(true);
+                }
+
+                return Ok(false);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

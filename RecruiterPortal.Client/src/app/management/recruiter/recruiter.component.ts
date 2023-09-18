@@ -105,7 +105,6 @@ export class RecruiterComponent implements OnInit {
     }
 
     onEdit(recruiter: any) {
-        console.log(recruiter);
         this.regForm.controls['loginId'].disable();
         this.regForm.controls['password'].disable();
         this.regForm.controls['confirmPassword'].disable();
