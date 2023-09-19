@@ -3,17 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { MailSettingsComponent } from './mail-settings.component';
 
 
-const routes: Routes = [
-    {
-        path: "",
-        children: [
+const routes: Routes = [{
+    path: '',
+    children:
+        [
             {
-                path: "",
+                path: '',
                 component: MailSettingsComponent
             }
         ]
-    }
-];
+}];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],

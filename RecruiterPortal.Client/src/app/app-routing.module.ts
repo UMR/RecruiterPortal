@@ -106,6 +106,10 @@ const routes: Routes = [
         path: 'user-management', loadChildren: './user-management/user-management.module#UserManagementModule'
     },
     {
+        canActivate: [AuthGuard],
+        path: 'user-mail-settings', loadChildren: () => import('./timecards/mail-settings/mail-settings.module').then(m => m.MailSettingsModule)
+    },
+    {
         path: 'registration',
         component: RegistrationComponent
     },
