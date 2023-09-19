@@ -4,6 +4,22 @@
            ,[CreatedBy]
            ,[CreatedDate]
            ,[UpdatedBy]
-           ,[UpdatedDate])
+           ,[UpdatedDate]
+		   ,[Address]
+		   ,[Town]
+           ,[County]
+           ,[ZipCode]
+           ,[CountryId]
+           ,[StateId]
+           ,[Telephone]
+           ,[Website])
 
-SELECT InstituteName, IsActive, CreatedBy, CreatedDate, UpdatedBy, UpdatedDate FROM [UMRRecruitementDB_New].[dbo].[Institute]
+SELECT InstituteName, IsActive, CreatedBy, CreatedDate, UpdatedBy, UpdatedDate
+	  ,[Address]
+      ,[Town]
+      ,[County]
+      ,[ZipCode]
+      ,[CountryId]
+      ,[StateId]
+      ,[Telephone]
+      ,[Website] FROM [UMRRecruitementDB_New].[dbo].[Institute]

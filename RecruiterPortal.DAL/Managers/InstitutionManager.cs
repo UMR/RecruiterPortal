@@ -1,6 +1,8 @@
 ﻿using Microsoft.Data.SqlClient;
+using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
+using System.Data;
 using System.Dynamic;
 
 namespace RecruiterPortal.DAL.Managers
@@ -23,6 +25,30 @@ namespace RecruiterPortal.DAL.Managers
             {
                 throw new Exception(ex.Message);
             }
+        }
+        public static DataSet GetAllInstitutionByFilter(InstitutionSearchModel institutionSearchModel)
+        {
+
+            string spName = "sp_GetAllInstitutionByFilter";
+            dynamic expandoObject = new ExpandoObject();
+            expandoObject.take = institutionSearchModel.take;
+            expandoObject.skip = institutionSearchModel.skip;
+
+            GenericRepository<Institution> institutionRepo = new GenericRepository<Institution>();
+            SqlParameter[] sqlParameters = institutionRepo.GetSqlParametersFromExpandoObject(expandoObject, spName);
+            DataSet institutionDt = null;
+
+            try
+            {
+                institutionDt = institutionRepo.LoadDataSetTable(spName, sqlParameters);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return institutionDt;
         }
     }
 }

@@ -8,14 +8,14 @@
         </div>-->
         <div class="container-fluid">
             <p-table #leadTable [responsive]="true"
-                     [value]="leads"
+                     [value]="institutions"
                      selectionMode="single"
                      [(selection)]="selectedInstitute"
                      dataKey="Id"
                      [paginator]="true"
                      [rows]="rows"
                      [columns]="cols"
-                     [totalRecords]="totalItem"
+                     [totalRecords]="totalInstitute"
                      [lazy]="true"
                      (onLazyLoad)="onLazyLoad($event)"
                      [rowsPerPageOptions]="[10,15,20]"
@@ -23,8 +23,7 @@
                      currentPageReportTemplate="Total Records {{totalInstitute}}">
                 <ng-template pTemplate="header" let-columns>
                     <tr>
-                        <th>Institution Name</th>
-                        <th>Institution Type</th>
+                        <th style="width:350px">Institution Name</th>
                         <th>Address</th>
                         <th>Telephone</th>
                         <th>City/Town</th>
@@ -33,15 +32,15 @@
                         <th>Zip Code</th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-agency let-rowData let-columns="columns">
+                <ng-template pTemplate="body" let-ins let-rowData let-columns="columns">
                     <tr [pSelectableRow]="agency">
-                        <td>{{agency.AgencyName}}</td>
-                        <td>{{agency.Urlprefix}}</td>
-                        <td>{{agency.AgencyEmail}}</td>
-                        <td>{{agency.AgencyPhone}}</td>
-                        <td>{{agency.AgencyContactPerson}}</td>
-                        <td>{{agency.AgencyPhone}}</td>
-                        <td>{{agency.AgencyContactPerson}}</td>
+                        <td style="width:350px">{{ins.InstituteName}}</td>
+                        <td>{{ins.Address}}</td>
+                        <td>{{ins.Telephone}}</td>
+                        <td>{{ins.Town}}</td>
+                        <td>{{ins.County}}</td>
+                        <td>{{ins.StateName}}</td>
+                        <td>{{ins.ZipCode}}</td>
                         <!--<td class="text-center"><button type="button" (click)="onSendToClick(applicant)" class="btn btn-primary btn-import-sync">Send To</button> </td>-->
                     </tr>
                 </ng-template>

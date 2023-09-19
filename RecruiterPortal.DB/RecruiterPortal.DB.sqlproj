@@ -474,5 +474,7 @@
     <None Include="2023-09-13\02_AZ_01_CREATE_TABLE_ApplicantStatus.sql" />
     <None Include="Special\09_SR_01_INSERT_File_Data.sql" />
     <None Include="2023-09-18\01_SR_01_ALTER_sp_GetPDFFileTemplateFileType.sql" />
+    <None Include="2023-09-18\02_SR_02_CREATE_Table_Institution.sql" />
+    <None Include="2023-09-18\03_SR_01_CREATE_SP_GetAllInstitutionByFilter.sql" />
   </ItemGroup>
 </Project>
