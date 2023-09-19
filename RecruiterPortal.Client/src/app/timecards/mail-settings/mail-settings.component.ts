@@ -9,7 +9,8 @@ import { MessageService, ConfirmationService } from 'primeng/api';
 })
 export class MailSettingsComponent implements OnInit {
 
-    public isLoading: boolean = false;        
+    public isLoading: boolean = false;
+    public showMailTemplateType: boolean = false;
     public formGroup: FormGroup;    
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService) {        
@@ -25,6 +26,10 @@ export class MailSettingsComponent implements OnInit {
             mailTemplateType: ['', Validators.compose([Validators.required])],
             templateDescription: ['', Validators.compose([Validators.required])]            
         });
+    }
+
+    showTemplateType() {
+        this.showMailTemplateType = true;
     }
 
 }

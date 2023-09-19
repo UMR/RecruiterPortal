@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MailSettingsRoutingModule } from './mail-settings-routing.module';
 import { MailSettingsComponent } from './mail-settings.component';
+import { MailTemplateTypeModule } from '../mail-template-type/mail-template-type.module';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoadingImageModule } from '../../common/loading-image.module';
@@ -11,11 +12,13 @@ import { DialogModule, ConfirmDialogModule, EditorModule, ConfirmationService, M
 import { SharedModule } from '../../common/shared.module';
 
 
+
 @NgModule({
     declarations: [MailSettingsComponent],
     imports: [
         CommonModule,
         MailSettingsRoutingModule,
+        MailTemplateTypeModule,
         ReactiveFormsModule,
         LoadingImageModule,
         ToastModule,        
