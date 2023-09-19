@@ -30,19 +30,14 @@ export class LeadComponent implements OnInit {
     }
 
     onLazyLoad(event: LazyLoadEvent) {
-        this.getAgencies();
+        
     }
-    getAgencies() {
-
-    }
-
     onEdit(agency: any) {
 
 
     }
 
     onAgencySubmit() {
-
         this.saveAgency();
     }
     saveAgency() {
@@ -53,13 +48,11 @@ export class LeadComponent implements OnInit {
     }
     onClickClear() {
     }
-
     changeStatus(id: any, value: boolean) {
         let updateAgency = {
             agencyId: id,
             isActive: !value
         }
-
     }
 
     openNewAgency() {
