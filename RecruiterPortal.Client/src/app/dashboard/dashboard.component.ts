@@ -14,8 +14,6 @@ export class DashboardComponent implements OnInit {
         //const textColor = documentStyle.getPropertyValue('--text-color');
         //const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         //const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
-        console.log("dadad")
     }
 
     data: any;
