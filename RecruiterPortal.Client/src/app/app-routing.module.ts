@@ -75,6 +75,10 @@ const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
+        path: 'form-list', loadChildren: () => import('./reports-list/form-list/form-list.module').then(m => m.FormListModule)
+    },
+    {
+        canActivate: [AuthGuard],
         path: 'calendar', loadChildren: './calendar/calendar.module#CalendarModule'
     },
     {

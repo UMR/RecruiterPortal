@@ -16,45 +16,21 @@ export class LeadComponent implements OnInit {
     private take: number;
     private skip: number;
     private pageNumber: number;
-    public selectedLead: any;
-    submitted: boolean = false;
-    isActive: any = [];
-    addEditTxt: string = "Add";
-    agency: any;
-    agencyDialog: boolean = false;
 
     constructor() { }
 
     ngOnInit() {
 
     }
-
     onLazyLoad(event: LazyLoadEvent) {
         
     }
-    onEdit(agency: any) {
-
-
-    }
-
     onAgencySubmit() {
         this.saveAgency();
     }
     saveAgency() {
 
     }
-
-    hideDialog() {
-    }
-    onClickClear() {
-    }
-    changeStatus(id: any, value: boolean) {
-        let updateAgency = {
-            agencyId: id,
-            isActive: !value
-        }
-    }
-
     openNewAgency() {
     }
 }

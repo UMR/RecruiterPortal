@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="src\app\reports-list\" />
     <Folder Include="src\app\view-by-status\" />
   </ItemGroup>
 
