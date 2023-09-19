@@ -108,7 +108,6 @@ export class AuthService {
         if (value.access_token) {
             const decodedToken = jwt_decode(value.access_token);
             const userInfo = JSON.parse(decodedToken["RecruiterClaim"]);
-            console.log(userInfo);
             this.storageService.storeDataToSession(userInfo,"CurrentUserInfo");
             const roleArray = JSON.parse(decodedToken["RecruiterClaim"]).Roles;            
             if (roleArray && roleArray.length > 0) {
