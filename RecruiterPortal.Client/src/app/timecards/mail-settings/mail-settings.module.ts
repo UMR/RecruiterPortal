@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { MailSettingsRoutingModule } from './mail-settings-routing.module';
 import { MailSettingsComponent } from './mail-settings.component';
+
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoadingImageModule } from '../../common/loading-image.module';
 import { ToastModule } from 'primeng/toast';
-import { DropdownModule, AutoCompleteModule, SharedModule, DialogModule, ConfirmDialogModule } from 'primeng/primeng';
-import { TableModule } from 'primeng/components/table/table';
+import { DialogModule, ConfirmDialogModule, EditorModule, ConfirmationService, MessageService } from 'primeng/primeng';
+import { SharedModule } from '../../common/shared.module';
 
 
 @NgModule({
@@ -17,13 +18,12 @@ import { TableModule } from 'primeng/components/table/table';
         MailSettingsRoutingModule,
         ReactiveFormsModule,
         LoadingImageModule,
-        ToastModule,
-        DropdownModule,
-        AutoCompleteModule,
-        TableModule,
+        ToastModule,        
         SharedModule,
         DialogModule,
-        ConfirmDialogModule
-    ]
+        ConfirmDialogModule,
+        EditorModule
+    ],
+    providers: [ConfirmationService, MessageService]
 })
 export class MailSettingsModule { }

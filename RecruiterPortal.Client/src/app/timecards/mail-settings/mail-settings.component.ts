@@ -1,15 +1,30 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService, ConfirmationService } from 'primeng/api';
 
 @Component({
-  selector: 'app-mail-settings',
-  templateUrl: './mail-settings.component.html',
-  styleUrls: ['./mail-settings.component.css']
+    selector: 'app-mail-settings',
+    templateUrl: './mail-settings.component.html',
+    styleUrls: ['./mail-settings.component.css']
 })
 export class MailSettingsComponent implements OnInit {
 
-  constructor() { }
+    public isLoading: boolean = false;        
+    public formGroup: FormGroup;    
 
-  ngOnInit() {
-  }
+    constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService) {        
+    }
+
+    ngOnInit() {
+        this.createFormGroup();
+    }
+
+    createFormGroup() {
+        this.formGroup = this.fb.group({
+            fromMail: ['', Validators.compose([Validators.required])],
+            mailTemplateType: ['', Validators.compose([Validators.required])],
+            templateDescription: ['', Validators.compose([Validators.required])]            
+        });
+    }
 
 }
