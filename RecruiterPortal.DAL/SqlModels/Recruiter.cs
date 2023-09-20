@@ -46,4 +46,10 @@ public partial class Recruiter
     public virtual ICollection<Job> JobCreatedByNavigations { get; set; } = new List<Job>();
 
     public virtual ICollection<Job> JobUpdatedByNavigations { get; set; } = new List<Job>();
+
+    public virtual ICollection<MailTemplateType> MailTemplateTypeCreatedByNavigations { get; set; } = new List<MailTemplateType>();
+
+    public virtual ICollection<MailTemplateType> MailTemplateTypeRecruiters { get; set; } = new List<MailTemplateType>();
+
+    public virtual ICollection<MailTemplateType> MailTemplateTypeUpdatedByNavigations { get; set; } = new List<MailTemplateType>();
 }

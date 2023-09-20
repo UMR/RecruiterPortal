@@ -34,6 +34,4 @@ public partial class Institution
     public string Telephone { get; set; }
 
     public string Website { get; set; }
-
-    public virtual ICollection<ApplicantStatus> ApplicantStatuses { get; set; } = new List<ApplicantStatus>();
 }

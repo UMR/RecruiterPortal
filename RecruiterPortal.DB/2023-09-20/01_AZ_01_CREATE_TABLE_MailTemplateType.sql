@@ -1,7 +1,7 @@
 ﻿USE [UMRRecruitmentApplicant]
 GO
 
-/****** Object:  Table [dbo].[MailTemplateType]    Script Date: 9/20/2023 6:55:03 PM ******/
+/****** Object:  Table [dbo].[MailTemplateType]    Script Date: 9/20/2023 7:30:36 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -11,6 +11,7 @@ GO
 CREATE TABLE [dbo].[MailTemplateType](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](100) NOT NULL,
+	[RecruiterId] [int] NOT NULL,
 	[CreatedBy] [int] NULL,
 	[CreatedDate] [datetime] NULL,
 	[UpdatedBy] [int] NULL,
@@ -34,6 +35,13 @@ REFERENCES [dbo].[Recruiter] ([RecruiterID])
 GO
 
 ALTER TABLE [dbo].[MailTemplateType] CHECK CONSTRAINT [FK_MailTemplateType_Recruiter1]
+GO
+
+ALTER TABLE [dbo].[MailTemplateType]  WITH CHECK ADD  CONSTRAINT [FK_MailTemplateType_Recruiter2] FOREIGN KEY([RecruiterId])
+REFERENCES [dbo].[Recruiter] ([RecruiterID])
+GO
+
+ALTER TABLE [dbo].[MailTemplateType] CHECK CONSTRAINT [FK_MailTemplateType_Recruiter2]
 GO
 
 
