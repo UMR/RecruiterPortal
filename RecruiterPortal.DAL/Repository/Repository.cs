@@ -218,6 +218,34 @@ namespace RecruiterPortal.DAL.Repository
                 throw new Exception(ex.Message);
             }
         }
+        public async Task<int> GetAllAsyncCount(Expression<Func<T, bool>> predicate)
+        {
+            try
+            {
+                using (context)
+                {
+                    return await context.Set<T>().Where(predicate).CountAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public async Task<int> GetAllAsyncCount()
+        {
+            try
+            {
+                using (context)
+                {
+                    return await context.Set<T>().CountAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public async Task<T> GetByIdAsync(Expression<Func<T, bool>> predicate)
         {

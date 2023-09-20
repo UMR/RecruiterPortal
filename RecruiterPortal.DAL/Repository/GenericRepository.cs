@@ -49,6 +49,14 @@ namespace RecruiterPortal.DAL.Repository
         {
             return await _repo.GetAllAsync(predicate);
         }
+        public async Task<int> GetAllAsyncCount(Expression<Func<T, bool>> predicate)
+        {
+            return await _repo.GetAllAsyncCount(predicate);
+        }
+        public async Task<int> GetAllAsyncCount()
+        {
+            return await _repo.GetAllAsyncCount();
+        }
 
         public async Task<IEnumerable<T>> GetPageAsync(Expression<Func<T, bool>> predicate, int page, int pageSize)
         {

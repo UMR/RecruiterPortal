@@ -350,6 +350,21 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
         }
 
+        [Route("get-applicant-count")]
+        [HttpGet]
+        public async Task<IActionResult> GetApplicantCount()
+        {
+            try
+            {
+                return Ok (await UserManager.GetApplicantCount());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         private byte[] GenerateEAFile(int applicantId, out string fileName)
         {
             byte[] data;

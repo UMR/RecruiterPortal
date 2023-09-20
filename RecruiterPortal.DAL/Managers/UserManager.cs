@@ -578,6 +578,27 @@ namespace RecruiterPortalDAL.Managers
 
             return userDt;
         }
+
+        public static async Task<ApplicantCountModel> GetApplicantCount()
+        {
+            try
+            {
+                GenericRepository<User> repository = new GenericRepository<User>();
+                var totalCount = await repository.GetAllAsyncCount();
+                var verifiedCount = await repository.GetAllAsyncCount(u => u.IsVerified == true);
+                var notVerifiedCount = await repository.GetAllAsyncCount(u => u.IsVerified == false);
+
+                ApplicantCountModel applicantCountModel = new ApplicantCountModel();
+                applicantCountModel.TotalApplicant = totalCount.ToString();
+                applicantCountModel.VerifiedApplicant = verifiedCount.ToString();
+                applicantCountModel.NotVerifiedApplicant = notVerifiedCount.ToString();
+                return applicantCountModel;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public static int DeleteUserByEmail(string email)
         {
             string spName = "sp_ApendUserEmail";

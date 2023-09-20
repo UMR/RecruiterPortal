@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from './dashboard.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-
+    applicantCount: any;
+    data1: any;
 
     ngOnInit() {
         //const documentStyle = getComputedStyle(document.documentElement);
@@ -16,30 +18,11 @@ export class DashboardComponent implements OnInit {
         //const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
     }
 
-    data: any;
-    data1: any;
+   
 
-    constructor() {
-        this.data = {
-            labels: ['A', 'B', 'C','D'],
-            datasets: [
-                {
-                    data: [300, 50, 100, 50],
-                    backgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56",
-                        "#5BFF33"
-                    ],
-                    hoverBackgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56",
-                        "#5BFF33"
-                    ]
-                }]
-        };
-
+    constructor(private dashboardService: DashboardService) {
+        this.getApplicantCount();
+        this.getApplicantStatus();
         this.data1 = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Sep', 'October', 'November', 'December'],
             datasets: [
@@ -57,6 +40,35 @@ export class DashboardComponent implements OnInit {
                     data: [28, 48, 40, 19, 86, 27, 90, 70, 60, 50, 10, 20]
                 }
             ]
+        };
+    }
+
+    getApplicantCount() {
+        this.dashboardService.getApplicantCount().subscribe(res => {
+            console.log(res);
+        },
+            err => {
+            },
+            () => {
+            });
+    }
+    getApplicantStatus() {
+        this.applicantCount = {
+            labels: ['Verified Applicant', 'Not Verified Applicant', 'Total Applicant'],
+            datasets: [
+                {
+                    data: [50, 100, 50],
+                    backgroundColor: [
+                        "#36A2EB",
+                        "#FFCE56",
+                        "#5BFF33"
+                    ],
+                    hoverBackgroundColor: [
+                        "#36A2EB",
+                        "#FFCE56",
+                        "#5BFF33"
+                    ]
+                }]
         };
     }
 
