@@ -35,7 +35,7 @@ export class AddApplicantComponent implements OnInit {
         appModel.LastName = this.applicantForm.get('lastName').value;
         appModel.Email = this.applicantForm.get('email').value
         appModel.Password = '123456';
-        appModel.IsVerified = false;
+        appModel.IsVerified = true;
         appModel.MiddleName = this.applicantForm.get('middleName').value;
 
         this.addApplicantService.addApplicant(appModel).subscribe(res => {
