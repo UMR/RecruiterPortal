@@ -55,19 +55,21 @@ export class DashboardComponent implements OnInit {
     }
     getApplicantStatus(totalApplicant: any, verifiedApplicant: any, notVerifiedApplicant: any) {
         this.applicantCount = {
-            labels: ['Verified Applicant', 'Not Verified Applicant', 'Total Applicant'],
+            labels: ['Total Applicant','Verified Applicant', 'Not Verified Applicant' ],
             datasets: [
                 {
-                    data: [verifiedApplicant, notVerifiedApplicant, totalApplicant],
+                    data: [totalApplicant,verifiedApplicant, notVerifiedApplicant],
                     backgroundColor: [
+                        "#5BFF33",
                         "#36A2EB",
-                        "#FFCE56",
-                        "#5BFF33"
+                        "#FFCE56"
+                        
                     ],
                     hoverBackgroundColor: [
+                        "#5BFF33",
                         "#36A2EB",
-                        "#FFCE56",
-                        "#5BFF33"
+                        "#FFCE56"
+                       
                     ]
                 }]
         };
