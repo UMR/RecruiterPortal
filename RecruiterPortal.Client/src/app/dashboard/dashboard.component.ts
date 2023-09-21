@@ -18,11 +18,11 @@ export class DashboardComponent implements OnInit {
         //const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
     }
 
-   
+
 
     constructor(private dashboardService: DashboardService) {
         this.getApplicantCount();
-        this.getApplicantStatus();
+        //this.getApplicantStatus();
         this.data1 = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Sep', 'October', 'November', 'December'],
             datasets: [
@@ -45,19 +45,20 @@ export class DashboardComponent implements OnInit {
 
     getApplicantCount() {
         this.dashboardService.getApplicantCount().subscribe(res => {
-            console.log(res);
+            console.log(res.body);
+            this.getApplicantStatus(res.body.TotalApplicant, res.body.VerifiedApplicant, res.body.NotVerifiedApplicant)
         },
             err => {
             },
             () => {
             });
     }
-    getApplicantStatus() {
+    getApplicantStatus(totalApplicant: any, verifiedApplicant: any, notVerifiedApplicant: any) {
         this.applicantCount = {
             labels: ['Verified Applicant', 'Not Verified Applicant', 'Total Applicant'],
             datasets: [
                 {
-                    data: [50, 100, 50],
+                    data: [verifiedApplicant, notVerifiedApplicant, totalApplicant],
                     backgroundColor: [
                         "#36A2EB",
                         "#FFCE56",

@@ -585,7 +585,9 @@ namespace RecruiterPortalDAL.Managers
             {
                 GenericRepository<User> repository = new GenericRepository<User>();
                 var totalCount = await repository.GetAllAsyncCount();
+                repository = new GenericRepository<User>();
                 var verifiedCount = await repository.GetAllAsyncCount(u => u.IsVerified == true);
+                repository = new GenericRepository<User>();
                 var notVerifiedCount = await repository.GetAllAsyncCount(u => u.IsVerified == false);
 
                 ApplicantCountModel applicantCountModel = new ApplicantCountModel();
