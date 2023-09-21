@@ -80,7 +80,7 @@ namespace RecruiterPortal.DAL.Managers
             try
             {
                 IEnumerable<JobResponseModel> jobs = null;
-                int jobsCount = 0;                                
+                int jobsCount = 0;
 
                 using (UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext())
                 {
@@ -210,6 +210,29 @@ namespace RecruiterPortal.DAL.Managers
             }
 
             return response;
+        }
+        public static async Task<JobCountModel> GetJobCount()
+        {
+            try
+            {
+                GenericRepository<Job> repository = new GenericRepository<Job>();
+                var jobCount = await repository.GetAllAsyncCount();
+                repository = new GenericRepository<Job>();
+                var activeJob = await repository.GetAllAsyncCount(j => j.Status == true);
+                repository = new GenericRepository<Job>();
+                var inActiveJob = await repository.GetAllAsyncCount(j => j.Status == false);
+
+                JobCountModel jobCountModel = new JobCountModel();
+                jobCountModel.TotalJob = jobCount.ToString();
+                jobCountModel.ActiveJob = activeJob.ToString();
+                jobCountModel.InActiveJob = inActiveJob.ToString();
+
+                return jobCountModel;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

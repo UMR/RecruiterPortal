@@ -85,5 +85,20 @@ namespace RecruiterPortal.API.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        [Route("get-count")]
+        [HttpGet]
+        public async Task<IActionResult> GetJobCount()
+        {
+            try
+            {
+                return Ok(await JobManager.GetJobCount());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

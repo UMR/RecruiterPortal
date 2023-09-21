@@ -9,19 +9,17 @@ import { DashboardService } from './dashboard.service';
 export class DashboardComponent implements OnInit {
 
     applicantCount: any;
+    jobCount: any;
     data1: any;
 
     ngOnInit() {
-        //const documentStyle = getComputedStyle(document.documentElement);
-        //const textColor = documentStyle.getPropertyValue('--text-color');
-        //const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-        //const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
     }
 
 
 
     constructor(private dashboardService: DashboardService) {
         this.getApplicantCount();
+        this.getJobCount();
         //this.getApplicantStatus();
         this.data1 = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Sep', 'October', 'November', 'December'],
@@ -55,21 +53,53 @@ export class DashboardComponent implements OnInit {
     }
     getApplicantStatus(totalApplicant: any, verifiedApplicant: any, notVerifiedApplicant: any) {
         this.applicantCount = {
-            labels: ['Total Applicant','Verified Applicant', 'Not Verified Applicant' ],
+            labels: ['Total Applicant: ' + totalApplicant, 'Verified Applicant: ' + verifiedApplicant, 'Not Verified Applicant: ' + notVerifiedApplicant],
             datasets: [
                 {
-                    data: [totalApplicant,verifiedApplicant, notVerifiedApplicant],
+                    data: [totalApplicant, verifiedApplicant, notVerifiedApplicant],
                     backgroundColor: [
                         "#5BFF33",
                         "#36A2EB",
                         "#FFCE56"
-                        
+
                     ],
                     hoverBackgroundColor: [
                         "#5BFF33",
                         "#36A2EB",
                         "#FFCE56"
-                       
+
+                    ]
+                }]
+        };
+    }
+
+    getJobCount() {
+        this.dashboardService.getJobCount().subscribe(res => {
+            console.log(res.body);
+            this.getJobStatus(res.body.TotalJob, res.body.ActiveJob, res.body.InActiveJob)
+        },
+            err => {
+            },
+            () => {
+            });
+    }
+    getJobStatus(totalJob: any, activeJob: any, inActiveJob: any) {
+        this.jobCount = {
+            labels: ['Total Job: ' + totalJob, 'Active Job: ' + activeJob, 'In Active Job: ' + inActiveJob],
+            datasets: [
+                {
+                    data: [totalJob, activeJob, inActiveJob],
+                    backgroundColor: [
+                        "#5BFF33",
+                        "#36A2EB",
+                        "#FFCE56"
+
+                    ],
+                    hoverBackgroundColor: [
+                        "#5BFF33",
+                        "#36A2EB",
+                        "#FFCE56"
+
                     ]
                 }]
         };
