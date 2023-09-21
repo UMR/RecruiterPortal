@@ -8,21 +8,26 @@ namespace RecruiterPortal.DAL.Managers
     {
         private static MailTemplateType MapMailTemplateTypeRequest(bool isInsert, MailTemplateType request, int recruiterId)
         {
-            MailTemplateType mailTemplateType = new MailTemplateType();
-            mailTemplateType.Id = request.Id;
+            MailTemplateType mailTemplateType = null;
             if (isInsert)
             {
+                mailTemplateType = new MailTemplateType();
+                mailTemplateType.RecruiterId = recruiterId;
+                mailTemplateType.Name = request.Name;
                 mailTemplateType.CreatedBy = recruiterId;
                 mailTemplateType.CreatedDate = DateTime.Now;
             }
             else
             {
+                mailTemplateType.Id = request.Id;
+                mailTemplateType.RecruiterId = recruiterId;
+                mailTemplateType.Name = request.Name;
                 mailTemplateType.UpdatedBy = recruiterId;
                 mailTemplateType.UpdatedDate = DateTime.Now;
             }
             return mailTemplateType;
         }
-        public static async Task<long> Insert(MailTemplateType request, int recruiterId)
+        public static async Task<int> Create(MailTemplateType request, int recruiterId)
         {
             try
             {
@@ -36,33 +41,37 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
-        public static async Task<int> Update(MailTemplateType request, int recruiterId)
+        public static async Task<bool?> Update(MailTemplateType request, int recruiterId)
         {
             try
             {
                 GenericRepository<MailTemplateType> repository = new GenericRepository<MailTemplateType>();
-                MailTemplateType mailTemplateType = MapMailTemplateTypeRequest(false, request, recruiterId);
-                return await repository.UpdateAsync(mailTemplateType);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-        public static async Task<int?> Delete(int id)
-        {
-            try
-            {
-                int? result = null;
-                GenericRepository<MailTemplateType> repository = new GenericRepository<MailTemplateType>();
-                MailTemplateType mailTemplateType = await repository.GetByIdAsync(s => s.Id == id);
-
+                MailTemplateType mailTemplateType = await repository.GetByIdAsync(m => m.Id == request.Id);
                 if (mailTemplateType != null)
                 {
-                    result = await repository.DeleteAsync(mailTemplateType);
+                    MapMailTemplateTypeRequest(false, request, recruiterId);
+                    return await repository.UpdateAsync(mailTemplateType) > 0 ? true : false;
                 }
 
-                return result;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public static async Task<bool?> Delete(int id)
+        {
+            try
+            {
+                GenericRepository<MailTemplateType> repository = new GenericRepository<MailTemplateType>();
+                MailTemplateType mailTemplateType = await repository.GetByIdAsync(s => s.Id == id);
+                if (mailTemplateType != null)
+                {
+                    return await repository.DeleteAsync(mailTemplateType) > 0 ? true : false; ;
+                }
+
+                return null;
             }
             catch (Exception ex)
             {
@@ -70,7 +79,7 @@ namespace RecruiterPortal.DAL.Managers
             }
         }
 
-        public static async List<MailTemplateTypeResponse> GetMailTemplateTypeByRecruiterId(int recruiterId)
+        public static async Task<List<MailTemplateTypeResponse>> GetMailTemplateTypeByRecruiterId(int recruiterId)
         {
             try
             {
@@ -78,7 +87,7 @@ namespace RecruiterPortal.DAL.Managers
                 GenericRepository<MailTemplateType> repository = new GenericRepository<MailTemplateType>();
                 var mailTemplateTypesFromDb = await repository.GetAllAsync(m => m.RecruiterId == recruiterId);
 
-                foreach (var mailTemplateType in mailTemplateTypes) 
+                foreach (var mailTemplateType in mailTemplateTypes)
                 {
                     MailTemplateTypeResponse mailTemplateTypeResponse = new MailTemplateTypeResponse();
                     mailTemplateTypeResponse.Id = mailTemplateType.Id;
@@ -89,7 +98,7 @@ namespace RecruiterPortal.DAL.Managers
                     mailTemplateTypeResponse.UpdatedDate = mailTemplateType.UpdatedDate;
                 }
 
-                mailTemplateTypes;
+                return mailTemplateTypes;
             }
             catch (Exception ex)
             {
