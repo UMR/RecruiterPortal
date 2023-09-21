@@ -9,10 +9,11 @@
                     </div>
                 </div>
                 <div class="col-6">
-                    <div style="background-color:white">
-                        <p-chart type="doughnut" [data]="jobCount"></p-chart>
+                    <div style="background-color: white;">
+                        <p-chart type="polarArea" [data]="statusCount"></p-chart>
                     </div>
                 </div>
+
             </div>
             <div class="row">
                 <div class="col-6">
@@ -22,7 +23,7 @@
                 </div>
                 <div class="col-6">
                     <div style="background-color: white; margin-top: 16px">
-                        <p-chart type="polarArea" [data]="applicantCount"></p-chart>
+                        <p-chart type="doughnut" [data]="jobCount"></p-chart>
                     </div>
                 </div>
             </div>
