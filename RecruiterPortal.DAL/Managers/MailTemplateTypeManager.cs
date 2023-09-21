@@ -27,6 +27,21 @@ namespace RecruiterPortal.DAL.Managers
             }
             return mailTemplateType;
         }
+
+        private static MailTemplateTypeResponse MapMailTemplateTypeResponse(MailTemplateType request) 
+        {
+            MailTemplateTypeResponse response = new MailTemplateTypeResponse();
+            response.Id = request.Id;
+            response.RecruiterId = request.RecruiterId;
+            response.Name = request.Name;
+            response.CreatedBy = request.CreatedBy;
+            response.CreatedDate = request.CreatedDate;
+            response.UpdatedBy = request.UpdatedBy;
+            response.UpdatedDate = request.UpdatedDate;
+
+            return response;
+        }
+
         public static async Task<int> Create(MailTemplateType request, int recruiterId)
         {
             try
@@ -79,23 +94,40 @@ namespace RecruiterPortal.DAL.Managers
             }
         }
 
-        public static async Task<List<MailTemplateTypeResponse>> GetMailTemplateTypeByRecruiterId(int recruiterId)
+        public static async Task<MailTemplateTypeResponse> GetMailTemplateTypeById(int id)
+        {
+            try
+            {
+                MailTemplateTypeResponse mailTemplateType = null;
+                GenericRepository<MailTemplateType> repository = new GenericRepository<MailTemplateType>();
+                var mailTemplateTypeFromDb = await repository.GetByIdAsync(m => m.Id == id);
+                if (mailTemplateTypeFromDb != null)
+                {
+                    mailTemplateType = MapMailTemplateTypeResponse(mailTemplateTypeFromDb);
+                }
+
+                return mailTemplateType;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static async Task<List<MailTemplateTypeResponse>> GetMailTemplateTypesByRecruiterId(int recruiterId)
         {
             try
             {
                 List<MailTemplateTypeResponse> mailTemplateTypes = new List<MailTemplateTypeResponse>();
                 GenericRepository<MailTemplateType> repository = new GenericRepository<MailTemplateType>();
                 var mailTemplateTypesFromDb = await repository.GetAllAsync(m => m.RecruiterId == recruiterId);
-
-                foreach (var mailTemplateType in mailTemplateTypes)
+                if (mailTemplateTypesFromDb != null)
                 {
-                    MailTemplateTypeResponse mailTemplateTypeResponse = new MailTemplateTypeResponse();
-                    mailTemplateTypeResponse.Id = mailTemplateType.Id;
-                    mailTemplateTypeResponse.Name = mailTemplateType.Name;
-                    mailTemplateTypeResponse.CreatedBy = mailTemplateType.CreatedBy;
-                    mailTemplateTypeResponse.CreatedDate = mailTemplateType.CreatedDate;
-                    mailTemplateTypeResponse.UpdatedBy = mailTemplateType.UpdatedBy;
-                    mailTemplateTypeResponse.UpdatedDate = mailTemplateType.UpdatedDate;
+                    foreach (var mailTemplateTypeFromDb in mailTemplateTypesFromDb)
+                    {
+                        MailTemplateTypeResponse mailTemplateType = MapMailTemplateTypeResponse(mailTemplateTypeFromDb);
+                        mailTemplateTypes.Add(mailTemplateType);
+                    }
                 }
 
                 return mailTemplateTypes;
