@@ -70,20 +70,31 @@ namespace RecruiterPortal.DAL.Managers
             }
         }
 
-        //public static List<MailTemplateTypeResponse> GetApplicantStatusByAgencyId(int recruiterId)
-        //{
-        //    try
-        //    {
-        //        IEnumerable<MailTemplateTypeResponse> mailTemplateTypes = Array.Empty<MailTemplateTypeResponse>();
-        //        using (UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext()) 
-        //        {
-        //            var mailTemplateTypes = context.MailTemplateTypes.Where(m=>m.re);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-        //}
+        public static async List<MailTemplateTypeResponse> GetMailTemplateTypeByRecruiterId(int recruiterId)
+        {
+            try
+            {
+                List<MailTemplateTypeResponse> mailTemplateTypes = new List<MailTemplateTypeResponse>();
+                GenericRepository<MailTemplateType> repository = new GenericRepository<MailTemplateType>();
+                var mailTemplateTypesFromDb = await repository.GetAllAsync(m => m.RecruiterId == recruiterId);
+
+                foreach (var mailTemplateType in mailTemplateTypes) 
+                {
+                    MailTemplateTypeResponse mailTemplateTypeResponse = new MailTemplateTypeResponse();
+                    mailTemplateTypeResponse.Id = mailTemplateType.Id;
+                    mailTemplateTypeResponse.Name = mailTemplateType.Name;
+                    mailTemplateTypeResponse.CreatedBy = mailTemplateType.CreatedBy;
+                    mailTemplateTypeResponse.CreatedDate = mailTemplateType.CreatedDate;
+                    mailTemplateTypeResponse.UpdatedBy = mailTemplateType.UpdatedBy;
+                    mailTemplateTypeResponse.UpdatedDate = mailTemplateType.UpdatedDate;
+                }
+
+                mailTemplateTypes;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
