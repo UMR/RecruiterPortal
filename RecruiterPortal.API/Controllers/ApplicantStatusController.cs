@@ -32,5 +32,20 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 return Ok();
             }
         }
+
+        [Route("save")]
+        [HttpPost]
+        public async Task<IActionResult> SaveApplicantStatus(ApplicantStatusRequestModel requestModel)
+        {
+            try
+            {
+                return Ok(await ApplicantStatusManager.Insert(requestModel, AgencyId, RecruiterId));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }
