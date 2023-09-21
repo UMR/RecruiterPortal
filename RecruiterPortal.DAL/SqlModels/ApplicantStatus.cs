@@ -47,6 +47,8 @@ public partial class ApplicantStatus
 
     public virtual Recruiter CreatedByNavigation { get; set; }
 
+    public virtual Institution Institution { get; set; }
+
     public virtual Position Position { get; set; }
 
     public virtual Recruiter UpdatedByNavigation { get; set; }
