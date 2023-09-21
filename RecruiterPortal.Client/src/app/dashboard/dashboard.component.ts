@@ -51,9 +51,10 @@ export class DashboardComponent implements OnInit {
             () => {
             });
     }
+
     getApplicantStatus(totalApplicant: any, verifiedApplicant: any, notVerifiedApplicant: any) {
         this.applicantCount = {
-            labels: ['Total Applicant: ' + totalApplicant, 'Verified Applicant: ' + verifiedApplicant, 'Not Verified Applicant: ' + notVerifiedApplicant],
+            labels: ['Total Applicant : ' + totalApplicant, 'Verified Applicant : ' + verifiedApplicant, 'Not Verified Applicant : ' + notVerifiedApplicant],
             datasets: [
                 {
                     data: [totalApplicant, verifiedApplicant, notVerifiedApplicant],
@@ -85,7 +86,7 @@ export class DashboardComponent implements OnInit {
     }
     getJobStatus(totalJob: any, activeJob: any, inActiveJob: any) {
         this.jobCount = {
-            labels: ['Total Job: ' + totalJob, 'Active Job: ' + activeJob, 'In Active Job: ' + inActiveJob],
+            labels: ['Total Job : ' + totalJob, 'Active Job : ' + activeJob, 'In Active Job : ' + inActiveJob],
             datasets: [
                 {
                     data: [totalJob, activeJob, inActiveJob],
