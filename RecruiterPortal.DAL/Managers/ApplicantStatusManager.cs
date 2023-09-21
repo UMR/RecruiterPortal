@@ -20,12 +20,6 @@ namespace RecruiterPortal.DAL.Managers
                     statusModel.StatusName = GetEnumDescription(item);
                     statusModelList.Add(statusModel);
                 }
-                //SortedList sortedList = new SortedList();
-                //foreach (EnumApplicantStatus item in Enum.GetValues(typeof(EnumApplicantStatus)))
-                //{
-                //    sortedList.Add((int)item, GetEnumDescription(item));
-                //}
-
                 return statusModelList;
             }
             catch (Exception ex)

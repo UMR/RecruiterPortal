@@ -23,22 +23,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         public IActionResult GetApplicantStatus()
         {
             List<StatusModel> applicantStatus = ApplicantStatusManager.GetAllStatus();
-            //List<StatusModel> result = new List<StatusModel>();
             if (applicantStatus.Count > 0)
             {
-                //foreach (var item in applicantStatus)
-                //{
-                //    StatusModel childNode = new StatusModel();
-                //    childNode.StatusId = item.StatusId;
-                //    childNode.StatusName = applicantStatus.GetByIndex(i).ToString();
-                //    result.Add(childNode);
-                //}
-                //{
-                //    StatusModel childNode = new StatusModel();
-                //    childNode.StatusId = applicantStatus.;
-                //    childNode.StatusName = applicantStatus.GetByIndex(i).ToString();
-                //    result.Add(childNode);
-                //}
                 return Ok(applicantStatus);
             }
             else
