@@ -23,6 +23,25 @@ namespace RecruiterPortal.DAL.Utility
             Honorable = 1,
             Dishonorable = 0
         }
+        public enum EnumApplicantStatus
+        {
+            [Description("New Leads")]
+            NewLeads = 0,
+            [Description("Pre-screened")]
+            PreScreened = 1,
+            [Description("Phone Screened")]
+            PhoneScreened = 2,
+            [Description("Final Interview")]
+            FinalInterview = 3,
+            [Description("Offered")]
+            Offered = 4,
+            [Description("Accepted")]
+            Accepted = 5,
+            [Description("Refused")]
+            Refused = 6,
+            [Description("Rejected")]
+            Rejected = 7
+        }
         public enum EnumFileType
         {
             [Description("UMR Health Form")]

@@ -49,6 +49,10 @@ namespace RecruiterPortal.DAL.Repository
         {
             return await _repo.GetAllAsync(predicate);
         }
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
+            return await _repo.GetAllAsync();
+        }
         public async Task<int> GetAllAsyncCount(Expression<Func<T, bool>> predicate)
         {
             return await _repo.GetAllAsyncCount(predicate);

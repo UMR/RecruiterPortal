@@ -1,11 +1,38 @@
 ﻿using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
+using System.Collections;
+using static RecruiterPortal.DAL.Utility.Utility;
 
 namespace RecruiterPortal.DAL.Managers
 {
     public class ApplicantStatusManager
     {
+        public static List<StatusModel> GetAllStatus()
+        {
+            try
+            {
+                List<StatusModel> statusModelList = new List<StatusModel>();
+                foreach (EnumApplicantStatus item in Enum.GetValues(typeof(EnumApplicantStatus)))
+                {
+                    StatusModel statusModel = new StatusModel();
+                    statusModel.StatusId = ((int)item).ToString();
+                    statusModel.StatusName = GetEnumDescription(item);
+                    statusModelList.Add(statusModel);
+                }
+                //SortedList sortedList = new SortedList();
+                //foreach (EnumApplicantStatus item in Enum.GetValues(typeof(EnumApplicantStatus)))
+                //{
+                //    sortedList.Add((int)item, GetEnumDescription(item));
+                //}
+
+                return statusModelList;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         private static ApplicantStatus MapApplicantStatusRequest(bool isInsert, ApplicantStatusRequestModel request, long agencyId, int recruiterId)
         {
             ApplicantStatus applicantStatus = new ApplicantStatus();

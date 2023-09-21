@@ -1,6 +1,23 @@
 <form [formGroup]="formGroup" novalidate>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="institution" class="form-label">Status</label>
+                <p-autoComplete formControlName="status" [suggestions]="statusResults" class="form-control"
+                                required autocomplete="off" (completeMethod)="onStatusSearch()"
+                                forceSelection="true" (onSelect)="onStatusSelect($event)" [ngClass]="{ 'is-invalid': submitted }" [dropdown]="true">
+                    <ng-template let-status pTemplate="item">
+                        <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                            <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{status.StatusName}}</div>
+                        </div>
+                    </ng-template>
+                </p-autoComplete>
+                <small class="p-error" *ngIf="submitted">Institution is required.</small>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="form-group">
                 <label for="postion" class="form-label">Postion</label>
                 <p-autoComplete formControlName="position" [suggestions]="positionResults" class="form-control"
@@ -15,11 +32,13 @@
                 <small class="p-error" *ngIf="submitted">Postion is required.</small>
             </div>
         </div>
-        <div class="col-md-6">
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <div class="form-group">
                 <label for="institution" class="form-label">Institution</label>
                 <p-autoComplete formControlName="institution" [suggestions]="institutionResults" class="form-control"
-                                (completeMethod)="onInstitutiionSearch($event)" required autocomplete="off"
+                                (completeMethod)="onInstitutiionSearch($event)" autocomplete="off"
                                 forceSelection="true" (onSelect)="onInstitutiionSelect($event)" [ngClass]="{ 'is-invalid': submitted }" [dropdown]="true">
                     <ng-template let-institute pTemplate="item">
                         <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
@@ -30,7 +49,23 @@
                 <small class="p-error" *ngIf="submitted">Institution is required.</small>
             </div>
         </div>
-    </div>    
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="institution" class="form-label">Cureent Salary</label>
+                <input type="text" formControlName="currentSalary" pInputText pKeyFilter="num" placeholder="Cureent Salary" class="form-control">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="institution" class="form-label">Expected Salary</label>
+                <input type="text" formControlName="expectedSalary" pInputText pKeyFilter="num" placeholder="Expected Salary" class="form-control">
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="com-md-12">
             <ul class="list-inline mb-0 d-flex justify-content-between mt-2 ml-3">

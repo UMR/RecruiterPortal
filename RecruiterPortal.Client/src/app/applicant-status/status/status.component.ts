@@ -14,24 +14,43 @@ export class StatusComponent implements OnInit {
     @Output() hideEvent = new EventEmitter<boolean>();
     @Input() selectedApplicant: any;
     public formGroup: FormGroup;
+    public statusResults: string[];
     public positionResults: string[];
     public institutionResults: any[];
     
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private statusService: StatusService) { }
 
     ngOnInit() {
-        this.createFormGroup();        
+        this.createFormGroup();
     }
 
     createFormGroup() {
-        this.formGroup = this.fb.group({            
+        this.formGroup = this.fb.group({
+            status: ['', Validators.compose([Validators.required])],
+            statusKey:[],
             position: ['', Validators.compose([Validators.required])],
             positionId: [''],
-            institution: ['', Validators.compose([Validators.required])],
-            instituteId: [''],            
+            institution: [''],
+            instituteId: [''],
+            currentSalary: [''],
+            expectedSalary:['']
         });
     }
-
+    onStatusSelect($event) {
+        this.formGroup.patchValue({
+            status: $event.StatusName,
+            statusKey: $event.StatusId
+        });
+    }
+    onStatusSearch() {
+        this.statusService.getStatus().subscribe(response => {
+            console.log(response.body);
+            this.statusResults = response.body;
+        },
+            err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get positions', detail: '' }); },
+            () => { });
+    }
+    
     onPositionSearch($event) {
         this.statusService.getPositionByPositionName($event.query).subscribe(response => {
             this.positionResults = response.body;

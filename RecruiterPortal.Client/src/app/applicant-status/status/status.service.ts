@@ -10,6 +10,10 @@ export class StatusService {
 
     constructor(private client: HttpClient) { }
 
+    getStatus(): Observable<HttpResponse<any>> {
+        return this.client.get(encodeURI(`${resourceServerUrl}/api/applicantstatus/get-status`), { observe: 'response' });
+    }
+
     getPositionByPositionName(posotion: string): Observable<HttpResponse<any>> {
         return this.client.get(encodeURI(`${resourceServerUrl}/api/employment/position?text=${posotion}`), { observe: 'response' });
     }
@@ -17,4 +21,5 @@ export class StatusService {
     getInsituteByInsituteName(institute: string): Observable<HttpResponse<any>> {
         return this.client.get(encodeURI(`${resourceServerUrl}/api/employment/institute?text=${institute}`), { observe: 'response' });
     }
+
 }

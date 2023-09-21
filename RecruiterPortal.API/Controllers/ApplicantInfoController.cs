@@ -1,9 +1,12 @@
-﻿using System.Data;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Data;
 using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using RecruiterPortal.API.Controllers;
+using RecruiterPortal.DAL.Managers;
 using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.SqlModels;
 using RecruiterPortalDAL.Managers;
@@ -356,7 +359,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             try
             {
-                return Ok (await UserManager.GetApplicantCount());
+                return Ok(await UserManager.GetApplicantCount());
             }
             catch (Exception ex)
             {
@@ -364,6 +367,9 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+       
+
 
         private byte[] GenerateEAFile(int applicantId, out string fileName)
         {
