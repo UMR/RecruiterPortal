@@ -1,1 +1,56 @@
-<p>mail-template-type works!</p>
+<div id="page-content-wrapper">
+    <applicant-portal-header (onToggleButtonClicked)="(showHideMenu)()" isVisibleToggleButton=0></applicant-portal-header>
+    <loading-image [is-loading]="isLoading"></loading-image>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <button pButton pRipple label="Add New" class="p-button-success" tabindex="0" (click)="onAddNew()"></button>
+            </div>
+        </div>
+        <form [formGroup]="formGroup" novalidate>
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Mail Template Type Name</label>
+                        <input id="name" name="name" type="text" class="form-control" autocomplete="off"
+                               formControlName="name" tabindex="1" trimmed maxlength="100" />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-portal" (click)="save()" [disabled]="!formGroup.valid">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-md-12">
+                <p-table [responsive]="true"
+                         [value]="mailTemplateTypes"
+                         selectionMode="single"
+                         [(selection)]="selectedMailTemplateType"
+                         dataKey="Id">
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th>Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-mail let-rowData>
+                        <tr [pSelectableRow]="mail">
+                            <td>{{mail.Name}}</td>
+                            <td><a (click)="onEdit(mail)"><i class="pi pi-pencil"></i></a><a style="color:red" (click)="onDelete(mail)"><i class="pi pi-trash"></i></a></td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-toast></p-toast>
+<p-confirmDialog [style]="{ width: '1000px' }" #cd>
+    <ng-template pTemplate="footer">
+        <button type="button" pButton icon="pi pi-times" label="No" class="btn-no" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="pi pi-check" label="Yes" class="btn-yes" (click)="cd.accept()"></button>
+    </ng-template>
+</p-confirmDialog>
+<p-toast key="toastKey1"></p-toast>

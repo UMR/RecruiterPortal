@@ -6,7 +6,7 @@ namespace RecruiterPortal.DAL.Managers
 {
     public class MailTemplateTypeManager
     {
-        private static MailTemplateType MapMailTemplateTypeRequest(bool isInsert, MailTemplateType request, int recruiterId)
+        private static MailTemplateType MapMailTemplateTypeRequest(bool isInsert, MailTemplateTypeRequest request, int recruiterId)
         {
             MailTemplateType mailTemplateType = null;
             if (isInsert)
@@ -42,7 +42,7 @@ namespace RecruiterPortal.DAL.Managers
             return response;
         }
 
-        public static async Task<int> Create(MailTemplateType request, int recruiterId)
+        public static async Task<int> Create(MailTemplateTypeRequest  request, int recruiterId)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
-        public static async Task<bool?> Update(MailTemplateType request, int recruiterId)
+        public static async Task<bool?> Update(MailTemplateTypeRequest request, int recruiterId)
         {
             try
             {
