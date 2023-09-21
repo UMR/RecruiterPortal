@@ -42,7 +42,6 @@ namespace RecruiterPortal.API.Controllers
             }
         }
 
-
         [Route("save")]
         [HttpPost]
         public async Task<IActionResult> Save([FromBody] JobRequestModel request)
