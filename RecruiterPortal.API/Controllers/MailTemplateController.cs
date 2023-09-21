@@ -27,13 +27,13 @@ namespace RecruiterPortal.API.Controllers
             }
         }
 
-        [Route("get-mail-template-type-by-recruiterid/{id}")]
+        [Route("get-mail-template-type-by-id/{id}")]
         [HttpGet]
-        public IActionResult GetMailTemplateTypeByRecruiterId(int id)
+        public async Task<IActionResult> GetMailTemplateTypeById(int id)
         {
             try
             {
-                return StatusCode(200, MailTemplateTypeManager.GetMailTemplateTypeById(id));
+                return StatusCode(200, await MailTemplateTypeManager.GetMailTemplateTypeById(id));
             }
             catch (Exception ex)
             {
@@ -45,7 +45,7 @@ namespace RecruiterPortal.API.Controllers
 
         [Route("save-mail-template-type")]
         [HttpPost]
-        public async Task<IActionResult> Save([FromBody] MailTemplateTypeRequest request)
+        public async Task<IActionResult> SaveMailTemplateType([FromBody] MailTemplateTypeRequest request)
         {
             try
             {
@@ -59,6 +59,26 @@ namespace RecruiterPortal.API.Controllers
                     return StatusCode(200);
                 }
                 return StatusCode(200, await MailTemplateTypeManager.Create(request, RecruiterId));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [Route("delete-mail-template-type/{id}")]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteMailTemplateType(int id)
+        {
+            try
+            {
+                bool? result = await MailTemplateTypeManager.Delete(id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return StatusCode(200);
             }
             catch (Exception ex)
             {

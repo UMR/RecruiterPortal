@@ -32,9 +32,19 @@ export class MailTemplateTypeComponent implements OnInit {
         });
     }
 
-    getMailTemplateTypesByRecruiterId() {        
+    getMailTemplateTypesByRecruiterId() {
         this.mailTemplateTypeService.getMailTemplateTypesByRecruiterId()
             .subscribe(response => { this.mailTemplateTypes = response.body; console.log(this.mailTemplateTypes); });
+    }
+
+    getMailTemplateTypeById(id) {
+        this.mailTemplateTypeService.getMailTemplateTypeById(id)
+            .subscribe(response => {
+                console.log(response);
+                this.selectedMailTemplateType = response.body;
+                this.selectedMailTemplateTypeId = this.selectedMailTemplateType.Id;
+                this.formGroup.controls.name.setValue(this.selectedMailTemplateType.Name);
+            });
     }
 
     onAddNew() {
@@ -43,6 +53,7 @@ export class MailTemplateTypeComponent implements OnInit {
 
     onEdit(mailTemplateType) {
         this.selectedMailTemplateTypeId = mailTemplateType.Id;
+        this.getMailTemplateTypeById(this.selectedMailTemplateTypeId);
     }
 
     save() {
@@ -53,6 +64,8 @@ export class MailTemplateTypeComponent implements OnInit {
         if (this.formGroup.valid) {
             this.mailTemplateTypeService.save(jobModel).subscribe(res => {
                 if (res.status === 200) {
+                    this.selectedMailTemplateTypeId = null;
+                    this.selectedMailTemplateType = null;
                     this.setDefaultFields();
                     this.getMailTemplateTypesByRecruiterId();
                     this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail Template Type Saved', life: 3000 });
@@ -76,6 +89,9 @@ export class MailTemplateTypeComponent implements OnInit {
             accept: () => {
                 this.mailTemplateTypeService.delete(mailTemplateType.Id).subscribe(res => {
                     if (res.status === 200) {
+                        this.selectedMailTemplateTypeId = null;
+                        this.selectedMailTemplateType = null;
+                        this.setDefaultFields();
                         this.getMailTemplateTypesByRecruiterId();
                         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail Template Type Deleted', life: 3000 });
                     }

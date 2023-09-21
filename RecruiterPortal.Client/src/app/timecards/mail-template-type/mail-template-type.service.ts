@@ -14,8 +14,8 @@ export class MailTemplateService {
         return this.client.get(`${resourceServerUrl}/api/mailtemplate/get-mail-template-types-by-recruiterid`, { observe: 'response' });
     }
 
-    getJobById(id: number): Observable<HttpResponse<any>> {
-        return this.client.get(`${resourceServerUrl}/api/jobs/get-by-id/${id}`, { observe: 'response' });
+    getMailTemplateTypeById(id: number): Observable<any> {
+        return this.client.get(`${resourceServerUrl}/api/mailtemplate/get-mail-template-type-by-id/${id}`, { observe: 'response' });
     }    
 
     save(job: any): Observable<HttpResponse<any>> {
