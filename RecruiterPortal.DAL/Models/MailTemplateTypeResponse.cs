@@ -14,5 +14,7 @@
 
         public DateTime? UpdatedDate { get; set; }
 
+        public int RecruiterId { get; set; }
+
     }
 }
