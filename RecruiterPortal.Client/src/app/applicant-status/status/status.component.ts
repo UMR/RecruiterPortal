@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { StatusService } from './status.service';
+import { ApplicantStatusRequestModel } from '../../common/model/applicantStatusRequestModel';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class StatusComponent implements OnInit {
     createFormGroup() {
         this.formGroup = this.fb.group({
             status: ['', Validators.compose([Validators.required])],
-            statusKey:[],
+            statusId:[],
             position: ['', Validators.compose([Validators.required])],
             positionId: [''],
             institution: [''],
@@ -39,7 +40,7 @@ export class StatusComponent implements OnInit {
     onStatusSelect($event) {
         this.formGroup.patchValue({
             status: $event.StatusName,
-            statusKey: $event.StatusId
+            statusId: $event.StatusId
         });
     }
     onStatusSearch() {
@@ -92,7 +93,28 @@ export class StatusComponent implements OnInit {
     }
 
     save() {
-        console.log(this.selectedApplicant);
-        console.log('aasa');
+
+        let statusModel = new ApplicantStatusRequestModel;
+        statusModel.ApplicantId = this.selectedApplicant.UserId;
+        statusModel.Status = this.formGroup.get('statusId').value;
+        statusModel.Date = new Date;
+        statusModel.PositionId = this.formGroup.get('positionId').value;
+        statusModel.InstitutionId = this.formGroup.get('instituteId').value;
+        statusModel.CurrentSalary = this.formGroup.get('currentSalary').value;
+        statusModel.ExpectedSalary = this.formGroup.get('expectedSalary').value;
+
+        this.statusService.addApplicantStatus(statusModel).subscribe(res => {
+            if (res) {
+                this.formGroup.reset()
+                this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Applicant Added Successfully', detail: '' });
+            }
+        },
+            err => {
+               /* this.isLoading = false;*/
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Add Applicant failed', detail: '' });
+            },
+            () => {
+                //this.isLoading = false;
+            });
     }
 }

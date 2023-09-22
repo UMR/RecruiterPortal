@@ -39,7 +39,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             try
             {
-                return Ok(await ApplicantStatusManager.Insert(requestModel, AgencyId, RecruiterId));
+                return Ok(200, await ApplicantStatusManager.Insert(requestModel, AgencyId, RecruiterId));
             }
             catch (Exception ex)
             {

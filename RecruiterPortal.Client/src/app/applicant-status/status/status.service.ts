@@ -2,6 +2,7 @@
 import { resourceServerUrl } from '../../common/constants/auth-keys';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ApplicantStatusRequestModel } from '../../common/model/applicantStatusRequestModel';
 
 @Injectable({
     providedIn: 'root'
@@ -21,5 +22,7 @@ export class StatusService {
     getInsituteByInsituteName(institute: string): Observable<HttpResponse<any>> {
         return this.client.get(encodeURI(`${resourceServerUrl}/api/employment/institute?text=${institute}`), { observe: 'response' });
     }
-
+    addApplicantStatus(applicantStatusModel: ApplicantStatusRequestModel) {
+        return this.client.post(encodeURI(`${resourceServerUrl}/api/applicantstatus/save`), applicantStatusModel);
+    }
 }
