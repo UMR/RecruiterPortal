@@ -66,7 +66,7 @@ export class MailTemplateTypeComponent implements OnInit {
         if (this.formGroup.valid) {
             this.mailTemplateTypeService.save(model).subscribe(res => {
                 if (res.status === 200) {
-                    this.selectedMailTemplateTypeId = null;
+                    this.selectedMailTemplateTypeId = 0;
                     this.selectedMailTemplateType = null;
                     this.setDefaultFields();
                     this.getMailTemplateTypesByRecruiterId();

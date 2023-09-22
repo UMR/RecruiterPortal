@@ -27,6 +27,9 @@
                          [value]="mailTemplateTypes"
                          selectionMode="single"
                          [(selection)]="selectedMailTemplateType"
+                         [paginator]="true" 
+                         [rows]="5" 
+                         [showCurrentPageReport]="true"                            
                          dataKey="Id">
                     <ng-template pTemplate="header" let-columns>
                         <tr>
