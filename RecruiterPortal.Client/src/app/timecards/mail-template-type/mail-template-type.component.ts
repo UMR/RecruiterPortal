@@ -28,7 +28,7 @@ export class MailTemplateTypeComponent implements OnInit {
 
     createJobFormGroup() {
         this.formGroup = this.fb.group({
-            name: ['', Validators.compose([Validators.maxLength(100)])]
+            name: ['', Validators.compose([Validators.required, Validators.maxLength(100)])]
         });
     }
 
@@ -84,26 +84,19 @@ export class MailTemplateTypeComponent implements OnInit {
     }
 
     onDelete(mailTemplateType) {
-        this.confirmationService.confirm({
-            message: `Are you sure you want to delete ${mailTemplateType.Name} mail template type?`,
-            header: 'Confirm',
-            icon: 'pi pi-exclamation-triangle',
-            accept: () => {
-                this.mailTemplateTypeService.delete(mailTemplateType.Id).subscribe(res => {
-                    if (res.status === 200) {
-                        this.selectedMailTemplateTypeId = null;
-                        this.selectedMailTemplateType = null;
-                        this.setDefaultFields();
-                        this.getMailTemplateTypesByRecruiterId();
-                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail Template Type Deleted', life: 3000 });
-                    }
-                },
-                    err => {
-                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail Template Type Delete Failed', life: 3000 });
-                    }
-                );
+        this.mailTemplateTypeService.delete(mailTemplateType.Id).subscribe(res => {
+            if (res.status === 200) {
+                this.selectedMailTemplateTypeId = null;
+                this.selectedMailTemplateType = null;
+                this.setDefaultFields();
+                this.getMailTemplateTypesByRecruiterId();
+                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail Template Type Deleted', life: 3000 });
             }
-        });
+        },
+            err => {
+                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail Template Type Delete Failed', life: 3000 });
+            }
+        );
     }
 
 }
