@@ -49,6 +49,8 @@ export class MailTemplateTypeComponent implements OnInit {
 
     onAddNew() {
         this.setDefaultFields();
+        this.selectedMailTemplateTypeId = null;
+        this.selectedMailTemplateType = null;
     }
 
     onEdit(mailTemplateType) {
@@ -57,12 +59,12 @@ export class MailTemplateTypeComponent implements OnInit {
     }
 
     save() {
-        const jobModel = {
+        const model = {
             Id: this.selectedMailTemplateTypeId,
             Name: this.formGroup.controls.name.value
         }
         if (this.formGroup.valid) {
-            this.mailTemplateTypeService.save(jobModel).subscribe(res => {
+            this.mailTemplateTypeService.save(model).subscribe(res => {
                 if (res.status === 200) {
                     this.selectedMailTemplateTypeId = null;
                     this.selectedMailTemplateType = null;

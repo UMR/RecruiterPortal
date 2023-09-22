@@ -6,29 +6,28 @@ namespace RecruiterPortal.DAL.Managers
 {
     public class MailTemplateTypeManager
     {
-        private static MailTemplateType MapMailTemplateTypeRequest(bool isInsert, MailTemplateTypeRequest request, int recruiterId)
+        private static MailTemplateType MapMailTemplateTypeCreateRequest(MailTemplateTypeRequest request, int recruiterId)
         {
-            MailTemplateType mailTemplateType = null;
-            if (isInsert)
-            {
-                mailTemplateType = new MailTemplateType();
-                mailTemplateType.RecruiterId = recruiterId;
-                mailTemplateType.Name = request.Name;
-                mailTemplateType.CreatedBy = recruiterId;
-                mailTemplateType.CreatedDate = DateTime.Now;
-            }
-            else
-            {
-                mailTemplateType.Id = request.Id;
-                mailTemplateType.RecruiterId = recruiterId;
-                mailTemplateType.Name = request.Name;
-                mailTemplateType.UpdatedBy = recruiterId;
-                mailTemplateType.UpdatedDate = DateTime.Now;
-            }
+            MailTemplateType mailTemplateType = new MailTemplateType();
+            mailTemplateType = new MailTemplateType();
+            mailTemplateType.RecruiterId = recruiterId;
+            mailTemplateType.Name = request.Name;
+            mailTemplateType.CreatedBy = recruiterId;
+            mailTemplateType.CreatedDate = DateTime.Now;
             return mailTemplateType;
         }
 
-        private static MailTemplateTypeResponse MapMailTemplateTypeResponse(MailTemplateType request) 
+        private static MailTemplateType MapMailTemplateTypeUpdateRequest(MailTemplateTypeRequest request, MailTemplateType mailTemplateType, int recruiterId)
+        {
+            mailTemplateType.Id = request.Id;
+            mailTemplateType.RecruiterId = recruiterId;
+            mailTemplateType.Name = request.Name;
+            mailTemplateType.UpdatedBy = recruiterId;
+            mailTemplateType.UpdatedDate = DateTime.Now;
+            return mailTemplateType;
+        }
+
+        private static MailTemplateTypeResponse MapMailTemplateTypeResponse(MailTemplateType request)
         {
             MailTemplateTypeResponse response = new MailTemplateTypeResponse();
             response.Id = request.Id;
@@ -42,12 +41,12 @@ namespace RecruiterPortal.DAL.Managers
             return response;
         }
 
-        public static async Task<int> Create(MailTemplateTypeRequest  request, int recruiterId)
+        public static async Task<int> Create(MailTemplateTypeRequest request, int recruiterId)
         {
             try
             {
                 GenericRepository<MailTemplateType> repository = new GenericRepository<MailTemplateType>();
-                MailTemplateType mailTemplateType = MapMailTemplateTypeRequest(true, request, recruiterId);
+                MailTemplateType mailTemplateType = MapMailTemplateTypeCreateRequest(request, recruiterId);
                 MailTemplateType createdMailTemplateType = await repository.SaveAsync(mailTemplateType);
                 return createdMailTemplateType.Id;
             }
@@ -64,8 +63,8 @@ namespace RecruiterPortal.DAL.Managers
                 MailTemplateType mailTemplateType = await repository.GetByIdAsync(m => m.Id == request.Id);
                 if (mailTemplateType != null)
                 {
-                    MapMailTemplateTypeRequest(false, request, recruiterId);
-                    return await repository.UpdateAsync(mailTemplateType) > 0 ? true : false;
+                    var mailTemplateTypeToUpdate = MapMailTemplateTypeUpdateRequest(request, mailTemplateType, recruiterId);
+                    return await repository.UpdateAsync(mailTemplateTypeToUpdate) > 0 ? true : false;
                 }
 
                 return null;
