@@ -165,6 +165,29 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
+        public static async Task<List<ApplicantStatus>> GetApplicantByStatus(int statusId)
+        {
+            try
+            {
+                List<ApplicantStatus> applicantStatusList = new List<ApplicantStatus>();
+                GenericRepository<ApplicantStatus> repository = new GenericRepository<ApplicantStatus>();
+                var statuses = await repository.GetAllAsync(m => m.Status == statusId);
+                if (statuses != null)
+                {
+                    foreach (var status in statuses)
+                    {
+                        ApplicantStatus applicantStatus = new ApplicantStatus();
+                        applicantStatus.Status = status.Status;
+                        applicantStatusList.Add(applicantStatus);
+                    }
+                }
+                return applicantStatusList;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public static JobResponseModel GetApplicantStatusRelated(int jobId)
         {
             JobResponseModel response = null;

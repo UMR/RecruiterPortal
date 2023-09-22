@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
+import { LeadService } from './lead.service';
 
 @Component({
     selector: 'app-lead',
@@ -17,20 +18,24 @@ export class LeadComponent implements OnInit {
     private skip: number;
     private pageNumber: number;
 
-    constructor() { }
+    constructor(private leadService: LeadService) { }
 
     ngOnInit() {
-
+        this.getApplicantStatus();
     }
     onLazyLoad(event: LazyLoadEvent) {
-        
-    }
-    onAgencySubmit() {
-        this.saveAgency();
-    }
-    saveAgency() {
 
     }
-    openNewAgency() {
+    getApplicantStatus() {
+        this.leadService.getApplicantStatus(0).subscribe(response => {
+            console.log(response);
+            if (response.status === 200) {
+                
+            }
+        },
+            err => {
+                
+            },
+            () => { });
     }
 }

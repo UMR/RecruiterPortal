@@ -20,7 +20,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
         [Route("get-status")]
         [HttpGet]
-        public IActionResult GetApplicantStatus()
+        public IActionResult GetStatus()
         {
             List<StatusModel> applicantStatus = ApplicantStatusManager.GetAllStatus();
             if (applicantStatus.Count > 0)
@@ -33,13 +33,30 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
         }
 
+        [Route("get-applicant-by-status/{statusId}")]
+        [HttpGet]
+        public async Task<IActionResult> GetApplicantStatus(int statusId)
+        {
+            //ApplicantStatus applicantStatus = awai ApplicantStatusManager.GetApplicantByStatus(statusId);
+            try
+            {
+                return Ok(await ApplicantStatusManager.GetApplicantByStatus(statusId));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+
+        }
+
         [Route("save")]
         [HttpPost]
         public async Task<IActionResult> SaveApplicantStatus(ApplicantStatusRequestModel requestModel)
         {
             try
             {
-                return Ok(200, await ApplicantStatusManager.Insert(requestModel, AgencyId, RecruiterId));
+                return Ok(await ApplicantStatusManager.Insert(requestModel, AgencyId, RecruiterId));
             }
             catch (Exception ex)
             {
