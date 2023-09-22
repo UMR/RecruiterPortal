@@ -30,7 +30,7 @@ export class LeadComponent implements OnInit {
         this.leadService.getApplicantStatus(0).subscribe(response => {
             console.log(response);
             if (response.status === 200) {
-                
+                this.leads = response.body;
             }
         },
             err => {

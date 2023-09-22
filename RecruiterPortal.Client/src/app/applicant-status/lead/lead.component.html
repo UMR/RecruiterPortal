@@ -26,19 +26,17 @@
                         <th>Applicant Name</th>
                         <th>Institution Name</th>
                         <th>Position Name</th>
-                        <th>Current Status</th>
                         <th>Status Created Date</th>
                         <th>Send To</th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-agency let-rowData let-columns="columns">
-                    <tr [pSelectableRow]="agency">
-                        <td>{{agency.AgencyName}}</td>
-                        <td>{{agency.Urlprefix}}</td>
-                        <td>{{agency.AgencyEmail}}</td>
-                        <td>{{agency.AgencyPhone}}</td>
-                        <td>{{agency.AgencyContactPerson}}</td>
-                        <td class="text-center"><button type="button" (click)="onSendToClick(applicant)" class="btn btn-primary btn-import-sync">Send To</button> </td>
+                <ng-template pTemplate="body" let-lead let-rowData let-columns="columns">
+                    <tr [pSelectableRow]="lead">
+                        <td>{{lead.ApplicantId}}</td>
+                        <td>{{lead.InstitutionId}}</td>
+                        <td>{{lead.PositionId}}</td>
+                        <td>{{lead.Date}}</td>
+                        <td><button type="button" (click)="onSendToClick(applicant)" class="btn btn-primary btn-import-sync">Send To</button> </td>
                     </tr>
                 </ng-template>
             </p-table>

@@ -177,7 +177,10 @@ namespace RecruiterPortal.DAL.Managers
                     foreach (var status in statuses)
                     {
                         ApplicantStatus applicantStatus = new ApplicantStatus();
-                        applicantStatus.Status = status.Status;
+                        applicantStatus.ApplicantId = status.ApplicantId;
+                        applicantStatus.InstitutionId = status.InstitutionId;   
+                        applicantStatus.PositionId=status.PositionId;
+                        applicantStatus.Date = status.Date;
                         applicantStatusList.Add(applicantStatus);
                     }
                 }
