@@ -39,7 +39,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             try
             {
-                return Ok(ApplicantStatusManager.GetApplicantByStatus(1, statusId));
+                return Ok(ApplicantStatusManager.GetApplicantByStatus(AgencyId, statusId));
             }
             catch (Exception ex)
             {
