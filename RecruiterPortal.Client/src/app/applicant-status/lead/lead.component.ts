@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
 import { LeadService } from './lead.service';
+import { StatusEnum } from '../status/status.enum';
 
 @Component({
     selector: 'app-lead',
@@ -29,7 +30,7 @@ export class LeadComponent implements OnInit {
 
     }
     getApplicantStatus() {
-        this.leadService.getApplicantStatus(0).subscribe(response => {
+        this.leadService.getApplicantStatus(StatusEnum.NewLeads).subscribe(response => {
             if (response.status === 200) {
                 this.leads = response.body;
             }
