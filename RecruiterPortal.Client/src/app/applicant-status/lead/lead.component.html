@@ -22,6 +22,8 @@
                             <th>Applicant Name</th>
                             <th>Institution Name</th>
                             <th>Position Name</th>
+                            <th>Current Salary</th>
+                            <th>Expected Salary</th>
                             <th>Status Created Date</th>
                             <th>Send To</th>
                         </tr>
@@ -31,6 +33,8 @@
                             <td>{{lead.ApplicantName}}</td>
                             <td>{{lead.InstitutionName}}</td>
                             <td>{{lead.PositionName}}</td>
+                            <td>{{lead.CurrentSalary}}</td>
+                            <td>{{lead.ExpectedSalary}}</td>
                             <td>{{lead.Date| date :'M/d/yy, h:mm a'  }}</td>
                             <td><button type="button" (click)="onSendToClick(applicant)" class="btn btn-primary btn-import-sync">Send To</button> </td>
                         </tr>
