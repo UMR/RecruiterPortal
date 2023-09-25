@@ -5,6 +5,10 @@ import { PaperScreenedRoutingModule } from './paper-screened-routing.module';
 import { PaperScreenedComponent } from './paper-screened.component';
 import { TableModule } from 'primeng/components/table/table';
 import { SharedModule } from '../../common/shared.module';
+import { StatusModule } from '../status/status.module';
+import { DialogModule } from 'primeng/dialog';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -13,7 +17,11 @@ import { SharedModule } from '../../common/shared.module';
         CommonModule,
         PaperScreenedRoutingModule,
         SharedModule,
-        TableModule
-    ]
+        TableModule,
+        StatusModule,
+        DialogModule,
+        ToastModule
+    ],
+    providers: [MessageService]
 })
 export class PaperScreenedModule { }

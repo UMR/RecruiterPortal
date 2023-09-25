@@ -1,49 +1,54 @@
 <div id="page-content-wrapper">
-<applicant-portal-header (onToggleButtonClicked)="(showHideMenu)()" isVisibleToggleButton=0></applicant-portal-header>
-<section class="main-content">
-    <!--<div class="grid">
-        <div class="col-12">
-            <button pButton pRipple label="Send To" class="button-success btn-add" (click)="onSendToClick()"></button>
+    <applicant-portal-header (onToggleButtonClicked)="(showHideMenu)()" isVisibleToggleButton=0></applicant-portal-header>
+    <section class="main-content">
+        <!--<div class="grid">
+            <div class="col-12">
+                <button pButton pRipple label="Send To" class="button-success btn-add" (click)="onSendToClick()"></button>
+            </div>
+        </div>-->
+        <div class="container-fluid">
+            <p-table #table [responsive]="true"
+                     [value]="applicants"
+                     selectionMode="single"
+                     [(selection)]="selectedApplicant"
+                     dataKey="Id"
+                     [paginator]="true"
+                     [rows]="rows"
+                     [columns]="cols"
+                     [totalRecords]="totalRecords"
+                     [lazy]="true"
+                     (onLazyLoad)="loadApplicantLazy($event)"
+                     [rowsPerPageOptions]="[10,15,20]"
+                     [showCurrentPageReport]="true"
+                     currentPageReportTemplate="Total Records {{totalRecords}}">
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th>Applicant Name</th>
+                        <th>Institution Name</th>
+                        <th>Position Name</th>
+                        <th style="width:150px">Current Salary</th>
+                        <th style="width:150px">Expected Salary</th>
+                        <th>Status Created Date</th>
+                        <th style="width:150px">Send To</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-applicant let-columns="columns">
+                    <tr [pSelectableRow]="agency">
+                        <td>{{applicant.ApplicantName}}</td>
+                        <td>{{applicant.InstitutionName}}</td>
+                        <td>{{applicant.PositionName}}</td>
+                        <td>{{applicant.CurrentSalary}}</td>
+                        <td>{{applicant.ExpectedSalary}}</td>
+                        <td>{{applicant.Date| date :'M/d/yy, h:mm a'  }}</td>
+                        <td><button type="button" (click)="onSendToClick(applicant)" class="btn btn-primary btn-import-sync">Send To</button> </td>
+                    </tr>
+                </ng-template>
+            </p-table>
         </div>
-    </div>-->
-    <div class="container-fluid">
-        <p-table #table [responsive]="true"
-                 [value]="applicants"
-                 selectionMode="single"
-                 [(selection)]="selectedApplicant"
-                 dataKey="Id"
-                 [paginator]="true"
-                 [rows]="rows"
-                 [columns]="cols"
-                 [totalRecords]="totalRecords"
-                 [lazy]="true"
-                 (onLazyLoad)="loadApplicantLazy($event)"
-                 [rowsPerPageOptions]="[10,15,20]"
-                 [showCurrentPageReport]="true"
-                 currentPageReportTemplate="Total Records {{totalRecords}}">
-            <ng-template pTemplate="header" let-columns>
-                <tr>
-                    <th>Applicant Name</th>
-                    <th>Institution Name</th>
-                    <th>Position Name</th>
-                    <th style="width:150px">Current Salary</th>
-                    <th style="width:150px">Expected Salary</th>
-                    <th >Status Created Date</th>
-                    <th style="width:150px">Send To</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-applicant let-columns="columns">
-                <tr [pSelectableRow]="agency">
-                    <td>{{applicant.ApplicantName}}</td>
-                    <td>{{applicant.InstitutionName}}</td>
-                    <td>{{applicant.PositionName}}</td>
-                    <td>{{applicant.CurrentSalary}}</td>
-                    <td>{{applicant.ExpectedSalary}}</td>
-                    <td>{{applicant.Date| date :'M/d/yy, h:mm a'  }}</td>
-                    <td><button type="button" (click)="onSendToClick(applicant)" class="btn btn-primary btn-import-sync">Send To</button> </td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
-</section>
+    </section>
 </div>
+
+<p-dialog [(visible)]="showDialog" [style]="{ width: '450px' }" header="Send To" [modal]="true" [draggable]="false" [resizable]="false">
+    <app-status (hideEvent)="handleHideEvent($event)" [selectedApplicant]="selectedApplicant"></app-status>
+</p-dialog>
+<p-toast key="toastKey1"></p-toast>
