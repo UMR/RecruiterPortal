@@ -59,6 +59,8 @@ public partial class UmrrecruitmentApplicantContext : DbContext
 
     public virtual DbSet<Recruiter> Recruiters { get; set; }
 
+    public virtual DbSet<RecruiterMailConfig> RecruiterMailConfigs { get; set; }
+
     public virtual DbSet<RecruiterRole> RecruiterRoles { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
@@ -262,10 +264,6 @@ public partial class UmrrecruitmentApplicantContext : DbContext
             entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.ApplicantStatusCreatedByNavigations)
                 .HasForeignKey(d => d.CreatedBy)
                 .HasConstraintName("FK_ApplicantStatus_Recruiter");
-
-            entity.HasOne(d => d.Institution).WithMany(p => p.ApplicantStatuses)
-                .HasForeignKey(d => d.InstitutionId)
-                .HasConstraintName("FK_ApplicantStatus_Institution");
 
             entity.HasOne(d => d.Position).WithMany(p => p.ApplicantStatuses)
                 .HasForeignKey(d => d.PositionId)
@@ -522,9 +520,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
                 .HasForeignKey(d => d.CreatedBy)
                 .HasConstraintName("FK_Job_Recruiter");
 
-            entity.HasOne(d => d.UpdatedByNavigation).WithMany(p => p.JobUpdatedByNavigations)
-                .HasForeignKey(d => d.UpdatedBy)
-                .HasConstraintName("FK_Job_Recruiter1");
+            entity.HasOne(d => d.UpdatedByNavigation).WithMany(p => p.JobUpdatedByNavigations).HasForeignKey(d => d.UpdatedBy);
         });
 
         modelBuilder.Entity<LookupZipCode>(entity =>
@@ -707,6 +703,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
         {
             entity.ToTable("Recruiter");
 
+            entity.Property(e => e.RecruiterId).HasColumnName("RecruiterID");
             entity.Property(e => e.AgencyId).HasColumnName("AgencyID");
             entity.Property(e => e.ApplicantTypeId).HasColumnName("ApplicantTypeID");
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -739,11 +736,30 @@ public partial class UmrrecruitmentApplicantContext : DbContext
             entity.HasOne(d => d.Agency).WithMany(p => p.Recruiters).HasForeignKey(d => d.AgencyId);
         });
 
+        modelBuilder.Entity<RecruiterMailConfig>(entity =>
+        {
+            entity.ToTable("RecruiterMailConfig");
+
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.Email)
+                .HasMaxLength(200)
+                .IsUnicode(false);
+            entity.Property(e => e.GoogleDriveFolderId).HasMaxLength(128);
+            entity.Property(e => e.GoogleRefreshToken)
+                .HasMaxLength(500)
+                .IsUnicode(false);
+            entity.Property(e => e.ProfileName)
+                .IsRequired()
+                .HasMaxLength(200);
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+        });
+
         modelBuilder.Entity<RecruiterRole>(entity =>
         {
             entity.HasNoKey();
 
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.RecruiterId).HasColumnName("RecruiterID");
             entity.Property(e => e.RoleId).HasColumnName("RoleID");
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
         });
@@ -1039,7 +1055,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
         {
             entity.HasKey(e => e.LicenseId).HasName("PK_License");
 
-            entity.ToTable("UserLicense", tb => tb.HasTrigger("Update_ChangeTracker_UserLicense"));
+            entity.ToTable("UserLicense");
 
             entity.Property(e => e.LicenseId).HasColumnName("LicenseID");
             entity.Property(e => e.CreatedDate)
@@ -1070,7 +1086,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
 
         modelBuilder.Entity<UserMilitary>(entity =>
         {
-            entity.ToTable("UserMilitary", tb => tb.HasTrigger("Update_ChangeTracker_UserMilitary"));
+            entity.ToTable("UserMilitary");
 
             entity.Property(e => e.UserMilitaryId).HasColumnName("UserMilitaryID");
             entity.Property(e => e.Branch).HasMaxLength(500);
