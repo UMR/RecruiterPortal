@@ -21,7 +21,7 @@
                      [rowsPerPageOptions]="[10,15,20]"
                      [showCurrentPageReport]="true"
                      currentPageReportTemplate="Total Records {{totalApplicant}}">
-                <ng-template pTemplate="header" let-columns>
+                <ng-template pTemplate="header">
                     <tr>
                         <th>Applicant Name</th>
                         <th>Institution Name</th>
@@ -30,12 +30,12 @@
                         <th>Send To</th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-lead let-rowData let-columns="columns">
+                <ng-template pTemplate="body" let-lead let-columns="columns">
                     <tr [pSelectableRow]="lead">
                         <td>{{lead.ApplicantName}}</td>
                         <td>{{lead.InstitutionName}}</td>
                         <td>{{lead.PositionName}}</td>
-                        <td>{{lead.Date}}</td>
+                        <td>{{lead.Date| date :'M/d/yy, h:mm a'  }}</td>
                         <td><button type="button" (click)="onSendToClick(applicant)" class="btn btn-primary btn-import-sync">Send To</button> </td>
                     </tr>
                 </ng-template>
