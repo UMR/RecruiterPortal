@@ -17,6 +17,8 @@ export class LeadComponent implements OnInit {
     private take: number;
     private skip: number;
     private pageNumber: number;
+    public selectedApplicant: any;
+    public showDialog: boolean = false;
 
     constructor(private leadService: LeadService) { }
 
@@ -34,8 +36,12 @@ export class LeadComponent implements OnInit {
             }
         },
             err => {
-                
+
             },
             () => { });
+    }
+    onSendToClick(applicant) {
+        this.selectedApplicant = applicant;
+        this.showDialog = true;
     }
 }

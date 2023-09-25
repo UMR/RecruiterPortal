@@ -5,6 +5,8 @@ import { LeadRoutingModule } from './lead-routing.module';
 import { LeadComponent } from './lead.component';
 import { SharedModule } from '../../common/shared.module';
 import { TableModule } from 'primeng/components/table/table';
+import { StatusModule } from '../status/status.module';
+import { DialogModule } from 'primeng/dialog';
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import { TableModule } from 'primeng/components/table/table';
         CommonModule,
         LeadRoutingModule,
         SharedModule,
-        TableModule
+        TableModule,
+        StatusModule,
+        DialogModule
     ]
 })
 export class LeadModule { }
