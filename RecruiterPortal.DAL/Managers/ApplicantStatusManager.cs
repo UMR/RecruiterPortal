@@ -179,8 +179,8 @@ namespace RecruiterPortal.DAL.Managers
                                            join ins in context.Institutions
                                            on applicantStatus.InstitutionId equals ins.Id
                                            join app in context.Users
-                                          on applicantStatus.ApplicantId equals app.UserId
-                                           where applicantStatus.AgencyId == agencyId && applicantStatus.Status == statusId
+                                           on applicantStatus.ApplicantId equals app.UserId
+                                           where applicantStatus.AgencyId == agencyId && applicantStatus.Status == statusId && applicantStatus.IsActive == true
                                            select (new ApplicantStatusResponseModel
                                            {
                                                Id = applicantStatus.Id,
