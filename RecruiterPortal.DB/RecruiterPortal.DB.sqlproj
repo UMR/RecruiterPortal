@@ -480,5 +480,6 @@
     <None Include="2023-09-18\03_SR_01_CREATE_SP_GetAllInstitutionByFilter.sql" />
     <None Include="2023-09-20\01_AZ_01_CREATE_TABLE_MailTemplateType.sql" />
     <None Include="2023-09-25\01_AZ_01_CREATE_TABLE_RecruiterMailConfig.sql" />
+    <None Include="Special\10_AZ_09_Insert_MailConfig_Data.sql" />
   </ItemGroup>
 </Project>
