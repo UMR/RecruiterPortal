@@ -63,6 +63,30 @@ const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
+        path: 'phone-screened', loadChildren: () => import('./applicant-status/phone-screened/phone-screened.module').then(m => m.PhoneScreenedModule)
+    },
+    {
+        canActivate: [AuthGuard],
+        path: 'final-interview', loadChildren: () => import('./applicant-status/final-interview/final-interview.module').then(m => m.FinalInterviewModule)
+    },
+    {
+        canActivate: [AuthGuard],
+        path: 'offered', loadChildren: () => import('./applicant-status/offered/offered.module').then(m => m.OfferedModule)
+    },
+    {
+        canActivate: [AuthGuard],
+        path: 'accepted', loadChildren: () => import('./applicant-status/accepted/accepted.module').then(m => m.AcceptedModule)
+    },
+    {
+        canActivate: [AuthGuard],
+        path: 'refused', loadChildren: () => import('./applicant-status/refused/refused.module').then(m => m.RefusedModule)
+    },
+    {
+        canActivate: [AuthGuard],
+        path: 'rejected', loadChildren: () => import('./applicant-status/rejected/rejected.module').then(m => m.RejectedModule)
+    },
+    {
+        canActivate: [AuthGuard],
         path: 'job-orders', loadChildren: './job-orders/job-orders.module#JobOrdersModule'
     },
     {
