@@ -23,9 +23,8 @@
                                     <div class="form-group">
                                         <label for="mailTemplateType" class="form-label">Template Type</label>
                                         <select id="mailTemplateType" name="mailTemplateType" class="form-control" formControlName="mailTemplateType" tabindex="2">
-                                            <option value="">All</option>
-                                            <option value="1">Open</option>
-                                            <option value="0">Closed</option>
+                                            <option value="">----Select----</option>
+                                            <option *ngFor="let mailType of mailTemplateTypes" value="mailType.Id">{{mailType?.Name}}</option>                                            
                                         </select>
                                     </div>
                                 </div>
