@@ -33,7 +33,7 @@ export class OfferedComponent implements OnInit {
         this.getApplicantStatus();
     }
     getApplicantStatus() {
-        this.offeredService.getApplicantStatus(StatusEnum.PreScreened).subscribe(response => {
+        this.offeredService.getApplicantStatus(StatusEnum.Offered).subscribe(response => {
             if (response.status === 200) {
                 this.applicants = response.body;
             }
