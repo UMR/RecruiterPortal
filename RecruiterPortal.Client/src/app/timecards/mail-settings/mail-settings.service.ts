@@ -10,8 +10,8 @@ export class MailSettingsService {
     
     constructor(private client: HttpClient) { }
 
-    getMailTemplateTypesByRecruiterId(): Observable<any> {
-        return this.client.get(`${resourceServerUrl}/api/mailtemplate/get-mail-template-types-by-recruiterid`, { observe: 'response' });
+    getRecruiterMailConfigsByRecruiterId(): Observable<any> {
+        return this.client.get(`${resourceServerUrl}/api/recruitermailconfig/get-by-recruiterid`, { observe: 'response' });
     }    
     
 }
