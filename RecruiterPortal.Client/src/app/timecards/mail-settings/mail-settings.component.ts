@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { MailSettingsService } from './mail-settings.service';
+import { MailTemplateService } from '../mail-template-type/mail-template-type.service';
 
 @Component({
     selector: 'app-mail-settings',
@@ -16,7 +17,8 @@ export class MailSettingsComponent implements OnInit {
     public mailTemplateTypes: any[] = [];
 
     constructor(private fb: FormBuilder, private messageService: MessageService,
-        private confirmationService: ConfirmationService, private mailSettingsService: MailSettingsService) {        
+        private confirmationService: ConfirmationService, private mailTemplateTypeService: MailTemplateService, private mailSettingsService: MailSettingsService) {
+        this.mailTemplateTypeService.mailTemplateTypes$.subscribe(data => { this.mailTemplateTypes = data; });
     }
 
     ngOnInit() {
@@ -32,7 +34,7 @@ export class MailSettingsComponent implements OnInit {
         this.formGroup = this.fb.group({
             fromMail: ['', Validators.compose([Validators.required])],
             mailTemplateType: ['', Validators.compose([Validators.required])],
-            templateDescription: ['', Validators.compose([Validators.required])]            
+            templateDescription: ['', Validators.compose([Validators.required])]
         });
     }
 

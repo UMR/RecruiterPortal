@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { resourceServerUrl } from '../../common/constants/auth-keys';
 
 @Injectable({
     providedIn: 'root'
 })
 export class MailTemplateService {
+
+    private mailTemplateTypesSubject = new BehaviorSubject<any>([]);
+    public mailTemplateTypes$ = this.mailTemplateTypesSubject.asObservable();
 
     constructor(private client: HttpClient) { }
 
@@ -27,5 +30,9 @@ export class MailTemplateService {
 
     delete(id: number): Observable<HttpResponse<any>> {
         return this.client.delete(`${resourceServerUrl}/api/mailtemplate/delete-mail-template-type/${id}`, { observe: 'response' });
+    }
+
+    setMailTemplateTypes(mailTemplateType: any) {
+        this.mailTemplateTypesSubject.next(mailTemplateType);
     }
 }

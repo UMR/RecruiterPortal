@@ -19,6 +19,7 @@ export class MailTemplateTypeComponent implements OnInit {
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private mailTemplateTypeService: MailTemplateService) {
         this.addEditTitle = "Add";
+        this.mailTemplateTypeService.mailTemplateTypes$.subscribe(data => { this.mailTemplateTypes = data; });
     }
 
     ngOnInit() {
@@ -34,16 +35,19 @@ export class MailTemplateTypeComponent implements OnInit {
 
     getMailTemplateTypesByRecruiterId() {
         this.mailTemplateTypeService.getMailTemplateTypesByRecruiterId()
-            .subscribe(response => { this.mailTemplateTypes = response.body; console.log(this.mailTemplateTypes); });
+            .subscribe(response => {
+                this.mailTemplateTypes = response.body;
+                this.mailTemplateTypeService.setMailTemplateTypes(this.mailTemplateTypes);
+            });
     }
 
     getMailTemplateTypeById(id) {
         this.mailTemplateTypeService.getMailTemplateTypeById(id)
             .subscribe(response => {
-                console.log(response);
                 this.selectedMailTemplateType = response.body;
                 this.selectedMailTemplateTypeId = this.selectedMailTemplateType.Id;
                 this.formGroup.controls.name.setValue(this.selectedMailTemplateType.Name);
+                this.mailTemplateTypeService.mailTemplateTypes$.subscribe(data => { this.mailTemplateTypes = data; });
             });
     }
 
