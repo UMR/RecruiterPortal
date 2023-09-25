@@ -9,17 +9,16 @@
                         <h4 class="mt-4 mb-4">Mail Template</h4>
                         <form [formGroup]="formGroup" novalidate>
                             <div class="row">
-                                <div class="col-3">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label for="fromMail" class="form-label">From Mail</label>
                                         <select id="fromMail" name="fromMail" class="form-control" formControlName="fromMail" tabindex="1">
-                                            <option value="">All</option>
-                                            <option value="1">Open</option>
-                                            <option value="0">Closed</option>
+                                            <option value="">----Select----</option>
+                                            <option *ngFor="let mailConfig of recruiterMailConfigs" value="mailConfig.Id">{{ mailConfig.Email}}</option>                                            
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-4">
                                     <div class="form-group">
                                         <label for="mailTemplateType" class="form-label">Template Type</label>
                                         <select id="mailTemplateType" name="mailTemplateType" class="form-control" formControlName="mailTemplateType" tabindex="2">

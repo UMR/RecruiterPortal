@@ -15,6 +15,7 @@ export class MailSettingsComponent implements OnInit {
     public showMailTemplateType: boolean = false;
     public formGroup: FormGroup;
     public mailTemplateTypes: any[] = [];
+    public recruiterMailConfigs: any[] = [];
 
     constructor(private fb: FormBuilder, private messageService: MessageService,
         private confirmationService: ConfirmationService, private mailTemplateTypeService: MailTemplateService, private mailSettingsService: MailSettingsService) {
@@ -27,7 +28,7 @@ export class MailSettingsComponent implements OnInit {
     }
 
     getMailTemplateTypesByRecruiterId() {
-        this.mailSettingsService.getMailTemplateTypesByRecruiterId().subscribe(res => this.mailTemplateTypes = res.body);
+        this.mailSettingsService.getRecruiterMailConfigsByRecruiterId().subscribe(res => { this.recruiterMailConfigs = res.body; console.log(res); });
     }
 
     createFormGroup() {
