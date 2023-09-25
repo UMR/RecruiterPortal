@@ -22,10 +22,10 @@
                             <th>Applicant Name</th>
                             <th>Institution Name</th>
                             <th>Position Name</th>
-                            <th>Current Salary</th>
-                            <th>Expected Salary</th>
+                            <th style="width:150px">Current Salary</th>
+                            <th style="width:150px">Expected Salary</th>
                             <th>Status Created Date</th>
-                            <th>Send To</th>
+                            <th style="width:150px">Send To</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-lead let-columns="columns">
@@ -36,7 +36,7 @@
                             <td>{{lead.CurrentSalary}}</td>
                             <td>{{lead.ExpectedSalary}}</td>
                             <td>{{lead.Date| date :'M/d/yy, h:mm a'  }}</td>
-                            <td><button type="button" (click)="onSendToClick(applicant)" class="btn btn-primary btn-import-sync">Send To</button> </td>
+                            <td><button type="button" (click)="onSendToClick(lead)" class="btn btn-primary btn-import-sync">Send To</button> </td>
                         </tr>
                     </ng-template>
                 </p-table>

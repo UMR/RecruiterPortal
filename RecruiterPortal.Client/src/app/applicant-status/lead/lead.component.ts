@@ -41,7 +41,7 @@ export class LeadComponent implements OnInit {
             () => { });
     }
     onSendToClick(applicant) {
-        this.selectedApplicant = applicant;
+        this.selectedApplicant = applicant.ApplicantId;
         this.showDialog = true;
     }
 }

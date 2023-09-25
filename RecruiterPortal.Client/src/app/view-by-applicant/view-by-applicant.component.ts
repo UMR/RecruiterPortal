@@ -199,7 +199,7 @@ export class ViewByApplicantComponent implements OnInit {
     }
 
     onSendToClick(applicant) {        
-        this.selectedApplicant = applicant;        
+        this.selectedApplicant = applicant.UserId;
         this.showDialog = true;        
     }
 

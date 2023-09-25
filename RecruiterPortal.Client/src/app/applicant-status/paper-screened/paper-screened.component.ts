@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Table } from 'primeng/components/table/table';
 import { LazyLoadEvent } from 'primeng/api';
+import { PaperScreenedService } from './paper-screened.service';
+import { StatusEnum } from '../status/status.enum';
 
 @Component({
     selector: 'app-paper-screened',
@@ -20,8 +22,9 @@ export class PaperScreenedComponent implements OnInit {
     private skip: number;
     private pageNumber: number;
     public selectedApplicant: any;
-    
-    constructor() {
+    public showDialog: boolean = false;
+
+    constructor(private paperScreenedService: PaperScreenedService) {
         
     }
 
@@ -33,6 +36,22 @@ export class PaperScreenedComponent implements OnInit {
         this.take = event.rows;
         this.skip = event.rows * (this.pageNumber - 1);
         //this.getJobsByAgencyId(this.skip, this.take);
+        this.getApplicantStatus();
+    }
+    getApplicantStatus() {
+        this.paperScreenedService.getApplicantStatus(StatusEnum.PreScreened).subscribe(response => {
+            if (response.status === 200) {
+                this.applicants = response.body;
+            }
+        },
+            err => {
+
+            },
+            () => { });
+    }
+    onSendToClick(applicant) {
+        this.selectedApplicant = applicant.ApplicantId;
+        this.showDialog = true;
     }
 
 }

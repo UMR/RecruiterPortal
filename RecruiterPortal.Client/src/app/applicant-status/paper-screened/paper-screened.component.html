@@ -26,19 +26,21 @@
                     <th>Applicant Name</th>
                     <th>Institution Name</th>
                     <th>Position Name</th>
-                    <th>Current Status</th>
-                    <th>Status Created Date</th>
-                    <th>Send To</th>
+                    <th style="width:150px">Current Salary</th>
+                    <th style="width:150px">Expected Salary</th>
+                    <th >Status Created Date</th>
+                    <th style="width:150px">Send To</th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-applicant let-rowData let-columns="columns">
+            <ng-template pTemplate="body" let-applicant let-columns="columns">
                 <tr [pSelectableRow]="agency">
-                    <td>{{applicant.AgencyName}}</td>
-                    <td>{{applicant.Urlprefix}}</td>
-                    <td>{{applicant.AgencyEmail}}</td>
-                    <td>{{applicant.AgencyPhone}}</td>
-                    <td>{{applicant.AgencyContactPerson}}</td>
-                    <td class="text-center"><button type="button" (click)="onSendToClick(applicant)" class="btn btn-primary btn-import-sync">Send To</button> </td>
+                    <td>{{applicant.ApplicantName}}</td>
+                    <td>{{applicant.InstitutionName}}</td>
+                    <td>{{applicant.PositionName}}</td>
+                    <td>{{applicant.CurrentSalary}}</td>
+                    <td>{{applicant.ExpectedSalary}}</td>
+                    <td>{{applicant.Date| date :'M/d/yy, h:mm a'  }}</td>
+                    <td><button type="button" (click)="onSendToClick(applicant)" class="btn btn-primary btn-import-sync">Send To</button> </td>
                 </tr>
             </ng-template>
         </p-table>

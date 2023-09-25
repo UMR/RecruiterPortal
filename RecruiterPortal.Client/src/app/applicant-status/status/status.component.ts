@@ -95,7 +95,7 @@ export class StatusComponent implements OnInit {
     save() {
 
         let statusModel = new ApplicantStatusRequestModel;
-        statusModel.ApplicantId = this.selectedApplicant.UserId;
+        statusModel.ApplicantId = this.selectedApplicant;
         statusModel.Status = this.formGroup.get('statusId').value;
         statusModel.Date = new Date;
         statusModel.PositionId = this.formGroup.get('positionId').value;
