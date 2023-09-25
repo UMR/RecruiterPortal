@@ -165,25 +165,39 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
-        public static async Task<List<ApplicantStatus>> GetApplicantByStatus(int statusId)
+        public static List<ApplicantStatusResponseModel> GetApplicantByStatus(long agencyId, int statusId)
         {
             try
             {
-                List<ApplicantStatus> applicantStatusList = new List<ApplicantStatus>();
+                List<ApplicantStatusResponseModel> applicantStatusList = null;
                 GenericRepository<ApplicantStatus> repository = new GenericRepository<ApplicantStatus>();
-                var statuses = await repository.GetAllAsync(m => m.Status == statusId);
-                if (statuses != null)
+                using (UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext())
                 {
-                    foreach (var status in statuses)
-                    {
-                        ApplicantStatus applicantStatus = new ApplicantStatus();
-                        applicantStatus.ApplicantId = status.ApplicantId;
-                        applicantStatus.InstitutionId = status.InstitutionId;   
-                        applicantStatus.PositionId=status.PositionId;
-                        applicantStatus.Date = status.Date;
-                        applicantStatusList.Add(applicantStatus);
-                    }
+                    applicantStatusList = (from applicantStatus in context.ApplicantStatuses
+                                           join pos in context.Positions
+                                           on applicantStatus.PositionId equals pos.Id
+                                           join ins in context.Institutions
+                                           on applicantStatus.InstitutionId equals ins.Id
+                                           join app in context.Users
+                                          on applicantStatus.ApplicantId equals app.UserId
+                                           where applicantStatus.AgencyId == agencyId && applicantStatus.Status == statusId
+                                           select (new ApplicantStatusResponseModel
+                                           {
+                                               Id = applicantStatus.Id,
+                                               ApplicantId = applicantStatus.ApplicantId,
+                                               ApplicantName = app.FirstName + " " + app.LastName,
+                                               PositionId = pos.Id,
+                                               PositionName = pos.PositionName,
+                                               InstitutionId = applicantStatus.InstitutionId,
+                                               InstitutionName = ins.InstituteName,
+                                               Date = applicantStatus.Date,
+                                               CurrentSalary = applicantStatus.CurrentSalary,
+                                               ExpectedSalary = applicantStatus.ExpectedSalary,
+                                           })
+                           ).ToList();
+
                 }
+
                 return applicantStatusList;
             }
             catch (Exception ex)

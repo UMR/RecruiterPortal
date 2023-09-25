@@ -35,12 +35,11 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
         [Route("get-applicant-by-status/{statusId}")]
         [HttpGet]
-        public async Task<IActionResult> GetApplicantStatus(int statusId)
+        public IActionResult GetApplicantStatus(int statusId)
         {
-            //ApplicantStatus applicantStatus = awai ApplicantStatusManager.GetApplicantByStatus(statusId);
             try
             {
-                return Ok(await ApplicantStatusManager.GetApplicantByStatus(statusId));
+                return Ok(ApplicantStatusManager.GetApplicantByStatus(1, statusId));
             }
             catch (Exception ex)
             {

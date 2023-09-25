@@ -32,9 +32,9 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-lead let-rowData let-columns="columns">
                     <tr [pSelectableRow]="lead">
-                        <td>{{lead.ApplicantId}}</td>
-                        <td>{{lead.InstitutionId}}</td>
-                        <td>{{lead.PositionId}}</td>
+                        <td>{{lead.ApplicantName}}</td>
+                        <td>{{lead.InstitutionName}}</td>
+                        <td>{{lead.PositionName}}</td>
                         <td>{{lead.Date}}</td>
                         <td><button type="button" (click)="onSendToClick(applicant)" class="btn btn-primary btn-import-sync">Send To</button> </td>
                     </tr>
