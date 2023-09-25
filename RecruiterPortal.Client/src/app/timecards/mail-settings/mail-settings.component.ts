@@ -28,7 +28,7 @@ export class MailSettingsComponent implements OnInit {
     }
 
     getMailTemplateTypesByRecruiterId() {
-        this.mailSettingsService.getRecruiterMailConfigsByRecruiterId().subscribe(res => { this.recruiterMailConfigs = res.body; console.log(res); });
+        this.mailSettingsService.getRecruiterMailConfigsByRecruiterId().subscribe(res => this.recruiterMailConfigs = res.body);
     }
 
     createFormGroup() {
@@ -41,6 +41,24 @@ export class MailSettingsComponent implements OnInit {
 
     showTemplateType() {
         this.showMailTemplateType = true;
+    }
+
+    save() {
+        const model = {
+            fromMail: this.formGroup.controls.fromMail.value,
+            mailTemplateType: this.formGroup.controls.mailTemplateType.value,
+            templateDescription: this.formGroup.controls.templateDescription.value
+        }
+        if (this.formGroup.valid) {
+            this.mailTemplateTypeService.save(model).subscribe(res => {
+                if (res.status === 200) {
+                    this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail Template Type Saved', life: 3000 });
+                }
+            },
+                error => {
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Mail Template Type Save Failed', life: 3000 });
+                });
+        }
     }
 
 }
