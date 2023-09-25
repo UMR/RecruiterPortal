@@ -41,6 +41,8 @@ public partial class ApplicantStatus
 
     public string Shift { get; set; }
 
+    public bool? IsActive { get; set; }
+
     public virtual Agency Agency { get; set; }
 
     public virtual User Applicant { get; set; }
