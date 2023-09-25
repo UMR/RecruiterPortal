@@ -27,6 +27,7 @@
         public byte? ProfileStatus { get; set; }
 
         public string Shift { get; set; }
+        public bool? IsActive { get; set; }
 
     }
 }

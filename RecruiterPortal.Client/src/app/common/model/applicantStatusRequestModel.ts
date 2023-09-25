@@ -12,4 +12,5 @@ export class ApplicantStatusRequestModel {
     ExpectedSalary: number;
     ProfileStatus: number;
     Shift: string;
+    IsActive: boolean;
 }

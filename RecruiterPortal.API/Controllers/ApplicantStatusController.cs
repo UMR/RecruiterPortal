@@ -55,7 +55,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             try
             {
-                return Ok(await ApplicantStatusManager.Insert(requestModel, AgencyId, RecruiterId));
+                return Ok(await ApplicantStatusManager.UpdateBeforeInsert(requestModel, AgencyId, RecruiterId));
             }
             catch (Exception ex)
             {

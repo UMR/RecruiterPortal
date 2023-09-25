@@ -44,6 +44,7 @@ namespace RecruiterPortal.DAL.Managers
             applicantStatus.ExpectedSalary = request.ExpectedSalary;
             applicantStatus.ProfileStatus = request.ProfileStatus;
             applicantStatus.Shift = request.Shift;
+            applicantStatus.IsActive = request.IsActive;
             if (isInsert)
             {
                 applicantStatus.CreatedBy = recruiterId;
@@ -54,6 +55,28 @@ namespace RecruiterPortal.DAL.Managers
                 applicantStatus.UpdatedBy = recruiterId;
                 applicantStatus.UpdatedDate = DateTime.Now;
             }
+            return applicantStatus;
+        }
+        private static ApplicantStatus UpdateStatusRequest(ApplicantStatus request, bool isActive, int recruiterId)
+        {
+            ApplicantStatus applicantStatus = new ApplicantStatus();
+            applicantStatus.Id = request.Id;
+            applicantStatus.AgencyId = request.AgencyId;
+            applicantStatus.ApplicantId = request.ApplicantId;
+            applicantStatus.PositionId = request.PositionId;
+            applicantStatus.InstitutionId = request.InstitutionId;
+            applicantStatus.Status = request.Status;
+            applicantStatus.Date = request.Date;
+            applicantStatus.TotalFee = request.TotalFee;
+            applicantStatus.NetFee = request.NetFee;
+            applicantStatus.RefFee = request.RefFee;
+            applicantStatus.CurrentSalary = request.CurrentSalary;
+            applicantStatus.ExpectedSalary = request.ExpectedSalary;
+            applicantStatus.ProfileStatus = request.ProfileStatus;
+            applicantStatus.Shift = request.Shift;
+            applicantStatus.IsActive = isActive;
+            applicantStatus.UpdatedBy = recruiterId;
+            applicantStatus.UpdatedDate = DateTime.Now;
             return applicantStatus;
         }
         public static async Task<long> Insert(ApplicantStatusRequestModel request, long agencyId, int recruiterId)
@@ -77,6 +100,41 @@ namespace RecruiterPortal.DAL.Managers
                 GenericRepository<ApplicantStatus> repository = new GenericRepository<ApplicantStatus>();
                 ApplicantStatus applicantStatus = MapApplicantStatusRequest(false, request, agencyId, recruiterId);
                 return await repository.UpdateAsync(applicantStatus);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public static async Task<long> UpdateBeforeInsert(ApplicantStatusRequestModel request, long agencyId, int recruiterId)
+        {
+            try
+            {
+                await UpdateStatus(request, false, recruiterId);
+
+                GenericRepository<ApplicantStatus> repository = new GenericRepository<ApplicantStatus>();
+                ApplicantStatus applicantStatus = MapApplicantStatusRequest(true, request, agencyId, recruiterId);
+                ApplicantStatus createdApplicantStatus = await repository.SaveAsync(applicantStatus);
+                return createdApplicantStatus.Id;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public static async Task<bool?> UpdateStatus(ApplicantStatusRequestModel request, bool isActive, int recruiterId)
+        {
+            try
+            {
+                GenericRepository<ApplicantStatus> repository = new GenericRepository<ApplicantStatus>();
+                ApplicantStatus status = await repository.GetByIdAsync(p => p.ApplicantId == request.ApplicantId && p.IsActive == true);
+                if (status != null)
+                {
+                    ApplicantStatus applicantStatus = UpdateStatusRequest(status, isActive, recruiterId);
+                    return await repository.UpdateAsync(applicantStatus) > 0 ? true : false;
+                }
+
+                return null;
             }
             catch (Exception ex)
             {
