@@ -14,7 +14,7 @@
                                         <label for="fromMail" class="form-label">From Mail</label>
                                         <select id="fromMail" name="fromMail" class="form-control" formControlName="fromMail" tabindex="1">
                                             <option value="">----Select----</option>
-                                            <option *ngFor="let mailConfig of recruiterMailConfigs" value="mailConfig.Id">{{ mailConfig.Email}}</option>                                            
+                                            <option *ngFor="let mailConfig of recruiterMailConfigs" [value]="mailConfig.Id">{{ mailConfig.Email}}</option>                                            
                                         </select>
                                     </div>
                                 </div>
@@ -23,7 +23,7 @@
                                         <label for="mailTemplateType" class="form-label">Template Type</label>
                                         <select id="mailTemplateType" name="mailTemplateType" class="form-control" formControlName="mailTemplateType" tabindex="2">
                                             <option value="">----Select----</option>
-                                            <option *ngFor="let mailType of mailTemplateTypes" value="mailType.Id">{{mailType?.Name}}</option>                                            
+                                            <option *ngFor="let mailType of mailTemplateTypes" [value]="mailType.Id">{{mailType?.Name}}</option>                                            
                                         </select>
                                     </div>
                                 </div>
@@ -49,7 +49,7 @@
                                             <button type="button" class="btn btn-primary btn-portal-border">Clear</button>
                                         </li>
                                         <li class="list-inline-item">
-                                            <button type="submit" class="btn btn-primary btn-block btn-portal" [disabled]="!formGroup.valid">Save</button>
+                                            <button type="submit" class="btn btn-primary btn-block btn-portal" [disabled]="!formGroup.valid" (click)="save()">Save</button>
                                         </li>
                                     </ul>
                                 </div>
