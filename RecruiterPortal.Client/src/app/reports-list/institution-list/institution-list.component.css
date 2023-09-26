@@ -1,3 +1,46 @@
+.btn-add {
+    width: 200px;
+    margin-bottom: 12px;
+    background-color: green;
+    border: none;
+}
+
+    .btn-add:hover {
+        background-color: #339933 !important;
+    }
+
+.btn-save {
+    width: 100px;
+    float: right;
+    background-color: green;
+    border: none;
+}
+
+    .btn-save:hover {
+        background-color: #339933 !important;
+    }
+
+.btn-clear {
+    margin-right: 8px;
+    width: 100px;
+    background-color: #808080;
+    color: black;
+    border: none;
+}
+
+    .btn-clear:hover {
+        background-color: #808080 !important;
+    }
+
+.field {
+    margin-bottom: 1rem;
+    display: grid;
+}
+
+    .field > label {
+        display: inline-block;
+        margin-bottom: 0.5rem;
+    }
 :host >>> p-autocomplete {
     padding-top: 0;
     padding-left: 0;
@@ -41,9 +84,6 @@
     display: none;
 }
 
-.btn-import-sync {
-    padding: 1px 10px !important;
-}
 
 @media screen and (max-width: 590px) {
     .p-column-title {
@@ -64,4 +104,7 @@
     color: white;
     width: 100px;
     height: 42px;
+}
+.ui-button.ui-button-text-only .ui-button-text {
+    padding: 5px 15px !important;
 }

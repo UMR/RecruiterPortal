@@ -1,0 +1,42 @@
+
+<div class="add-form">
+    <h4 class="mt-4 mb-4">Add Applicant</h4>
+    <form [formGroup]="applicantForm" (ngSubmit)="onAddApplicantSubmit()">
+        <div class="form-group">
+            <label for="firstName" class="form-label">First Name</label>
+            <input id="firstName" name="firstName" type="text" class="form-control" required
+                   formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
+            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                <div *ngIf="f.firstName.errors.required">First Name is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="middleName" class="form-label">Last Name</label>
+            <input id="middleName" name="middleName" type="text" class="form-control"
+                   formControlName="middleName">
+        </div>
+
+        <div class="form-group">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input id="lastName" formControlName="lastName" type="text" required
+                   class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input id="email" formControlName="email" type="text" required
+                   class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+            </div>
+        </div>
+        <div class="mb-10">
+            <button type="submit" class="btn btn-primary btn-block btn-portal" [disabled]="!applicantForm.valid">Add Applicant</button>
+        </div>
+    </form>
+</div>
+
+
+<p-toast key="toastKey1"></p-toast>
