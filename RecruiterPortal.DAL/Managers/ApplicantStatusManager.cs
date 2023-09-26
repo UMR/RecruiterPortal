@@ -57,28 +57,7 @@ namespace RecruiterPortal.DAL.Managers
             }
             return applicantStatus;
         }
-        private static ApplicantStatus UpdateStatusRequest(ApplicantStatus request, bool isActive, int recruiterId)
-        {
-            ApplicantStatus applicantStatus = new ApplicantStatus();
-            applicantStatus.Id = request.Id;
-            applicantStatus.AgencyId = request.AgencyId;
-            applicantStatus.ApplicantId = request.ApplicantId;
-            applicantStatus.PositionId = request.PositionId;
-            applicantStatus.InstitutionId = request.InstitutionId;
-            applicantStatus.Status = request.Status;
-            applicantStatus.Date = request.Date;
-            applicantStatus.TotalFee = request.TotalFee;
-            applicantStatus.NetFee = request.NetFee;
-            applicantStatus.RefFee = request.RefFee;
-            applicantStatus.CurrentSalary = request.CurrentSalary;
-            applicantStatus.ExpectedSalary = request.ExpectedSalary;
-            applicantStatus.ProfileStatus = request.ProfileStatus;
-            applicantStatus.Shift = request.Shift;
-            applicantStatus.IsActive = isActive;
-            applicantStatus.UpdatedBy = recruiterId;
-            applicantStatus.UpdatedDate = DateTime.Now;
-            return applicantStatus;
-        }
+       
         public static async Task<long> Insert(ApplicantStatusRequestModel request, long agencyId, int recruiterId)
         {
             try
@@ -128,10 +107,12 @@ namespace RecruiterPortal.DAL.Managers
             {
                 GenericRepository<ApplicantStatus> repository = new GenericRepository<ApplicantStatus>();
                 ApplicantStatus status = await repository.GetByIdAsync(p => p.ApplicantId == request.ApplicantId && p.IsActive == true);
+                status.IsActive=isActive;
+                status.UpdatedDate=DateTime.Now;
+                status.UpdatedBy = recruiterId;
                 if (status != null)
                 {
-                    ApplicantStatus applicantStatus = UpdateStatusRequest(status, isActive, recruiterId);
-                    return await repository.UpdateAsync(applicantStatus) > 0 ? true : false;
+                    return await repository.UpdateAsync(status) > 0 ? true : false;
                 }
 
                 return null;
