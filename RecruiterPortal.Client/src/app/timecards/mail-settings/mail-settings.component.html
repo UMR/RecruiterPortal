@@ -12,7 +12,7 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="fromMail" class="form-label">From Mail</label>
-                                        <select id="fromMail" name="fromMail" class="form-control" formControlName="fromMail" tabindex="1">
+                                        <select id="fromMail" name="fromMail" class="form-control" formControlName="fromMail" tabindex="1" (change)="onMailChange($event)">
                                             <option value="">----Select----</option>
                                             <option *ngFor="let mailConfig of recruiterMailConfigs" [value]="mailConfig.Id">{{ mailConfig.Email}}</option>                                            
                                         </select>
@@ -21,7 +21,7 @@
                                 <div class="col-4">
                                     <div class="form-group">
                                         <label for="mailTemplateType" class="form-label">Template Type</label>
-                                        <select id="mailTemplateType" name="mailTemplateType" class="form-control" formControlName="mailTemplateType" tabindex="2">
+                                        <select id="mailTemplateType" name="mailTemplateType" class="form-control" formControlName="mailTemplateType" tabindex="2" (change)="onTemplateTypeChange($event)">
                                             <option value="">----Select----</option>
                                             <option *ngFor="let mailType of mailTemplateTypes" [value]="mailType.Id">{{mailType?.Name}}</option>                                            
                                         </select>
