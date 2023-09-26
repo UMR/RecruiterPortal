@@ -43,8 +43,13 @@ export class MailSettingsComponent implements OnInit {
         this.showMailTemplateType = true;
     }
 
-    save() {
-        console.log(this.formGroup.controls.fromMail);
+    clear() {
+        this.formGroup.reset();
+        this.formGroup.controls.fromMail.setValue('');
+        this.formGroup.controls.mailTemplateType.setValue('');        
+    }
+
+    save() {        
         const model = {
             Id: 0,
             EmailAddress: this.formGroup.controls.fromMail.value,
