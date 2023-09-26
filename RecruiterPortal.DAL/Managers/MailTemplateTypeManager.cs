@@ -9,7 +9,6 @@ namespace RecruiterPortal.DAL.Managers
         private static MailTemplateType MapMailTemplateTypeCreateRequest(MailTemplateTypeRequest request, int recruiterId)
         {
             MailTemplateType mailTemplateType = new MailTemplateType();
-            mailTemplateType = new MailTemplateType();
             mailTemplateType.RecruiterId = recruiterId;
             mailTemplateType.Name = request.Name;
             mailTemplateType.CreatedBy = recruiterId;
