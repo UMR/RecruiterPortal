@@ -17,8 +17,8 @@ export class MailSettingsComponent implements OnInit {
     public mailTemplateTypes: any[] = [];
     public recruiterMailConfigs: any[] = [];
 
-    constructor(private fb: FormBuilder, private messageService: MessageService,
-        private confirmationService: ConfirmationService, private mailTemplateTypeService: MailTemplateService, private mailSettingsService: MailSettingsService) {
+    constructor(private fb: FormBuilder, private messageService: MessageService, private mailTemplateTypeService: MailTemplateService,
+        private mailSettingsService: MailSettingsService) {
         this.mailTemplateTypeService.mailTemplateTypes$.subscribe(data => { this.mailTemplateTypes = data; });
     }
 
@@ -44,13 +44,15 @@ export class MailSettingsComponent implements OnInit {
     }
 
     save() {
+        console.log(this.formGroup.controls.fromMail);
         const model = {
-            fromMail: this.formGroup.controls.fromMail.value,
-            mailTemplateType: this.formGroup.controls.mailTemplateType.value,
-            templateDescription: this.formGroup.controls.templateDescription.value
+            Id: 0,
+            EmailAddress: this.formGroup.controls.fromMail.value,
+            MailTemplateTypeId: this.formGroup.controls.mailTemplateType.value,
+            TemplateText: this.formGroup.controls.templateDescription.value
         }
         if (this.formGroup.valid) {
-            this.mailTemplateTypeService.save(model).subscribe(res => {
+            this.mailSettingsService.save(model).subscribe(res => {
                 if (res.status === 200) {
                     this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail Template Type Saved', life: 3000 });
                 }

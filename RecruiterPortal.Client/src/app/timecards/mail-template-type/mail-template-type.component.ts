@@ -13,7 +13,7 @@ export class MailTemplateTypeComponent implements OnInit {
     public isLoading: boolean = false;
     public mailTemplateTypes: any[] = [];
     public selectedMailTemplateType: any;
-    public selectedMailTemplateTypeId: number;
+    public selectedMailTemplateTypeId: number = 0;
     public addEditTitle: string;
     public formGroup: FormGroup;
 
@@ -53,7 +53,7 @@ export class MailTemplateTypeComponent implements OnInit {
 
     onAddNew() {
         this.setDefaultFields();
-        this.selectedMailTemplateTypeId = null;
+        this.selectedMailTemplateTypeId = 0;
         this.selectedMailTemplateType = null;
     }
 
@@ -90,7 +90,7 @@ export class MailTemplateTypeComponent implements OnInit {
     onDelete(mailTemplateType) {
         this.mailTemplateTypeService.delete(mailTemplateType.Id).subscribe(res => {
             if (res.status === 200) {
-                this.selectedMailTemplateTypeId = null;
+                this.selectedMailTemplateTypeId = 0;
                 this.selectedMailTemplateType = null;
                 this.setDefaultFields();
                 this.getMailTemplateTypesByRecruiterId();

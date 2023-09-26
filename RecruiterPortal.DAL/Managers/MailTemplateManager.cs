@@ -12,6 +12,7 @@ namespace RecruiterPortal.DAL.Managers
             mailTemplate.RecruiterId = recruiterId;
             mailTemplate.EmailAddress = request.EmailAddress;
             mailTemplate.TemplateText = request.TemplateText;
+            mailTemplate.MailTemplateTypeId = request.MailTemplateTypeId;
             mailTemplate.CreatedBy = recruiterId;
             mailTemplate.CreatedDate = DateTime.Now;
             return mailTemplate;
@@ -23,6 +24,7 @@ namespace RecruiterPortal.DAL.Managers
             mailTemplate.RecruiterId = recruiterId;
             mailTemplate.EmailAddress = request.EmailAddress;
             mailTemplate.TemplateText = request.TemplateText;
+            mailTemplate.MailTemplateTypeId = request.MailTemplateTypeId;
             mailTemplate.UpdatedBy = recruiterId;
             mailTemplate.UpdatedDate = DateTime.Now;
             return mailTemplate;

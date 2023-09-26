@@ -2,9 +2,7 @@
 {
     public class MailTemplateRequest
     {
-        public int Id { get; set; }
-
-        public int RecruiterId { get; set; }
+        public int Id { get; set; }        
 
         public string EmailAddress { get; set; }
 

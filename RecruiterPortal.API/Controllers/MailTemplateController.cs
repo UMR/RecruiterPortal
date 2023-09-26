@@ -67,6 +67,30 @@ namespace RecruiterPortal.API.Controllers
             }
         }
 
+        [Route("save-mail-template")]
+        [HttpPost]
+        public async Task<IActionResult> SaveMailTemplateType([FromBody] MailTemplateRequest request)
+        {
+            try
+            {
+                if (request.Id > 0)
+                {
+                    var result = await MailTemplateManager.Update(request, RecruiterId);
+                    if (result == null)
+                    {
+                        return NotFound();
+                    }
+                    return StatusCode(200);
+                }
+                return StatusCode(200, await MailTemplateManager.Create(request, RecruiterId));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         [Route("delete-mail-template-type/{id}")]
         [HttpDelete]
         public async Task<IActionResult> DeleteMailTemplateType(int id)
