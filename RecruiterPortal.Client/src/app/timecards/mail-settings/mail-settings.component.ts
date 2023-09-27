@@ -16,6 +16,9 @@ export class MailSettingsComponent implements OnInit {
     public formGroup: FormGroup;
     public mailTemplateTypes: any[] = [];
     public recruiterMailConfigs: any[] = [];
+    private selectedFromMail: string;
+    private selectedTemplateType: string;
+    public mailTemplateId: number = 0;
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private mailTemplateTypeService: MailTemplateService,
         private mailSettingsService: MailSettingsService) {
@@ -49,12 +52,20 @@ export class MailSettingsComponent implements OnInit {
         this.formGroup.controls.mailTemplateType.setValue('');        
     }
 
-    onMailChange(event) {
-        console.log(event.target.value);
+    onMailChange(event) {        
+        this.selectedFromMail = event.target.value;
+        this.getMailTemplate();
     }
 
     onTemplateTypeChange(event) {
-        console.log(event.target.value);
+        this.selectedTemplateType = event.target.value;        
+        this.getMailTemplate();
+    }
+
+    getMailTemplate() {
+        if (this.selectedFromMail && this.selectedTemplateType) {
+
+        }
     }
 
     save() {        

@@ -30,6 +30,21 @@ namespace RecruiterPortal.DAL.Managers
             return mailTemplate;
         }
 
+        private static MailTemplateResponse MapMailTemplateResponse(MailTemplate mailTemplate)
+        {
+            MailTemplateResponse response = new MailTemplateResponse();
+            response.Id = mailTemplate.Id;
+            response.RecruiterId = mailTemplate.RecruiterId;
+            response.EmailAddress = mailTemplate.EmailAddress;
+            response.TemplateText = mailTemplate.TemplateText;
+            response.MailTemplateTypeId = mailTemplate.MailTemplateTypeId;
+            response.CreatedBy = mailTemplate.CreatedBy;
+            response.CreatedDate = mailTemplate.CreatedDate;
+            response.UpdatedBy = mailTemplate.UpdatedBy;
+            response.UpdatedDate = mailTemplate.UpdatedDate;
+            return response;
+        }
+
         public static async Task<int> Create(MailTemplateRequest request, int recruiterId)
         {
             try
