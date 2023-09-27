@@ -88,9 +88,9 @@ namespace RecruiterPortal.DAL.Managers
                     {
                         jobsCount = (from job in context.Jobs
                                      join pos in context.Positions
-                                     on job.JobId equals pos.Id
+                                     on job.PositionId equals pos.Id
                                      join ins in context.Institutions
-                                     on job.JobId equals ins.Id
+                                     on job.InstituteId equals ins.Id
                                      where job.AgencyId == agencyId
                                      select job).Count();
                     }
@@ -98,9 +98,9 @@ namespace RecruiterPortal.DAL.Managers
                     {
                         jobsCount = (from job in context.Jobs
                                      join pos in context.Positions
-                                     on job.JobId equals pos.Id
+                                     on job.PositionId equals pos.Id
                                      join ins in context.Institutions
-                                     on job.JobId equals ins.Id
+                                     on job.InstituteId equals ins.Id
                                      where job.AgencyId == agencyId && job.Status == status
                                      select job).Count();
                     }
@@ -108,9 +108,9 @@ namespace RecruiterPortal.DAL.Managers
                     {
                         jobs = (from job in context.Jobs
                                 join pos in context.Positions
-                                on job.JobId equals pos.Id
+                                on job.PositionId equals pos.Id
                                 join ins in context.Institutions
-                                on job.JobId equals ins.Id
+                                on job.InstituteId equals ins.Id
                                 where job.AgencyId == agencyId
                                 select (new JobResponseModel
                                 {
@@ -135,9 +135,9 @@ namespace RecruiterPortal.DAL.Managers
                     {
                         jobs = (from job in context.Jobs
                                 join pos in context.Positions
-                                on job.JobId equals pos.Id
+                                on job.PositionId equals pos.Id
                                 join ins in context.Institutions
-                                on job.JobId equals ins.Id
+                                on job.InstituteId equals ins.Id
                                 where job.AgencyId == agencyId && job.Status == status
                                 select (new JobResponseModel
                                 {
