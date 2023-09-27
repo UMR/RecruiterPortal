@@ -576,10 +576,6 @@ public partial class UmrrecruitmentApplicantContext : DbContext
             entity.ToTable("MailTemplate");
 
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-            entity.Property(e => e.EmailAddress)
-                .IsRequired()
-                .HasMaxLength(50)
-                .IsUnicode(false);
             entity.Property(e => e.TemplateText)
                 .IsRequired()
                 .HasColumnType("text");

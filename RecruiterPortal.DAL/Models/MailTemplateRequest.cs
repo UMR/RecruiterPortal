@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }        
 
-        public string EmailAddress { get; set; }
+        public int? RecruiterMailConfigId { get; set; }
 
         public string TemplateText { get; set; }        
 

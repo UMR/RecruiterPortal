@@ -8,9 +8,9 @@ namespace RecruiterPortal.DAL.Managers
     {
         private static MailTemplate MapMailTemplateCreateRequest(MailTemplateRequest request, int recruiterId)
         {
-            MailTemplate mailTemplate = new MailTemplate();            
+            MailTemplate mailTemplate = new MailTemplate();
             mailTemplate.RecruiterId = recruiterId;
-            mailTemplate.EmailAddress = request.EmailAddress;
+            mailTemplate.RecruiterMailConfigId = request.RecruiterMailConfigId;
             mailTemplate.TemplateText = request.TemplateText;
             mailTemplate.MailTemplateTypeId = request.MailTemplateTypeId;
             mailTemplate.CreatedBy = recruiterId;
@@ -22,7 +22,7 @@ namespace RecruiterPortal.DAL.Managers
         {
             mailTemplate.Id = request.Id;
             mailTemplate.RecruiterId = recruiterId;
-            mailTemplate.EmailAddress = request.EmailAddress;
+            mailTemplate.RecruiterMailConfigId = request.RecruiterMailConfigId;
             mailTemplate.TemplateText = request.TemplateText;
             mailTemplate.MailTemplateTypeId = request.MailTemplateTypeId;
             mailTemplate.UpdatedBy = recruiterId;
@@ -35,13 +35,26 @@ namespace RecruiterPortal.DAL.Managers
             MailTemplateResponse response = new MailTemplateResponse();
             response.Id = mailTemplate.Id;
             response.RecruiterId = mailTemplate.RecruiterId;
-            response.EmailAddress = mailTemplate.EmailAddress;
+            response.RecruiterMailConfigId = mailTemplate.RecruiterMailConfigId;
             response.TemplateText = mailTemplate.TemplateText;
             response.MailTemplateTypeId = mailTemplate.MailTemplateTypeId;
             response.CreatedBy = mailTemplate.CreatedBy;
             response.CreatedDate = mailTemplate.CreatedDate;
             response.UpdatedBy = mailTemplate.UpdatedBy;
             response.UpdatedDate = mailTemplate.UpdatedDate;
+            return response;
+        }
+
+        public static async Task<MailTemplateResponse> GetMailTemplate(int recruiterMailConfigId, int mailTemplateTypeId)
+        {
+            GenericRepository<MailTemplate> repository = new GenericRepository<MailTemplate>();
+            MailTemplate mailTemplate = await repository.GetByIdAsync(m => m.RecruiterMailConfigId == recruiterMailConfigId && m.MailTemplateTypeId == mailTemplateTypeId);
+            if (mailTemplate == null)
+            {
+                return null;
+            }
+
+            MailTemplateResponse response = MapMailTemplateResponse(mailTemplate);
             return response;
         }
 

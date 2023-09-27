@@ -9,7 +9,7 @@ public partial class MailTemplate
 
     public int RecruiterId { get; set; }
 
-    public string EmailAddress { get; set; }
+    public int? RecruiterMailConfigId { get; set; }
 
     public string TemplateText { get; set; }
 
