@@ -18,7 +18,8 @@ export class MailSettingsComponent implements OnInit {
     public recruiterMailConfigs: any[] = [];
     private selectedFromMail: number;
     private selectedTemplateType: number;
-    public mailTemplateId: number = 0;
+    public selectedMailTemplateId: number = 0;
+    public addEditButtonTitle: string = "Save";
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private mailTemplateTypeService: MailTemplateService,
         private mailSettingsService: MailSettingsService) {
@@ -47,9 +48,17 @@ export class MailSettingsComponent implements OnInit {
     }
 
     clear() {
+        this.clearFields();        
+    }
+
+    clearFields() {
         this.formGroup.reset();
         this.formGroup.controls.fromMail.setValue('');
-        this.formGroup.controls.mailTemplateType.setValue('');        
+        this.formGroup.controls.mailTemplateType.setValue(''); 
+        this.selectedFromMail = null;
+        this.selectedTemplateType = null;
+        this.selectedMailTemplateId = 0;
+        this.addEditButtonTitle = "Save";
     }
 
     onMailChange(event) {        
@@ -64,25 +73,42 @@ export class MailSettingsComponent implements OnInit {
 
     getMailTemplate() {
         if (this.selectedFromMail && this.selectedTemplateType) {
-            this.mailSettingsService.getMailTemplate(this.selectedFromMail, this.selectedTemplateType).subscribe(res => console.log(res));
+            this.mailSettingsService
+                .getMailTemplate(this.selectedFromMail, this.selectedTemplateType)
+                .subscribe(res => {                    
+                    if (res.body) {
+                        this.selectedMailTemplateId = res.body.Id;
+                        this.formGroup.controls.templateDescription.setValue(res.body.TemplateText);
+                        this.addEditButtonTitle = "Update";
+                    } else {
+                        this.selectedMailTemplateId = 0;
+                        this.formGroup.controls.templateDescription.setValue('');
+                        this.addEditButtonTitle = "Save";
+                    }
+                });
         }
     }
 
     save() {        
         const model = {
-            Id: 0,
+            Id: this.selectedMailTemplateId,
             RecruiterMailConfigId: this.formGroup.controls.fromMail.value,
             MailTemplateTypeId: this.formGroup.controls.mailTemplateType.value,
             TemplateText: this.formGroup.controls.templateDescription.value
         }
         if (this.formGroup.valid) {
             this.mailSettingsService.save(model).subscribe(res => {
-                if (res.status === 200) {
-                    this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail Template Type Saved', life: 3000 });
+                if (res.status === 200) {                    
+                    if (this.addEditButtonTitle === "Update") {
+                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail Template Updated', life: 3000 });
+                    } else {
+                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail Template Saved', life: 3000 });
+                    }
+                    this.clearFields();
                 }
             },
                 error => {
-                    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Mail Template Type Save Failed', life: 3000 });
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Mail Template Save Failed', life: 3000 });
                 });
         }
     }
