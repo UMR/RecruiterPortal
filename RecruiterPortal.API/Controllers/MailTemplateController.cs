@@ -42,6 +42,21 @@ namespace RecruiterPortal.API.Controllers
             }
         }
 
+        [Route("get-mail-template/{configId}/{mailTemplateTypeId}")]
+        [HttpGet]
+        public async Task<IActionResult> GetMailTemplateTypeById(int configId,int mailTemplateTypeId)
+        {
+            try
+            {
+                return StatusCode(200, await MailTemplateManager.GetMailTemplate(configId, mailTemplateTypeId));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
 
         [Route("save-mail-template-type")]
         [HttpPost]

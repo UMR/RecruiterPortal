@@ -486,5 +486,6 @@
     <None Include="Special\10_AZ_09_Insert_MailConfig_Data.sql" />
     <None Include="2023-09-25\02_SR_01_ALTER_Applicant_Status_TABLE.sql" />
     <None Include="2023-09-25\03_AZ_02_CREATE_TABLE_MailTemplate.sql" />
+    <None Include="2023-09-27\01_AZ_01_ALTER_COLUMN_EmailAddress.sql" />
   </ItemGroup>
 </Project>

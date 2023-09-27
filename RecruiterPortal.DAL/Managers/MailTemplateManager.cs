@@ -50,9 +50,7 @@ namespace RecruiterPortal.DAL.Managers
             GenericRepository<MailTemplate> repository = new GenericRepository<MailTemplate>();
             MailTemplate mailTemplate = await repository.GetByIdAsync(m => m.RecruiterMailConfigId == recruiterMailConfigId && m.MailTemplateTypeId == mailTemplateTypeId);
             if (mailTemplate == null)
-            {
                 return null;
-            }
 
             MailTemplateResponse response = MapMailTemplateResponse(mailTemplate);
             return response;

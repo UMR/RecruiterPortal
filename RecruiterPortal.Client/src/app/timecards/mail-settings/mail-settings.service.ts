@@ -14,6 +14,10 @@ export class MailSettingsService {
         return this.client.get(`${resourceServerUrl}/api/recruitermailconfig/get-by-recruiterid`, { observe: 'response' });
     } 
 
+    getMailTemplate(configId: number, mailTemplateId: number): Observable<any> {
+        return this.client.get(`${resourceServerUrl}/api/mailtemplate/get-mail-template/${configId}/${mailTemplateId}`, { observe: 'response' });
+    }     
+
     save(model: any): Observable<HttpResponse<any>> {
         return this.client.post(`${resourceServerUrl}/api/mailtemplate/save-mail-template`, model, {
             headers: new HttpHeaders()
