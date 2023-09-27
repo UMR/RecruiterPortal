@@ -135,6 +135,7 @@
     <Folder Include="2023-09-18" />
     <Folder Include="2023-09-20" />
     <Folder Include="2023-09-25" />
+    <Folder Include="2023-09-27" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="2019-11-04\01_TR_01_CREATE_DATABASE.sql" />
@@ -404,6 +405,8 @@
     <Build Include="2023-07-26\09_SR_05_sp_GetUserPhoto.sql" />
     <Build Include="2023-07-26\10_SR_06_Update_ChangeTracker_UserPhoto.sql" />
     <Build Include="2023-07-26\11_SR_07_Update_ChangeTracker_UserSocial.sql" />
+    <Build Include="2023-08-14\02_SR_01_CREATE_sp_GetUserEmailByEmailSearch.sql" />
+    <Build Include="2023-09-27\01_AZ_01_ALTER_COLUMN_EmailAddress.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="2023-08-03\01_SR_01_Create_AgencyTable.sql" />

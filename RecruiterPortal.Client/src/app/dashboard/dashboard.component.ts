@@ -42,7 +42,6 @@ export class DashboardComponent implements OnInit {
 
     getApplicantCount() {
         this.dashboardService.getApplicantCount().subscribe(res => {
-            console.log(res.body);
             this.getApplicantStatus(res.body.TotalApplicant, res.body.VerifiedApplicant, res.body.NotVerifiedApplicant)
         },
             err => {
@@ -74,7 +73,6 @@ export class DashboardComponent implements OnInit {
 
     getApplicantStatusCount() {
         this.dashboardService.getApplicantCount().subscribe(res => {
-            console.log(res.body);
             this.getStatus(10, 15, 5, 10, 20, 3, 15, 8);
         },
             err => {
@@ -116,7 +114,6 @@ export class DashboardComponent implements OnInit {
 
     getJobCount() {
         this.dashboardService.getJobCount().subscribe(res => {
-            console.log(res.body);
             this.getJobStatus(res.body.TotalJob, res.body.ActiveJob, res.body.InActiveJob)
         },
             err => {
