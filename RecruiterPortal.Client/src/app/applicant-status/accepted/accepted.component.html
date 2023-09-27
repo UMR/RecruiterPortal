@@ -1,11 +1,6 @@
 <div id="page-content-wrapper">
     <applicant-portal-header (onToggleButtonClicked)="(showHideMenu)()" isVisibleToggleButton=0></applicant-portal-header>
     <section class="main-content">
-        <!--<div class="grid">
-            <div class="col-12">
-                <button pButton pRipple label="Send To" class="button-success btn-add" (click)="onSendToClick()"></button>
-            </div>
-        </div>-->
         <div class="container-fluid">
             <p-table #table [responsive]="true"
                      [value]="applicants"
