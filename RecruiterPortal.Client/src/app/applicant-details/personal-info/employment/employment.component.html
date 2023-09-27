@@ -2,11 +2,11 @@
 <div class="tab-pane" id="v-pills-previous-employment" role="tabpanel" aria-labelledby="v-pills-previous-employment-tab">
   <div class="card portal-card">
     <div class="card-body">
-      <a [routerLink]="['./add-edit']" *ngIf="(employments && employments.length !== 0) && (employmentsImported && employmentsImported.length !== 0)"
+      <a [routerLink]="['./add-edit']" *ngIf="(employments && employments.length !== 0)"
          class="text-right card-edit"><i class="fa fa-plus text-edit"></i></a>
       <div class="row">
         <div class="col-md-12">
-          <div class="empty-state text-center" *ngIf="(employments && employments.length === 0) && (employmentsImported && employmentsImported.length === 0)">
+          <div class="empty-state text-center" *ngIf="(employments && employments.length === 0)">
             <img src="assets/img/employement.svg" class="img-fluid mb-3" width="72" alt="">
             <h5 class="mb-3">You haven't added any employment yet.</h5>
             <a [routerLink]="['./add-edit']" class="btn btn-primary btn-portal-border">Add Employment</a>

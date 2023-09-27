@@ -10,8 +10,7 @@ import { Router } from '@angular/router';
 })
 export class EmploymentComponent implements OnInit {
     public isLoading: boolean = false;
-    public employments: any = [];
-    public employmentsImported: any = [];
+    public employments: any = [];    
 
     constructor(private messageService: MessageService,
         private employmentService: EmploymentService,
