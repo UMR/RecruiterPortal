@@ -3,7 +3,7 @@
     <section class="main-content">
         <div class="grid">
             <div class="col-12">
-                <button pButton pRipple label="Add New" class="button-success btn-add" (click)="openNewAgency()"></button>
+                <button pButton pRipple label="Add New" class="button-success btn-add" (click)="addNewInstitution()">Add New</button>
             </div>
         </div>
         <div class="container-fluid">
@@ -48,4 +48,6 @@
         </div>
     </section>
 </div>
-
+<p-dialog [(visible)]="showDialog" [style]="{ width: '450px' }" header="Add Institution" [modal]="true" [draggable]="false" [resizable]="false">
+    <app-add-institution (hideEvent)="handleHideEvent($event)"></app-add-institution>
+</p-dialog>

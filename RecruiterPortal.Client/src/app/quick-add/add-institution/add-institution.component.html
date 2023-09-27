@@ -1,0 +1,16 @@
+
+<form [formGroup]="institutionForm" (ngSubmit)="onAddInstitutionSubmit()">
+
+    <div class="form-group">
+        <label for="institutionName" class="form-label">Institution Name</label>
+        <input id="institutionName" name="institutionName" type="text" class="form-control"
+               formControlName="institutionName">
+    </div>
+
+    <div class="mb-10">
+        <button type="submit" class="btn btn-primary btn-block btn-portal" [disabled]="!institutionForm.valid">Add Institution</button>
+    </div>
+</form>
+
+
+<p-toast key="toastKey1"></p-toast>

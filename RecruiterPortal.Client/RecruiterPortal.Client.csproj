@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="src\app\view-by-status\" />
+    <Compile Remove="src\app\view-by-status\**" />
+    <EmbeddedResource Remove="src\app\view-by-status\**" />
+    <None Remove="src\app\view-by-status\**" />
   </ItemGroup>
 
 </Project>
