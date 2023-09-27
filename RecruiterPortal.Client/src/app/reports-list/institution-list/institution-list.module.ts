@@ -5,6 +5,8 @@ import { InstitutionListRoutingModule } from './institution-list-routing.module'
 import { InstitutionListComponent } from './institution-list.component';
 import { SharedModule } from '../../common/shared.module';
 import { TableModule } from 'primeng/components/table/table';
+import { AddInstitutionModule } from '../../quick-add/add-institution/add-institution.module';
+import { DialogModule } from 'primeng/dialog';
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import { TableModule } from 'primeng/components/table/table';
         CommonModule,
         InstitutionListRoutingModule,
         SharedModule,
-        TableModule
+        TableModule,
+        AddInstitutionModule,
+        DialogModule
     ]
 })
 export class InstitutionListModule { }

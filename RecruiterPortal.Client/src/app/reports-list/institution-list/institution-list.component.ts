@@ -19,18 +19,21 @@ export class InstitutionListComponent implements OnInit {
     private skip: number;
     private pageNumber: number;
     public selectedInstitute: any;
+    public showDialog: boolean = false;
 
     constructor(private institutionListService: InstitutionListService) { }
 
     ngOnInit() {
 
     }
+
     onLazyLoad(event: LazyLoadEvent) {
         this.pageNumber = Math.ceil((event.first + 1) / event.rows);
         this.take = event.rows;
         this.skip = event.rows * (this.pageNumber - 1);
         this.getAllInstitution();
     }
+
     getAllInstitution() {
         this.isLoading = true;
 
@@ -42,7 +45,6 @@ export class InstitutionListComponent implements OnInit {
         this.institutionListService.getAllInstitute(model)
             .subscribe(response => {
                 if (response.status === 200) {
-                    console.log(response.body);
                     this.institutions = (response.body as any).institutes;
                     this.totalInstitute = (response.body as any).totalInstitute;
                 }
@@ -54,5 +56,9 @@ export class InstitutionListComponent implements OnInit {
                 () => {
                     this.isLoading = false;
                 });
+    }
+
+    addNewInstitution() {
+        this.showDialog = true;
     }
 }
