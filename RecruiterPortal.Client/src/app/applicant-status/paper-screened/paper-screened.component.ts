@@ -54,4 +54,7 @@ export class PaperScreenedComponent implements OnInit {
         this.showDialog = true;
     }
 
+    handleHideEvent(show) {
+        this.showDialog = show;
+    }
 }

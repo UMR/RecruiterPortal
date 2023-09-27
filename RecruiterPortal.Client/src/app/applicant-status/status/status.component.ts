@@ -20,7 +20,8 @@ export class StatusComponent implements OnInit {
     public institutionResults: any[];
     
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private statusService: StatusService) {
- }
+
+     }
 
     ngOnInit() {
         this.createFormGroup();

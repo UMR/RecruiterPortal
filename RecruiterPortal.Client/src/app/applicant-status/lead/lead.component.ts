@@ -26,9 +26,11 @@ export class LeadComponent implements OnInit {
     ngOnInit() {
         this.getApplicantStatus();
     }
+
     onLazyLoad(event: LazyLoadEvent) {
 
     }
+
     getApplicantStatus() {
         this.leadService.getApplicantStatus(StatusEnum.NewLeads).subscribe(response => {
             if (response.status === 200) {
@@ -40,8 +42,13 @@ export class LeadComponent implements OnInit {
             },
             () => { });
     }
+
     onSendToClick(applicant) {
         this.selectedApplicant = applicant.ApplicantId;
         this.showDialog = true;
+    }
+
+    handleHideEvent(show) {
+        this.showDialog = show;
     }
 }

@@ -47,4 +47,7 @@ export class OfferedComponent implements OnInit {
         this.selectedApplicant = applicant.ApplicantId;
         this.showDialog = true;
     }
+    handleHideEvent(show) {
+        this.showDialog = show;
+    }
 }

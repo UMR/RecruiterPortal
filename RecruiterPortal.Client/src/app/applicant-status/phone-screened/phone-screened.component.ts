@@ -44,8 +44,13 @@ export class PhoneScreenedComponent implements OnInit {
             },
             () => { });
     }
+
     onSendToClick(applicant) {
         this.selectedApplicant = applicant.ApplicantId;
         this.showDialog = true;
+    }
+
+    handleHideEvent(show) {
+        this.showDialog = show;
     }
 }

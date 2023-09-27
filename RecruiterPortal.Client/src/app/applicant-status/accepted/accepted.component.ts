@@ -47,4 +47,8 @@ export class AcceptedComponent implements OnInit {
         this.selectedApplicant = applicant.ApplicantId;
         this.showDialog = true;
     }
+
+    handleHideEvent(show) {
+        this.showDialog = show;
+    }
 }

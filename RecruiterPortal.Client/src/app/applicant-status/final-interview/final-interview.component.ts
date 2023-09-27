@@ -32,6 +32,7 @@ export class FinalInterviewComponent implements OnInit {
         //this.getJobsByAgencyId(this.skip, this.take);
         this.getApplicantStatus();
     }
+
     getApplicantStatus() {
         this.finalInterviewService.getApplicantStatus(StatusEnum.FinalInterview).subscribe(response => {
             if (response.status === 200) {
@@ -43,8 +44,13 @@ export class FinalInterviewComponent implements OnInit {
             },
             () => { });
     }
+
     onSendToClick(applicant) {
         this.selectedApplicant = applicant.ApplicantId;
         this.showDialog = true;
+    }
+
+    handleHideEvent(show) {
+        this.showDialog = show;
     }
 }
