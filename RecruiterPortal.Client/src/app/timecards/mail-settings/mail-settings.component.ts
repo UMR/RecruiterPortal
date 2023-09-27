@@ -71,7 +71,7 @@ export class MailSettingsComponent implements OnInit {
     save() {        
         const model = {
             Id: 0,
-            EmailAddress: this.formGroup.controls.fromMail.value,
+            RecruiterMailConfigId: this.formGroup.controls.fromMail.value,
             MailTemplateTypeId: this.formGroup.controls.mailTemplateType.value,
             TemplateText: this.formGroup.controls.templateDescription.value
         }
