@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpResponse, HttpBackend, HttpClient } from '@angular/common/http';
-import { resourceServerUrl } from '../../common/constants/auth-keys';
 import { ApplicantModel } from '../../common/model/applicant';
+import { resourceServerUrl } from '../../common/constants/auth-keys';
 
 
 @Injectable({

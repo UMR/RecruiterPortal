@@ -9,10 +9,6 @@
         background-color: #339933 !important;
     }
 
-.input-text {
-    padding: 4px 4px;
-    font-size: 16px;
-}
 .btn-save {
     width: 100px;
     float: right;
@@ -45,70 +41,43 @@
         display: inline-block;
         margin-bottom: 0.5rem;
     }
-:host >>> p-autocomplete {
-    padding-top: 0;
-    padding-left: 0;
-    padding-right: 0;
+
+.input-text {
+    padding: 4px 4px;
+    font-size: 16px;
 }
 
-:host >>> .ui-autocomplete {
-    width: 100%;
+:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page {
+    min-width: 2rem;
+    height: 2rem;
 }
 
-:host >>> p-autocomplete input, :host >>> p-autocomplete.ng-dirty.ng-invalid > .ui-autocomplete > .ui-inputtext {
-    border: none;
-    background: transparent;
-    width: 100%;
-    height: 40px;
+:host ::ng-deep .p-paginator .p-paginator-next {
+    min-width: 2rem;
+    height: 2rem;
 }
 
-:host >>> .ui-table .ui-table-tbody > tr.ui-state-highlight {
-    background-color: #007ad9 !important;
+:host ::ng-deep .p-paginator .p-paginator-last {
+    min-width: 2rem;
+    height: 2rem;
 }
 
-.pd-15 {
-    padding: 0 15px;
+:host ::ng-deep .p-paginator .p-paginator-first {
+    min-width: 2rem;
+    height: 2rem;
 }
 
-:host >>> .ui-paginator .ui-paginator-pages .ui-paginator-page {
-    color: #848484;
-    height: 2.286em;
-    min-width: 3.286em;
-    border: 0 none;
-    line-height: 2.286em;
-    padding: 0;
-    margin: 0;
-    vertical-align: top;
-    -moz-border-radius: 0;
-    -webkit-border-radius: 0;
-    border-radius: 0;
+:host ::ng-deep .p-paginator .p-paginator-prev {
+    min-width: 2rem;
+    height: 2rem;
 }
 
-.p-column-title {
-    display: none;
+:host ::ng-deep .p-paginator .p-dropdown {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    height: 2rem !important;
 }
 
-
-@media screen and (max-width: 590px) {
-    .p-column-title {
-        display: block;
-    }
-}
-
-.btn-clear {
-    background: white;
-    color: black;
-    border: 1px solid;
-    width: 100px;
-    height: 42px;
-}
-
-.btn-search {
-    background: black;
-    color: white;
-    width: 100px;
-    height: 42px;
-}
-.ui-button.ui-button-text-only .ui-button-text {
-    padding: 5px 15px !important;
+:host >>> .ui-table .ui-table-tbody > tr.ui-state-highlight{
+    background-color:#007ad9 !important;
 }
