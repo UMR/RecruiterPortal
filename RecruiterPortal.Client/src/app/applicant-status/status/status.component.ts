@@ -37,12 +37,14 @@ export class StatusComponent implements OnInit {
             expectedSalary:['']
         });
     }
+
     onStatusSelect($event) {
         this.formGroup.patchValue({
             status: $event.StatusName,
             statusId: $event.StatusId
         });
     }
+
     onStatusSearch() {
         this.statusService.getStatus().subscribe(response => {
             console.log(response.body);
@@ -89,6 +91,7 @@ export class StatusComponent implements OnInit {
     }
 
     hide() {
+        this.formGroup.reset();
         this.hideEvent.emit(false);
     }
 
