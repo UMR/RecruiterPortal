@@ -6,7 +6,7 @@ namespace RecruiterPortal.DAL.Managers
 {
     public class OfficialFileManager
     {
-        private static OfficialFile MapOfficialFileCreateRequest(OfficialFileRequest request, int recruiterId, int agencyId)
+        private static OfficialFile MapOfficialFileCreateRequest(OfficialFileRequest request, int recruiterId, long agencyId)
         {
             OfficialFile officialFile = new OfficialFile();
             officialFile.FileName = request.FileName;
@@ -29,7 +29,7 @@ namespace RecruiterPortal.DAL.Managers
             officialFile.Title = request.Title;
             officialFile.IsRequired = request.IsRequired;
             officialFile.IsAdministrative = request.IsAdministrative;
-            officialFile.IsActive = request.IsActive;            
+            officialFile.IsActive = request.IsActive;
             officialFile.UpdatedBy = recruiterId;
             officialFile.UpdatedDate = DateTime.Now;
             return officialFile;
@@ -39,7 +39,7 @@ namespace RecruiterPortal.DAL.Managers
         {
             OfficialFileResponse response = new OfficialFileResponse();
             response.Id = officialFile.Id;
-            response.FileName = officialFile.FileName;            
+            response.FileName = officialFile.FileName;
             response.Title = officialFile.Title;
             response.IsRequired = officialFile.IsRequired;
             response.IsAdministrative = officialFile.IsAdministrative;
@@ -51,7 +51,58 @@ namespace RecruiterPortal.DAL.Managers
             return response;
         }
 
-        public static async Task<int> Create(OfficialFileRequest request, int recruiterId, int agencyId)
+        private static List<OfficialFileResponse> MapOfficialFileResponse(IEnumerable<OfficialFile> officialFiles)
+        {
+            List<OfficialFileResponse> response = new List<OfficialFileResponse>(); 
+            foreach (var officialFile in officialFiles)
+            {
+                response.Add(MapOfficialFileResponse(officialFile));
+            }
+
+            return response;
+        }
+
+        public static async Task<OfficialFileResponse> GetOfficialFileById(int id)
+        {
+            try
+            {
+                OfficialFileResponse response = null;
+                GenericRepository<OfficialFile> repository = new GenericRepository<OfficialFile>();
+                var officialFile = await repository.GetByIdAsync(m => m.Id == id);
+                if (officialFile != null)
+                {
+                    response = MapOfficialFileResponse(officialFile);
+                }
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static async Task<List<OfficialFileResponse>> GetOfficialFileByAgencyId(long agencyId)
+        {
+            try
+            {
+                List<OfficialFileResponse> response = null;
+                GenericRepository<OfficialFile> repository = new GenericRepository<OfficialFile>();
+                var officialFiles = await repository.GetAllAsync(o => o.AgencyId == agencyId);
+                if (officialFiles != null && officialFiles.Count() > 0)
+                {
+                    response = MapOfficialFileResponse(officialFiles);
+                }
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static async Task<int> Create(OfficialFileRequest request, int recruiterId, long agencyId)
         {
             try
             {
