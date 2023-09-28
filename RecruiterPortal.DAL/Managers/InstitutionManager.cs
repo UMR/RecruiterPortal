@@ -57,7 +57,10 @@ namespace RecruiterPortal.DAL.Managers
             {
                 GenericRepository<State> stateRepo = new GenericRepository<State>();
                 State state = await stateRepo.GetByIdAsync(s => s.StateCode == request.StateCode);
-                request.StateCode = state.StateId.ToString();
+                if (state != null)
+                {
+                    request.StateCode = state.StateId.ToString();
+                }
                 GenericRepository<Institution> repository = new GenericRepository<Institution>();
                 Institution institution = MapApplicantStatusRequest(true, request, recruiterId);
                 Institution createdApplicantStatus = await repository.SaveAsync(institution);
