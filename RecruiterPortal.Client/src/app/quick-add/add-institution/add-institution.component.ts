@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { AddInstitutionService } from './add-institution.service';
+import { InstitutionModel } from './institution.model';
 
 @Component({
     selector: 'app-add-institution',
@@ -11,6 +12,7 @@ import { AddInstitutionService } from './add-institution.service';
 export class AddInstitutionComponent implements OnInit {
     public institutionForm: FormGroup;
     public zipCodeResults: string[];
+    public isLoading: boolean = false;
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private addInstitutionService: AddInstitutionService) { }
 
@@ -22,9 +24,10 @@ export class AddInstitutionComponent implements OnInit {
         this.institutionForm = this.fb.group({
             institutionName: ["", Validators.required],
             telephone: [''],
-            zipCode: [''],
+            zipCode: ['', Validators.required],
             state: [''],
             cityTown: [''],
+            county: [''],
             institutionWeb: [''],
             institutionAddress: [''],
             isActive: [false]
@@ -41,21 +44,49 @@ export class AddInstitutionComponent implements OnInit {
     }
 
     onZipCodeSelect($event) {
+        console.log($event);
         if ($event) {
             this.institutionForm.patchValue({
                 cityTown: $event.City,
-                state: $event.StateName
+                state: $event.StateCode,
+                county: $event.StateName
             });
         }
         else {
             this.institutionForm.patchValue({
                 cityTown: '',
-                state: ''
+                state: '',
+                county: ''
             });
         }
     }
 
     onAddInstitutionSubmit() {
+        this.isLoading = true;
+        let insModel = new InstitutionModel;
+        insModel.InstituteName = this.institutionForm.get('institutionName').value;
+        insModel.Telephone = this.institutionForm.get('telephone').value == '' ? null : this.institutionForm.get('telephone').value;
+        insModel.ZipCode = this.institutionForm.get('zipCode').value.ZipCode;
+        insModel.CountryId = 1;
+        insModel.StateCode = this.institutionForm.get('state').value;
+        insModel.County = this.institutionForm.get('county').value;;
+        insModel.Town = this.institutionForm.get('cityTown').value;
+        insModel.Address = this.institutionForm.get('institutionAddress').value;
+        insModel.IsActive = this.institutionForm.get('isActive').value;
 
+        this.addInstitutionService.addInstitution(insModel).subscribe(res => {
+            console.log(res);
+            if (res) {
+                this.institutionForm.reset()
+                this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Institution Added Successfully', detail: '' });
+            }
+        },
+            err => {
+                this.isLoading = false;
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Add Institution failed', detail: '' });
+            },
+            () => {
+                this.isLoading = false;
+            });
     }
 }

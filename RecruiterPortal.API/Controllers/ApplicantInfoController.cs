@@ -67,8 +67,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             try
             {
-                user.IsVerified = false;
-                user.AgencyId = Convert.ToInt32(GetCurrentUser().AgencyId);
+                user.IsVerified = true;
+                user.AgencyId = Convert.ToInt32(AgencyId);
                 int userId = UserManager.AddApplicant(user);
 
                 return Ok(userId);
@@ -79,6 +79,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 return StatusCode(500, ex);
             }
         }
+
         [Route("{email}")]
         [HttpGet]
         public IActionResult GetUserByEmail(string email)

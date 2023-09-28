@@ -1,6 +1,6 @@
 
 <form [formGroup]="institutionForm" (ngSubmit)="onAddInstitutionSubmit()">
-
+    <loading-image [is-loading]="isLoading"></loading-image>
     <div class="form-group">
         <label for="institutionName" class="form-label">Institution Name</label>
         <input id="institutionName" name="institutionName" required type="text" class="form-control"
@@ -8,11 +8,11 @@
     </div>
     <div class="form-group">
         <label for="institutePhone">Telephone</label>
-        <p-inputMask mask="(999) 999-9999" required class="input-text" formControlName="telephone" placeholder="(999) 999-9999" [style]="{'width':'100%'}"></p-inputMask>
+        <p-inputMask mask="(999) 999-9999" class="input-text" formControlName="telephone" placeholder="(999) 999-9999" [style]="{'width':'100%'}"></p-inputMask>
     </div>
     <div class="form-group">
         <label for="zipcode" class="form-label">Zip Code</label>
-        <p-autoComplete formControlName="zipCode" [suggestions]="zipCodeResults" class="form-control"
+        <p-autoComplete formControlName="zipCode" [suggestions]="zipCodeResults" class="form-control" required
                         (completeMethod)="onZipCodeSearch($event)" field="ZipCode" [dropdown]="true"
                         forceSelection="true" (onSelect)="onZipCodeSelect($event)" tabindex="12">
             <ng-template let-zipCode pTemplate="item">

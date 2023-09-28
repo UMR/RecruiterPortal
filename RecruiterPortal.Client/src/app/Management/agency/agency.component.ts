@@ -111,12 +111,12 @@ export class AgencyComponent implements OnInit {
         this.submitted = true;
         const agencyModel = new AgencyModel();
         agencyModel.AgencyName = this.agencyForm.get('agencyName').value;
-        agencyModel.URLPrefix = this.agencyForm.get('urlPrefix').value;;
-        agencyModel.AgencyEmail = this.agencyForm.get('agencyEmail').value;;
-        agencyModel.AgencyPhone = this.agencyForm.get('agencyPhone').value;;
-        agencyModel.AgencyAddress = this.agencyForm.get('agencyAddress').value;;
-        agencyModel.AgencyContactPerson = this.agencyForm.get('agencyContactPerson').value;;
-        agencyModel.AgencyContactPersonPhone = this.agencyForm.get('contactPersonPhone').value;;
+        agencyModel.URLPrefix = this.agencyForm.get('urlPrefix').value;
+        agencyModel.AgencyEmail = this.agencyForm.get('agencyEmail').value;
+        agencyModel.AgencyPhone = this.agencyForm.get('agencyPhone').value;
+        agencyModel.AgencyAddress = this.agencyForm.get('agencyAddress').value;
+        agencyModel.AgencyContactPerson = this.agencyForm.get('agencyContactPerson').value;
+        agencyModel.AgencyContactPersonPhone = this.agencyForm.get('contactPersonPhone').value;
         agencyModel.IsActive = this.agencyForm.get('isActive').value;;
         agencyModel.AgencyId = this.agencyId;
 

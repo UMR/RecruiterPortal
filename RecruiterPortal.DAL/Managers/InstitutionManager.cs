@@ -19,7 +19,7 @@ namespace RecruiterPortal.DAL.Managers
                 expandoObject.Name = name;
                 SqlParameter[] sqlParameters = institutionRepo.GetSqlParametersFromExpandoObject(expandoObject, spName, "@");
 
-                return institutionRepo.GetAll(spName, sqlParameters);                
+                return institutionRepo.GetAll(spName, sqlParameters);
             }
             catch (Exception ex)
             {
@@ -49,6 +49,49 @@ namespace RecruiterPortal.DAL.Managers
             }
 
             return institutionDt;
+        }
+
+        public static async Task<long> Insert(InstitutionRequestModel request, int recruiterId)
+        {
+            try
+            {
+                GenericRepository<State> stateRepo = new GenericRepository<State>();
+                State state = await stateRepo.GetByIdAsync(s => s.StateCode == request.StateCode);
+                request.StateCode = state.StateId.ToString();
+                GenericRepository<Institution> repository = new GenericRepository<Institution>();
+                Institution institution = MapApplicantStatusRequest(true, request, recruiterId);
+                Institution createdApplicantStatus = await repository.SaveAsync(institution);
+                return createdApplicantStatus.Id;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        private static Institution MapApplicantStatusRequest(bool isInsert, InstitutionRequestModel request, int recruiterId)
+        {
+            Institution institution = new Institution();
+            institution.Id = request.Id;
+            institution.InstituteName = request.InstituteName;
+            institution.Telephone = request.Telephone;
+            institution.ZipCode = request.ZipCode;
+            institution.County = request.County;
+            institution.StateId = Convert.ToInt32(request.StateCode);
+            institution.Town = request.Town;
+            institution.Website = request.Website;
+            institution.Address = request.Address;
+            institution.IsActive = request.IsActive;
+            if (isInsert)
+            {
+                institution.CreatedBy = recruiterId;
+                institution.CreatedDate = DateTime.Now;
+            }
+            else
+            {
+                institution.UpdatedBy = recruiterId;
+                institution.UpdatedDate = DateTime.Now;
+            }
+            return institution;
         }
     }
 }

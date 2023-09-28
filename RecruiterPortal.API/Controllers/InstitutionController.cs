@@ -49,13 +49,25 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                         instituteModel.StateName = oRow["StateName"].ToString();
                         instituteModel.County = oRow["County"].ToString();
                         instituteModel.Website = oRow["Website"].ToString();
-                        //instituteModel. = oRow["First_Name"].ToString();
-                        //instituteModel.LastName = oRow["Last_Name"].ToString();
-                        //instituteModel.UserId = Convert.ToInt32(oRow["UserID"].ToString());
                         instituteList.Add(instituteModel);
                     }
                 }
                 return Ok(new { institutes = instituteList, totalInstitute = instituteCount });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [Route("save")]
+        [HttpPost]
+        public async Task<IActionResult> SaveInstitution(InstitutionRequestModel requestModel)
+        {
+            try
+            {
+                return Ok(await InstitutionManager.Insert(requestModel, RecruiterId));
             }
             catch (Exception ex)
             {
