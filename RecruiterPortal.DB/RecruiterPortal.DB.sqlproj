@@ -489,5 +489,6 @@
     <None Include="2023-09-25\03_AZ_02_CREATE_TABLE_MailTemplate.sql" />
     <None Include="2023-09-27\01_AZ_01_ALTER_COLUMN_EmailAddress.sql" />
     <None Include="2023-09-28\01_AZ_01_CREATE_TABLE_OfficialFiles.sql" />
+    <None Include="2023-09-28\02_SR_01_ALTER_SP_All_GET_Agency.sql" />
   </ItemGroup>
 </Project>
