@@ -53,6 +53,8 @@ public partial class UmrrecruitmentApplicantContext : DbContext
 
     public virtual DbSet<NurseForm> NurseForms { get; set; }
 
+    public virtual DbSet<OfficialFile> OfficialFiles { get; set; }
+
     public virtual DbSet<Pdftemplate> Pdftemplates { get; set; }
 
     public virtual DbSet<Position> Positions { get; set; }
@@ -669,6 +671,17 @@ public partial class UmrrecruitmentApplicantContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_NurseForm_UserID");
+        });
+
+        modelBuilder.Entity<OfficialFile>(entity =>
+        {
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.FileData).IsRequired();
+            entity.Property(e => e.FileName)
+                .IsRequired()
+                .HasMaxLength(200);
+            entity.Property(e => e.Title).HasMaxLength(200);
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
         });
 
         modelBuilder.Entity<Pdftemplate>(entity =>

@@ -136,6 +136,7 @@
     <Folder Include="2023-09-20" />
     <Folder Include="2023-09-25" />
     <Folder Include="2023-09-27" />
+    <Folder Include="2023-09-28" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="2019-11-04\01_TR_01_CREATE_DATABASE.sql" />
@@ -487,5 +488,6 @@
     <None Include="2023-09-25\02_SR_01_ALTER_Applicant_Status_TABLE.sql" />
     <None Include="2023-09-25\03_AZ_02_CREATE_TABLE_MailTemplate.sql" />
     <None Include="2023-09-27\01_AZ_01_ALTER_COLUMN_EmailAddress.sql" />
+    <None Include="2023-09-28\01_AZ_01_CREATE_TABLE_OfficialFiles.sql" />
   </ItemGroup>
 </Project>
