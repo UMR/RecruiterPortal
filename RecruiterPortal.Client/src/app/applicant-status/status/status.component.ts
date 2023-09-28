@@ -111,8 +111,9 @@ export class StatusComponent implements OnInit {
 
         this.statusService.addApplicantStatus(statusModel).subscribe(res => {
             if (res) {
-                this.formGroup.reset()
+                this.formGroup.reset();
                 this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Applicant send successfully', detail: '' });
+                this.hideEvent.emit(false);
             }
         },
             err => {
