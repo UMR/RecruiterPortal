@@ -68,7 +68,8 @@
         </div>
         <div class="field">
             <label for="agencyPhone">Agency Phone</label>
-            <p-inputMask mask="(999) 999-9999" required class="input-text" formControlName="agencyPhone" placeholder="(999) 999-9999" [style]="{'width':'100%'}"></p-inputMask>
+            <p-inputMask mask="(999) 999-9999" required class="input-text" formControlName="agencyPhone" unmask="true"
+                         placeholder="(999) 999-9999" [style]="{'width':'100%'}"></p-inputMask>
         </div>
         <div class="field">
             <label for="agencyAdress">Agency Address</label>
@@ -80,7 +81,7 @@
         </div>
         <div class="field">
             <label for="personPhone">Agency Contact Person Phone</label>
-            <p-inputMask mask="(999) 999-9999" class="input-text" formControlName="contactPersonPhone"
+            <p-inputMask mask="(999) 999-9999" class="input-text" formControlName="contactPersonPhone" unmask="true"
                          placeholder="(999) 999-9999" [style]="{'width':'100%'}"></p-inputMask>
         </div>
         <div>
