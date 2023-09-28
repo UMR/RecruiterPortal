@@ -72,8 +72,9 @@ export class DashboardComponent implements OnInit {
     }
 
     getApplicantStatusCount() {
-        this.dashboardService.getApplicantCount().subscribe(res => {
-            this.getStatus(10, 15, 5, 10, 20, 3, 15, 8);
+        this.dashboardService.getApplicantStatusCount().subscribe(res => {
+            this.getStatus(res.body.NewLeads, res.body.PreScreened, res.body.PhoneScreened,
+                res.body.FinalInterview, res.body.Offered, res.body.Accepted, res.body.Refused, res.body.Rejected)
         },
             err => {
             },

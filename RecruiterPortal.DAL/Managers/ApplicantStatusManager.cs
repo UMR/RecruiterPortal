@@ -279,5 +279,43 @@ namespace RecruiterPortal.DAL.Managers
 
             return response;
         }
+
+        public static async Task<ApplicantStatusCountModel> GetApplicantStatusCount()
+        {
+            try
+            {
+                GenericRepository<ApplicantStatus> repository = new GenericRepository<ApplicantStatus>();
+                var newLeads = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.NewLeads);
+                repository = new GenericRepository<ApplicantStatus>();
+                var preScreened = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.PreScreened);
+                repository = new GenericRepository<ApplicantStatus>();
+                var phoneScreened = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.PhoneScreened);
+                repository = new GenericRepository<ApplicantStatus>();
+                var finalInterview = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.FinalInterview);
+                repository = new GenericRepository<ApplicantStatus>();
+                var offered = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.Offered);
+                repository = new GenericRepository<ApplicantStatus>();
+                var accepted = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.Accepted);
+                repository = new GenericRepository<ApplicantStatus>();
+                var refused = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.Refused);
+                repository = new GenericRepository<ApplicantStatus>();
+                var rejected = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.Rejected);
+
+                ApplicantStatusCountModel applicantCountModel = new ApplicantStatusCountModel();
+                applicantCountModel.NewLeads = newLeads.ToString();
+                applicantCountModel.PreScreened = preScreened.ToString();
+                applicantCountModel.PhoneScreened = phoneScreened.ToString();
+                applicantCountModel.FinalInterview = finalInterview.ToString();
+                applicantCountModel.Offered = offered.ToString();
+                applicantCountModel.Accepted = accepted.ToString();
+                applicantCountModel.Refused = refused.ToString();
+                applicantCountModel.Rejected = rejected.ToString();
+                return applicantCountModel;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

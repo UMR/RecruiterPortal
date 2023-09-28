@@ -63,5 +63,20 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        [Route("get-applicant-status-count")]
+        [HttpGet]
+        public async Task<IActionResult> GetApplicantStatusCount()
+        {
+            try
+            {
+                return Ok(await ApplicantStatusManager.GetApplicantStatusCount());
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

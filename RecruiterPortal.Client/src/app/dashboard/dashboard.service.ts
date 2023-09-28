@@ -8,13 +8,16 @@ import { resourceServerUrl } from '../common/constants/auth-keys';
 })
 export class DashboardService {
     private getApplicantURI: string = `${resourceServerUrl}/api/applicant-info/get-applicant-count`;
+    private getApplicantStatusURI: string = `${resourceServerUrl}/api/applicantstatus/get-applicant-status-count`;
     private getJobURI: string = `${resourceServerUrl}/api/jobs/get-count`;
-
 
     constructor(private http: HttpClient) { }
 
     getApplicantCount(): Observable<HttpResponse<any>> {
         return this.http.get(this.getApplicantURI, { observe: 'response' });
+    }
+    getApplicantStatusCount(): Observable<HttpResponse<any>> {
+        return this.http.get(this.getApplicantStatusURI, { observe: 'response' });
     }
     getJobCount(): Observable<HttpResponse<any>> {
         return this.http.get(this.getJobURI, { observe: 'response' });
