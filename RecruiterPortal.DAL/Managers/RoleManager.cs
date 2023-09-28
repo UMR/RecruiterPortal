@@ -88,11 +88,11 @@ namespace RecruiterPortalDAL.Managers
 
             try
             {
-                GenericRepository<UserCompany> employInfo = new GenericRepository<UserCompany>();
+                GenericRepository<Recruiter> recruiterRepo = new GenericRepository<Recruiter>();
                 dynamic expandoObject = new ExpandoObject();
                 expandoObject.RecruiterId = recruiterId;
-                SqlParameter[] sqlParameters = employInfo.GetSqlParametersFromExpandoObject(expandoObject, spName, "@");
-                var result = employInfo.Delete(spName, sqlParameters);
+                SqlParameter[] sqlParameters = recruiterRepo.GetSqlParametersFromExpandoObject(expandoObject, spName, "@");
+                var result = recruiterRepo.Delete(spName, sqlParameters);
                 return result;
             }
             catch (Exception ex)

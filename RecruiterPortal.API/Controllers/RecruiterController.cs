@@ -170,7 +170,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
                 RoleManager.DeleteRecruiterRole(recruiterModel.RecruiterId);
 
-                if (recruiterModel.RecruiterRole != String.Empty)
+                if (recruiterModel.RecruiterRole != string.Empty)
                 {
                     var splitRole = recruiterModel.RecruiterRole.Split(",");
                     if (splitRole.Length > 0)
