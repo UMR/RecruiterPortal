@@ -104,9 +104,9 @@ export class StatusComponent implements OnInit {
         statusModel.Status = this.formGroup.get('statusId').value;
         statusModel.Date = new Date;
         statusModel.PositionId = this.formGroup.get('positionId').value;
-        statusModel.InstitutionId = this.formGroup.get('instituteId').value;
-        statusModel.CurrentSalary = this.formGroup.get('currentSalary').value;
-        statusModel.ExpectedSalary = this.formGroup.get('expectedSalary').value;
+        statusModel.InstitutionId = this.formGroup.get('instituteId').value == '' ? null : this.formGroup.get('instituteId').value;
+        statusModel.CurrentSalary = this.formGroup.get('currentSalary').value == '' ? null : this.formGroup.get('currentSalary').value;
+        statusModel.ExpectedSalary = this.formGroup.get('expectedSalary').value == '' ? null : this.formGroup.get('expectedSalary').value;
         statusModel.IsActive = true;
 
         this.statusService.addApplicantStatus(statusModel).subscribe(res => {

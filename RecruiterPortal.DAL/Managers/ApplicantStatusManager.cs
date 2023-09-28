@@ -57,7 +57,7 @@ namespace RecruiterPortal.DAL.Managers
             }
             return applicantStatus;
         }
-       
+
         public static async Task<long> Insert(ApplicantStatusRequestModel request, long agencyId, int recruiterId)
         {
             try
@@ -107,12 +107,15 @@ namespace RecruiterPortal.DAL.Managers
             {
                 GenericRepository<ApplicantStatus> repository = new GenericRepository<ApplicantStatus>();
                 ApplicantStatus status = await repository.GetByIdAsync(p => p.ApplicantId == request.ApplicantId && p.IsActive == true);
-                status.IsActive=isActive;
-                status.UpdatedDate=DateTime.Now;
-                status.UpdatedBy = recruiterId;
                 if (status != null)
                 {
-                    return await repository.UpdateAsync(status) > 0 ? true : false;
+                    status.IsActive = isActive;
+                    status.UpdatedDate = DateTime.Now;
+                    status.UpdatedBy = recruiterId;
+                    if (status != null)
+                    {
+                        return await repository.UpdateAsync(status) > 0 ? true : false;
+                    }
                 }
 
                 return null;
