@@ -2,41 +2,106 @@
     <applicant-portal-header (onToggleButtonClicked)="(showHideMenu)()" isVisibleToggleButton=0></applicant-portal-header>
     <section class="main-content">
         <div class="container-fluid">
-            <p-table #leadTable [responsive]="true"
-                     [value]="formList"
-                     selectionMode="single"
-                     [(selection)]="selectedForm"
-                     dataKey="Id"
-                     [paginator]="true"
-                     [rows]="rows"
-                     [columns]="cols"
-                     [totalRecords]="totalFrom"
-                     [lazy]="true"
-                     (onLazyLoad)="onLazyLoad($event)"
-                     [rowsPerPageOptions]="[10,15,20]"
-                     [showCurrentPageReport]="true"
-                     currentPageReportTemplate="Total Records {{totalFrom}}">
-                <ng-template pTemplate="header" let-columns>
-                    <tr>
-                        <th>File Name</th>
-                        <th>Title</th>
-                        <th>Created Date</th>
-                        <th>Is Active</th>
-                        <th>Action</th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-form let-rowData let-columns="columns">
-                    <tr [pSelectableRow]="form">
-                        <td>{{agency.AgencyName}}</td>
-                        <td>{{agency.Urlprefix}}</td>
-                        <td>{{agency.AgencyEmail}}</td>
-                        <td>{{agency.AgencyPhone}}</td>
-                        <td>{{agency.AgencyContactPerson}}</td>
-                        <td class="text-center"><button type="button" (click)="onDeleteClick(form)" class="btn btn-primary btn-import-sync">Delete</button> </td>
-                    </tr>
-                </ng-template>
-            </p-table>
+            <div class="grid">
+                <div class="col-12">
+                    <button pButton pRipple label="Add New" class="p-button-success" (click)="onNew()" tabindex="0"></button>
+                </div>
+            </div>
+            <div class="container-fluid mt-2">
+                <p-table #leadTable [responsive]="true"
+                         [value]="formList"
+                         selectionMode="single"
+                         [(selection)]="selectedForm"
+                         dataKey="Id"
+                         [paginator]="true"
+                         [rows]="rows"
+                         [columns]="cols"
+                         [totalRecords]="totalFrom"
+                         [lazy]="true"
+                         (onLazyLoad)="onLazyLoad($event)"
+                         [rowsPerPageOptions]="[10,15,20]"
+                         [showCurrentPageReport]="true"
+                         currentPageReportTemplate="Total Records {{totalFrom}}">
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th>File Name</th>
+                            <th>Title</th>
+                            <th>Created Date</th>
+                            <th>Is Active</th>
+                            <th>Action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-form let-rowData let-columns="columns">
+                        <tr [pSelectableRow]="form">
+                            <td>{{agency.AgencyName}}</td>
+                            <td>{{agency.Urlprefix}}</td>
+                            <td>{{agency.AgencyEmail}}</td>
+                            <td>{{agency.AgencyPhone}}</td>
+                            <td>{{agency.AgencyContactPerson}}</td>
+                            <td class="text-center"><button type="button" (click)="onDeleteClick(form)" class="btn btn-primary btn-import-sync">Delete</button> </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
         </div>
     </section>
 </div>
+
+<p-dialog [(visible)]="showDialog" [style]="{ width: '1200px' }" header="{{addEditTitle}} Job" [modal]="true" [draggable]="false" [resizable]="false">
+    <form [formGroup]="formGroup" novalidate>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" id="title" name="title" class="form-control" formControlName="title" tabindex="1" required autofocus />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="isRequired" class="form-label">Required</label>
+                    <input id="isRequired" name="isRequired" type="checkbox" formControlName="isRequired" tabindex="2" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="isAdministrative" class="form-label">Administrative</label>
+                    <input id="isAdministrative" name="isAdministrative" type="checkbox" formControlName="isAdministrative" tabindex="3" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="isActive" class="form-label">Active</label>
+                    <input id="isActive" name="isActive" type="checkbox" formControlName="isActive" tabindex="4" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="com-md-12">
+                <ul class="list-inline mb-0 d-flex justify-content-between mt-2 ml-3">
+                    <li class="list-inline-item">
+                        <button type="button" class="btn btn-primary btn-portal-border" (click)="onHide()">Close</button>
+                    </li>
+                    <li class="list-inline-item">
+                        <button type="button" class="btn btn-primary btn-portal-border" (click)="onClear()">Clear</button>
+                    </li>
+                    <li class="list-inline-item">
+                        <button type="submit" class="btn btn-primary btn-portal" (click)="onSave()" [disabled]="!formGroup.valid">Save</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</p-dialog>
+
+<p-toast></p-toast>
+<p-confirmDialog [style]="{ width: '1000px' }" #cd>
+    <ng-template pTemplate="footer">
+        <button type="button" pButton icon="pi pi-times" label="No" class="btn-no" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="pi pi-check" label="Yes" class="btn-yes" (click)="cd.accept()"></button>
+    </ng-template>
+</p-confirmDialog>
+<p-toast key="toastKey1"></p-toast>
 
