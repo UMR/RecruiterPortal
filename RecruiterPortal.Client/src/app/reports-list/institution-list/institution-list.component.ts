@@ -57,6 +57,10 @@ export class InstitutionListComponent implements OnInit {
                     this.isLoading = false;
                 });
     }
+    
+    handleHideEvent(show) {
+        this.showDialog = show;
+    }
 
     addNewInstitution() {
         this.showDialog = true;

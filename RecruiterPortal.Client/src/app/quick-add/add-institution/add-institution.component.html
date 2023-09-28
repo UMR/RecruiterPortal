@@ -49,8 +49,20 @@
         <input type="checkbox" id="name" formControlName="isActive" />
         <label for="name" style="margin-left:12px">Active</label>
     </div>
-    <div class="mb-10">
-        <button type="submit" class="btn btn-primary btn-block btn-portal" [disabled]="!institutionForm.valid">Add Institution</button>
+    <div class="row">
+        <div class="com-md-12">
+            <ul class="list-inline mb-0 d-flex justify-content-between mt-2 ml-3">
+                <li class="list-inline-item">
+                    <button type="button" class="btn btn-primary btn-portal-border" (click)="hide()">Close</button>
+                </li>
+                <li class="list-inline-item" style="margin-left:80px">
+                    <button type="button" class="btn btn-primary btn-portal-border" (click)="clear()">Clear</button>
+                </li>
+                <li class="list-inline-item">
+                    <button type="submit" class="btn btn-primary btn-portal" [disabled]="!institutionForm.valid">Add Institution</button>
+                </li>
+            </ul>
+        </div>
     </div>
 </form>
 

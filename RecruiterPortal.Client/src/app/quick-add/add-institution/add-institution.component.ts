@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { AddInstitutionService } from './add-institution.service';
@@ -10,6 +10,9 @@ import { InstitutionModel } from './institution.model';
     styleUrls: ['./add-institution.component.css']
 })
 export class AddInstitutionComponent implements OnInit {
+
+    @Output() hideEvent = new EventEmitter<boolean>();
+
     public institutionForm: FormGroup;
     public zipCodeResults: string[];
     public isLoading: boolean = false;
@@ -60,6 +63,16 @@ export class AddInstitutionComponent implements OnInit {
             });
         }
     }
+
+    hide() {
+        this.institutionForm.reset();
+        this.hideEvent.emit(false);
+    }
+
+    clear() {
+        this.institutionForm.reset();
+    }
+
 
     onAddInstitutionSubmit() {
         this.isLoading = true;
