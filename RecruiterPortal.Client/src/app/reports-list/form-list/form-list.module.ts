@@ -9,7 +9,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
-import { ConfirmDialogModule } from 'primeng/primeng';
+import { ConfirmDialogModule, CheckboxModule } from 'primeng/primeng';
 
 
 @NgModule({
@@ -23,7 +23,8 @@ import { ConfirmDialogModule } from 'primeng/primeng';
         FormsModule,
         ReactiveFormsModule,
         DialogModule,
-        ConfirmDialogModule
+        ConfirmDialogModule,
+        CheckboxModule
     ],
     providers: [ConfirmationService, MessageService]
 })

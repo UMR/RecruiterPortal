@@ -47,7 +47,7 @@
     </section>
 </div>
 
-<p-dialog [(visible)]="showDialog" [style]="{ width: '1200px' }" header="{{addEditTitle}} Job" [modal]="true" [draggable]="false" [resizable]="false">
+<p-dialog [(visible)]="showDialog" [style]="{ width: '1200px' }" header="{{addEditTitle}} Form" [modal]="true" [draggable]="false" [resizable]="false">
     <form [formGroup]="formGroup" novalidate>
         <div class="row">
             <div class="col-md-6">
@@ -55,27 +55,27 @@
                     <label for="title" class="form-label">Title</label>
                     <input type="text" id="title" name="title" class="form-control" formControlName="title" tabindex="1" required autofocus />
                 </div>
-            </div>
-            <div class="col-md-6">
                 <div class="form-group">
-                    <label for="isRequired" class="form-label">Required</label>
-                    <input id="isRequired" name="isRequired" type="checkbox" formControlName="isRequired" tabindex="2" />
+                    <p-checkbox inputId="isRequired" formControlName="isRequired" value="isRequired" [binary]="true" class="mr-2"></p-checkbox>
+                    <label for="isRequired">Required</label>
+                </div>
+                <div class="form-group">
+                    <p-checkbox inputId="isAdministrative" formControlName="isAdministrative" value="isAdministrative" [binary]="true" class="mr-2"></p-checkbox>
+                    <label for="isAdministrative">Administrative</label>
+                </div>
+                <div class="form-group">
+                    <p-checkbox inputId="isActive" formControlName="isActive" value="isActive" [binary]="true" class="mr-2"></p-checkbox>
+                    <label for="isActive">Active</label>
                 </div>
             </div>
-        </div>
+            <div class="col-md-6">
+                
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="isAdministrative" class="form-label">Administrative</label>
-                    <input id="isAdministrative" name="isAdministrative" type="checkbox" formControlName="isAdministrative" tabindex="3" />
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="isActive" class="form-label">Active</label>
-                    <input id="isActive" name="isActive" type="checkbox" formControlName="isActive" tabindex="4" />
-                </div>
+                <!--<div class="form-check">
+                    <input class="form-check-input" id="isRequired" name="isRequired" type="checkbox" formControlName="isRequired" tabindex="2" />
+                    <label for="isRequired" class="form-check-label">Required</label>
+                </div>-->
+                
             </div>
         </div>
         <div class="row">
