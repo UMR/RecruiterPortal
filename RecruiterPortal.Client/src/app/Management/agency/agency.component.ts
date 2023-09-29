@@ -43,6 +43,7 @@ export class AgencyComponent implements OnInit {
             contactPersonPhone: [""],
             isActive: [false, Validators.required],
         });
+        this.isLoading = true;
     }
     loadAgencyLazy(event: LazyLoadEvent) {
         this.pageNumber = Math.ceil((event.first + 1) / event.rows);
@@ -51,11 +52,9 @@ export class AgencyComponent implements OnInit {
         this.getAgencies();
     }
     getAgencies() {
-        this.isLoading = true;
         this.agencyService.getAgency()
             .subscribe(response => {
-                console.log(response);
-                if (response.status === 200) {
+                if (response.status == 200) {
                     this.agencies = (response.body as any).agencies;
                     this.totalAgency = (response.body as any).agencyCount;
                 }
@@ -120,17 +119,21 @@ export class AgencyComponent implements OnInit {
         agencyModel.IsActive = this.agencyForm.get('isActive').value;;
         agencyModel.AgencyId = this.agencyId;
 
-        console.log(this.agencyId);
-
+        
+        this.isLoading = true;
         if (this.agencyId != 0) {
             this.agencyService.updateAgency(agencyModel).subscribe(res => {
                 this.getAgencies();
+                this.isLoading = false;
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Agency Updated', life: 3000 });
             },
                 error => {
+                    this.isLoading = false;
                     this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Agency Updated Faild', life: 3000 });
                 },
-                () => { })
+                () => {
+                    this.isLoading = false;
+                })
             this.agencyId = 0;
 
         } else {

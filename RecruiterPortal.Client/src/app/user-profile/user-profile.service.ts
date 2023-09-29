@@ -37,10 +37,7 @@ export class UserProfileService {
     }
 
     updateUserProfile(userModel: any): Observable<HttpResponse<any>> {
-        return this.httpClient.put(this.updateUserProfileURI, userModel, {
-            headers: new HttpHeaders()
-                .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
-        });
+        return this.httpClient.put(this.updateUserProfileURI, userModel, { observe: 'response' });
     }
 
     isEmailExist(email: string): Observable<HttpResponse<any>> {

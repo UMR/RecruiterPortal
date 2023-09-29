@@ -120,7 +120,7 @@ export class UserProfileComponent implements OnInit {
 
         this.userProfileService.updateUserProfile(recruiterFormModel)
             .subscribe(response => {
-                if (response.status === 200) {
+                if ((response as any).status == 200) {
                     this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Success', detail: 'User Profile Updated' });
                     let username = `${this.userFormGroup.controls.lastName.value.trim()} ${this.userFormGroup.controls.firstName.value.trim()}`;
                     this.userProfileService.setUsername(username);

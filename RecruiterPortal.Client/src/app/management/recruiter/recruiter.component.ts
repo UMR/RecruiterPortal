@@ -89,7 +89,6 @@ export class RecruiterComponent implements OnInit {
         this.isLoading = true;
         this.recruiterService.getRecruiter()
             .subscribe(response => {
-                console.log(response);
                 if (response.status === 200) {
                     this.recruiters = (response.body as any).recruiters;
                     this.totalRecruiter = (response.body as any).count;
