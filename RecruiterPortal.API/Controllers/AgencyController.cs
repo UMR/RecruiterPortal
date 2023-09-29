@@ -20,7 +20,6 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         [HttpGet]
         public IActionResult GetAgency()
         {
-
             try
             {
                 List<AgencyModel> agencyModelList = new List<AgencyModel>();
@@ -81,6 +80,34 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 agency.CreatedDate = DateTime.Now;
                 AgencyManager.SaveAgency(agency);
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [Route("url_prefix_exist")]
+        [HttpGet]
+        public async Task<IActionResult> IsUrlPrefixExist(string urlPrefix)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(urlPrefix))
+                {
+                    return BadRequest();
+                }
+                int agencyCount = 0;
+
+                agencyCount = await AgencyManager.GetUrlPrefix(urlPrefix);
+
+                if (agencyCount == 0)
+                {
+                    return Ok(true);
+                }
+
+                return Ok(false);
             }
             catch (Exception ex)
             {

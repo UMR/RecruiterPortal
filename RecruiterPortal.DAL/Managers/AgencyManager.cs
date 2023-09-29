@@ -36,7 +36,7 @@ namespace RecruiterPortalDAL.Managers
 
         public static List<Agency> GetAllActiveAgency()
         {
-            string spName = "SP_Get_All_Active_Agency";  
+            string spName = "SP_Get_All_Active_Agency";
             List<Agency> agencies;
 
             try
@@ -92,6 +92,20 @@ namespace RecruiterPortalDAL.Managers
                 GenericRepository<Agency> agencyRepo = new GenericRepository<Agency>();
                 SqlParameter[] sqlParameters = agencyRepo.GetSqlParametersFromObject(agency, spName);
                 agencyRepo.Update(spName, sqlParameters);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static async Task<int> GetUrlPrefix(string urlPrefix)
+        {
+            try
+            {
+                GenericRepository<Agency> repository = new GenericRepository<Agency>();
+                var newLeads = await repository.GetAllAsyncCount(a => a.Urlprefix == urlPrefix);
+                return newLeads;
             }
             catch (Exception ex)
             {

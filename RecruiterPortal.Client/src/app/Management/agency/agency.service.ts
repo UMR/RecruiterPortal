@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { resourceServerUrl } from '../../common/constants/auth-keys';
 import { Observable } from 'rxjs';
 import { AgencyModel } from './agency.model';
@@ -12,6 +12,7 @@ export class AgencyService {
     private getAgencyURI: string = `${resourceServerUrl}/api/agency/get`;
     private addAgencyURI: string = `${resourceServerUrl}/api/agency/save`;
     private updateAgencyURI: string = `${resourceServerUrl}/api/agency/update`;
+    private agencyUrlURI: string = `${resourceServerUrl}/api/agency/url_prefix_exist`;
 
     constructor(private httpClient: HttpClient) { }
 
@@ -31,5 +32,14 @@ export class AgencyService {
             headers: new HttpHeaders()
                 .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
         });
+    }
+
+    isUrlExist(url: string): Observable<HttpResponse<any>> {
+        return this.httpClient.get(this.agencyUrlURI,
+            {
+                params: new HttpParams()
+                    .set('urlPrefix', url)
+                , observe: 'response'
+            });
     }
 }

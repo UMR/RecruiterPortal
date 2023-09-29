@@ -51,6 +51,24 @@ export class AgencyComponent implements OnInit {
         this.skip = event.rows * (this.pageNumber - 1);
         this.getAgencies();
     }
+
+    checkDuplicateUrl() {
+        this.agencyService.isUrlExist(this.agencyForm.controls.urlPrefix.value.trim())
+            .subscribe(respone => {
+                console.log(respone);
+                if (respone.body === false) {
+                    this.agencyForm.controls.urlPrefix.setErrors({ 'invalid': true });;
+                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Error', detail: 'Url is already exist' });
+                }
+            },
+                err => {
+                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Error', detail: 'Failed to check duplicate url' });
+                },
+                () => {
+                    this.isLoading = false;
+                });
+    }
+
     getAgencies() {
         this.agencyService.getAgency()
             .subscribe(response => {
@@ -103,7 +121,7 @@ export class AgencyComponent implements OnInit {
         });
     }
     onAgencySubmit() {
-        
+
         this.saveAgency();
     }
     saveAgency() {
@@ -119,7 +137,7 @@ export class AgencyComponent implements OnInit {
         agencyModel.IsActive = this.agencyForm.get('isActive').value;;
         agencyModel.AgencyId = this.agencyId;
 
-        
+
         this.isLoading = true;
         if (this.agencyId != 0) {
             this.agencyService.updateAgency(agencyModel).subscribe(res => {

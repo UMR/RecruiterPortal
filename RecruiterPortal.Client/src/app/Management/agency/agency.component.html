@@ -63,7 +63,7 @@
         </div>
         <div class="field">
             <label for="urlPrefix">Agency URL Prefix</label>
-            <input pInputText formControlName="urlPrefix" class="input-text" [pKeyFilter]="'alpha'" required id="urlPrefix" maxlength="50" />
+            <input pInputText formControlName="urlPrefix" class="input-text" [pKeyFilter]="'alpha'" required id="urlPrefix" maxlength="50" (focusout)="checkDuplicateUrl()"/>
         </div>
         <div class="field">
             <label for="agencyEmail">Agency Email</label>
