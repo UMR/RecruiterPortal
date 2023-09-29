@@ -56,26 +56,38 @@
                     <input type="text" id="title" name="title" class="form-control" formControlName="title" tabindex="1" required autofocus />
                 </div>
                 <div class="form-group">
-                    <p-checkbox inputId="isRequired" formControlName="isRequired" value="isRequired" [binary]="true" class="mr-2"></p-checkbox>
+                    <p-checkbox inputId="isRequired" formControlName="isRequired" value="isRequired" [binary]="true" class="mr-2" tabindex="3"></p-checkbox>
                     <label for="isRequired">Required</label>
                 </div>
                 <div class="form-group">
-                    <p-checkbox inputId="isAdministrative" formControlName="isAdministrative" value="isAdministrative" [binary]="true" class="mr-2"></p-checkbox>
+                    <p-checkbox inputId="isAdministrative" formControlName="isAdministrative" value="isAdministrative" [binary]="true" class="mr-2" tabindex="4"></p-checkbox>
                     <label for="isAdministrative">Administrative</label>
                 </div>
                 <div class="form-group">
-                    <p-checkbox inputId="isActive" formControlName="isActive" value="isActive" [binary]="true" class="mr-2"></p-checkbox>
+                    <p-checkbox inputId="isActive" formControlName="isActive" value="isActive" [binary]="true" class="mr-2" tabindex="5"></p-checkbox>
                     <label for="isActive">Active</label>
                 </div>
             </div>
-            <div class="col-md-6">
-                
-
-                <!--<div class="form-check">
-                    <input class="form-check-input" id="isRequired" name="isRequired" type="checkbox" formControlName="isRequired" tabindex="2" />
-                    <label for="isRequired" class="form-check-label">Required</label>
-                </div>-->
-                
+            <div class="col-md-6 mt-3">
+                <div class="form-group">
+                    <div class="upload">
+                        <p-fileUpload mode="advanced"
+                                      auto="true"
+                                      customUpload="true"
+                                      accept="image/*,application/pdf,.doc,.docx,application/msword"
+                                      maxFileSize="5000000"
+                                      tabindex="2"
+                                      (onSelect)="onFileSelect($event)">
+                            <ng-template pTemplate="toolbar">
+                                <p class="mt-3">Size Maximum 5MB(doc, docx, pdf, jpg, jpeg, png, gif format)</p>
+                            </ng-template>
+                            <ng-template let-file pTemplate="file">
+                            </ng-template>
+                            <ng-template pTemplate="content">
+                            </ng-template>
+                        </p-fileUpload>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
