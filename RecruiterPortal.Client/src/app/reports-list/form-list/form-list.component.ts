@@ -37,20 +37,20 @@ export class FormListComponent implements OnInit {
             title: ['', Validators.compose([Validators.required, Validators.maxLength(200)])],
             isRequired: [''],
             isAdministrative: [''],
-            isActive: ['', Validators.compose([Validators.required])],
-            fileName: ['']
+            isActive: [''],
+            fileName: ['', Validators.compose([Validators.required])]
         });
     }
 
     onLazyLoadOfficialFiles(event: LazyLoadEvent) {
         this.pageNumber = Math.ceil((event.first + 1) / event.rows);
         this.pageSize = event.rows;        
-        this.getOfficialFilesByAgencyId(this.pageNumber, this.pageSize);
+        this.getOfficialFilesByAgencyId();
     }
 
-    getOfficialFilesByAgencyId(pageNumber: number, pageSize: number) {
+    getOfficialFilesByAgencyId() {
         this.isLoading = true;
-        this.formService.getOfficialFilesByAgencyId(pageNumber, pageSize)
+        this.formService.getOfficialFilesByAgencyId(this.pageNumber, this.pageSize)
             .subscribe(response => {
                 console.log(response);
                 if (response.status === 200) {
@@ -60,32 +60,33 @@ export class FormListComponent implements OnInit {
             },
                 err => {
                     this.isLoading = false;
-                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get official form', detail: '' });
+                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get official file', detail: '' });
                 },
                 () => {
                     this.isLoading = false;
                 });
     }
 
-    getOfficialFormById(id) {
+    getOfficialFileById(id) {
         this.isLoading = true;
         this.formService.getOfficialFileById(id)
             .subscribe(response => {
+                console.log(response);
                 if (response.status === 200) {
-                    //this.selectedJob = response.body;
-                    //this.fillupJob(this.selectedJob);
+                    this.selectedOfficialFile = response.body;
+                    this.fillupOfficialFile(this.selectedOfficialFile);
                 }
             },
                 err => {
                     this.isLoading = false;
-                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get official form', detail: '' });
+                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get official file', detail: '' });
                 },
                 () => {
                     this.isLoading = false;
                 });
     }
 
-    fillupOfficialForm(officialForm: any) {
+    fillupOfficialFile(officialForm: any) {
         this.formGroup.patchValue({
             title: officialForm.title,
             isRequired: officialForm.isRequired,
@@ -124,9 +125,9 @@ export class FormListComponent implements OnInit {
     }
 
     onEdit(form) {
-        //this.selectedJobId = job.JobId;
-        //this.getJobsById(this.selectedJobId);
-        //this.jobDialog = true;
+        this.selectedOfficialFileId = form.Id;        
+        this.getOfficialFileById(this.selectedOfficialFileId);
+        this.showDialog = true;
     }
 
     onClear() {
@@ -145,21 +146,20 @@ export class FormListComponent implements OnInit {
             isRequired: this.formGroup.controls.isRequired.value,
             isAdministrative: this.formGroup.controls.isAdministrative.value,
             isActive: this.formGroup.controls.isActive.value
-        };
-        console.log(model);
+        };        
         this.isLoading = true;
         this.formService.saveOfficialFile(model)
             .subscribe(result => {
                 if (result.status === 200) {
                     this.isLoading = false;
-                    this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official form saved successfully', life: 3000 });
+                    this.getOfficialFilesByAgencyId();
+                    this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official file saved successfully', life: 3000 });
                 }
             },
                 err => {
                     this.isLoading = false;
-                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to save official form', detail: '' });
+                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to save official file', detail: '' });
                 });
-
     }
 
     onDelete() {

@@ -24,20 +24,21 @@
                          currentPageReportTemplate="Total Records {{totalOfficialFile}}">
                     <ng-template pTemplate="header" let-columns>
                         <tr>
-                            <th>File Name</th>
                             <th>Title</th>
-                            <th>Created Date</th>
-                            <th>Is Active</th>
+                            <th>File Name</th>
+                            <th>Administrative</th>
+                            <th>Required</th>
+                            <th>Active</th>
                             <th>Action</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-form let-rowData let-columns="columns">
                         <tr [pSelectableRow]="form">
-                            <td>{{agency.AgencyName}}</td>
-                            <td>{{agency.Urlprefix}}</td>
-                            <td>{{agency.AgencyEmail}}</td>
-                            <td>{{agency.AgencyPhone}}</td>
-                            <td>{{agency.AgencyContactPerson}}</td>
+                            <td>{{form.Title}}</td>
+                            <td>{{form.FileName}}</td>
+                            <td>{{form.IsAdministrative}}</td>
+                            <td>{{form.IsRequired}}</td>
+                            <td>{{form.IsActive}}</td>
                             <td class="text-center"><button type="button" (click)="onDeleteClick(form)" class="btn btn-primary btn-import-sync">Delete</button> </td>
                         </tr>
                     </ng-template>
