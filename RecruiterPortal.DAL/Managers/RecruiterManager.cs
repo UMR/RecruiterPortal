@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
 using RecruiterPortal.DAL.Utility;
@@ -182,6 +183,37 @@ namespace RecruiterPortal.DAL.Managers
                     }
                 }
                 return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static List<EntryExitModel> GetRecruiterEntryExit(long agencyId, int skip, int take)
+        {
+            try
+            {
+                List<EntryExitModel> entryExitModels = null;
+                GenericRepository<RecruiterEntryExit> repository = new GenericRepository<RecruiterEntryExit>();
+                using (UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext())
+                {
+                    entryExitModels = (from recruiterEntryExit in context.RecruiterEntryExits
+                                       join recruiter in context.Recruiters
+                                       on recruiterEntryExit.RecruiterId equals recruiter.RecruiterId
+                                       where recruiter.AgencyId == agencyId
+                                       select (new EntryExitModel
+                                       {
+                                           Id = recruiterEntryExit.Id,
+                                           LogInTime = recruiterEntryExit.LogInTime.ToString("dd MMMM yyyy HH:mm:ss"),
+                                           RecruiterName = recruiter.FirstName + " " + recruiter.LastName,
+                                           LogOutTime = recruiterEntryExit.LogOutTime == null ? "" : recruiterEntryExit.LogOutTime.Value.ToString("dd MMMM yyyy HH:mm:ss"),
+                                       })
+                           ).Skip(skip).Take(take).ToList();
+
+                }
+
+                return entryExitModels;
             }
             catch (Exception ex)
             {

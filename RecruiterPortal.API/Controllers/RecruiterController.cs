@@ -259,12 +259,28 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         [Route("update-entry-exit")]
         [AllowAnonymous]
         [HttpPut]
-        public async Task<IActionResult> UpdateRecruiterEntry([FromBody]int recruiterId)
+        public async Task<IActionResult> UpdateRecruiterEntry([FromBody] int recruiterId)
         {
 
             try
             {
                 return Ok(await RecruiterManager.UpdateRecruiterEntry(recruiterId));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [Route("entry-exit")]
+        [HttpGet]
+        public IActionResult GetRecruiterEntry([FromQuery] int skip, [FromQuery] int take)
+        {
+
+            try
+            {
+                return Ok(RecruiterManager.GetRecruiterEntryExit(AgencyId, skip, take));
             }
             catch (Exception ex)
             {
