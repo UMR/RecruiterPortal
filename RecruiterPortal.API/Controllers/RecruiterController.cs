@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RecruiterPortal.API.Controllers;
 using RecruiterPortal.DAL.Managers;
 using RecruiterPortal.DAL.Models;
@@ -247,6 +248,23 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 recruiter.UpdatedDate = DateTime.Now;
                 RecruiterManager.UpdateRecruiter(recruiter);
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [Route("update-entry-exit")]
+        [AllowAnonymous]
+        [HttpPut]
+        public async Task<IActionResult> UpdateRecruiterEntry([FromBody]int recruiterId)
+        {
+
+            try
+            {
+                return Ok(await RecruiterManager.UpdateRecruiterEntry(recruiterId));
             }
             catch (Exception ex)
             {

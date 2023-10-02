@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient, HttpBackend, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpBackend, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, forkJoin, from, of } from 'rxjs';
 import 'rxjs/add/operator/map';
 import { UmrCookieService } from '../common/services/umr-cookie.service';
@@ -14,6 +14,7 @@ import jwt_decode from 'jwt-decode';
 @Injectable()
 export class AuthService {
     private isUserVerifiedUrl: string = `${resourceServerUrl}/api/base/is-user-verified`;
+    private updateEntryUrl: string = `${resourceServerUrl}/api/recruiter/update-entry-exit`;
     public redirectUrl: string;
     public logoutMessage: string;
     public http: HttpClient;
@@ -72,6 +73,14 @@ export class AuthService {
             });
     }
 
+    updateEntryExit(): Observable<HttpResponse<any>> {
+        var user = this.storageService.getDataFromSession("CurrentUserInfo");
+        return this.http.put(this.updateEntryUrl, +user.RecruiterId, {
+            headers: new HttpHeaders()
+                .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
+        });
+    }
+
     renewToken(refreshToken): Observable<any> {
         return getTokenFromRefreshToken(this.http, refreshToken)
             .map((value, index) => {
@@ -82,8 +91,14 @@ export class AuthService {
     logout() {
         //localStorage.removeItem(currentUserVerificationStatus);
         //this.storageService.removeApplicantId();
+        this.updateEntryExit().subscribe(
+            res => {
+            },
+            err => { }
+        );
         localStorage.clear();
         sessionStorage.clear();
+
         const tokenInfo = this.getTokenInfo();
         if (tokenInfo && tokenInfo.refresh_token) {
             const refreshToken = tokenInfo.refresh_token;
@@ -104,15 +119,15 @@ export class AuthService {
         });
     }
 
-    private saveAuthInfo(value, isAccessToken: boolean = false) {        
+    private saveAuthInfo(value, isAccessToken: boolean = false) {
         if (value.access_token) {
             const decodedToken = jwt_decode(value.access_token);
             const userInfo = JSON.parse(decodedToken["RecruiterClaim"]);
-            this.storageService.storeDataToSession(userInfo,"CurrentUserInfo");
-            const roleArray = JSON.parse(decodedToken["RecruiterClaim"]).Roles;            
+            this.storageService.storeDataToSession(userInfo, "CurrentUserInfo");
+            const roleArray = JSON.parse(decodedToken["RecruiterClaim"]).Roles;
             if (roleArray && roleArray.length > 0) {
                 if (roleArray.includes('recruiter')) {
-                    this.storageService.setIsRecruiter(true);                    
+                    this.storageService.setIsRecruiter(true);
                 }
                 if (roleArray.includes('supervisor')) {
                     this.storageService.setIsSupervisor(true);

@@ -159,8 +159,29 @@ namespace RecruiterPortal.DAL.Managers
                 RecruiterEntryExit recruiterEntry = new RecruiterEntryExit();
                 recruiterEntry.RecruiterId = recruiterId;
                 recruiterEntry.LogInTime = DateTime.Now;
-                RecruiterEntryExit createdApplicantStatus = await repository.SaveAsync(recruiterEntry);
-                return createdApplicantStatus.Id;
+                RecruiterEntryExit recruiterEntryExit = await repository.SaveAsync(recruiterEntry);
+                return recruiterEntryExit.Id;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public static async Task<bool?> UpdateRecruiterEntry(int recruiterId)
+        {
+            try
+            {
+                GenericRepository<RecruiterEntryExit> repository = new GenericRepository<RecruiterEntryExit>();
+                RecruiterEntryExit entryExit = await repository.GetByIdAsync(e => e.RecruiterId == recruiterId && e.LogOutTime == null);
+                if (entryExit != null)
+                {
+                    entryExit.LogOutTime = DateTime.Now;
+                    if (entryExit != null)
+                    {
+                        return await repository.UpdateAsync(entryExit) > 0 ? true : false;
+                    }
+                }
+                return null;
             }
             catch (Exception ex)
             {
