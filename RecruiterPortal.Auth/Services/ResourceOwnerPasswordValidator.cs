@@ -16,7 +16,7 @@ namespace ApplicantPortalAPI.AuthorizationServer.Services
         {
             _httpContextAccessor = httpContextAccessor;
             _logger = logger;
-        }        
+        }
 
         public Task ValidateAsync(ResourceOwnerPasswordValidationContext context)
         {
@@ -27,7 +27,7 @@ namespace ApplicantPortalAPI.AuthorizationServer.Services
                 {
                     var recruiter = RecruiterManager.GetRecruiterByLoginid(context.UserName);
                     context.Result = new GrantValidationResult(context.UserName, OidcConstants.AuthenticationMethods.Password);
-
+                    var v = RecruiterManager.InsertRecruiterEntry(recruiter.RecruiterId);
                     _logger.LogInformation($"Authentication Pass For User {context.UserName}");
                 }
             }

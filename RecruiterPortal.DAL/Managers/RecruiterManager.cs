@@ -151,15 +151,16 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
-        public static void InsertRecruiterEntry(Recruiter recruiter)
+        public static async Task<long> InsertRecruiterEntry(int recruiterId)
         {
-            string spName = "sp_InsertRecruiter";
-
             try
             {
-                GenericRepository<Recruiter> recruiterRepo = new GenericRepository<Recruiter>();
-                SqlParameter[] sqlParameters = recruiterRepo.GetSqlParametersFromObject(recruiter, spName);
-                recruiterRepo.Insert(spName, sqlParameters);
+                GenericRepository<RecruiterEntryExit> repository = new GenericRepository<RecruiterEntryExit>();
+                RecruiterEntryExit recruiterEntry = new RecruiterEntryExit();
+                recruiterEntry.RecruiterId = recruiterId;
+                recruiterEntry.LogInTime = DateTime.Now;
+                RecruiterEntryExit createdApplicantStatus = await repository.SaveAsync(recruiterEntry);
+                return createdApplicantStatus.Id;
             }
             catch (Exception ex)
             {
