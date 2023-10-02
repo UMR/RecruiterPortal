@@ -1,7 +1,6 @@
 ﻿using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
-using RecruiterPortalDAL.Models;
 
 namespace RecruiterPortal.DAL.Managers
 {

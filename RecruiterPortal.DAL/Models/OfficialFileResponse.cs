@@ -8,11 +8,11 @@
 
         public string Title { get; set; }
 
-        public bool IsRequired { get; set; }
+        public bool? IsRequired { get; set; }
 
-        public bool IsAdministrative { get; set; }
+        public bool? IsAdministrative { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
 
         public int CreatedBy { get; set; }
 

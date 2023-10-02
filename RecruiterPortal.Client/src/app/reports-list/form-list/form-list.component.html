@@ -36,10 +36,10 @@
                         <tr [pSelectableRow]="form">
                             <td>{{form.Title}}</td>
                             <td>{{form.FileName}}</td>
-                            <td>{{form.IsAdministrative}}</td>
-                            <td>{{form.IsRequired}}</td>
-                            <td>{{form.IsActive}}</td>
-                            <td class="text-center"><button type="button" (click)="onDeleteClick(form)" class="btn btn-primary btn-import-sync">Delete</button> </td>
+                            <td>{{form.IsAdministrative == true ? 'Yes' : 'No'}}</td>
+                            <td>{{form.IsRequired == true ? 'Yes' : 'No'}}</td>
+                            <td>{{form.IsActive == true ? 'Active' : 'Inactive'}}</td>
+                            <td><a (click)="onEdit(form)"><i class="pi pi-pencil"></i></a><a style="color:red" (click)="onDelete(form)"><i class="pi pi-trash"></i></a></td>
                         </tr>
                     </ng-template>
                 </p-table>

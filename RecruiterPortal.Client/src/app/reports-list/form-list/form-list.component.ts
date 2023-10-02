@@ -21,8 +21,7 @@ export class FormListComponent implements OnInit {
 
     public showDialog: boolean = false;
     public addEditTitle: string;
-    public formGroup: FormGroup;
-    private fileData: any;
+    public formGroup: FormGroup;    
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private formService: FormListService) {
         this.addEditTitle = "Add";
@@ -38,7 +37,8 @@ export class FormListComponent implements OnInit {
             isRequired: [''],
             isAdministrative: [''],
             isActive: [''],
-            fileName: ['', Validators.compose([Validators.required])]
+            fileName: ['', Validators.compose([Validators.required])],
+            fileData: ['']
         });
     }
 
@@ -51,8 +51,7 @@ export class FormListComponent implements OnInit {
     getOfficialFilesByAgencyId() {
         this.isLoading = true;
         this.formService.getOfficialFilesByAgencyId(this.pageNumber, this.pageSize)
-            .subscribe(response => {
-                console.log(response);
+            .subscribe(response => {                
                 if (response.status === 200) {
                     this.officialFiles = response.body.Records;
                     this.totalOfficialFile = response.body.TotalRecords;
@@ -67,11 +66,19 @@ export class FormListComponent implements OnInit {
                 });
     }
 
+    setDefaultFields(isLoading: boolean, showDialog: boolean, selectedId: number, selectedOfficialFile: any, addEditTitle: string) {
+        this.isLoading = isLoading;
+        this.showDialog = showDialog;
+        this.selectedOfficialFileId = selectedId;
+        this.selectedOfficialFile = selectedOfficialFile;
+        this.formGroup.reset();
+        this.addEditTitle = addEditTitle;
+    }
+
     getOfficialFileById(id) {
         this.isLoading = true;
         this.formService.getOfficialFileById(id)
-            .subscribe(response => {
-                console.log(response);
+            .subscribe(response => {               
                 if (response.status === 200) {
                     this.selectedOfficialFile = response.body;
                     this.fillupOfficialFile(this.selectedOfficialFile);
@@ -86,18 +93,16 @@ export class FormListComponent implements OnInit {
                 });
     }
 
-    fillupOfficialFile(officialForm: any) {
+    fillupOfficialFile(officialForm: any){
+        console.log(officialForm);
         this.formGroup.patchValue({
-            title: officialForm.title,
-            isRequired: officialForm.isRequired,
-            isAdministrative: officialForm.isAdministrative,
-            isActive: officialForm.isActive,
-            fileName: officialForm.fileName            
+            title: officialForm.Title,
+            isRequired: officialForm.IsRequired,
+            isAdministrative: officialForm.IsAdministrative,
+            isActive: officialForm.IsActive,
+            fileName: officialForm.FileName            
         });
-    }
-
-    onLazyLoad(event: LazyLoadEvent) {
-    }
+    }    
 
     onFileSelect(event) {
         if (event.files.length > 0) {
@@ -109,24 +114,22 @@ export class FormListComponent implements OnInit {
                 this.formGroup.controls.fileName.setValue(event.files[0].name);
                 let reader = new FileReader();
                 reader.readAsDataURL(event.files[0]);
-                reader.onloadend = () => {
-                    this.fileData = reader.result.toString().split(',')[1];
+                reader.onloadend = () => {                    
+                    this.formGroup.controls.fileData.setValue(reader.result.toString().split(',')[1]);
                 }
             }
         }
     }
 
     onNew() {
-        //this.selectedJobId = 0;
-        //this.selectedJob = null;
-        //this.addEditTitle = "Add";
-        this.showDialog = true;
-        //this.setDefaultFields();
+        this.setDefaultFields(false, true, 0, null, "Add");             
     }
 
     onEdit(form) {
-        this.selectedOfficialFileId = form.Id;        
-        this.getOfficialFileById(this.selectedOfficialFileId);
+        this.formGroup.reset();
+        this.selectedOfficialFileId = form.Id;
+        this.selectedOfficialFile = form;
+        this.fillupOfficialFile(form);
         this.showDialog = true;
     }
 
@@ -141,7 +144,7 @@ export class FormListComponent implements OnInit {
     onSave() {
         const model: any = {
             fileName: this.formGroup.controls.fileName.value,
-            fileData: this.fileData,
+            fileData: this.formGroup.controls.fileData.value,
             title: this.formGroup.controls.title.value,
             isRequired: this.formGroup.controls.isRequired.value,
             isAdministrative: this.formGroup.controls.isAdministrative.value,
@@ -151,7 +154,7 @@ export class FormListComponent implements OnInit {
         this.formService.saveOfficialFile(model)
             .subscribe(result => {
                 if (result.status === 200) {
-                    this.isLoading = false;
+                    this.setDefaultFields(false, false, 0, null, "Add");
                     this.getOfficialFilesByAgencyId();
                     this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official file saved successfully', life: 3000 });
                 }
