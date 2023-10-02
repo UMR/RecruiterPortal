@@ -6,7 +6,7 @@
 
         public string FileName { get; set; }
 
-        public byte[] FileData { get; set; }
+        public string FileData { get; set; }
 
         public string Title { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
+using RecruiterPortalDAL.Models;
 
 namespace RecruiterPortal.DAL.Managers
 {
@@ -10,7 +11,7 @@ namespace RecruiterPortal.DAL.Managers
         {
             OfficialFile officialFile = new OfficialFile();
             officialFile.FileName = request.FileName;
-            officialFile.FileData = request.FileData;
+            officialFile.FileData = Convert.FromBase64String(request.FileData); 
             officialFile.Title = request.Title;
             officialFile.IsRequired = request.IsRequired;
             officialFile.IsAdministrative = request.IsAdministrative;
@@ -25,7 +26,7 @@ namespace RecruiterPortal.DAL.Managers
         {
             officialFile.Id = request.Id;
             officialFile.FileName = request.FileName;
-            officialFile.FileData = request.FileData;
+            officialFile.FileData = Convert.FromBase64String(request.FileData);
             officialFile.Title = request.Title;
             officialFile.IsRequired = request.IsRequired;
             officialFile.IsAdministrative = request.IsAdministrative;
@@ -48,6 +49,7 @@ namespace RecruiterPortal.DAL.Managers
             response.CreatedDate = officialFile.CreatedDate;
             response.UpdatedBy = officialFile.UpdatedBy;
             response.UpdatedDate = officialFile.UpdatedDate;
+            response.AgencyId = officialFile.AgencyId;
             return response;
         }
 
@@ -82,19 +84,19 @@ namespace RecruiterPortal.DAL.Managers
             }
         }
 
-        public static async Task<List<OfficialFileResponse>> GetOfficialFileByAgencyId(long agencyId)
+        public static async Task<PagedResponse<OfficialFileResponse>> GetOfficialFileByAgencyId(long agencyId, int page, int pageSize)
         {
             try
             {
-                List<OfficialFileResponse> response = null;
-                GenericRepository<OfficialFile> repository = new GenericRepository<OfficialFile>();
-                var officialFiles = await repository.GetAllAsync(o => o.AgencyId == agencyId);
+                List<OfficialFileResponse> officialFilesToReturn = null;                
+                int officialFilesCount = await new GenericRepository<OfficialFile>().GetAllAsyncCount(o => o.AgencyId == agencyId);
+                var officialFiles = await new GenericRepository<OfficialFile>().GetPageAsync(o => o.AgencyId == agencyId, page,pageSize);
                 if (officialFiles != null && officialFiles.Count() > 0)
                 {
-                    response = MapOfficialFileResponse(officialFiles);
+                    officialFilesToReturn = MapOfficialFileResponse(officialFiles);
                 }
 
-                return response;
+                return new PagedResponse<OfficialFileResponse> { Records = officialFilesToReturn, TotalRecords = officialFilesCount }; 
             }
             catch (Exception ex)
             {
@@ -106,7 +108,7 @@ namespace RecruiterPortal.DAL.Managers
         {
             try
             {
-                GenericRepository<OfficialFile> repository = new GenericRepository<OfficialFile>();
+                GenericRepository<OfficialFile> repository = new GenericRepository<OfficialFile>();                
                 OfficialFile officialFileToCreate = MapOfficialFileCreateRequest(request, recruiterId, agencyId);
                 OfficialFile createdOfficialFile = await repository.SaveAsync(officialFileToCreate);
                 return createdOfficialFile.Id;

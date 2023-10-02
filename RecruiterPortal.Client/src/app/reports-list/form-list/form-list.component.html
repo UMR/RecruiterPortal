@@ -8,20 +8,20 @@
                 </div>
             </div>
             <div class="container-fluid mt-2">
-                <p-table #leadTable [responsive]="true"
-                         [value]="formList"
+                <p-table #table [responsive]="true"
+                         [value]="officialFiles"
                          selectionMode="single"
-                         [(selection)]="selectedForm"
+                         [(selection)]="selectedOfficialFile"
                          dataKey="Id"
                          [paginator]="true"
                          [rows]="rows"
                          [columns]="cols"
-                         [totalRecords]="totalFrom"
+                         [totalRecords]="totalOfficialFile"
                          [lazy]="true"
-                         (onLazyLoad)="onLazyLoad($event)"
+                         (onLazyLoad)="onLazyLoadOfficialFiles($event)"
                          [rowsPerPageOptions]="[10,15,20]"
                          [showCurrentPageReport]="true"
-                         currentPageReportTemplate="Total Records {{totalFrom}}">
+                         currentPageReportTemplate="Total Records {{totalOfficialFile}}">
                     <ng-template pTemplate="header" let-columns>
                         <tr>
                             <th>File Name</th>

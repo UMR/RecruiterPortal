@@ -12,6 +12,21 @@ namespace RecruiterPortal.API.Controllers
         {
         }
 
+        [Route("get-by-agencyid")]
+        [HttpGet]
+        public async Task<IActionResult> GetByAgencyId(int page, int pageSize)
+        {
+            try
+            {
+                return StatusCode(200, await OfficialFileManager.GetOfficialFileByAgencyId(AgencyId, page, pageSize));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         [Route("get-by-id/{id}")]
         [HttpGet]
         public async Task<IActionResult> GetById(int id)
