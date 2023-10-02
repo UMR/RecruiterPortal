@@ -138,6 +138,10 @@ const routes: Routes = [
         path: 'user-mail-settings', loadChildren: () => import('./timecards/mail-settings/mail-settings.module').then(m => m.MailSettingsModule)
     },
     {
+        canActivate: [AuthGuard],
+        path: 'recruiter-history', loadChildren: () => import('./timecards/recruiter-history/recruiter-history.module').then(m => m.RecruiterHistoryModule)
+    },
+    {
         path: 'registration',
         component: RegistrationComponent
     },
