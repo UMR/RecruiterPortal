@@ -47,7 +47,7 @@ namespace RecruiterPortal.API.Controllers
         public async Task<IActionResult> Save([FromBody] OfficialFileRequest request)
         {
             try
-            {                
+            {
                 return StatusCode(200, await OfficialFileManager.Create(request, RecruiterId, AgencyId));
             }
             catch (Exception ex)
@@ -89,6 +89,25 @@ namespace RecruiterPortal.API.Controllers
                     return NotFound();
                 }
                 return StatusCode(200);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("download/{id}")]
+        public async Task<IActionResult> Download(int id)
+        {
+            try
+            {
+                var officialFileData = await OfficialFileManager.GetOfficialFileDataById(id);
+                return new FileContentResult(officialFileData, "application/octet-stream")
+                {
+                    FileDownloadName = string.Empty
+                };
             }
             catch (Exception ex)
             {

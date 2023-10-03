@@ -1,4 +1,5 @@
-﻿using RecruiterPortal.DAL.Models;
+﻿using Azure.Core;
+using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
 
@@ -77,6 +78,26 @@ namespace RecruiterPortal.DAL.Managers
                 }
 
                 return response;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static async Task<byte[]> GetOfficialFileDataById(int id)
+        {
+            try
+            {
+                byte[] fileData = null;
+                GenericRepository<OfficialFile> repository = new GenericRepository<OfficialFile>();
+                var officialFile = await repository.GetByIdAsync(m => m.Id == id);
+                if (officialFile != null)
+                {
+                    fileData = officialFile.FileData;
+                }
+
+                return fileData;
             }
             catch (Exception ex)
             {

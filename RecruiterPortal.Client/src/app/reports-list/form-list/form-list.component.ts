@@ -186,10 +186,28 @@ export class FormListComponent implements OnInit {
     }
 
     onDownload(form) {
-
+        this.isLoading = true;
+        this.formService.getOfficialFileById(form.Id)
+            .subscribe(response => {
+                if (response.status === 200) {
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = window.URL.createObjectURL(response.body);
+                    downloadLink.setAttribute('download', form.Filename);
+                    document.body.appendChild(downloadLink);
+                    downloadLink.click();
+                }
+            },
+                err => {
+                    this.isLoading = false;
+                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to download official file', detail: '' });
+                },
+                () => {
+                    this.isLoading = false;
+                });
     }
 
     onDelete(form) {
+        this.isLoading = true;
         this.confirmationService.confirm({
             message: `Are you sure you want to delete ${form.FileName} official file?`,
             header: 'Confirm',
@@ -203,6 +221,7 @@ export class FormListComponent implements OnInit {
                     }
                 },
                     err => {
+                        this.isLoading = false;
                         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Failed to delete official file', life: 3000 });
                     }
                 );
