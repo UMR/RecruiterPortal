@@ -5,6 +5,8 @@ import { RecruiterHistoryRoutingModule } from './recruiter-history-routing.modul
 import { RecruiterHistoryComponent } from './recruiter-history.component';
 import { SharedModule } from '../../common/shared.module';
 import { TableModule } from 'primeng/components/table/table';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/components/common/messageservice';
 
 @NgModule({
     declarations: [RecruiterHistoryComponent],
@@ -12,7 +14,9 @@ import { TableModule } from 'primeng/components/table/table';
         CommonModule,
         RecruiterHistoryRoutingModule,
         SharedModule,
-        TableModule
-    ]
+        TableModule,
+        ToastModule
+    ],
+    providers: [MessageService]
 })
 export class RecruiterHistoryModule { }

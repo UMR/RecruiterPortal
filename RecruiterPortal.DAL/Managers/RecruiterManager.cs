@@ -190,18 +190,26 @@ namespace RecruiterPortal.DAL.Managers
             }
         }
 
-        public static List<EntryExitModel> GetRecruiterEntryExit(long agencyId, int skip, int take)
+        public static PagedResponse<EntryExitModel> GetRecruiterEntryExit(long agencyId, int skip, int take)
         {
             try
             {
-                List<EntryExitModel> entryExitModels = null;
+                IEnumerable<EntryExitModel> entryExitModels = null;
+                int totalCount = 0;
+
                 GenericRepository<RecruiterEntryExit> repository = new GenericRepository<RecruiterEntryExit>();
                 using (UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext())
                 {
+                    totalCount = (from recruiterEntryExit in context.RecruiterEntryExits
+                                join recruiter in context.Recruiters
+                                on recruiterEntryExit.RecruiterId equals recruiter.RecruiterId
+                                where recruiter.AgencyId == agencyId
+                                select recruiterEntryExit).Count();
+
                     entryExitModels = (from recruiterEntryExit in context.RecruiterEntryExits
                                        join recruiter in context.Recruiters
                                        on recruiterEntryExit.RecruiterId equals recruiter.RecruiterId
-                                       where recruiter.AgencyId == agencyId
+                                       where recruiter.AgencyId == agencyId orderby recruiterEntryExit.LogInTime descending
                                        select (new EntryExitModel
                                        {
                                            Id = recruiterEntryExit.Id,
@@ -212,8 +220,7 @@ namespace RecruiterPortal.DAL.Managers
                            ).Skip(skip).Take(take).ToList();
 
                 }
-
-                return entryExitModels;
+                return new PagedResponse<EntryExitModel> { Records = entryExitModels, TotalRecords = totalCount };
             }
             catch (Exception ex)
             {

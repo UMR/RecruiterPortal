@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecruiterHistoryService } from './recruiter-history.service';
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-recruiter-history',
@@ -16,7 +16,7 @@ export class RecruiterHistoryComponent implements OnInit {
     private pageNumber: number;
     public totalInstitute: number;
 
-    constructor(private recruiterHistoryService: RecruiterHistoryService) { }
+    constructor(private recruiterHistoryService: RecruiterHistoryService, private messageService: MessageService) { }
 
     ngOnInit() {
         this.getEntryExit()
@@ -31,7 +31,18 @@ export class RecruiterHistoryComponent implements OnInit {
 
     getEntryExit() {
         this.recruiterHistoryService.getRecruiterEntryExit(this.take, this.skip).subscribe(
-            res => this.entryExits = res.body
+            res => {
+                if (res.status == 200) {
+                    this.entryExits = res.body.Records;
+                    this.totalInstitute = res.body.TotalRecords;
+                }
+                else {
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to get entry exit', life: 3000 });
+                }
+            },
+            err => {
+                this.messageService.add({ severity: 'error', summary: 'Error', detail: err.message, life: 3000 });
+            }
         );
     }
 }

@@ -73,9 +73,8 @@ export class AuthService {
             });
     }
 
-    updateEntryExit(): Observable<HttpResponse<any>> {
-        var user = this.storageService.getDataFromSession("CurrentUserInfo");
-        return this.http.put(this.updateEntryUrl, +user.RecruiterId, {
+    updateEntryExit(recruiterId): Observable<HttpResponse<any>> {
+        return this.http.put(this.updateEntryUrl, +recruiterId, {
             headers: new HttpHeaders()
                 .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
         });
@@ -91,11 +90,15 @@ export class AuthService {
     logout() {
         //localStorage.removeItem(currentUserVerificationStatus);
         //this.storageService.removeApplicantId();
-        this.updateEntryExit().subscribe(
-            res => {
-            },
-            err => { }
-        );
+        var user = this.storageService.getDataFromSession("CurrentUserInfo");
+        if (user != null) {
+            this.updateEntryExit(+user.RecruiterId).subscribe(
+                res => {
+                },
+                err => { }
+            );
+        }
+
         localStorage.clear();
         sessionStorage.clear();
 
