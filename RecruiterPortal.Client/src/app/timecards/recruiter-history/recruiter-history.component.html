@@ -9,15 +9,13 @@
                         <div class="col-sm-6 col-md-2 col-lg-2">
                             <div class="form-group">
                                 <label for="fromDate" class="form-label">From Date</label>
-                                <input id="fromDate" name="fromDate" type="text" class="form-control"
-                                       formControlName="fromDate" />
+                                <p-calendar formControlName="fromDate" [monthNavigator]="true" [yearNavigator]="true" [showIcon]="true" [maxDate]="maxDateValue" yearRange="1923:2030"></p-calendar>
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-2 col-lg-2">
                             <div class="form-group">
                                 <label for="toDate" class="form-label">To Date</label>
-                                <input id="toDate" name="toDate" type="text" class="form-control"
-                                       formControlName="toDate" />
+                                <p-calendar formControlName="toDate" [monthNavigator]="true" [yearNavigator]="true" [showIcon]="true" [maxDate]="maxDateValue" yearRange="1923:2023"></p-calendar>
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-2 col-lg-2">

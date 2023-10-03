@@ -8,6 +8,7 @@ import { TableModule } from 'primeng/components/table/table';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
     declarations: [RecruiterHistoryComponent],
@@ -17,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         SharedModule,
         TableModule,
         ToastModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        CalendarModule
     ],
     providers: [MessageService]
 })

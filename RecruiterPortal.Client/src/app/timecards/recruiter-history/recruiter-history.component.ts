@@ -17,6 +17,7 @@ export class RecruiterHistoryComponent implements OnInit {
     private pageNumber: number;
     public totalInstitute: number;
     public searchFg: FormGroup;
+    public maxDateValue: any = new Date();
 
     constructor(private fb: FormBuilder, private recruiterHistoryService: RecruiterHistoryService, private messageService: MessageService) { }
 
@@ -28,7 +29,7 @@ export class RecruiterHistoryComponent implements OnInit {
     createForm() {
         this.searchFg = this.fb.group({
             fromDate: [""],
-            toDate: [""]
+            toDate: [new Date(),]
         });
     }
 
