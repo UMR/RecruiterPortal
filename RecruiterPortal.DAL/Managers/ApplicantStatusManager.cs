@@ -36,7 +36,7 @@ namespace RecruiterPortal.DAL.Managers
             applicantStatus.PositionId = request.PositionId;
             applicantStatus.InstitutionId = request.InstitutionId;
             applicantStatus.Status = request.Status;
-            applicantStatus.Date = request.Date;
+            applicantStatus.Date = DateTime.Now;
             applicantStatus.TotalFee = request.TotalFee;
             applicantStatus.NetFee = request.NetFee;
             applicantStatus.RefFee = request.RefFee;
