@@ -43,7 +43,7 @@ export class RecruiterHistoryComponent implements OnInit {
 
     }
     onClear() {
-
+        this.searchFg.controls.toDate.setValue(new Date());
     }
 
     getEntryExit() {
