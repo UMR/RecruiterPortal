@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RecruiterHistoryService } from './recruiter-history.service';
 import { LazyLoadEvent, MessageService } from 'primeng/api';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
     selector: 'app-recruiter-history',
@@ -15,11 +16,20 @@ export class RecruiterHistoryComponent implements OnInit {
     private skip: number = 0;
     private pageNumber: number;
     public totalInstitute: number;
+    public searchFg: FormGroup;
 
-    constructor(private recruiterHistoryService: RecruiterHistoryService, private messageService: MessageService) { }
+    constructor(private fb: FormBuilder, private recruiterHistoryService: RecruiterHistoryService, private messageService: MessageService) { }
 
     ngOnInit() {
+        this.createForm();
         this.getEntryExit()
+    }
+
+    createForm() {
+        this.searchFg = this.fb.group({
+            fromDate: [""],
+            toDate: [""]
+        });
     }
 
     onLazyLoad(event: LazyLoadEvent) {
@@ -27,6 +37,12 @@ export class RecruiterHistoryComponent implements OnInit {
         this.take = event.rows;
         this.skip = event.rows * (this.pageNumber - 1);
         this.getEntryExit();
+    }
+    onSearchClick() {
+
+    }
+    onClear() {
+
     }
 
     getEntryExit() {

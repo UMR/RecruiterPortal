@@ -7,6 +7,7 @@ import { SharedModule } from '../../common/shared.module';
 import { TableModule } from 'primeng/components/table/table';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/components/common/messageservice';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [RecruiterHistoryComponent],
@@ -15,7 +16,8 @@ import { MessageService } from 'primeng/components/common/messageservice';
         RecruiterHistoryRoutingModule,
         SharedModule,
         TableModule,
-        ToastModule
+        ToastModule,
+        ReactiveFormsModule
     ],
     providers: [MessageService]
 })
