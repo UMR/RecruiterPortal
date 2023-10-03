@@ -1,6 +1,6 @@
 <div id="page-content-wrapper">
-    <applicant-portal-header (onToggleButtonClicked)="(showHideMenu)()" isVisibleToggleButton=0></applicant-portal-header>
-    <section class="main-content">
+    <applicant-portal-header (onToggleButtonClicked)="(showHideMenu)()" isVisibleToggleButton=0></applicant-portal-header>    
+    <section class="main-content">        
         <div class="container-fluid">
             <div class="grid">
                 <div class="col-12">
@@ -8,6 +8,7 @@
                 </div>
             </div>
             <div class="container-fluid mt-2">
+                <loading-image [is-loading]="isLoading"></loading-image>
                 <p-table #table [responsive]="true"
                          [value]="officialFiles"
                          selectionMode="single"
