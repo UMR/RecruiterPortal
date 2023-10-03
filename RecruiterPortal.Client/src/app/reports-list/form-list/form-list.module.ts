@@ -10,6 +10,7 @@ import { ToastModule } from 'primeng/toast';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule, CheckboxModule, FileUploadModule } from 'primeng/primeng';
+import { LoadingImageModule } from '../../common/loading-image.module';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ConfirmDialogModule, CheckboxModule, FileUploadModule } from 'primeng/p
         DialogModule,
         ConfirmDialogModule,
         CheckboxModule,
-        FileUploadModule
+        FileUploadModule,
+        LoadingImageModule
     ],
     providers: [ConfirmationService, MessageService]
 })

@@ -186,13 +186,14 @@ export class FormListComponent implements OnInit {
     }
 
     onDownload(form) {
+        console.log(form);
         this.isLoading = true;
-        this.formService.getOfficialFileById(form.Id)
-            .subscribe(response => {
+        this.formService.getOfficialFileDataById(form.Id)
+            .subscribe(response => {                
                 if (response.status === 200) {
                     const downloadLink = document.createElement('a');
                     downloadLink.href = window.URL.createObjectURL(response.body);
-                    downloadLink.setAttribute('download', form.Filename);
+                    downloadLink.setAttribute('download', form.FileName);
                     document.body.appendChild(downloadLink);
                     downloadLink.click();
                 }

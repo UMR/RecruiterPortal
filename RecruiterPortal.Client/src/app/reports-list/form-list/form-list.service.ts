@@ -39,4 +39,8 @@ export class FormListService {
                 .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
         });
     }
+
+    getOfficialFileDataById(id: number): Observable<HttpResponse<any>> {
+        return this.http.get(`${resourceServerUrl}/api/officialfile/download/${id}`, { observe: 'response', responseType: 'blob' });
+    }
 }
