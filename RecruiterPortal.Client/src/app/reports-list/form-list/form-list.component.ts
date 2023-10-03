@@ -15,22 +15,24 @@ export class FormListComponent implements OnInit {
     public selectedOfficialFileId: number;
     public selectedOfficialFile: any;
     public cols: any[];
-    public rows: number = 15;    
+    public rows: number = 15;
     private pageNumber: number;
     private pageSize: number;
 
     public showDialog: boolean = false;
     public addEditTitle: string;
     public addEditButtonTitle: string;
-    public formGroup: FormGroup;    
+    public formGroup: FormGroup;
+    public uploadedFile: any;
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private formService: FormListService) {
         this.addEditTitle = "Add";
         this.addEditButtonTitle = "Save";
+        this.selectedOfficialFileId = 0;
     }
 
     ngOnInit() {
-        this.createFormGroup();        
+        this.createFormGroup();
     }
 
     createFormGroup() {
@@ -46,14 +48,14 @@ export class FormListComponent implements OnInit {
 
     onLazyLoadOfficialFiles(event: LazyLoadEvent) {
         this.pageNumber = Math.ceil((event.first + 1) / event.rows);
-        this.pageSize = event.rows;        
+        this.pageSize = event.rows;
         this.getOfficialFilesByAgencyId();
     }
 
     getOfficialFilesByAgencyId() {
         this.isLoading = true;
         this.formService.getOfficialFilesByAgencyId(this.pageNumber, this.pageSize)
-            .subscribe(response => {                
+            .subscribe(response => {
                 if (response.status === 200) {
                     this.officialFiles = response.body.Records;
                     this.totalOfficialFile = response.body.TotalRecords;
@@ -76,12 +78,13 @@ export class FormListComponent implements OnInit {
         this.formGroup.reset();
         this.addEditTitle = addEditTitle;
         this.addEditButtonTitle = addEditButtonTitle;
+        this.uploadedFile = null;
     }
 
     getOfficialFileById(id) {
         this.isLoading = true;
         this.formService.getOfficialFileById(id)
-            .subscribe(response => {               
+            .subscribe(response => {
                 if (response.status === 200) {
                     this.selectedOfficialFile = response.body;
                     this.fillupOfficialFile(this.selectedOfficialFile);
@@ -96,16 +99,16 @@ export class FormListComponent implements OnInit {
                 });
     }
 
-    fillupOfficialFile(officialForm: any){        
+    fillupOfficialFile(officialForm: any) {
         this.formGroup.patchValue({
             title: officialForm.Title,
             isRequired: officialForm.IsRequired,
             isAdministrative: officialForm.IsAdministrative,
             isActive: officialForm.IsActive,
             fileName: officialForm.FileName,
-            fileData: officialForm.FileData 
+            fileData: officialForm.FileData
         });
-    }    
+    }
 
     onFileSelect(event) {
         if (event.files.length > 0) {
@@ -114,10 +117,11 @@ export class FormListComponent implements OnInit {
             } else if (event.files[0].size > 5000000) {
                 this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid file size', detail: 'File size limit: 5MB' });
             } else {
+                this.uploadedFile = event.files[0];
                 this.formGroup.controls.fileName.setValue(event.files[0].name);
                 let reader = new FileReader();
                 reader.readAsDataURL(event.files[0]);
-                reader.onloadend = () => {                    
+                reader.onloadend = () => {
                     this.formGroup.controls.fileData.setValue(reader.result.toString().split(',')[1]);
                 }
             }
@@ -125,11 +129,11 @@ export class FormListComponent implements OnInit {
     }
 
     onNew() {
-        this.setDefaultFields(false, true, null, null, "Add","Save");             
+        this.setDefaultFields(false, true, 0, null, "Add", "Save");
     }
 
-    onEdit(form) {                        
-        this.setDefaultFields(true, true, form.Id, form, "Edit","Update"); 
+    onEdit(form) {
+        this.setDefaultFields(true, true, form.Id, form, "Edit", "Update");
         this.fillupOfficialFile(form);
     }
 
@@ -150,13 +154,13 @@ export class FormListComponent implements OnInit {
             isRequired: this.formGroup.controls.isRequired.value,
             isAdministrative: this.formGroup.controls.isAdministrative.value,
             isActive: this.formGroup.controls.isActive.value
-        };        
+        };
         this.isLoading = true;
-        if (!this.selectedOfficialFileId) {
+        if (this.selectedOfficialFileId == 0) {
             this.formService.saveOfficialFile(model)
                 .subscribe(result => {
                     if (result.status === 200) {
-                        this.setDefaultFields(false, false, null, null, "Add", "Save");
+                        this.setDefaultFields(false, false, 0, null, "Add", "Save");
                         this.getOfficialFilesByAgencyId();
                         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official file saved successfully', life: 3000 });
                     }
@@ -169,7 +173,7 @@ export class FormListComponent implements OnInit {
             this.formService.updateOfficialFile(model)
                 .subscribe(result => {
                     if (result.status === 200) {
-                        this.setDefaultFields(false, false, null, null, "Add", "Save");
+                        this.setDefaultFields(false, false, 0, null, "Add", "Save");
                         this.getOfficialFilesByAgencyId();
                         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official file updated successfully', life: 3000 });
                     }
