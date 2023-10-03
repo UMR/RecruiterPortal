@@ -21,10 +21,12 @@ export class FormListComponent implements OnInit {
 
     public showDialog: boolean = false;
     public addEditTitle: string;
+    public addEditButtonTitle: string;
     public formGroup: FormGroup;    
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private formService: FormListService) {
         this.addEditTitle = "Add";
+        this.addEditButtonTitle = "Save";
     }
 
     ngOnInit() {
@@ -66,13 +68,14 @@ export class FormListComponent implements OnInit {
                 });
     }
 
-    setDefaultFields(isLoading: boolean, showDialog: boolean, selectedId: number, selectedOfficialFile: any, addEditTitle: string) {
+    setDefaultFields(isLoading: boolean, showDialog: boolean, selectedId: number, selectedOfficialFile: any, addEditTitle: string, addEditButtonTitle: string) {
         this.isLoading = isLoading;
         this.showDialog = showDialog;
         this.selectedOfficialFileId = selectedId;
         this.selectedOfficialFile = selectedOfficialFile;
         this.formGroup.reset();
         this.addEditTitle = addEditTitle;
+        this.addEditButtonTitle = addEditButtonTitle;
     }
 
     getOfficialFileById(id) {
@@ -122,15 +125,12 @@ export class FormListComponent implements OnInit {
     }
 
     onNew() {
-        this.setDefaultFields(false, true, 0, null, "Add");             
+        this.setDefaultFields(false, true, 0, null, "Add","Save");             
     }
 
-    onEdit(form) {
-        this.formGroup.reset();
-        this.selectedOfficialFileId = form.Id;
-        this.selectedOfficialFile = form;
+    onEdit(form) {                        
+        this.setDefaultFields(true, true, form.Id, form, "Edit","Update"); 
         this.fillupOfficialFile(form);
-        this.showDialog = true;
     }
 
     onClear() {
@@ -143,6 +143,7 @@ export class FormListComponent implements OnInit {
 
     onSave() {
         const model: any = {
+            id: this.selectedOfficialFileId,
             fileName: this.formGroup.controls.fileName.value,
             fileData: this.formGroup.controls.fileData.value,
             title: this.formGroup.controls.title.value,
@@ -154,7 +155,7 @@ export class FormListComponent implements OnInit {
         this.formService.saveOfficialFile(model)
             .subscribe(result => {
                 if (result.status === 200) {
-                    this.setDefaultFields(false, false, 0, null, "Add");
+                    this.setDefaultFields(false, false, 0, null, "Add","Save");
                     this.getOfficialFilesByAgencyId();
                     this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official file saved successfully', life: 3000 });
                 }

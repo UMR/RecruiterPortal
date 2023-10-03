@@ -10,7 +10,7 @@ namespace RecruiterPortal.DAL.Managers
         {
             OfficialFile officialFile = new OfficialFile();
             officialFile.FileName = request.FileName;
-            officialFile.FileData = Convert.FromBase64String(request.FileData); 
+            officialFile.FileData = Convert.FromBase64String(request.FileData);
             officialFile.Title = request.Title;
             officialFile.IsRequired = request.IsRequired;
             officialFile.IsAdministrative = request.IsAdministrative;
@@ -40,6 +40,7 @@ namespace RecruiterPortal.DAL.Managers
             OfficialFileResponse response = new OfficialFileResponse();
             response.Id = officialFile.Id;
             response.FileName = officialFile.FileName;
+            response.FileData = officialFile.FileData == null ? Convert.ToBase64String(officialFile.FileData) : null;
             response.Title = officialFile.Title;
             response.IsRequired = officialFile.IsRequired;
             response.IsAdministrative = officialFile.IsAdministrative;
@@ -54,7 +55,7 @@ namespace RecruiterPortal.DAL.Managers
 
         private static List<OfficialFileResponse> MapOfficialFileResponse(IEnumerable<OfficialFile> officialFiles)
         {
-            List<OfficialFileResponse> response = new List<OfficialFileResponse>(); 
+            List<OfficialFileResponse> response = new List<OfficialFileResponse>();
             foreach (var officialFile in officialFiles)
             {
                 response.Add(MapOfficialFileResponse(officialFile));
@@ -87,15 +88,15 @@ namespace RecruiterPortal.DAL.Managers
         {
             try
             {
-                List<OfficialFileResponse> officialFilesToReturn = null;                
+                List<OfficialFileResponse> officialFilesToReturn = null;
                 int officialFilesCount = await new GenericRepository<OfficialFile>().GetAllAsyncCount(o => o.AgencyId == agencyId);
-                var officialFiles = await new GenericRepository<OfficialFile>().GetPageAsync(o => o.AgencyId == agencyId, page,pageSize);
+                var officialFiles = await new GenericRepository<OfficialFile>().GetPageAsync(o => o.AgencyId == agencyId, page, pageSize);
                 if (officialFiles != null && officialFiles.Count() > 0)
                 {
                     officialFilesToReturn = MapOfficialFileResponse(officialFiles);
                 }
 
-                return new PagedResponse<OfficialFileResponse> { Records = officialFilesToReturn, TotalRecords = officialFilesCount }; 
+                return new PagedResponse<OfficialFileResponse> { Records = officialFilesToReturn, TotalRecords = officialFilesCount };
             }
             catch (Exception ex)
             {
@@ -107,7 +108,7 @@ namespace RecruiterPortal.DAL.Managers
         {
             try
             {
-                GenericRepository<OfficialFile> repository = new GenericRepository<OfficialFile>();                
+                GenericRepository<OfficialFile> repository = new GenericRepository<OfficialFile>();
                 OfficialFile officialFileToCreate = MapOfficialFileCreateRequest(request, recruiterId, agencyId);
                 OfficialFile createdOfficialFile = await repository.SaveAsync(officialFileToCreate);
                 return createdOfficialFile.Id;
