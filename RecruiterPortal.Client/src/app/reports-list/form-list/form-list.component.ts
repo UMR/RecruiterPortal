@@ -185,6 +185,28 @@ export class FormListComponent implements OnInit {
         }
     }
 
-    onDelete() {
+    onDownload(form) {
+
+    }
+
+    onDelete(form) {
+        this.confirmationService.confirm({
+            message: `Are you sure you want to delete ${form.FileName} official file?`,
+            header: 'Confirm',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+                this.formService.deleteOfficialFile(form.Id).subscribe(res => {
+                    if (res.status === 200) {
+                        this.setDefaultFields(false, false, 0, null, "Add", "Save");
+                        this.getOfficialFilesByAgencyId();
+                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official file deleted successfully', life: 3000 });
+                    }
+                },
+                    err => {
+                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Failed to delete official file', life: 3000 });
+                    }
+                );
+            }
+        });
     }
 }

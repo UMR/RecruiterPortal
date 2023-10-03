@@ -35,7 +35,7 @@
                     <ng-template pTemplate="body" let-form let-rowData let-columns="columns">
                         <tr [pSelectableRow]="form">
                             <td>{{form.Title}}</td>
-                            <td>{{form.FileName}}</td>
+                            <td><a (click)="onDownload(form)" style="color:blue">{{form.FileName}}</a></td>
                             <td>{{form.IsAdministrative == true ? 'Yes' : 'No'}}</td>
                             <td>{{form.IsRequired == true ? 'Yes' : 'No'}}</td>
                             <td>{{form.IsActive == true ? 'Active' : 'Inactive'}}</td>
