@@ -5,6 +5,7 @@ import { AddApplicantComponent } from './add-applicant.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { InputBehaviorModule } from '../../common/input-behavior.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { ToastModule } from 'primeng/toast';
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        ToastModule
+        ToastModule,
+        InputBehaviorModule
     ],
     providers: [MessageService, ConfirmationService]
 })

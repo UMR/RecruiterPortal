@@ -9,7 +9,7 @@
                         <form [formGroup]="applicantForm" (ngSubmit)="onAddApplicantSubmit()">
                             <div class="form-group">
                                 <label for="lastName" class="form-label">Last Name</label>
-                                <input id="lastName" formControlName="lastName" type="text" required
+                                <input id="lastName" formControlName="lastName" type="text" required trimmed
                                        class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
                                 <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
                                     <div *ngIf="f.lastName.errors.required">Last Name is required</div>
@@ -17,7 +17,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="firstName" class="form-label">First Name</label>
-                                <input id="firstName" name="firstName" type="text" class="form-control" required
+                                <input id="firstName" name="firstName" type="text" class="form-control" required trimmed
                                        formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
                                 <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
                                     <div *ngIf="f.firstName.errors.required">First Name is required</div>
@@ -25,12 +25,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="middleName" class="form-label">Middle Name</label>
-                                <input id="middleName" name="middleName" type="text" class="form-control"
+                                <input id="middleName" name="middleName" type="text" class="form-control" trimmed
                                        formControlName="middleName">
                             </div>
                             <div class="form-group">
                                 <label for="email" class="form-label">Email</label>
-                                <input id="email" formControlName="email" type="text" required
+                                <input id="email" formControlName="email" type="text" required trimmed
                                        class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
                                 <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                                     <div *ngIf="f.email.errors.required">Email is required</div>

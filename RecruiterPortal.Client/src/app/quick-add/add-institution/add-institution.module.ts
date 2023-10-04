@@ -6,6 +6,7 @@ import { ToastModule } from 'primeng/toast';
 import { InputMaskModule } from 'primeng/inputmask';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { LoadingImageModule } from '../../common/loading-image.module';
+import { InputBehaviorModule } from '../../common/input-behavior.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { LoadingImageModule } from '../../common/loading-image.module';
         ToastModule,
         InputMaskModule,
         AutoCompleteModule,
-        LoadingImageModule
+        LoadingImageModule,
+        InputBehaviorModule
     ]
 })
 export class AddInstitutionModule { }

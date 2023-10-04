@@ -11,21 +11,23 @@ import { SharedModule } from '../common/shared.module';
 import { UserProfileRoutingModule } from './user-profile-routing.module';
 import { UserProfileComponent } from './user-profile.component';
 import { InputMaskModule } from 'primeng/inputmask';
+import { InputBehaviorModule } from '../common/input-behavior.module';
 
 
 @NgModule({
-  declarations: [UserProfileComponent],
-  imports: [
-    CommonModule,
-    UserProfileRoutingModule,
-    ReactiveFormsModule,
-    LoadingImageModule,
-    ToastModule,
-    DropdownModule,
-    AutoCompleteModule,
-    SharedModule,
-    InputMaskModule
-  ],
-  providers: [MessageService]
+    declarations: [UserProfileComponent],
+    imports: [
+        CommonModule,
+        UserProfileRoutingModule,
+        ReactiveFormsModule,
+        LoadingImageModule,
+        ToastModule,
+        DropdownModule,
+        AutoCompleteModule,
+        SharedModule,
+        InputMaskModule,
+        InputBehaviorModule
+    ],
+    providers: [MessageService]
 })
 export class UserProfileModule { }
