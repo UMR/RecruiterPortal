@@ -1,23 +1,25 @@
 
 .user-name {
-    text-align: center;
-    font-size: 24px;
+    margin-left: 8px;
+    font-size: 20px;
 }
 
 .list-group-item {
     height: 40px;
 }
+
 .list-inline-item {
-    padding-left:.5rem;
-}
-.list-inline-item:hover {
-    background-color: #434A5A;
+    padding-left: .5rem;
 }
 
-    .list-inline-item:hover a {
-        color: white;
-        opacity: 1;
+    .list-inline-item:hover {
+        background-color: #434A5A;
     }
+
+        .list-inline-item:hover a {
+            color: white;
+            opacity: 1;
+        }
 
 .dropdown:hover .dropdown-menu {
     display: block;
@@ -34,18 +36,22 @@ a {
     display: inline-block;
     height: 100%;
 }
-a:active {
-    opacity: 1;
-}
+
+    a:active {
+        opacity: 1;
+    }
+
 .dropdown-item {
     color: black !important;
     padding: 10px 0;
     padding-left: .5rem;
 }
+
     .dropdown-item:hover {
         background-color: #434A5A;
         color: white !important;
     }
-    .dropdown-toggle::after {
-        content: none;
-    }
+
+.dropdown-toggle::after {
+    content: none;
+}

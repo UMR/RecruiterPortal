@@ -33,6 +33,7 @@ export class HeaderComponent {
         this.isSupervisor = this.storageService.getIsSupervisor;
         this.isManager = this.storageService.getIsManager;
         this.isAdministrator = this.storageService.getIsAdministrator;
+
         //this.getUserRole();
         //this.agencyProfileService.isAgencyOwner()
         //  .subscribe(response => {
@@ -41,20 +42,16 @@ export class HeaderComponent {
         //    }
         //  });
 
+        this.userProfileService.selectedUsername$.subscribe(username => {
+            if (username) {
+                this.username = username;
+            }
+        });
 
-
-        //this.userProfileService.selectedUsername$.subscribe(username => {
-        //  if (username) {
-        //    this.username = username;
-        //  }
-        //});
-
-        //if (this.route.snapshot.data['home']) {
-        //  this.userProfileService.setUser(this.route.snapshot.data['home'][0].body);
-        //  this.userProfileService.selectedUser$.subscribe(user => {
-        //    console.log(user);
-        //    this.fullName = user.LastName + user.FirstName;
-        //  });
+        var user = this.storageService.getDataFromSession("CurrentUserInfo");
+        if (user != null) {
+            this.username = user.LastName + " " + user.FirstName;
+        }
         //  this.isAgencyOwner = true;
 
         //  //this.user = this.route.snapshot.data['home'][0].body;
