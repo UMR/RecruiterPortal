@@ -10,7 +10,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
     styleUrls: ['./agency.component.css']
 })
 export class AgencyComponent implements OnInit {
-    public isLoading: boolean = false;
+    public isLoading: boolean = true;
     public agencies: any[] = [];
     public totalAgency: number;
     public selectedAgencyId: number;
@@ -43,7 +43,7 @@ export class AgencyComponent implements OnInit {
             contactPersonPhone: [""],
             isActive: [false, Validators.required],
         });
-        this.isLoading = true;
+        
     }
     loadAgencyLazy(event: LazyLoadEvent) {
         this.pageNumber = Math.ceil((event.first + 1) / event.rows);
