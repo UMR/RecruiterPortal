@@ -9,7 +9,7 @@ export class UserProfileService {
     //public username: string = '';
     private username$ = new BehaviorSubject<any>(undefined);
     public selectedUsername$ = this.username$.asObservable();
-    private getCurrentUserURI: string = `${resourceServerUrl}/api/user/get-current-user`;
+    private getCurrentUserURI: string = `${resourceServerUrl}/api/recruiter/get-current-recruiter`;
     private getCurrentUserRolesURI: string = `${resourceServerUrl}/api/role/get-user-roles`;
     private getUserByUserIdURI: string = `${resourceServerUrl}/api/user/get-user-by-userid`;
     private updateUserProfileURI: string = `${resourceServerUrl}/api/recruiter/update-profile`;

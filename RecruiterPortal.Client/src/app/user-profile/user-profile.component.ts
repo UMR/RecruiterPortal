@@ -29,7 +29,8 @@ export class UserProfileComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getUserByUserId();
+        this.getCurrentRecruiter();
+        //this.getUserByUserId();
         this.obsEmail = this.userFormGroup.controls.email.valueChanges
             .pipe(debounceTime(500))
             .subscribe(data => {
@@ -65,7 +66,15 @@ export class UserProfileComponent implements OnInit {
     getUserByUserId() {
         this.user = this.storageService.getDataFromSession("CurrentUserInfo");
         this.fillUpUser();
-
+    }
+    getCurrentRecruiter() {
+        this.userProfileService.getCurrentUser().subscribe(res => {
+            this.user = res.body;
+            this.fillUpUser();
+        },
+            err => {
+                console.log(err);
+            });
     }
 
     fillUpUser() {

@@ -60,6 +60,33 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
         }
 
+        [Route("get-current-recruiter")]
+        [HttpGet]
+        public IActionResult GetCurrentRecruiter()
+        {
+
+            try
+            {
+                Recruiter recruiter = RecruiterManager.GetRecruiterByLoginid(GetCurrentUser().LoginId);
+                RecruiterModel recruiterModel = new RecruiterModel();
+                recruiterModel.RecruiterId = recruiter.RecruiterId;
+                recruiterModel.LoginId = recruiter.LoginId;
+                recruiterModel.Password = recruiter.Password;
+                recruiterModel.FirstName = recruiter.FirstName;
+                recruiterModel.LastName = recruiter.LastName;
+                recruiterModel.Email = recruiter.Email;
+                recruiterModel.Telephone = recruiter.Telephone;
+                recruiterModel.IsActive = recruiter.IsActive;
+                recruiterModel.AgencyId = recruiter.AgencyId;
+                return Ok(recruiterModel);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         [Route("save")]
         [HttpPost]
         public IActionResult AddRecruiter(RecruiterModel recruiterModel)
