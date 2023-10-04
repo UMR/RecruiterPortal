@@ -5,6 +5,7 @@ using RecruiterPortal.DAL.Managers;
 using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.SqlModels;
 using RecruiterPortalDAL.Managers;
+using RecruiterPortalDAL.Models;
 using System.Data;
 
 namespace ApplicantPortalAPI.ResourceServer.Controllers
@@ -308,6 +309,36 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 }
 
                 return Ok(false);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [Route("change-password")]
+        [HttpPut]
+        public async Task<IActionResult> ChangePassword(PasswordChangeModel passModel)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest();
+                }
+                string message = string.Empty;
+
+                Recruiter recruiter = RecruiterManager.GetRecruiterByLoginid(GetCurrentUser().LoginId.ToString());
+                if (recruiter != null && recruiter.Password == passModel.OldPassword)
+                {
+                    return Ok(await RecruiterManager.UpdateRecruiterPassword(GetCurrentUser().RecruiterId, passModel.NewPassword));
+                }
+                else
+                {
+                    message = "Password did not match";
+                    return BadRequest(message);
+                }
             }
             catch (Exception ex)
             {

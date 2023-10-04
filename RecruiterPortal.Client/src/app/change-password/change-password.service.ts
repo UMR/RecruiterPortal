@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class ChangePasswordService {
-  private changePasswordURI: string = `${resourceServerUrl}/api/password/change-password`;
+  private changePasswordURI: string = `${resourceServerUrl}/api/recruiter/change-password`;
 
 
   constructor(private httpClient: HttpClient) {

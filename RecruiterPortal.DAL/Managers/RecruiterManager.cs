@@ -177,10 +177,7 @@ namespace RecruiterPortal.DAL.Managers
                 if (entryExit != null)
                 {
                     entryExit.LogOutTime = DateTime.Now;
-                    if (entryExit != null)
-                    {
-                        return await repository.UpdateAsync(entryExit) > 0 ? true : false;
-                    }
+                    return await repository.UpdateAsync(entryExit) > 0 ? true : false;
                 }
                 return null;
             }
@@ -189,7 +186,25 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
+        public static async Task<bool?> UpdateRecruiterPassword(int recruiterId, string password)
+        {
+            try
+            {
+                GenericRepository<Recruiter> repository = new GenericRepository<Recruiter>();
+                Recruiter recruiter = await repository.GetByIdAsync(r => r.RecruiterId == recruiterId);
+                if (recruiter != null)
+                {
+                    recruiter.Password = password;
+                    return await repository.UpdateAsync(recruiter) > 0 ? true : false;
 
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public static PagedResponse<EntryExitModel> GetRecruiterEntryExit(long agencyId, int skip, int take)
         {
             try
@@ -201,15 +216,16 @@ namespace RecruiterPortal.DAL.Managers
                 using (UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext())
                 {
                     totalCount = (from recruiterEntryExit in context.RecruiterEntryExits
-                                join recruiter in context.Recruiters
-                                on recruiterEntryExit.RecruiterId equals recruiter.RecruiterId
-                                where recruiter.AgencyId == agencyId
-                                select recruiterEntryExit).Count();
+                                  join recruiter in context.Recruiters
+                                  on recruiterEntryExit.RecruiterId equals recruiter.RecruiterId
+                                  where recruiter.AgencyId == agencyId
+                                  select recruiterEntryExit).Count();
 
                     entryExitModels = (from recruiterEntryExit in context.RecruiterEntryExits
                                        join recruiter in context.Recruiters
                                        on recruiterEntryExit.RecruiterId equals recruiter.RecruiterId
-                                       where recruiter.AgencyId == agencyId orderby recruiterEntryExit.LogInTime descending
+                                       where recruiter.AgencyId == agencyId
+                                       orderby recruiterEntryExit.LogInTime descending
                                        select (new EntryExitModel
                                        {
                                            Id = recruiterEntryExit.Id,
