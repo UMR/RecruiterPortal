@@ -16,6 +16,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { AddApplicantService } from '../../add-applicant/add-applicant.service';
+import { InputBehaviorModule } from '../../common/input-behavior.module';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { AddApplicantService } from '../../add-applicant/add-applicant.service';
         DialogModule,
         InputMaskModule,
         InputTextareaModule,
-        KeyFilterModule
+        KeyFilterModule,
+        InputBehaviorModule
     ],
     providers: [ConfirmationService, MessageService, AddApplicantService]
 })

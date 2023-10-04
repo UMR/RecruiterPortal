@@ -43,7 +43,7 @@ export class AgencyComponent implements OnInit {
             contactPersonPhone: [""],
             isActive: [false, Validators.required],
         });
-        
+
     }
     loadAgencyLazy(event: LazyLoadEvent) {
         this.pageNumber = Math.ceil((event.first + 1) / event.rows);
@@ -53,20 +53,22 @@ export class AgencyComponent implements OnInit {
     }
 
     checkDuplicateUrl() {
-        this.agencyService.isUrlExist(this.agencyForm.controls.urlPrefix.value.trim())
-            .subscribe(respone => {
-                console.log(respone);
-                if (respone.body === false) {
-                    this.agencyForm.controls.urlPrefix.setErrors({ 'invalid': true });;
-                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Error', detail: 'Url is already exist' });
-                }
-            },
-                err => {
-                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Error', detail: 'Failed to check duplicate url' });
+        if (this.agencyForm.controls.urlPrefix.value) {
+            this.agencyService.isUrlExist(this.agencyForm.controls.urlPrefix.value.trim())
+                .subscribe(respone => {
+                    console.log(respone);
+                    if (respone.body === false) {
+                        this.agencyForm.controls.urlPrefix.setErrors({ 'invalid': true });;
+                        this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Error', detail: 'Url is already exist' });
+                    }
                 },
-                () => {
-                    this.isLoading = false;
-                });
+                    err => {
+                        this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Error', detail: 'Failed to check duplicate url' });
+                    },
+                    () => {
+                        this.isLoading = false;
+                    });
+        }
     }
 
     getAgencies() {

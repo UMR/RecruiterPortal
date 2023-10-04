@@ -59,7 +59,7 @@
     <form [formGroup]="agencyForm" (ngSubmit)="onAgencySubmit()">
         <div class="field">
             <label for="agencyName">Agency Name</label>
-            <input type="text" pInputText id="agencyName" class="input-text" formControlName="agencyName" required autofocus maxlength="100" />
+            <input type="text" pInputText id="agencyName" class="input-text" formControlName="agencyName" required autofocus maxlength="100" trimmed/>
         </div>
         <div class="field">
             <label for="urlPrefix">Agency URL Prefix</label>
@@ -67,7 +67,7 @@
         </div>
         <div class="field">
             <label for="agencyEmail">Agency Email</label>
-            <input type="text" id="agencyEmail" class="input-text" formControlName="agencyEmail" required maxlength="100" />
+            <input type="text" id="agencyEmail" class="input-text" formControlName="agencyEmail"  trimmed required maxlength="100" />
         </div>
         <div class="field">
             <label for="agencyPhone">Agency Phone</label>
@@ -76,11 +76,11 @@
         </div>
         <div class="field">
             <label for="agencyAdress">Agency Address</label>
-            <textarea pInputTextarea id="agencyAdress" formControlName="agencyAddress" maxlength="200" [autoResize]="true"></textarea>
+            <textarea pInputTextarea id="agencyAdress" formControlName="agencyAddress" maxlength="200" [autoResize]="true" trimmed></textarea>
         </div>
         <div class="field">
             <label for="contactPerson">Agency Contact Person</label>
-            <input type="text" pInputText id="contactPerson" class="input-text" formControlName="agencyContactPerson" />
+            <input type="text" pInputText id="contactPerson" class="input-text" formControlName="agencyContactPerson" trimmed/>
         </div>
         <div class="field">
             <label for="personPhone">Agency Contact Person Phone</label>
