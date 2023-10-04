@@ -102,7 +102,7 @@ export class MailSettingsComponent implements OnInit {
                     if (this.addEditButtonTitle === "Update") {
                         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail Template Updated', life: 3000 });
                     } else {
-                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail Template Saved', life: 3000 });
+                        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Mail Template Saved', life: 3000 });
                     }
                     this.clearFields();
                 }

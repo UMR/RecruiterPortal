@@ -189,7 +189,7 @@ export class FormListComponent implements OnInit {
         console.log(form);
         this.isLoading = true;
         this.formService.getOfficialFileDataById(form.Id)
-            .subscribe(response => {                
+            .subscribe(response => {
                 if (response.status === 200) {
                     const downloadLink = document.createElement('a');
                     downloadLink.href = window.URL.createObjectURL(response.body);
@@ -223,7 +223,7 @@ export class FormListComponent implements OnInit {
                 },
                     err => {
                         this.isLoading = false;
-                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Failed to delete official file', life: 3000 });
+                        this.messageService.add({ key: 'toastKey1', severity: 'error', detail: 'Failed to delete official file', life: 3000 });
                     }
                 );
             }

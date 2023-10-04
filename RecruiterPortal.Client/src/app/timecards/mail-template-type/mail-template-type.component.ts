@@ -98,7 +98,7 @@ export class MailTemplateTypeComponent implements OnInit {
             }
         },
             err => {
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail Template Type Delete Failed', life: 3000 });
+                this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Mail Template Type Delete Failed', life: 3000 });
             }
         );
     }

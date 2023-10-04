@@ -204,7 +204,7 @@ export class JobOrdersComponent implements OnInit {
                     }
                 },
                     err => {
-                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Job Delete Failed', life: 3000 });
+                        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Job Delete Failed', life: 3000 });
                     }
                 );
             }
