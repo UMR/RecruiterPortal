@@ -2,16 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MessageService, ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import { FormListService } from '../../reports-list/form-list/form-list.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-mail-configuration',
-  templateUrl: './mail-configuration.component.html',
-  styleUrls: ['./mail-configuration.component.css']
+    selector: 'app-mail-configuration',
+    templateUrl: './mail-configuration.component.html',
+    styleUrls: ['./mail-configuration.component.css']
 })
 export class MailConfigurationComponent implements OnInit {
     public isLoading: boolean = true;
     public mailconfigs: any[] = [];
-    public totalMailConfigs: number;    
+    public totalMailConfigs: number;
     public cols: any[];
     public rows: number = 10;
     private pageNumber: number;
@@ -20,18 +21,26 @@ export class MailConfigurationComponent implements OnInit {
     public showDialog: boolean = false;
     public addEditTitle: string;
     public addEditButtonTitle: string;
-    public formGroup: FormGroup;    
+    public formGroup: FormGroup;
     public selectedMailConfigId: number;
     public selectedMailConfig: any;
     private emailRegEx = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
+    private code :string;
 
-    constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private formService: FormListService) {
+    constructor(private fb: FormBuilder, private route: ActivatedRoute, private messageService: MessageService,
+        private confirmationService: ConfirmationService, private formService: FormListService) {
         this.addEditTitle = "Add";
         this.addEditButtonTitle = "Save";
         this.selectedMailConfigId = 0;
     }
 
     ngOnInit() {
+        this.route.queryParams
+            .subscribe(params => {
+                console.log(params.code);
+                this.code = params.code;
+                console.log(this.code);
+            });
         this.createFormGroup();
     }
 
@@ -70,7 +79,7 @@ export class MailConfigurationComponent implements OnInit {
         this.isLoading = isLoading;
         this.showDialog = showDialog;
         this.selectedMailConfigId = selectedId;
-        this.selectedMailConfig = selectedMailConfig;        
+        this.selectedMailConfig = selectedMailConfig;
         this.addEditTitle = addEditTitle;
         this.addEditButtonTitle = addEditButtonTitle;
         this.formGroup.reset();
@@ -96,9 +105,9 @@ export class MailConfigurationComponent implements OnInit {
 
     fillupMailConfig(officialForm: any) {
         this.formGroup.patchValue({
-            title: officialForm.Title            
+            title: officialForm.Title
         });
-    }   
+    }
 
     onNew() {
         this.setDefaultFields(false, true, 0, null, "Add", "Save");
@@ -121,7 +130,7 @@ export class MailConfigurationComponent implements OnInit {
         const model: any = {
             id: this.selectedMailConfigId,
             profileName: this.formGroup.controls.profileName.value,
-            emailAddress: this.formGroup.controls.emailAddress.value           
+            emailAddress: this.formGroup.controls.emailAddress.value
         };
         this.isLoading = true;
         if (this.selectedMailConfigId == 0) {
@@ -151,7 +160,7 @@ export class MailConfigurationComponent implements OnInit {
                         this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to update official file', detail: '' });
                     });
         }
-    }    
+    }
 
     onDelete(form) {
         this.isLoading = true;
