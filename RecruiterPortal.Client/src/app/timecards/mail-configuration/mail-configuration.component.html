@@ -1,1 +1,86 @@
-<p>mail-configuration works!</p>
+<div id="page-content-wrapper">
+    <applicant-portal-header (onToggleButtonClicked)="(showHideMenu)()" isVisibleToggleButton=0></applicant-portal-header>
+    <section class="main-content">
+        <div class="container-fluid">
+            <div class="grid">
+                <div class="col-12">
+                    <button pButton pRipple label="Add New" class="p-button-success" (click)="onNew()" tabindex="0"></button>
+                </div>
+            </div>
+            <div class="container-fluid mt-2">
+                <loading-image [is-loading]="isLoading"></loading-image>
+                <p-table #table [responsive]="true"
+                         [value]="officialFiles"
+                         selectionMode="single"
+                         [(selection)]="selectedOfficialFile"
+                         dataKey="Id"
+                         [paginator]="true"
+                         [rows]="rows"
+                         [columns]="cols"
+                         [totalRecords]="totalOfficialFile"
+                         [lazy]="true"
+                         (onLazyLoad)="onLazyLoadOfficialFiles($event)"
+                         [rowsPerPageOptions]="[10,15,20]"
+                         [showCurrentPageReport]="true"
+                         currentPageReportTemplate="Total Records {{totalOfficialFile}}">
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th>Title</th>                            
+                            <th>Active</th>
+                            <th>Action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-form let-rowData let-columns="columns">
+                        <tr [pSelectableRow]="form">
+                            <td>{{form.Title}}</td>                            
+                            <td>{{form.IsActive == true ? 'Active' : 'Inactive'}}</td>
+                            <td><a (click)="onEdit(form)"><i class="pi pi-pencil"></i></a><a style="color:red" (click)="onDelete(form)"><i class="pi pi-trash"></i></a></td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </section>
+</div>
+
+<p-dialog [(visible)]="showDialog" [style]="{ width: '1200px' }" header="{{addEditTitle}} Form" [modal]="true" [draggable]="false" [resizable]="false">
+    <form [formGroup]="formGroup" novalidate>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" id="title" name="title" class="form-control" formControlName="title" tabindex="1" required autofocus />
+                </div>                
+                <div class="form-group">
+                    <!--<p-checkbox inputId="isActive" formControlName="isActive" value="isActive" [binary]="true" class="mr-2" tabindex="5"></p-checkbox>-->
+                    <label for="isActive">Active</label>
+                </div>
+            </div>            
+        </div>
+        <div class="row">
+            <div class="com-md-12">
+                <ul class="list-inline mb-0 d-flex justify-content-between mt-2 ml-3">
+                    <li class="list-inline-item">
+                        <button type="button" class="btn btn-primary btn-portal-border" (click)="onHide()">Close</button>
+                    </li>
+                    <li class="list-inline-item">
+                        <button type="button" class="btn btn-primary btn-portal-border" (click)="onClear()">Clear</button>
+                    </li>
+                    <li class="list-inline-item">
+                        <button type="submit" class="btn btn-primary btn-portal" (click)="onSave()" [disabled]="!formGroup.valid">Save</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</p-dialog>
+
+<p-toast></p-toast>
+<p-confirmDialog [style]="{ width: '1000px' }" #cd>
+    <ng-template pTemplate="footer">
+        <button type="button" pButton icon="pi pi-times" label="No" class="btn-no" (click)="cd.reject()"></button>
+        <button type="button" pButton icon="pi pi-check" label="Yes" class="btn-yes" (click)="cd.accept()"></button>
+    </ng-template>
+</p-confirmDialog>
+<p-toast key="toastKey1"></p-toast>
+

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MessageService, ConfirmationService, LazyLoadEvent } from 'primeng/api';
+import { FormListService } from '../../reports-list/form-list/form-list.service';
 
 @Component({
   selector: 'app-mail-configuration',
@@ -6,10 +9,174 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mail-configuration.component.css']
 })
 export class MailConfigurationComponent implements OnInit {
+    public isLoading: boolean = false;
+    public officialFiles: any[] = [];
+    public totalOfficialFile: number;
+    public selectedOfficialFileId: number;
+    public selectedOfficialFile: any;
+    public cols: any[];
+    public rows: number = 15;
+    private pageNumber: number;
+    private pageSize: number;
 
-  constructor() { }
+    public showDialog: boolean = false;
+    public addEditTitle: string;
+    public addEditButtonTitle: string;
+    public formGroup: FormGroup;
+    public uploadedFile: any;
 
-  ngOnInit() {
-  }
+    constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private formService: FormListService) {
+        this.addEditTitle = "Add";
+        this.addEditButtonTitle = "Save";
+        this.selectedOfficialFileId = 0;
+    }
 
+    ngOnInit() {
+        this.createFormGroup();
+    }
+
+    createFormGroup() {
+        this.formGroup = this.fb.group({
+            title: ['', Validators.compose([Validators.required, Validators.maxLength(200)])]            
+        });
+    }
+
+    onLazyLoadOfficialFiles(event: LazyLoadEvent) {
+        this.pageNumber = Math.ceil((event.first + 1) / event.rows);
+        this.pageSize = event.rows;
+        this.getOfficialFilesByAgencyId();
+    }
+
+    getOfficialFilesByAgencyId() {
+        this.isLoading = true;
+        this.formService.getOfficialFilesByAgencyId(this.pageNumber, this.pageSize)
+            .subscribe(response => {
+                if (response.status === 200) {
+                    this.officialFiles = response.body.Records;
+                    this.totalOfficialFile = response.body.TotalRecords;
+                }
+            },
+                err => {
+                    this.isLoading = false;
+                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get official file', detail: '' });
+                },
+                () => {
+                    this.isLoading = false;
+                });
+    }
+
+    setDefaultFields(isLoading: boolean, showDialog: boolean, selectedId: number, selectedOfficialFile: any, addEditTitle: string, addEditButtonTitle: string) {
+        this.isLoading = isLoading;
+        this.showDialog = showDialog;
+        this.selectedOfficialFileId = selectedId;
+        this.selectedOfficialFile = selectedOfficialFile;
+        this.formGroup.reset();
+        this.addEditTitle = addEditTitle;
+        this.addEditButtonTitle = addEditButtonTitle;
+        this.uploadedFile = null;
+    }
+
+    getOfficialFileById(id) {
+        this.isLoading = true;
+        this.formService.getOfficialFileById(id)
+            .subscribe(response => {
+                if (response.status === 200) {
+                    this.selectedOfficialFile = response.body;
+                    this.fillupOfficialFile(this.selectedOfficialFile);
+                }
+            },
+                err => {
+                    this.isLoading = false;
+                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get official file', detail: '' });
+                },
+                () => {
+                    this.isLoading = false;
+                });
+    }
+
+    fillupOfficialFile(officialForm: any) {
+        this.formGroup.patchValue({
+            title: officialForm.Title            
+        });
+    }   
+
+    onNew() {
+        this.setDefaultFields(false, true, 0, null, "Add", "Save");
+    }
+
+    onEdit(form) {
+        this.setDefaultFields(true, true, form.Id, form, "Edit", "Update");
+        this.fillupOfficialFile(form);
+    }
+
+    onClear() {
+        this.formGroup.reset();
+    }
+
+    onHide() {
+        this.showDialog = false;
+    }
+
+    onSave() {
+        const model: any = {
+            id: this.selectedOfficialFileId,
+            fileName: this.formGroup.controls.fileName.value,
+            fileData: this.formGroup.controls.fileData.value,
+            title: this.formGroup.controls.title.value,
+            isRequired: this.formGroup.controls.isRequired.value,
+            isAdministrative: this.formGroup.controls.isAdministrative.value,
+            isActive: this.formGroup.controls.isActive.value
+        };
+        this.isLoading = true;
+        if (this.selectedOfficialFileId == 0) {
+            this.formService.saveOfficialFile(model)
+                .subscribe(result => {
+                    if (result.status === 200) {
+                        this.setDefaultFields(false, false, 0, null, "Add", "Save");
+                        this.getOfficialFilesByAgencyId();
+                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official file saved successfully', life: 3000 });
+                    }
+                },
+                    err => {
+                        this.isLoading = false;
+                        this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to save official file', detail: '' });
+                    });
+        } else {
+            this.formService.updateOfficialFile(model)
+                .subscribe(result => {
+                    if (result.status === 200) {
+                        this.setDefaultFields(false, false, 0, null, "Add", "Save");
+                        this.getOfficialFilesByAgencyId();
+                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official file updated successfully', life: 3000 });
+                    }
+                },
+                    err => {
+                        this.isLoading = false;
+                        this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to update official file', detail: '' });
+                    });
+        }
+    }    
+
+    onDelete(form) {
+        this.isLoading = true;
+        this.confirmationService.confirm({
+            message: `Are you sure you want to delete ${form.FileName} official file?`,
+            header: 'Confirm',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+                this.formService.deleteOfficialFile(form.Id).subscribe(res => {
+                    if (res.status === 200) {
+                        this.setDefaultFields(false, false, 0, null, "Add", "Save");
+                        this.getOfficialFilesByAgencyId();
+                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official file deleted successfully', life: 3000 });
+                    }
+                },
+                    err => {
+                        this.isLoading = false;
+                        this.messageService.add({ key: 'toastKey1', severity: 'error', detail: 'Failed to delete official file', life: 3000 });
+                    }
+                );
+            }
+        });
+    }
 }
