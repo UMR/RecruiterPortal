@@ -139,6 +139,10 @@ const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
+        path: 'user-mail-configuration', loadChildren: () => import('./timecards/mail-configuration/mail-configuration.module').then(m=>m.MailConfigurationModule)
+    },
+    {
+        canActivate: [AuthGuard],
         path: 'recruiter-history', loadChildren: () => import('./timecards/recruiter-history/recruiter-history.module').then(m => m.RecruiterHistoryModule)
     },
     {
