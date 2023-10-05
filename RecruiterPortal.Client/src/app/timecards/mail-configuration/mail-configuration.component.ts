@@ -9,26 +9,26 @@ import { FormListService } from '../../reports-list/form-list/form-list.service'
   styleUrls: ['./mail-configuration.component.css']
 })
 export class MailConfigurationComponent implements OnInit {
-    public isLoading: boolean = false;
-    public officialFiles: any[] = [];
-    public totalOfficialFile: number;
-    public selectedOfficialFileId: number;
-    public selectedOfficialFile: any;
+    public isLoading: boolean = true;
+    public mailconfigs: any[] = [];
+    public totalMailConfigs: number;    
     public cols: any[];
-    public rows: number = 15;
+    public rows: number = 10;
     private pageNumber: number;
     private pageSize: number;
 
     public showDialog: boolean = false;
     public addEditTitle: string;
     public addEditButtonTitle: string;
-    public formGroup: FormGroup;
-    public uploadedFile: any;
+    public formGroup: FormGroup;    
+    public selectedMailConfigId: number;
+    public selectedMailConfig: any;
+    private emailRegEx = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private formService: FormListService) {
         this.addEditTitle = "Add";
         this.addEditButtonTitle = "Save";
-        this.selectedOfficialFileId = 0;
+        this.selectedMailConfigId = 0;
     }
 
     ngOnInit() {
@@ -37,23 +37,24 @@ export class MailConfigurationComponent implements OnInit {
 
     createFormGroup() {
         this.formGroup = this.fb.group({
-            title: ['', Validators.compose([Validators.required, Validators.maxLength(200)])]            
+            profileName: ['', Validators.compose([Validators.required, Validators.maxLength(200)])],
+            emailAddress: ['', Validators.compose([Validators.required, Validators.maxLength(200), Validators.pattern(this.emailRegEx)])]
         });
     }
 
-    onLazyLoadOfficialFiles(event: LazyLoadEvent) {
+    onLazyLoadMailConfigs(event: LazyLoadEvent) {
         this.pageNumber = Math.ceil((event.first + 1) / event.rows);
         this.pageSize = event.rows;
-        this.getOfficialFilesByAgencyId();
+        this.getMailConfigsByAgencyId();
     }
 
-    getOfficialFilesByAgencyId() {
+    getMailConfigsByAgencyId() {
         this.isLoading = true;
         this.formService.getOfficialFilesByAgencyId(this.pageNumber, this.pageSize)
             .subscribe(response => {
                 if (response.status === 200) {
-                    this.officialFiles = response.body.Records;
-                    this.totalOfficialFile = response.body.TotalRecords;
+                    this.mailconfigs = response.body.Records;
+                    this.totalMailConfigs = response.body.TotalRecords;
                 }
             },
                 err => {
@@ -65,24 +66,23 @@ export class MailConfigurationComponent implements OnInit {
                 });
     }
 
-    setDefaultFields(isLoading: boolean, showDialog: boolean, selectedId: number, selectedOfficialFile: any, addEditTitle: string, addEditButtonTitle: string) {
+    setDefaultFields(isLoading: boolean, showDialog: boolean, selectedId: number, selectedMailConfig: any, addEditTitle: string, addEditButtonTitle: string) {
         this.isLoading = isLoading;
         this.showDialog = showDialog;
-        this.selectedOfficialFileId = selectedId;
-        this.selectedOfficialFile = selectedOfficialFile;
-        this.formGroup.reset();
+        this.selectedMailConfigId = selectedId;
+        this.selectedMailConfig = selectedMailConfig;        
         this.addEditTitle = addEditTitle;
         this.addEditButtonTitle = addEditButtonTitle;
-        this.uploadedFile = null;
+        this.formGroup.reset();
     }
 
-    getOfficialFileById(id) {
+    getMailConfigById(id) {
         this.isLoading = true;
         this.formService.getOfficialFileById(id)
             .subscribe(response => {
                 if (response.status === 200) {
-                    this.selectedOfficialFile = response.body;
-                    this.fillupOfficialFile(this.selectedOfficialFile);
+                    this.selectedMailConfig = response.body;
+                    this.fillupMailConfig(this.selectedMailConfig);
                 }
             },
                 err => {
@@ -94,7 +94,7 @@ export class MailConfigurationComponent implements OnInit {
                 });
     }
 
-    fillupOfficialFile(officialForm: any) {
+    fillupMailConfig(officialForm: any) {
         this.formGroup.patchValue({
             title: officialForm.Title            
         });
@@ -105,8 +105,8 @@ export class MailConfigurationComponent implements OnInit {
     }
 
     onEdit(form) {
-        this.setDefaultFields(true, true, form.Id, form, "Edit", "Update");
-        this.fillupOfficialFile(form);
+        this.setDefaultFields(false, true, form.Id, form, "Edit", "Update");
+        this.fillupMailConfig(form);
     }
 
     onClear() {
@@ -119,21 +119,17 @@ export class MailConfigurationComponent implements OnInit {
 
     onSave() {
         const model: any = {
-            id: this.selectedOfficialFileId,
-            fileName: this.formGroup.controls.fileName.value,
-            fileData: this.formGroup.controls.fileData.value,
-            title: this.formGroup.controls.title.value,
-            isRequired: this.formGroup.controls.isRequired.value,
-            isAdministrative: this.formGroup.controls.isAdministrative.value,
-            isActive: this.formGroup.controls.isActive.value
+            id: this.selectedMailConfigId,
+            profileName: this.formGroup.controls.profileName.value,
+            emailAddress: this.formGroup.controls.emailAddress.value           
         };
         this.isLoading = true;
-        if (this.selectedOfficialFileId == 0) {
+        if (this.selectedMailConfigId == 0) {
             this.formService.saveOfficialFile(model)
                 .subscribe(result => {
                     if (result.status === 200) {
                         this.setDefaultFields(false, false, 0, null, "Add", "Save");
-                        this.getOfficialFilesByAgencyId();
+                        this.getMailConfigsByAgencyId();
                         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official file saved successfully', life: 3000 });
                     }
                 },
@@ -146,7 +142,7 @@ export class MailConfigurationComponent implements OnInit {
                 .subscribe(result => {
                     if (result.status === 200) {
                         this.setDefaultFields(false, false, 0, null, "Add", "Save");
-                        this.getOfficialFilesByAgencyId();
+                        this.getMailConfigsByAgencyId();
                         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official file updated successfully', life: 3000 });
                     }
                 },
@@ -167,7 +163,7 @@ export class MailConfigurationComponent implements OnInit {
                 this.formService.deleteOfficialFile(form.Id).subscribe(res => {
                     if (res.status === 200) {
                         this.setDefaultFields(false, false, 0, null, "Add", "Save");
-                        this.getOfficialFilesByAgencyId();
+                        this.getMailConfigsByAgencyId();
                         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official file deleted successfully', life: 3000 });
                     }
                 },
