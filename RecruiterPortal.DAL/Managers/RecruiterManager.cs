@@ -3,6 +3,7 @@ using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
 using RecruiterPortal.DAL.Utility;
+using RecruiterPortalDAL.Models;
 using System.Data;
 using System.Dynamic;
 
@@ -205,12 +206,28 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
-        public static PagedResponse<EntryExitModel> GetRecruiterEntryExit(long agencyId, int skip, int take)
+        public static PagedResponse<EntryExitModel> GetRecruiterEntryExit(long agencyId, RecruiterHistorySearch recruiterHistorySearch)
         {
             try
             {
                 IEnumerable<EntryExitModel> entryExitModels = null;
+
                 int totalCount = 0;
+
+                DateTime startTime;
+                DateTime endTime;
+
+                if (recruiterHistorySearch.startTime != null )
+                {
+                    startTime = recruiterHistorySearch.startTime.Value.AddHours(00).AddMinutes(00).AddSeconds(00);
+                    endTime = recruiterHistorySearch.endTime.Value.AddHours(23).AddMinutes(59).AddSeconds(59);
+                }
+
+                else
+                {
+                    startTime = new DateTime(recruiterHistorySearch.endTime.Value.Year, recruiterHistorySearch.endTime.Value.Month, recruiterHistorySearch.endTime.Value.Day, 00, 00, 00);
+                    endTime = recruiterHistorySearch.endTime.Value.AddHours(23).AddMinutes(59).AddSeconds(59);
+                }
 
                 GenericRepository<RecruiterEntryExit> repository = new GenericRepository<RecruiterEntryExit>();
                 using (UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext())
@@ -218,13 +235,14 @@ namespace RecruiterPortal.DAL.Managers
                     totalCount = (from recruiterEntryExit in context.RecruiterEntryExits
                                   join recruiter in context.Recruiters
                                   on recruiterEntryExit.RecruiterId equals recruiter.RecruiterId
-                                  where recruiter.AgencyId == agencyId
+                                  where recruiter.AgencyId == agencyId && recruiterEntryExit.LogInTime >= startTime && recruiterEntryExit.LogInTime <= endTime
                                   select recruiterEntryExit).Count();
 
                     entryExitModels = (from recruiterEntryExit in context.RecruiterEntryExits
                                        join recruiter in context.Recruiters
                                        on recruiterEntryExit.RecruiterId equals recruiter.RecruiterId
                                        where recruiter.AgencyId == agencyId
+                                       && recruiterEntryExit.LogInTime >= startTime && recruiterEntryExit.LogInTime <= endTime
                                        orderby recruiterEntryExit.LogInTime descending
                                        select (new EntryExitModel
                                        {
@@ -233,7 +251,7 @@ namespace RecruiterPortal.DAL.Managers
                                            RecruiterName = recruiter.FirstName + " " + recruiter.LastName,
                                            LogOutTime = recruiterEntryExit.LogOutTime == null ? "" : recruiterEntryExit.LogOutTime.Value.ToString("dd MMMM yyyy HH:mm:ss"),
                                        })
-                           ).Skip(skip).Take(take).ToList();
+                           ).Skip(recruiterHistorySearch.skip).Take(recruiterHistorySearch.take).ToList();
 
                 }
                 return new PagedResponse<EntryExitModel> { Records = entryExitModels, TotalRecords = totalCount };

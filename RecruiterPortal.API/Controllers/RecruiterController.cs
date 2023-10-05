@@ -302,13 +302,13 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         }
 
         [Route("entry-exit")]
-        [HttpGet]
-        public IActionResult GetRecruiterEntry([FromQuery] int skip, [FromQuery] int take)
+        [HttpPost]
+        public IActionResult GetRecruiterEntry(RecruiterHistorySearch recruiterHistorySearch)
         {
 
             try
             {
-                return Ok(RecruiterManager.GetRecruiterEntryExit(AgencyId, skip, take));
+                return Ok(RecruiterManager.GetRecruiterEntryExit(AgencyId, recruiterHistorySearch));
             }
             catch (Exception ex)
             {
