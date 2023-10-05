@@ -12,7 +12,7 @@ export type UserSchedulerView = any;
 })
 export class CalendarComponent {
     public data: Object[] = <Object[]>extend([], fifaEventsData, null, true);
-    public selectedDate: Date = new Date(2018, 5, 21);
+    public selectedDate: Date = new Date(2023, 5, 21);
     public eventSettings: EventSettingsModel = { dataSource: this.data };
 
     group: GroupModel = { resources: ["Crews"], allowGroupEdit: true };
