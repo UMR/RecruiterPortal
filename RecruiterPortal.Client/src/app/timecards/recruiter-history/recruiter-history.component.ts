@@ -40,12 +40,14 @@ export class RecruiterHistoryComponent implements OnInit {
         this.onSearchClick();
     }
     onSearchClick() {
-        this.searchFg.controls.toDate.setValue(new Date());
+        if (this.searchFg.controls.toDate.value == null) {
+            this.searchFg.controls.toDate.setValue(new Date());
+        }
         let searchModel = new SearchModel;
         searchModel.skip = this.skip;
         searchModel.take = this.take;
         searchModel.startTime = this.searchFg.controls.fromDate.value == null ? null : this.getUTCFormatedDate(this.searchFg.controls.fromDate.value);
-        searchModel.endTime = this.searchFg.controls.toDate == null ? null : this.getUTCFormatedDate(this.searchFg.controls.toDate.value);
+        searchModel.endTime = this.searchFg.controls.toDate.value == null ? null : this.getUTCFormatedDate(this.searchFg.controls.toDate.value);
         this.getEntryExit(searchModel);
     }
     onClear() {
