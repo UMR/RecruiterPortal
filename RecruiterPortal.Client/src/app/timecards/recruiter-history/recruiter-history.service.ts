@@ -12,7 +12,6 @@ export class RecruiterHistoryService {
     constructor(private client: HttpClient) { }
 
     getRecruiterEntryExit(searchModel: SearchModel): Observable<any> {
-        console.log(searchModel);
         return this.client.post(`${resourceServerUrl}/api/recruiter/entry-exit`, searchModel, { observe: 'response' });
     }
 }

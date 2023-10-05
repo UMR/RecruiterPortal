@@ -42,12 +42,10 @@ export class RecruiterHistoryComponent implements OnInit {
     onSearchClick() {
         this.searchFg.controls.toDate.setValue(new Date());
         let searchModel = new SearchModel;
-        console.log(this.searchFg.controls.toDate.value);
         searchModel.skip = this.skip;
         searchModel.take = this.take;
         searchModel.startTime = this.searchFg.controls.fromDate.value == null ? null : this.getUTCFormatedDate(this.searchFg.controls.fromDate.value);
         searchModel.endTime = this.searchFg.controls.toDate == null ? null : this.getUTCFormatedDate(this.searchFg.controls.toDate.value);
-        console.log(searchModel);
         this.getEntryExit(searchModel);
     }
     onClear() {
@@ -78,7 +76,6 @@ export class RecruiterHistoryComponent implements OnInit {
                 new Date(value).getMonth(),
                 new Date(value).getDate()));
         }
-        //return new Date(value.getDay() + '/' + value.getMonth() + '/' + value.getFullYear());
         return null;
     }
 }
