@@ -16,7 +16,7 @@
                                formControlName="name" tabindex="1" trimmed maxlength="100" />
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-portal" (click)="save()" [disabled]="formGroup.invalid">Save</button>
+                        <button type="submit" class="btn btn-primary btn-portal" (click)="save()" [disabled]="formGroup.invalid">{{addEditButtonText}}</button>
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
 </div>
 
 <p-toast></p-toast>
-<p-confirmDialog [style]="{ width: '1000px' }" #cd>
+<p-confirmDialog [style]="{ width: '500px' }" #cd>
     <ng-template pTemplate="footer">
         <button type="button" pButton icon="pi pi-times" label="No" class="btn-no" (click)="cd.reject()"></button>
         <button type="button" pButton icon="pi pi-check" label="Yes" class="btn-yes" (click)="cd.accept()"></button>

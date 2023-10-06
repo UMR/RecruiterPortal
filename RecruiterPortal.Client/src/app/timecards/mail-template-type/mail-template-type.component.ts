@@ -15,10 +15,12 @@ export class MailTemplateTypeComponent implements OnInit {
     public selectedMailTemplateType: any;
     public selectedMailTemplateTypeId: number = 0;
     public addEditTitle: string;
+    public addEditButtonText: string;
     public formGroup: FormGroup;
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private mailTemplateTypeService: MailTemplateService) {
         this.addEditTitle = "Add";
+        this.addEditButtonText = "Save";
         this.mailTemplateTypeService.mailTemplateTypes$.subscribe(data => { this.mailTemplateTypes = data; });
     }
 
@@ -54,11 +56,14 @@ export class MailTemplateTypeComponent implements OnInit {
     onAddNew() {
         this.setDefaultFields();
         this.selectedMailTemplateTypeId = 0;
-        this.selectedMailTemplateType = null;
+        this.selectedMailTemplateType = null;    
+        this.addEditButtonText = "Save";
     }
 
     onEdit(mailTemplateType) {
         this.selectedMailTemplateTypeId = mailTemplateType.Id;
+        this.selectedMailTemplateType = mailTemplateType;
+        this.addEditButtonText = "Update";
         this.getMailTemplateTypeById(this.selectedMailTemplateTypeId);
     }
 
@@ -72,6 +77,7 @@ export class MailTemplateTypeComponent implements OnInit {
                 if (res.status === 200) {
                     this.selectedMailTemplateTypeId = 0;
                     this.selectedMailTemplateType = null;
+                    this.addEditButtonText = "Save";
                     this.setDefaultFields();
                     this.getMailTemplateTypesByRecruiterId();
                     this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail Template Type Saved', life: 3000 });
