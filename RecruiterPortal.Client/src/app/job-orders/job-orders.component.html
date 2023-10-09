@@ -64,14 +64,14 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="jobTitile" class="form-label">Title</label>
-                    <input type="text" id="jobTitile" name="jobTitile" class="form-control" formControlName="jobTitile" required autofocus />
+                    <input type="text" id="jobTitile" name="jobTitile" class="form-control" formControlName="jobTitile" required autofocus tabindex="1" />
                     <small class="p-error" *ngIf="submitted">Title is required.</small>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="status" class="form-label">Status</label>
-                    <select id="status" name="status" class="form-control" formControlName="status" placeholder="Status" tabindex="5">
+                    <select id="status" name="status" class="form-control" formControlName="status" placeholder="Status" tabindex="2" required>
                         <option value="" selected>----Select----</option>
                         <option value="1">Active</option>
                         <option value="0">Inactive</option>
@@ -87,7 +87,7 @@
                     <label for="postion" class="form-label">Postion</label>
                     <p-autoComplete formControlName="position" [suggestions]="positionResults" class="form-control"
                                     (completeMethod)="onPositionSearch($event)" required autocomplete="off"
-                                    forceSelection="true" (onSelect)="onPositionSelect($event)" [ngClass]="{ 'is-invalid': submitted }" [dropdown]="true">
+                                    forceSelection="true" (onSelect)="onPositionSelect($event)" [ngClass]="{ 'is-invalid': submitted }" [dropdown]="true" tabindex="3">
                         <ng-template let-position pTemplate="item">
                             <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
                                 <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{position.PositionName}}</div>
@@ -102,7 +102,7 @@
                     <label for="institution" class="form-label">Institution</label>
                     <p-autoComplete formControlName="institution" [suggestions]="institutionResults" class="form-control"
                                     (completeMethod)="onInstitutiionSearch($event)" required autocomplete="off"
-                                    forceSelection="true" (onSelect)="onInstitutiionSelect($event)" [ngClass]="{ 'is-invalid': submitted }" [dropdown]="true">
+                                    forceSelection="true" (onSelect)="onInstitutiionSelect($event)" [ngClass]="{ 'is-invalid': submitted }" [dropdown]="true" tabindex="4">
                         <ng-template let-institute pTemplate="item">
                             <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
                                 <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{institute.InstituteName}}</div>
@@ -116,7 +116,7 @@
         <div class="row">
             <div class="col-md-12">
                 <small class="p-error" *ngIf="submitted">Description is required.</small>
-                <p-editor [style]="{ height: '500px' }" formControlName="jobDescription"></p-editor>
+                <p-editor [style]="{ height: '500px' }" formControlName="jobDescription" tabindex="5"></p-editor>
             </div>
         </div>
         <div class="row">
