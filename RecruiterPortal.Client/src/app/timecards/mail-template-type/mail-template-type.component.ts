@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { MailTemplateService } from './mail-template-type.service';
@@ -18,7 +18,7 @@ export class MailTemplateTypeComponent implements OnInit {
     public addEditButtonText: string;
     public formGroup: FormGroup;
     @Output() hideEvent = new EventEmitter<boolean>();
-    @Input() showMailTemplateType: boolean;
+    //@Input() showMailTemplateType: boolean;
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private mailTemplateTypeService: MailTemplateService) {
         this.addEditTitle = "Add";
@@ -29,8 +29,22 @@ export class MailTemplateTypeComponent implements OnInit {
     ngOnInit() {
         this.createJobFormGroup();
         this.getMailTemplateTypesByRecruiterId();
+    }
 
-        console.log(this.showMailTemplateType);
+    //ngOnChanges(changes: SimpleChanges) {
+    //    if (changes.showMailTemplateType.currentValue == true) {
+    //        this.selectedMailTemplateTypeId = 0;
+    //        this.selectedMailTemplateType = null;
+    //        this.addEditButtonText = "Save";
+    //        this.formGroup.reset();
+    //    }
+    //}
+
+    public setInitialValue(): void {
+        this.selectedMailTemplateTypeId = 0;
+        this.selectedMailTemplateType = null;
+        this.addEditButtonText = "Save";
+        this.formGroup.reset();
     }
 
     createJobFormGroup() {
@@ -60,7 +74,7 @@ export class MailTemplateTypeComponent implements OnInit {
     onAddNew() {
         this.setDefaultFields();
         this.selectedMailTemplateTypeId = 0;
-        this.selectedMailTemplateType = null;    
+        this.selectedMailTemplateType = null;
         this.addEditButtonText = "Save";
     }
 
@@ -115,7 +129,7 @@ export class MailTemplateTypeComponent implements OnInit {
                 this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Mail Template Type Delete Failed', life: 3000 });
             }
         );
-    }    
+    }
 
     cancel() {
         this.setDefaultFields();

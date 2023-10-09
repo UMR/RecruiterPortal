@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MessageService, ConfirmationService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { MailSettingsService } from './mail-settings.service';
 import { MailTemplateService } from '../mail-template-type/mail-template-type.service';
+import { MailTemplateTypeComponent } from '../mail-template-type/mail-template-type.component';
 
 @Component({
     selector: 'app-mail-settings',
@@ -10,7 +11,7 @@ import { MailTemplateService } from '../mail-template-type/mail-template-type.se
     styleUrls: ['./mail-settings.component.css']
 })
 export class MailSettingsComponent implements OnInit {
-
+    @ViewChild("mailTemplateType", { static: false }) mailTemplateType: MailTemplateTypeComponent
     public isLoading: boolean = false;
     public showMailTemplateType: boolean = false;
     public formGroup: FormGroup;
@@ -113,11 +114,13 @@ export class MailSettingsComponent implements OnInit {
         }
     }
 
-    handleHideEvent(show) {
+    handleHideEvent(show) {        
+        this.mailTemplateType.setInitialValue();
         this.showMailTemplateType = show;
     }
 
-    hideModal() {
+    hideModal() {        
+        this.mailTemplateType.setInitialValue();
         this.showMailTemplateType = false;        
     }
 }
