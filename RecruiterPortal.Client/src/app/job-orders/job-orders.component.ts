@@ -47,8 +47,8 @@ export class JobOrdersComponent implements OnInit {
 
     createJobFormGroup() {
         this.jobFormGroup = this.fb.group({
-            jobTitile: ['', Validators.compose([Validators.maxLength(500)])],
-            status: ['1', Validators.compose([Validators.required])],
+            jobTitile: ['', Validators.compose([Validators.maxLength(500), this.noWhitespaceValidator, Validators.required])],
+            status: ['', Validators.compose([Validators.required])],
             position: ['', Validators.compose([Validators.required])],
             positionId: [''],
             institution: ['', Validators.compose([Validators.required])],
@@ -217,5 +217,12 @@ export class JobOrdersComponent implements OnInit {
 
     hide() {
         this.jobDialog = false;
+    }
+
+    noWhitespaceValidator(control: AbstractControl) {
+        if (control && control.value && !control.value.replace(/\s/g, '').length) {
+            control.setValue('');
+        }
+        return null;
     }
 }

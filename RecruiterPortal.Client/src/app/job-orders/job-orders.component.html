@@ -71,8 +71,9 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="status" class="form-label">Status</label>
-                    <select id="status" name="status" class="form-control" formControlName="status" placeholder="Status" tabindex="5" #applicantStatus>
-                        <option value="1" selected>Active</option>
+                    <select id="status" name="status" class="form-control" formControlName="status" placeholder="Status" tabindex="5">
+                        <option value="" selected>----Select----</option>
+                        <option value="1">Active</option>
                         <option value="0">Inactive</option>
                     </select>
                     <small class="p-error" *ngIf="submitted">Status is required.</small>
