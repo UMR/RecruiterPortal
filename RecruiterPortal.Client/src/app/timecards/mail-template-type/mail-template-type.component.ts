@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { MailTemplateService } from './mail-template-type.service';
 
@@ -17,6 +17,8 @@ export class MailTemplateTypeComponent implements OnInit {
     public addEditTitle: string;
     public addEditButtonText: string;
     public formGroup: FormGroup;
+    @Output() hideEvent = new EventEmitter<boolean>();
+    @Input() showMailTemplateType: boolean;
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private mailTemplateTypeService: MailTemplateService) {
         this.addEditTitle = "Add";
@@ -27,11 +29,13 @@ export class MailTemplateTypeComponent implements OnInit {
     ngOnInit() {
         this.createJobFormGroup();
         this.getMailTemplateTypesByRecruiterId();
+
+        console.log(this.showMailTemplateType);
     }
 
     createJobFormGroup() {
         this.formGroup = this.fb.group({
-            name: ['', Validators.compose([Validators.required, Validators.maxLength(100)])]
+            name: ['', Validators.compose([Validators.required, Validators.maxLength(100), this.noWhitespaceValidator])]
         });
     }
 
@@ -65,6 +69,10 @@ export class MailTemplateTypeComponent implements OnInit {
         this.selectedMailTemplateType = mailTemplateType;
         this.addEditButtonText = "Update";
         this.getMailTemplateTypeById(this.selectedMailTemplateTypeId);
+    }
+
+    onHide() {
+        this.hideEvent.emit(false);
     }
 
     save() {
@@ -107,6 +115,20 @@ export class MailTemplateTypeComponent implements OnInit {
                 this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Mail Template Type Delete Failed', life: 3000 });
             }
         );
+    }    
+
+    cancel() {
+        this.setDefaultFields();
+        this.selectedMailTemplateTypeId = 0;
+        this.selectedMailTemplateType = null;
+        this.addEditButtonText = "Save";
+    }
+
+    noWhitespaceValidator(control: AbstractControl) {
+        if (control && control.value && !control.value.replace(/\s/g, '').length) {
+            control.setValue('');
+        }
+        return null;
     }
 
 }

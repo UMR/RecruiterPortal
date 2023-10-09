@@ -113,4 +113,11 @@ export class MailSettingsComponent implements OnInit {
         }
     }
 
+    handleHideEvent(show) {
+        this.showMailTemplateType = show;
+    }
+
+    hideModal() {
+        this.showMailTemplateType = false;        
+    }
 }

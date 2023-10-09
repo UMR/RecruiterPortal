@@ -15,9 +15,21 @@
                         <input id="name" name="name" type="text" class="form-control" autocomplete="off" required autofocus
                                formControlName="name" tabindex="1" trimmed maxlength="100" />
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-portal" (click)="save()" [disabled]="formGroup.invalid">{{addEditButtonText}}</button>
-                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="com-md-12">
+                    <ul class="list-inline mb-0 d-flex justify-content-between mt-1 mb-3 ml-3">
+                        <li class="list-inline-item">
+                            <button type="button" class="btn btn-primary btn-portal-border" (click)="onHide()">Close</button>
+                        </li>
+                        <li class="list-inline-item">
+                            <button type="button" class="btn btn-primary btn-portal-border" (click)="cancel()">Cancel</button>
+                        </li>
+                        <li>
+                            <button type="submit" class="btn btn-primary btn-portal" (click)="save()" [disabled]="formGroup.invalid">{{addEditButtonText}}</button>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </form>
@@ -27,9 +39,9 @@
                          [value]="mailTemplateTypes"
                          selectionMode="single"
                          [(selection)]="selectedMailTemplateType"
-                         [paginator]="true" 
-                         [rows]="5" 
-                         [showCurrentPageReport]="true"                            
+                         [paginator]="true"
+                         [rows]="5"
+                         [showCurrentPageReport]="true"
                          dataKey="Id">
                     <ng-template pTemplate="header" let-columns>
                         <tr>
