@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LazyLoadEvent, MessageService, ConfirmationService } from 'primeng/api';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { FormListService } from './form-list.service';
 
 @Component({
@@ -37,7 +37,7 @@ export class FormListComponent implements OnInit {
 
     createFormGroup() {
         this.formGroup = this.fb.group({
-            title: ['', Validators.compose([Validators.required, Validators.maxLength(200)])],
+            title: ['', Validators.compose([Validators.required, Validators.maxLength(200), this.noWhitespaceValidator])],
             isRequired: [''],
             isAdministrative: [''],
             isActive: [''],
@@ -228,5 +228,12 @@ export class FormListComponent implements OnInit {
                 );
             }
         });
+    }
+
+    noWhitespaceValidator(control: AbstractControl) {
+        if (control && control.value && !control.value.replace(/\s/g, '').length) {
+            control.setValue('');
+        }
+        return null;
     }
 }

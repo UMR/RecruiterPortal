@@ -3,7 +3,7 @@ import { MessageService, ConfirmationService, LazyLoadEvent } from 'primeng/api'
 
 import { JobService } from './job-orders.service';
 import { Table } from 'primeng/components/table/table';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 
 @Component({
     selector: 'app-job-orders',
