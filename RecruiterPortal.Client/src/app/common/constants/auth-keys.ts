@@ -18,10 +18,10 @@ export const recaptchaSitekey = '6LcMLzYdAAAAAM2ZK5SePLk_sfsA_cP2og7KecX6';
 //export const recaptchaSitekey = '6LcMLzYdAAAAAM2ZK5SePLk_sfsA_cP2og7KecX6';
 
 //////////////////////////    172.16.1.104 PRODUCTION  //////////////////////////
-//export const authorizationServerUrl = 'https://www.universalmedicalrecord.com/UMRRecruitmentBasicAPIAuthorizationServer';
-//export const pathMatch = '/UMRRecruitmentBasic';
-//export const scopes = ['UMRRecruitmentBasic', 'offline_access', 'openid'];
-//export const resourceServerUrl = 'https://www.universalmedicalrecord.com/UMRRecruitmentBasicAPIResourceServer';
+//export const authorizationServerUrl = 'https://www.universalmedicalrecord.com/RecruiterPortalAuth';
+//export const pathMatch = '/RecruiterPortal';
+//export const scopes = ['RecruiterPortal', 'offline_access', 'openid'];
+//export const resourceServerUrl = 'https://www.universalmedicalrecord.com/RecruiterPortalAPI';
 //export const recaptchaSitekey = '6LcMLzYdAAAAAM2ZK5SePLk_sfsA_cP2og7KecX6';
 
 //////////////////////////   mechatronicssolutionscorp  //////////////////////////
