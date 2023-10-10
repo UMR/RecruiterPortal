@@ -112,5 +112,26 @@ namespace RecruiterPortalDAL.Managers
                 throw new Exception(ex.Message);
             }
         }
+
+        public static async Task<int?> Delete(int id)
+        {
+            try
+            {
+                int? result = null;
+                GenericRepository<Agency> repository = new GenericRepository<Agency>();
+                Agency agency = await repository.GetByIdAsync(j => j.AgencyId == id);
+
+                if (agency != null)
+                {
+                    result = await repository.DeleteAsync(agency);
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

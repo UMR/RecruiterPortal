@@ -150,5 +150,24 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+        [Route("delete/{id}")]
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                int? result = await AgencyManager.Delete(id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

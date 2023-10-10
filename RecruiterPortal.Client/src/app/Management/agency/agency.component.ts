@@ -108,16 +108,19 @@ export class AgencyComponent implements OnInit {
         this.confirmationService.confirm({
             message: 'Are you sure you want to delete ' + agency.AgencyName + ' agency ?',
             header: 'Confirm',
-            icon: 'pi pi-exclamation-triangle',
+            icon: 'pi pi-trash',
             accept: () => {
-                //this.agencyService.deleteAgency(agency.agencyId).subscribe(res => {
-                //    console.log(res);
-                //    if (res && res.body) {
-                //        this.agencies = this.agencies.filter((val) => val.agencyId !== agency.agencyId);
-                //        this.agency = {};
-                //        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Agency Deleted', life: 3000 });
-                //    }
-                //}, err => { })
+                this.agencyService.delete(agency.AgencyId).subscribe(res => {
+                    if (res && res.status == 200) {
+                        this.getAgencies();
+                        this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Successful', detail: 'Agency Deleted' });
+                    }
+                    else {
+                        this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Error', detail: "Agency can't delete. is used another process." });
+                    }
+                }, err => {
+                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Error', detail: "Agency can't delete. is used another process." });
+                })
 
             }
         });
@@ -184,20 +187,6 @@ export class AgencyComponent implements OnInit {
             agencyId: id,
             isActive: !value
         }
-        //this.agencyService.updateAgencyStatus(id, updateAgency)
-        //    .subscribe(res => {
-        //        console.log(res);
-        //        if ((res.body as any).success) {
-        //            this.getAllAgency();
-        //            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Agency Updated', life: 3000 });
-        //        }
-        //        else {
-        //            this.messageService.add({ severity: 'error', summary: 'Error', detail: (res.body as any).errors[0], life: 3000 });
-        //        }
-        //    },
-        //        err => { },
-        //        () => { });
-        //console.log(id, value);
     }
 
     openNewAgency() {

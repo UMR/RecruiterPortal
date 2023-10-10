@@ -106,9 +106,9 @@
 </p-dialog>
 
 <p-confirmDialog [style]="{ width: '450px' }" #cd>
-    <ng-template pTemplate="footer">
-        <button type="button" pButton icon="pi pi-times" label="No" class="btn-no" (click)="cd.reject()"></button>
-        <button type="button" pButton icon="pi pi-check" label="Yes" class="btn-yes" (click)="cd.accept()"></button>
+    <ng-template pTemplate="footer" class="png-footer">
+        <button type="button" pButton label="No" class="btn-no" (click)="cd.reject()" style="background-color:red !important"></button>
+        <button type="button" pButton label="Yes" class="btnyes" (click)="cd.accept()" style="background-color:red !important"></button>
     </ng-template>
 </p-confirmDialog>
 <p-toast key="toastKey1"></p-toast>

@@ -1,3 +1,8 @@
+
+.png-footer.btnyes {
+    background-color: red !important;
+}
+
 .btn-add {
     width: 200px;
     margin-bottom: 12px;
@@ -78,6 +83,6 @@
     height: 2rem !important;
 }
 
-:host >>> .ui-table .ui-table-tbody > tr.ui-state-highlight{
-    background-color:#007ad9 !important;
+:host > > > .ui-table .ui-table-tbody > tr.ui-state-highlight {
+    background-color: #007ad9 !important;
 }

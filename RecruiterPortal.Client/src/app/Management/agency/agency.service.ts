@@ -42,4 +42,8 @@ export class AgencyService {
                 , observe: 'response'
             });
     }
+
+    delete(id: number): Observable<HttpResponse<any>> {
+        return this.httpClient.delete(`${resourceServerUrl}/api/agency/delete/${id}`, { observe: 'response' });
+    }
 }
