@@ -217,7 +217,7 @@ namespace RecruiterPortal.DAL.Managers
                 DateTime startTime;
                 DateTime endTime;
 
-                if (recruiterHistorySearch.startTime != null )
+                if (recruiterHistorySearch.startTime != null)
                 {
                     startTime = recruiterHistorySearch.startTime.Value.AddHours(00).AddMinutes(00).AddSeconds(00);
                     endTime = recruiterHistorySearch.endTime.Value.AddHours(23).AddMinutes(59).AddSeconds(59);
@@ -261,5 +261,125 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
+
+        public static PagedResponse<RecruiterModel> GetRecruiterByFilter(long agencyId, RecruiterSearchModel recruiterSearchModel)
+        {
+            try
+            {
+                IEnumerable<RecruiterModel> recruiterModels = null;
+                int totalCount = 0;
+
+                GenericRepository<Recruiter> repository = new GenericRepository<Recruiter>();
+                using (UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext())
+                {
+                    string whereClouse = "where recruiter.AgencyId == agencyId";
+
+                    if (!string.IsNullOrEmpty(recruiterSearchModel.FirstName))
+                    {
+                        whereClouse = whereClouse + " && recruiter.FirstName.Contains(recruiterSearchModel.FirstName)";
+                    }
+                    if (!string.IsNullOrEmpty(recruiterSearchModel.LastName))
+                    {
+                        whereClouse = whereClouse + " && recruiter.LastName.Contains(recruiterSearchModel.FirstName)";
+                    }
+                    if (!string.IsNullOrEmpty(recruiterSearchModel.Eamil))
+                    {
+                        whereClouse = whereClouse + "&& recruiter.Email.Contains(recruiterSearchModel.Eamil)";
+                    }
+                    if (recruiterSearchModel.Status == "")
+                    {
+                        totalCount = (from recruiter in context.Recruiters
+                                      where recruiter.AgencyId == agencyId
+                                      && recruiter.FirstName.Contains(recruiterSearchModel.FirstName)
+                                      && recruiter.LastName.Contains(recruiterSearchModel.FirstName)
+                                      && recruiter.Email.Contains(recruiterSearchModel.Eamil)
+                                      select recruiter).Count();
+                    }
+                    if (recruiterSearchModel.Status == "1")
+                    {
+                        totalCount = (from recruiter in context.Recruiters
+                                      where recruiter.AgencyId == agencyId
+                                      && recruiter.FirstName.Contains(recruiterSearchModel.FirstName)
+                                      && recruiter.LastName.Contains(recruiterSearchModel.FirstName)
+                                      && recruiter.Email.Contains(recruiterSearchModel.Eamil)
+                                      && recruiter.IsActive == true
+                                      select recruiter).Count();
+                    }
+                    if (recruiterSearchModel.Status == "0")
+                    {
+                        totalCount = (from recruiter in context.Recruiters
+                                      where recruiter.AgencyId == agencyId
+                                      && recruiter.FirstName.Contains(recruiterSearchModel.FirstName)
+                                      && recruiter.LastName.Contains(recruiterSearchModel.FirstName)
+                                      && recruiter.Email.Contains(recruiterSearchModel.Eamil)
+                                      && recruiter.IsActive == false
+                                      select recruiter).Count();
+                    }
+                    if (recruiterSearchModel.Status == "")
+                    {
+
+                        recruiterModels = (from recruiter in context.Recruiters
+                                           where recruiter.AgencyId == agencyId
+                                           && recruiter.FirstName.Contains(recruiterSearchModel.FirstName)
+                                           && recruiter.LastName.Contains(recruiterSearchModel.FirstName)
+                                           && recruiter.Email.Contains(recruiterSearchModel.Eamil)
+                                           select (new RecruiterModel
+                                           {
+                                               RecruiterId = recruiter.RecruiterId,
+                                               LoginId = recruiter.LoginId,
+                                               FirstName = recruiter.FirstName,
+                                               LastName = recruiter.LastName,
+                                               Email = recruiter.Email,
+                                               Telephone = recruiter.Telephone,
+                                               IsActive = recruiter.IsActive
+                                           })).ToList();
+                    }
+                    if (recruiterSearchModel.Status == "1")
+                    {
+                        recruiterModels = (from recruiter in context.Recruiters
+                                           where recruiter.AgencyId == agencyId
+                                           && recruiter.FirstName.Contains(recruiterSearchModel.FirstName)
+                                           && recruiter.LastName.Contains(recruiterSearchModel.FirstName)
+                                           && recruiter.Email.Contains(recruiterSearchModel.Eamil)
+                                           && recruiter.IsActive == true
+                                           select (new RecruiterModel
+                                           {
+                                               RecruiterId = recruiter.RecruiterId,
+                                               LoginId = recruiter.LoginId,
+                                               FirstName = recruiter.FirstName,
+                                               LastName = recruiter.LastName,
+                                               Email = recruiter.Email,
+                                               Telephone = recruiter.Telephone,
+                                               IsActive = recruiter.IsActive
+                                           })).ToList();
+                    }
+                    if (recruiterSearchModel.Status == "0")
+                    {
+                        recruiterModels = (from recruiter in context.Recruiters
+                                           where recruiter.AgencyId == agencyId
+                                           && recruiter.FirstName == recruiterSearchModel.FirstName
+                                           && recruiter.LastName == recruiterSearchModel.FirstName
+                                           && recruiter.Email == recruiterSearchModel.Eamil
+                                           && recruiter.IsActive == false
+                                           select (new RecruiterModel
+                                           {
+                                               RecruiterId = recruiter.RecruiterId,
+                                               LoginId = recruiter.LoginId,
+                                               FirstName = recruiter.FirstName,
+                                               LastName = recruiter.LastName,
+                                               Email = recruiter.Email,
+                                               Telephone = recruiter.Telephone,
+                                               IsActive = recruiter.IsActive
+                                           })).ToList();
+                    }
+                }
+                return new PagedResponse<RecruiterModel> { Records = recruiterModels, TotalRecords = totalCount };
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
+
 }

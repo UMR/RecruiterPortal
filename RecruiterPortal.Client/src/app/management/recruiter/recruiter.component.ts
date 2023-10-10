@@ -93,6 +93,7 @@ export class RecruiterComponent implements OnInit {
         this.skip = event.rows * (this.pageNumber - 1);
         this.getRecruiters();
     }
+
     getRecruiters() {
         this.isLoading = true;
         this.recruiterService.getRecruiter()

@@ -60,6 +60,47 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
         }
 
+        [Route("get-recruiter-by-filter")]
+        [HttpPost]
+        public IActionResult GetRecruiterByFilter(RecruiterSearchModel recruiterSearchModel)
+        {
+
+            try
+            {
+                List<RecruiterModel> recruiterModelList = new List<RecruiterModel>();
+                DataTable recruiterDt = RecruiterManager.GetAllRecruiter();
+                int recruiterCount = 0;
+                if (recruiterDt != null && recruiterDt.Rows.Count > 0)
+                {
+                    recruiterCount = recruiterDt.Rows.Count;
+                    foreach (DataRow oRow in recruiterDt.Rows)
+                    {
+                        RecruiterModel recruiter = new RecruiterModel();
+
+                        recruiter.RecruiterId = Convert.ToInt32(oRow["RecruiterId"].ToString());
+                        recruiter.LoginId = oRow["LoginId"].ToString();
+                        recruiter.FirstName = oRow["FirstName"].ToString();
+                        recruiter.LastName = oRow["LastName"].ToString();
+                        recruiter.Email = oRow["Email"].ToString();
+                        recruiter.Telephone = oRow["Telephone"].ToString();
+                        var roleList = RoleManager.GetRoleNamesByRecruiterId(Convert.ToInt64(oRow["RecruiterId"].ToString()));
+                        if (roleList != null)
+                        {
+                            recruiter.RecruiterRole = string.Join(",", roleList.ToArray());
+                        }
+                        recruiter.IsActive = Convert.ToBoolean(oRow["IsActive"].ToString());
+                        recruiterModelList.Add(recruiter);
+                    }
+                }
+                return Ok(new { recruiters = recruiterModelList, count = recruiterCount });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         [Route("get-current-recruiter")]
         [HttpGet]
         public IActionResult GetCurrentRecruiter()
