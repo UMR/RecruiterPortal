@@ -133,7 +133,7 @@ export class FormListComponent implements OnInit {
     }
 
     onEdit(form) {
-        this.setDefaultFields(true, true, form.Id, form, "Edit", "Update");
+        this.setDefaultFields(false, true, form.Id, form, "Edit", "Update");
         this.fillupOfficialFile(form);
     }
 
@@ -185,8 +185,7 @@ export class FormListComponent implements OnInit {
         }
     }
 
-    onDownload(form) {
-        console.log(form);
+    onDownload(form) {        
         this.isLoading = true;
         this.formService.getOfficialFileDataById(form.Id)
             .subscribe(response => {
@@ -207,13 +206,13 @@ export class FormListComponent implements OnInit {
                 });
     }
 
-    onDelete(form) {
-        this.isLoading = true;
+    onDelete(form) {        
         this.confirmationService.confirm({
             message: `Are you sure you want to delete ${form.FileName} official file?`,
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
+                this.isLoading = true;
                 this.formService.deleteOfficialFile(form.Id).subscribe(res => {
                     if (res.status === 200) {
                         this.setDefaultFields(false, false, 0, null, "Add", "Save");
@@ -228,6 +227,10 @@ export class FormListComponent implements OnInit {
                 );
             }
         });
+    }
+
+    hideModal() {
+        this.setDefaultFields(false, false, 0, null, "Add", "Save");
     }
 
     noWhitespaceValidator(control: AbstractControl) {
