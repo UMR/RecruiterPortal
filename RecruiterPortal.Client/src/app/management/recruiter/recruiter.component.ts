@@ -4,6 +4,7 @@ import { LazyLoadEvent, MessageService, ConfirmationService } from 'primeng/api'
 import { AgencyModel } from '../agency/agency.model';
 import { RecruiterModel } from './recruiter.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RecruiterSearchModel } from './recruiter-search.model';
 
 @Component({
     selector: 'app-recruiter',
@@ -67,6 +68,7 @@ export class RecruiterComponent implements OnInit {
             sEmail: [""],
             status:[""]
         });
+        this.getRecruiterByFilter();
     }
 
     MustMatch(controlName: string, matchingControlName: string) {
@@ -97,6 +99,29 @@ export class RecruiterComponent implements OnInit {
     getRecruiters() {
         this.isLoading = true;
         this.recruiterService.getRecruiter()
+            .subscribe(response => {
+                if (response.status === 200) {
+                    this.recruiters = (response.body as any).recruiters;
+                    this.totalRecruiter = (response.body as any).count;
+                }
+            },
+                err => {
+                    this.isLoading = false;
+                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get recruiter', detail: '' });
+                },
+                () => {
+                    this.isLoading = false;
+                });
+    }
+
+    getRecruiterByFilter() {
+        const recruiterSearchModel = new RecruiterSearchModel();
+        recruiterSearchModel.FirstName = "dm";
+        recruiterSearchModel.LastName = "";
+        recruiterSearchModel.Email = "";
+        recruiterSearchModel.Status = "";
+
+        this.recruiterService.getRecruiterByFilter(recruiterSearchModel)
             .subscribe(response => {
                 if (response.status === 200) {
                     this.recruiters = (response.body as any).recruiters;

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
@@ -269,23 +270,33 @@ namespace RecruiterPortal.DAL.Managers
                 IEnumerable<RecruiterModel> recruiterModels = null;
                 int totalCount = 0;
 
+                string sqlWithWhereClouse = "SELECT * From Recruiter where Recruiter.AgencyId = " + agencyId;
+
+                if (!string.IsNullOrEmpty(recruiterSearchModel.FirstName))
+                {
+                    sqlWithWhereClouse = sqlWithWhereClouse + " AND Recruiter.FirstName like '%" + recruiterSearchModel.FirstName + "%'";
+                }
+
+                if (!string.IsNullOrEmpty(recruiterSearchModel.LastName))
+                {
+                    sqlWithWhereClouse = sqlWithWhereClouse + " AND Recruiter.LastName like '%" + recruiterSearchModel.FirstName + "%'";
+                }
+
+                if (!string.IsNullOrEmpty(recruiterSearchModel.Eamil))
+                {
+                    sqlWithWhereClouse = sqlWithWhereClouse + "AND Recruiter.Email like '%" + recruiterSearchModel.Eamil + "%'";
+                }
+                //var result =  context.Database.ExecuteSqlRaw(sqlWithWhereClouse);
+                GenericRepository<Recruiter> genericRepository = new GenericRepository<Recruiter>();
+                
+
+                DataTable dt = genericRepository.LoadDataTableFromQuery(sqlWithWhereClouse, null);
+
                 GenericRepository<Recruiter> repository = new GenericRepository<Recruiter>();
                 using (UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext())
                 {
-                    string whereClouse = "where recruiter.AgencyId == agencyId";
+                   
 
-                    if (!string.IsNullOrEmpty(recruiterSearchModel.FirstName))
-                    {
-                        whereClouse = whereClouse + " && recruiter.FirstName.Contains(recruiterSearchModel.FirstName)";
-                    }
-                    if (!string.IsNullOrEmpty(recruiterSearchModel.LastName))
-                    {
-                        whereClouse = whereClouse + " && recruiter.LastName.Contains(recruiterSearchModel.FirstName)";
-                    }
-                    if (!string.IsNullOrEmpty(recruiterSearchModel.Eamil))
-                    {
-                        whereClouse = whereClouse + "&& recruiter.Email.Contains(recruiterSearchModel.Eamil)";
-                    }
                     if (recruiterSearchModel.Status == "")
                     {
                         totalCount = (from recruiter in context.Recruiters

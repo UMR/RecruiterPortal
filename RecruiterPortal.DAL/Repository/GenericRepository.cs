@@ -96,6 +96,10 @@ namespace RecruiterPortal.DAL.Repository
         {
             return _repo.LoadDataSetStoredProcedure(storedProcedureName, parameters);
         }
+        public DataTable LoadDataTableFromQuery(string query, SqlParameter[] parameters = null)
+        {
+            return _repo.LoadDataTableFromSql(query, parameters);
+        }
         public DataSet LoadDataSetTable(string storedProcedureName, SqlParameter[] parameters = null)
         {
             return _repo.LoadDataStoredProcedure(storedProcedureName, parameters);

@@ -12,4 +12,10 @@
     <None Remove="src\app\view-by-status\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="src\app\management\recruiter\recruiter-search.model.ts">
+      <SubType>Code</SubType>
+    </None>
+  </ItemGroup>
+
 </Project>
