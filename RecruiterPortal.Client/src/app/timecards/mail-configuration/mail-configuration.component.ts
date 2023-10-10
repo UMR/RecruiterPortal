@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { MessageService, ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import { FormListService } from '../../reports-list/form-list/form-list.service';
 import { ActivatedRoute } from '@angular/router';
@@ -44,10 +44,17 @@ export class MailConfigurationComponent implements OnInit {
         this.createFormGroup();
     }
 
+    noWhitespaceValidator(control: AbstractControl) {
+        if (control && control.value && !control.value.replace(/\s/g, '').length) {
+            control.setValue('');
+        }
+        return null;
+    }
+
     createFormGroup() {
         this.formGroup = this.fb.group({
-            profileName: ['', Validators.compose([Validators.required, Validators.maxLength(200)])],
-            emailAddress: ['', Validators.compose([Validators.required, Validators.maxLength(200), Validators.pattern(this.emailRegEx)])]
+            profileName: ['', Validators.compose([Validators.required, Validators.maxLength(200), this.noWhitespaceValidator])],
+            emailAddress: ['', Validators.compose([Validators.required, Validators.maxLength(200), Validators.pattern(this.emailRegEx), this.noWhitespaceValidator])]
         });
     }
 

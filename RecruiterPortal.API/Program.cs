@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using RecruiterPortal.API.Configurations;
+using RecruiterPortalDAL.Managers;
 using Serilog;
 using System.Text.Json;
 
@@ -14,6 +15,7 @@ builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
 
 builder.ConfigureIdentityServerServices();
+builder.Services.AddScoped<IMailConfigurationManager, MailConfigurationManager>();
 
 builder.Services.AddCors(o =>
 {
