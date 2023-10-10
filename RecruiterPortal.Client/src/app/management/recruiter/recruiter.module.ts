@@ -16,6 +16,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputBehaviorModule } from '../../common/input-behavior.module';
 
 @NgModule({
     declarations: [RecruiterComponent],
@@ -33,7 +34,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         InputMaskModule,
         InputTextareaModule,
         KeyFilterModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        InputBehaviorModule
     ],
     providers: [RecruiterService, ConfirmationService, MessageService]
 })

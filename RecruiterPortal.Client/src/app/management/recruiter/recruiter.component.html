@@ -3,7 +3,50 @@
     <section class="main-content">
         <div class="grid">
             <div class="col-12">
-                <button pButton pRipple label="Add New" class="button-success btn-add" (click)="openNewRecruiter()" ></button>
+                <button pButton pRipple label="Add New" class="button-success btn-add" (click)="openNewRecruiter()"></button>
+            </div>
+        </div>
+        <div style="padding: 0rem 1rem 1rem 1rem !important; ">
+            <div class="card-body px-3 py-3" style="height: auto; background-color: white;">
+                <form (ngSubmit)="onSearchClick()" [formGroup]="searchFg">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label for="sFirstName" class="form-label">First Name</label>
+                                <input type="text" id="sFirstName" class="input-text form-control" formControlName="sFirstName" trimmed maxlength="100" autocomplete="off"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label for="sLastName" class="form-label">Last Name</label>
+                                <input type="text" id="sLastName" class="input-text form-control" formControlName="sLastName" trimmed maxlength="100" autocomplete="off"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label for="sEmail" class="form-label">Email</label>
+                                <input type="text" id="sEmail" class="input-text form-control" formControlName="sEmail" trimmed maxlength="100" autocomplete="off"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label for="status" class="form-label">Status</label>
+                                <select id="status" name="status" class="form-control" formControlName="status" tabindex="4">
+                                    <option value="" selected>All</option>
+                                    <option value="1">Active</option>
+                                    <option value="0">In Active</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-2 col-lg-2">
+                            <div class="form-group" style="margin-top:20px;float:right">
+                                <button type="button" (click)="onClear()" class="btn btn-clear mr-3" tabindex="7">Clear</button>
+                                <button type="submit" class="btn btn-search" tabindex="6">Search</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
             </div>
         </div>
         <div class="container-fluid">

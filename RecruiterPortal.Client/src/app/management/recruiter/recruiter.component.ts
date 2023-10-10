@@ -33,6 +33,7 @@ export class RecruiterComponent implements OnInit {
     public isManager: boolean = false;
     public isAdministrator: boolean = false;
     public regForm: FormGroup;
+    public searchFg: FormGroup;
     private emailRegEx = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
     public isEditMode: boolean = false;
 
@@ -58,6 +59,13 @@ export class RecruiterComponent implements OnInit {
             confirmPassword: ["", Validators.required],
         }, {
             validator: this.MustMatch('password', 'confirmPassword')
+        });
+
+        this.searchFg = this.fb.group({
+            sFirstName: [""],
+            sLastName: [""],
+            sEmail: [""],
+            status:[""]
         });
     }
 
@@ -131,6 +139,13 @@ export class RecruiterComponent implements OnInit {
             this.regForm.controls.isAdministrator.setValue(true);
         }
         this.recruiterDialog = true;
+    }
+
+    onSearchClick() {
+
+    }
+    onClear() {
+
     }
 
     onDelete(recruiter: any) {
