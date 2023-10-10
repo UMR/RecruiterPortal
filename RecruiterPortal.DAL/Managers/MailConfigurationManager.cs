@@ -46,7 +46,7 @@ namespace RecruiterPortalDAL.Managers
         public string GetAuthorizationUrl(MailConfigurationRequest mailConfig)
         {
             string splitOperator = "|";
-            string state = mailConfig.ProfileName + splitOperator + mailConfig.GmailAddress;
+            string state = mailConfig.ProfileName + splitOperator + mailConfig.EmailAddress;
             StringBuilder UrlBuilder = new StringBuilder(Oaut2URI);
             UrlBuilder.Append("client_id=" + ClientId);
             UrlBuilder.Append("&redirect_uri=" + RedirectURI);
@@ -55,7 +55,7 @@ namespace RecruiterPortalDAL.Managers
             UrlBuilder.Append("&access_type=" + "offline");
             UrlBuilder.Append("&state=" + state);
             UrlBuilder.Append("&prompt=" + "select_account");
-            UrlBuilder.Append("&login_hint=" + mailConfig.GmailAddress);
+            UrlBuilder.Append("&login_hint=" + mailConfig.EmailAddress);
             return UrlBuilder.ToString();
         }
 

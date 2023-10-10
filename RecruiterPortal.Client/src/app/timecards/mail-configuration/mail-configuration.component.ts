@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { MessageService, ConfirmationService, LazyLoadEvent } from 'primeng/api';
-import { FormListService } from '../../reports-list/form-list/form-list.service';
 import { ActivatedRoute } from '@angular/router';
+import { MailConfigurationService } from './mail-configuration.service';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
     selector: 'app-mail-configuration',
@@ -10,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
     styleUrls: ['./mail-configuration.component.css']
 })
 export class MailConfigurationComponent implements OnInit {
-    public isLoading: boolean = true;
+    public isLoading: boolean = false;
     public mailconfigs: any[] = [];
     public totalMailConfigs: number;
     public cols: any[];
@@ -28,7 +29,7 @@ export class MailConfigurationComponent implements OnInit {
     private code :string;
 
     constructor(private fb: FormBuilder, private route: ActivatedRoute, private messageService: MessageService,
-        private confirmationService: ConfirmationService, private formService: FormListService) {
+        private confirmationService: ConfirmationService, private mailConfigService: MailConfigurationService, @Inject(DOCUMENT) private document: Document) {
         this.addEditTitle = "Add";
         this.addEditButtonTitle = "Save";
         this.selectedMailConfigId = 0;
@@ -61,26 +62,26 @@ export class MailConfigurationComponent implements OnInit {
     onLazyLoadMailConfigs(event: LazyLoadEvent) {
         this.pageNumber = Math.ceil((event.first + 1) / event.rows);
         this.pageSize = event.rows;
-        this.getMailConfigsByAgencyId();
+        //this.getMailConfigsByAgencyId();
     }
 
-    getMailConfigsByAgencyId() {
-        this.isLoading = true;
-        this.formService.getOfficialFilesByAgencyId(this.pageNumber, this.pageSize)
-            .subscribe(response => {
-                if (response.status === 200) {
-                    this.mailconfigs = response.body.Records;
-                    this.totalMailConfigs = response.body.TotalRecords;
-                }
-            },
-                err => {
-                    this.isLoading = false;
-                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get official file', detail: '' });
-                },
-                () => {
-                    this.isLoading = false;
-                });
-    }
+    //getMailConfigsByAgencyId() {
+    //    this.isLoading = true;
+    //    this.mailConfigService.getOfficialFilesByAgencyId(this.pageNumber, this.pageSize)
+    //        .subscribe(response => {
+    //            if (response.status === 200) {
+    //                this.mailconfigs = response.body.Records;
+    //                this.totalMailConfigs = response.body.TotalRecords;
+    //            }
+    //        },
+    //            err => {
+    //                this.isLoading = false;
+    //                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get official file', detail: '' });
+    //            },
+    //            () => {
+    //                this.isLoading = false;
+    //            });
+    //}
 
     setDefaultFields(isLoading: boolean, showDialog: boolean, selectedId: number, selectedMailConfig: any, addEditTitle: string, addEditButtonTitle: string) {
         this.isLoading = isLoading;
@@ -92,27 +93,28 @@ export class MailConfigurationComponent implements OnInit {
         this.formGroup.reset();
     }
 
-    getMailConfigById(id) {
-        this.isLoading = true;
-        this.formService.getOfficialFileById(id)
-            .subscribe(response => {
-                if (response.status === 200) {
-                    this.selectedMailConfig = response.body;
-                    this.fillupMailConfig(this.selectedMailConfig);
-                }
-            },
-                err => {
-                    this.isLoading = false;
-                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get official file', detail: '' });
-                },
-                () => {
-                    this.isLoading = false;
-                });
-    }
+    //getMailConfigById(id) {
+    //    this.isLoading = true;
+    //    this.formService.getOfficialFileById(id)
+    //        .subscribe(response => {
+    //            if (response.status === 200) {
+    //                this.selectedMailConfig = response.body;
+    //                this.fillupMailConfig(this.selectedMailConfig);
+    //            }
+    //        },
+    //            err => {
+    //                this.isLoading = false;
+    //                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get official file', detail: '' });
+    //            },
+    //            () => {
+    //                this.isLoading = false;
+    //            });
+    //}
 
-    fillupMailConfig(officialForm: any) {
+    fillupMailConfig(mailConfig: any) {
         this.formGroup.patchValue({
-            title: officialForm.Title
+            profileName: mailConfig.ProfileName,
+            emailAddress: mailConfig.EmailAddress,
         });
     }
 
@@ -140,33 +142,35 @@ export class MailConfigurationComponent implements OnInit {
             emailAddress: this.formGroup.controls.emailAddress.value
         };
         this.isLoading = true;
-        if (this.selectedMailConfigId == 0) {
-            this.formService.saveOfficialFile(model)
-                .subscribe(result => {
-                    if (result.status === 200) {
-                        this.setDefaultFields(false, false, 0, null, "Add", "Save");
-                        this.getMailConfigsByAgencyId();
-                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official file saved successfully', life: 3000 });
-                    }
-                },
-                    err => {
-                        this.isLoading = false;
-                        this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to save official file', detail: '' });
-                    });
-        } else {
-            this.formService.updateOfficialFile(model)
-                .subscribe(result => {
-                    if (result.status === 200) {
-                        this.setDefaultFields(false, false, 0, null, "Add", "Save");
-                        this.getMailConfigsByAgencyId();
-                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official file updated successfully', life: 3000 });
-                    }
-                },
-                    err => {
-                        this.isLoading = false;
-                        this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to update official file', detail: '' });
-                    });
-        }
+
+        this.mailConfigService.getAuthorizationUrl(model).subscribe(res => this.document.location.href = res.body);
+        //if (this.selectedMailConfigId == 0) {
+        //    this.formService.saveOfficialFile(model)
+        //        .subscribe(result => {
+        //            if (result.status === 200) {
+        //                this.setDefaultFields(false, false, 0, null, "Add", "Save");
+        //                this.getMailConfigsByAgencyId();
+        //                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official file saved successfully', life: 3000 });
+        //            }
+        //        },
+        //            err => {
+        //                this.isLoading = false;
+        //                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to save official file', detail: '' });
+        //            });
+        //} else {
+        //    this.formService.updateOfficialFile(model)
+        //        .subscribe(result => {
+        //            if (result.status === 200) {
+        //                this.setDefaultFields(false, false, 0, null, "Add", "Save");
+        //                this.getMailConfigsByAgencyId();
+        //                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official file updated successfully', life: 3000 });
+        //            }
+        //        },
+        //            err => {
+        //                this.isLoading = false;
+        //                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to update official file', detail: '' });
+        //            });
+        //}
     }
 
     onDelete(form) {

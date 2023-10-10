@@ -15,7 +15,7 @@ namespace RecruiterPortal.API.Controllers
         }
 
         [Route("get-authorization-url")]
-        [HttpGet]
+        [HttpPost]
         public IActionResult GetAuthorizationUrl(MailConfigurationRequest mailConfigurationRequest)
         {
             return Ok(_mailCongigurationManager.GetAuthorizationUrl(mailConfigurationRequest));

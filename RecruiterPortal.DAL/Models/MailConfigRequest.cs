@@ -2,8 +2,9 @@
 {
     public class MailConfigurationRequest
     {       
+        public int Id { get; set; }
         public string ProfileName { get; set; }
-        public string GmailAddress { get; set; }        
+        public string EmailAddress { get; set; }        
         
     }
 }
