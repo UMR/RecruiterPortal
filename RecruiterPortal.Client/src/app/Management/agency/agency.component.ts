@@ -56,7 +56,6 @@ export class AgencyComponent implements OnInit {
         if (this.agencyForm.controls.urlPrefix.value) {
             this.agencyService.isUrlExist(this.agencyForm.controls.urlPrefix.value.trim())
                 .subscribe(respone => {
-                    console.log(respone);
                     if (respone.body === false) {
                         this.agencyForm.controls.urlPrefix.setErrors({ 'invalid': true });;
                         this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Error', detail: 'Url is already exist' });

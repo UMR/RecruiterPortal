@@ -48,9 +48,6 @@ label {
 .custom-control-label {
   padding-top: 6px;
 }
-.ui-button-icon-left {
-    display: none !important;
-}
 
 .custom-control-input:checked ~ .custom-control-label::before {
   color: #fff;

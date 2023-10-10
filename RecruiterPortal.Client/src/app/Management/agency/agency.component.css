@@ -1,4 +1,6 @@
-
+:host ::ng-deep.ui-button-icon-left {
+    display: none !important;
+}
 .png-footer.btnyes {
     background-color: red !important;
 }
