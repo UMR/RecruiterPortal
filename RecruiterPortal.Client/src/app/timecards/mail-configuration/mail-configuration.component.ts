@@ -175,24 +175,24 @@ export class MailConfigurationComponent implements OnInit {
 
     onDelete(form) {
         this.isLoading = true;
-        this.confirmationService.confirm({
-            message: `Are you sure you want to delete ${form.FileName} official file?`,
-            header: 'Confirm',
-            icon: 'pi pi-exclamation-triangle',
-            accept: () => {
-                this.formService.deleteOfficialFile(form.Id).subscribe(res => {
-                    if (res.status === 200) {
-                        this.setDefaultFields(false, false, 0, null, "Add", "Save");
-                        this.getMailConfigsByAgencyId();
-                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official file deleted successfully', life: 3000 });
-                    }
-                },
-                    err => {
-                        this.isLoading = false;
-                        this.messageService.add({ key: 'toastKey1', severity: 'error', detail: 'Failed to delete official file', life: 3000 });
-                    }
-                );
-            }
-        });
+        //this.confirmationService.confirm({
+        //    message: `Are you sure you want to delete ${form.FileName} official file?`,
+        //    header: 'Confirm',
+        //    icon: 'pi pi-exclamation-triangle',
+        //    accept: () => {
+        //        this.formService.deleteOfficialFile(form.Id).subscribe(res => {
+        //            if (res.status === 200) {
+        //                this.setDefaultFields(false, false, 0, null, "Add", "Save");
+        //                this.getMailConfigsByAgencyId();
+        //                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official file deleted successfully', life: 3000 });
+        //            }
+        //        },
+        //            err => {
+        //                this.isLoading = false;
+        //                this.messageService.add({ key: 'toastKey1', severity: 'error', detail: 'Failed to delete official file', life: 3000 });
+        //            }
+        //        );
+        //    }
+        //});
     }
 }
