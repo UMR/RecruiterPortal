@@ -17,6 +17,13 @@ export class MailConfigurationService {
         });
     }    
 
+    saveToken(model: any): Observable<HttpResponse<any>> {
+        return this.client.post(`${resourceServerUrl}/api/mailconfiguration/save-token`, model, {
+            headers: new HttpHeaders()
+                .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
+        });
+    }   
+
     save(job: any): Observable<HttpResponse<any>> {
         return this.client.post(`${resourceServerUrl}/api/mailtemplate/save-mail-template-type`, job, {
             headers: new HttpHeaders()

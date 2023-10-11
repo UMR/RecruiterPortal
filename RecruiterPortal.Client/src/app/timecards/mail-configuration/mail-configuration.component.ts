@@ -26,7 +26,9 @@ export class MailConfigurationComponent implements OnInit {
     public selectedMailConfigId: number;
     public selectedMailConfig: any;
     private emailRegEx = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
-    private code :string;
+    private code: string;
+    private email: string;
+    private profileName: string;
 
     constructor(private fb: FormBuilder, private route: ActivatedRoute, private messageService: MessageService,
         private confirmationService: ConfirmationService, private mailConfigService: MailConfigurationService, @Inject(DOCUMENT) private document: Document) {
@@ -37,10 +39,18 @@ export class MailConfigurationComponent implements OnInit {
 
     ngOnInit() {
         this.route.queryParams
-            .subscribe(params => {
-                console.log(params.code);
+            .subscribe(params => {                
                 this.code = params.code;
-                console.log(this.code);
+                let state = params.state.split("|");
+                this.profileName = state[0];
+                this.email = state[1];
+                const model: any = {
+                    id: this.selectedMailConfigId,
+                    profileName: this.profileName,
+                    emailAddress: this.email,
+                    code: this.code
+                };
+                this.mailConfigService.saveToken(model).subscribe(res => console.log(res));
             });
         this.createFormGroup();
     }

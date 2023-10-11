@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RecruiterPortal.DAL.Models;
 using RecruiterPortalDAL.Managers;
+using System.Text.Json;
 
 namespace RecruiterPortal.API.Controllers
 {
@@ -19,6 +20,16 @@ namespace RecruiterPortal.API.Controllers
         public IActionResult GetAuthorizationUrl(MailConfigurationRequest mailConfigurationRequest)
         {
             return Ok(_mailCongigurationManager.GetAuthorizationUrl(mailConfigurationRequest));
+        }
+
+        [Route("save-token")]
+        [HttpPost]
+        public IActionResult SaveToken(MailConfigurationRequest mailConfigurationRequest)
+        {
+            var refreshToken = _mailCongigurationManager.FetchExchangeAuthorizationCode(mailConfigurationRequest.Code, out string token);
+
+
+            return Ok();
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
+using System.Net;
 using System.Text;
 
 namespace RecruiterPortalDAL.Managers
@@ -10,6 +12,7 @@ namespace RecruiterPortalDAL.Managers
     public interface IMailConfigurationManager
     {
         string GetAuthorizationUrl(MailConfigurationRequest mailConfig);
+        string FetchExchangeAuthorizationCode(string code, out string accessToken);
     }
 
     public class MailConfigurationManager : IMailConfigurationManager
@@ -57,6 +60,44 @@ namespace RecruiterPortalDAL.Managers
             UrlBuilder.Append("&prompt=" + "select_account");
             UrlBuilder.Append("&login_hint=" + mailConfig.EmailAddress);
             return UrlBuilder.ToString();
+        }
+
+        public string FetchExchangeAuthorizationCode(string code, out string accessToken)
+        {
+            accessToken = string.Empty;
+            string refreshToken = string.Empty;
+            var contentBody = $"code={code}&client_id={ClientId}&client_secret={ClientSecret}&redirect_uri={RedirectURI}&grant_type=authorization_code";
+            var request = WebRequest.Create(TokenURI);
+            request.Method = "POST";
+            byte[] byteArray = Encoding.UTF8.GetBytes(contentBody);
+            request.ContentType = "application/x-www-form-urlencoded";
+            request.ContentLength = byteArray.Length;
+
+            using (Stream dataStream = request.GetRequestStream())
+            {
+                dataStream.Write(byteArray, 0, byteArray.Length);
+                dataStream.Close();
+            }
+
+            var response = (HttpWebResponse)request.GetResponse();
+            Stream responseDataStream = response.GetResponseStream();
+            StreamReader streamReader = new StreamReader(responseDataStream);
+            string responseData = streamReader.ReadToEnd();
+            streamReader.Close();
+            responseDataStream.Close();            
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var returnedToken = JsonConvert.DeserializeObject<GoogleToken>(responseData);
+                if (returnedToken.refresh_token != null)
+                {
+                    accessToken = returnedToken.access_token;
+                    refreshToken = returnedToken.refresh_token;
+                }                
+            }
+
+            return refreshToken;
+            
         }
 
         public const string POP3USERNAME = "trahman@ael-bd.com";
