@@ -17,23 +17,13 @@ namespace RecruiterPortalDAL.Managers
 
     public class MailConfigurationManager : IMailConfigurationManager
     {
-        public readonly string ApplicationName = string.Empty;
-        public readonly string ClientId = string.Empty;
-        public readonly string ClientSecret = string.Empty;
-        public readonly string RedirectURI = string.Empty;
-        public readonly string Oaut2URI = "https://accounts.google.com/o/oauth2/auth?";
-        public readonly string TokenURI = "https://accounts.google.com/o/oauth2/token";
-        public readonly string GmailScopes = "https://www.googleapis.com/auth/userinfo.email " +
-            "https://www.googleapis.com/auth/gmail.compose " +
-            "https://www.googleapis.com/auth/gmail.send " +
-            "https://www.googleapis.com/auth/gmail.modify " +
-            "https://www.googleapis.com/auth/calendar " +
-            "https://www.googleapis.com/auth/calendar.readonly " +
-            "https://www.googleapis.com/auth/drive " +
-            "https://www.googleapis.com/auth/drive.file " +
-            "https://www.googleapis.com/auth/drive.appdata " +
-            "https://www.googleapis.com/auth/drive.apps.readonly " +
-            "https://www.google.com/m8/feeds/contacts/default/full/";
+        public readonly string ApplicationName;
+        public readonly string ClientId;
+        public readonly string ClientSecret;
+        public readonly string RedirectURI;
+        public readonly string Oaut2URI;
+        public readonly string TokenURI;
+        public readonly string Scopes;
 
         private readonly IConfiguration _configuration;
 
@@ -44,6 +34,9 @@ namespace RecruiterPortalDAL.Managers
             ClientId = _configuration["Google:ClientId"];
             ClientSecret = _configuration["Google:ClientSecret"];
             RedirectURI = _configuration["Google:RedirectUrl"];
+            Scopes = _configuration["Google:Scopes"];
+            Oaut2URI = _configuration["Google:OAuth2"];
+            TokenURI = _configuration["Google:TokenURI"];
         }
 
         public string GetAuthorizationUrl(MailConfigurationRequest mailConfig)
@@ -51,10 +44,10 @@ namespace RecruiterPortalDAL.Managers
             string splitOperator = "|";
             string state = mailConfig.ProfileName + splitOperator + mailConfig.EmailAddress;
             StringBuilder UrlBuilder = new StringBuilder(Oaut2URI);
-            UrlBuilder.Append("client_id=" + ClientId);
+            UrlBuilder.Append("?client_id=" + ClientId);
             UrlBuilder.Append("&redirect_uri=" + RedirectURI);
             UrlBuilder.Append("&response_type=" + "code");
-            UrlBuilder.Append("&scope=" + GmailScopes);
+            UrlBuilder.Append("&scope=" + Scopes);
             UrlBuilder.Append("&access_type=" + "offline");
             UrlBuilder.Append("&state=" + state);
             UrlBuilder.Append("&prompt=" + "select_account");
