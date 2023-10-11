@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RecruiterPortal.API.Services;
 using RecruiterPortal.DAL.Models;
 using RecruiterPortalDAL.Managers;
 using System.Text.Json;
@@ -9,9 +10,12 @@ namespace RecruiterPortal.API.Controllers
     [ApiController]
     public class MailConfigurationController : CustomControllerBase
     {
+        private readonly IMailConfigurationService _mailConfigurationService;
         private readonly IMailConfigurationManager _mailCongigurationManager;
-        public MailConfigurationController(ILogger<CustomControllerBase> logger, IMailConfigurationManager mailCongigurationManager) : base(logger)
+        public MailConfigurationController(ILogger<CustomControllerBase> logger, IMailConfigurationService mailConfigurationService,
+            IMailConfigurationManager mailCongigurationManager) : base(logger)
         {
+            _mailConfigurationService = mailConfigurationService;
             _mailCongigurationManager = mailCongigurationManager;
         }
 
@@ -19,16 +23,21 @@ namespace RecruiterPortal.API.Controllers
         [HttpPost]
         public IActionResult GetAuthorizationUrl(MailConfigurationRequest mailConfigurationRequest)
         {
-            return Ok(_mailCongigurationManager.GetAuthorizationUrl(mailConfigurationRequest));
+            return Ok(_mailConfigurationService.GetAuthorizationUrl(mailConfigurationRequest));
         }
 
         [Route("save-token")]
         [HttpPost]
-        public IActionResult SaveToken(MailConfigurationRequest mailConfigurationRequest)
+        public async Task<IActionResult> SaveToken(MailConfigurationRequest mailConfigurationRequest)
         {
-            var refreshToken = _mailCongigurationManager.FetchExchangeAuthorizationCode(mailConfigurationRequest.Code, out string token);
+            var token = await _mailConfigurationService.GetTokenByCode(mailConfigurationRequest.Code);
+            if (token == null) 
+            {
+                return BadRequest("Failed to get token");
+            }
 
-
+            mailConfigurationRequest.GoogleRefreshToken = token.refresh_token;
+            await _mailCongigurationManager.Create(mailConfigurationRequest, RecruiterId);
             return Ok();
         }
     }

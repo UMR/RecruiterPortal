@@ -19,7 +19,7 @@ export class MailConfigurationComponent implements OnInit {
     private pageNumber: number;
     private pageSize: number;
 
-    public showDialog: boolean = false;
+    public showAddEdit: boolean = false;
     public addEditTitle: string;
     public addEditButtonTitle: string;
     public formGroup: FormGroup;
@@ -39,7 +39,7 @@ export class MailConfigurationComponent implements OnInit {
 
     ngOnInit() {
         this.route.queryParams
-            .subscribe(params => {                
+            .subscribe(params => {
                 this.code = params.code;
                 let state = params.state.split("|");
                 this.profileName = state[0];
@@ -50,7 +50,13 @@ export class MailConfigurationComponent implements OnInit {
                     emailAddress: this.email,
                     code: this.code
                 };
-                this.mailConfigService.saveToken(model).subscribe(res => console.log(res));
+                this.mailConfigService.saveToken(model).subscribe(res => {
+                    if (res.status == 200 && res.body) {
+                        let token = res.body;
+                        console.log(token);
+                    }
+                });
+
             });
         this.createFormGroup();
     }
@@ -95,7 +101,7 @@ export class MailConfigurationComponent implements OnInit {
 
     setDefaultFields(isLoading: boolean, showDialog: boolean, selectedId: number, selectedMailConfig: any, addEditTitle: string, addEditButtonTitle: string) {
         this.isLoading = isLoading;
-        this.showDialog = showDialog;
+        this.showAddEdit = showDialog;
         this.selectedMailConfigId = selectedId;
         this.selectedMailConfig = selectedMailConfig;
         this.addEditTitle = addEditTitle;
@@ -142,7 +148,7 @@ export class MailConfigurationComponent implements OnInit {
     }
 
     onHide() {
-        this.showDialog = false;
+        this.showAddEdit = false;
     }
 
     onSave() {
