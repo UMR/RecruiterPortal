@@ -87,23 +87,23 @@ namespace RecruiterPortalDAL.Managers
             }
         }
 
-        public static async Task<List<MailConfigurationResponse>> GetMailTemplateTypesByRecruiterId(int recruiterId)
+        public static async Task<List<MailConfigurationResponse>> GetMailConfigByRecruiterId(int recruiterId)
         {
             try
             {
-                List<MailConfigurationResponse> mailTemplateTypes = new List<MailConfigurationResponse>();
+                List<MailConfigurationResponse> mailConfigs = new List<MailConfigurationResponse>();
                 GenericRepository<RecruiterMailConfig> repository = new GenericRepository<RecruiterMailConfig>();
-                var mailConfigurationFromDb = await repository.GetAllAsync(m => m.RecruiterId == recruiterId);
-                if (mailConfigurationFromDb != null)
+                var mailConfigsFromDb = await repository.GetAllAsync(m => m.RecruiterId == recruiterId);
+                if (mailConfigsFromDb != null)
                 {
-                    foreach (var mailTemplateTypeFromDb in mailConfigurationFromDb)
+                    foreach (var mailTemplateTypeFromDb in mailConfigsFromDb)
                     {
                         MailConfigurationResponse mailConfiguration = MapMailConfigurationResponse(mailTemplateTypeFromDb);
-                        mailTemplateTypes.Add(mailConfiguration);
+                        mailConfigs.Add(mailConfiguration);
                     }
                 }
 
-                return mailTemplateTypes;
+                return mailConfigs;
             }
             catch (Exception ex)
             {
