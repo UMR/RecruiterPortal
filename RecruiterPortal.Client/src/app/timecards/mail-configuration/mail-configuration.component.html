@@ -6,7 +6,7 @@
                 <div class="col-12">
                     <button pButton pRipple label="Add New" class="p-button-success" (click)="onNew()" tabindex="0"></button>
                 </div>
-            </div>            
+            </div>
             <div class="container-fluid mt-2">
                 <div class="login mb-3" style="padding:20px" *ngIf="showAddEdit">
                     <div class="login-form ">
@@ -36,7 +36,7 @@
                                             <button type="button" class="btn btn-primary btn-portal-border" (click)="onClear()">Clear</button>
                                         </li>
                                         <li class="list-inline-item">
-                                            <button type="submit" class="btn btn-primary btn-portal" (click)="onSave()" [disabled]="!formGroup.valid">Save</button>
+                                            <button type="submit" class="btn btn-primary btn-portal" (click)="onSave()" [disabled]="!formGroup.valid">{{addEditButtonTitle}}</button>
                                         </li>
                                     </ul>
                                 </div>
@@ -44,45 +44,40 @@
                         </form>
                     </div>
                 </div>
-                    <loading-image [is-loading]="isLoading"></loading-image>
-                    <p-table #table [responsive]="true"
-                             [value]="mailconfigs"
-                             selectionMode="single"
-                             [(selection)]="selectedMailConfig"
-                             dataKey="Id"
-                             [paginator]="true"
-                             [rows]="rows"
-                             [columns]="cols"
-                             [totalRecords]="totalMailConfigs"
-                             [lazy]="true"
-                             (onLazyLoad)="onLazyLoadMailConfigs($event)"
-                             [rowsPerPageOptions]="[10,15,20]"
-                             [showCurrentPageReport]="true"
-                             currentPageReportTemplate="Total Records {{totalMailConfigs}}">
-                        <ng-template pTemplate="header" let-columns>
-                            <tr>
-                                <th>Profile Name</th>
-                                <th>Email Address</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-mailConfig let-rowData let-columns="columns">
-                            <tr [pSelectableRow]="form">
-                                <td>{{mailConfig.Title}}</td>
-                                <td>{{mailConfig.Title}}</td>
-                                <td>{{mailConfig.IsActive == true ? 'Active' : 'Inactive'}}</td>
-                                <td><a (click)="onEdit(mailConfig)"><i class="pi pi-pencil"></i></a><a style="color:red" (click)="onDelete(mailConfig)"><i class="pi pi-trash"></i></a></td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
+                <loading-image [is-loading]="isLoading"></loading-image>
+                <p-table [responsive]="true"
+                         dataKey="Id"
+                         [value]="mailconfigs"
+                         selectionMode="single"
+                         [(selection)]="selectedMailConfig"                         
+                         [paginator]="true"
+                         [rows]="10"                                                                         
+                         [rowsPerPageOptions]="[10,15,20]"
+                         [showCurrentPageReport]="true">
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th>Profile Name</th>
+                            <th>Email Address</th>
+                            <th>Google Api Error</th>
+                            <th>Action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-mailConfig let-rowData let-columns="columns">
+                        <tr [pSelectableRow]="form">
+                            <td>{{mailConfig.ProfileName}}</td>
+                            <td>{{mailConfig.EmailAddress}}</td>
+                            <td>{{mailConfig.IsGoogleApiError == true ? 'Yes' : 'No'}}</td>
+                            <td><a (click)="onEdit(mailConfig)"><i class="pi pi-pencil"></i></a><a style="color:red" (click)="onDelete(mailConfig)"><i class="pi pi-trash"></i></a></td>
+                        </tr>
+                    </ng-template>
+                </p-table>
             </div>
         </div>
     </section>
 </div>
 
 <p-toast></p-toast>
-<p-confirmDialog [style]="{ width: '1000px' }" #cd>
+<p-confirmDialog [style]="{ width: '650px' }" #cd>
     <ng-template pTemplate="footer">
         <button type="button" pButton icon="pi pi-times" label="No" class="btn-no" (click)="cd.reject()"></button>
         <button type="button" pButton icon="pi pi-check" label="Yes" class="btn-yes" (click)="cd.accept()"></button>

@@ -17,8 +17,7 @@ export class MailTemplateTypeComponent implements OnInit {
     public addEditTitle: string;
     public addEditButtonText: string;
     public formGroup: FormGroup;
-    @Output() hideEvent = new EventEmitter<boolean>();
-    //@Input() showMailTemplateType: boolean;
+    @Output() hideEvent = new EventEmitter<boolean>();    
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private mailTemplateTypeService: MailTemplateService) {
         this.addEditTitle = "Add";

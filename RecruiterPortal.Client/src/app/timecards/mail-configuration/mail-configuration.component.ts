@@ -4,6 +4,7 @@ import { MessageService, ConfirmationService, LazyLoadEvent } from 'primeng/api'
 import { ActivatedRoute } from '@angular/router';
 import { MailConfigurationService } from './mail-configuration.service';
 import { DOCUMENT } from '@angular/common';
+import { error } from '@angular/compiler/src/util';
 
 @Component({
     selector: 'app-mail-configuration',
@@ -16,8 +17,6 @@ export class MailConfigurationComponent implements OnInit {
     public totalMailConfigs: number;
     public cols: any[];
     public rows: number = 10;
-    private pageNumber: number;
-    private pageSize: number;
 
     public showAddEdit: boolean = false;
     public addEditTitle: string;
@@ -40,25 +39,26 @@ export class MailConfigurationComponent implements OnInit {
     ngOnInit() {
         this.route.queryParams
             .subscribe(params => {
-                this.code = params.code;
-                let state = params.state.split("|");
-                this.profileName = state[0];
-                this.email = state[1];
-                const model: any = {
-                    id: this.selectedMailConfigId,
-                    profileName: this.profileName,
-                    emailAddress: this.email,
-                    code: this.code
-                };
-                this.mailConfigService.saveToken(model).subscribe(res => {
-                    if (res.status == 200 && res.body) {
-                        let token = res.body;
-                        console.log(token);
-                    }
-                });
-
+                if (params.code) {
+                    this.code = params.code;
+                    let state = params.state.split("|");
+                    this.profileName = state[0];
+                    this.email = state[1];
+                    const model: any = {
+                        id: this.selectedMailConfigId,
+                        profileName: this.profileName,
+                        emailAddress: this.email,
+                        code: this.code
+                    };
+                    this.mailConfigService.saveToken(model).subscribe(res => {
+                        if (res.status == 200 && res.body) {
+                            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail configuration done successfully', life: 3000 });
+                        }
+                    });
+                }
             });
         this.createFormGroup();
+        this.getMailConfigsByAgencyId();
     }
 
     noWhitespaceValidator(control: AbstractControl) {
@@ -75,29 +75,22 @@ export class MailConfigurationComponent implements OnInit {
         });
     }
 
-    onLazyLoadMailConfigs(event: LazyLoadEvent) {
-        this.pageNumber = Math.ceil((event.first + 1) / event.rows);
-        this.pageSize = event.rows;
-        //this.getMailConfigsByAgencyId();
+    getMailConfigsByAgencyId() {
+        this.isLoading = true;
+        this.mailConfigService.getMailConfigsByRecruiterId()
+            .subscribe(response => {
+                if (response.status === 200) {
+                    this.mailconfigs = response.body;
+                }
+            },
+                err => {
+                    this.isLoading = false;
+                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get mail file', detail: '' });
+                },
+                () => {
+                    this.isLoading = false;
+                });
     }
-
-    //getMailConfigsByAgencyId() {
-    //    this.isLoading = true;
-    //    this.mailConfigService.getOfficialFilesByAgencyId(this.pageNumber, this.pageSize)
-    //        .subscribe(response => {
-    //            if (response.status === 200) {
-    //                this.mailconfigs = response.body.Records;
-    //                this.totalMailConfigs = response.body.TotalRecords;
-    //            }
-    //        },
-    //            err => {
-    //                this.isLoading = false;
-    //                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get official file', detail: '' });
-    //            },
-    //            () => {
-    //                this.isLoading = false;
-    //            });
-    //}
 
     setDefaultFields(isLoading: boolean, showDialog: boolean, selectedId: number, selectedMailConfig: any, addEditTitle: string, addEditButtonTitle: string) {
         this.isLoading = isLoading;
@@ -138,9 +131,9 @@ export class MailConfigurationComponent implements OnInit {
         this.setDefaultFields(false, true, 0, null, "Add", "Save");
     }
 
-    onEdit(form) {
-        this.setDefaultFields(false, true, form.Id, form, "Edit", "Update");
-        this.fillupMailConfig(form);
+    onEdit(mailconfig) {
+        this.setDefaultFields(false, true, mailconfig.Id, mailconfig, "Edit", "Update");
+        this.fillupMailConfig(mailconfig);
     }
 
     onClear() {
@@ -158,57 +151,34 @@ export class MailConfigurationComponent implements OnInit {
             emailAddress: this.formGroup.controls.emailAddress.value
         };
         this.isLoading = true;
-
-        this.mailConfigService.getAuthorizationUrl(model).subscribe(res => this.document.location.href = res.body);
-        //if (this.selectedMailConfigId == 0) {
-        //    this.formService.saveOfficialFile(model)
-        //        .subscribe(result => {
-        //            if (result.status === 200) {
-        //                this.setDefaultFields(false, false, 0, null, "Add", "Save");
-        //                this.getMailConfigsByAgencyId();
-        //                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official file saved successfully', life: 3000 });
-        //            }
-        //        },
-        //            err => {
-        //                this.isLoading = false;
-        //                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to save official file', detail: '' });
-        //            });
-        //} else {
-        //    this.formService.updateOfficialFile(model)
-        //        .subscribe(result => {
-        //            if (result.status === 200) {
-        //                this.setDefaultFields(false, false, 0, null, "Add", "Save");
-        //                this.getMailConfigsByAgencyId();
-        //                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official file updated successfully', life: 3000 });
-        //            }
-        //        },
-        //            err => {
-        //                this.isLoading = false;
-        //                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to update official file', detail: '' });
-        //            });
-        //}
+        this.mailConfigService.getAuthorizationUrl(model).subscribe(res => {
+            this.document.location.href = res.body
+        }, error => {
+            this.isLoading = false;
+            this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to redirect google site', detail: '' });
+        });
     }
 
-    onDelete(form) {
-        this.isLoading = true;
-        //this.confirmationService.confirm({
-        //    message: `Are you sure you want to delete ${form.FileName} official file?`,
-        //    header: 'Confirm',
-        //    icon: 'pi pi-exclamation-triangle',
-        //    accept: () => {
-        //        this.formService.deleteOfficialFile(form.Id).subscribe(res => {
-        //            if (res.status === 200) {
-        //                this.setDefaultFields(false, false, 0, null, "Add", "Save");
-        //                this.getMailConfigsByAgencyId();
-        //                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Official file deleted successfully', life: 3000 });
-        //            }
-        //        },
-        //            err => {
-        //                this.isLoading = false;
-        //                this.messageService.add({ key: 'toastKey1', severity: 'error', detail: 'Failed to delete official file', life: 3000 });
-        //            }
-        //        );
-        //    }
-        //});
+    onDelete(mailConfig) {        
+        this.confirmationService.confirm({
+            message: `Are you sure you want to delete ${mailConfig.EmailAddress} email address?`,
+            header: 'Confirm',
+            icon: 'pi pi-exclamation-triangle',
+            accept: () => {
+                this.isLoading = true;
+                this.mailConfigService.deleteMailConfig(mailConfig.Id).subscribe(res => {
+                    if (res.status === 200) {
+                        this.setDefaultFields(false, false, 0, null, "Add", "Save");
+                        this.getMailConfigsByAgencyId();
+                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail Configuration deleted successfully', life: 3000 });
+                    }
+                },
+                    err => {
+                        this.isLoading = false;
+                        this.messageService.add({ key: 'toastKey1', severity: 'error', detail: 'Failed to delete mail configuration', life: 3000 });
+                    }
+                );
+            }
+        });
     }
 }

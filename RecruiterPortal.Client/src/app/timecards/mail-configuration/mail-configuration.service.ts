@@ -22,17 +22,13 @@ export class MailConfigurationService {
             headers: new HttpHeaders()
                 .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
         });
-    }   
-
-    save(job: any): Observable<HttpResponse<any>> {
-        return this.client.post(`${resourceServerUrl}/api/mailtemplate/save-mail-template-type`, job, {
-            headers: new HttpHeaders()
-                .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
-        });
-    }
-
-    delete(id: number): Observable<HttpResponse<any>> {
-        return this.client.delete(`${resourceServerUrl}/api/mailtemplate/delete-mail-template-type/${id}`, { observe: 'response' });
-    }
+    } 
     
+    getMailConfigsByRecruiterId(): Observable<any> {
+        return this.client.get(`${resourceServerUrl}/api/mailconfiguration/get-mail-config-by-recruiterid`, { observe: "response" });            
+    }      
+
+    deleteMailConfig(id: number): Observable<HttpResponse<any>> {
+        return this.client.delete(`${resourceServerUrl}/api/mailconfiguration/delete-mail-config/${id}`, { observe: 'response' });
+    }    
 }
