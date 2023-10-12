@@ -9,6 +9,8 @@ namespace RecruiterPortalDAL.Managers
         Task<int> Create(MailConfigurationRequest request, int recruiterId);        
         Task<bool?> Update(MailConfigurationRequest request, int recruiterId);
         Task<bool?> Delete(int id);
+        Task<MailConfigurationResponse> GetMailConfigById(int id);
+        Task<List<MailConfigurationResponse>> GetMailConfigByRecruiterId(int recruiterId);
     }
 
     public class MailConfigurationManager : IMailConfigurationManager
@@ -67,7 +69,7 @@ namespace RecruiterPortalDAL.Managers
             }
         }
 
-        public static async Task<MailConfigurationResponse> GetMailConfigById(int id)
+        public async Task<MailConfigurationResponse> GetMailConfigById(int id)
         {
             try
             {
@@ -87,7 +89,7 @@ namespace RecruiterPortalDAL.Managers
             }
         }
 
-        public static async Task<List<MailConfigurationResponse>> GetMailConfigByRecruiterId(int recruiterId)
+        public async Task<List<MailConfigurationResponse>> GetMailConfigByRecruiterId(int recruiterId)
         {
             try
             {
@@ -111,7 +113,7 @@ namespace RecruiterPortalDAL.Managers
             }
         }
 
-        private static MailConfigurationResponse MapMailConfigurationResponse(RecruiterMailConfig request)
+        private MailConfigurationResponse MapMailConfigurationResponse(RecruiterMailConfig request)
         {
             MailConfigurationResponse response = new MailConfigurationResponse();
             response.Id = request.Id;

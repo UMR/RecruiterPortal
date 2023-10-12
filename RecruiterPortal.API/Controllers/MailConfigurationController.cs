@@ -19,6 +19,20 @@ namespace RecruiterPortal.API.Controllers
             _mailCongigurationManager = mailCongigurationManager;
         }
 
+        [Route("get-mail-config-by-recruiterid")]
+        [HttpPost]
+        public IActionResult GetMailConfigByRecruiterId()
+        {
+            return Ok(_mailCongigurationManager.GetMailConfigByRecruiterId(RecruiterId));
+        }
+
+        [Route("get-mail-config-by-id/{id}")]
+        [HttpPost]
+        public IActionResult GetMailConfigById(int id)
+        {
+            return Ok(_mailCongigurationManager.GetMailConfigById(id));
+        }
+
         [Route("get-authorization-url")]
         [HttpPost]
         public IActionResult GetAuthorizationUrl(MailConfigurationRequest mailConfigurationRequest)
