@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RecruiterPortal.API.Services;
+using RecruiterPortal.DAL.Managers;
 using RecruiterPortal.DAL.Models;
 using RecruiterPortalDAL.Managers;
 using System.Text.Json;
@@ -20,17 +21,17 @@ namespace RecruiterPortal.API.Controllers
         }
 
         [Route("get-mail-config-by-recruiterid")]
-        [HttpPost]
-        public IActionResult GetMailConfigByRecruiterId()
+        [HttpGet]
+        public async Task<IActionResult> GetMailConfigByRecruiterId()
         {
-            return Ok(_mailCongigurationManager.GetMailConfigByRecruiterId(RecruiterId));
+            return Ok(await _mailCongigurationManager.GetMailConfigByRecruiterId(RecruiterId));
         }
 
         [Route("get-mail-config-by-id/{id}")]
-        [HttpPost]
-        public IActionResult GetMailConfigById(int id)
+        [HttpGet]
+        public async Task<IActionResult> GetMailConfigById(int id)
         {
-            return Ok(_mailCongigurationManager.GetMailConfigById(id));
+            return Ok(await _mailCongigurationManager.GetMailConfigById(id));
         }
 
         [Route("get-authorization-url")]
@@ -53,6 +54,26 @@ namespace RecruiterPortal.API.Controllers
             mailConfigurationRequest.GoogleRefreshToken = token.refresh_token;
             await _mailCongigurationManager.Create(mailConfigurationRequest, RecruiterId);
             return Ok();
+        }
+
+        [Route("delete-mail-config/{id}")]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteMailConfig(int id)
+        {
+            try
+            {
+                bool? result = await _mailCongigurationManager.Delete(id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return StatusCode(200);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }
