@@ -38,12 +38,13 @@ export class MailConfigurationComponent implements OnInit {
 
     ngOnInit() {
         this.route.queryParams
-            .subscribe(params => {
+            .subscribe(params => {                
                 if (params.code) {
                     this.code = params.code;
-                    let state = params.state.split("|");
+                    let state = params.state.split("|");                    
                     this.profileName = state[0];
                     this.email = state[1];
+                    this.selectedMailConfigId = state[2];
                     const model: any = {
                         id: this.selectedMailConfigId,
                         profileName: this.profileName,
@@ -51,8 +52,12 @@ export class MailConfigurationComponent implements OnInit {
                         code: this.code
                     };
                     this.mailConfigService.saveToken(model).subscribe(res => {
-                        if (res.status == 200 && res.body) {
-                            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail configuration done successfully', life: 3000 });
+                        if (res.status == 200) {
+                            if (this.selectedMailConfigId && this.selectedMailConfigId > 0) {
+                                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail configuration updated successfully', life: 3000 });
+                            } else {
+                                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail configuration saved successfully', life: 3000 });
+                            }
                         }
                     });
                 }
@@ -101,25 +106,7 @@ export class MailConfigurationComponent implements OnInit {
         this.addEditButtonTitle = addEditButtonTitle;
         this.formGroup.reset();
     }
-
-    //getMailConfigById(id) {
-    //    this.isLoading = true;
-    //    this.formService.getOfficialFileById(id)
-    //        .subscribe(response => {
-    //            if (response.status === 200) {
-    //                this.selectedMailConfig = response.body;
-    //                this.fillupMailConfig(this.selectedMailConfig);
-    //            }
-    //        },
-    //            err => {
-    //                this.isLoading = false;
-    //                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get official file', detail: '' });
-    //            },
-    //            () => {
-    //                this.isLoading = false;
-    //            });
-    //}
-
+    
     fillupMailConfig(mailConfig: any) {
         this.formGroup.patchValue({
             profileName: mailConfig.ProfileName,

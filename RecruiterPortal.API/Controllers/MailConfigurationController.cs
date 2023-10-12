@@ -46,14 +46,18 @@ namespace RecruiterPortal.API.Controllers
         public async Task<IActionResult> SaveToken(MailConfigurationRequest mailConfigurationRequest)
         {
             var token = await _mailConfigurationService.GetTokenByCode(mailConfigurationRequest.Code);
-            if (token == null) 
+            if (token == null)
             {
                 return BadRequest("Failed to get token");
             }
 
             mailConfigurationRequest.GoogleRefreshToken = token.refresh_token;
-            await _mailCongigurationManager.Create(mailConfigurationRequest, RecruiterId);
-            return Ok();
+            if (mailConfigurationRequest.Id > 0)
+            {
+                return Ok(await _mailCongigurationManager.Update(mailConfigurationRequest, RecruiterId));
+            }
+
+            return Ok(await _mailCongigurationManager.Create(mailConfigurationRequest, RecruiterId));
         }
 
         [Route("delete-mail-config/{id}")]

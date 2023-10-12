@@ -37,7 +37,7 @@ namespace RecruiterPortalDAL.Managers
         public string GetAuthorizationUrl(MailConfigurationRequest mailConfig)
         {
             string splitOperator = "|";
-            string state = mailConfig.ProfileName + splitOperator + mailConfig.EmailAddress;
+            string state = mailConfig.ProfileName + splitOperator + mailConfig.EmailAddress + splitOperator + mailConfig.Id;
             StringBuilder UrlBuilder = new StringBuilder(Oaut2URI);
             UrlBuilder.Append("?client_id=" + ClientId);
             UrlBuilder.Append("&redirect_uri=" + RedirectURI);
@@ -50,26 +50,26 @@ namespace RecruiterPortalDAL.Managers
             return UrlBuilder.ToString();
         }
 
-        public async Task<GoogleToken> GetTokenByCode(string code) 
+        public async Task<GoogleToken> GetTokenByCode(string code)
         {
             GoogleToken googleToken = null;
             using (var httpClient = _httpClientFactory.CreateClient())
-            {                
+            {
                 httpClient.BaseAddress = new Uri(TokenURI);
                 var contentBody = $"code={code}&client_id={ClientId}&client_secret={ClientSecret}&redirect_uri={RedirectURI}&grant_type=authorization_code";
                 var content = new StringContent(contentBody, Encoding.UTF8, "application/x-www-form-urlencoded");
-                
+
                 var response = await httpClient.PostAsync(string.Empty, content);
 
                 if (response.IsSuccessStatusCode)
-                {                    
+                {
                     var responseBody = await response.Content.ReadAsStringAsync();
                     var returnedToken = JsonConvert.DeserializeObject<GoogleToken>(responseBody);
-                    if (returnedToken.access_token !=null && returnedToken.refresh_token != null)
+                    if (returnedToken.access_token != null && returnedToken.refresh_token != null)
                     {
-                        googleToken= returnedToken;
-                    }                    
-                }                
+                        googleToken = returnedToken;
+                    }
+                }
             }
 
             return googleToken;
@@ -97,7 +97,7 @@ namespace RecruiterPortalDAL.Managers
             StreamReader streamReader = new StreamReader(responseDataStream);
             string responseData = streamReader.ReadToEnd();
             streamReader.Close();
-            responseDataStream.Close();            
+            responseDataStream.Close();
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
@@ -106,11 +106,11 @@ namespace RecruiterPortalDAL.Managers
                 {
                     accessToken = returnedToken.access_token;
                     refreshToken = returnedToken.refresh_token;
-                }                
+                }
             }
 
             return refreshToken;
-            
-        }       
+
+        }
     }
 }
