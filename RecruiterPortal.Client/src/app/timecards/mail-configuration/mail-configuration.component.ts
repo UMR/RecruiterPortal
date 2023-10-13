@@ -38,7 +38,10 @@ export class MailConfigurationComponent implements OnInit {
 
     ngOnInit() {
         this.route.queryParams
-            .subscribe(params => {                
+            .subscribe(params => {   
+                if (params.error) {
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Google authentication problem', life: 3000 });
+                }
                 if (params.code) {
                     this.code = params.code;
                     let state = params.state.split("|");                    
