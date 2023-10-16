@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RecruiterService } from './recruiter.service';
 import { LazyLoadEvent, MessageService, ConfirmationService } from 'primeng/api';
 import { AgencyModel } from '../agency/agency.model';
 import { RecruiterModel } from './recruiter.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RecruiterSearchModel } from './recruiter-search.model';
+import { Table } from 'primeng/components/table/table';
 
 @Component({
     selector: 'app-recruiter',
@@ -37,6 +38,7 @@ export class RecruiterComponent implements OnInit {
     public searchFg: FormGroup;
     private emailRegEx = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
     public isEditMode: boolean = false;
+    @ViewChild('recruiterTable', { static: false }) recruiterTable: Table;
 
 
     constructor(private recruiterService: RecruiterService, private messageService: MessageService, private fb: FormBuilder,
@@ -68,7 +70,7 @@ export class RecruiterComponent implements OnInit {
             sEmail: [""],
             status:[""]
         });
-        this.getRecruiterByFilter();
+        this.getRecruiters();
     }
 
     MustMatch(controlName: string, matchingControlName: string) {
@@ -93,13 +95,15 @@ export class RecruiterComponent implements OnInit {
         this.pageNumber = Math.ceil((event.first + 1) / event.rows);
         this.take = event.rows;
         this.skip = event.rows * (this.pageNumber - 1);
-        this.getRecruiters();
+        //this.getRecruiters();
+        this.getRecruiterByFilter();
     }
 
     getRecruiters() {
         this.isLoading = true;
         this.recruiterService.getRecruiter()
             .subscribe(response => {
+                console.log(response);
                 if (response.status === 200) {
                     this.recruiters = (response.body as any).recruiters;
                     this.totalRecruiter = (response.body as any).count;
@@ -116,10 +120,10 @@ export class RecruiterComponent implements OnInit {
 
     getRecruiterByFilter() {
         const recruiterSearchModel = new RecruiterSearchModel();
-        recruiterSearchModel.FirstName = "dm";
-        recruiterSearchModel.LastName = "";
-        recruiterSearchModel.Email = "";
-        recruiterSearchModel.Status = "";
+        recruiterSearchModel.FirstName = this.searchFg.get('sFirstName').value;
+        recruiterSearchModel.LastName = this.searchFg.get('sLastName').value;
+        recruiterSearchModel.Email = this.searchFg.get('sEmail').value;
+        recruiterSearchModel.Status = this.searchFg.get('status').value;
 
         this.recruiterService.getRecruiterByFilter(recruiterSearchModel)
             .subscribe(response => {
@@ -135,6 +139,10 @@ export class RecruiterComponent implements OnInit {
                 () => {
                     this.isLoading = false;
                 });
+    }
+    onStatusChange(evt) {
+        this.recruiterTable.reset();
+        this.getRecruiterByFilter();
     }
 
     onEdit(recruiter: any) {
@@ -168,10 +176,13 @@ export class RecruiterComponent implements OnInit {
     }
 
     onSearchClick() {
-
+        this.getRecruiterByFilter();
     }
     onClear() {
-
+        this.searchFg.reset();
+        this.searchFg.controls.status.setValue("");
+        this.recruiterTable.reset();
+        this.getRecruiterByFilter();
     }
 
     onDelete(recruiter: any) {

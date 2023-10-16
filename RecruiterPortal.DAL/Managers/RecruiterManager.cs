@@ -263,12 +263,12 @@ namespace RecruiterPortal.DAL.Managers
             }
         }
 
-        public static PagedResponse<RecruiterModel> GetRecruiterByFilter(long agencyId, RecruiterSearchModel recruiterSearchModel)
+        public static DataTable GetRecruiterByFilter(long agencyId, RecruiterSearchModel recruiterSearchModel)
         {
             try
             {
-                IEnumerable<RecruiterModel> recruiterModels = null;
-                int totalCount = 0;
+                //IEnumerable<RecruiterModel> recruiterModels = null;
+                //int totalCount = 0;
 
                 string sqlWithWhereClouse = "SELECT * From Recruiter where Recruiter.AgencyId = " + agencyId;
 
@@ -279,112 +279,116 @@ namespace RecruiterPortal.DAL.Managers
 
                 if (!string.IsNullOrEmpty(recruiterSearchModel.LastName))
                 {
-                    sqlWithWhereClouse = sqlWithWhereClouse + " AND Recruiter.LastName like '%" + recruiterSearchModel.FirstName + "%'";
+                    sqlWithWhereClouse = sqlWithWhereClouse + " AND Recruiter.LastName like '%" + recruiterSearchModel.LastName + "%'";
                 }
 
                 if (!string.IsNullOrEmpty(recruiterSearchModel.Eamil))
                 {
                     sqlWithWhereClouse = sqlWithWhereClouse + "AND Recruiter.Email like '%" + recruiterSearchModel.Eamil + "%'";
                 }
+                if (!string.IsNullOrEmpty(recruiterSearchModel.Status))
+                {
+                    sqlWithWhereClouse = sqlWithWhereClouse + "AND Recruiter.IsActive =" + recruiterSearchModel.Status;
+                }
                 //var result =  context.Database.ExecuteSqlRaw(sqlWithWhereClouse);
                 GenericRepository<Recruiter> genericRepository = new GenericRepository<Recruiter>();
-                
 
-                DataTable dt = genericRepository.LoadDataTableFromQuery(sqlWithWhereClouse, null);
 
-                GenericRepository<Recruiter> repository = new GenericRepository<Recruiter>();
-                using (UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext())
-                {
-                   
+                DataTable recruiterDt = genericRepository.LoadDataTableFromQuery(sqlWithWhereClouse, null);
 
-                    if (recruiterSearchModel.Status == "")
-                    {
-                        totalCount = (from recruiter in context.Recruiters
-                                      where recruiter.AgencyId == agencyId
-                                      && recruiter.FirstName.Contains(recruiterSearchModel.FirstName)
-                                      && recruiter.LastName.Contains(recruiterSearchModel.FirstName)
-                                      && recruiter.Email.Contains(recruiterSearchModel.Eamil)
-                                      select recruiter).Count();
-                    }
-                    if (recruiterSearchModel.Status == "1")
-                    {
-                        totalCount = (from recruiter in context.Recruiters
-                                      where recruiter.AgencyId == agencyId
-                                      && recruiter.FirstName.Contains(recruiterSearchModel.FirstName)
-                                      && recruiter.LastName.Contains(recruiterSearchModel.FirstName)
-                                      && recruiter.Email.Contains(recruiterSearchModel.Eamil)
-                                      && recruiter.IsActive == true
-                                      select recruiter).Count();
-                    }
-                    if (recruiterSearchModel.Status == "0")
-                    {
-                        totalCount = (from recruiter in context.Recruiters
-                                      where recruiter.AgencyId == agencyId
-                                      && recruiter.FirstName.Contains(recruiterSearchModel.FirstName)
-                                      && recruiter.LastName.Contains(recruiterSearchModel.FirstName)
-                                      && recruiter.Email.Contains(recruiterSearchModel.Eamil)
-                                      && recruiter.IsActive == false
-                                      select recruiter).Count();
-                    }
-                    if (recruiterSearchModel.Status == "")
-                    {
+                //GenericRepository<Recruiter> repository = new GenericRepository<Recruiter>();
+                //using (UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext())
+                //{
 
-                        recruiterModels = (from recruiter in context.Recruiters
-                                           where recruiter.AgencyId == agencyId
-                                           && recruiter.FirstName.Contains(recruiterSearchModel.FirstName)
-                                           && recruiter.LastName.Contains(recruiterSearchModel.FirstName)
-                                           && recruiter.Email.Contains(recruiterSearchModel.Eamil)
-                                           select (new RecruiterModel
-                                           {
-                                               RecruiterId = recruiter.RecruiterId,
-                                               LoginId = recruiter.LoginId,
-                                               FirstName = recruiter.FirstName,
-                                               LastName = recruiter.LastName,
-                                               Email = recruiter.Email,
-                                               Telephone = recruiter.Telephone,
-                                               IsActive = recruiter.IsActive
-                                           })).ToList();
-                    }
-                    if (recruiterSearchModel.Status == "1")
-                    {
-                        recruiterModels = (from recruiter in context.Recruiters
-                                           where recruiter.AgencyId == agencyId
-                                           && recruiter.FirstName.Contains(recruiterSearchModel.FirstName)
-                                           && recruiter.LastName.Contains(recruiterSearchModel.FirstName)
-                                           && recruiter.Email.Contains(recruiterSearchModel.Eamil)
-                                           && recruiter.IsActive == true
-                                           select (new RecruiterModel
-                                           {
-                                               RecruiterId = recruiter.RecruiterId,
-                                               LoginId = recruiter.LoginId,
-                                               FirstName = recruiter.FirstName,
-                                               LastName = recruiter.LastName,
-                                               Email = recruiter.Email,
-                                               Telephone = recruiter.Telephone,
-                                               IsActive = recruiter.IsActive
-                                           })).ToList();
-                    }
-                    if (recruiterSearchModel.Status == "0")
-                    {
-                        recruiterModels = (from recruiter in context.Recruiters
-                                           where recruiter.AgencyId == agencyId
-                                           && recruiter.FirstName == recruiterSearchModel.FirstName
-                                           && recruiter.LastName == recruiterSearchModel.FirstName
-                                           && recruiter.Email == recruiterSearchModel.Eamil
-                                           && recruiter.IsActive == false
-                                           select (new RecruiterModel
-                                           {
-                                               RecruiterId = recruiter.RecruiterId,
-                                               LoginId = recruiter.LoginId,
-                                               FirstName = recruiter.FirstName,
-                                               LastName = recruiter.LastName,
-                                               Email = recruiter.Email,
-                                               Telephone = recruiter.Telephone,
-                                               IsActive = recruiter.IsActive
-                                           })).ToList();
-                    }
-                }
-                return new PagedResponse<RecruiterModel> { Records = recruiterModels, TotalRecords = totalCount };
+
+                //    if (recruiterSearchModel.Status == "")
+                //    {
+                //        totalCount = (from recruiter in context.Recruiters
+                //                      where recruiter.AgencyId == agencyId
+                //                      && recruiter.FirstName.Contains(recruiterSearchModel.FirstName)
+                //                      && recruiter.LastName.Contains(recruiterSearchModel.FirstName)
+                //                      && recruiter.Email.Contains(recruiterSearchModel.Eamil)
+                //                      select recruiter).Count();
+                //    }
+                //    if (recruiterSearchModel.Status == "1")
+                //    {
+                //        totalCount = (from recruiter in context.Recruiters
+                //                      where recruiter.AgencyId == agencyId
+                //                      && recruiter.FirstName.Contains(recruiterSearchModel.FirstName)
+                //                      && recruiter.LastName.Contains(recruiterSearchModel.FirstName)
+                //                      && recruiter.Email.Contains(recruiterSearchModel.Eamil)
+                //                      && recruiter.IsActive == true
+                //                      select recruiter).Count();
+                //    }
+                //    if (recruiterSearchModel.Status == "0")
+                //    {
+                //        totalCount = (from recruiter in context.Recruiters
+                //                      where recruiter.AgencyId == agencyId
+                //                      && recruiter.FirstName.Contains(recruiterSearchModel.FirstName)
+                //                      && recruiter.LastName.Contains(recruiterSearchModel.FirstName)
+                //                      && recruiter.Email.Contains(recruiterSearchModel.Eamil)
+                //                      && recruiter.IsActive == false
+                //                      select recruiter).Count();
+                //    }
+                //    if (recruiterSearchModel.Status == "")
+                //    {
+
+                //        recruiterModels = (from recruiter in context.Recruiters
+                //                           where recruiter.AgencyId == agencyId
+                //                           && recruiter.FirstName.Contains(recruiterSearchModel.FirstName)
+                //                           && recruiter.LastName.Contains(recruiterSearchModel.FirstName)
+                //                           && recruiter.Email.Contains(recruiterSearchModel.Eamil)
+                //                           select (new RecruiterModel
+                //                           {
+                //                               RecruiterId = recruiter.RecruiterId,
+                //                               LoginId = recruiter.LoginId,
+                //                               FirstName = recruiter.FirstName,
+                //                               LastName = recruiter.LastName,
+                //                               Email = recruiter.Email,
+                //                               Telephone = recruiter.Telephone,
+                //                               IsActive = recruiter.IsActive
+                //                           })).ToList();
+                //    }
+                //    if (recruiterSearchModel.Status == "1")
+                //    {
+                //        recruiterModels = (from recruiter in context.Recruiters
+                //                           where recruiter.AgencyId == agencyId
+                //                           && recruiter.FirstName.Contains(recruiterSearchModel.FirstName)
+                //                           && recruiter.LastName.Contains(recruiterSearchModel.FirstName)
+                //                           && recruiter.Email.Contains(recruiterSearchModel.Eamil)
+                //                           && recruiter.IsActive == true
+                //                           select (new RecruiterModel
+                //                           {
+                //                               RecruiterId = recruiter.RecruiterId,
+                //                               LoginId = recruiter.LoginId,
+                //                               FirstName = recruiter.FirstName,
+                //                               LastName = recruiter.LastName,
+                //                               Email = recruiter.Email,
+                //                               Telephone = recruiter.Telephone,
+                //                               IsActive = recruiter.IsActive
+                //                           })).ToList();
+                //    }
+                //    if (recruiterSearchModel.Status == "0")
+                //    {
+                //        recruiterModels = (from recruiter in context.Recruiters
+                //                           where recruiter.AgencyId == agencyId
+                //                           && recruiter.FirstName == recruiterSearchModel.FirstName
+                //                           && recruiter.LastName == recruiterSearchModel.FirstName
+                //                           && recruiter.Email == recruiterSearchModel.Eamil
+                //                           && recruiter.IsActive == false
+                //                           select (new RecruiterModel
+                //                           {
+                //                               RecruiterId = recruiter.RecruiterId,
+                //                               LoginId = recruiter.LoginId,
+                //                               FirstName = recruiter.FirstName,
+                //                               LastName = recruiter.LastName,
+                //                               Email = recruiter.Email,
+                //                               Telephone = recruiter.Telephone,
+                //                               IsActive = recruiter.IsActive
+                //                           })).ToList();
+                //    }
+                //}
+                return recruiterDt;
             }
             catch (Exception ex)
             {

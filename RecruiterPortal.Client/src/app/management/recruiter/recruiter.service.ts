@@ -23,7 +23,7 @@ export class RecruiterService {
     getRecruiterByFilter(searchParam: RecruiterSearchModel) {
         return this.httpClient.post(this.getRecruiterFilterURI, searchParam, {
             headers: new HttpHeaders()
-                .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
+                .set('Content-Type', 'application/json'), observe: 'response'
         });
     }
 
