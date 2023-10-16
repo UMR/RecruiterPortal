@@ -3,5 +3,9 @@
     padding-left: 30px !important;
     padding-right: 10px !important;
     border: 0px !important;
-    line-height: 15px!important;
+    line-height: 15px !important;
+}
+
+:host >>> .ui-confirmdialog-message {
+    line-height: 2;
 }
