@@ -150,6 +150,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
         [Route("delete/{id}")]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)

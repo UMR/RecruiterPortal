@@ -207,6 +207,25 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
+        public static async Task<bool?> UpdateRecruiterStatus(int recruiterId, bool status)
+        {
+            try
+            {
+                GenericRepository<Recruiter> repository = new GenericRepository<Recruiter>();
+                Recruiter recruiter = await repository.GetByIdAsync(r => r.RecruiterId == recruiterId);
+                if (recruiter != null)
+                {
+                    recruiter.IsActive = status;
+                    return await repository.UpdateAsync(recruiter) > 0 ? true : false;
+
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public static PagedResponse<EntryExitModel> GetRecruiterEntryExit(long agencyId, RecruiterHistorySearch recruiterHistorySearch)
         {
             try

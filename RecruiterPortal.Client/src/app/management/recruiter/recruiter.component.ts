@@ -68,7 +68,7 @@ export class RecruiterComponent implements OnInit {
             sFirstName: [""],
             sLastName: [""],
             sEmail: [""],
-            status:[""]
+            status: [""]
         });
         this.getRecruiters();
     }
@@ -191,14 +191,12 @@ export class RecruiterComponent implements OnInit {
             header: 'Confirm',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                //this.agencyService.deleteAgency(agency.agencyId).subscribe(res => {
-                //    console.log(res);
-                //    if (res && res.body) {
-                //        this.agencies = this.agencies.filter((val) => val.agencyId !== agency.agencyId);
-                //        this.agency = {};
-                //        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Agency Deleted', life: 3000 });
-                //    }
-                //}, err => { })
+                this.recruiterService.updateRecruiterStatus(recruiter.RecruiterId, false).subscribe(res => {
+                    console.log(res);
+                    if (res && res.status == 200) {
+                        this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Successful', detail: 'Recruiter status updated successfully', life: 3000 });
+                    }
+                }, err => { })
 
             }
         });

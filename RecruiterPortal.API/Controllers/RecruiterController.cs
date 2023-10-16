@@ -62,7 +62,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
         [Route("get-recruiter-by-filter")]
         [HttpPost]
-        public  IActionResult GetRecruiterByFilter(RecruiterSearchModel recruiterSearchModel)
+        public IActionResult GetRecruiterByFilter(RecruiterSearchModel recruiterSearchModel)
         {
 
             try
@@ -320,6 +320,26 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 recruiter.UpdatedDate = DateTime.Now;
                 RecruiterManager.UpdateRecruiter(recruiter);
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [Route("update-status")]
+        [HttpPut]
+        public async Task<IActionResult> UpdateRecruiterStatus(int recruiterId, bool status)
+        {
+
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    BadRequest(ModelState);
+                }
+                return Ok(await RecruiterManager.UpdateRecruiterStatus(recruiterId, status));
             }
             catch (Exception ex)
             {
