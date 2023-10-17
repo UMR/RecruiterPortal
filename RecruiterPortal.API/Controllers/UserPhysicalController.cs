@@ -70,6 +70,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     }
                     else
                     {
+                        userPhysical.UserPhysicalId = isExist.UserPhysicalId;
                         UserPhysicalManager.UpdateUserPhysical(userPhysical);
                     }
 

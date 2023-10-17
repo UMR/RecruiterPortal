@@ -44,7 +44,7 @@ export class EditPhysicalInfoComponent implements OnInit {
                 if (dataRaces.status === 200) {
                     this.races = dataRaces.body;
                     this.editPhysicalInfoService.getPhysicalInfo(this.service.getApplicantId)
-                        .subscribe(data => {                            
+                        .subscribe(data => {
                             if (data.status === 200) {                                
                                 this.userPhysical = data.body;
                                 this.fillUserPhysicalInfoService();
@@ -98,7 +98,6 @@ export class EditPhysicalInfoComponent implements OnInit {
     }
 
     fillUserPhysicalInfoService() {
-        console.log(this.userPhysical.EyeColor);
         this.physicalFormGroup.get('height').setValue(this.checkNullOrUndefined(this.userPhysical.Height));
         this.physicalFormGroup.get('eyeColor').setValue(this.checkNullOrUndefined(this.userPhysical.EyeColor));
         this.physicalFormGroup.get('race').setValue(this.checkNullOrUndefined(this.userPhysical.Race));
