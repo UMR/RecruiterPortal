@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, MessageService } from 'primeng/api';
 import { InstitutionListService } from './institution-list.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class InstitutionListComponent implements OnInit {
     public selectedInstitute: any;
     public showDialog: boolean = false;
 
-    constructor(private institutionListService: InstitutionListService) { }
+    constructor(private institutionListService: InstitutionListService, private messageService: MessageService) { }
 
     ngOnInit() {
 
@@ -60,6 +60,7 @@ export class InstitutionListComponent implements OnInit {
     
     handleHideEvent(show) {
         this.showDialog = show;
+        //this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Institution Added Successfully', detail: '' });
     }
 
     addNewInstitution() {

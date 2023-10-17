@@ -7,6 +7,7 @@ import { SharedModule } from '../../common/shared.module';
 import { TableModule } from 'primeng/components/table/table';
 import { AddInstitutionModule } from '../../quick-add/add-institution/add-institution.module';
 import { DialogModule } from 'primeng/dialog';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { DialogModule } from 'primeng/dialog';
         InstitutionListRoutingModule,
         SharedModule,
         TableModule,
+        ToastModule,
         AddInstitutionModule,
         DialogModule
     ]

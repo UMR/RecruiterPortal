@@ -39,7 +39,6 @@ export class AddInstitutionComponent implements OnInit {
 
     onZipCodeSearch($event) {
         this.addInstitutionService.getZipCodeCityStateByZipCode($event.query).subscribe(data => {
-            console.log(data);
             this.zipCodeResults = data.body;
         },
             err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get zip code', detail: '' }); },
@@ -47,7 +46,6 @@ export class AddInstitutionComponent implements OnInit {
     }
 
     onZipCodeSelect($event) {
-        console.log($event);
         if ($event) {
             this.institutionForm.patchValue({
                 cityTown: $event.City,
@@ -88,9 +86,9 @@ export class AddInstitutionComponent implements OnInit {
         insModel.IsActive = this.institutionForm.get('isActive').value;
 
         this.addInstitutionService.addInstitution(insModel).subscribe(res => {
-            console.log(res);
             if (res) {
-                this.institutionForm.reset()
+                this.institutionForm.reset();
+                this.hide();
                 this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Institution Added Successfully', detail: '' });
             }
         },
