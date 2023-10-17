@@ -8,8 +8,10 @@ namespace RecruiterPortalDAL.Managers
     {
         Task<int> Create(MailConfigurationRequest request, int recruiterId);        
         Task<bool?> Update(MailConfigurationRequest request, int recruiterId);
+        Task<bool?> Update(string email, string googleRefreshToken);
         Task<bool?> Delete(int id);
         Task<MailConfigurationResponse> GetMailConfigById(int id);
+        Task<MailConfigurationResponse> GetMailConfigByEmail(string email);
         Task<List<MailConfigurationResponse>> GetMailConfigByRecruiterId(int recruiterId);
     }
 
@@ -50,6 +52,26 @@ namespace RecruiterPortalDAL.Managers
             }
         }
 
+        public async Task<bool?> Update(string email,string googleRefreshToken)
+        {
+            try
+            {
+                GenericRepository<RecruiterMailConfig> repository = new GenericRepository<RecruiterMailConfig>();
+                RecruiterMailConfig mailConfig = await repository.GetByIdAsync(m => m.Email == email);
+                if (mailConfig != null)
+                {
+                    mailConfig.GoogleRefreshToken = googleRefreshToken;
+                    return await repository.UpdateAsync(mailConfig) > 0 ? true : false;
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<bool?> Delete(int id)
         {
             try
@@ -76,6 +98,26 @@ namespace RecruiterPortalDAL.Managers
                 MailConfigurationResponse mailConfiguration = null;
                 GenericRepository<RecruiterMailConfig> repository = new GenericRepository<RecruiterMailConfig>();
                 var mailConfigurationFromDb = await repository.GetByIdAsync(m => m.Id == id);
+                if (mailConfigurationFromDb != null)
+                {
+                    mailConfiguration = MapMailConfigurationResponse(mailConfigurationFromDb);
+                }
+
+                return mailConfiguration;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<MailConfigurationResponse> GetMailConfigByEmail(string email)
+        {
+            try
+            {
+                MailConfigurationResponse mailConfiguration = null;
+                GenericRepository<RecruiterMailConfig> repository = new GenericRepository<RecruiterMailConfig>();
+                var mailConfigurationFromDb = await repository.GetByIdAsync(m => m.Email == email);
                 if (mailConfigurationFromDb != null)
                 {
                     mailConfiguration = MapMailConfigurationResponse(mailConfigurationFromDb);

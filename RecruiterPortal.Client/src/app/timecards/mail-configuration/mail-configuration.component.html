@@ -49,9 +49,9 @@
                          dataKey="Id"
                          [value]="mailconfigs"
                          selectionMode="single"
-                         [(selection)]="selectedMailConfig"                         
+                         [(selection)]="selectedMailConfig"
                          [paginator]="true"
-                         [rows]="10"                                                                         
+                         [rows]="10"
                          [rowsPerPageOptions]="[10,15,20]"
                          [showCurrentPageReport]="true">
                     <ng-template pTemplate="header" let-columns>
@@ -67,7 +67,11 @@
                             <td>{{mailConfig.ProfileName}}</td>
                             <td>{{mailConfig.EmailAddress}}</td>
                             <td>{{mailConfig.IsGoogleApiError == true ? 'Yes' : 'No'}}</td>
-                            <td><a (click)="onEdit(mailConfig)"><i class="pi pi-pencil"></i></a><a style="color:red" (click)="onDelete(mailConfig)"><i class="pi pi-trash"></i></a></td>
+                            <td>
+                                <a (click)="onEdit(mailConfig)"><i class="pi pi-pencil"></i></a>
+                                <a style="color:red" (click)="onDelete(mailConfig)"><i class="pi pi-trash"></i></a>
+                                <a style="color:red" (click)="onEmail(mailConfig)">Send</a>
+                            </td>
                         </tr>
                     </ng-template>
                 </p-table>
