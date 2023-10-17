@@ -13,6 +13,7 @@ namespace RecruiterPortal.API.Controllers
     {
         private readonly IMailConfigurationService _mailConfigurationService;
         private readonly IMailConfigurationManager _mailCongigurationManager;
+
         public MailConfigurationController(ILogger<CustomControllerBase> logger, IMailConfigurationService mailConfigurationService,
             IMailConfigurationManager mailCongigurationManager) : base(logger)
         {
@@ -25,6 +26,14 @@ namespace RecruiterPortal.API.Controllers
         public async Task<IActionResult> GetMailConfigByRecruiterId()
         {
             return Ok(await _mailCongigurationManager.GetMailConfigByRecruiterId(RecruiterId));
+        }
+
+        [Route("get-gmail-service/{email}")]
+        [HttpGet]
+        public IActionResult GetGmailService(string email)
+        {
+            var gmailService = _mailConfigurationService.GetGmailService(email);
+            return Ok();
         }
 
         [Route("get-mail-config-by-id/{id}")]

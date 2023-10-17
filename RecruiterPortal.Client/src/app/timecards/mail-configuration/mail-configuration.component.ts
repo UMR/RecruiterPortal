@@ -134,6 +134,21 @@ export class MailConfigurationComponent implements OnInit {
         this.showAddEdit = false;
     }
 
+    onEmail(mailConfig) {
+        this.isLoading = true;
+        this.mailConfigService.getGmailService(mailConfig.EmailAddress)
+            .subscribe(response => {
+                console.log(response);
+            },
+                err => {
+                    this.isLoading = false;
+                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get mail file', detail: '' });
+                },
+                () => {
+                    this.isLoading = false;
+                });
+    }
+
     onSave() {
         const model: any = {
             id: this.selectedMailConfigId,

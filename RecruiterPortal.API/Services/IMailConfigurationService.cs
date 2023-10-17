@@ -1,4 +1,5 @@
-﻿using RecruiterPortal.DAL.Models;
+﻿using Google.Apis.Gmail.v1;
+using RecruiterPortal.DAL.Models;
 
 namespace RecruiterPortal.API.Services
 {
@@ -7,5 +8,6 @@ namespace RecruiterPortal.API.Services
         string GetAuthorizationUrl(MailConfigurationRequest mailConfig);
         Task<GoogleToken> GetTokenByCode(string code);
         string FetchExchangeAuthorizationCode(string code, out string accessToken);
+        GmailService GetGmailService(string emailAddress);
     }
 }

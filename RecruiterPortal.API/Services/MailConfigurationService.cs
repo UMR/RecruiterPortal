@@ -1,6 +1,9 @@
-﻿using Azure.Core;
+﻿using Google.Apis.Auth.OAuth2;
+using Google.Apis.Auth.OAuth2.Flows;
+using Google.Apis.Auth.OAuth2.Responses;
+using Google.Apis.Gmail.v1;
+using Google.Apis.Services;
 using Newtonsoft.Json;
-using Org.BouncyCastle.Asn1.Ocsp;
 using RecruiterPortal.API.Services;
 using RecruiterPortal.DAL.Models;
 using System.Net;
@@ -20,8 +23,9 @@ namespace RecruiterPortalDAL.Managers
 
         private readonly IConfiguration _configuration;
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IMailConfigurationManager _mailConfigurationManager;
 
-        public MailConfigurationService(IConfiguration configuration, IHttpClientFactory httpClientFactory)
+        public MailConfigurationService(IConfiguration configuration, IHttpClientFactory httpClientFactory, IMailConfigurationManager mailConfigurationManager)
         {
             _configuration = configuration;
             ApplicationName = _configuration["Google:ApplicationName"];
@@ -32,6 +36,7 @@ namespace RecruiterPortalDAL.Managers
             Oaut2URI = _configuration["Google:OAuth2"];
             TokenURI = _configuration["Google:TokenURI"];
             _httpClientFactory = httpClientFactory;
+            _mailConfigurationManager =mailConfigurationManager;
         }
 
         public string GetAuthorizationUrl(MailConfigurationRequest mailConfig)
@@ -112,5 +117,58 @@ namespace RecruiterPortalDAL.Managers
             return refreshToken;
 
         }
+
+        public GmailService GetGmailService(string emailAddress)
+        {
+            var credential =  GetGoogleUserCredential(emailAddress).Result;
+            if (credential != null)
+            {
+                return new GmailService(new BaseClientService.Initializer()
+                {
+                    HttpClientInitializer = credential,
+                    ApplicationName = ApplicationName
+                });
+            }
+
+            return null;
+        }
+
+        private async Task<UserCredential> GetGoogleUserCredential(string email)
+        {
+            TokenResponse respnseToken = null;
+            UserCredential credential = null;            
+            IAuthorizationCodeFlow flow = GoogleAuthorizationCodeFlow();            
+            var mailConfiguration = await _mailConfigurationManager.GetMailConfigByEmail(email);
+            if (mailConfiguration != null)
+            {                
+                respnseToken = new TokenResponse() { RefreshToken = mailConfiguration.GoogleRefreshToken };
+            }
+            
+            if (flow != null && respnseToken != null)
+            {
+                credential = new UserCredential(flow, "user", respnseToken);
+            }
+            
+            if (credential.Token != null)
+            {                
+               await  _mailConfigurationManager.Update(email, credential.Token.RefreshToken);
+            }
+
+            return credential;
+        }       
+
+        private IAuthorizationCodeFlow GoogleAuthorizationCodeFlow()
+        {
+            return new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer
+            {
+                ClientSecrets = new ClientSecrets()
+                {
+                    ClientId = ClientId,
+                    ClientSecret = ClientSecret
+                },
+                Scopes = Scopes.Split(" ")
+            });
+        }
+
     }
 }

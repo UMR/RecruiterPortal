@@ -23,6 +23,10 @@ export class MailConfigurationService {
                 .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
         });
     } 
+
+    getGmailService(email: string): Observable<any> {
+        return this.client.get(`${resourceServerUrl}/api/mailconfiguration/get-gmail-service/${email}`, { observe: "response" });            
+    }  
     
     getMailConfigsByRecruiterId(): Observable<any> {
         return this.client.get(`${resourceServerUrl}/api/mailconfiguration/get-mail-config-by-recruiterid`, { observe: "response" });            
