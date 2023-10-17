@@ -186,9 +186,9 @@ namespace RecruiterPortal.DAL.Managers
             {
                 response = (from job in context.Jobs
                             join pos in context.Positions
-                            on job.JobId equals pos.Id
+                            on job.PositionId equals pos.Id
                             join ins in context.Institutions
-                            on job.JobId equals ins.Id
+                            on job.InstituteId equals ins.Id
                             where job.JobId == jobId
                             select (new JobResponseModel
                             {

@@ -58,7 +58,7 @@
     </section>
 </div>
 
-<p-dialog [(visible)]="jobDialog" [style]="{ width: '1200px' }" header="{{addEditTitle}} Job" [modal]="true" [draggable]="false" [resizable]="false">
+<p-dialog [(visible)]="jobDialog" [style]="{ width: '1200px' }" header="{{addEditTitle}} Job" [modal]="true" [draggable]="false" [resizable]="false" (onHide)="hideModal()">
     <form [formGroup]="jobFormGroup" novalidate>
         <div class="row">
             <div class="col-md-6">

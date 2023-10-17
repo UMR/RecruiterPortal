@@ -104,6 +104,7 @@ export class JobOrdersComponent implements OnInit {
     }
 
     fillupJob(job: any) {
+        console.log(job);
         this.jobFormGroup.patchValue({
             jobTitile: job.JobTitle,
             status: job.Status === true ? '1' : '0',
@@ -159,6 +160,14 @@ export class JobOrdersComponent implements OnInit {
         this.selectedJobId = job.JobId;
         this.getJobsById(this.selectedJobId);
         this.jobDialog = true;
+    }
+
+    hideModal() {
+        this.selectedJobId = 0;
+        this.selectedJob = null;
+        this.addEditTitle = "Add";
+        this.jobDialog = false;
+        this.setDefaultFields();
     }
 
     save() {
