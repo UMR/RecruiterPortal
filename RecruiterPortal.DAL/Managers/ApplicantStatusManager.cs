@@ -207,6 +207,27 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
+        public static async Task<string> GetApplicantActiveStatusById(int applicantId)
+        {
+            try
+            {
+                string currentStatus = string.Empty;
+                using (UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext())
+                {
+                    GenericRepository<ApplicantStatus> repository = new GenericRepository<ApplicantStatus>();
+                    var activeStatus = await repository.GetByIdAsync(p => p.ApplicantId == applicantId && p.IsActive == true);
+                    if (activeStatus != null)
+                    {
+                        currentStatus = GetEnumDescription((EnumApplicantStatus)(activeStatus.Status));
+                    }
+                }
+                return currentStatus;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public static List<ApplicantStatusResponseModel> GetApplicantByStatus(long agencyId, int statusId)
         {
             try

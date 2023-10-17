@@ -49,6 +49,22 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
         }
 
+        [Route("get-applicant-status-by-id/{applicantId}")]
+        [HttpGet]
+        public async Task<IActionResult> GetApplicantActiveStatus(int applicantId)
+        {
+            try
+            {
+                return Ok(await ApplicantStatusManager.GetApplicantActiveStatusById(applicantId));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+
+        }
+
         [Route("save")]
         [HttpPost]
         public async Task<IActionResult> SaveApplicantStatus(ApplicantStatusRequestModel requestModel)

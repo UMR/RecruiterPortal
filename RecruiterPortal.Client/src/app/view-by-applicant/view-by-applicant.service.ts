@@ -11,6 +11,7 @@ export class ViewByApplicantService {
     private getApplicantLastNameURI: string = `${resourceServerUrl}/api/applicant-info/get-applicant-lastname`;
     private getApplicantEmailURI: string = `${resourceServerUrl}/api/applicant-info/get-applicant-email`;
     private getImportSyncApplicantURI: string = `${resourceServerUrl}/api/applicant-info/importsync/`;
+    private getActiveStatusURI: string = `${resourceServerUrl}/api/applicantstatus/get-applicant-status-by-id/`;
 
     constructor(private httpClient: HttpClient) {
 
@@ -70,5 +71,9 @@ export class ViewByApplicantService {
 
     getImportSyncApplicant(applicantPortalUserId: string): Observable<HttpResponse<any>> {
         return this.httpClient.get(this.getImportSyncApplicantURI + applicantPortalUserId, { observe: 'response' });
+    }
+
+    getApplicantActiveStatus(applicantId: any): Observable<HttpResponse<any>> {
+        return this.httpClient.get(this.getActiveStatusURI + applicantId, { observe: 'response' });
     }
 }

@@ -47,7 +47,7 @@ export class ViewByApplicantComponent implements OnInit {
             { field: 'LastName', header: 'Applicant Last Name' },
             { field: 'FirstName', header: 'Applicant First Name' },
             { field: 'Email', header: 'Applicant Email' },
-            { field: 'ApplicantMobilePhone', header: 'Applicant Status' }
+            { field: this.getApplicantStatus(20167), header: 'Applicant Status' }
         ];
         this.selectedApplicantStatus = "1";
     }
@@ -190,6 +190,20 @@ export class ViewByApplicantComponent implements OnInit {
                 err => {
                     this.isLoading = false;
                     this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to import or sync applicant info', detail: '' });
+                },
+                () => {
+                    this.isLoading = false;
+                });
+    }
+
+    getApplicantStatus(applicantId) {
+        this.viewByApplicantService.getApplicantActiveStatus(applicantId)
+            .subscribe(response => {
+                console.log(response);
+                if (response.status === 200) {
+                }
+            },
+                err => {
                 },
                 () => {
                     this.isLoading = false;
