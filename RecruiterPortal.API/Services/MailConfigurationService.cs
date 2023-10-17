@@ -2,11 +2,14 @@
 using Google.Apis.Auth.OAuth2.Flows;
 using Google.Apis.Auth.OAuth2.Responses;
 using Google.Apis.Gmail.v1;
+using Google.Apis.Gmail.v1.Data;
 using Google.Apis.Services;
+using MimeKit;
 using Newtonsoft.Json;
 using RecruiterPortal.API.Services;
 using RecruiterPortal.DAL.Models;
 using System.Net;
+using System.Net.Mail;
 using System.Text;
 
 namespace RecruiterPortalDAL.Managers
@@ -63,9 +66,7 @@ namespace RecruiterPortalDAL.Managers
                 httpClient.BaseAddress = new Uri(TokenURI);
                 var contentBody = $"code={code}&client_id={ClientId}&client_secret={ClientSecret}&redirect_uri={RedirectURI}&grant_type=authorization_code";
                 var content = new StringContent(contentBody, Encoding.UTF8, "application/x-www-form-urlencoded");
-
                 var response = await httpClient.PostAsync(string.Empty, content);
-
                 if (response.IsSuccessStatusCode)
                 {
                     var responseBody = await response.Content.ReadAsStringAsync();
@@ -80,7 +81,95 @@ namespace RecruiterPortalDAL.Managers
             return googleToken;
         }
 
-        public string FetchExchangeAuthorizationCode(string code, out string accessToken)
+        public MailMessage GetMailMessage(string fromAddress, string toAddress, string subject, string body) 
+        {
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(fromAddress);
+            message.To.Add(new MailAddress(toAddress));
+            message.Subject = subject;
+            message.Body = body;
+            message.IsBodyHtml = true;
+            //message.Attachments.Add(new Attachment(new MemoryStream(resumeFileData), resumeFileName));
+            return message;
+        }
+
+        public bool SendEmail(string email, MailMessage mailMessage) 
+        {
+            try
+            {
+                MimeMessage mimeMessage = MimeMessage.CreateFromMailMessage(mailMessage);
+                Message gmailMessage = new Message();
+                gmailMessage.Raw = base64UrlEncode(mimeMessage.ToString());
+
+                GmailService gmailService = getGmailService(email);
+                var result = gmailService.Users.Messages.Send(gmailMessage, "me").Execute();
+                if (result != null && result.LabelIds.Count > 0 && result.LabelIds.Contains("SENT"))
+                {
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            
+            return false;
+
+        }
+
+        private GmailService getGmailService(string emailAddress)
+        {
+            var credential =  GetUserCredential(emailAddress).Result;
+            if (credential != null)
+            {
+                return new GmailService(new BaseClientService.Initializer()
+                {
+                    HttpClientInitializer = credential,
+                    ApplicationName = ApplicationName
+                });
+            }
+
+            return null;
+        }
+
+        private async Task<UserCredential> GetUserCredential(string email)
+        {
+            TokenResponse respnseToken = null;
+            UserCredential credential = null;            
+            IAuthorizationCodeFlow flow = AuthorizationCodeFlow();            
+            var mailConfiguration = await _mailConfigurationManager.GetMailConfigByEmail(email);
+            if (mailConfiguration != null)
+            {                
+                respnseToken = new TokenResponse() { RefreshToken = mailConfiguration.GoogleRefreshToken };
+            }
+            
+            if (flow != null && respnseToken != null)
+            {
+                credential = new UserCredential(flow, "user", respnseToken);
+            }
+            
+            if (credential.Token != null)
+            {                
+               await  _mailConfigurationManager.Update(email, credential.Token.RefreshToken);
+            }
+
+            return credential;
+        }       
+
+        private IAuthorizationCodeFlow AuthorizationCodeFlow()
+        {
+            return new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer
+            {
+                ClientSecrets = new ClientSecrets()
+                {
+                    ClientId = ClientId,
+                    ClientSecret = ClientSecret
+                },
+                Scopes = Scopes.Split(" ")
+            });
+        }
+
+        private string fetchExchangeAuthorizationCode(string code, out string accessToken)
         {
             accessToken = string.Empty;
             string refreshToken = string.Empty;
@@ -115,59 +204,15 @@ namespace RecruiterPortalDAL.Managers
             }
 
             return refreshToken;
-
         }
 
-        public GmailService GetGmailService(string emailAddress)
+        private string base64UrlEncode(string input)
         {
-            var credential =  GetGoogleUserCredential(emailAddress).Result;
-            if (credential != null)
-            {
-                return new GmailService(new BaseClientService.Initializer()
-                {
-                    HttpClientInitializer = credential,
-                    ApplicationName = ApplicationName
-                });
-            }
-
-            return null;
-        }
-
-        private async Task<UserCredential> GetGoogleUserCredential(string email)
-        {
-            TokenResponse respnseToken = null;
-            UserCredential credential = null;            
-            IAuthorizationCodeFlow flow = GoogleAuthorizationCodeFlow();            
-            var mailConfiguration = await _mailConfigurationManager.GetMailConfigByEmail(email);
-            if (mailConfiguration != null)
-            {                
-                respnseToken = new TokenResponse() { RefreshToken = mailConfiguration.GoogleRefreshToken };
-            }
-            
-            if (flow != null && respnseToken != null)
-            {
-                credential = new UserCredential(flow, "user", respnseToken);
-            }
-            
-            if (credential.Token != null)
-            {                
-               await  _mailConfigurationManager.Update(email, credential.Token.RefreshToken);
-            }
-
-            return credential;
-        }       
-
-        private IAuthorizationCodeFlow GoogleAuthorizationCodeFlow()
-        {
-            return new GoogleAuthorizationCodeFlow(new GoogleAuthorizationCodeFlow.Initializer
-            {
-                ClientSecrets = new ClientSecrets()
-                {
-                    ClientId = ClientId,
-                    ClientSecret = ClientSecret
-                },
-                Scopes = Scopes.Split(" ")
-            });
+            var inputBytes = System.Text.Encoding.UTF8.GetBytes(input);
+            return Convert.ToBase64String(inputBytes)
+              .Replace('+', '-')
+              .Replace('/', '_')
+              .Replace("=", "");
         }
 
     }

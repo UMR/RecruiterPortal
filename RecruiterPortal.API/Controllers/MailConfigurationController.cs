@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RecruiterPortal.API.Services;
-using RecruiterPortal.DAL.Managers;
 using RecruiterPortal.DAL.Models;
 using RecruiterPortalDAL.Managers;
-using System.Text.Json;
 
 namespace RecruiterPortal.API.Controllers
 {
@@ -31,8 +29,8 @@ namespace RecruiterPortal.API.Controllers
         [Route("get-gmail-service/{email}")]
         [HttpGet]
         public IActionResult GetGmailService(string email)
-        {
-            var gmailService = _mailConfigurationService.GetGmailService(email);
+        {           
+            
             return Ok();
         }
 
