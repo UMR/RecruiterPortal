@@ -26,7 +26,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">                                     
+                <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="date-available" class="form-label">Date Of Birth</label>
@@ -41,6 +41,23 @@
                             </p-calendar>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="Phone" class="form-label">Phone</label>
+                            <input id="Phone" name="Phone" type="text" class="form-control" autocomplete="off"
+                                   formControlName="phone" required tabindex="4" trimmed E164PhoneNumber="true" maxlength="25" />
+                            <input type="hidden" id="PhoneId" name="PhoneId" formControlName="phone">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input id="email" name="email" type="email" class="form-control" autocomplete="off"
+                                   formControlName="email" required tabindex="5" trimmed />
+                            <input type="hidden" id="EmailId" name="EmailId" formControlName="email">
+                        </div>
+                    </div>
+
                 </div>
                 <div class="row">
                     <div class="col-md-4">
@@ -144,7 +161,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="position-applied" class="form-label">Position Applied For</label>                            
+                            <label for="position-applied" class="form-label">Position Applied For</label>
                             <p-autoComplete formControlName="positionAppliedFor" [suggestions]="positionResults"
                                             class="form-control" [dropdown]="true" (completeMethod)="onPositionSearch($event)"
                                             field="PositionName">
