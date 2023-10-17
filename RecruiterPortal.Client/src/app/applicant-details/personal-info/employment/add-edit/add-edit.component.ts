@@ -31,7 +31,7 @@ export class AddEditComponent implements OnInit {
         });
 
         this.empForm = this.fb.group({
-            companyName: ["", Validators.compose([Validators.required, Validators.maxLength(30)])],
+            companyName: ["", Validators.compose([Validators.required, Validators.maxLength(100)])],
             supervisor: ["", Validators.compose([Validators.maxLength(250)])],
             companyPhone: ["", Validators.compose([Validators.maxLength(50)])],
             jobTItle: ["", Validators.compose([Validators.required, Validators.maxLength(100)])],
