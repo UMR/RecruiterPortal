@@ -51,7 +51,9 @@ export class RecruiterHistoryComponent implements OnInit {
         this.getEntryExit(searchModel);
     }
     onClear() {
-
+        this.searchFg.controls.fromDate.setValue("");
+        this.searchFg.controls.toDate.setValue(new Date());
+        this.onSearchClick();
     }
 
     getEntryExit(searchModel: SearchModel) {
