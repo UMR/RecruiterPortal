@@ -16,6 +16,14 @@
     padding: 6px !important;
     box-shadow: none !important;
     background: #434A5A !important;
-    border-radius: 4px !important;    
-    border-left: 5px solid red!important;
+    border-radius: 4px !important;
+    /*border-left: 5px solid green !important;*/
+}
+
+:host >>> .fileupload-required div > div :first-child {
+    border-left: 5px solid red !important;
+}
+
+:host >>> .fileupload-success div > div :first-child {
+    border-left: 5px solid green !important;
 }
