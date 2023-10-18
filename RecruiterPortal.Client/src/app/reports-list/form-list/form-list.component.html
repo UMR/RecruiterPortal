@@ -84,8 +84,8 @@
                             <ng-template pTemplate="toolbar">
                                 <p class="mt-3">Size Maximum 5MB(doc, docx, pdf, jpg, jpeg, png, gif format)</p>
                                 <p class="mt-3" *ngIf="uploadedFile">
-                                    Name: {{ uploadedFile?.name}} <span *ngIf="uploadedFile?.size">Size : </span>
-                                    {{uploadedFile?.size ? uploadedFile?.size/1000 : '' }} <span *ngIf="uploadedFile?.size">bytes</span>
+                                    Name: {{ uploadedFile?.name}} <span *ngIf="uploadedFile?.size" style="border: 0px !important;">Size : </span>
+                                    {{uploadedFile?.size ? uploadedFile?.size/1000 : '' }} <span *ngIf="uploadedFile?.size" style="border: 0px !important;">bytes</span>
                                 </p>
                             </ng-template>
                         </p-fileUpload>
