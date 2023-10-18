@@ -108,6 +108,7 @@ export class FormListComponent implements OnInit {
             fileName: officialForm.FileName,
             fileData: officialForm.FileData
         });
+        this.uploadedFile = { ...this.uploadedFile, name: officialForm.FileName };        
     }
 
     onFileSelect(event) {
