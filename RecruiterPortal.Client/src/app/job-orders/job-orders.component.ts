@@ -225,7 +225,11 @@ export class JobOrdersComponent implements OnInit {
     }
 
     hide() {
+        this.selectedJobId = 0;
+        this.selectedJob = null;
+        this.addEditTitle = "Add";
         this.jobDialog = false;
+        this.setDefaultFields();
     }
 
     noWhitespaceValidator(control: AbstractControl) {
