@@ -9,3 +9,13 @@
 :host >>> .ui-confirmdialog-message {
     line-height: 2;
 }
+
+:host >>> .ui-fileupload .ui-fileupload-buttonbar .ui-button {
+    width: 100% !important;
+    margin: 0px !important;
+    padding: 6px !important;
+    box-shadow: none !important;
+    background: #434A5A !important;
+    border-radius: 4px !important;    
+    border-left: 5px solid red!important;
+}
