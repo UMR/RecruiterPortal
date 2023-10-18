@@ -40,7 +40,7 @@
                         </div>
                         <div class="col-sm-6 col-md-2 col-lg-2">
                             <div class="form-group" style="margin-top:20px;float:right">
-                                <button type="button" (click)="onClear()" class="btn btn-clear mr-3" tabindex="7">Clear</button>
+                                <button type="button" (click)="onClear()" class="btn btn-search-clear mr-3" tabindex="7">Clear</button>
                                 <button type="submit" class="btn btn-search" tabindex="6">Search</button>
                             </div>
                         </div>
@@ -169,10 +169,10 @@
         </div>
         <p-footer>
             <div>
-                <button pButton label="Cancel" class="" (click)="hideDialog()"></button>
+                <button pButton label="Cancel" class="btn-cancel" (click)="hideDialog()"></button>
                 <div style="float:right">
-                    <button pButton label="Clear" class="btn-clear" (click)="onClickClear()" type="reset"></button>
-                    <button type="submit" pButton pRipple label="Save" class="btn-save" [disabled]="regForm.invalid"></button>
+                    <button label="Clear" type="reset" pButton class="btn-clear" (click)="onClickClear()"></button>
+                    <button label="Save" type="submit" pButton class="btn-save" [disabled]="regForm.invalid"></button>
                 </div>
             </div>
         </p-footer>
