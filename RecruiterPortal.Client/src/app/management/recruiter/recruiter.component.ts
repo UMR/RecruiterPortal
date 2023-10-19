@@ -43,7 +43,6 @@ export class RecruiterComponent implements OnInit {
 
     constructor(private recruiterService: RecruiterService, private messageService: MessageService, private fb: FormBuilder,
         private confirmationService: ConfirmationService) {
-        this.getRecruiters();
     }
 
     ngOnInit() {
@@ -70,7 +69,7 @@ export class RecruiterComponent implements OnInit {
             sEmail: [""],
             status: [""]
         });
-        this.getRecruiters();
+        //this.getRecruiters();
     }
 
     MustMatch(controlName: string, matchingControlName: string) {
@@ -99,24 +98,23 @@ export class RecruiterComponent implements OnInit {
         this.getRecruiterByFilter();
     }
 
-    getRecruiters() {
-        this.isLoading = true;
-        this.recruiterService.getRecruiter()
-            .subscribe(response => {
-                console.log(response);
-                if (response.status === 200) {
-                    this.recruiters = (response.body as any).recruiters;
-                    this.totalRecruiter = (response.body as any).count;
-                }
-            },
-                err => {
-                    this.isLoading = false;
-                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get recruiter', detail: '' });
-                },
-                () => {
-                    this.isLoading = false;
-                });
-    }
+    //getRecruiters() {
+    //    this.isLoading = true;
+    //    this.recruiterService.getRecruiter()
+    //        .subscribe(response => {
+    //            if (response.status === 200) {
+    //                this.recruiters = (response.body as any).recruiters;
+    //                this.totalRecruiter = (response.body as any).count;
+    //            }
+    //        },
+    //            err => {
+    //                this.isLoading = false;
+    //                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get recruiter', detail: '' });
+    //            },
+    //            () => {
+    //                this.isLoading = false;
+    //            });
+    //}
 
     getRecruiterByFilter() {
         const recruiterSearchModel = new RecruiterSearchModel();
@@ -192,7 +190,7 @@ export class RecruiterComponent implements OnInit {
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
                 this.recruiterService.updateRecruiterStatus(recruiter.RecruiterId, false).subscribe(res => {
-                    console.log(res);
+                    this.getRecruiterByFilter();
                     if (res && res.status == 200) {
                         this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Successful', detail: 'Recruiter status updated successfully', life: 3000 });
                     }
@@ -245,8 +243,7 @@ export class RecruiterComponent implements OnInit {
 
         if (!this.isEditMode) {
             this.recruiterService.addRecruiter(recruiterFormModel).subscribe(res => {
-                console.log(res);
-                this.getRecruiters();
+                this.getRecruiterByFilter();
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Recruiter add successfully', life: 3000 });
             },
                 error => {
@@ -257,8 +254,7 @@ export class RecruiterComponent implements OnInit {
         else {
             recruiterFormModel.RecruiterId = this.recruiterId;
             this.recruiterService.updateRecruiter(recruiterFormModel).subscribe(res => {
-                console.log(res);
-                this.getRecruiters();
+                this.getRecruiterByFilter();
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Recruiter update successfully', life: 3000 });
             },
                 error => {

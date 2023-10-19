@@ -219,7 +219,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         }
 
         [Route("update")]
-        [HttpPost]
+        [HttpPut]
         public IActionResult UpdateRecruiter(RecruiterModel recruiterModel)
         {
 

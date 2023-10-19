@@ -12,7 +12,8 @@ export class RecruiterService {
     private getRecruiterURI: string = `${resourceServerUrl}/api/recruiter/get`;
     private getRecruiterFilterURI: string = `${resourceServerUrl}/api/recruiter/get-recruiter-by-filter`;
     private addRecruiterURI: string = `${resourceServerUrl}/api/recruiter/save`;
-    private updateRecruiterURI: string = `${resourceServerUrl}/api/recruiter/update-status`;
+    private updateStatusRecruiterURI: string = `${resourceServerUrl}/api/recruiter/update-status`;
+    private updateRecruiterURI: string = `${resourceServerUrl}/api/recruiter/update`;
 
     constructor(private httpClient: HttpClient) { }
 
@@ -35,14 +36,14 @@ export class RecruiterService {
     }
 
     updateRecruiter(recruiter: RecruiterModel): Observable<HttpResponse<any>> {
-        return this.httpClient.post(this.updateRecruiterURI, recruiter, {
+        return this.httpClient.put(this.updateRecruiterURI, recruiter, {
             headers: new HttpHeaders()
                 .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
         });
     }
 
     updateRecruiterStatus(recruiter: number, status: boolean): Observable<HttpResponse<any>> {
-        return this.httpClient.put(this.updateRecruiterURI + "?recruiterId=" + recruiter + "&status=" + status, null, {
+        return this.httpClient.put(this.updateStatusRecruiterURI + "?recruiterId=" + recruiter + "&status=" + status, null, {
             headers: new HttpHeaders()
                 .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
         });

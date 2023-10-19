@@ -19,10 +19,11 @@
     width: 100px;
     height: 42px;
 }
-
+.btn-cancel {
+    width: 100px;
+}
 .btn-cancel:focus {
     box-shadow: none !important;
-    width: 100px;
 }
 
 .btn-add {
