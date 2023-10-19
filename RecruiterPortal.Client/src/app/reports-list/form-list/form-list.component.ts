@@ -139,6 +139,7 @@ export class FormListComponent implements OnInit {
     }
 
     onClear() {
+        this.uploadedFile = null;
         this.formGroup.reset();
     }
 
