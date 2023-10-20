@@ -134,15 +134,15 @@ export class MailConfigurationComponent implements OnInit {
         this.showAddEdit = false;
     }
 
-    onEmail(mailConfig) {
+    onEmail() {
         this.isLoading = true;
-        this.mailConfigService.getGmailService(mailConfig.EmailAddress)
+        this.mailConfigService.sendMail()
             .subscribe(response => {
                 console.log(response);
             },
                 err => {
                     this.isLoading = false;
-                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get mail file', detail: '' });
+                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to send mail', detail: '' });
                 },
                 () => {
                     this.isLoading = false;

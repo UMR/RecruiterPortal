@@ -24,8 +24,11 @@ export class MailConfigurationService {
         });
     } 
 
-    getGmailService(email: string): Observable<any> {
-        return this.client.get(`${resourceServerUrl}/api/mailconfiguration/get-gmail-service/${email}`, { observe: "response" });            
+    sendMail(): Observable<any> {
+        return this.client.post(`${resourceServerUrl}/api/mailconfiguration/send-mail`, {
+            headers: new HttpHeaders()
+                .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
+        });        
     }  
     
     getMailConfigsByRecruiterId(): Observable<any> {

@@ -2,6 +2,7 @@
 using RecruiterPortal.API.Services;
 using RecruiterPortal.DAL.Models;
 using RecruiterPortalDAL.Managers;
+using System.Net.Mail;
 
 namespace RecruiterPortal.API.Controllers
 {
@@ -65,6 +66,20 @@ namespace RecruiterPortal.API.Controllers
             }
 
             return Ok(await _mailCongigurationManager.Create(mailConfigurationRequest, RecruiterId));
+        }
+
+        [Route("send-mail")]
+        [HttpPost]
+        public IActionResult SendMail()
+        {
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress("kaptan.cse@gmail.com");
+            message.To.Add(new MailAddress("arzaman@ael-bd.com"));
+            message.Subject = "Subject";
+            message.Body = "Body";
+            message.IsBodyHtml = true;
+            var result = _mailConfigurationService.SendEmail("kaptan.cse@gmail.com",message);
+            return Ok();
         }
 
         [Route("delete-mail-config/{id}")]
