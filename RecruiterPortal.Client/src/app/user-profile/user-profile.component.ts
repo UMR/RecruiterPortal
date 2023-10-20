@@ -19,6 +19,7 @@ export class UserProfileComponent implements OnInit {
     public userFormGroup: FormGroup;
     public user: any = {};
     private recruiterId = 0;
+    private emailRegEx = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
     private obsEmail: Subscription;
 
     constructor(private fb: FormBuilder, private storageService: StorageService,
@@ -58,7 +59,7 @@ export class UserProfileComponent implements OnInit {
             loginId: [{ value: '', disabled: true }, [Validators.required, Validators.maxLength(50)]],
             lastName: ['', [Validators.required, Validators.maxLength(50)]],
             firstName: ['', [Validators.required, Validators.maxLength(50)]],
-            email: ['', [Validators.required, Validators.maxLength(50)]],
+            email: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(this.emailRegEx)]],
             telephone: ['', [Validators.required, Validators.maxLength(50)]]
         });
     }

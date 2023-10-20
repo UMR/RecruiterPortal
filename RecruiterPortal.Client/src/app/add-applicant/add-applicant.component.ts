@@ -54,4 +54,21 @@ export class AddApplicantComponent implements OnInit {
             });
 
     }
+
+    focusOutEmail() {
+        let email = this.applicantForm.get('email').value
+        this.addApplicantService.getApplicantByEmail(email)
+            .subscribe(data => {
+                if (data.body) {
+                    this.applicantForm.controls['email'].setErrors({ 'incorrect': true });
+                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Email already exist', detail: '' });
+                }
+            },
+                err => {
+                    this.isLoading = false;
+                },
+                () => {
+                    this.isLoading = false;
+                });
+    }
 }
