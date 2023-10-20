@@ -11,7 +11,7 @@
         public string PositionName { get; set; }
 
         public int? InstitutionId { get; set; }
-        public string InstitutionName { get; set; }
+        public string? InstitutionName { get; set; }
 
         public byte Status { get; set; }
 

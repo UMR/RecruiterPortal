@@ -237,10 +237,9 @@ namespace RecruiterPortal.DAL.Managers
                 using (UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext())
                 {
                     applicantStatusList = (from applicantStatus in context.ApplicantStatuses
-                                           join pos in context.Positions
-                                           on applicantStatus.PositionId equals pos.Id
-                                           join ins in context.Institutions
-                                           on applicantStatus.InstitutionId equals ins.Id
+                                           join pos in context.Positions on applicantStatus.PositionId equals pos.Id
+                                           join ins in context.Institutions on applicantStatus.InstitutionId equals ins.Id 
+                                           into ins2 from institution in ins2.DefaultIfEmpty()
                                            join app in context.Users
                                            on applicantStatus.ApplicantId equals app.UserId
                                            where applicantStatus.AgencyId == agencyId && applicantStatus.Status == statusId && applicantStatus.IsActive == true
@@ -251,8 +250,8 @@ namespace RecruiterPortal.DAL.Managers
                                                ApplicantName = app.FirstName + " " + app.LastName,
                                                PositionId = pos.Id,
                                                PositionName = pos.PositionName,
-                                               InstitutionId = applicantStatus.InstitutionId,
-                                               InstitutionName = ins.InstituteName,
+                                               InstitutionId = applicantStatus.InstitutionId != null ? applicantStatus.InstitutionId : null,
+                                               InstitutionName = institution.InstituteName != null ? institution.InstituteName : null,
                                                Date = applicantStatus.Date,
                                                CurrentSalary = applicantStatus.CurrentSalary,
                                                ExpectedSalary = applicantStatus.ExpectedSalary,
