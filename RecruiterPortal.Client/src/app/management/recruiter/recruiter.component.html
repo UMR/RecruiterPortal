@@ -137,7 +137,7 @@
         </div>
         <div class="field">
             <label for="email">Email</label>
-            <input type="text" id="email" formControlName="email" class="input-text" maxlength="100" autocomplete="off" />
+            <input type="text" id="email" formControlName="email" class="input-text" maxlength="100" autocomplete="off" required/>
             <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                 <div *ngIf="f.email.errors.required">Email is required</div>
                 <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
@@ -145,7 +145,7 @@
         </div>
         <div class="field">
             <label for="telephone">Telephone</label>
-            <p-inputMask mask="(999) 999-9999" required formControlName="telephone" unmask="true"
+            <p-inputMask mask="(999) 999-9999" formControlName="telephone" unmask="true"
                          placeholder="(999) 999-9999" [style]="{'width':'100%'}"></p-inputMask>
         </div>
         <div>

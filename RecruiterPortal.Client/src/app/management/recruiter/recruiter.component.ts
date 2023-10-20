@@ -48,15 +48,15 @@ export class RecruiterComponent implements OnInit {
     ngOnInit() {
         this.regForm = this.fb.group({
             loginId: ["", Validators.required],
-            telephone: ["", Validators.required],
+            telephone: [""],
             firstName: ["", Validators.required],
             lastName: ["", Validators.required],
-            isActive: [false, Validators.required],
+            isActive: [false],
             isRecruiter: [false],
             isSupervisor: [false],
             isManager: [false],
             isAdministrator: [false],
-            email: ["", [Validators.pattern(this.emailRegEx)]],
+            email: ["", [Validators.required, Validators.pattern(this.emailRegEx)]],
             password: ["", [Validators.required, Validators.minLength(4)]],
             confirmPassword: ["", Validators.required],
         }, {
