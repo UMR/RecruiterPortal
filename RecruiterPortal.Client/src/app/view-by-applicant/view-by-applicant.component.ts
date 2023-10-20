@@ -119,6 +119,9 @@ export class ViewByApplicantComponent implements OnInit {
     }
 
     onApplicantStatusChange(event) {
+        this.take = 15;
+        this.skip = 0;
+        //this.pageNumber = 1;
         this.applicantTable.reset();
         this.selectedApplicantStatus = event.target.value;
         this.getApplicants();
