@@ -20,7 +20,7 @@ export class IdentificationInfoComponent implements OnInit {
 
     getAllUserLicense() {
         this.isLoading = true;
-        this.licenseService.getAllUserLicense()
+        this.licenseService.getAllUserLicense(this.storageService.getApplicantId)
             .subscribe(data => {
                 console.log(data);
                 if (data.status === 200) {

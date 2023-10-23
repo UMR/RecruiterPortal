@@ -17,8 +17,8 @@ export class IdentificationInfoService {
     constructor(private http: HttpClient) {
     }
 
-    getAllUserLicense(): Observable<HttpResponse<any>> {
-        return this.http.get(this.getAllUserLicenseURI + "/" + EnumFileType.PassportSsnTin, { observe: 'response' });
+    getAllUserLicense(applicantId: any): Observable<HttpResponse<any>> {
+        return this.http.get(`${resourceServerUrl}/api/user-license/get-all?applicantId=${applicantId}`, { observe: 'response' });
     }
 
     getUserLicenseById(id: any): Observable<HttpResponse<any>> {
