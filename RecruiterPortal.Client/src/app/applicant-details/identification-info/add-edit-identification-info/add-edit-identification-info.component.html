@@ -1,132 +1,152 @@
 <loading-image [is-loading]="isLoading"></loading-image>
 <div class="container-fluid">
-  <div class="card portal-card">
-    <div class="card-body px-3 py-3">
-      <form [formGroup]="licenseFormGroup" novalidate>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="licenseName" class="form-label">ID Type</label>
-              <select id="idType" name="isntitutionType" class="form-control" formControlName="idType" placeholder="Select a Id Type"
-                      tabindex="1" autofocus required>
-                <option value="">----Select Id Type----</option>
-                <option value="U.S. Passport or U.S. Passport Card">U.S. Passport or U.S. Passport Card</option>
-                <option value="Permanent Resident Card">Permanent Resident Card</option>
-                <option value="Alien Registration Receipt Card">Alien Registration Receipt Card</option>
-                <option value="Foreign passport with temporary I-551">Foreign passport with temporary I-551</option>
-                <option value="Employment Authorization Document">Employment Authorization Document</option>
-                <option value="Form I-94 or Form I-94A">Form I-94 or Form I-94A</option>
-                <option value="Driver's license or ID card">Driver's license or ID card</option>
-                <option value="School ID card">School ID card</option>
-                <option value="Voter's registration card">Voter's registration card</option>
-                <option value="U.S. Military card or draft record">U.S. Military card or draft record</option>
-                <option value="Voter's registration card">Voter's registration card</option>
-                <option value="U.S. Coast Guard Merchant Mariner Card">U.S. Coast Guard Merchant Mariner Card</option>
-                <option value="School record or report card">School record or report card</option>
-                <option value="Clinic, doctor, or hospital record">Clinic, doctor, or hospital record</option>
-                <option value="Day-care or nursery school record">Day-care or nursery school record</option>
-                <option value="SSN">SSN</option>
-                <option value="Birth Certificate">Birth Certificate</option>
-                <option value="Identification Card for Use of Resident Citizen in US (Form I-179)">Identification Card for Use of Resident Citizen in US (Form I-179)</option>
-                <option value="Employment authorization document of Homeland Security">Employment authorization document of Homeland Security</option>
-                <option value="Other License">Other License</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="licenseNo" class="form-label">ID No.</label>
-              <input id="licenseNo" name="licenseNo" type="text" class="form-control" autocomplete="off" autofocus formControlName="licenseNo" tabindex="2" pTooltip="Maximum 50 characters" tooltipPosition="top"
-                     tooltipEvent="focus" trimmed>
-            </div>
-          </div>
+    <div class="card portal-card">
+        <div class="card-body px-3">
+            <form [formGroup]="licenseFormGroup" novalidate>
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="idTypeA" class="form-label">Document Type A</label>
+                            <select id="idTypeA" name="idTypeA" class="form-control" formControlName="idTypeA" placeholder="Select Document Type A" (change)="onChangeIdTypeA($event)" required
+                                    tabindex="1" autofocus>
+                                <option value="">----Document Type A----</option>
+                                <option value="U.S. Passport or U.S. Passport Card">U.S. Passport or U.S. Passport Card</option>
+                                <option value="Permanent Resident Card">Permanent Resident Card</option>
+                                <option value="Alien Registration Receipt Card">Alien Registration Receipt Card</option>
+                                <option value="Foreign passport with temporary I-551">Foreign passport with temporary I-551</option>
+                                <option value="Employment Authorization Document">Employment Authorization Document</option>
+                                <option value="Form I-94 or Form I-94A">Form I-94 or Form I-94A</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="idTypeB" class="form-label">Document Type B</label>
+                            <select id="idTypeB" name="idTypeB" class="form-control" formControlName="idTypeB" placeholder="Select Document Type B" (change)="onChangeIdTypeB($event)" required
+                                    tabindex="2">
+                                <option value="">----Document Type B----</option>
+                                <option value="Driver's license or ID card">Driver's license or ID card</option>
+                                <option value="School ID card">School ID card</option>
+                                <option value="Voter's registration card">Voter's registration card</option>
+                                <option value="U.S. Military card or draft record">U.S. Military card or draft record</option>
+                                <option value="Voter's registration card">Voter's registration card</option>
+                                <option value="U.S. Coast Guard Merchant Mariner Card">U.S. Coast Guard Merchant Mariner Card</option>
+                                <option value="School record or report card">School record or report card</option>
+                                <option value="Clinic, doctor, or hospital record">Clinic, doctor, or hospital record</option>
+                                <option value="Day-care or nursery school record">Day-care or nursery school record</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="idTypeC" class="form-label">Document Type C</label>
+                            <select id="idTypeC" name="idTypeC" class="form-control" formControlName="idTypeC" placeholder="Select Document Type C" tabindex="3" required>
+                                <option value="">----Document Type C----</option>
+                                <option value="SSN">SSN</option>
+                                <option value="Birth Certificate">Birth Certificate</option>
+                                <option value="Identification Card for Use of Resident Citizen in US (Form I-179)">Identification Card for Use of Resident Citizen in US (Form I-179)</option>
+                                <option value="Employment authorization document of Homeland Security">Employment authorization document of Homeland Security</option>
+                                <option value="Other License">Other License</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>                
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="licenseNo" class="form-label">License No</label>
+                            <input id="licenseNo" name="licenseNo" type="text" class="form-control" autocomplete="off" autofocus formControlName="licenseNo" tabindex="4" pTooltip="Maximum 50 characters" tooltipPosition="top"
+                                   tooltipEvent="focus" trimmed>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="issueDate" class="form-label">Issue Date</label>
+                            <p-calendar id="issueDate" name="issueDate" placeholder="MM-DD-YYYY"
+                                        formControlName="issueDate"
+                                        tabindex="5"
+                                        dateFormat="mm-dd-yy"
+                                        [monthNavigator]="true"
+                                        [yearNavigator]="true"
+                                        yearRange="1900:2030"
+                                        [showIcon]="true">
+                            </p-calendar>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="expiryDate" class="form-label">Expiration Date</label>
+                            <p-calendar id="expiryDate" name="expiryDate" placeholder="MM-DD-YYYY"
+                                        formControlName="expiryDate"
+                                        tabindex="6"
+                                        dateFormat="mm-dd-yy"
+                                        [monthNavigator]="true"
+                                        [yearNavigator]="true"
+                                        yearRange="1900:2030"
+                                        [showIcon]="true"
+                                        [minDate]="minDateValue">
+                            </p-calendar>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="issuingAuthority" class="form-label">Issuing Authority</label>
+                            <p-autoComplete formControlName="issuingAuthority" [suggestions]="issuingAuthorityResults" class="form-control"
+                                            (completeMethod)="onIssuingAuthoritySearch($event)" field="issueAuthority"
+                                            forceSelection="true" tabindex="7">
+                            </p-autoComplete>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="" class="form-label"></label>
+                        <div class="form-group mt-1">
+                            <div class="upload">
+                                <p-fileUpload chooseLabel="Select a Document"
+                                              mode="advanced"
+                                              auto="true"
+                                              customUpload="true"
+                                              accept="image/*,application/pdf,.doc,.docx,application/msword"
+                                              maxFileSize="5000000"
+                                              tabindex="8"
+                                              (onSelect)="onFileSelect($event)">
+                                    <ng-template pTemplate="toolbar">
+                                        <p class="mt-3">Size Maximum 5MB(doc, docx, pdf, jpg, jpeg, png, gif format)</p>
+                                    </ng-template>
+                                    <ng-template let-file pTemplate="file">
+                                    </ng-template>
+                                    <ng-template pTemplate="content">
+                                    </ng-template>
+                                </p-fileUpload>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="" class="form-label"></label>
+                        <div class="form-group mt-1">
+                            <input id="fileName" name="fileName" type="text" class="form-control" autocomplete="off" formControlName="fileName" disabled trimmed>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="issueDate" class="form-label">Issue Date</label>
-              <p-calendar id="issueDate" name="issueDate" placeholder="MM-DD-YYYY"
-                          formControlName="issueDate"
-                          tabindex="3"
-                          dateFormat="mm-dd-yy"
-                          [monthNavigator]="true"
-                          [yearNavigator]="true"
-                          yearRange="1900:2030"
-                          [showIcon]="true">
-              </p-calendar>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="expiryDate" class="form-label">Expiry Date</label>
-              <p-calendar id="expiryDate" name="expiryDate" placeholder="MM-DD-YYYY"
-                          formControlName="expiryDate"
-                          tabindex="3"
-                          dateFormat="mm-dd-yy"
-                          [monthNavigator]="true"
-                          [yearNavigator]="true"
-                          yearRange="1900:2030"
-                          [showIcon]="true"
-                          [minDate]="minDateValue">
-              </p-calendar>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="form-group">
-              <label for="issuingAuthority" class="form-label">Issuing Authority</label>
-              <p-autoComplete formControlName="issuingAuthority" [suggestions]="issuingAuthorityResults" class="form-control"
-                              (completeMethod)="onIssuingAuthoritySearch($event)" field="IssueAuthority"
-                              forceSelection="true" tabindex="4" [dropdown]="true">
-              </p-autoComplete>
-            </div>
-          </div>
+        <div class="card-footer">
+            <ul class="list-inline mb-0 d-flex justify-content-between">
+                <li class="list-inline-item">
+                    <a [routerLink]="['/general-info/identification-info']" routerLinkActive="active" class="btn btn-primary btn-portal-border" tabindex="10">Back</a>
+                </li>
+                <li class="list-inline-item">
+                    <a (click)="onClear()" class="btn btn-primary btn-portal-border" tabindex="11" style="margin-left: 10px !important;">Clear</a>
+                </li>
+                <li class="list-inline-item">
+                    <button class="btn btn-primary btn-portal" pTooltip="Fill out form with valid info." tabindex="9"
+                            tooltipPosition="left" [tooltipDisabled]="licenseFormGroup.valid" [disabled]="licenseFormGroup.invalid" (click)="onSave()">
+                        Save
+                    </button>
+                </li>
+            </ul>
         </div>
-        <div class="row">
-          <div class="col-md-3">
-            <div class="form-group">
-              <div class="upload">
-                <p-fileUpload mode="advanced"
-                              auto="true"
-                              customUpload="true"
-                              accept="image/*,application/pdf,.doc,.docx,application/msword"
-                              maxFileSize="5000000"
-                              tabindex="5"
-                              (onSelect)="onFileSelect($event)">
-                  <ng-template pTemplate="toolbar">
-                    <p class="mt-3">Size Maximum 5MB(doc, docx, pdf, jpg, jpeg, png, gif format)</p>
-                  </ng-template>
-                  <ng-template let-file pTemplate="file">
-                  </ng-template>
-                  <ng-template pTemplate="content">
-                  </ng-template>
-                </p-fileUpload>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-9">
-            <div class="form-group">
-              <input id="fileName" name="fileName" type="text" class="form-control" autocomplete="off" formControlName="fileName" disabled trimmed>
-            </div>
-          </div>
-        </div>
-      </form>
     </div>
-    <div class="card-footer">
-      <ul class="list-inline mb-0 d-flex justify-content-between">
-        <li class="list-inline-item">
-          <a [routerLink]="['/identification-info']" routerLinkActive="active" class="btn btn-primary btn-portal-border" tabindex="7">Back</a>
-          <a (click)="onClear()" class="btn btn-primary btn-portal-border" tabindex="6" style="margin-left: 10px !important;">Clear</a>
-        </li>
-        <li class="list-inline-item">
-        </li>
-        <li class="list-inline-item">
-          <button class="btn btn-primary btn-portal" pTooltip="Fill out form with valid info." tabindex="6"
-                  tooltipPosition="left" [tooltipDisabled]="licenseFormGroup.valid" [disabled]="licenseFormGroup.invalid" (click)="onSave()">
-            Save
-          </button>
-        </li>
-      </ul>
-    </div>
-  </div>
 </div>
-  <p-toast key="toastKey1"></p-toast>
+<p-toast key="toastKey1"></p-toast>

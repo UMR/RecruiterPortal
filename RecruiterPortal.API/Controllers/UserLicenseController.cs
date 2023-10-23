@@ -81,8 +81,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         public IActionResult GetUserLicenseByFileType(byte fileType)
         {
             try
-            {
-                //Enum.TryParse(fileType.ToString(), out EnumFileType enumFileType);
+            {                
                 IEnumerable<UserLicense> userLicenses = UserLicenseManager.GetUserLicenseByFileType(base.GetCurrentUser().RecruiterId, fileType);
                 List<UserLicenseModel> userLicenseList = new List<UserLicenseModel>();
 

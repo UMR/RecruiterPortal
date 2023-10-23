@@ -22,10 +22,33 @@ export class AddEditIdentificationInfoComponent implements OnInit {
     private licenseFile: string;
     public minDateValue: Date = new Date();
     public issuingAuthorityResults: string[];
+    public documentNumberLabel: string = 'Document Number';
+    public idTypes: any[] = [
+        'U.S. Passport or U.S. Passport Card',
+        'Permanent Resident Card',
+        'Alien Registration Receipt Card',
+        'Foreign passport with temporary I-551',
+        'Employment Authorization Document',
+        'Form I-94 or Form I-94A',
+        'Driver\'s license or ID card',
+        'School ID card',
+        'Voter\'s registration card',
+        'U.S. Military card or draft record',
+        'Voter\'s registration card',
+        'U.S. Coast Guard Merchant Mariner Card',
+        'School record or report card',
+        'Clinic, doctor, or hospital record',
+        'Day-care or nursery school record',
+        'SSN',
+        'Birth Certificate',
+        'Identification Card for Use of Resident Citizen in US (Form I-179)',
+        'Employment authorization document of Homeland Security',
+        'Other License'
+    ];
 
-    constructor(private fb: FormBuilder, private licenseService: IdentificationInfoService, private router: Router,
-        private activeRoute: ActivatedRoute, private messageService: MessageService,
-        private storageService: StorageService) { }
+    constructor(private fb: FormBuilder, private licenseService: IdentificationInfoService,
+        private router: Router, private activeRoute: ActivatedRoute,
+        private messageService: MessageService, private storageService: StorageService) { }
 
     ngOnInit() {
         this.activeRoute.paramMap.subscribe(params => {
@@ -35,6 +58,47 @@ export class AddEditIdentificationInfoComponent implements OnInit {
             }
         });
         this.createLicenseForm();
+    }
+
+    onChangeIdType(event) {
+        this.licenseFormGroup.controls.licenseName.setValue('');
+        this.licenseFormGroup.controls.licenseNo.setValue('');
+
+        if (event.target.value == 'Other License') {
+            this.documentNumberLabel = 'License Number';
+            this.licenseFormGroup.controls.licenseName.setValidators([Validators.required]);
+            this.licenseFormGroup.controls.licenseName.updateValueAndValidity();
+        } else {
+            this.documentNumberLabel = 'Document Number';
+            this.licenseFormGroup.controls.licenseName.clearValidators();
+            this.licenseFormGroup.controls.licenseName.updateValueAndValidity();
+        }
+
+    }
+
+    onChangeIdTypeA(event) {
+        if (event.target.value) {
+            this.licenseFormGroup.controls.idTypeB.clearValidators();
+            this.licenseFormGroup.controls.idTypeB.updateValueAndValidity();
+            this.licenseFormGroup.controls.idTypeC.clearValidators();
+            this.licenseFormGroup.controls.idTypeC.updateValueAndValidity();
+        }
+    }
+
+    onChangeIdTypeB(event) {
+        if (event.target.value) {
+            this.licenseFormGroup.controls.idTypeC.setValue('');
+            this.licenseFormGroup.controls.idTypeC.setValidators([Validators.required]);
+            this.licenseFormGroup.controls.idTypeC.updateValueAndValidity();
+            this.licenseFormGroup.controls.idTypeA.clearValidators();
+            this.licenseFormGroup.controls.idTypeA.updateValueAndValidity();
+        } else {
+            this.licenseFormGroup.controls.idTypeC.setValue('');
+            this.licenseFormGroup.controls.idTypeC.clearValidators();
+            this.licenseFormGroup.controls.idTypeC.updateValueAndValidity();
+            this.licenseFormGroup.controls.idTypeA.setValidators([Validators.required]);
+            this.licenseFormGroup.controls.idTypeA.updateValueAndValidity();
+        }
     }
 
     onFileSelect(event) {
@@ -56,7 +120,9 @@ export class AddEditIdentificationInfoComponent implements OnInit {
 
     createLicenseForm() {
         this.licenseFormGroup = this.fb.group({
-            idType: ['', [Validators.required, this.noWhitespaceValidator, Validators.maxLength(200)]],
+            idTypeA: [''],
+            idTypeB: [''],
+            idTypeC: [''],
             licenseNo: ['', [Validators.maxLength(50)]],
             fileName: [''],
             issueDate: ['', [new CompareValidator('expiryDate', '<', 'true')]],
@@ -78,7 +144,6 @@ export class AddEditIdentificationInfoComponent implements OnInit {
             .subscribe(data => {
                 if (data.status === 200) {
                     this.userLicense = data.body;
-                    console.log(this.userLicense);
                 }
                 else {
                     this.userLicense = {};
@@ -95,14 +160,19 @@ export class AddEditIdentificationInfoComponent implements OnInit {
     }
 
     fillUserLicense() {
-        this.licenseFormGroup.setValue({
-            idType: this.checkNullOrUndefined(this.userLicense.LicenseName),
-            licenseNo: this.checkNullOrUndefined(this.userLicense.LicenseNo),
-            issueDate: this.userLicense.IssuedDate ? new Date(this.userLicense.IssuedDate) : null,
-            expiryDate: this.userLicense.ExpiryDate ? new Date(this.userLicense.ExpiryDate) : null,
-            fileName: this.checkNullOrUndefined(this.userLicense.FileName),
-            issuingAuthority: { IssueAuthority: this.checkNullOrUndefined(this.userLicense.IssueAuthority) }
+        this.licenseFormGroup.patchValue({
+            idTypeA: this.userLicense.licenseNameA,
+            idTypeB: this.userLicense.licenseNameB,
+            idTypeC: this.userLicense.licenseNameC,
+            licenseNo: this.checkNullOrUndefined(this.userLicense.licenseNo),
+            issueDate: this.userLicense.issuedDate ? new Date(this.userLicense.issuedDate) : null,
+            expiryDate: this.userLicense.expiryDate ? new Date(this.userLicense.expiryDate) : null,
+            fileName: this.checkNullOrUndefined(this.userLicense.fileName),
+            issuingAuthority: { issueAuthority: this.checkNullOrUndefined(this.userLicense.issueAuthority) }
         });
+
+        this.licenseFormGroup.controls.idTypeB.setValue(this.userLicense.licenseNameB);
+        this.licenseFormGroup.controls.idTypeC.setValue(this.userLicense.licenseNameC);
     }
 
     checkNullOrUndefined(value) {
@@ -112,22 +182,35 @@ export class AddEditIdentificationInfoComponent implements OnInit {
         return '';
     }
 
+    isIdTypeSelected() {
+        if (this.licenseFormGroup.controls.idTypeA.value == '' && this.licenseFormGroup.controls.idTypeB.value == '') {
+            return true;
+        }
+    }
+
     onSave() {
-        const model: any = {
-            LicenseID: this.userLicense.LicenseID ? this.userLicense.LicenseID : 0,
-            LicenseName: this.licenseFormGroup.get('idType').value,
-            LicenseNo: this.licenseFormGroup.get('licenseNo').value,
-            ExpiryDate: this.licenseFormGroup.get('expiryDate').value ? this.licenseFormGroup.get('expiryDate').value.toLocaleString() : null,
-            IssuedDate: this.licenseFormGroup.get('issueDate').value ? this.licenseFormGroup.get('issueDate').value.toLocaleString() : null,
-            FIleData: this.licenseFile,
-            FileName: this.licenseFormGroup.get('fileName').value,
-            FileType: EnumFileType.PassportSsnTin,
-            IssueAuthority: this.licenseFormGroup.get('issuingAuthority').value ? this.licenseFormGroup.get('issuingAuthority').value.IssueAuthority : "",
-            StateCode: "",
-            ApplicantID: this.storageService.getApplicantId
+
+        if (this.licenseFormGroup.controls.idTypeA.value == '' && this.licenseFormGroup.controls.idTypeB.value == '') {
+            this.messageService.add({ key: 'toastKey1', severity: 'info', summary: 'Document Type A or Document Type B is required.', detail: '' });
+            return false;
+        }        
+
+        let model = {
+            userID: this.storageService.getApplicantId,
+            licenseID: this.userLicense.licenseID ? this.userLicense.licenseID : 0,
+            licenseNameA: this.licenseFormGroup.get('idTypeA').value,
+            licenseNameB: this.licenseFormGroup.get('idTypeB').value,
+            licenseNameC: this.licenseFormGroup.get('idTypeC').value,
+            licenseNo: this.licenseFormGroup.get('licenseNo').value,
+            expiryDate: this.licenseFormGroup.get('expiryDate').value ? this.licenseFormGroup.get('expiryDate').value.toLocaleString() : null,
+            issuedDate: this.licenseFormGroup.get('issueDate').value ? this.licenseFormGroup.get('issueDate').value.toLocaleString() : null,
+            fileData: this.licenseFile,
+            fileName: this.licenseFormGroup.get('fileName').value,
+            fileType: EnumFileType.PassportSsnTin,
+            issueAuthority: this.licenseFormGroup.get('issuingAuthority').value ? this.licenseFormGroup.get('issuingAuthority').value.issueAuthority : "",
+            stateCode: ""
         };
 
-        console.log(model);
         if (this.licenseId) {
             this.isLoading = true;
             this.licenseService.update(model).subscribe(() => {
@@ -157,7 +240,9 @@ export class AddEditIdentificationInfoComponent implements OnInit {
     }
 
     onClear() {
-        this.licenseFormGroup.get('idType').setValue('');
+        this.licenseFormGroup.get('idTypeA').setValue('');
+        this.licenseFormGroup.get('idTypeB').setValue('');
+        this.licenseFormGroup.get('idTypeC').setValue('');
         this.licenseFormGroup.get('licenseNo').setValue('');
         this.licenseFormGroup.get('expiryDate').setValue('');
         this.licenseFormGroup.get('issueDate').setValue('');
@@ -166,11 +251,19 @@ export class AddEditIdentificationInfoComponent implements OnInit {
     }
 
     onIssuingAuthoritySearch($event) {
-        this.licenseService.getIssueingAuthorityByText($event.query).subscribe(data => {            
-            //console.log(data.body.data);
-            this.issuingAuthorityResults = data.body;
+        this.licenseService.getIssueingAuthorityByText($event.query).subscribe(data => {
+            this.issuingAuthorityResults = data.body.data;
         },
             err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get Issuing Authority', detail: '' }); },
             () => { });
+    }
+    getUTCFormatedDate(value): Date {
+        if (value) {
+            return new Date(Date.UTC(
+                new Date(value).getFullYear(),
+                new Date(value).getMonth(),
+                new Date(value).getDate()));
+        }
+        return null;
     }
 }

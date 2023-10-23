@@ -3,21 +3,22 @@ import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { resourceServerUrl } from '../../common/constants/auth-keys';
 import { Observable } from 'rxjs';
 import { EnumFileType } from '../upload-file/upload-file.model';
-import { StorageService } from '../../common/services/storage.service';
 
 @Injectable()
 export class IdentificationInfoService {
-    
+
+    private getAllUserLicenseURI: string = `${resourceServerUrl}/api/user-license/get-all`;
     private getUserLicenseByIdURI: string = `${resourceServerUrl}/api/user-license/get`;
     private saveUserLicenseURI: string = `${resourceServerUrl}/api/user-license/save`;
     private updateUserLicenseURI: string = `${resourceServerUrl}/api/user-license/update`;
-    private deleteUserLicenseURI: string = `${resourceServerUrl}/api/user-license/delete/`;    
+    private deleteUserLicenseURI: string = `${resourceServerUrl}/api/user-license/delete/`;
+    private issueingAuthorityURI: string = `${resourceServerUrl}/api/applicant-info/issuing-authority/`;
 
-    constructor(private http: HttpClient, private storageService: StorageService) {
+    constructor(private http: HttpClient) {
     }
 
     getAllUserLicense(): Observable<HttpResponse<any>> {
-        return this.http.get(`${resourceServerUrl}/api/user-license/get-all?applicantId=${this.storageService.getApplicantId}`, { observe: 'response' });
+        return this.http.get(this.getAllUserLicenseURI + "/" + EnumFileType.PassportSsnTin, { observe: 'response' });
     }
 
     getUserLicenseById(id: any): Observable<HttpResponse<any>> {
@@ -42,7 +43,7 @@ export class IdentificationInfoService {
         return this.http.delete(this.deleteUserLicenseURI + userLicenseId);
     }
 
-    getIssueingAuthorityByText(text: string): Observable<HttpResponse<any>> {        
-        return this.http.get(encodeURI(`${resourceServerUrl}/api/applicant-info/issuing-authority?text=${text}`), { observe: 'response' });
+    getIssueingAuthorityByText(text: string = 'AllIssueAuthority'): Observable<HttpResponse<any>> {
+        return this.http.get(encodeURI(this.issueingAuthorityURI + text), { observe: 'response' });
     }
 }
