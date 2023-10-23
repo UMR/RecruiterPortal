@@ -238,8 +238,9 @@ namespace RecruiterPortal.DAL.Managers
                 {
                     applicantStatusList = (from applicantStatus in context.ApplicantStatuses
                                            join pos in context.Positions on applicantStatus.PositionId equals pos.Id
-                                           join ins in context.Institutions on applicantStatus.InstitutionId equals ins.Id 
-                                           into ins2 from institution in ins2.DefaultIfEmpty()
+                                           join ins in context.Institutions on applicantStatus.InstitutionId equals ins.Id
+                                           into ins2
+                                           from institution in ins2.DefaultIfEmpty()
                                            join app in context.Users
                                            on applicantStatus.ApplicantId equals app.UserId
                                            where applicantStatus.AgencyId == agencyId && applicantStatus.Status == statusId && applicantStatus.IsActive == true
@@ -305,21 +306,21 @@ namespace RecruiterPortal.DAL.Managers
             try
             {
                 GenericRepository<ApplicantStatus> repository = new GenericRepository<ApplicantStatus>();
-                var newLeads = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.NewLeads);
+                var newLeads = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.NewLeads && u.IsActive == true);
                 repository = new GenericRepository<ApplicantStatus>();
-                var preScreened = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.PreScreened);
+                var preScreened = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.PreScreened && u.IsActive == true);
                 repository = new GenericRepository<ApplicantStatus>();
-                var phoneScreened = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.PhoneScreened);
+                var phoneScreened = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.PhoneScreened && u.IsActive == true);
                 repository = new GenericRepository<ApplicantStatus>();
-                var finalInterview = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.FinalInterview);
+                var finalInterview = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.FinalInterview && u.IsActive == true);
                 repository = new GenericRepository<ApplicantStatus>();
-                var offered = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.Offered);
+                var offered = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.Offered && u.IsActive == true);
                 repository = new GenericRepository<ApplicantStatus>();
-                var accepted = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.Accepted);
+                var accepted = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.Accepted && u.IsActive == true);
                 repository = new GenericRepository<ApplicantStatus>();
-                var refused = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.Refused);
+                var refused = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.Refused && u.IsActive == true);
                 repository = new GenericRepository<ApplicantStatus>();
-                var rejected = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.Rejected);
+                var rejected = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.Rejected && u.IsActive == true);
 
                 ApplicantStatusCountModel applicantCountModel = new ApplicantStatusCountModel();
                 applicantCountModel.NewLeads = newLeads.ToString();
