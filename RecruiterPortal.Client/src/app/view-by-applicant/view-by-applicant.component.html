@@ -80,7 +80,7 @@
                                                  (onLazyLoad)="loadApplicantsLazy($event)"
                                                  [rowsPerPageOptions]="[10,15,20]"
                                                  [showCurrentPageReport]="true"
-                                                 currentPageReportTemplate="Total Records {{totalApplicants}}">
+                                                 currentPageReportTemplate="Total Records: {{totalApplicants}}">
                                             <ng-template pTemplate="header" let-columns>
                                                 <tr>
                                                     <th *ngFor="let col of columns">

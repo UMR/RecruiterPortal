@@ -36,6 +36,7 @@ export class AcceptedComponent implements OnInit {
         this.acceptedService.getApplicantStatus(StatusEnum.Accepted).subscribe(response => {
             if (response.status === 200) {
                 this.applicants = response.body;
+                this.totalRecords = response.body.length;
             }
         },
             err => {

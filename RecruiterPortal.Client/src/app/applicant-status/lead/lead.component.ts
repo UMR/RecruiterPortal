@@ -11,7 +11,7 @@ import { StatusEnum } from '../status/status.enum';
 export class LeadComponent implements OnInit {
     public isLoading: boolean = false;
     public leads: any[] = [];
-    public totalApplicant: number;
+    public totalRecords: number = 0;
     public Id: number;
     public cols: any[];
     public rows: number = 15;
@@ -35,6 +35,7 @@ export class LeadComponent implements OnInit {
         this.leadService.getApplicantStatus(StatusEnum.NewLeads).subscribe(response => {
             if (response.status === 200) {
                 this.leads = response.body;
+                this.totalRecords = response.body.length;
             }
         },
             err => {

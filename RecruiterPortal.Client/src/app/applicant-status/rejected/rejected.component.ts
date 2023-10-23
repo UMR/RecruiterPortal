@@ -37,6 +37,7 @@ export class RejectedComponent implements OnInit {
         this.rejectedService.getApplicantStatus(StatusEnum.Rejected).subscribe(response => {
             if (response.status === 200) {
                 this.applicants = response.body;
+                this.totalRecords = response.body.length;
             }
         },
             err => {

@@ -42,6 +42,7 @@ export class PaperScreenedComponent implements OnInit {
         this.paperScreenedService.getApplicantStatus(StatusEnum.PreScreened).subscribe(response => {
             if (response.status === 200) {
                 this.applicants = response.body;
+                this.totalRecords = response.body.length;
             }
         },
             err => {

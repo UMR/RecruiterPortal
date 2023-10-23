@@ -33,7 +33,7 @@
                          (onLazyLoad)="loadJobLazy($event)"
                          [rowsPerPageOptions]="[10,15,20]"
                          [showCurrentPageReport]="true"
-                         currentPageReportTemplate="Total Records {{totalJobs}}">
+                         currentPageReportTemplate="Total Records: {{totalJobs}}">
                     <ng-template pTemplate="header" let-columns>
                         <tr>
                             <th>Job Title</th>

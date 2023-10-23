@@ -37,6 +37,7 @@ export class FinalInterviewComponent implements OnInit {
         this.finalInterviewService.getApplicantStatus(StatusEnum.FinalInterview).subscribe(response => {
             if (response.status === 200) {
                 this.applicants = response.body;
+                this.totalRecords = response.body.length;
             }
         },
             err => {
