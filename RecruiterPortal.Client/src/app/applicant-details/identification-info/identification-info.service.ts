@@ -11,8 +11,7 @@ export class IdentificationInfoService {
     private getUserLicenseByIdURI: string = `${resourceServerUrl}/api/user-license/get`;
     private saveUserLicenseURI: string = `${resourceServerUrl}/api/user-license/save`;
     private updateUserLicenseURI: string = `${resourceServerUrl}/api/user-license/update`;
-    private deleteUserLicenseURI: string = `${resourceServerUrl}/api/user-license/delete/`;
-    private issueingAuthorityURI: string = `${resourceServerUrl}/api/applicant-info/issuing-authority/`;
+    private deleteUserLicenseURI: string = `${resourceServerUrl}/api/user-license/delete/`;    
 
     constructor(private http: HttpClient) {
     }
@@ -44,6 +43,6 @@ export class IdentificationInfoService {
     }
 
     getIssueingAuthorityByText(text: string = 'AllIssueAuthority'): Observable<HttpResponse<any>> {
-        return this.http.get(encodeURI(this.issueingAuthorityURI + text), { observe: 'response' });
+        return this.http.get(encodeURI(`${resourceServerUrl}/api/applicant-info/issuing-authority?text=${text}`), { observe: 'response' });
     }
 }

@@ -141,9 +141,10 @@ export class AddEditIdentificationInfoComponent implements OnInit {
     getUserLicenseById(userLicenseId: number) {
         this.isLoading = true;
         this.licenseService.getUserLicenseById(userLicenseId)
-            .subscribe(data => {
-                if (data.status === 200) {
-                    this.userLicense = data.body;
+            .subscribe(res => {
+                console.log(res);
+                if (res.status === 200) {
+                    this.userLicense = res.body;
                 }
                 else {
                     this.userLicense = {};
@@ -161,18 +162,17 @@ export class AddEditIdentificationInfoComponent implements OnInit {
 
     fillUserLicense() {
         this.licenseFormGroup.patchValue({
-            idTypeA: this.userLicense.licenseNameA,
-            idTypeB: this.userLicense.licenseNameB,
-            idTypeC: this.userLicense.licenseNameC,
-            licenseNo: this.checkNullOrUndefined(this.userLicense.licenseNo),
-            issueDate: this.userLicense.issuedDate ? new Date(this.userLicense.issuedDate) : null,
-            expiryDate: this.userLicense.expiryDate ? new Date(this.userLicense.expiryDate) : null,
-            fileName: this.checkNullOrUndefined(this.userLicense.fileName),
-            issuingAuthority: { issueAuthority: this.checkNullOrUndefined(this.userLicense.issueAuthority) }
+            idTypeA: this.userLicense.LicenseNameA,
+            idTypeB: this.userLicense.LicenseNameB,
+            idTypeC: this.userLicense.LicenseNameC,
+            licenseNo: this.checkNullOrUndefined(this.userLicense.LicenseNo),
+            issueDate: this.userLicense.IssuedDate ? new Date(this.userLicense.IssuedDate) : null,
+            expiryDate: this.userLicense.ExpiryDate ? new Date(this.userLicense.ExpiryDate) : null,
+            fileName: this.checkNullOrUndefined(this.userLicense.FileName),
+            issuingAuthority: { issueAuthority: this.checkNullOrUndefined(this.userLicense.IssueAuthority) }
         });
-
-        this.licenseFormGroup.controls.idTypeB.setValue(this.userLicense.licenseNameB);
-        this.licenseFormGroup.controls.idTypeC.setValue(this.userLicense.licenseNameC);
+        this.licenseFormGroup.controls.idTypeB.setValue(this.userLicense.LicenseNameB);
+        this.licenseFormGroup.controls.idTypeC.setValue(this.userLicense.LicenseNameC);
     }
 
     checkNullOrUndefined(value) {
@@ -189,11 +189,10 @@ export class AddEditIdentificationInfoComponent implements OnInit {
     }
 
     onSave() {
-
         if (this.licenseFormGroup.controls.idTypeA.value == '' && this.licenseFormGroup.controls.idTypeB.value == '') {
             this.messageService.add({ key: 'toastKey1', severity: 'info', summary: 'Document Type A or Document Type B is required.', detail: '' });
             return false;
-        }        
+        }
 
         let model = {
             userID: this.storageService.getApplicantId,
@@ -210,7 +209,6 @@ export class AddEditIdentificationInfoComponent implements OnInit {
             issueAuthority: this.licenseFormGroup.get('issuingAuthority').value ? this.licenseFormGroup.get('issuingAuthority').value.issueAuthority : "",
             stateCode: ""
         };
-
         if (this.licenseId) {
             this.isLoading = true;
             this.licenseService.update(model).subscribe(() => {
@@ -251,8 +249,12 @@ export class AddEditIdentificationInfoComponent implements OnInit {
     }
 
     onIssuingAuthoritySearch($event) {
-        this.licenseService.getIssueingAuthorityByText($event.query).subscribe(data => {
-            this.issuingAuthorityResults = data.body.data;
+        this.licenseService.getIssueingAuthorityByText($event.query).subscribe(res => {            
+            if (res.status === 200) {
+                console.log(res);
+                this.issuingAuthorityResults = res.body;
+                console.log(this.issuingAuthorityResults);
+            }
         },
             err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get Issuing Authority', detail: '' }); },
             () => { });

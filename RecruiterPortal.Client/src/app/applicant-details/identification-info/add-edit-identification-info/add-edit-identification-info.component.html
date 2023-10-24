@@ -94,8 +94,8 @@
                         <div class="form-group">
                             <label for="issuingAuthority" class="form-label">Issuing Authority</label>
                             <p-autoComplete formControlName="issuingAuthority" [suggestions]="issuingAuthorityResults" class="form-control"
-                                            (completeMethod)="onIssuingAuthoritySearch($event)" field="issueAuthority"
-                                            forceSelection="true" tabindex="7">
+                                            (completeMethod)="onIssuingAuthoritySearch($event)" field="IssueAuthority"
+                                            forceSelection="true" tabindex="7" [dropdown]="true">
                             </p-autoComplete>
                         </div>
                     </div>
