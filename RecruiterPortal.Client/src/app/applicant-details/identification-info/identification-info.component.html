@@ -28,11 +28,11 @@
                 </div>
                 <h6>{{idInfo.LicenseNo}}</h6>
                 <div class="refer">
-                  <p *ngIf='idInfo.issuedDate!==""'><label for="" style="color:#434A54">Issue Date:&nbsp;</label><label for="">{{idInfo.IssuedDate}}</label></p>
-                  <p *ngIf='idInfo.expiryDate!==""'><label for="" style="color:#434A54">Expiry Date:&nbsp;</label><label for="">{{idInfo.ExpiryDate}}</label></p>
+                  <p *ngIf='idInfo.IssuedDate'><label for="" style="color:#434A54">Issue Date:&nbsp;</label><label for="">{{idInfo.IssuedDate}}</label></p>
+                  <p *ngIf='idInfo.ExpiryDate'><label for="" style="color:#434A54">Expiry Date:&nbsp;</label><label for="">{{idInfo.ExpiryDate}}</label></p>
                 </div>
                 <div class="refer">
-                  <p *ngIf='idInfo.fileName!==""'><label for="" style="color:#434A54">File Name:&nbsp;</label><label for="">{{idInfo.FileName}}</label></p>
+                  <p *ngIf='idInfo.FileName'><label for="" style="color:#434A54">File Name:&nbsp;</label><label for="">{{idInfo.FileName}}</label></p>
                 </div>
               </div>
             </li>
