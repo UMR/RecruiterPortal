@@ -50,7 +50,7 @@ export class HeaderComponent {
 
         var user = this.storageService.getDataFromSession("CurrentUserInfo");
         if (user != null) {
-            this.username = user.LastName + " " + user.FirstName;
+            this.username = user.FirstName + " " + user.LastName ;
         }
         //  this.isAgencyOwner = true;
 
