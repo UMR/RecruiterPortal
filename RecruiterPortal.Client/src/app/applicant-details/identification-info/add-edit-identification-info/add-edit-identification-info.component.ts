@@ -20,6 +20,7 @@ export class AddEditIdentificationInfoComponent implements OnInit {
     public userLicense: any = {};
     public licenseId: number;
     private licenseFile: string;
+    public uploadedFile: any;
     public minDateValue: Date = new Date();
     public issuingAuthorityResults: string[];
     public documentNumberLabel: string = 'Document Number';
@@ -108,6 +109,7 @@ export class AddEditIdentificationInfoComponent implements OnInit {
             } else if (event.files[0].size > 5000000) {
                 this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid file size', detail: 'File size limit: 5MB' });
             } else {
+                this.uploadedFile = event.files[0];
                 this.licenseFormGroup.get('fileName').setValue(event.files[0].name);
                 let reader = new FileReader();
                 reader.readAsDataURL(event.files[0]);
@@ -172,6 +174,8 @@ export class AddEditIdentificationInfoComponent implements OnInit {
         });
         this.licenseFormGroup.controls.idTypeB.setValue(this.userLicense.LicenseNameB);
         this.licenseFormGroup.controls.idTypeC.setValue(this.userLicense.LicenseNameC);
+        this.licenseFile = this.userLicense.FIleData;
+        this.uploadedFile = { ...this.uploadedFile, name: this.userLicense.FileName };    
     }
 
     checkNullOrUndefined(value) {
@@ -244,6 +248,8 @@ export class AddEditIdentificationInfoComponent implements OnInit {
         this.licenseFormGroup.get('issueDate').setValue('');
         this.licenseFormGroup.get('fileName').setValue('');
         this.licenseFormGroup.get('issuingAuthority').setValue('');
+        this.licenseFile = null;
+        this.uploadedFile = null;
     }
 
     onIssuingAuthoritySearch($event) {
