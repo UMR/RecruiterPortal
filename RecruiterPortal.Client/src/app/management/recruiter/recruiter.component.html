@@ -169,7 +169,7 @@
         </div>
         <p-footer>
             <div>
-                <button pButton label="Cancel" class="btn-cancel" (click)="hideDialog()"></button>
+                <button pButton label="Cancel" class="btn-cancel" (click)="hideDialog()" type="reset"></button>
                 <div style="float:right">
                     <button label="Clear" type="reset" pButton class="btn-clear" (click)="onClickClear()"></button>
                     <button label="Save" type="submit" pButton class="btn-save" [disabled]="regForm.invalid"></button>
