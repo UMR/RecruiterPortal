@@ -39,7 +39,7 @@ export class AddEditAgreementComponent implements OnInit {
         this.addEditAgreementService.getAgreementInfo(this.service.getApplicantId)
             .subscribe(data => {
                 if (data.status === 200 && data.body !== null) {
-                    this.agreementId = data.body.agreementID;
+                    this.agreementId = data.body.AgreementID;
                     this.addEditAgreementFormGroup.setValue({
                         contractorName: data.body.ContractorName,
                         streetAdress: data.body.StreetAddress,
