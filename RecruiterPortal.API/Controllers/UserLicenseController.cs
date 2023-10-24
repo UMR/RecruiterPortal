@@ -21,7 +21,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             try
             {
-                 IEnumerable<UserLicense> userLicenses = UserLicenseManager.GetUserLicenseByUserId(applicantId);
+                IEnumerable<UserLicense> userLicenses = UserLicenseManager.GetUserLicenseByUserId(applicantId);
                 List<UserLicenseModel> userLicenseList = new List<UserLicenseModel>();
 
                 if (userLicenses != null && userLicenses.Count() > 0)
@@ -81,7 +81,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         public IActionResult GetUserLicenseByFileType(byte fileType)
         {
             try
-            {                
+            {
                 IEnumerable<UserLicense> userLicenses = UserLicenseManager.GetUserLicenseByFileType(base.GetCurrentUser().RecruiterId, fileType);
                 List<UserLicenseModel> userLicenseList = new List<UserLicenseModel>();
 
@@ -147,7 +147,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
         [Route("get/{userLicenseId}")]
         [HttpGet]
-        public IActionResult GetUserReferenceByUserId(long userLicenseId)
+        public IActionResult GetUserLicenseByUserId(long userLicenseId)
         {
             try
             {
@@ -161,7 +161,6 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     userLicenseModel.LicenseNameB = userLicense.LicenseNameB;
                     userLicenseModel.LicenseNameC = userLicense.LicenseNameC;
                     userLicenseModel.LicenseNo = userLicense.LicenseNo;
-
                     if (userLicense.ExpiryDate != null)
                     {
                         userLicenseModel.ExpiryDate = userLicense.ExpiryDate.ToString();

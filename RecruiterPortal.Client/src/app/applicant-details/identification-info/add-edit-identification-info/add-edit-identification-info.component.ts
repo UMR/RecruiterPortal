@@ -141,8 +141,7 @@ export class AddEditIdentificationInfoComponent implements OnInit {
     getUserLicenseById(userLicenseId: number) {
         this.isLoading = true;
         this.licenseService.getUserLicenseById(userLicenseId)
-            .subscribe(res => {
-                console.log(res);
+            .subscribe(res => {                
                 if (res.status === 200) {
                     this.userLicense = res.body;
                 }
@@ -160,7 +159,7 @@ export class AddEditIdentificationInfoComponent implements OnInit {
                 });
     }
 
-    fillUserLicense() {
+    fillUserLicense() {        
         this.licenseFormGroup.patchValue({
             idTypeA: this.userLicense.LicenseNameA,
             idTypeB: this.userLicense.LicenseNameB,
@@ -169,7 +168,7 @@ export class AddEditIdentificationInfoComponent implements OnInit {
             issueDate: this.userLicense.IssuedDate ? new Date(this.userLicense.IssuedDate) : null,
             expiryDate: this.userLicense.ExpiryDate ? new Date(this.userLicense.ExpiryDate) : null,
             fileName: this.checkNullOrUndefined(this.userLicense.FileName),
-            issuingAuthority: { issueAuthority: this.checkNullOrUndefined(this.userLicense.IssueAuthority) }
+            issuingAuthority: { IssueAuthority: this.checkNullOrUndefined(this.userLicense.IssueAuthority) }
         });
         this.licenseFormGroup.controls.idTypeB.setValue(this.userLicense.LicenseNameB);
         this.licenseFormGroup.controls.idTypeC.setValue(this.userLicense.LicenseNameC);
@@ -193,10 +192,9 @@ export class AddEditIdentificationInfoComponent implements OnInit {
             this.messageService.add({ key: 'toastKey1', severity: 'info', summary: 'Document Type A or Document Type B is required.', detail: '' });
             return false;
         }
-
         let model = {
             userID: this.storageService.getApplicantId,
-            licenseID: this.userLicense.licenseID ? this.userLicense.licenseID : 0,
+            licenseID: this.userLicense.LicenseID ? this.userLicense.LicenseID : 0,
             licenseNameA: this.licenseFormGroup.get('idTypeA').value,
             licenseNameB: this.licenseFormGroup.get('idTypeB').value,
             licenseNameC: this.licenseFormGroup.get('idTypeC').value,
@@ -206,9 +204,9 @@ export class AddEditIdentificationInfoComponent implements OnInit {
             fileData: this.licenseFile,
             fileName: this.licenseFormGroup.get('fileName').value,
             fileType: EnumFileType.PassportSsnTin,
-            issueAuthority: this.licenseFormGroup.get('issuingAuthority').value ? this.licenseFormGroup.get('issuingAuthority').value.issueAuthority : "",
+            issueAuthority: this.licenseFormGroup.get('issuingAuthority').value ? this.licenseFormGroup.get('issuingAuthority').value.IssueAuthority : "",
             stateCode: ""
-        };
+        };        
         if (this.licenseId) {
             this.isLoading = true;
             this.licenseService.update(model).subscribe(() => {
@@ -250,10 +248,8 @@ export class AddEditIdentificationInfoComponent implements OnInit {
 
     onIssuingAuthoritySearch($event) {
         this.licenseService.getIssueingAuthorityByText($event.query).subscribe(res => {            
-            if (res.status === 200) {
-                console.log(res);
-                this.issuingAuthorityResults = res.body;
-                console.log(this.issuingAuthorityResults);
+            if (res.status === 200) {                
+                this.issuingAuthorityResults = res.body;                
             }
         },
             err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get Issuing Authority', detail: '' }); },
