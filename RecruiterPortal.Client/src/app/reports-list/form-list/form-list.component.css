@@ -27,3 +27,7 @@
 :host >>> .fileupload-success div > div :first-child {
     border-left: 5px solid green !important;
 }
+
+:host >>> .ui-table .ui-table-tbody > tr.ui-state-highlight {
+    background-color: #007ad9 !important;
+}
