@@ -17,6 +17,13 @@ export const recaptchaSitekey = '6LcMLzYdAAAAAM2ZK5SePLk_sfsA_cP2og7KecX6';
 //export const resourceServerUrl = 'http://www.umrtest.com/RecruiterPortalAPI';
 //export const recaptchaSitekey = '6LcMLzYdAAAAAM2ZK5SePLk_sfsA_cP2og7KecX6';
 
+//////////////////////    easyon-boarding.com   //////////////////////////
+//export const authorizationServerUrl = 'http://www.easyon-boarding.com/RecruiterPortalAuth';
+//export const pathMatch = '/WebPortal';
+//export const scopes = ['WebPortal', 'offline_access', 'openid'];
+//export const resourceServerUrl = 'http://www.easyon-boarding.com/RecruiterPortalAPI';
+//export const recaptchaSitekey = '6LcMLzYdAAAAAM2ZK5SePLk_sfsA_cP2og7KecX6';
+
 //////////////////////////    172.16.1.104 PRODUCTION  //////////////////////////
 //export const authorizationServerUrl = 'https://www.universalmedicalrecord.com/RecruiterPortalAuth';
 //export const pathMatch = '/RecruiterPortal';
