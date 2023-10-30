@@ -31,11 +31,11 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     cbcModel = new CBCModel();
                     cbcModel.CBCID = cbcForm.Cbcid;
                     cbcModel.UserID = cbcForm.UserId;
-                    cbcModel.Alias_AKA = cbcForm.AliasAka;
+                    cbcModel.AliasAKA = cbcForm.AliasAka;
                     cbcModel.HomePhone = cbcForm.HomePhone;
                     cbcModel.AgencyIdentification = cbcForm.AgencyIdentification;
-                    cbcModel.LTHHP_PFI = cbcForm.LthhpPfi;
-                    cbcModel.LHCSA_License = cbcForm.LhcsaLicense;
+                    cbcModel.LTHHPPFI = cbcForm.LthhpPfi;
+                    cbcModel.LHCSALicense = cbcForm.LhcsaLicense;
                     cbcModel.AgencyName = cbcForm.AgencyName;
                     cbcModel.ATelephoneNo = cbcForm.AtelephoneNo;
                     cbcModel.APLastName = cbcForm.AplastName;
@@ -88,11 +88,11 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 {
                     Cbcform cbc = new Cbcform();
                     cbc.UserId = cbcModel.UserID;                    
-                    cbc.AliasAka = cbcModel.Alias_AKA;
+                    cbc.AliasAka = cbcModel.AliasAKA;
                     cbc.HomePhone = cbcModel.HomePhone;
                     cbc.AgencyIdentification = cbcModel.AgencyIdentification;
-                    cbc.LthhpPfi = cbcModel.LTHHP_PFI;
-                    cbc.LhcsaLicense = cbcModel.LHCSA_License;
+                    cbc.LthhpPfi = cbcModel.LTHHPPFI;
+                    cbc.LhcsaLicense = cbcModel.LHCSALicense;
                     cbc.AgencyName = cbcModel.AgencyName;
                     cbc.AtelephoneNo = cbcModel.ATelephoneNo;
                     cbc.AplastName = cbcModel.APLastName;
@@ -237,11 +237,11 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             FillApplicantInfo(applicantId, pdfFormFields);
             FillCertInfo(applicantId, pdfFormFields);
 
-            pdfFormFields.SetField("Alias_AKA", dataRow["Alias_AKA"].ToString().Trim());
-            pdfFormFields.SetField("Alias_AKA1", dataRow["Alias_AKA"].ToString().Trim());
+            pdfFormFields.SetField("Alias_AKA", dataRow["AliasAKA"].ToString().Trim());
+            pdfFormFields.SetField("Alias_AKA1", dataRow["AliasAKA"].ToString().Trim());
             pdfFormFields.SetField("AgencyIdentification", dataRow["AgencyIdentification"].ToString());
-            pdfFormFields.SetField("LTHHP_PFI", dataRow["LTHHP_PFI"].ToString());
-            pdfFormFields.SetField("LHCSA_License", dataRow["LHCSA_License"].ToString());
+            pdfFormFields.SetField("LTHHP_PFI", dataRow["LTHHPPFI"].ToString());
+            pdfFormFields.SetField("LHCSA_License", dataRow["LHCSALicense"].ToString());
 
             pdfFormFields.SetField("AgencyName", dataRow["AgencyName"].ToString().Trim());
 
@@ -314,7 +314,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             pdfFormFields.SetField("ParentorLegalGuardian", dataRow["ParentorLegalGuardian"].ToString().Trim());
 
             pdfFormFields.SetField("AgencyName1", dataRow["AgencyName"].ToString().Trim());
-            pdfFormFields.SetField("PFIOperatingLicenseNumber:", dataRow["LTHHP_PFI"].ToString());
+            pdfFormFields.SetField("PFIOperatingLicenseNumber:", dataRow["LTHHPPFI"].ToString());
             pdfFormFields.SetField("Title2", dataRow["FTitle"].ToString().Trim());
             pdfFormFields.SetField("PrintNameofAuthorizedPerson", dataRow["APFirstName"].ToString().Trim() + " " + dataRow["APLastName"].ToString().Trim());
             pdfFormFields.SetField("SignatureAuthorizedPerson", dataRow["APFirstName"].ToString().Trim() + " " + dataRow["APLastName"].ToString().Trim());

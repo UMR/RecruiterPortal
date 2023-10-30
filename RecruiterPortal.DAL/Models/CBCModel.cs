@@ -9,11 +9,11 @@ namespace RecruiterPortalDAL.Models
     {
         public long CBCID { get; set; }
         public long UserID { get; set; }
-        public string Alias_AKA{ get; set; }
+        public string AliasAKA{ get; set; }
         public string HomePhone { get; set; }
         public string AgencyIdentification { get; set; }
-        public string LTHHP_PFI { get; set; }
-        public string LHCSA_License { get; set; }
+        public string LTHHPPFI { get; set; }
+        public string LHCSALicense { get; set; }
         public string AgencyName { get; set; }
         public string ATelephoneNo { get; set; }
         public string APLastName { get; set; }
