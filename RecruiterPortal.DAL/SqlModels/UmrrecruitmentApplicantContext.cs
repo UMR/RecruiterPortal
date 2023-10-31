@@ -303,7 +303,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
             entity.Property(e => e.AgencyName).HasMaxLength(500);
             entity.Property(e => e.AliasAka)
                 .HasMaxLength(500)
-                .HasColumnName("Alias_AKA");
+                .HasColumnName("AliasAKA");
             entity.Property(e => e.ApfirstName)
                 .HasMaxLength(500)
                 .HasColumnName("APFirstName");
@@ -358,10 +358,10 @@ public partial class UmrrecruitmentApplicantContext : DbContext
             entity.Property(e => e.HomePhone).HasMaxLength(500);
             entity.Property(e => e.LhcsaLicense)
                 .HasMaxLength(500)
-                .HasColumnName("LHCSA_License");
+                .HasColumnName("LHCSALicense");
             entity.Property(e => e.LthhpPfi)
                 .HasMaxLength(500)
-                .HasColumnName("LTHHP_PFI");
+                .HasColumnName("LTHHPPFI");
             entity.Property(e => e.MotherMaidenName).HasMaxLength(500);
             entity.Property(e => e.ParentorLegalGuardian).HasMaxLength(500);
             entity.Property(e => e.Signature).HasMaxLength(500);

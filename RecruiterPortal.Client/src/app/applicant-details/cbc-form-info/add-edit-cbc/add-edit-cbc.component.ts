@@ -71,8 +71,8 @@ export class AddEditCBCComponent implements OnInit {
                     this.cbcid = data.body.CBCID;
                     this.addEditCBCFormGroup.setValue({
                         agencyIdentification: data.body.AgencyIdentification,
-                        pfi: data.body.LTHHP_PFI,
-                        license: data.body.LHCSA_License,
+                        pfi: data.body.LTHHPPFI,
+                        license: data.body.LHCSALicense,
                         agencyName: data.body.AgencyName,
                         agFirstName: data.body.APFirstName,
                         agLastName: data.body.APLastName,
@@ -98,12 +98,12 @@ export class AddEditCBCComponent implements OnInit {
                         fpSignature: data.body.Signature,
                         fbDate: data.body.DateFingerPrinted ? new Date(data.body.DateFingerPrinted) : null,
                         motherMaidenName: data.body.MotherMaidenName,
-                        alias: data.body.Alias_AKA,
+                        alias: data.body.AliasAKA,
                         guardianSign: data.body.ParentorLegalGuardian,
                         homePhone: data.body.HomePhone,
                         title: data.body.Title
                     });
-                    this.pfiLicenseEnableDisable(data.body.AgencyIdentification, data.body.LTHHP_PFI, data.body.LHCSA_License);
+                    this.pfiLicenseEnableDisable(data.body.AgencyIdentification, data.body.LTHHPPFI, data.body.LHCSALicense);
                 }
             },
                 err => {
@@ -158,8 +158,8 @@ export class AddEditCBCComponent implements OnInit {
         }
         cbcModel.UserID = this.service.getApplicantId.toString();
         cbcModel.AgencyIdentification = this.addEditCBCFormGroup.get('agencyIdentification').value;
-        cbcModel.LTHHP_PFI = this.addEditCBCFormGroup.get('pfi').value;
-        cbcModel.LHCSA_License = this.addEditCBCFormGroup.get('license').value;
+        cbcModel.LTHHPPFI = this.addEditCBCFormGroup.get('pfi').value;
+        cbcModel.LHCSALicense = this.addEditCBCFormGroup.get('license').value;
         cbcModel.AgencyName = this.addEditCBCFormGroup.get('agencyName').value;
         cbcModel.APFirstName = this.addEditCBCFormGroup.get('agFirstName').value;
         cbcModel.APLastName = this.addEditCBCFormGroup.get('agLastName').value;
@@ -185,7 +185,7 @@ export class AddEditCBCComponent implements OnInit {
         cbcModel.Signature = this.addEditCBCFormGroup.get('fpSignature').value;
         cbcModel.DateFingerPrinted = this.addEditCBCFormGroup.get('fbDate').value ? this.getUTCFormatedDate(this.addEditCBCFormGroup.get('fbDate').value) : Date;;
         cbcModel.MotherMaidenName = this.addEditCBCFormGroup.get('motherMaidenName').value;
-        cbcModel.Alias_AKA = this.addEditCBCFormGroup.get('alias').value;
+        cbcModel.AliasAKA = this.addEditCBCFormGroup.get('alias').value;
         cbcModel.ParentorLegalGuardian = this.addEditCBCFormGroup.get('guardianSign').value;
         cbcModel.HomePhone = this.addEditCBCFormGroup.get('homePhone').value;
         cbcModel.Title = this.addEditCBCFormGroup.get('title').value;

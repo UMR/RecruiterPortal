@@ -54,8 +54,8 @@ export class CBCFormInfoComponent implements OnInit {
         console.log(data);
         if (data.status === 200 && data.body !== null) {
           this.agencyIdentification = data.body.AgencyIdentification;
-          this.pfi = data.body.LTHHP_PFI;
-          this.license = data.body.LHCSA_License;
+          this.pfi = data.body.LTHHPPFI;
+          this.license = data.body.LHCSALicense;
           this.agencyName = data.body.AgencyName;
           this.agFirstName = data.body.APFirstName;
           this.agLastName = data.body.APLastName;
@@ -81,7 +81,7 @@ export class CBCFormInfoComponent implements OnInit {
           this.fpSignature = data.body.Signature;
           this.fbDate = data.body.DateFingerPrinted;
           this.motherMaidenName = data.body.MotherMaidenName;
-          this.alias = data.body.Alias_AKA;
+          this.alias = data.body.AliasAKA;
           this.guardianSign = data.body.ParentorLegalGuardian;
           this.homePhone = data.body.HomePhone;
           this.title = data.body.Title

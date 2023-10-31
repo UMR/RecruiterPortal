@@ -1,11 +1,11 @@
 export class AddEditCBCModel {
     CBCID: string;
     UserID: string;
-    Alias_AKA: string;
+    AliasAKA: string;
     HomePhone: string;
     AgencyIdentification: string;
-    LTHHP_PFI: string;
-    LHCSA_License: string;
+    LTHHPPFI: string;
+    LHCSALicense: string;
     AgencyName: string;
     ATelephoneNo: string;
     APLastName: string;
