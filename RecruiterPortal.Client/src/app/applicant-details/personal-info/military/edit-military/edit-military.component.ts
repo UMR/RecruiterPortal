@@ -50,7 +50,7 @@ export class EditMilitaryComponent implements OnInit {
         this.editMilitaryService.getUserMilitary(this.service.getApplicantId)
             .subscribe(data => {
                 if (data.status === 200) {
-                    this.userMilitary = data.body;                    
+                    this.userMilitary = data.body;
                     this.onDischargeChange();
                     this.fillUserMilitary();
                 }
@@ -89,7 +89,7 @@ export class EditMilitaryComponent implements OnInit {
                 this.militaryFormGroup.get('toDate').setValue(toDate);
             }
             this.militaryFormGroup.get('rankDischarge').setValue(this.userMilitary.RankAtDischarge);
-            if (this.userMilitary.DischargeType == 0 || this.userMilitary.DischargeType == 1) {                
+            if (this.userMilitary.DischargeType == 0 || this.userMilitary.DischargeType == 1) {
                 let dischargeType = this.userMilitary.DischargeType ? 1 : 0;
                 this.militaryFormGroup.get('typeDischarge').setValue(dischargeType);
             }
@@ -106,7 +106,7 @@ export class EditMilitaryComponent implements OnInit {
         }
     }
 
-    onSave() {        
+    onSave() {
         if (this.userMilitary) {
             this.userMilitaryID = this.userMilitary.UserMilitaryID;
         }
@@ -158,6 +158,7 @@ export class EditMilitaryComponent implements OnInit {
         this.militaryFormGroup.get('toDate').setValue('');
         this.militaryFormGroup.get('rankDischarge').setValue('');
         this.militaryFormGroup.get('typeDischarge').setValue('');
+        this.militaryFormGroup.get('dishonour').setValidators([Validators.required, Validators.maxLength(500)]);
         this.militaryFormGroup.get('dishonour').setValue('');
     }
 
