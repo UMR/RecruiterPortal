@@ -137,7 +137,7 @@ export class EditMilitaryComponent implements OnInit {
     }
 
     onDischargeChange() {
-        if (this.militaryFormGroup.get('typeDischarge').value == '' || +this.militaryFormGroup.get('typeDischarge').value == 1) {
+        if (this.militaryFormGroup.get('typeDischarge').value == '' || this.militaryFormGroup.get('typeDischarge').value == null || +this.militaryFormGroup.get('typeDischarge').value == 1) {
             this.militaryFormGroup.get('dishonour').setValidators(null);
             this.trefDishonour.nativeElement.required = false;
             this.militaryFormGroup.get('dishonour').setValue('');
