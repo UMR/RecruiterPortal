@@ -7,7 +7,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="idTypeA" class="form-label">Document Type A</label>
-                            <select id="idTypeA" name="idTypeA" class="form-control" formControlName="idTypeA" placeholder="Select Document Type A" (change)="onChangeIdTypeA($event)" required
+                            <select id="idTypeA" name="idTypeA" class="form-control" formControlName="idTypeA" placeholder="Select Document Type A" (change)="onChangeIdTypeA($event.target.value)" required
                                     tabindex="1" autofocus>
                                 <option value="">----Document Type A----</option>
                                 <option value="U.S. Passport or U.S. Passport Card">U.S. Passport or U.S. Passport Card</option>
@@ -22,7 +22,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="idTypeB" class="form-label">Document Type B</label>
-                            <select id="idTypeB" name="idTypeB" class="form-control" formControlName="idTypeB" placeholder="Select Document Type B" (change)="onChangeIdTypeB($event)" required
+                            <select id="idTypeB" name="idTypeB" class="form-control" formControlName="idTypeB" placeholder="Select Document Type B" (change)="onChangeIdTypeB($event.target.value)" required
                                     tabindex="2">
                                 <option value="">----Document Type B----</option>
                                 <option value="Driver's license or ID card">Driver's license or ID card</option>

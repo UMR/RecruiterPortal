@@ -24,28 +24,6 @@ export class AddEditIdentificationInfoComponent implements OnInit {
     public minDateValue: Date = new Date();
     public issuingAuthorityResults: string[];
     public documentNumberLabel: string = 'Document Number';
-    public idTypes: any[] = [
-        'U.S. Passport or U.S. Passport Card',
-        'Permanent Resident Card',
-        'Alien Registration Receipt Card',
-        'Foreign passport with temporary I-551',
-        'Employment Authorization Document',
-        'Form I-94 or Form I-94A',
-        'Driver\'s license or ID card',
-        'School ID card',
-        'Voter\'s registration card',
-        'U.S. Military card or draft record',
-        'Voter\'s registration card',
-        'U.S. Coast Guard Merchant Mariner Card',
-        'School record or report card',
-        'Clinic, doctor, or hospital record',
-        'Day-care or nursery school record',
-        'SSN',
-        'Birth Certificate',
-        'Identification Card for Use of Resident Citizen in US (Form I-179)',
-        'Employment authorization document of Homeland Security',
-        'Other License'
-    ];
 
     constructor(private fb: FormBuilder, private licenseService: IdentificationInfoService,
         private router: Router, private activeRoute: ActivatedRoute,
@@ -61,45 +39,74 @@ export class AddEditIdentificationInfoComponent implements OnInit {
         this.createLicenseForm();
     }
 
-    onChangeIdType(event) {
-        this.licenseFormGroup.controls.licenseName.setValue('');
-        this.licenseFormGroup.controls.licenseNo.setValue('');
+    //onChangeIdType(event) {
+    //    this.licenseFormGroup.controls.licenseName.setValue('');
+    //    this.licenseFormGroup.controls.licenseNo.setValue('');
 
-        if (event.target.value == 'Other License') {
-            this.documentNumberLabel = 'License Number';
-            this.licenseFormGroup.controls.licenseName.setValidators([Validators.required]);
-            this.licenseFormGroup.controls.licenseName.updateValueAndValidity();
-        } else {
-            this.documentNumberLabel = 'Document Number';
-            this.licenseFormGroup.controls.licenseName.clearValidators();
-            this.licenseFormGroup.controls.licenseName.updateValueAndValidity();
-        }
+    //    if (event.target.value == 'Other License') {
+    //        this.documentNumberLabel = 'License Number';
+    //        this.licenseFormGroup.controls.licenseName.setValidators([Validators.required]);
+    //        this.licenseFormGroup.controls.licenseName.updateValueAndValidity();
+    //    } else {
+    //        this.documentNumberLabel = 'Document Number';
+    //        this.licenseFormGroup.controls.licenseName.clearValidators();
+    //        this.licenseFormGroup.controls.licenseName.updateValueAndValidity();
+    //    }
+    //}
 
-    }
-
-    onChangeIdTypeA(event) {
-        if (event.target.value) {
+    onChangeIdTypeA(value) {        
+        let typeA = value;
+        let typeB = this.licenseFormGroup.controls.idTypeB.value;
+        if (typeA && !typeB) {
             this.licenseFormGroup.controls.idTypeB.clearValidators();
             this.licenseFormGroup.controls.idTypeB.updateValueAndValidity();
-            this.licenseFormGroup.controls.idTypeC.clearValidators();
-            this.licenseFormGroup.controls.idTypeC.updateValueAndValidity();
+        } else if (!typeA && typeB) {
+            this.licenseFormGroup.controls.idTypeA.clearValidators();
+            this.licenseFormGroup.controls.idTypeA.updateValueAndValidity();
+        } else if (!typeA && !typeB) {
+            this.licenseFormGroup.controls.idTypeA.setValidators([Validators.required]);
+            this.licenseFormGroup.controls.idTypeA.updateValueAndValidity();
+            this.licenseFormGroup.controls.idTypeB.setValidators([Validators.required]);
+            this.licenseFormGroup.controls.idTypeB.updateValueAndValidity();
         }
     }
 
-    onChangeIdTypeB(event) {
-        if (event.target.value) {
+    onChangeIdTypeB(value) {
+        let typeB = value;
+        let typeA = this.licenseFormGroup.controls.idTypeA.value;
+
+        if (typeB && !typeA) {
             this.licenseFormGroup.controls.idTypeC.setValue('');
+            this.licenseFormGroup.controls.idTypeC.enable();
             this.licenseFormGroup.controls.idTypeC.setValidators([Validators.required]);
             this.licenseFormGroup.controls.idTypeC.updateValueAndValidity();
             this.licenseFormGroup.controls.idTypeA.clearValidators();
             this.licenseFormGroup.controls.idTypeA.updateValueAndValidity();
-        } else {
+        }
+        else if (!typeB && typeA) {
+            this.licenseFormGroup.controls.idTypeB.clearValidators();
+            this.licenseFormGroup.controls.idTypeB.updateValueAndValidity();
             this.licenseFormGroup.controls.idTypeC.setValue('');
+            this.licenseFormGroup.controls.idTypeC.disable();
             this.licenseFormGroup.controls.idTypeC.clearValidators();
             this.licenseFormGroup.controls.idTypeC.updateValueAndValidity();
+        }
+        else if (!typeA && !typeB) {
             this.licenseFormGroup.controls.idTypeA.setValidators([Validators.required]);
             this.licenseFormGroup.controls.idTypeA.updateValueAndValidity();
+            this.licenseFormGroup.controls.idTypeB.setValidators([Validators.required]);
+            this.licenseFormGroup.controls.idTypeB.updateValueAndValidity();
+            this.licenseFormGroup.controls.idTypeC.setValue('');
+            this.licenseFormGroup.controls.idTypeC.disable();
+            this.licenseFormGroup.controls.idTypeC.clearValidators();
+            this.licenseFormGroup.controls.idTypeC.updateValueAndValidity();
         }
+        else if (typeA && typeB) {
+            this.licenseFormGroup.controls.idTypeC.setValue('');
+            this.licenseFormGroup.controls.idTypeC.enable();
+            this.licenseFormGroup.controls.idTypeC.clearValidators();
+            this.licenseFormGroup.controls.idTypeC.updateValueAndValidity();
+        }                
     }
 
     onFileSelect(event) {
@@ -124,7 +131,7 @@ export class AddEditIdentificationInfoComponent implements OnInit {
         this.licenseFormGroup = this.fb.group({
             idTypeA: [''],
             idTypeB: [''],
-            idTypeC: [''],
+            idTypeC: [{ value: '', disabled: true }],
             licenseNo: ['', [Validators.maxLength(50)]],
             fileName: [''],
             issueDate: ['', [new CompareValidator('expiryDate', '<', 'true')]],
@@ -143,7 +150,7 @@ export class AddEditIdentificationInfoComponent implements OnInit {
     getUserLicenseById(userLicenseId: number) {
         this.isLoading = true;
         this.licenseService.getUserLicenseById(userLicenseId)
-            .subscribe(res => {                
+            .subscribe(res => {
                 if (res.status === 200) {
                     this.userLicense = res.body;
                 }
@@ -172,10 +179,29 @@ export class AddEditIdentificationInfoComponent implements OnInit {
             fileName: this.checkNullOrUndefined(this.userLicense.FileName),
             issuingAuthority: { IssueAuthority: this.checkNullOrUndefined(this.userLicense.IssueAuthority) }
         });
-        this.licenseFormGroup.controls.idTypeB.setValue(this.userLicense.LicenseNameB);
-        this.licenseFormGroup.controls.idTypeC.setValue(this.userLicense.LicenseNameC);
         this.licenseFile = this.userLicense.FIleData;
-        this.uploadedFile = { ...this.uploadedFile, name: this.userLicense.FileName };    
+        this.uploadedFile = { ...this.uploadedFile, name: this.userLicense.FileName };        
+
+        if (this.userLicense.LicenseNameA && !this.userLicense.LicenseNameB) {
+            this.licenseFormGroup.controls.idTypeB.clearValidators();
+            this.licenseFormGroup.controls.idTypeB.updateValueAndValidity();
+        }
+        else if (this.userLicense.LicenseNameB && !this.userLicense.LicenseNameA) {
+            this.licenseFormGroup.controls.idTypeA.clearValidators();
+            this.licenseFormGroup.controls.idTypeA.updateValueAndValidity();
+            this.licenseFormGroup.controls.idTypeC.enable();
+            this.licenseFormGroup.controls.idTypeC.clearValidators();
+            this.licenseFormGroup.controls.idTypeC.updateValueAndValidity();
+        }
+        else if (this.userLicense.LicenseNameA && this.userLicense.LicenseNameB) {
+            this.licenseFormGroup.controls.idTypeA.clearValidators();
+            this.licenseFormGroup.controls.idTypeA.updateValueAndValidity();
+            this.licenseFormGroup.controls.idTypeB.clearValidators();
+            this.licenseFormGroup.controls.idTypeB.updateValueAndValidity();
+            this.licenseFormGroup.controls.idTypeC.enable();
+            this.licenseFormGroup.controls.idTypeC.clearValidators();
+            this.licenseFormGroup.controls.idTypeC.updateValueAndValidity();
+        }
     }
 
     checkNullOrUndefined(value) {
@@ -210,7 +236,7 @@ export class AddEditIdentificationInfoComponent implements OnInit {
             fileType: EnumFileType.PassportSsnTin,
             issueAuthority: this.licenseFormGroup.get('issuingAuthority').value ? this.licenseFormGroup.get('issuingAuthority').value.IssueAuthority : "",
             stateCode: ""
-        };        
+        };
         if (this.licenseId) {
             this.isLoading = true;
             this.licenseService.update(model).subscribe(() => {
@@ -250,12 +276,14 @@ export class AddEditIdentificationInfoComponent implements OnInit {
         this.licenseFormGroup.get('issuingAuthority').setValue('');
         this.licenseFile = null;
         this.uploadedFile = null;
+        this.onChangeIdTypeA('');
+        this.onChangeIdTypeB('');
     }
 
     onIssuingAuthoritySearch($event) {
-        this.licenseService.getIssueingAuthorityByText($event.query).subscribe(res => {            
-            if (res.status === 200) {                
-                this.issuingAuthorityResults = res.body;                
+        this.licenseService.getIssueingAuthorityByText($event.query).subscribe(res => {
+            if (res.status === 200) {
+                this.issuingAuthorityResults = res.body;
             }
         },
             err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get Issuing Authority', detail: '' }); },
