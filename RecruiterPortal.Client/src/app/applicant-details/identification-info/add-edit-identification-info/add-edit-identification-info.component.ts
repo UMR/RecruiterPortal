@@ -22,8 +22,7 @@ export class AddEditIdentificationInfoComponent implements OnInit {
     private licenseFile: string;
     public uploadedFile: any;
     public minDateValue: Date = new Date();
-    public issuingAuthorityResults: string[];
-    public documentNumberLabel: string = 'Document Number';
+    public issuingAuthorityResults: string[];    
 
     constructor(private fb: FormBuilder, private licenseService: IdentificationInfoService,
         private router: Router, private activeRoute: ActivatedRoute,
@@ -37,22 +36,7 @@ export class AddEditIdentificationInfoComponent implements OnInit {
             }
         });
         this.createLicenseForm();
-    }
-
-    //onChangeIdType(event) {
-    //    this.licenseFormGroup.controls.licenseName.setValue('');
-    //    this.licenseFormGroup.controls.licenseNo.setValue('');
-
-    //    if (event.target.value == 'Other License') {
-    //        this.documentNumberLabel = 'License Number';
-    //        this.licenseFormGroup.controls.licenseName.setValidators([Validators.required]);
-    //        this.licenseFormGroup.controls.licenseName.updateValueAndValidity();
-    //    } else {
-    //        this.documentNumberLabel = 'Document Number';
-    //        this.licenseFormGroup.controls.licenseName.clearValidators();
-    //        this.licenseFormGroup.controls.licenseName.updateValueAndValidity();
-    //    }
-    //}
+    }    
 
     onChangeIdTypeA(value) {        
         let typeA = value;
@@ -104,7 +88,7 @@ export class AddEditIdentificationInfoComponent implements OnInit {
         else if (typeA && typeB) {
             this.licenseFormGroup.controls.idTypeC.setValue('');
             this.licenseFormGroup.controls.idTypeC.enable();
-            this.licenseFormGroup.controls.idTypeC.clearValidators();
+            this.licenseFormGroup.controls.idTypeC.setValidators([Validators.required]);
             this.licenseFormGroup.controls.idTypeC.updateValueAndValidity();
         }                
     }
