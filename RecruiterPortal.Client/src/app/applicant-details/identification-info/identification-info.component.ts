@@ -66,4 +66,34 @@ export class IdentificationInfoComponent implements OnInit {
             });
         }
     }
+
+    onViewPdf(userLicense: any) {
+        this.licenseService.getUserLicenseById(userLicense.LicenseID).subscribe(res => {
+            var blob = this.b64toBlob(res.body.FIleData, "application/pdf", "");
+            const fileURL = URL.createObjectURL(blob);
+            window.open(fileURL, '_blank');
+        });
+    }
+
+    b64toBlob(b64Data, contentType, sliceSize) {
+        contentType = contentType || "";
+        sliceSize = sliceSize || 512;
+
+        var byteCharacters = atob(b64Data);
+        var byteArrays = [];
+
+        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            var byteNumbers = new Array(slice.length);
+            for (var i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            var byteArray = new Uint8Array(byteNumbers);
+
+            byteArrays.push(byteArray);
+        }
+        return new File(byteArrays, "pot", { type: contentType });
+    }
 }

@@ -25,6 +25,7 @@
                                     </div>                                                                     
                                     <ul class="list-inline mr-5">
                                         <li class="list-inline-item mr-4"><a [routerLink]="['./add-edit',idInfo.LicenseID]" class="text-primary"><i class="fa fa-pencil-alt"></i> Edit</a></li>
+                                        <li class="list-inline-item mr-4" *ngIf="idInfo.FileName"><a class="text-primary" (click)="onViewPdf(idInfo)"><i class="fa fa-eye mr-2"></i>View</a></li>
                                         <li class="list-inline-item"><a (click)="onDelete(idInfo.LicenseID)" class="text-danger"><i class="fa fa-trash-alt"></i> Delete</a></li>
                                     </ul>
                                 </div>
