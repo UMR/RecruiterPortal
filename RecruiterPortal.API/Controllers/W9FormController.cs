@@ -32,6 +32,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     base.MapObjects(w9Form, w9Model);
                     w9Model.WID = w9Form.Wid;
                     w9Model.SSN = w9Form.Ssn;
+                    w9Model.CCorporation = w9Form.Ccorporation;
+                    w9Model.SCorporation = w9Form.Scorporation;
                 }
 
                 return Ok(w9Model);
@@ -59,6 +61,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 w9From.UserId = w9Model.UserID;
                 w9From.Wid = w9Model.WID;
                 w9From.Ssn = w9Model.SSN;
+                w9From.Ccorporation = w9Model.CCorporation;
+                w9From.Scorporation = w9Model.SCorporation;
 
                 W9from isExist = W9FormManager.GetW9FormByUserID(w9Model.UserID);
                 if (isExist == null)
