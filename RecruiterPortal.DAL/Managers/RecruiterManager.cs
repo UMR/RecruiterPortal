@@ -301,9 +301,9 @@ namespace RecruiterPortal.DAL.Managers
                     sqlWithWhereClouse = sqlWithWhereClouse + " AND Recruiter.LastName like '%" + recruiterSearchModel.LastName + "%'";
                 }
 
-                if (!string.IsNullOrEmpty(recruiterSearchModel.Eamil))
+                if (!string.IsNullOrEmpty(recruiterSearchModel.Email))
                 {
-                    sqlWithWhereClouse = sqlWithWhereClouse + "AND Recruiter.Email like '%" + recruiterSearchModel.Eamil + "%'";
+                    sqlWithWhereClouse = sqlWithWhereClouse + "AND Recruiter.Email like '%" + recruiterSearchModel.Email + "%'";
                 }
                 if (!string.IsNullOrEmpty(recruiterSearchModel.Status))
                 {

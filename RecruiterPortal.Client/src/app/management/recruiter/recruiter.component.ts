@@ -119,10 +119,13 @@ export class RecruiterComponent implements OnInit {
 
     getRecruiterByFilter() {
         const recruiterSearchModel = new RecruiterSearchModel();
+        console.log(this.searchFg.get('sEmail').value)
         recruiterSearchModel.FirstName = this.searchFg.get('sFirstName').value;
         recruiterSearchModel.LastName = this.searchFg.get('sLastName').value;
         recruiterSearchModel.Email = this.searchFg.get('sEmail').value;
         recruiterSearchModel.Status = this.searchFg.get('status').value;
+
+        console.log(recruiterSearchModel);
 
         this.recruiterService.getRecruiterByFilter(recruiterSearchModel)
             .subscribe(response => {
