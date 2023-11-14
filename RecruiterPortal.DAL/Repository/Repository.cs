@@ -275,6 +275,13 @@ namespace RecruiterPortal.DAL.Repository
             return await query.ToListAsync();
         }
 
+        public async Task<IEnumerable<T>> GetPageAsync(int page, int pageSize)
+        {
+            var query = context.Set<T>().Skip((page - 1) * pageSize).Take(pageSize);
+
+            return await query.ToListAsync();
+        }
+
         public List<SqlParameter> NonQueryStoredProcedure(string storedProcedureName, SqlParameter[] parameters = null)
         {
             try

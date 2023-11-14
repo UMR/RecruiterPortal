@@ -1,6 +1,6 @@
 ﻿namespace RecruiterPortal.DAL.Models;
 
-public class PositionRequest
+public class PositionRequestModel
 {
     public int Id { get; set; }
 

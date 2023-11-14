@@ -1,6 +1,6 @@
 ﻿namespace RecruiterPortal.DAL.Models;
 
-public class PositionResponse
+public class PositionResponseModel
 {
     public int Id { get; set; }
 

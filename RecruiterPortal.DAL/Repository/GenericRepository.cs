@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using RecruiterPortal.DAL.SqlModels;
+using System;
 using System.Data;
 using System.Dynamic;
 using System.Linq.Expressions;
@@ -65,6 +66,11 @@ namespace RecruiterPortal.DAL.Repository
         public async Task<IEnumerable<T>> GetPageAsync(Expression<Func<T, bool>> predicate, int page, int pageSize)
         {
             return await _repo.GetPageAsync(predicate, page, pageSize);
+        }
+
+        public async Task<IEnumerable<T>> GetPageAsync(int page, int pageSize) 
+        {
+            return await _repo.GetPageAsync(page, pageSize);
         }
 
         public async Task<T> GetByIdAsync(Expression<Func<T, bool>> predicate)
