@@ -14,11 +14,11 @@ namespace RecruiterPortal.API.Controllers
 
         [Route("get-all")]
         [HttpGet]
-        public IActionResult GetPositions(int page, int pageSize)
+        public async Task<IActionResult> GetPositions(int page, int pageSize)
         {
             try
             {
-                return Ok(PositionManager.GetAllPosition(page, pageSize));
+                return Ok(await PositionManager.GetAllPosition(page, pageSize));
             }
             catch (Exception ex)
             {
