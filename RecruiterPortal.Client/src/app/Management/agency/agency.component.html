@@ -22,7 +22,7 @@
                      (onLazyLoad)="loadAgencyLazy($event)"
                      [rowsPerPageOptions]="[10,15,20]"
                      [showCurrentPageReport]="true"
-                     currentPageReportTemplate="Total Records {{totalAgecny}}">
+                     currentPageReportTemplate = "Total Records: {{count}}">
                 <ng-template pTemplate="header" let-columns>
                     <tr>
                         <th>Agency Name</th>

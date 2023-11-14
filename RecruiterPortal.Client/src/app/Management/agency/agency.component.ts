@@ -13,6 +13,7 @@ export class AgencyComponent implements OnInit {
     public isLoading: boolean = true;
     public agencies: any[] = [];
     public totalAgency: number;
+    public count = "";
     public selectedAgencyId: number;
     public cols: any[];
     public rows: number = 15;
@@ -74,8 +75,10 @@ export class AgencyComponent implements OnInit {
         this.agencyService.getAgency()
             .subscribe(response => {
                 if (response.status == 200) {
+                    
                     this.agencies = (response.body as any).agencies;
                     this.totalAgency = (response.body as any).agencyCount;
+                    this.count = (response.body as any).agencyCount;
                 }
             },
                 err => {

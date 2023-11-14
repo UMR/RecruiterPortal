@@ -44,7 +44,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                         agencyModelList.Add(agency);
                     }
                 }
-                return Ok(new { agencies = agencyModelList, totalApplicants = agencyCount });
+                return Ok(new { agencies = agencyModelList, agencyCount = agencyCount });
                 //return Ok(agencyModelList);
             }
             catch (Exception ex)

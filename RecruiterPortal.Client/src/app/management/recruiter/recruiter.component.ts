@@ -17,6 +17,7 @@ export class RecruiterComponent implements OnInit {
     public isLoading: boolean = false;
     public recruiters: any[] = [];
     public totalRecruiter: number;
+    public count : string = "";
     public selectedRecruiterId: number;
     public cols: any[];
     public rows: number = 15;
@@ -128,6 +129,7 @@ export class RecruiterComponent implements OnInit {
                 if (response.status === 200) {
                     this.recruiters = (response.body as any).recruiters;
                     this.totalRecruiter = (response.body as any).count;
+                    this.count = (response.body as any).count;
                 }
             },
                 err => {
