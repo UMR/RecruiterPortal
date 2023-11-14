@@ -146,6 +146,10 @@ const routes: Routes = [
         path: 'recruiter-history', loadChildren: () => import('./timecards/recruiter-history/recruiter-history.module').then(m => m.RecruiterHistoryModule)
     },
     {
+        canActivate: [AuthGuard],
+        path: 'position-list', loadChildren: () => import('./reports-list/position-list/position-list.module').then(m => m.PositionListModule)
+    },
+    {
         path: 'registration',
         component: RegistrationComponent
     },
