@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { PositionListRoutingModule } from './position-list-routing.module';
 import { PositionListComponent } from './position-list.component';
+import { PositionListService } from './position-list.service';
 import { SharedModule } from '../../common/shared.module';
 import { TableModule } from 'primeng/components/table/table';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -30,6 +31,6 @@ import { LoadingImageModule } from '../../common/loading-image.module';
         FileUploadModule,
         LoadingImageModule
     ],
-    providers: [ConfirmationService, MessageService]
+    providers: [ConfirmationService, MessageService, PositionListService]
 })
 export class PositionListModule { }
