@@ -29,11 +29,11 @@ namespace RecruiterPortal.API.Controllers
 
         [Route("get-by-id/{id}")]
         [HttpGet]
-        public IActionResult GetPositionById(int id)
+        public async Task<IActionResult> GetPositionById(int id)
         {
             try
             {
-                return Ok(PositionManager.GetPositionById(id));
+                return Ok(await PositionManager.GetPositionById(id));
             }
             catch (Exception ex)
             {
