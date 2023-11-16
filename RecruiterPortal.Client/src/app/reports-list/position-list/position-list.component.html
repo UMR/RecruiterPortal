@@ -41,10 +41,10 @@
     </section>
 </div>
 
-<p-dialog [(visible)]="showDialog" [style]="{ width: '1200px' }" header="{{addEditTitle}} Form" [modal]="true" [draggable]="false" [resizable]="false" (onHide)="hideModal()">
+<p-dialog [(visible)]="showDialog" [style]="{ width: '650px' }" header="{{addEditTitle}} Position" [modal]="true" [draggable]="false" [resizable]="false" (onHide)="hideModal()">
     <form [formGroup]="formGroup" novalidate>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label for="positionName" class="form-label">Position Name</label>
                     <input type="text" id="positionName" name="positionName" class="form-control" formControlName="positionName" tabindex="1" required autofocus />
