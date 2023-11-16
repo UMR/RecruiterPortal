@@ -376,3 +376,4 @@ RecruiterPortal.Auth/Log/logs.txt
 RecruiterPortal.API/Log/logs.txt
 
 logs.txt
+RecruiterPortal.Client/dist/
