@@ -51,7 +51,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="phone" class="form-label">Phone</label>
-                            <input id="phone" name="phone" type="tel" class="form-control" formControlName="companyPhone" maxlength="25" trimmed
+                            <input id="phone" name="phone" type="tel" class="form-control" formControlName="companyPhone" maxlength="25" trimmed required
                                    autocomplete="off" autofocus [ngClass]="{ 'is-invalid': submitted && f.companyPhone.errors }" E164PhoneNumber="true">
                             <div *ngIf="submitted && f.companyPhone.errors" class="invalid-feedback">
                                 <div *ngIf="f.companyPhone.errors.required">Company Phone required</div>
