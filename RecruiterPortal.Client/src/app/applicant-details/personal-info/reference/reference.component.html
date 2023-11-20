@@ -1,62 +1,62 @@
 <loading-image [is-loading]="isLoading"></loading-image>
 <div class="card portal-card">
-  <div class="card-body">
-    <a [routerLink]="['./add-edit']" *ngIf="userReferences.length !== 0" class="text-right card-edit"><i class="fa fa-plus text-edit"></i></a>
-    <div class="row">
-      <div class="col-md-12">
+    <div class="card-body">
+        <a [routerLink]="['./add-edit']" *ngIf="userReferences.length !== 0" class="text-right card-edit"><i class="fa fa-plus text-edit"></i></a>
+        <div class="row">
+            <div class="col-md-12">
 
-        <div class="empty-state text-center" *ngIf="userReferences.length === 0">
-          <img src="assets/img/refer.svg" class="img-fluid mb-3" width="72" alt="">
-          <h5 class="mb-3">You haven't added any reference yet.</h5>
-          <a [routerLink]="['./add-edit']" class="btn btn-primary btn-portal-border">Add Reference</a>
-        </div>
+                <div class="empty-state text-center" *ngIf="userReferences.length === 0">
+                    <img src="assets/img/refer.svg" class="img-fluid mb-3" width="72" alt="">
+                    <h5 class="mb-3">You haven't added any reference yet.</h5>
+                    <a [routerLink]="['./add-edit']" class="btn btn-primary btn-portal-border">Add Reference</a>
+                </div>
 
-        <ul class="timeline">
-          <li *ngFor="let ref of userReferences">
-            <div class="timeline-list">
-              <img src="assets/img/refer.svg" class="img-fluid" width="30" alt="">
-              <div class="d-flex justify-content-between">
-                <h4> {{ref.Name}} </h4>
-                <ul class="list-inline mr-5">
-                  <li class="list-inline-item mr-4"><a [routerLink]="['./add-edit',ref.UserReferenceID]" class="text-primary"><i class="fa fa-pencil-alt"></i> Edit</a></li>
-                  <li class="list-inline-item"><a (click)="onDelete(ref.UserReferenceID)" class="text-danger"><i class="fa fa-trash-alt"></i> Delete</a></li>
+                <ul class="timeline">
+                    <li *ngFor="let ref of userReferences">
+                        <div class="timeline-list">
+                            <img src="assets/img/refer.svg" class="img-fluid" width="30" alt="">
+                            <div class="d-flex justify-content-between">
+                                <h4 style="margin-bottom:5px;"> {{ref.RefLastName}} {{ref.RefFirstName}} </h4>
+                                <ul class="list-inline mr-5">
+                                    <li class="list-inline-item mr-4"><a [routerLink]="['./add-edit',ref.UserReferenceID]" class="text-primary"><i class="fa fa-pencil-alt"></i> Edit</a></li>
+                                    <li class="list-inline-item"><a (click)="onDelete(ref.UserReferenceID)" class="text-danger"><i class="fa fa-trash-alt"></i> Delete</a></li>
+                                </ul>
+                            </div>
+                            <h6>{{ref.NatureOfRelationship}}</h6>
+                            <div class="refer">
+                                <p><label for="">{{ref.CompanyName}}</label></p>
+                                <p class="emp-address"><i class="fa fa-map-marker-alt"></i> {{ref.RefAddress}}</p>
+                                <p><i class="fa fa-phone-alt"></i> {{ref.RefPhone}}</p>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
-              </div>
-              <h6>{{ref.NatureOfRelationship}}</h6>
-              <div class="refer">
-                <p><label for="">{{ref.CompanyName}}</label></p>
-                <p class="emp-address"><i class="fa fa-map-marker-alt"></i> {{ref.RefAddress}}</p>
-                <p><i class="fa fa-phone-alt"></i> {{ref.RefPhone}}</p>
-              </div>
-            </div>
-          </li>
-        </ul>
 
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <div class="card-footer">
-  <ul class="list-inline mb-0 d-flex justify-content-between">
-    <li class="list-inline-item">
-      <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-primary btn-block btn-portal" (click)="prevPage()"><i class="fa fa-angle-left" aria-hidden="true"></i>Previous</button>
-      </div>
-    </li>
-    <li class="list-inline-item">
-      <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-primary btn-block btn-portal" (click)="nextPage()">Next<i class="fa fa-angle-right" aria-hidden="true" tabindex="7"></i></button>
-      </div>
-    </li>
-  </ul>
+    <ul class="list-inline mb-0 d-flex justify-content-between">
+        <li class="list-inline-item">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-primary btn-block btn-portal" (click)="prevPage()"><i class="fa fa-angle-left" aria-hidden="true"></i>Previous</button>
+            </div>
+        </li>
+        <li class="list-inline-item">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-primary btn-block btn-portal" (click)="nextPage()">Next<i class="fa fa-angle-right" aria-hidden="true" tabindex="7"></i></button>
+            </div>
+        </li>
+    </ul>
 </div>
 
 <p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle text-danger">
-  <p-footer>
-    <button type="button" class="btn btn-primary btn-portal-border btn-dialog btn-cancel" pButton label="No" (click)="cd.reject()"></button>
-    <button type="button" class="btn btn-primary btn-portal btn-dialog" pButton label="Yes" (click)="cd.accept()"></button>
-  </p-footer>
+    <p-footer>
+        <button type="button" class="btn btn-primary btn-portal-border btn-dialog btn-cancel" pButton label="No" (click)="cd.reject()"></button>
+        <button type="button" class="btn btn-primary btn-portal btn-dialog" pButton label="Yes" (click)="cd.accept()"></button>
+    </p-footer>
 </p-confirmDialog>
 
 <p-toast key="toastKey1"></p-toast>
