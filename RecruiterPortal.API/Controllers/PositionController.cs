@@ -42,6 +42,21 @@ namespace RecruiterPortal.API.Controllers
             }
         }
 
+        [Route("is-exist-position-name")]
+        [HttpGet]
+        public async Task<IActionResult> IsExistPositionName(string name)
+        {
+            try
+            {
+                return Ok(await PositionManager.IsExistPositionName(name));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         [Route("save")]
         [HttpPost]
         public async Task<IActionResult> Save([FromBody] PositionRequestModel request)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
@@ -75,6 +76,23 @@ public class PositionManager
         if (position == null) return null;
         PositionResponseModel response = MapPositionResponse(position);
         return response;
+    }
+
+    public static async Task<bool> IsExistPositionName(string name, int? id = null)
+    {
+        bool isExist = false;
+        using UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext();
+
+        if (id == null)
+        {
+            isExist = await context.Positions.AnyAsync(p => p.PositionName.ToLower() == name.ToLower());
+        }
+        else 
+        {
+            isExist = await context.Positions.AnyAsync(p => p.PositionName.ToLower() == name.ToLower() && p.Id !=id);
+        }       
+
+        return isExist;
     }
 
     public static async Task<PagedResponse<PositionResponseModel>> GetAllPosition(int page, int pageSize)
