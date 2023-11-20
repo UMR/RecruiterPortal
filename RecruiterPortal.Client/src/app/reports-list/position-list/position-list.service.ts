@@ -19,6 +19,10 @@ export class PositionListService {
         return this.http.get(`${resourceServerUrl}/api/position/get-by-id/${id}`, { observe: 'response' });
     }
 
+    isExistPositionName(name: string): Observable<HttpResponse<any>> {
+        return this.http.get(`${resourceServerUrl}/api/position/is-exist-position-name?name=${name}`, { observe: 'response' });
+    }
+
     savePosition(position: any): Observable<HttpResponse<any>> {
         return this.http.post(`${resourceServerUrl}/api/position/save`, position, {
             headers: new HttpHeaders()
@@ -39,5 +43,5 @@ export class PositionListService {
                 .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
         });
     }
-    
+
 }

@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { MessageService, ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import { PositionListService } from './position-list.service';
+import { positionValidator } from './positionValidator';
 
 @Component({
-  selector: 'app-position-list',
-  templateUrl: './position-list.component.html',
-  styleUrls: ['./position-list.component.css']
+    selector: 'app-position-list',
+    templateUrl: './position-list.component.html',
+    styleUrls: ['./position-list.component.css']
 })
 export class PositionListComponent implements OnInit {
 
@@ -23,7 +24,7 @@ export class PositionListComponent implements OnInit {
     public showDialog: boolean = false;
     public addEditTitle: string;
     public addEditButtonTitle: string;
-    public formGroup: FormGroup;    
+    public formGroup: FormGroup;
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private positionService: PositionListService) {
         this.addEditTitle = "Add";
@@ -37,9 +38,15 @@ export class PositionListComponent implements OnInit {
 
     createFormGroup() {
         this.formGroup = this.fb.group({
-            positionName: ['', Validators.compose([Validators.required, Validators.maxLength(200), this.noWhitespaceValidator])],            
+            positionName: ['',
+                {
+                    validators: [Validators.required, Validators.maxLength(200), this.noWhitespaceValidator],
+                    asyncValidators: [positionValidator(this.positionService, this.selectedPositionId)],
+                    updateOn: 'change', 
+                },
+            ],
         });
-    }
+    }    
 
     setDefaultFields(isLoading: boolean, showDialog: boolean, selectedId: number, selectedOfficialFile: any, addEditTitle: string, addEditButtonTitle: string) {
         this.isLoading = isLoading;
@@ -48,7 +55,7 @@ export class PositionListComponent implements OnInit {
         this.selectedPosition = selectedOfficialFile;
         this.formGroup.reset();
         this.addEditTitle = addEditTitle;
-        this.addEditButtonTitle = addEditButtonTitle;        
+        this.addEditButtonTitle = addEditButtonTitle;
     }
 
     noWhitespaceValidator(control: AbstractControl) {
@@ -84,8 +91,8 @@ export class PositionListComponent implements OnInit {
 
     fillupPosition(position: any) {
         this.formGroup.patchValue({
-            positionName: position.PositionName            
-        });        
+            positionName: position.PositionName
+        });
     }
 
     hideModal() {
@@ -101,7 +108,7 @@ export class PositionListComponent implements OnInit {
         this.fillupPosition(form);
     }
 
-    onClear() {        
+    onClear() {
         this.formGroup.reset();
     }
 
@@ -112,7 +119,7 @@ export class PositionListComponent implements OnInit {
     onSave() {
         const model: any = {
             Id: this.selectedPositionId,
-            PositionName: this.formGroup.controls.positionName.value            
+            PositionName: this.formGroup.controls.positionName.value
         };
         this.isLoading = true;
         if (this.selectedPositionId == 0) {
@@ -165,6 +172,6 @@ export class PositionListComponent implements OnInit {
                 );
             }
         });
-    }   
+    }
 
 }
