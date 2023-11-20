@@ -44,11 +44,11 @@ namespace RecruiterPortal.API.Controllers
 
         [Route("is-exist-position-name")]
         [HttpGet]
-        public async Task<IActionResult> IsExistPositionName(string name)
+        public async Task<IActionResult> IsExistPositionName(string name, int? id)
         {
             try
             {
-                return Ok(await PositionManager.IsExistPositionName(name));
+                return Ok(await PositionManager.IsExistPositionName(name, id));
             }
             catch (Exception ex)
             {

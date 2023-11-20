@@ -14,7 +14,7 @@ export function positionValidator(positionListService: PositionListService, id: 
         return of(control.value).pipe(
             debounceTime(100),
             switchMap(value =>
-                positionListService.isExistPositionName(value)
+                positionListService.isExistPositionName(value, id)
             ),
             map(isValid => (isValid.body == false ? null : { duplicatePositionError: true })),
             catchError(() => of(null))

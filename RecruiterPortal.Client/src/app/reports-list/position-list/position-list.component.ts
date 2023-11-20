@@ -103,9 +103,11 @@ export class PositionListComponent implements OnInit {
         this.setDefaultFields(false, true, 0, null, "Add", "Save");
     }
 
-    onEdit(form) {
+    onEdit(form) {        
         this.setDefaultFields(false, true, form.Id, form, "Edit", "Update");
         this.fillupPosition(form);
+        this.formGroup.controls.positionName.setAsyncValidators([positionValidator(this.positionService, this.selectedPositionId)]);
+        this.formGroup.controls.positionName.updateValueAndValidity();
     }
 
     onClear() {

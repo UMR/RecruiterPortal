@@ -48,10 +48,10 @@
                 <div class="form-group">
                     <label for="positionName" class="form-label">Position Name</label>
                     <input type="text" id="positionName" name="positionName" class="form-control" formControlName="positionName" tabindex="1" required autofocus />
-                </div> 
-                <div *ngIf="formGroup.get('positionName').hasError('duplicatePositionError')">
-                    Position already exist
                 </div>
+                <div *ngIf="formGroup.get('positionName').hasError('duplicatePositionError')">
+                    <div style="color:red;font-weight:normal">Position already exist</div>
+                </div>                
             </div>            
         </div>
         <div class="row">

@@ -83,14 +83,14 @@ public class PositionManager
         bool isExist = false;
         using UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext();
 
-        if (id == null)
+        if (id == null || id == 0)
         {
             isExist = await context.Positions.AnyAsync(p => p.PositionName.ToLower() == name.ToLower());
         }
-        else 
+        else
         {
-            isExist = await context.Positions.AnyAsync(p => p.PositionName.ToLower() == name.ToLower() && p.Id !=id);
-        }       
+            isExist = await context.Positions.AnyAsync(p => p.PositionName.ToLower() == name.ToLower() && p.Id != id);
+        }
 
         return isExist;
     }
