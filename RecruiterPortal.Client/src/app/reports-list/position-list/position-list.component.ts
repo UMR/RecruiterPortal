@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { MessageService, ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import { PositionListService } from './position-list.service';
-import { positionValidator } from './positionValidator';
+import { positionListValidator } from './position-list.validator';
 
 @Component({
     selector: 'app-position-list',
@@ -41,7 +41,7 @@ export class PositionListComponent implements OnInit {
             positionName: ['',
                 {
                     validators: [Validators.required, Validators.maxLength(200), this.noWhitespaceValidator],
-                    asyncValidators: [positionValidator(this.positionService, this.selectedPositionId)],
+                    asyncValidators: [positionListValidator(this.positionService, this.selectedPositionId)],
                     updateOn: 'change', 
                 },
             ],
@@ -106,7 +106,7 @@ export class PositionListComponent implements OnInit {
     onEdit(form) {        
         this.setDefaultFields(false, true, form.Id, form, "Edit", "Update");
         this.fillupPosition(form);
-        this.formGroup.controls.positionName.setAsyncValidators([positionValidator(this.positionService, this.selectedPositionId)]);
+        this.formGroup.controls.positionName.setAsyncValidators([positionListValidator(this.positionService, this.selectedPositionId)]);
         this.formGroup.controls.positionName.updateValueAndValidity();
     }
 
