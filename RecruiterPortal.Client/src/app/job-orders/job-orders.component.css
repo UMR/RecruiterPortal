@@ -38,3 +38,7 @@
     background-color:#007ad9 !important;
 }
 
+/*:host >>> .ui-editor-container .ui-editor-content .ql-editor {
+    border-left: 3px solid red !important;
+}*/
+

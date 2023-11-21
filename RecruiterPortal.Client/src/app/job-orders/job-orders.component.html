@@ -116,11 +116,10 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="jobDescription" class="form-label">Description</label>
-                    <small class="p-error" *ngIf="submitted">Description is required.</small>
-                    <p-editor [style]="{ height: '350px' }" formControlName="jobDescription"
-                              tabindex="5" required [ngClass]="jobFormGroup.controls.jobDescription.value !== null ? 'editor-success' : 'editor-required'"></p-editor>
+                    <label for="jobDescription" class="form-label">Description <span style="color:red;">*</span></label>
+                    <p-editor [style]="{ height: '350px' }" formControlName="jobDescription" tabindex="5"></p-editor>
                 </div>
+                <!--<div class="text-danger mt-2" *ngIf="jobFormGroup.controls.jobDescription.errors">Description is required.</div>-->
             </div>
         </div>
         <div class="row">

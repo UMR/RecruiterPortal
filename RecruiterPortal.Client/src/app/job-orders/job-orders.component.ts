@@ -53,7 +53,7 @@ export class JobOrdersComponent implements OnInit {
             positionId: [''],
             institution: ['', Validators.compose([Validators.required])],
             instituteId: [''],
-            jobDescription: ['', Validators.compose([Validators.required])]
+            jobDescription: ['']
         });
     }
     get f() { return this.jobFormGroup.controls; }
@@ -103,8 +103,7 @@ export class JobOrdersComponent implements OnInit {
                 });
     }
 
-    fillupJob(job: any) {
-        console.log(job);
+    fillupJob(job: any) {        
         this.jobFormGroup.patchValue({
             jobTitile: job.JobTitle,
             status: job.Status === true ? '1' : '0',
@@ -171,6 +170,10 @@ export class JobOrdersComponent implements OnInit {
     }
 
     save() {
+        if (!this.jobFormGroup.controls.jobDescription.value) {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Description is required', life: 3000 });
+            return;
+        }
         const jobModel = {
             JobId: this.selectedJobId,
             Status: this.jobFormGroup.controls.status.value == '1' ? true : false,
