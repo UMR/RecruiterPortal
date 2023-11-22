@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MessageService, ConfirmationService } from 'primeng/api';
-
-import { EditEducationService } from './edit-education/edit-education.service';
 import { Router } from '@angular/router';
-//import { EditEducationModel } from './edit-education/edit-education.model';
+import { EditEducationService } from './edit-education/edit-education.service';
+import { distinctUntilChanged, debounceTime } from 'rxjs/operators';
+
 
 @Component({
     selector: 'app-education',
@@ -12,27 +12,52 @@ import { Router } from '@angular/router';
     providers: [MessageService]
 })
 export class EducationComponent implements OnInit {
-    //public editEducationModel: EditEducationModel = new EditEducationModel();
     public editEducationModels: any = [];
     public isLoading: boolean = true;
+    public facilities: any[] = [];
 
-  constructor(private editEducationService: EditEducationService,
-    private messageService: MessageService,
-    private confirmationService: ConfirmationService,
-    private router: Router) { }
+    constructor(private editEducationService: EditEducationService,
+        private messageService: MessageService,
+        private confirmationService: ConfirmationService,
+        private router: Router) { }
 
     ngOnInit() {
-        this.getData();
-
+        this.getFacilityType();
+        this.getEdutions();
     }
 
-    getData() {
-        this.editEducationService.getEducationInfo().subscribe(data => {
-            
-            this.editEducationModels = data.body;
-        },
-            err => { this.isLoading = false; this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get education info', detail: '' }); },
-            () => { this.isLoading = false; });
+    getFacilityType() {
+        this.editEducationService.getFacilityType().subscribe(res => {
+            if (res.status === 200) {
+                this.facilities = res.body;
+                console.log(this.facilities);
+            }
+        })
+    }
+
+    getEdutions() {
+        this.editEducationService.getEducationInfo().pipe(
+            debounceTime(3000),
+            distinctUntilChanged()).subscribe(data => {
+                if (data.status === 200) {
+                    this.editEducationModels = data.body;
+                    if (this.editEducationModels.length > 0) {
+                        this.editEducationModels.forEach((education) => {                            
+                            if (this.facilities) {
+                                const facility = this.facilities.find(item => +item.Value === +education.InstitutionType);
+                                if (facility) {
+                                    const facilityName = facility.Text;
+                                    console.log(facilityName);
+                                }                                
+                            }
+                        });
+                    }
+                }
+            },
+                err => { this.isLoading = false; this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get education info', detail: '' }); },
+                () => {
+                    this.isLoading = false;
+                });
     }
 
     getYearRange(fromDate, toDate) {
@@ -44,6 +69,7 @@ export class EducationComponent implements OnInit {
         }
         return dateRange;
     }
+
     delete(id) {
         this.confirmationService.confirm({
             message: 'Are you sure that you want to delete this record?',
@@ -53,7 +79,7 @@ export class EducationComponent implements OnInit {
                         this.isLoading = false;
                         this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Successfully delete', detail: '' });
                         this.editEducationModels = [];
-                        this.getData();
+                        this.getEdutions();
 
                     },
                         err => {
@@ -65,14 +91,14 @@ export class EducationComponent implements OnInit {
                         });
             }
         });
-  }
+    }
 
-  prevPage() {
-    this.router.navigate(['personal-info/physical-info/edit']);
-  }
+    prevPage() {
+        this.router.navigate(['personal-info/physical-info/edit']);
+    }
 
-  nextPage() {
-    this.router.navigate(['personal-info/employment']);
-  }
+    nextPage() {
+        this.router.navigate(['personal-info/employment']);
+    }
 
 }

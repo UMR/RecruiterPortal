@@ -2,8 +2,6 @@
 using RecruiterPortal.API.Controllers;
 using RecruiterPortal.DAL.Managers;
 using RecruiterPortal.DAL.Models;
-using RecruiterPortal.DAL.SqlModels;
-using RecruiterPortalDAL.Managers;
 using System.Data;
 
 namespace ApplicantPortalAPI.ResourceServer.Controllers
