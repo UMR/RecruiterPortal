@@ -1,87 +1,53 @@
-<!--<loading-image [is-loading]="isLoading"></loading-image>
-<div class="tab-pane" id="v-pills-education" role="tabpanel" aria-labelledby="v-pills-education-tab">
-  <div class="card portal-card">
-    <div class="card-body">
-      <a [routerLink]="['./edit']" class="card-edit text-right"><i class="fa fa-edit text-edit"></i></a>
-      <div class="row">
-        <div class="col-md-12">
-          <ul class="timeline">
-            <li>
-              <img src="assets/img/high-school.svg" class="img-fluid" width="36" alt="" />
-              <h4>High School</h4>
-              <h5>{{editEducationModel.highSchool}}</h5>
-              <label for="">{{editEducationModel.highSchoolDegree}}<span>{{getYearRange(editEducationModel.highSchoolFromDate, editEducationModel.highSchoolToDate)}}</span></label>
-            </li>
-            <li>
-              <img src="assets/img/college.svg" class="img-fluid" width="36" alt="" />
-              <h4>College</h4>
-              <h5>{{editEducationModel.college}}</h5>
-              <label for="">{{editEducationModel.collegeDegree}}<span>{{getYearRange(editEducationModel.collegeFromDate, editEducationModel.collegeToDate)}}</span></label>
-            </li>
-            <li>
-              <img src="assets/img/university.svg" class="img-fluid" width="36" alt="" />
-              <h4>University</h4>
-              <h5>{{editEducationModel.university}}</h5>
-              <label for="">{{editEducationModel.universityDegree}}<span>{{getYearRange(editEducationModel.universityFromDate, editEducationModel.universityToDate)}}</span></label>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<p-toast key="toastKey1" [baseZIndex]="5000"></p-toast>-->
-
 <loading-image [is-loading]="isLoading"></loading-image>
 <div class="tab-pane" id="v-pills-education" role="tabpanel" aria-labelledby="v-pills-education-tab">
-  <div class="card portal-card">
-    <div class="card-body">
-      <a [routerLink]="['./edit']" *ngIf="editEducationModels && editEducationModels.length !== 0" class="text-right card-edit"><i class="fa fa-plus text-edit"></i></a>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="empty-state text-center" *ngIf="editEducationModels && editEducationModels.length === 0">
-            <img src="assets/img/university.svg" class="img-fluid mb-3" width="72" alt="">
-            <h5 class="mb-3">You haven't added any education yet.</h5>
-            <a [routerLink]="['./edit']" class="btn btn-primary btn-portal-border">Add Education</a>
-          </div>
-          <ul class="timeline">
-            <li *ngFor="let editEducationModel of editEducationModels">
-              <div class="timeline-list">
-                <img src="assets/img/university.svg" class="img-fluid" width="36" alt="" />
-                  <div class="d-flex justify-content-between">
-                    <h4>{{editEducationModel.InstitutionTypeName}}</h4>
-                    <ul class="list-inline mr-5">
-                      <li class="list-inline-item mr-4"><a [routerLink]="['./edit/',editEducationModel.EducationID]" class="text-primary"><i class="fa fa-pencil-alt"></i> Edit</a></li>
-                      <li class="list-inline-item"><a class="text-danger" (click)="delete(editEducationModel.EducationID)"><i class="fa fa-trash-alt"></i> Delete</a></li>
+    <div class="card portal-card">
+        <div class="card-body">
+            <a [routerLink]="['./edit']" *ngIf="editEducationModels && editEducationModels.length !== 0" class="text-right card-edit"><i class="fa fa-plus text-edit"></i></a>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="empty-state text-center" *ngIf="editEducationModels && editEducationModels.length === 0">
+                        <img src="assets/img/university.svg" class="img-fluid mb-3" width="72" alt="">
+                        <h5 class="mb-3">You haven't added any education yet.</h5>
+                        <a [routerLink]="['./edit']" class="btn btn-primary btn-portal-border">Add Education</a>
+                    </div>
+                    <ul class="timeline">
+                        <li *ngFor="let editEducationModel of editEducationModels">
+                            <div class="timeline-list">
+                                <img src="assets/img/university.svg" class="img-fluid" width="36" alt="" />
+                                <div class="d-flex justify-content-between">
+                                    <h4>{{editEducationModel.FacilityType}}</h4>
+                                    <ul class="list-inline mr-5">
+                                        <li class="list-inline-item mr-4"><a [routerLink]="['./edit/',editEducationModel.EducationID]" class="text-primary"><i class="fa fa-pencil-alt"></i> Edit</a></li>
+                                        <li class="list-inline-item"><a class="text-danger" (click)="delete(editEducationModel.EducationID)"><i class="fa fa-trash-alt"></i> Delete</a></li>
+                                    </ul>
+                                </div>
+                                <h5>{{editEducationModel.SchoolName}}</h5>
+                                <label for="">{{editEducationModel.Degree}}<span *ngIf="editEducationModel.FromDate!=''||editEducationModel.ToDate!=''"> ( {{editEducationModel.FromDate}} - {{editEducationModel.ToDate}} )</span></label>
+                            </div>
+                        </li>
                     </ul>
-                  </div>
-                  <h5>{{editEducationModel.SchoolName}}</h5>
-                  <label for="">{{editEducationModel.Degree}}<span *ngIf="editEducationModel.FromDate!=''||editEducationModel.ToDate!=''"> ( {{editEducationModel.FromDate}} - {{editEducationModel.ToDate}} )</span></label>
                 </div>
-            </li>
-          </ul>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 <div class="card-footer">
-  <ul class="list-inline mb-0 d-flex justify-content-between">
-    <li class="list-inline-item">
-      <button type="button" class="btn btn-primary btn-block btn-portal" (click)="prevPage()"><i class="fa fa-angle-left" aria-hidden="true"></i>Previous</button>
-    </li>
-    <li class="list-inline-item">
-      <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-primary btn-block btn-portal" (click)="nextPage()">Next<i class="fa fa-angle-right" aria-hidden="true" tabindex="7"></i></button>
-      </div>
-    </li>
-  </ul>
+    <ul class="list-inline mb-0 d-flex justify-content-between">
+        <li class="list-inline-item">
+            <button type="button" class="btn btn-primary btn-block btn-portal" (click)="prevPage()"><i class="fa fa-angle-left" aria-hidden="true"></i>Previous</button>
+        </li>
+        <li class="list-inline-item">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-primary btn-block btn-portal" (click)="nextPage()">Next<i class="fa fa-angle-right" aria-hidden="true" tabindex="7"></i></button>
+            </div>
+        </li>
+    </ul>
 </div>
 
 <p-confirmDialog #cd header="Confirmation" icon="pi pi-exclamation-triangle text-danger">
-  <p-footer>
-    <button type="button" class="btn btn-primary btn-portal-border btn-dialog btn-cancel" pButton label="No" (click)="cd.reject()"></button>
-    <button type="button" class="btn btn-primary btn-portal btn-dialog" pButton label="Yes" (click)="cd.accept()"></button>
-  </p-footer>
+    <p-footer>
+        <button type="button" class="btn btn-primary btn-portal-border btn-dialog btn-cancel" pButton label="No" (click)="cd.reject()"></button>
+        <button type="button" class="btn btn-primary btn-portal btn-dialog" pButton label="Yes" (click)="cd.accept()"></button>
+    </p-footer>
 </p-confirmDialog>

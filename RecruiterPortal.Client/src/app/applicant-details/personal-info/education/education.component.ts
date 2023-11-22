@@ -29,8 +29,7 @@ export class EducationComponent implements OnInit {
     getFacilityType() {
         this.editEducationService.getFacilityType().subscribe(res => {
             if (res.status === 200) {
-                this.facilities = res.body;
-                console.log(this.facilities);
+                this.facilities = res.body;                
             }
         })
     }
@@ -39,18 +38,19 @@ export class EducationComponent implements OnInit {
         this.editEducationService.getEducationInfo().pipe(
             debounceTime(3000),
             distinctUntilChanged()).subscribe(data => {
-                if (data.status === 200) {
-                    this.editEducationModels = data.body;
-                    if (this.editEducationModels.length > 0) {
-                        this.editEducationModels.forEach((education) => {                            
+                if (data.status === 200) {                    
+                    const educationList = data.body;
+                    if (educationList && educationList.length > 0) {
+                        educationList.forEach((education) => {
                             if (this.facilities) {
                                 const facility = this.facilities.find(item => +item.Value === +education.InstitutionType);
                                 if (facility) {
-                                    const facilityName = facility.Text;
-                                    console.log(facilityName);
+                                    const facilityName = facility.Text;                                    
+                                    const educationObj = {...education, FacilityType: facilityName}
+                                    this.editEducationModels.push(educationObj);
                                 }                                
                             }
-                        });
+                        });                        
                     }
                 }
             },
