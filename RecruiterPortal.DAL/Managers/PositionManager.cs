@@ -85,11 +85,19 @@ public class PositionManager
 
         if (id == null || id == 0)
         {
-            isExist = await context.Positions.AnyAsync(p => p.PositionName.ToLower() == name.ToLower());
+            var position = await context.Positions.FirstOrDefaultAsync(p => p.PositionName.ToLower() == name.ToLower());
+            if (position != null)
+            {
+                isExist = true;
+            }
         }
         else
         {
-            isExist = await context.Positions.AnyAsync(p => p.PositionName.ToLower() == name.ToLower() && p.Id != id);
+            var position = await context.Positions.FirstOrDefaultAsync(p => p.PositionName.ToLower() == name.ToLower() && p.Id != id);
+            if (position != null) 
+            {
+                isExist = true;
+            }
         }
 
         return isExist;
@@ -110,7 +118,8 @@ public class PositionManager
         {
             positionsCount = await new GenericRepository<Position>().GetAllAsyncCount();
             positions = await new GenericRepository<Position>().GetPageAsync(page, pageSize);
-        }
+        }       
+
         if (positions != null && positions.Count() > 0)
         {
             positionsToReturn = MapPositionResponse(positions.ToList());

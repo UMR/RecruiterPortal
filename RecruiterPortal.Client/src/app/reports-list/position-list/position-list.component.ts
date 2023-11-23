@@ -51,18 +51,18 @@ export class PositionListComponent implements OnInit {
             positionName: ['',
                 {
                     validators: [Validators.required, Validators.maxLength(200), this.noWhitespaceValidator],
-                    asyncValidators: [positionListValidator(this.positionService, this.selectedPositionId)],
+                    asyncValidators: [positionListValidator(this.positionService)],
                     updateOn: 'change',
                 },
             ],
         });
     }
 
-    setDefaultFields(isLoading: boolean, showDialog: boolean, selectedId: number, selectedOfficialFile: any, addEditTitle: string, addEditButtonTitle: string) {
+    setDefaultFields(isLoading: boolean, showDialog: boolean, selectedPositionId: number, selectedPosition: any, addEditTitle: string, addEditButtonTitle: string) {
         this.isLoading = isLoading;
         this.showDialog = showDialog;
-        this.selectedPositionId = selectedId;
-        this.selectedPosition = selectedOfficialFile;
+        this.selectedPositionId = selectedPositionId;
+        this.selectedPosition = selectedPosition;
         this.formGroup.reset();
         this.addEditTitle = addEditTitle;
         this.addEditButtonTitle = addEditButtonTitle;
@@ -95,7 +95,7 @@ export class PositionListComponent implements OnInit {
         this.getPositions();
     }
 
-    onSearchClick() {        
+    onSearchClick() {             
         this.getPositions();
     }
 
@@ -138,9 +138,9 @@ export class PositionListComponent implements OnInit {
         this.setDefaultFields(false, true, 0, null, "Add", "Save");
     }
 
-    onEdit(form) {
-        this.setDefaultFields(false, true, form.Id, form, "Edit", "Update");
-        this.fillupPosition(form);
+    onEdit(position) {
+        this.setDefaultFields(false, true, position.Id, position, "Edit", "Update");
+        this.fillupPosition(position);
         this.formGroup.controls.positionName.setAsyncValidators([positionListValidator(this.positionService, this.selectedPositionId)]);
         this.formGroup.controls.positionName.updateValueAndValidity();
     }
