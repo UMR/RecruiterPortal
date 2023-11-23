@@ -95,11 +95,22 @@ public class PositionManager
         return isExist;
     }
 
-    public static async Task<PagedResponse<PositionResponseModel>> GetAllPosition(int page, int pageSize)
+    public static async Task<PagedResponse<PositionResponseModel>> GetAllPosition(int page, int pageSize, int? id = null)
     {
         List<PositionResponseModel> positionsToReturn = null;
-        int positionsCount = await new GenericRepository<Position>().GetAllAsyncCount();
-        var positions = await new GenericRepository<Position>().GetPageAsync(page, pageSize);
+        IEnumerable<Position> positions = null;
+        int positionsCount = 0;
+
+        if (id != null)
+        {
+            positionsCount = await new GenericRepository<Position>().GetAllAsyncCount(p => p.Id == id);
+            positions = await new GenericRepository<Position>().GetPageAsync(p => p.Id == id, page, pageSize);
+        }
+        else
+        {
+            positionsCount = await new GenericRepository<Position>().GetAllAsyncCount();
+            positions = await new GenericRepository<Position>().GetPageAsync(page, pageSize);
+        }
         if (positions != null && positions.Count() > 0)
         {
             positionsToReturn = MapPositionResponse(positions.ToList());
