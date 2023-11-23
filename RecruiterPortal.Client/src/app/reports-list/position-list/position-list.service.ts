@@ -11,8 +11,8 @@ export class PositionListService {
     constructor(private http: HttpClient) {
     }
 
-    getPositions(page: number, pageSize: number): Observable<HttpResponse<any>> {
-        return this.http.get(`${resourceServerUrl}/api/position/get-all?page=${page}&pageSize=${pageSize}`, { observe: 'response' });
+    getPositions(page: number, pageSize: number, id: string): Observable<HttpResponse<any>> {
+        return this.http.get(`${resourceServerUrl}/api/position/get-all?page=${page}&pageSize=${pageSize}&id=${id}`, { observe: 'response' });
     }
 
     getPositionById(id: any): Observable<HttpResponse<any>> {
@@ -42,6 +42,10 @@ export class PositionListService {
             headers: new HttpHeaders()
                 .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
         });
+    }
+
+    getPositionByPositionName(posotion: string): Observable<HttpResponse<any>> {
+        return this.http.get(encodeURI(`${resourceServerUrl}/api/employment/position?text=${posotion}`), { observe: 'response' });
     }
 
 }

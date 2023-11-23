@@ -25,6 +25,8 @@ export class PositionListComponent implements OnInit {
     public addEditTitle: string;
     public addEditButtonTitle: string;
     public formGroup: FormGroup;
+    public searchFormGroup: FormGroup;
+    public positionResults: string[];
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private positionService: PositionListService) {
         this.addEditTitle = "Add";
@@ -33,7 +35,15 @@ export class PositionListComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.createSearchFormGroup();
         this.createFormGroup();
+    }
+
+    createSearchFormGroup() {
+        this.searchFormGroup = this.fb.group({
+            searchPosition: [""],
+            searchPositionId: [""]
+        });
     }
 
     createFormGroup() {
@@ -42,11 +52,11 @@ export class PositionListComponent implements OnInit {
                 {
                     validators: [Validators.required, Validators.maxLength(200), this.noWhitespaceValidator],
                     asyncValidators: [positionListValidator(this.positionService, this.selectedPositionId)],
-                    updateOn: 'change', 
+                    updateOn: 'change',
                 },
             ],
         });
-    }    
+    }
 
     setDefaultFields(isLoading: boolean, showDialog: boolean, selectedId: number, selectedOfficialFile: any, addEditTitle: string, addEditButtonTitle: string) {
         this.isLoading = isLoading;
@@ -65,9 +75,34 @@ export class PositionListComponent implements OnInit {
         return null;
     }
 
+    onPositionSearch($event) {
+        this.positionService.getPositionByPositionName($event.query).subscribe(response => {
+            this.positionResults = response.body;
+        },
+            err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get positions', detail: '' }); },
+            () => { });
+    }
+
+    onPositionSelect($event) {        
+        this.searchFormGroup.patchValue({
+            searchPosition: $event.PositionName,
+            searchPositionId: $event.Id
+        });
+    }
+
+    onSearchClear() {
+        this.searchFormGroup.reset();
+        this.getPositions();
+    }
+
+    onSearchClick() {        
+        this.getPositions();
+    }
+
     getPositions() {
         this.isLoading = true;
-        this.positionService.getPositions(this.pageNumber, this.pageSize)
+        const positionId = this.searchFormGroup.controls.searchPositionId.value ? this.searchFormGroup.controls.searchPositionId.value : '';
+        this.positionService.getPositions(this.pageNumber, this.pageSize, positionId)
             .subscribe(response => {
                 if (response.status === 200) {
                     this.positions = response.body.Records;
@@ -103,7 +138,7 @@ export class PositionListComponent implements OnInit {
         this.setDefaultFields(false, true, 0, null, "Add", "Save");
     }
 
-    onEdit(form) {        
+    onEdit(form) {
         this.setDefaultFields(false, true, form.Id, form, "Edit", "Update");
         this.fillupPosition(form);
         this.formGroup.controls.positionName.setAsyncValidators([positionListValidator(this.positionService, this.selectedPositionId)]);
@@ -163,6 +198,7 @@ export class PositionListComponent implements OnInit {
                 this.positionService.deletePosition(position.Id).subscribe(res => {
                     if (res.status === 200) {
                         this.setDefaultFields(false, false, 0, null, "Add", "Save");
+                        this.searchFormGroup.reset();
                         this.getPositions();
                         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Position deleted successfully', life: 3000 });
                     }

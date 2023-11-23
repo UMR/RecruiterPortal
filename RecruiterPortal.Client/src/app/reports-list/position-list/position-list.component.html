@@ -8,6 +8,36 @@
                 </div>
             </div>
             <div class="container-fluid mt-2">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-body" style="height: auto; background-color: white;">
+                            <form [formGroup]="searchFormGroup">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-3 col-lg-3">
+                                        <div class="form-group">
+                                            <label for="searchPosition" class="form-label">Position</label>
+                                            <p-autoComplete formControlName="searchPosition" [suggestions]="positionResults" class="form-control"
+                                                            (completeMethod)="onPositionSearch($event)" autocomplete="off"
+                                                            forceSelection="true" (onSelect)="onPositionSelect($event)" [dropdown]="true" tabindex="1">
+                                                <ng-template let-position pTemplate="item">
+                                                    <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                                                        <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{position.PositionName}}</div>
+                                                    </div>
+                                                </ng-template>
+                                            </p-autoComplete>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-2 col-lg-2">
+                                        <div class="form-group" style="vertical-align:middle;float:left;margin-top:15px;">
+                                            <button type="button" (click)="onSearchClear()" class="btn btn-primary btn-portal-border mr-3" tabindex="3">Clear</button>
+                                            <button type="submit" (click)="onSearchClick()" class="btn btn-primary btn-portal" tabindex="2">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 <loading-image [is-loading]="isLoading"></loading-image>
                 <p-table #table [responsive]="true"
                          [value]="positions"
@@ -25,13 +55,13 @@
                          currentPageReportTemplate="Total Records: {{totalPosition}}">
                     <ng-template pTemplate="header" let-columns>
                         <tr>
-                            <th>Position Name</th>                            
+                            <th>Position Name</th>
                             <th>Action</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-position let-rowData let-columns="columns">
                         <tr [pSelectableRow]="form">
-                            <td>{{position.PositionName}}</td>                            
+                            <td>{{position.PositionName}}</td>
                             <td><a (click)="onEdit(position)"><i class="pi pi-pencil"></i></a><a style="color:red" (click)="onDelete(position)"><i class="pi pi-trash"></i></a></td>
                         </tr>
                     </ng-template>
@@ -51,8 +81,8 @@
                 </div>
                 <div *ngIf="formGroup.get('positionName').hasError('duplicatePositionError')">
                     <div style="color:red;font-weight:normal">Position already exist</div>
-                </div>                
-            </div>            
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="com-md-12">

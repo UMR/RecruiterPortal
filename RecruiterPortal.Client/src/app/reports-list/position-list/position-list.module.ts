@@ -10,7 +10,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
-import { ConfirmDialogModule, CheckboxModule, FileUploadModule } from 'primeng/primeng';
+import { ConfirmDialogModule, CheckboxModule, FileUploadModule, AutoCompleteModule } from 'primeng/primeng';
 import { LoadingImageModule } from '../../common/loading-image.module';
 
 
@@ -29,7 +29,8 @@ import { LoadingImageModule } from '../../common/loading-image.module';
         ConfirmDialogModule,
         CheckboxModule,
         FileUploadModule,
-        LoadingImageModule
+        LoadingImageModule,
+        AutoCompleteModule
     ],
     providers: [ConfirmationService, MessageService, PositionListService]
 })
