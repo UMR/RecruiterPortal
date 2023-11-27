@@ -175,12 +175,19 @@ namespace RecruiterPortal.DAL.Managers
             try
             {
                 GenericRepository<RecruiterEntryExit> repository = new GenericRepository<RecruiterEntryExit>();
-                RecruiterEntryExit entryExit = await repository.GetByIdAsync(e => e.RecruiterId == recruiterId && e.LogOutTime == null);
-                if (entryExit != null)
+                var entryExitList = await repository.GetAllAsync(e => e.RecruiterId == recruiterId && e.LogOutTime == null);
+                if (entryExitList != null && entryExitList.Count() > 0)
                 {
-                    entryExit.LogOutTime = DateTime.Now;
-                    return await repository.UpdateAsync(entryExit) > 0 ? true : false;
+                    foreach (var entryExit in entryExitList)
+                    {
+                        var tempRepository = new GenericRepository<RecruiterEntryExit>();
+                        entryExit.LogOutTime = DateTime.Now;
+                        await tempRepository.UpdateAsync(entryExit);
+                    }
+
+                    return true;
                 }
+
                 return null;
             }
             catch (Exception ex)
