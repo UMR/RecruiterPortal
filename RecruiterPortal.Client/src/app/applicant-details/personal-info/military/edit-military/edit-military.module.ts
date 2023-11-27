@@ -13,6 +13,7 @@ import { InputBehaviorModule } from '../../../../common/input-behavior.module';
 import { EditMilitaryRoutingModule } from './edit-military-routing.module';
 import { EditMilitaryComponent } from './edit-military.component';
 import { CompareValidatorModule } from '../../../../common/compare-validator.module';
+import { CheckboxModule } from 'primeng/checkbox';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { CompareValidatorModule } from '../../../../common/compare-validator.mod
         TooltipModule,
         EditMilitaryRoutingModule,
         InputBehaviorModule,
-        CompareValidatorModule
+        CompareValidatorModule,
+        CheckboxModule
     ],
     providers: [MessageService,EditMilitaryService]
 })

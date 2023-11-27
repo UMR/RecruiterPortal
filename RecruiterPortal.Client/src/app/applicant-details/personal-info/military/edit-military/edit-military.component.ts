@@ -19,6 +19,7 @@ export class EditMilitaryComponent implements OnInit {
     public militaryFormGroup: FormGroup;
     public userMilitary: any;
     private userMilitaryID: any;
+    public noMilitaryExpChk: boolean = false;
 
     @ViewChild("trefDishonour", { static: false }) trefDishonour: ElementRef;
 
@@ -103,6 +104,21 @@ export class EditMilitaryComponent implements OnInit {
                 this.militaryFormGroup.controls['dishonour'].disable();
             }
             this.militaryFormGroup.get('dishonour').setValue(this.userMilitary.DisonourComment);
+            if (this.userMilitary.userMilitaryID && this.militaryFormGroup.get('branch').value == "") {
+                this.noMilitaryExpChk = true;
+            }
+        }
+    }
+
+    onClickNoMilitary() {
+        this.militaryFormGroup.get('branch').setValue('');
+        this.militaryFormGroup.get('fromDate').setValue('');
+        this.militaryFormGroup.get('toDate').setValue('');
+        this.militaryFormGroup.get('rankDischarge').setValue('');
+        this.militaryFormGroup.get('typeDischarge').setValue('');
+        this.militaryFormGroup.get('dishonour').setValue('');
+        if (this.noMilitaryExpChk) {
+            this.onSave()
         }
     }
 

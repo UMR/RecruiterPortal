@@ -1,98 +1,105 @@
 <div class="card portal-card">
-  <div class="card-body px-3 py-3">
-    <form [formGroup]="militaryFormGroup" (ngSubmit)="onSave()" novalidate>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="branch" class="form-label">Branch</label>
-            <input id="branch" name="branch" type="text" class="form-control" autocomplete="off" autofocus formControlName="branch" tabindex="1" pTooltip="Maximum 500 characters" tooltipPosition="top"
-                   tooltipEvent="focus" required trimmed>
-          </div>
+    <div class="card-body px-3 py-3">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <p-checkbox [(ngModel)]="noMilitaryExpChk" label="No Military Experience" (click)="onClickNoMilitary()" [binary]="true"></p-checkbox>
+                </div>
+            </div>
         </div>
-        <div class="col-md-3">
-          <div class="form-group">
-            <label for="fromDate" class="form-label">From</label>
-            <p-calendar id="fromDate" name="fromDate" placeholder="MM-DD-YYYY"
-                        formControlName="fromDate"
-                        tabindex="2"
-                        dateFormat="mm-dd-yy"
-                        [monthNavigator]="true"
-                        [yearNavigator]="true"
-                        yearRange="1900:2030"
-                        [showIcon]="true" required compare="toDate" reverse="true" compare-operator="<">
-            </p-calendar>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="form-group">
-            <label for="toDate" class="toDate">To</label>
-            <p-calendar id="toDate" name="toDate" placeholder="MM-DD-YYYY"
-                        formControlName="toDate"
-                        tabindex="3"
-                        dateFormat="mm-dd-yy"
-                        [monthNavigator]="true"
-                        [yearNavigator]="true"
-                        yearRange="1900:2030"
-                        [showIcon]="true" required compare="fromDate" reverse="true" compare-operator=">">
-            </p-calendar>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="rankDischarge" class="form-label">Rank at Discharge</label>
-            <input id="rankDischarge" name="rankDischarge" type="text" class="form-control" tabindex="4" autocomplete="off" formControlName="rankDischarge" pTooltip="Maximum 150 characters" tooltipPosition="top"
-                   tooltipEvent="focus" required trimmed>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="typeDischarge" class="form-label">Type of Discharge</label>
-            <select id="typeDischarge" name="typeDischarge" class="form-control" formControlName="typeDischarge" placeholder="Type of Discharge" (change)="onDischargeChange()"
-                    tabindex="5" required>
-              <!--<option *ngFor="let user of users" value="{{user.userId}}">{{user.name}}</option>-->
-              <option value="">----Select----</option>
-              <option value="1">Honorable</option>
-              <option value="0">Dishonorable</option>
-            </select>
-            <!--<input id="typeDischarge" name="typeDischarge" type="text" class="form-control" autocomplete="off" formControlName="typeDischarge" required>-->
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-group">
-            <label for="dishonour" class="form-label">If other than honorable, explain</label>
-            <input #trefDishonour id="dishonour" name="dishonour" type="text" class="form-control" tabindex="6" autocomplete="off" formControlName="dishonour" pTooltip="Maximum 500 characters" tooltipPosition="top"
-                   tooltipEvent="focus" required trimmed>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-  <div class="card-footer">
-    <ul class="list-inline mb-0 d-flex justify-content-between">
-      <li class="list-inline-item">
-        <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-primary btn-block btn-portal" (click)="prevPage()" tabindex="10"><i class="fa fa-angle-left" aria-hidden="true"></i>Previous</button>          
-        </div>
-      </li>
-      <li class="list-inline-item">
-        <a (click)="onClear()" class="btn btn-primary btn-portal-border" tabindex="8">Clear</a>
-      </li>
-      <li class="list-inline-item">
-        <div class="btn-group" role="group" aria-label="Basic example" style="margin-right:10px;">
-          <button class="btn btn-primary btn-portal" pTooltip="Fill out form with valid info." tabindex="7" tooltipPosition="left" [tooltipDisabled]="militaryFormGroup.valid" [disabled]="militaryFormGroup.invalid" (click)="onSave()">
-            Save
-          </button>
-        </div>
-        <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-primary btn-block btn-portal" (click)="nextPage()" tabindex="9">Next <i class="fa fa-angle-right" aria-hidden="true"></i></button>
-        </div>
-      </li>
-    </ul>
-  </div>
+        <form [formGroup]="militaryFormGroup" (ngSubmit)="onSave()" novalidate>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="branch" class="form-label">Branch</label>
+                        <input id="branch" name="branch" type="text" class="form-control" autocomplete="off" autofocus formControlName="branch" tabindex="1" pTooltip="Maximum 500 characters" tooltipPosition="top"
+                               tooltipEvent="focus" required trimmed>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="fromDate" class="form-label">From</label>
+                        <p-calendar id="fromDate" name="fromDate" placeholder="MM-DD-YYYY"
+                                    formControlName="fromDate"
+                                    tabindex="2"
+                                    dateFormat="mm-dd-yy"
+                                    [monthNavigator]="true"
+                                    [yearNavigator]="true"
+                                    yearRange="1900:2030"
+                                    [showIcon]="true" required compare="toDate" reverse="true" compare-operator="<">
+                        </p-calendar>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="toDate" class="toDate">To</label>
+                        <p-calendar id="toDate" name="toDate" placeholder="MM-DD-YYYY"
+                                    formControlName="toDate"
+                                    tabindex="3"
+                                    dateFormat="mm-dd-yy"
+                                    [monthNavigator]="true"
+                                    [yearNavigator]="true"
+                                    yearRange="1900:2030"
+                                    [showIcon]="true" required compare="fromDate" reverse="true" compare-operator=">">
+                        </p-calendar>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="rankDischarge" class="form-label">Rank at Discharge</label>
+                        <input id="rankDischarge" name="rankDischarge" type="text" class="form-control" tabindex="4" autocomplete="off" formControlName="rankDischarge" pTooltip="Maximum 150 characters" tooltipPosition="top"
+                               tooltipEvent="focus" required trimmed>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="typeDischarge" class="form-label">Type of Discharge</label>
+                        <select id="typeDischarge" name="typeDischarge" class="form-control" formControlName="typeDischarge" placeholder="Type of Discharge" (change)="onDischargeChange()"
+                                tabindex="5" required>
+                            <!--<option *ngFor="let user of users" value="{{user.userId}}">{{user.name}}</option>-->
+                            <option value="">----Select----</option>
+                            <option value="1">Honorable</option>
+                            <option value="0">Dishonorable</option>
+                        </select>
+                        <!--<input id="typeDischarge" name="typeDischarge" type="text" class="form-control" autocomplete="off" formControlName="typeDischarge" required>-->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="dishonour" class="form-label">If other than honorable, explain</label>
+                        <input #trefDishonour id="dishonour" name="dishonour" type="text" class="form-control" tabindex="6" autocomplete="off" formControlName="dishonour" pTooltip="Maximum 500 characters" tooltipPosition="top"
+                               tooltipEvent="focus" required trimmed>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <ul class="list-inline mb-0 d-flex justify-content-between">
+            <li class="list-inline-item">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary btn-block btn-portal" (click)="prevPage()" tabindex="10"><i class="fa fa-angle-left" aria-hidden="true"></i>Previous</button>
+                </div>
+            </li>
+            <li class="list-inline-item">
+                <a (click)="onClear()" class="btn btn-primary btn-portal-border" tabindex="8">Clear</a>
+            </li>
+            <li class="list-inline-item">
+                <div class="btn-group" role="group" aria-label="Basic example" style="margin-right:10px;">
+                    <button class="btn btn-primary btn-portal" pTooltip="Fill out form with valid info." tabindex="7" tooltipPosition="left" [tooltipDisabled]="militaryFormGroup.valid" [disabled]="militaryFormGroup.invalid" (click)="onSave()">
+                        Save
+                    </button>
+                </div>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary btn-block btn-portal" (click)="nextPage()" tabindex="9">Next <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>
 
 <p-toast key="toastKey1"></p-toast>
