@@ -4,13 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CalendarRoutingModule } from './calendar-routing.module';
 import { CalendarComponent } from './calendar.component';
 import { SharedModule } from '../common/shared.module';
-
-import { ScheduleAllModule, RecurrenceEditorAllModule } from "@syncfusion/ej2-angular-schedule";
-import {
-    DatePickerAllModule,
-    TimePickerAllModule,
-    DateTimePickerAllModule
-} from "@syncfusion/ej2-angular-calendars";
+import { FullCalendarModule } from 'primeng/fullcalendar';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -19,12 +13,8 @@ import { FormsModule } from '@angular/forms';
         CommonModule,
         CalendarRoutingModule,
         SharedModule,
-        ScheduleAllModule,
-        RecurrenceEditorAllModule,
-        DatePickerAllModule,
-        TimePickerAllModule,
-        DateTimePickerAllModule,
-        FormsModule
+        FormsModule,
+        FullCalendarModule
     ]
 })
 export class CalendarModule { }
