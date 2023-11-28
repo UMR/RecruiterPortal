@@ -1,33 +1,53 @@
-<form [formGroup]="formGroup" novalidate>    
+<form [formGroup]="formGroup" novalidate>
+    <div class="row">
+        <div class="col-4">
+            <div class="form-group">
+                <label for="fromMail" class="form-label">From Mail</label>
+                <select id="fromMail" name="fromMail" class="form-control" formControlName="fromMail" required tabindex="1" (change)="onFromMailChange($event)">
+                    <option value="">----Select----</option>
+                    <option *ngFor="let mailConfig of recruiterMailConfigs" [value]="mailConfig.Id">{{ mailConfig.Email}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="form-group">
+                <label for="mailTemplateType" class="form-label">Template Type</label>
+                <select id="mailTemplateType" name="mailTemplateType" class="form-control" formControlName="mailTemplateType" tabindex="2" (change)="onTemplateTypeChange($event)">
+                    <option value="">----Select----</option>
+                    <option *ngFor="let mailType of mailTemplateTypes" [value]="mailType.Id">{{mailType?.Name}}</option>
+                </select>
+            </div>
+        </div>       
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="to" class="form-label">TO</label>
-                <p-chips formControlName="to"></p-chips>
+                <label for="mailAddressTo" class="form-label">TO</label>
+                <p-chips formControlName="mailAddressTo" tabindex="3" [style]="{ width: '100%' }"></p-chips>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="cc" class="form-label">CC</label>
-                <p-chips formControlName="cc"></p-chips>
+                <label for="mailAddressCc" class="form-label">CC</label>
+                <p-chips formControlName="mailAddressCc" tabindex="4" [style]="{ width: '100%' }"></p-chips>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="bcc" class="form-label">BCC</label>
-                <p-chips formControlName="bcc"></p-chips>
+                <label for="mailAddressBcc" class="form-label">BCC</label>
+                <p-chips formControlName="mailAddressBcc" tabindex="5" [style]="{ width: '100%' }"></p-chips>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="subject" class="form-label">Cureent Salary</label>
-                <input type="text" formControlName="subject" placeholder="subject" class="form-control">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" formControlName="subject" placeholder="Subject" class="form-control" tabindex="6">
             </div>
         </div>
     </div>
@@ -35,7 +55,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="body" class="form-label">Body</label>
-                <input type="text" formControlName="body" placeholder="Body" class="form-control">
+                <p-editor [style]="{ height: '350px' }" formControlName="body" tabindex="7"></p-editor>
             </div>
         </div>
     </div>
@@ -43,13 +63,13 @@
         <div class="com-md-12">
             <ul class="list-inline mb-0 d-flex justify-content-between mt-2 ml-3">
                 <li class="list-inline-item">
-                    <button type="button" class="btn btn-primary btn-portal-border" (click)="hide()">Close</button>
+                    <button type="button" class="btn btn-primary btn-portal-border" tabindex="9" (click)="hide()">Close</button>
                 </li>
                 <li class="list-inline-item" style="margin-left:190px">
-                    <button type="button" class="btn btn-primary btn-portal-border" (click)="clear()">Clear</button>
+                    <button type="button" class="btn btn-primary btn-portal-border" tabindex="10" (click)="clear()">Clear</button>
                 </li>
                 <li class="list-inline-item">
-                    <button type="submit" class="btn btn-primary btn-portal" (click)="sendMail()" [disabled]="!formGroup.valid">Save</button>
+                    <button type="submit" class="btn btn-primary btn-portal" tabindex="8" (click)="sendMail()" [disabled]="!formGroup.valid">Send</button>
                 </li>
             </ul>
         </div>
