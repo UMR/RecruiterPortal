@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { CalendarService } from './calendar.service';
+import { CalendarOptions, EventClickArg } from '@fullcalendar/core';
 import * as jsonData from './data.json';
 
 
@@ -15,26 +16,44 @@ export class CalendarComponent implements OnInit {
     events: any[];
     options: any;
 
+    calendarOptions: CalendarOptions = {
+        plugins: [
+            interactionPlugin,
+            dayGridPlugin,
+            timeGridPlugin
+        ],
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+        },
+        initialView: 'dayGridMonth',
+        weekends: true,
+        editable: true,
+        selectable: true,
+        selectMirror: true,
+        dayMaxEvents: true,
+        dateClick: (e) => {
+            this.handleDateClick(e)
+        },
+        eventClick: (ee) => {
+            this.handleEventClick(ee)
+        }
+      
+    };
     constructor(private calendarService: CalendarService) { }
 
     ngOnInit() {
-        console.log(jsonData);
         this.events = jsonData.data;
-        console.log(this.events);
-        //this.calendarService.getEvents().subscribe(res => {
-        //    console.log(res);
-        //    //this.events = events
-        //});
+    }
 
-        this.options = {
-            plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-            defaultDate: '2017-02-01',
-            header: {
-                left: 'prev,next',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            editable: true
-        };
+    handleDateClick(arg) {
+        alert('date click! ' + arg.dateStr)
+    }
+
+    handleEventClick(clickInfo: EventClickArg) {
+        if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+            clickInfo.event.remove();
+        }
     }
 }
