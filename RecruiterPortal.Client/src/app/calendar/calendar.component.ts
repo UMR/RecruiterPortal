@@ -3,7 +3,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { CalendarService } from './calendar.service';
-import { CalendarOptions, EventClickArg } from '@fullcalendar/core';
+import { CalendarOptions, EventClickArg, DateSelectArg } from '@fullcalendar/core';
 import * as jsonData from './data.json';
 
 
@@ -38,6 +38,9 @@ export class CalendarComponent implements OnInit {
         },
         eventClick: (ee) => {
             this.handleEventClick(ee)
+        },
+        select: (eee) => {
+            this.handleDateSelect(eee)
         }
       
     };
@@ -54,6 +57,23 @@ export class CalendarComponent implements OnInit {
     handleEventClick(clickInfo: EventClickArg) {
         if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
             clickInfo.event.remove();
+        }
+    }
+
+    handleDateSelect(selectInfo: DateSelectArg) {
+        const title = prompt('Please enter a new title for your event');
+        const calendarApi = selectInfo.view.calendar;
+
+        calendarApi.unselect(); // clear date selection
+
+        if (title) {
+            calendarApi.addEvent({
+                //id: createEventId(),
+                title,
+                start: selectInfo.startStr,
+                end: selectInfo.endStr,
+                allDay: selectInfo.allDay
+            });
         }
     }
 }
