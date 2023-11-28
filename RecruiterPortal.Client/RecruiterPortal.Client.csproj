@@ -13,6 +13,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="src\app\common\components\sent-mail\sent-mail.module.ts">
+      <SubType>Code</SubType>
+    </None>
+    <None Update="src\app\common\components\sent-mail\sent-mail.service.ts">
+      <SubType>Code</SubType>
+    </None>
     <None Update="src\app\management\recruiter\recruiter-search.model.ts">
       <SubType>Code</SubType>
     </None>

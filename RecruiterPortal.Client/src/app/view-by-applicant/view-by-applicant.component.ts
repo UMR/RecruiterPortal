@@ -203,6 +203,10 @@ export class ViewByApplicantComponent implements OnInit {
         this.showDialog = true;
     }
 
+    onSendMailClick(applicant) {        
+        this.showDialog = true;
+    }
+
     handleHideEvent(show) {
         this.showDialog = show;
     }

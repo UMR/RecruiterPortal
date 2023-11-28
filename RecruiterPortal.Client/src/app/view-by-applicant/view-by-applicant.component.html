@@ -88,6 +88,7 @@
                                                     </th>
                                                     <th *ngIf="selectedApplicantStatus==='1'" class="text-center">View/Edit</th>
                                                     <th class="text-center">Send To</th>
+                                                    <th class="text-center">Send Mail</th>
                                                 </tr>
                                             </ng-template>
                                             <ng-template pTemplate="body" let-applicant let-rowData let-columns="columns">
@@ -97,6 +98,7 @@
                                                     </td>
                                                     <td class="text-center" *ngIf="selectedApplicantStatus==='1'"><a (click)="onEdit(applicant.UserId)"><i class="pi pi-pencil"></i></a></td>
                                                     <td class="text-center"><button type="button" (click)="onSendToClick(applicant)" class="btn btn-primary btn-import-sync">Send To</button> </td>
+                                                    <td class="text-center"><button type="button" (click)="onSendMailClick(applicant)" class="btn btn-search">Send Mail</button> </td>
                                                 </tr>
                                             </ng-template>
                                         </p-table>
