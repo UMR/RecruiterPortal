@@ -32,6 +32,7 @@ export class ViewByApplicantComponent implements OnInit {
     private pageNumber: number;
     public selectedApplicant: any;
     public showDialog: boolean = false;
+    public showSentMailDialog: boolean = false;
     @ViewChild('applicantTable', { static: false }) applicantTable: Table;
 
     constructor(private fb: FormBuilder,
@@ -203,13 +204,18 @@ export class ViewByApplicantComponent implements OnInit {
         this.showDialog = true;
     }
 
-    onSendMailClick(applicant) {        
-        this.showDialog = true;
-    }
-
     handleHideEvent(show) {
         this.showDialog = show;
     }
+
+    onSendMailClick(applicant) {    
+        this.selectedApplicant = applicant.UserId;
+        this.showSentMailDialog = true;
+    }
+
+    handleSendMailHideEvent(show) {
+        this.showSentMailDialog = show;
+    }    
 
     onClear() {
         this.viewByApplicantFormGroup.reset();

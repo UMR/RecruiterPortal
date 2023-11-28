@@ -116,6 +116,9 @@
 <p-dialog [(visible)]="showDialog" [style]="{ width: '450px' }" header="Send To" [modal]="true" [closable]="false" [draggable]="false" [resizable]="false">
     <app-status (hideEvent)="handleHideEvent($event)" [selectedApplicant]="selectedApplicant"></app-status>
 </p-dialog>
+<p-dialog [(visible)]="showSentMailDialog" [style]="{ width: '1200px' }" header="Send Mail" [modal]="true" [closable]="false" [draggable]="false" [resizable]="false">
+    <sent-mail (hideEvent)="handleSendMailHideEvent($event)"></sent-mail>
+</p-dialog>
 <p-toast key="toastKey1"></p-toast>
 
 

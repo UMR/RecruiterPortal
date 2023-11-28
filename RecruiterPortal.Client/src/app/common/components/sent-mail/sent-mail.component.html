@@ -1,68 +1,41 @@
-<form [formGroup]="formGroup" novalidate>
+<form [formGroup]="formGroup" novalidate>    
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="institution" class="form-label">Status</label>
-                <p-autoComplete formControlName="status" [suggestions]="statusResults" class="form-control"
-                                required autocomplete="off" (completeMethod)="onStatusSearch()"
-                                forceSelection="true" (onSelect)="onStatusSelect($event)" [ngClass]="{ 'is-invalid': submitted }" [dropdown]="true">
-                    <ng-template let-status pTemplate="item">
-                        <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                            <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{status.StatusName}}</div>
-                        </div>
-                    </ng-template>
-                </p-autoComplete>
-                <small class="p-error" *ngIf="submitted">Institution is required.</small>
+                <label for="to" class="form-label">TO</label>
+                <p-chips formControlName="to"></p-chips>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="postion" class="form-label">Postion</label>
-                <p-autoComplete formControlName="position" [suggestions]="positionResults" class="form-control"
-                                (completeMethod)="onPositionSearch($event)" required autocomplete="off"
-                                forceSelection="true" (onSelect)="onPositionSelect($event)" [ngClass]="{ 'is-invalid': submitted }" [dropdown]="true">
-                    <ng-template let-position pTemplate="item">
-                        <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                            <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{position.PositionName}}</div>
-                        </div>
-                    </ng-template>
-                </p-autoComplete>
-                <small class="p-error" *ngIf="submitted">Postion is required.</small>
+                <label for="cc" class="form-label">CC</label>
+                <p-chips formControlName="cc"></p-chips>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="institution" class="form-label">Institution</label>
-                <p-autoComplete formControlName="institution" [suggestions]="institutionResults" class="form-control"
-                                (completeMethod)="onInstitutiionSearch($event)" autocomplete="off"
-                                forceSelection="true" (onSelect)="onInstitutiionSelect($event)" [ngClass]="{ 'is-invalid': submitted }" [dropdown]="true">
-                    <ng-template let-institute pTemplate="item">
-                        <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                            <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{institute.InstituteName}}</div>
-                        </div>
-                    </ng-template>
-                </p-autoComplete>
-                <small class="p-error" *ngIf="submitted">Institution is required.</small>
+                <label for="bcc" class="form-label">BCC</label>
+                <p-chips formControlName="bcc"></p-chips>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="institution" class="form-label">Cureent Salary</label>
-                <input type="text" formControlName="currentSalary" pInputText pKeyFilter="num" placeholder="Cureent Salary" class="form-control">
+                <label for="subject" class="form-label">Cureent Salary</label>
+                <input type="text" formControlName="subject" placeholder="subject" class="form-control">
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="institution" class="form-label">Expected Salary</label>
-                <input type="text" formControlName="expectedSalary" pInputText pKeyFilter="num" placeholder="Expected Salary" class="form-control">
+                <label for="body" class="form-label">Body</label>
+                <input type="text" formControlName="body" placeholder="Body" class="form-control">
             </div>
         </div>
     </div>
@@ -76,7 +49,7 @@
                     <button type="button" class="btn btn-primary btn-portal-border" (click)="clear()">Clear</button>
                 </li>
                 <li class="list-inline-item">
-                    <button type="submit" class="btn btn-primary btn-portal" (click)="save()" [disabled]="!formGroup.valid">Save</button>
+                    <button type="submit" class="btn btn-primary btn-portal" (click)="sendMail()" [disabled]="!formGroup.valid">Save</button>
                 </li>
             </ul>
         </div>
