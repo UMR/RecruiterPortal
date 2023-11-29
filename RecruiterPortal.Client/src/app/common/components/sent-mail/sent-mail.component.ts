@@ -33,8 +33,8 @@ export class SentMailComponent implements OnInit {
     createFormGroup() {
         this.formGroup = this.fb.group({
             fromMail: ['', Validators.compose([Validators.required])],
-            mailTemplateType: ['', Validators.compose([Validators.required])],
-            mailAddressTo: [''],
+            mailTemplateType: [''],
+            mailAddressTo: ['', Validators.compose([Validators.required])],
             mailAddressCc: [''],
             mailAddressBcc: [''],
             subject: [''],
@@ -89,32 +89,34 @@ export class SentMailComponent implements OnInit {
 
     sendMail() {
 
-        const toAddress = this.formGroup.controls.mailAddressTo.value ? this.formGroup.controls.mailAddressTo.value : [];
-        const ccAddress = this.formGroup.controls.mailAddressCc.value ? this.formGroup.controls.mailAddressCc.value : [];
-        const bccAddress = this.formGroup.controls.mailAddressBcc.value ? this.formGroup.controls.mailAddressBcc.value : [];
-        const subject = this.formGroup.controls.subject.value;
-        const body = this.formGroup.controls.body.value;
+        const filteredFromAddress = this.recruiterMailConfigs.filter(m => m.Id == this.selectedFromMail);
+        if (filteredFromAddress.length > 0) {
+            const fromAddress = filteredFromAddress[0].Email;
+            const toAddress = this.formGroup.controls.mailAddressTo.value ? this.formGroup.controls.mailAddressTo.value : [];
+            const ccAddress = this.formGroup.controls.mailAddressCc.value ? this.formGroup.controls.mailAddressCc.value : [];
+            const bccAddress = this.formGroup.controls.mailAddressBcc.value ? this.formGroup.controls.mailAddressBcc.value : [];
+            const subject = this.formGroup.controls.subject.value;
+            const body = this.formGroup.controls.body.value;
 
-        const model: any = {
-            toAddress: toAddress,
-            ccAddress: ccAddress,
-            bccAddress: bccAddress,
-            subject: subject,
-            body: body
-        }
-
-        console.log(model);
-
-        this.sentMailService.sendMail(model).subscribe(res => {
-            if (res) {
-                this.formGroup.reset();
-                this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Mail send successfully', detail: '' });
-                this.hideEvent.emit(false);
+            const model: any = {
+                fromAddress: fromAddress,
+                toAddress: toAddress,
+                ccAddress: ccAddress,
+                bccAddress: bccAddress,
+                subject: subject,
+                body: body
             }
-        },
-            err => {
-                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Mail send failed', detail: '' });
-            });
 
+            this.sentMailService.sendMail(model).subscribe(res => {
+                if (res) {
+                    this.formGroup.reset();
+                    this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Mail send successfully', detail: '' });
+                    this.hideEvent.emit(false);
+                }
+            },
+                err => {
+                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Mail send failed', detail: '' });
+                });
+        }
     }
 }

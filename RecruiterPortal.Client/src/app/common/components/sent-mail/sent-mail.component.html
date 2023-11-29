@@ -24,7 +24,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="mailAddressTo" class="form-label">TO</label>
-                <p-chips formControlName="mailAddressTo" tabindex="3" [style]="{ width: '100%' }"></p-chips>
+                <p-chips formControlName="mailAddressTo" tabindex="3" [style]="{ width: '100%' }" required></p-chips>
             </div>
         </div>
         <div class="col-md-6">
@@ -62,7 +62,7 @@
                 <li class="list-inline-item">
                     <button type="button" class="btn btn-primary btn-portal-border" tabindex="9" (click)="hide()">Close</button>
                 </li>
-                <li class="list-inline-item" style="margin-left:190px">
+                <li class="list-inline-item">
                     <button type="button" class="btn btn-primary btn-portal-border" tabindex="10" (click)="clear()">Clear</button>
                 </li>
                 <li class="list-inline-item">
