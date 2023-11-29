@@ -70,13 +70,24 @@ namespace RecruiterPortal.API.Controllers
 
         [Route("send-mail")]
         [HttpPost]
-        public IActionResult SendMail()
+        public IActionResult SendMail([FromBody] SendMailRequest request)
         {
             MailMessage message = new MailMessage();
             message.From = new MailAddress("kaptan.cse@gmail.com");
-            message.To.Add(new MailAddress("arzaman@ael-bd.com"));
-            message.Subject = "Subject";
-            message.Body = "Body";
+            foreach (string toAddress in request.ToAddress) 
+            {
+                message.To.Add(new MailAddress(toAddress));
+            }
+            foreach (string ccAddress in request.CcAddress)
+            {
+                message.To.Add(new MailAddress(ccAddress));
+            }
+            foreach (string bccAddress in request.BccAddress)
+            {
+                message.Bcc.Add(new MailAddress(bccAddress));
+            }            
+            message.Subject = request.Subject;
+            message.Body = request.Body;
             message.IsBodyHtml = true;
             var result = _mailConfigurationService.SendEmail("kaptan.cse@gmail.com",message);
             return Ok();

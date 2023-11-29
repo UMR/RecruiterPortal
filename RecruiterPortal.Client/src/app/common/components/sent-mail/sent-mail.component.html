@@ -1,6 +1,6 @@
 <form [formGroup]="formGroup" novalidate>
     <div class="row">
-        <div class="col-4">
+        <div class="col-6">
             <div class="form-group">
                 <label for="fromMail" class="form-label">From Mail</label>
                 <select id="fromMail" name="fromMail" class="form-control" formControlName="fromMail" required tabindex="1" (change)="onFromMailChange($event)">
@@ -9,7 +9,7 @@
                 </select>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-6">
             <div class="form-group">
                 <label for="mailTemplateType" class="form-label">Template Type</label>
                 <select id="mailTemplateType" name="mailTemplateType" class="form-control" formControlName="mailTemplateType" tabindex="2"
@@ -21,15 +21,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="mailAddressTo" class="form-label">TO</label>
                 <p-chips formControlName="mailAddressTo" tabindex="3" [style]="{ width: '100%' }"></p-chips>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="form-group">
                 <label for="mailAddressCc" class="form-label">CC</label>
                 <p-chips formControlName="mailAddressCc" tabindex="4" [style]="{ width: '100%' }"></p-chips>
@@ -43,8 +41,6 @@
                 <p-chips formControlName="mailAddressBcc" tabindex="5" [style]="{ width: '100%' }"></p-chips>
             </div>
         </div>
-    </div>
-    <div class="row">
         <div class="col-md-12">
             <div class="form-group">
                 <label for="subject" class="form-label">Subject</label>
@@ -56,7 +52,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="body" class="form-label">Body</label>
-                <p-editor [style]="{ height: '350px' }" formControlName="body" tabindex="7"></p-editor>
+                <p-editor [style]="{ height: '320px'}" formControlName="body" tabindex="7"></p-editor>
             </div>
         </div>
     </div>

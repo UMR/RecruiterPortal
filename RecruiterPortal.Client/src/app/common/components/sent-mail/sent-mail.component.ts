@@ -55,10 +55,10 @@ export class SentMailComponent implements OnInit {
     }
 
     getMailTemplate() {
-        if (this.selectedFromMail && this.selectedTemplateType) {            
+        if (this.selectedFromMail && this.selectedTemplateType) {
             this.mailSettingsService
                 .getMailTemplate(this.selectedFromMail, this.selectedTemplateType)
-                .subscribe(res => {                                     
+                .subscribe(res => {
                     if (res.body) {
                         this.formGroup.controls.body.setValue(res.body.TemplateText);
                     } else {
@@ -73,7 +73,7 @@ export class SentMailComponent implements OnInit {
         this.getMailTemplateTypesByRecruiterId();
     }
 
-    onMailTemplateTypeChange(event) {        
+    onMailTemplateTypeChange(event) {
         this.selectedTemplateType = event.target.value;
         this.getMailTemplate();
     }
@@ -89,26 +89,32 @@ export class SentMailComponent implements OnInit {
 
     sendMail() {
 
-        const toMailAddress = this.formGroup.controls.mailAddressTo.value;
-        const ccMailAddress = this.formGroup.controls.mailAddressCc.value;
-        const bccMailAddress = this.formGroup.controls.mailAddressBcc.value;
+        const toAddress = this.formGroup.controls.mailAddressTo.value ? this.formGroup.controls.mailAddressTo.value : [];
+        const ccAddress = this.formGroup.controls.mailAddressCc.value ? this.formGroup.controls.mailAddressCc.value : [];
+        const bccAddress = this.formGroup.controls.mailAddressBcc.value ? this.formGroup.controls.mailAddressBcc.value : [];
         const subject = this.formGroup.controls.subject.value;
         const body = this.formGroup.controls.body.value;
 
-        console.log(toMailAddress);
-        console.log(ccMailAddress);
-        console.log(bccMailAddress);
+        const model: any = {
+            toAddress: toAddress,
+            ccAddress: ccAddress,
+            bccAddress: bccAddress,
+            subject: subject,
+            body: body
+        }
 
-        //this.sentMailService.addApplicantStatus(model).subscribe(res => {
-        //    if (res) {
-        //        this.formGroup.reset();
-        //        this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Applicant send successfully', detail: '' });
-        //        this.hideEvent.emit(false);
-        //    }
-        //},
-        //    err => {
-        //        this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Applicant send failed', detail: '' });
-        //    });
+        console.log(model);
+
+        this.sentMailService.sendMail(model).subscribe(res => {
+            if (res) {
+                this.formGroup.reset();
+                this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Mail send successfully', detail: '' });
+                this.hideEvent.emit(false);
+            }
+        },
+            err => {
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Mail send failed', detail: '' });
+            });
 
     }
 }

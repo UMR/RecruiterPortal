@@ -11,20 +11,9 @@ import { ApplicantStatusRequestModel } from '../../model/applicantStatusRequestM
 export class SentMailService {
 
     constructor(private client: HttpClient) { }
+   
 
-    getStatus(): Observable<HttpResponse<any>> {
-        return this.client.get(encodeURI(`${resourceServerUrl}/api/applicantstatus/get-status`), { observe: 'response' });
-    }
-
-    getPositionByPositionName(posotion: string): Observable<HttpResponse<any>> {
-        return this.client.get(encodeURI(`${resourceServerUrl}/api/employment/position?text=${posotion}`), { observe: 'response' });
-    }
-
-    getInsituteByInsituteName(institute: string): Observable<HttpResponse<any>> {
-        return this.client.get(encodeURI(`${resourceServerUrl}/api/employment/institute?text=${institute}`), { observe: 'response' });
-    }
-
-    addApplicantStatus(applicantStatusModel: ApplicantStatusRequestModel) {
-        return this.client.post(encodeURI(`${resourceServerUrl}/api/applicantstatus/save`), applicantStatusModel);
+    sendMail(model: any) {
+        return this.client.post(encodeURI(`${resourceServerUrl}/api/MailConfiguration/send-mail`), model);
     }
 }
