@@ -15,9 +15,9 @@ public partial class Cbcform
 
     public string AgencyIdentification { get; set; }
 
-    public string LthhpPfi { get; set; }
+    public string Lthhppfi { get; set; }
 
-    public string LhcsaLicense { get; set; }
+    public string Lhcsalicense { get; set; }
 
     public string AgencyName { get; set; }
 

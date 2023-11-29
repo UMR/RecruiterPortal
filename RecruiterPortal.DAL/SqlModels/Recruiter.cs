@@ -43,6 +43,8 @@ public partial class Recruiter
 
     public virtual ICollection<ApplicantStatus> ApplicantStatusUpdatedByNavigations { get; set; } = new List<ApplicantStatus>();
 
+    public virtual ICollection<InterviewSchedule> InterviewSchedules { get; set; } = new List<InterviewSchedule>();
+
     public virtual ICollection<Job> JobCreatedByNavigations { get; set; } = new List<Job>();
 
     public virtual ICollection<Job> JobUpdatedByNavigations { get; set; } = new List<Job>();

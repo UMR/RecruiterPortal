@@ -43,6 +43,8 @@ public partial class UmrrecruitmentApplicantContext : DbContext
 
     public virtual DbSet<Institution> Institutions { get; set; }
 
+    public virtual DbSet<InterviewSchedule> InterviewSchedules { get; set; }
+
     public virtual DbSet<Job> Jobs { get; set; }
 
     public virtual DbSet<LookupZipCode> LookupZipCodes { get; set; }
@@ -356,10 +358,10 @@ public partial class UmrrecruitmentApplicantContext : DbContext
                 .HasMaxLength(500)
                 .HasColumnName("FZip");
             entity.Property(e => e.HomePhone).HasMaxLength(500);
-            entity.Property(e => e.LhcsaLicense)
+            entity.Property(e => e.Lhcsalicense)
                 .HasMaxLength(500)
                 .HasColumnName("LHCSALicense");
-            entity.Property(e => e.LthhpPfi)
+            entity.Property(e => e.Lthhppfi)
                 .HasMaxLength(500)
                 .HasColumnName("LTHHPPFI");
             entity.Property(e => e.MotherMaidenName).HasMaxLength(500);
@@ -507,6 +509,23 @@ public partial class UmrrecruitmentApplicantContext : DbContext
             entity.Property(e => e.ZipCode)
                 .HasMaxLength(10)
                 .IsFixedLength();
+        });
+
+        modelBuilder.Entity<InterviewSchedule>(entity =>
+        {
+            entity.ToTable("InterviewSchedule");
+
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.EndDate).HasColumnType("datetime");
+            entity.Property(e => e.StartDate).HasColumnType("datetime");
+            entity.Property(e => e.Title).HasMaxLength(100);
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+
+            entity.HasOne(d => d.Recruiter).WithMany(p => p.InterviewSchedules)
+                .HasForeignKey(d => d.RecruiterId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_InterviewSchedule_Recruter");
         });
 
         modelBuilder.Entity<Job>(entity =>
