@@ -30,8 +30,8 @@ namespace RecruiterPortal.API.Controllers
         [Route("get-gmail-service/{email}")]
         [HttpGet]
         public IActionResult GetGmailService(string email)
-        {           
-            
+        {
+
             return Ok();
         }
 
@@ -73,8 +73,8 @@ namespace RecruiterPortal.API.Controllers
         public IActionResult SendMail([FromBody] SendMailRequest request)
         {
             MailMessage message = new MailMessage();
-            message.From = new MailAddress("kaptan.cse@gmail.com");
-            foreach (string toAddress in request.ToAddress) 
+            message.From = new MailAddress(request.FromAddress);
+            foreach (string toAddress in request.ToAddress)
             {
                 message.To.Add(new MailAddress(toAddress));
             }
@@ -85,11 +85,11 @@ namespace RecruiterPortal.API.Controllers
             foreach (string bccAddress in request.BccAddress)
             {
                 message.Bcc.Add(new MailAddress(bccAddress));
-            }            
+            }
             message.Subject = request.Subject;
             message.Body = request.Body;
             message.IsBodyHtml = true;
-            var result = _mailConfigurationService.SendEmail("kaptan.cse@gmail.com",message);
+            var result = _mailConfigurationService.SendEmail(request.FromAddress, message);
             return Ok();
         }
 
