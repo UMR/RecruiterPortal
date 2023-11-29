@@ -51,7 +51,7 @@ export class CalendarComponent implements OnInit {
     }
 
     handleDateClick(arg) {
-        alert('date click! ' + arg.dateStr)
+        //alert('date click! ' + arg.dateStr)
     }
 
     handleEventClick(clickInfo: EventClickArg) {
