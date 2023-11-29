@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import listPlugin from '@fullcalendar/list';
 import { CalendarService } from './calendar.service';
 import { CalendarOptions, EventClickArg, DateSelectArg } from '@fullcalendar/core';
 import * as jsonData from './data.json';
@@ -20,12 +21,13 @@ export class CalendarComponent implements OnInit {
         plugins: [
             interactionPlugin,
             dayGridPlugin,
-            timeGridPlugin
+            timeGridPlugin,
+            listPlugin
         ],
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
         },
         initialView: 'dayGridMonth',
         weekends: true,
