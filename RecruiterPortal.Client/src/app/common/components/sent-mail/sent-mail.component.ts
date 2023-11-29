@@ -55,11 +55,10 @@ export class SentMailComponent implements OnInit {
     }
 
     getMailTemplate() {
-        if (this.selectedFromMail && this.selectedTemplateType) {
+        if (this.selectedFromMail && this.selectedTemplateType) {            
             this.mailSettingsService
                 .getMailTemplate(this.selectedFromMail, this.selectedTemplateType)
-                .subscribe(res => {
-                    console.log(res);
+                .subscribe(res => {                                     
                     if (res.body) {
                         this.formGroup.controls.body.setValue(res.body.TemplateText);
                     } else {
@@ -74,7 +73,7 @@ export class SentMailComponent implements OnInit {
         this.getMailTemplateTypesByRecruiterId();
     }
 
-    onTemplateTypeChange(event) {
+    onMailTemplateTypeChange(event) {        
         this.selectedTemplateType = event.target.value;
         this.getMailTemplate();
     }

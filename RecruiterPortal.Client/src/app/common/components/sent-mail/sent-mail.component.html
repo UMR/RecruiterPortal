@@ -12,12 +12,13 @@
         <div class="col-4">
             <div class="form-group">
                 <label for="mailTemplateType" class="form-label">Template Type</label>
-                <select id="mailTemplateType" name="mailTemplateType" class="form-control" formControlName="mailTemplateType" tabindex="2" (change)="onTemplateTypeChange($event)">
+                <select id="mailTemplateType" name="mailTemplateType" class="form-control" formControlName="mailTemplateType" tabindex="2"
+                        (change)="onMailTemplateTypeChange($event)">
                     <option value="">----Select----</option>
                     <option *ngFor="let mailType of mailTemplateTypes" [value]="mailType.Id">{{mailType?.Name}}</option>
                 </select>
             </div>
-        </div>       
+        </div>
     </div>
     <div class="row">
         <div class="col-md-12">
