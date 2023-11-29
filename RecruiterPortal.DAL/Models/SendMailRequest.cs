@@ -2,6 +2,8 @@
 {
     public class SendMailRequest
     {
+        public string FromAddress { get; set; }   
+
         public string[] ToAddress { get; set; }
 
         public string[] CcAddress { get; set; }
