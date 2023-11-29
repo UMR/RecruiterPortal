@@ -6,6 +6,7 @@ import listPlugin from '@fullcalendar/list';
 import { CalendarService } from './calendar.service';
 import { CalendarOptions, EventClickArg, DateSelectArg } from '@fullcalendar/core';
 import * as jsonData from './data.json';
+import { EventDataList } from './data';
 
 
 @Component({
@@ -44,12 +45,37 @@ export class CalendarComponent implements OnInit {
         select: (eee) => {
             this.handleDateSelect(eee)
         }
-      
+
     };
     constructor(private calendarService: CalendarService) { }
 
     ngOnInit() {
-        this.events = jsonData.data;
+        //this.events = jsonData.data;
+        this.getInterviewByRecruiterId();
+    }
+
+    getInterviewByRecruiterId() {
+        this.calendarService.getInterviewScheduleById()
+            .subscribe(response => {
+                if (response.status === 200) {
+                    let allData: any[] = [];
+                    for (let i = 0; i < response.body.length; i++) {
+                        let data = {
+                            title: response.body[i].Title,
+                            id: response.body[i].Id,
+                            start: response.body[i].StartDate,
+                            end: response.body[i].EndDate
+                        }
+                        allData.push(data);
+                    }
+
+                    this.events = allData;
+                }
+            },
+                err => {
+                },
+                () => {
+                });
     }
 
     handleDateClick(arg) {

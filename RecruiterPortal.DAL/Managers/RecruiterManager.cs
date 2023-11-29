@@ -91,17 +91,17 @@ namespace RecruiterPortal.DAL.Managers
             string spName = "SP_GET_All_Recruiter";
             GenericRepository<Recruiter> agencyRepo = new GenericRepository<Recruiter>();
             SqlParameter[] sqlParameters = agencyRepo.GetSqlParametersFromStoredProcedure(spName);
-            DataTable agencyDt = null;
+            DataTable recruiterDt = null;
             try
             {
-                agencyDt = agencyRepo.LoadDataTable(spName, sqlParameters);
+                recruiterDt = agencyRepo.LoadDataTable(spName, sqlParameters);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
 
-            return agencyDt;
+            return recruiterDt;
         }
         public static DataTable IsUserEmailExist(string email, int? userId)
         {
