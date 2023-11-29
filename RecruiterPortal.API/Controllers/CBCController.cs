@@ -34,8 +34,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     cbcModel.AliasAKA = cbcForm.AliasAka;
                     cbcModel.HomePhone = cbcForm.HomePhone;
                     cbcModel.AgencyIdentification = cbcForm.AgencyIdentification;
-                    cbcModel.LTHHPPFI = cbcForm.LthhpPfi;
-                    cbcModel.LHCSALicense = cbcForm.LhcsaLicense;
+                    cbcModel.LTHHPPFI = cbcForm.Lthhppfi;
+                    cbcModel.LHCSALicense = cbcForm.Lhcsalicense;
                     cbcModel.AgencyName = cbcForm.AgencyName;
                     cbcModel.ATelephoneNo = cbcForm.AtelephoneNo;
                     cbcModel.APLastName = cbcForm.AplastName;
@@ -91,8 +91,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     cbc.AliasAka = cbcModel.AliasAKA;
                     cbc.HomePhone = cbcModel.HomePhone;
                     cbc.AgencyIdentification = cbcModel.AgencyIdentification;
-                    cbc.LthhpPfi = cbcModel.LTHHPPFI;
-                    cbc.LhcsaLicense = cbcModel.LHCSALicense;
+                    cbc.Lthhppfi = cbcModel.LTHHPPFI;
+                    cbc.Lhcsalicense = cbcModel.LHCSALicense;
                     cbc.AgencyName = cbcModel.AgencyName;
                     cbc.AtelephoneNo = cbcModel.ATelephoneNo;
                     cbc.AplastName = cbcModel.APLastName;
