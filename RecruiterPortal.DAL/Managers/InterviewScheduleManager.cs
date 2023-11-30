@@ -35,8 +35,17 @@ namespace RecruiterPortalDAL.Managers
                 GenericRepository<InterviewSchedule> repository = new GenericRepository<InterviewSchedule>();
 
                 InterviewSchedule interviewSchedule = MapInterviewScheduleRequest(request, recruiterId);
-                InterviewSchedule createdApplicantStatus = await repository.SaveAsync(interviewSchedule);
-                return createdApplicantStatus.Id;
+                InterviewSchedule createdUpdateSchedule;
+                if (request.Id == 0)
+                {
+                    createdUpdateSchedule = await repository.SaveAsync(interviewSchedule);
+                }
+                else {
+                    createdUpdateSchedule = await repository.SaveAsync(interviewSchedule);
+                    //createdUpdateSchedule = await repository.UpdateAsync(interviewSchedule);
+                }
+
+                return createdUpdateSchedule.Id;
             }
             catch (Exception ex)
             {
