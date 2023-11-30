@@ -621,7 +621,7 @@ p-calendar.ng-pending input:not(:required) {
     padding: 0.2145em 0.429em;
     display: inline-block;
     width: 100%;
-    height: 42px !important;
+    height: 40px !important;
 }
 
 /* ============================== */

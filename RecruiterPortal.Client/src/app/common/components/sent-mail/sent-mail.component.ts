@@ -37,6 +37,7 @@ export class SentMailComponent implements OnInit, OnChanges {
     ngOnChanges(changes: SimpleChanges) {
         if (changes.selectedApplicant && changes.selectedApplicant.currentValue) {
             this.selectedEmail = (changes.selectedApplicant.currentValue as any).Email;
+            this.toEmail = [];
             this.toEmail.push(this.selectedEmail);
             this.formGroup.controls.mailAddressTo.setValue(this.toEmail);
         }
