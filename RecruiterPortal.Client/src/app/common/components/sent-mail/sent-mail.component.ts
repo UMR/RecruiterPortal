@@ -19,6 +19,7 @@ export class SentMailComponent implements OnInit {
     public mailTemplateTypes: any[] = [];
     private selectedFromMail: number;
     private selectedTemplateType: number;
+    public emailRegex = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService,
         private sentMailService: SentMailService, private mailTemplateTypeService: MailTemplateService, private mailSettingsService: MailSettingsService) {
@@ -76,6 +77,19 @@ export class SentMailComponent implements OnInit {
     onMailTemplateTypeChange(event) {
         this.selectedTemplateType = event.target.value;
         this.getMailTemplate();
+    }
+
+    validateEmail(email) {
+        return email.match(this.emailRegex);
+    }
+
+    onTokenAdd(chip) {
+        if (chip.value) {
+            const result = this.validateEmail(chip.value);
+            if (!result) {
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid email address', detail: '' });
+            }
+        }
     }
 
     clear() {
