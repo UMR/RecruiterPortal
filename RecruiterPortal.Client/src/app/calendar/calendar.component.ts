@@ -5,8 +5,8 @@ import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import { CalendarService } from './calendar.service';
 import { CalendarOptions, EventClickArg, DateSelectArg } from '@fullcalendar/core';
-import * as jsonData from './data.json';
-import { EventDataList } from './data';
+import { InterViewSchedule } from './interview-schedule';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -15,8 +15,11 @@ import { EventDataList } from './data';
     styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-    events: any[];
-    options: any;
+    public events: any[];
+    public options: any;
+    public addEditTxt: string = "Add";
+    public interviewDialog: boolean = false;
+    public scheduleForm: FormGroup;
 
     calendarOptions: CalendarOptions = {
         plugins: [
@@ -47,11 +50,19 @@ export class CalendarComponent implements OnInit {
         }
 
     };
-    constructor(private calendarService: CalendarService) { }
+    constructor(private calendarService: CalendarService, private fb: FormBuilder) { }
 
     ngOnInit() {
         //this.events = jsonData.data;
         this.getInterviewByRecruiterId();
+        this.createForm();
+    }
+
+    createForm() {
+        this.scheduleForm = this.fb.group({
+            title: ["", Validators.required],
+            description: [""]
+        });
     }
 
     getInterviewByRecruiterId() {
@@ -79,6 +90,7 @@ export class CalendarComponent implements OnInit {
     }
 
     handleDateClick(arg) {
+
         //alert('date click! ' + arg.dateStr)
     }
 
@@ -89,19 +101,25 @@ export class CalendarComponent implements OnInit {
     }
 
     handleDateSelect(selectInfo: DateSelectArg) {
-        const title = prompt('Please enter a new title for your event');
+        this.interviewDialog = true;
+        console.log(selectInfo);
+
+        //if (title) {
+        //    calendarApi.addEvent({
+        //        //id: createEventId(),
+        //        title,
+        //        start: selectInfo.startStr,
+        //        end: selectInfo.endStr,
+        //        allDay: selectInfo.allDay
+        //    });
+        //}
+
         const calendarApi = selectInfo.view.calendar;
 
         calendarApi.unselect(); // clear date selection
+    }
 
-        if (title) {
-            calendarApi.addEvent({
-                //id: createEventId(),
-                title,
-                start: selectInfo.startStr,
-                end: selectInfo.endStr,
-                allDay: selectInfo.allDay
-            });
-        }
+    hideDialog() {
+        this.interviewDialog = false;
     }
 }
