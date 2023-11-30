@@ -9,3 +9,26 @@
         </div>
     </section>
 </div>
+
+
+<p-dialog [(visible)]="interviewDialog" [style]="{ width: '450px' }" header="{{addEditTxt}} Schedule" [modal]="true" [draggable]="false" [resizable]="false">
+    <form [formGroup]="scheduleForm" (ngSubmit)="onScheduleSubmit()">
+        <div class="field">
+            <label for="title">Title</label>
+            <input type="text" id="title" class="input-text" formControlName="title" required autofocus maxlength="100" trimmed />
+        </div>
+        <div class="field">
+            <label for="title">Description</label>
+            <textarea id="description" class="input-text" formControlName="description" maxlength="500" trimmed rows="8"></textarea>
+        </div>
+        <p-footer>
+            <div>
+                <button pButton label="Cancel" class="" (click)="hideDialog()" type="reset"></button>
+                <div style="float:right">
+                    <button pButton label="Clear" class="btn-clear" (click)="onClickClear()" type="reset"></button>
+                    <button type="submit" pButton pRipple label="Save" class="btn-save" [disabled]="scheduleForm.invalid"></button>
+                </div>
+            </div>
+        </p-footer>
+    </form>
+</p-dialog>

@@ -5,7 +5,10 @@ import { CalendarRoutingModule } from './calendar-routing.module';
 import { CalendarComponent } from './calendar.component';
 import { SharedModule } from '../common/shared.module';
 import { FullCalendarModule } from 'primeng/fullcalendar';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DialogModule } from 'primeng/dialog'; 
+import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
     declarations: [CalendarComponent],
@@ -14,7 +17,11 @@ import { FormsModule } from '@angular/forms';
         CalendarRoutingModule,
         SharedModule,
         FormsModule,
-        FullCalendarModule
+        FullCalendarModule,
+        DialogModule,
+        ReactiveFormsModule,
+        ToastModule,
+        ButtonModule
     ]
 })
 export class CalendarModule { }
