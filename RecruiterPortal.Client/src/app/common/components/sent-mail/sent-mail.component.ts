@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { SentMailService } from './sent-mail.service';
@@ -11,7 +11,7 @@ import { MailSettingsService } from '../../../timecards/mail-settings/mail-setti
     templateUrl: './sent-mail.component.html',
     styleUrls: ['./sent-mail.component.css']
 })
-export class SentMailComponent implements OnInit, AfterViewInit {
+export class SentMailComponent implements OnInit, OnChanges {
 
     @Input() selectedApplicant: any;
     @Output() hideEvent = new EventEmitter<boolean>();
@@ -21,6 +21,8 @@ export class SentMailComponent implements OnInit, AfterViewInit {
     private selectedFromMail: number;
     private selectedTemplateType: number;
     public emailRegex = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
+    private selectedEmail: string;
+    private toEmail: string[] = [];
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService,
         private sentMailService: SentMailService, private mailTemplateTypeService: MailTemplateService, private mailSettingsService: MailSettingsService) {
@@ -29,15 +31,15 @@ export class SentMailComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         this.createFormGroup();
-        this.getMailConfigurationByRecruiterId();
-        console.log(this.selectedApplicant);
-        if (this.selectedApplicant) {
-            this.formGroup.controls.mailAddressTo.setValue(this.selectedApplicant);
-        }
+        this.getMailConfigurationByRecruiterId();       
     }
 
-    ngAfterViewInit() {
-        console.log(this.selectedApplicant);
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.selectedApplicant && changes.selectedApplicant.currentValue) {
+            this.selectedEmail = (changes.selectedApplicant.currentValue as any).Email;
+            this.toEmail.push(this.selectedEmail);
+            this.formGroup.controls.mailAddressTo.setValue(this.toEmail);
+        }
     }
 
     createFormGroup() {
@@ -49,7 +51,7 @@ export class SentMailComponent implements OnInit, AfterViewInit {
             mailAddressBcc: [''],
             subject: ['', Validators.compose([Validators.max(200)])],
             body: ['']
-        });
+        });        
     }
 
     getMailConfigurationByRecruiterId() {

@@ -208,7 +208,7 @@ export class ViewByApplicantComponent implements OnInit {
         this.showDialog = show;
     }
 
-    onSendMailClick(applicant) {    
+    onSendMailClick(applicant) {        
         this.selectedApplicant = applicant;        
         this.showSentMailDialog = true;
     }
