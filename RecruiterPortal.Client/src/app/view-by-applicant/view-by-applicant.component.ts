@@ -209,7 +209,7 @@ export class ViewByApplicantComponent implements OnInit {
     }
 
     onSendMailClick(applicant) {    
-        this.selectedApplicant = applicant.UserId;
+        this.selectedApplicant = applicant;        
         this.showSentMailDialog = true;
     }
 

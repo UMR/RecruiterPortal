@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { SentMailService } from './sent-mail.service';
@@ -11,8 +11,9 @@ import { MailSettingsService } from '../../../timecards/mail-settings/mail-setti
     templateUrl: './sent-mail.component.html',
     styleUrls: ['./sent-mail.component.css']
 })
-export class SentMailComponent implements OnInit {
+export class SentMailComponent implements OnInit, AfterViewInit {
 
+    @Input() selectedApplicant: any;
     @Output() hideEvent = new EventEmitter<boolean>();
     public formGroup: FormGroup;
     public recruiterMailConfigs: any[] = [];
@@ -29,6 +30,14 @@ export class SentMailComponent implements OnInit {
     ngOnInit() {
         this.createFormGroup();
         this.getMailConfigurationByRecruiterId();
+        console.log(this.selectedApplicant);
+        if (this.selectedApplicant) {
+            this.formGroup.controls.mailAddressTo.setValue(this.selectedApplicant);
+        }
+    }
+
+    ngAfterViewInit() {
+        console.log(this.selectedApplicant);
     }
 
     createFormGroup() {
@@ -38,7 +47,7 @@ export class SentMailComponent implements OnInit {
             mailAddressTo: ['', Validators.compose([Validators.required])],
             mailAddressCc: [''],
             mailAddressBcc: [''],
-            subject: [''],
+            subject: ['', Validators.compose([Validators.max(200)])],
             body: ['']
         });
     }
