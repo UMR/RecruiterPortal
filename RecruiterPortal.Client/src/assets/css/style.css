@@ -617,6 +617,12 @@ p-calendar.ng-pending input:not(:required) {
   background: #434A5A !important;
 }
 
+.ui-chips > ul.ui-inputtext {
+    padding: 0.2145em 0.429em;
+    display: inline-block;
+    width: 100%;
+    height: 42px !important;
+}
 
 /* ============================== */
 /* Prime Ng Toast Area            */
