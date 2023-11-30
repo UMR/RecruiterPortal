@@ -47,3 +47,13 @@
     padding: 4px 4px;
     font-size: 16px;
 }
+
+:host ::ng-deep.bg-c-green {
+    width: 130px !important;
+    background-color: green !important;
+}
+
+:host ::ng-deep.bg-c-red {
+    width:130px !important;
+    background-color: red !important;
+}

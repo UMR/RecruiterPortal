@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog'; 
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @NgModule({
     declarations: [CalendarComponent],
@@ -21,7 +23,9 @@ import { ButtonModule } from 'primeng/button';
         DialogModule,
         ReactiveFormsModule,
         ToastModule,
-        ButtonModule
-    ]
+        ButtonModule,
+        ConfirmDialogModule
+    ],
+    providers: [ConfirmationService, MessageService]
 })
 export class CalendarModule { }

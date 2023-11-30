@@ -7,7 +7,7 @@ import { CalendarService } from './calendar.service';
 import { CalendarOptions, EventClickArg, DateSelectArg } from '@fullcalendar/core';
 import { InterViewScheduleModel } from './interview-schedule';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { MessageService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 
 
 @Component({
@@ -23,6 +23,7 @@ export class CalendarComponent implements OnInit {
     public scheduleForm: FormGroup;
     private startDate: any;
     private endDate: any;
+    private Id: number = 0;
 
     calendarOptions: CalendarOptions = {
         plugins: [
@@ -53,7 +54,7 @@ export class CalendarComponent implements OnInit {
         }
 
     };
-    constructor(private calendarService: CalendarService, private fb: FormBuilder, private messageService: MessageService) { }
+    constructor(private calendarService: CalendarService, private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
     ngOnInit() {
         //this.events = jsonData.data;
@@ -98,9 +99,12 @@ export class CalendarComponent implements OnInit {
     }
 
     handleEventClick(clickInfo: EventClickArg) {
-        if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-            clickInfo.event.remove();
-        }
+        this.confirmation(clickInfo);
+
+        //console.log(clickInfo.event.id);
+        //if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+        //    clickInfo.event.remove();
+        //}
     }
 
     handleDateSelect(selectInfo: DateSelectArg) {
@@ -109,35 +113,54 @@ export class CalendarComponent implements OnInit {
         this.startDate = selectInfo.startStr;
         this.endDate = selectInfo.endStr;
 
-        //if (title) {
-        //    calendarApi.addEvent({
-        //        //id: createEventId(),
-        //        title,
-        //        start: selectInfo.startStr,
-        //        end: selectInfo.endStr,
-        //        allDay: selectInfo.allDay
-        //    });
-        //}
-
         const calendarApi = selectInfo.view.calendar;
 
         calendarApi.unselect(); // clear date selection
+    }
+
+    confirmation(clickInfo) {
+        this.confirmationService.confirm({
+            message: 'Do you want to delete or edit this record?',
+            header: 'Confirmation',
+            icon: 'pi pi-info-circle',
+            accept: () => {
+                this.interviewDialog = true;
+                console.log(clickInfo);
+                this.Id = clickInfo.event.id
+                this.startDate = clickInfo.event.startStr;
+                this.endDate = clickInfo.event.endStr;
+                this.scheduleForm.patchValue({
+                    title: clickInfo.event.title,
+                    description: clickInfo.event.title
+                })
+                this.messageService.add({ key: 'toastKey1', severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
+            },
+            reject: () => {
+                this.messageService.add({ key: 'toastKey1', severity: 'info', summary: 'Rejected', detail: 'You have rejected' });
+            }
+        });
     }
     onScheduleSubmit() {
         var requestObj = new InterViewScheduleModel();
         requestObj.StartDate = this.startDate;
         requestObj.EndDate = this.endDate;
         requestObj.Title = this.scheduleForm.get('title').value;;
-        requestObj.Description = this.scheduleForm.get('description').value;;
-        requestObj.Id = 0;
+        requestObj.Description = this.scheduleForm.get('description').value;
+        if (this.Id != 0) {
+            requestObj.Id = this.Id;
+        }
+        else {
+            requestObj.Id = 0;
+        }
 
         this.calendarService.addInterviewSchedule(requestObj).subscribe(res => {
             this.getInterviewByRecruiterId();
+            this.scheduleForm.reset();
             this.interviewDialog = false;
-            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Shedule added successful', life: 3000 });
+            this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Successful', detail: 'Shedule added successful', life: 3000 });
         },
             error => {
-                this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Shedule added faild', life: 3000 });
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Error', detail: 'Shedule added faild', life: 3000 });
             },
             () => {
                 //this.isLoading = false;
@@ -145,5 +168,6 @@ export class CalendarComponent implements OnInit {
     }
     hideDialog() {
         this.interviewDialog = false;
+        this.scheduleForm.reset();
     }
 }

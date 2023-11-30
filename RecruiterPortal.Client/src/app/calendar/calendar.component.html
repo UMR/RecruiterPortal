@@ -32,3 +32,9 @@
         </p-footer>
     </form>
 </p-dialog>
+<p-confirmDialog [style]="{ width: '450px' }" #cd [transitionOptions]="'0ms'"
+                 acceptLabel="Edit" acceptIcon="pi pi-pencil" acceptButtonStyleClass="bg-c-green"
+                 rejectLabel="Delete" rejectIcon="pi pi-trash" rejectButtonStyleClass="bg-c-red"
+                 >
+</p-confirmDialog>
+<p-toast key="toastKey1"></p-toast>
