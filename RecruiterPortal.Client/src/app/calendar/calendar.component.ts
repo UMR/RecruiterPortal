@@ -5,8 +5,9 @@ import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import { CalendarService } from './calendar.service';
 import { CalendarOptions, EventClickArg, DateSelectArg } from '@fullcalendar/core';
-import { InterViewSchedule } from './interview-schedule';
+import { InterViewScheduleModel } from './interview-schedule';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 
 
 @Component({
@@ -20,6 +21,8 @@ export class CalendarComponent implements OnInit {
     public addEditTxt: string = "Add";
     public interviewDialog: boolean = false;
     public scheduleForm: FormGroup;
+    private startDate: any;
+    private endDate: any;
 
     calendarOptions: CalendarOptions = {
         plugins: [
@@ -50,7 +53,7 @@ export class CalendarComponent implements OnInit {
         }
 
     };
-    constructor(private calendarService: CalendarService, private fb: FormBuilder) { }
+    constructor(private calendarService: CalendarService, private fb: FormBuilder, private messageService: MessageService) { }
 
     ngOnInit() {
         //this.events = jsonData.data;
@@ -103,6 +106,8 @@ export class CalendarComponent implements OnInit {
     handleDateSelect(selectInfo: DateSelectArg) {
         this.interviewDialog = true;
         console.log(selectInfo);
+        this.startDate = selectInfo.startStr;
+        this.endDate = selectInfo.endStr;
 
         //if (title) {
         //    calendarApi.addEvent({
@@ -118,7 +123,26 @@ export class CalendarComponent implements OnInit {
 
         calendarApi.unselect(); // clear date selection
     }
+    onScheduleSubmit() {
+        var requestObj = new InterViewScheduleModel();
+        requestObj.StartDate = this.startDate;
+        requestObj.EndDate = this.endDate;
+        requestObj.Title = this.scheduleForm.get('title').value;;
+        requestObj.Description = this.scheduleForm.get('description').value;;
+        requestObj.Id = 0;
 
+        this.calendarService.addInterviewSchedule(requestObj).subscribe(res => {
+            this.getInterviewByRecruiterId();
+            this.interviewDialog = false;
+            this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Shedule added successful', life: 3000 });
+        },
+            error => {
+                this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Shedule added faild', life: 3000 });
+            },
+            () => {
+                //this.isLoading = false;
+            })
+    }
     hideDialog() {
         this.interviewDialog = false;
     }
