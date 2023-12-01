@@ -24,6 +24,7 @@ export class CalendarComponent implements OnInit {
     private startDate: any;
     private endDate: any;
     private Id: number = 0;
+    public confirmationDialog: boolean = false;
 
     calendarOptions: CalendarOptions = {
         plugins: [
@@ -43,9 +44,6 @@ export class CalendarComponent implements OnInit {
         selectable: true,
         selectMirror: true,
         dayMaxEvents: true,
-        dateClick: (e) => {
-            this.handleDateClick(e)
-        },
         eventClick: (ee) => {
             this.handleEventClick(ee)
         },
@@ -93,13 +91,9 @@ export class CalendarComponent implements OnInit {
                 });
     }
 
-    handleDateClick(arg) {
-
-        //alert('date click! ' + arg.dateStr)
-    }
-
     handleEventClick(clickInfo: EventClickArg) {
-        this.confirmation(clickInfo);
+        this.confirmationDialog = true;
+        //this.confirmation(clickInfo);
 
         //console.log(clickInfo.event.id);
         //if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
@@ -109,37 +103,46 @@ export class CalendarComponent implements OnInit {
 
     handleDateSelect(selectInfo: DateSelectArg) {
         this.interviewDialog = true;
-        console.log(selectInfo);
         this.startDate = selectInfo.startStr;
         this.endDate = selectInfo.endStr;
-
         const calendarApi = selectInfo.view.calendar;
 
         calendarApi.unselect(); // clear date selection
     }
 
-    confirmation(clickInfo) {
-        this.confirmationService.confirm({
-            message: 'Do you want to delete or edit this record?',
-            header: 'Confirmation',
-            icon: 'pi pi-info-circle',
-            accept: () => {
-                this.interviewDialog = true;
-                console.log(clickInfo);
-                this.Id = clickInfo.event.id
-                this.startDate = clickInfo.event.startStr;
-                this.endDate = clickInfo.event.endStr;
-                this.scheduleForm.patchValue({
-                    title: clickInfo.event.title,
-                    description: clickInfo.event.title
-                })
-                this.messageService.add({ key: 'toastKey1', severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
-            },
-            reject: () => {
-                this.messageService.add({ key: 'toastKey1', severity: 'info', summary: 'Rejected', detail: 'You have rejected' });
-            }
-        });
+    edit() {
+        this.confirmationDialog = false;
+        this.interviewDialog = true;
+
+        //this.scheduleForm.patchValue({
+        //    title: clickInfo.event.title,
+        //    description: clickInfo.event.title
+        //})
     }
+
+    delete() {
+        this.confirmationDialog = false;
+        this.deleteShedule(this.Id);
+    }
+
+    hideConfirm() {
+        this.confirmationDialog = false;
+    }
+
+    deleteShedule(id) {
+        this.calendarService.delete(id).subscribe(res => {
+            if (res && res.status == 200) {
+                this.getInterviewByRecruiterId();
+                this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Successful', detail: 'Successfully Schedule Deleted' });
+            }
+            else {
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Error', detail: "Schedule delete failed" });
+            }
+        }, err => {
+            this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Error', detail: "Schedule delete failed" });
+        })
+    }
+
     onScheduleSubmit() {
         var requestObj = new InterViewScheduleModel();
         requestObj.StartDate = this.startDate;
@@ -166,6 +169,7 @@ export class CalendarComponent implements OnInit {
                 //this.isLoading = false;
             })
     }
+
     hideDialog() {
         this.interviewDialog = false;
         this.scheduleForm.reset();

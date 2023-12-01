@@ -28,24 +28,28 @@ namespace RecruiterPortalDAL.Managers
             }
         }
 
-        public static async Task<long> InsertOrUpdateSchedule(InterviewScheduleModel request, int recruiterId)
+        public static async Task<long> InsertSchedule(InterviewScheduleModel request, int recruiterId)
         {
             try
             {
                 GenericRepository<InterviewSchedule> repository = new GenericRepository<InterviewSchedule>();
 
                 InterviewSchedule interviewSchedule = MapInterviewScheduleRequest(request, recruiterId);
-                InterviewSchedule createdUpdateSchedule;
-                if (request.Id == 0)
-                {
-                    createdUpdateSchedule = await repository.SaveAsync(interviewSchedule);
-                }
-                else {
-                    createdUpdateSchedule = await repository.SaveAsync(interviewSchedule);
-                    //createdUpdateSchedule = await repository.UpdateAsync(interviewSchedule);
-                }
-
+                InterviewSchedule createdUpdateSchedule = await repository.SaveAsync(interviewSchedule);
                 return createdUpdateSchedule.Id;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public static async Task<long> UpdateSchedule(InterviewScheduleModel request, int recruiterId)
+        {
+            try
+            {
+                GenericRepository<InterviewSchedule> repository = new GenericRepository<InterviewSchedule>();
+                InterviewSchedule interviewSchedule = MapInterviewScheduleRequest(request, recruiterId);
+                return await repository.UpdateAsync(interviewSchedule);
             }
             catch (Exception ex)
             {
@@ -73,6 +77,27 @@ namespace RecruiterPortalDAL.Managers
                 interviewSchedule.UpdatedDate = DateTime.Now;
             }
             return interviewSchedule;
+        }
+
+        public static async Task<int?> Delete(int id)
+        {
+            try
+            {
+                int? result = null;
+                GenericRepository<InterviewSchedule> repository = new GenericRepository<InterviewSchedule>();
+                InterviewSchedule schedule = await repository.GetByIdAsync(j => j.Id == id);
+
+                if (schedule != null)
+                {
+                    result = await repository.DeleteAsync(schedule);
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

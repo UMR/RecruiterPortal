@@ -10,15 +10,21 @@ import { InterViewScheduleModel } from './interview-schedule';
 export class CalendarService {
     private getInterviewScheduleURI: string = `${resourceServerUrl}/api/interviewschedule/get`;
     private saveInterviewScheduleURI: string = `${resourceServerUrl}/api/interviewschedule/save`;
+
     constructor(private httpClient: HttpClient) { }
 
     getInterviewScheduleById(): Observable<HttpResponse<any>> {
         return this.httpClient.get(`${this.getInterviewScheduleURI}`, { observe: 'response' });
     }
+
     addInterviewSchedule(resuest: InterViewScheduleModel): Observable<HttpResponse<any>> {
         return this.httpClient.post(this.saveInterviewScheduleURI, resuest, {
             headers: new HttpHeaders()
                 .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
         });
+    }
+
+    delete(id: number): Observable<HttpResponse<any>> {
+        return this.httpClient.delete(`${resourceServerUrl}/api/interviewschedule/delete/${id}`, { observe: 'response' });
     }
 }

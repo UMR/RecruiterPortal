@@ -22,8 +22,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             try
             {
-                var interviewScheduleList= InterviewScheduleManager.GetInterviewScheduleByRecruiterId(RecruiterId);
-                return Ok(await interviewScheduleList);
+                return Ok(await InterviewScheduleManager.GetInterviewScheduleByRecruiterId(RecruiterId));
             }
             catch (Exception ex)
             {
@@ -38,7 +37,15 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             try
             {
-                return Ok(await InterviewScheduleManager.InsertOrUpdateSchedule(requestModel, RecruiterId));
+                if (requestModel.Id == 0)
+                {
+                    return Ok(await InterviewScheduleManager.InsertSchedule(requestModel, RecruiterId));
+                }
+                else
+                {
+                    return Ok(await InterviewScheduleManager.UpdateSchedule(requestModel, RecruiterId));
+                }
+
             }
             catch (Exception ex)
             {
@@ -47,24 +54,24 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
         }
 
-        //[Route("delete/{id}")]
-        //[HttpDelete]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    try
-        //    {
-        //        int? result = await AgencyManager.Delete(id);
-        //        if (result == null)
-        //        {
-        //            return NotFound();
-        //        }
-        //        return Ok();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError($"Something went wrong: {ex}");
-        //        return StatusCode(500, ex.Message);
-        //    }
-        //}
+        [Route("delete/{id}")]
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                int? result = await InterviewScheduleManager.Delete(id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }
