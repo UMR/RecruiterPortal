@@ -9,14 +9,18 @@ import { InterViewScheduleModel } from './interview-schedule';
 })
 export class CalendarService {
     private getInterviewScheduleURI: string = `${resourceServerUrl}/api/interviewschedule/get`;
+    private getScheduleByIdURI: string = `${resourceServerUrl}/api/interviewschedule/get`;
     private saveInterviewScheduleURI: string = `${resourceServerUrl}/api/interviewschedule/save`;
 
     constructor(private httpClient: HttpClient) { }
 
-    getInterviewScheduleById(): Observable<HttpResponse<any>> {
+    getInterviewSchedule(): Observable<HttpResponse<any>> {
         return this.httpClient.get(`${this.getInterviewScheduleURI}`, { observe: 'response' });
     }
 
+    getScheduleById(id: number): Observable<HttpResponse<any>> {
+        return this.httpClient.get(`${this.getScheduleByIdURI}/${id}`, { observe: 'response' });
+    }
     addInterviewSchedule(resuest: InterViewScheduleModel): Observable<HttpResponse<any>> {
         return this.httpClient.post(this.saveInterviewScheduleURI, resuest, {
             headers: new HttpHeaders()

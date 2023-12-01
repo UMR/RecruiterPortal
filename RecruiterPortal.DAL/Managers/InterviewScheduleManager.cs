@@ -27,7 +27,6 @@ namespace RecruiterPortalDAL.Managers
                 throw new Exception(ex.Message);
             }
         }
-
         public static async Task<long> InsertSchedule(InterviewScheduleModel request, int recruiterId)
         {
             try
@@ -56,7 +55,6 @@ namespace RecruiterPortalDAL.Managers
                 throw new Exception(ex.Message);
             }
         }
-
         private static InterviewSchedule MapInterviewScheduleRequest(InterviewScheduleModel request, int recruiterId)
         {
             InterviewSchedule interviewSchedule = new InterviewSchedule();
@@ -78,7 +76,18 @@ namespace RecruiterPortalDAL.Managers
             }
             return interviewSchedule;
         }
-
+        public static async Task<InterviewSchedule> GetScheduleById(int id)
+        {
+            try
+            {
+                GenericRepository<InterviewSchedule> repository = new GenericRepository<InterviewSchedule>();
+                return await repository.GetByIdAsync(p => p.Id == id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public static async Task<int?> Delete(int id)
         {
             try

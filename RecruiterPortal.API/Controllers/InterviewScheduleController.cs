@@ -31,6 +31,21 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
         }
 
+        [Route("get/{id}")]
+        [HttpGet]
+        public async Task<IActionResult> GetJobById(int id)
+        {
+            try
+            {
+                return Ok(await InterviewScheduleManager.GetScheduleById(id));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         [Route("save")]
         [HttpPost]
         public async Task<IActionResult> SaveInterviewSchedule(InterviewScheduleModel requestModel)
