@@ -39,7 +39,7 @@ export class SentMailComponent implements OnInit, OnChanges {
             this.selectedEmail = (changes.selectedApplicant.currentValue as any).Email;
             this.toEmail = [];
             this.toEmail.push(this.selectedEmail);
-            this.formGroup.controls.mailAddressTo.setValue(this.toEmail);
+            this.formGroup.controls.mailAddressTo.patchValue(this.toEmail);
         }
     }
 
@@ -60,7 +60,7 @@ export class SentMailComponent implements OnInit, OnChanges {
             .getRecruiterMailConfigsByRecruiterId()
             .subscribe(res => {
                 this.recruiterMailConfigs = res.body;
-                if (this.recruiterMailConfigs && this.recruiterMailConfigs.length > 0) {                    
+                if (this.recruiterMailConfigs && this.recruiterMailConfigs.length > 0) {
                     this.formGroup.controls.fromMail.setValue(this.recruiterMailConfigs[0].Id);
                 }
             });
@@ -104,6 +104,12 @@ export class SentMailComponent implements OnInit, OnChanges {
         if (chip.value) {
             const result = this.validateEmail(chip.value);
             if (!result) {
+                const toEmailAddress: string[] = this.formGroup.controls.mailAddressTo.value;
+                //const filteredToEmailAddress = toEmailAddress.filter(m => m == chip.value);
+                if (toEmailAddress && toEmailAddress.length > 0) {
+                    toEmailAddress.pop();
+                    this.formGroup.controls.mailAddressTo.patchValue(toEmailAddress);
+                }
                 this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid email address', detail: '' });
             }
         }
