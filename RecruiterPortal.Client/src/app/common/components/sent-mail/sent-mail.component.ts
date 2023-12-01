@@ -100,23 +100,52 @@ export class SentMailComponent implements OnInit, OnChanges {
         return email.match(this.emailRegex);
     }
 
-    onTokenAdd(chip) {
+    onToTokenAdd(chip) {
         if (chip.value) {
             const result = this.validateEmail(chip.value);
             if (!result) {
-                const toEmailAddress: string[] = this.formGroup.controls.mailAddressTo.value;
-                //const filteredToEmailAddress = toEmailAddress.filter(m => m == chip.value);
+                const toEmailAddress: string[] = this.formGroup.controls.mailAddressTo.value;                
                 if (toEmailAddress && toEmailAddress.length > 0) {
                     toEmailAddress.pop();
                     this.formGroup.controls.mailAddressTo.patchValue(toEmailAddress);
                 }
-                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid email address', detail: '' });
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid to email address', detail: '' });
+            }
+        }
+    }
+
+    onCcTokenAdd(chip) {
+        if (chip.value) {
+            const result = this.validateEmail(chip.value);
+            if (!result) {
+                const ccEmailAddress: string[] = this.formGroup.controls.mailAddressCc.value;
+                if (ccEmailAddress && ccEmailAddress.length > 0) {
+                    ccEmailAddress.pop();
+                    this.formGroup.controls.mailAddressCc.patchValue(ccEmailAddress);
+                }
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid cc email address', detail: '' });
+            }
+        }
+    }
+
+    onBccTokenAdd(chip) {
+        if (chip.value) {
+            const result = this.validateEmail(chip.value);
+            if (!result) {
+                const bccEmailAddress: string[] = this.formGroup.controls.mailAddressBcc.value;
+                if (bccEmailAddress && bccEmailAddress.length > 0) {
+                    bccEmailAddress.pop();
+                    this.formGroup.controls.mailAddressTo.patchValue(bccEmailAddress);
+                }
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid bcc email address', detail: '' });
             }
         }
     }
 
     clear() {
         this.formGroup.reset();
+        this.formGroup.controls.mailTemplateType.setValue("");
+        this.getMailConfigurationByRecruiterId();
     }
 
     hide() {
@@ -146,9 +175,11 @@ export class SentMailComponent implements OnInit, OnChanges {
 
             this.sentMailService.sendMail(model).subscribe(res => {
                 if (res) {
-                    this.formGroup.reset();
-                    this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Mail send successfully', detail: '' });
-                    this.hideEvent.emit(false);
+                    if (res.status === 200) {
+                        this.formGroup.reset();
+                        this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Mail send successfully', detail: '' });
+                        this.hideEvent.emit(false);
+                    }
                 }
             },
                 err => {

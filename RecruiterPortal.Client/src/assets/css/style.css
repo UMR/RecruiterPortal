@@ -494,12 +494,16 @@ p-chips.ng-dirty.ng-touched.ng-invalid > div {
  /* border: 1px solid red !important;*/
   border-left: 5px solid red !important;
 }
+p-editor.ng-dirty.ng-touched.ng-invalid > div {
+    border-left: 5px solid red !important;
+}
+
 input:required.ng-touched.ng-pending,
 textarea:required.ng-touched.ng-pending,
 select:required.ng-touched.ng-pending,
 p-calendar.ng-touched.ng-pending input:required {
-  border: 1px solid orange !important;
-  border-left: 5px solid orange !important;
+    border: 1px solid orange !important;
+    border-left: 5px solid orange !important;
 }
 input:not(:required).ng-invalid,
 textarea:not(:required).ng-invalid,
