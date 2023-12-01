@@ -31,7 +31,7 @@ export class SentMailComponent implements OnInit, OnChanges {
 
     ngOnInit() {
         this.createFormGroup();
-        this.getMailConfigurationByRecruiterId();       
+        this.getMailConfigurationByRecruiterId();
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -52,13 +52,18 @@ export class SentMailComponent implements OnInit, OnChanges {
             mailAddressBcc: [''],
             subject: ['', Validators.compose([Validators.max(200)])],
             body: ['']
-        });        
+        });
     }
 
     getMailConfigurationByRecruiterId() {
         this.mailSettingsService
             .getRecruiterMailConfigsByRecruiterId()
-            .subscribe(res => { this.recruiterMailConfigs = res.body; });
+            .subscribe(res => {
+                this.recruiterMailConfigs = res.body;
+                if (this.recruiterMailConfigs && this.recruiterMailConfigs.length > 0) {                    
+                    this.formGroup.controls.fromMail.setValue(this.recruiterMailConfigs[0].Id);
+                }
+            });
     }
 
     getMailTemplateTypesByRecruiterId() {
