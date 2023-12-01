@@ -23,7 +23,7 @@ export class CalendarComponent implements OnInit {
     public scheduleForm: FormGroup;
     private startDate: any;
     private endDate: any;
-    private Id: number = 0;
+    private scheduleId: number = 0;
     public confirmationDialog: boolean = false;
 
     calendarOptions: CalendarOptions = {
@@ -68,7 +68,7 @@ export class CalendarComponent implements OnInit {
     }
 
     getInterviewByRecruiterId() {
-        this.calendarService.getInterviewScheduleById()
+        this.calendarService.getInterviewSchedule()
             .subscribe(response => {
                 if (response.status === 200) {
                     let allData: any[] = [];
@@ -93,6 +93,7 @@ export class CalendarComponent implements OnInit {
 
     handleEventClick(clickInfo: EventClickArg) {
         this.confirmationDialog = true;
+        this.scheduleId = +clickInfo.event.id;
         //this.confirmation(clickInfo);
 
         //console.log(clickInfo.event.id);
@@ -113,16 +114,28 @@ export class CalendarComponent implements OnInit {
     edit() {
         this.confirmationDialog = false;
         this.interviewDialog = true;
-
-        //this.scheduleForm.patchValue({
-        //    title: clickInfo.event.title,
-        //    description: clickInfo.event.title
-        //})
+        this.calendarService.getScheduleById(this.scheduleId)
+            .subscribe(response => {
+                if (response.status === 200) {
+                    console.log(response);
+                    this.scheduleForm.patchValue({
+                        title: response.body.Title,
+                        description: response.body.Description
+                    });
+                    this.startDate = response.body.StartDate
+                    this.endDate = response.body.EndDate
+                }
+            },
+                err => {
+                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Error', detail: "Failed get schedule" });
+                },
+                () => {
+                });
     }
 
     delete() {
         this.confirmationDialog = false;
-        this.deleteShedule(this.Id);
+        this.deleteShedule(this.scheduleId);
     }
 
     hideConfirm() {
@@ -149,8 +162,8 @@ export class CalendarComponent implements OnInit {
         requestObj.EndDate = this.endDate;
         requestObj.Title = this.scheduleForm.get('title').value;;
         requestObj.Description = this.scheduleForm.get('description').value;
-        if (this.Id != 0) {
-            requestObj.Id = this.Id;
+        if (this.scheduleId != 0) {
+            requestObj.Id = this.scheduleId;
         }
         else {
             requestObj.Id = 0;
@@ -172,6 +185,9 @@ export class CalendarComponent implements OnInit {
 
     hideDialog() {
         this.interviewDialog = false;
+        this.scheduleForm.reset();
+    }
+    onClickClear() {
         this.scheduleForm.reset();
     }
 }
