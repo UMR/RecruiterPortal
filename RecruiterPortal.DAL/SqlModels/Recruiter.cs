@@ -56,4 +56,8 @@ public partial class Recruiter
     public virtual ICollection<MailTemplateType> MailTemplateTypeUpdatedByNavigations { get; set; } = new List<MailTemplateType>();
 
     public virtual ICollection<RecruiterEntryExit> RecruiterEntryExits { get; set; } = new List<RecruiterEntryExit>();
+
+    public virtual ICollection<Smslog> SmslogCreatedByNavigations { get; set; } = new List<Smslog>();
+
+    public virtual ICollection<Smslog> SmslogUpdatedByNavigations { get; set; } = new List<Smslog>();
 }

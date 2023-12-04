@@ -73,6 +73,8 @@ public partial class UmrrecruitmentApplicantContext : DbContext
 
     public virtual DbSet<Role> Roles { get; set; }
 
+    public virtual DbSet<Smslog> Smslogs { get; set; }
+
     public virtual DbSet<State> States { get; set; }
 
     public virtual DbSet<TermsCondition> TermsConditions { get; set; }
@@ -545,7 +547,9 @@ public partial class UmrrecruitmentApplicantContext : DbContext
                 .HasForeignKey(d => d.CreatedBy)
                 .HasConstraintName("FK_Job_Recruiter");
 
-            entity.HasOne(d => d.UpdatedByNavigation).WithMany(p => p.JobUpdatedByNavigations).HasForeignKey(d => d.UpdatedBy);
+            entity.HasOne(d => d.UpdatedByNavigation).WithMany(p => p.JobUpdatedByNavigations)
+                .HasForeignKey(d => d.UpdatedBy)
+                .HasConstraintName("FK_Job_Recruiter1");
         });
 
         modelBuilder.Entity<LookupZipCode>(entity =>
@@ -752,7 +756,6 @@ public partial class UmrrecruitmentApplicantContext : DbContext
         {
             entity.ToTable("Recruiter");
 
-            entity.Property(e => e.RecruiterId).HasColumnName("RecruiterID");
             entity.Property(e => e.AgencyId).HasColumnName("AgencyID");
             entity.Property(e => e.ApplicantTypeId).HasColumnName("ApplicantTypeID");
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -821,7 +824,6 @@ public partial class UmrrecruitmentApplicantContext : DbContext
             entity.HasNoKey();
 
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-            entity.Property(e => e.RecruiterId).HasColumnName("RecruiterID");
             entity.Property(e => e.RoleId).HasColumnName("RoleID");
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
         });
@@ -837,6 +839,33 @@ public partial class UmrrecruitmentApplicantContext : DbContext
                 .IsRequired()
                 .HasMaxLength(100);
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+        });
+
+        modelBuilder.Entity<Smslog>(entity =>
+        {
+            entity.ToTable("SMSLog");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.FromNumber)
+                .IsRequired()
+                .HasMaxLength(30);
+            entity.Property(e => e.SendTime).HasColumnType("datetime");
+            entity.Property(e => e.Smsbody)
+                .IsRequired()
+                .HasColumnName("SMSBody");
+            entity.Property(e => e.ToNumber)
+                .IsRequired()
+                .HasMaxLength(30);
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+
+            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.SmslogCreatedByNavigations)
+                .HasForeignKey(d => d.CreatedBy)
+                .HasConstraintName("FK_SMS_Recruiter_CreatedBy");
+
+            entity.HasOne(d => d.UpdatedByNavigation).WithMany(p => p.SmslogUpdatedByNavigations)
+                .HasForeignKey(d => d.UpdatedBy)
+                .HasConstraintName("FK_SMS_Recruiter_UpdatedBy");
         });
 
         modelBuilder.Entity<State>(entity =>
@@ -1117,7 +1146,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
         {
             entity.HasKey(e => e.LicenseId).HasName("PK_License");
 
-            entity.ToTable("UserLicense");
+            entity.ToTable("UserLicense", tb => tb.HasTrigger("Update_ChangeTracker_UserLicense"));
 
             entity.Property(e => e.LicenseId).HasColumnName("LicenseID");
             entity.Property(e => e.CreatedDate)
@@ -1148,7 +1177,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
 
         modelBuilder.Entity<UserMilitary>(entity =>
         {
-            entity.ToTable("UserMilitary");
+            entity.ToTable("UserMilitary", tb => tb.HasTrigger("Update_ChangeTracker_UserMilitary"));
 
             entity.Property(e => e.UserMilitaryId).HasColumnName("UserMilitaryID");
             entity.Property(e => e.Branch).HasMaxLength(500);
