@@ -61,7 +61,9 @@ export class SentMailComponent implements OnInit, OnChanges {
             .subscribe(res => {
                 this.recruiterMailConfigs = res.body;
                 if (this.recruiterMailConfigs && this.recruiterMailConfigs.length > 0) {
-                    this.formGroup.controls.fromMail.setValue(this.recruiterMailConfigs[0].Id);
+                    this.selectedFromMail = this.recruiterMailConfigs[0].Id;
+                    this.formGroup.controls.fromMail.setValue(this.recruiterMailConfigs[0].Id); 
+                    this.getMailTemplateTypesByRecruiterId();
                 }
             });
     }
@@ -88,12 +90,23 @@ export class SentMailComponent implements OnInit, OnChanges {
 
     onFromMailChange(event) {
         this.selectedFromMail = event.target.value;
-        this.getMailTemplateTypesByRecruiterId();
+        if (!this.selectedFromMail) {
+            this.mailTemplateTypes = [];
+            this.formGroup.controls.body.setValue('');
+        }
+        if (this.selectedFromMail) {
+            this.getMailTemplateTypesByRecruiterId();
+        }
     }
 
     onMailTemplateTypeChange(event) {
         this.selectedTemplateType = event.target.value;
-        this.getMailTemplate();
+        if (!this.selectedTemplateType) {
+            this.formGroup.controls.body.setValue('');
+        }        
+        else if (this.selectedTemplateType) {
+            this.getMailTemplate();
+        }
     }
 
     validateEmail(email) {
