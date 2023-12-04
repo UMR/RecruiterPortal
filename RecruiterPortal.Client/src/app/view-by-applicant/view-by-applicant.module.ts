@@ -16,6 +16,7 @@ import { StorageService } from '../common/services/storage.service';
 import { DialogModule } from 'primeng/dialog';
 import { StatusModule } from '../applicant-status/status/status.module';
 import { SentMailModule } from '../common/components/sent-mail/sent-mail.module';
+import { SentBulkMailModule } from '../common/components/sent-bulk-mail/sent-bulk-mail.module';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { SentMailModule } from '../common/components/sent-mail/sent-mail.module'
         SharedModule,
         DialogModule,
         StatusModule,
-        SentMailModule
+        SentMailModule,
+        SentBulkMailModule
     ],
     providers: [ViewByApplicantService, MessageService, StorageService]
 })

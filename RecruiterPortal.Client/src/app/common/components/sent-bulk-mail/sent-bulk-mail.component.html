@@ -1,0 +1,74 @@
+<form [formGroup]="formGroup" novalidate>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="fromMail" class="form-label">From Mail</label>
+                <select id="fromMail" name="fromMail" class="form-control" formControlName="fromMail" required tabindex="1" (change)="onFromMailChange($event)">
+                    <option value="">----Select----</option>
+                    <option *ngFor="let mailConfig of recruiterMailConfigs" [value]="mailConfig.Id">{{ mailConfig.Email}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label for="mailTemplateType" class="form-label">Template Type</label>
+                <select id="mailTemplateType" name="mailTemplateType" class="form-control" formControlName="mailTemplateType" tabindex="2"
+                        (change)="onMailTemplateTypeChange($event)">
+                    <option value="">----Select----</option>
+                    <option *ngFor="let mailType of mailTemplateTypes" [value]="mailType.Id">{{mailType?.Name}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="mailAddressTo" class="form-label">TO</label>
+                <p-chips formControlName="mailAddressTo" tabindex="3" [style]="{ width: '100%', height: '42px' }" required (onAdd)="onToTokenAdd($event)"></p-chips>
+            </div>
+        </div>        
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="mailAddressCc" class="form-label">CC</label>
+                <p-chips formControlName="mailAddressCc" tabindex="4" [style]="{ width: '100%', height: '42px' }" (onAdd)="onCcTokenAdd($event)"></p-chips>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="mailAddressBcc" class="form-label">BCC</label>
+                <p-chips formControlName="mailAddressBcc" tabindex="5" [style]="{ width: '100%', height: '42px' }" (onAdd)="onBccTokenAdd($event)"></p-chips>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" formControlName="subject" placeholder="Subject" class="form-control" tabindex="6">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="body" class="form-label">Body</label>
+                <p-editor [style]="{ height: '320px'}" formControlName="body" tabindex="7"></p-editor>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="com-md-12">
+            <ul class="list-inline mb-0 d-flex justify-content-between mt-2 ml-3">
+                <li class="list-inline-item">
+                    <button type="button" class="btn btn-primary btn-portal-border" tabindex="9" (click)="hide()">Close</button>
+                </li>
+                <li class="list-inline-item">
+                    <button type="button" class="btn btn-primary btn-portal-border" tabindex="10" (click)="clear()">Clear</button>
+                </li>
+                <li class="list-inline-item">
+                    <button type="submit" class="btn btn-primary btn-portal" tabindex="8" (click)="sendMail()" [disabled]="!formGroup.valid">Send Email</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</form>
