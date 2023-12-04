@@ -140,6 +140,7 @@
     <Folder Include="2023-10-02" />
     <Folder Include="2023-10-24" />
     <Folder Include="2023-11-29" />
+    <Folder Include="2023-12-04" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="2019-11-04\01_TR_01_CREATE_DATABASE.sql" />
@@ -497,5 +498,6 @@
     <None Include="2023-10-24\01_SR_01_ALTER_sp_UpdateAgreementForm.sql" />
     <None Include="2023-11-29\01_SR_01_CREATE_InterviewSchedule_TABLE.sql" />
     <None Include="2023-11-29\02_SR_02_ALTER_sp_InsertUserLicense.sql" />
+    <None Include="2023-12-04\01_SR_01_CREATE_SMS_Log.sql" />
   </ItemGroup>
 </Project>
