@@ -68,3 +68,11 @@
     height: 30px;
     padding: 0;
 }
+
+.btn-bulk-email {
+    background: #516a7d;
+    color: white;
+    border: 1px solid white;
+    width: 150px;
+    height: 42px;
+}

@@ -33,6 +33,7 @@ export class ViewByApplicantComponent implements OnInit {
     public selectedApplicant: any;
     public showDialog: boolean = false;
     public showSentMailDialog: boolean = false;
+    public showSentBulkMailDialog: boolean = false;
     @ViewChild('applicantTable', { static: false }) applicantTable: Table;
 
     constructor(private fb: FormBuilder,
@@ -215,7 +216,15 @@ export class ViewByApplicantComponent implements OnInit {
 
     handleSendMailHideEvent(show) {
         this.showSentMailDialog = show;
-    }    
+    }  
+
+    onSendBulkMailClick() {
+        this.showSentBulkMailDialog = true;
+    }
+
+    handleSendBulkMailHideEvent(show) {
+        this.showSentBulkMailDialog = show;
+    }
 
     onClear() {
         this.viewByApplicantFormGroup.reset();

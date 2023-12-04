@@ -52,10 +52,11 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 col-md-2 col-lg-2">
-                                            <div class="form-group" style="margin-top:20px;float:right">
+                                        <div class="col-sm-8 col-md-4 col-lg-4">
+                                            <div class="form-group" style="margin-top:18px;float:left">
                                                 <button type="button" (click)="onClear()" class="btn btn-clear mr-3" tabindex="7">Clear</button>
-                                                <button type="submit" class="btn btn-search" tabindex="6" [disabled]="!viewByApplicantFormGroup.valid">Search</button>
+                                                <button type="submit" class="btn btn-search mr-3" tabindex="6" [disabled]="!viewByApplicantFormGroup.valid">Search</button>
+                                                <button type="button" class="btn btn-bulk-email mr-3" tabindex="8" (click)="onSendBulkMailClick()">Bulk Email</button>
                                             </div>
                                         </div>
                                     </div>
@@ -98,7 +99,7 @@
                                                     </td>
                                                     <td class="text-center" *ngIf="selectedApplicantStatus==='1'"><a (click)="onEdit(applicant.UserId)"><i class="pi pi-pencil"></i></a></td>
                                                     <td class="text-center"><button type="button" (click)="onSendToClick(applicant)" class="btn btn-primary btn-import-sync">Send To</button> </td>
-                                                    <td class="text-center"><button type="button" (click)="onSendMailClick(applicant)" class="btn btn-send-mail">Send Mail</button> </td>
+                                                    <td class="text-center"><button type="button" (click)="onSendMailClick(applicant)" class="btn btn-send-mail">Send Email</button> </td>
                                                 </tr>
                                             </ng-template>
                                         </p-table>
@@ -116,9 +117,15 @@
 <p-dialog [(visible)]="showDialog" [style]="{ width: '450px' }" header="Send To" [modal]="true" [closable]="false" [draggable]="false" [resizable]="false">
     <app-status (hideEvent)="handleHideEvent($event)" [selectedApplicant]="selectedApplicant"></app-status>
 </p-dialog>
+
 <p-dialog [(visible)]="showSentMailDialog" [style]="{ width: '1200px' }" header="Send Mail" [modal]="true" [closable]="false" [draggable]="false" [resizable]="false">
     <sent-mail (hideEvent)="handleSendMailHideEvent($event)" [selectedApplicant]="selectedApplicant"></sent-mail>
 </p-dialog>
+
+<p-dialog [(visible)]="showSentBulkMailDialog" [style]="{ width: '1200px' }" header="Send Mail" [modal]="true" [closable]="false" [draggable]="false" [resizable]="false">
+    <sent-mail (hideEvent)="handleSendBulkMailHideEvent($event)"></sent-mail>
+</p-dialog>
+
 <p-toast key="toastKey1"></p-toast>
 
 
