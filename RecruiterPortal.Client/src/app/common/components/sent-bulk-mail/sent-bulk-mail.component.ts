@@ -19,7 +19,7 @@ export class SentBulkMailComponent implements OnInit {
     public recruiterMailConfigs: any[] = [];
     public mailTemplateTypes: any[] = [];
     private selectedFromMail: number;
-    private selectedTemplateType: number;        
+    private selectedTemplateType: number;
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private mailService: MailService,
         private mailTemplateTypeService: MailTemplateService, private mailSettingsService: MailSettingsService) {
@@ -29,12 +29,12 @@ export class SentBulkMailComponent implements OnInit {
     ngOnInit() {
         this.createFormGroup();
         this.getMailConfigurationByRecruiterId();
-    }    
+    }
 
     createFormGroup() {
         this.formGroup = this.fb.group({
             fromMail: ['', Validators.compose([Validators.required])],
-            mailTemplateType: [''],           
+            mailTemplateType: [''],
             subject: ['', Validators.compose([Validators.max(200)])],
             body: ['']
         });
@@ -47,7 +47,7 @@ export class SentBulkMailComponent implements OnInit {
                 this.recruiterMailConfigs = res.body;
                 if (this.recruiterMailConfigs && this.recruiterMailConfigs.length > 0) {
                     this.selectedFromMail = this.recruiterMailConfigs[0].Id;
-                    this.formGroup.controls.fromMail.setValue(this.recruiterMailConfigs[0].Id); 
+                    this.formGroup.controls.fromMail.setValue(this.recruiterMailConfigs[0].Id);
                     this.getMailTemplateTypesByRecruiterId();
                 }
             });
@@ -88,7 +88,7 @@ export class SentBulkMailComponent implements OnInit {
         this.selectedTemplateType = event.target.value;
         if (!this.selectedTemplateType) {
             this.formGroup.controls.body.setValue('');
-        }        
+        }
         else if (this.selectedTemplateType) {
             this.getMailTemplate();
         }
@@ -109,15 +109,16 @@ export class SentBulkMailComponent implements OnInit {
     sendBulkMail() {
         const filteredFromAddress = this.recruiterMailConfigs.filter(m => m.Id == this.selectedFromMail);
         if (filteredFromAddress.length > 0) {
-            const fromAddress = filteredFromAddress[0].Email;            
+            const fromAddress = filteredFromAddress[0].Email;
             const subject = this.formGroup.controls.subject.value;
             const body = this.formGroup.controls.body.value;
-            const model: any = {
+
+            const model: { firstName: string; lastName: string; email: string; isVerified: boolean; fromAddress: string; subject: string; body: string } = {
                 firstName: this.selectedFilteredParams.firstName,
                 lastName: this.selectedFilteredParams.lastName,
                 email: this.selectedFilteredParams.email,
                 isVerified: this.selectedFilteredParams.isVerified,
-                fromAddress: fromAddress,                
+                fromAddress: fromAddress,
                 subject: subject,
                 body: body
             }
