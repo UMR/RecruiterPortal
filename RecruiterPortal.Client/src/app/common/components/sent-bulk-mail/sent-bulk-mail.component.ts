@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { MailTemplateService } from '../../../timecards/mail-template-type/mail-template-type.service';
 import { MailSettingsService } from '../../../timecards/mail-settings/mail-settings.service';
+import { MailService } from '../../services/mail.service';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class SentBulkMailComponent implements OnInit {
     private selectedFromMail: number;
     private selectedTemplateType: number;        
 
-    constructor(private fb: FormBuilder, private messageService: MessageService, 
+    constructor(private fb: FormBuilder, private messageService: MessageService, private mailService: MailService,
         private mailTemplateTypeService: MailTemplateService, private mailSettingsService: MailSettingsService) {
         this.mailTemplateTypeService.mailTemplateTypes$.subscribe(data => { this.mailTemplateTypes = data; });
     }
@@ -102,36 +103,37 @@ export class SentBulkMailComponent implements OnInit {
     hide() {
         this.formGroup.reset();
         this.hideEvent.emit(false);
+        this.getMailConfigurationByRecruiterId();
     }
 
-    sendMail() {
-
-        console.log(this.selectedFilteredParams);
-
+    sendBulkMail() {
         const filteredFromAddress = this.recruiterMailConfigs.filter(m => m.Id == this.selectedFromMail);
         if (filteredFromAddress.length > 0) {
             const fromAddress = filteredFromAddress[0].Email;            
             const subject = this.formGroup.controls.subject.value;
             const body = this.formGroup.controls.body.value;
-
             const model: any = {
+                firstName: this.selectedFilteredParams.firstName,
+                lastName: this.selectedFilteredParams.lastName,
+                email: this.selectedFilteredParams.email,
+                isVerified: this.selectedFilteredParams.isVerified,
                 fromAddress: fromAddress,                
                 subject: subject,
                 body: body
             }
 
-            //this.sentMailService.sendMail(model).subscribe(res => {
-            //    if (res) {
-            //        if (res.status === 200) {
-            //            this.formGroup.reset();
-            //            this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Mail send successfully', detail: '' });
-            //            this.hideEvent.emit(false);
-            //        }
-            //    }
-            //},
-            //    err => {
-            //        this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Mail send failed', detail: '' });
-            //    });
+            this.mailService.sendBulkMail(model).subscribe(res => {
+                if (res) {
+                    if (res.status === 200) {
+                        this.formGroup.reset();
+                        this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Mail send successfully', detail: '' });
+                        this.hideEvent.emit(false);
+                    }
+                }
+            },
+                err => {
+                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Mail send failed', detail: '' });
+                });
         }
     }
 }
