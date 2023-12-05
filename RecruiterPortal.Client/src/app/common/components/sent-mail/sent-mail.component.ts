@@ -165,6 +165,7 @@ export class SentMailComponent implements OnInit, OnChanges {
     hide() {
         this.formGroup.reset();
         this.hideEvent.emit(false);
+        this.getMailConfigurationByRecruiterId();
     }
 
     sendMail() {
