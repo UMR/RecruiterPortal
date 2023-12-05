@@ -133,13 +133,16 @@ export class CalendarComponent implements OnInit {
                 });
     }
 
-    delete() {
+    onDeleteClick() {
         this.confirmationDialog = false;
         this.deleteShedule(this.scheduleId);
+        this.scheduleId = 0;
     }
 
-    hideConfirm() {
+    onClickCancel() {
+        this.scheduleForm.reset();
         this.confirmationDialog = false;
+        this.scheduleId = 0;
     }
 
     deleteShedule(id) {

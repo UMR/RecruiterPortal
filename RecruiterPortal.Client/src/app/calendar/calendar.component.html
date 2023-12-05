@@ -38,12 +38,12 @@
                  rejectLabel="Delete" rejectIcon="pi pi-trash" rejectButtonStyleClass="bg-c-red">
 </p-confirmDialog>-->
 
-<p-dialog [(visible)]="confirmationDialog" [style]="{ width: '350px' }" header="Confirmation" [modal]="true" [draggable]="false" [resizable]="false">
+<p-dialog [(visible)]="confirmationDialog" [style]="{ width: '350px' }" header="Confirmation" [modal]="true" [draggable]="false" [resizable]="false" [closable]="false">
     <span>Do you want to <b>delete</b> or <b>edit</b> this record?</span>
     <p-footer>
         <div>
-            <button label="Cancel" class="btn btn-warning" (click)="hideConfirm()"><i class="pi pi-times"></i>Cancel</button>
-            <button label="Clear" class="btn btn-danger" (click)="delete()"><i class="pi pi-trash"></i>Delete</button>
+            <button label="Cancel" class="btn btn-warning" (click)="onClickCancel()"><i class="pi pi-times"></i>Cancel</button>
+            <button label="Clear" class="btn btn-danger" (click)="onDeleteClick()"><i class="pi pi-trash"></i>Delete</button>
             <button label="Save" class="btn btn-success" (click)="edit()"><i class="pi pi-pencil"></i>Edit</button>
         </div>
     </p-footer>
