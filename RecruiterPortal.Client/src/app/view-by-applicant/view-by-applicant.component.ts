@@ -232,14 +232,13 @@ export class ViewByApplicantComponent implements OnInit {
     onSendBulkMailClick() {
         const firstName = this.viewByApplicantFormGroup.controls.applicantFirstName.value ? this.viewByApplicantFormGroup.controls.applicantFirstName.value : '';
         const lastName = this.viewByApplicantFormGroup.controls.applicantLastName.value ? this.viewByApplicantFormGroup.controls.applicantLastName.value : '';
-        const email = this.viewByApplicantFormGroup.controls.applicantEmail.value ? this.viewByApplicantFormGroup.controls.applicantEmail.value : '';
-        this.selectedApplicantStatus == "1" ? true : false;
+        const email = this.viewByApplicantFormGroup.controls.applicantEmail.value ? this.viewByApplicantFormGroup.controls.applicantEmail.value : '';        
 
         this.selectedFilteredParams = {};
         this.selectedFilteredParams.firstName = firstName;
         this.selectedFilteredParams.lastName = lastName;
         this.selectedFilteredParams.email = email;
-        this.selectedFilteredParams.isVerified = this.selectedApplicantStatus;
+        this.selectedFilteredParams.isVerified = this.selectedApplicantStatus == "1" ? true : false;
 
         console.log(this.selectedFilteredParams);
         
