@@ -19,6 +19,12 @@
     <None Update="src\app\common\components\sent-bulk-mail\sent-bulk-mail.service.ts">
       <SubType>Code</SubType>
     </None>
+    <None Update="src\app\common\components\sent-sms\sent-sms.module.ts">
+      <SubType>Code</SubType>
+    </None>
+    <None Update="src\app\common\components\sent-sms\sent-sms.service.ts">
+      <SubType>Code</SubType>
+    </None>
     <None Update="src\app\common\components\sent-mail\sent-mail.module.ts">
       <SubType>Code</SubType>
     </None>

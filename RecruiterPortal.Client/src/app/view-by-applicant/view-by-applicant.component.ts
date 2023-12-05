@@ -33,6 +33,7 @@ export class ViewByApplicantComponent implements OnInit {
     public selectedApplicant: any;
     public showDialog: boolean = false;
     public showSentMailDialog: boolean = false;
+    public showSentSMSDialog: boolean = false;
     public showSentBulkMailDialog: boolean = false;
     @ViewChild('applicantTable', { static: false }) applicantTable: Table;
 
@@ -213,10 +214,17 @@ export class ViewByApplicantComponent implements OnInit {
         this.selectedApplicant = applicant;        
         this.showSentMailDialog = true;
     }
+    onSendSMSClick(applicant) {        
+        this.selectedApplicant = applicant;        
+        this.showSentSMSDialog = true;
+    }
 
     handleSendMailHideEvent(show) {
         this.showSentMailDialog = show;
-    }  
+    }
+    handleSendSMSHideEvent(show) {
+        this.showSentSMSDialog = show;
+    }
 
     onSendBulkMailClick() {
         this.showSentBulkMailDialog = true;

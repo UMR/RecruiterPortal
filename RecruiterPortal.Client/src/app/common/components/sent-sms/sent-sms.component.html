@@ -1,0 +1,22 @@
+<form [formGroup]="formGroup" novalidate>
+    <div class="row">
+        <div class="col-12">
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="com-md-12">
+            <ul class="list-inline mb-0 d-flex justify-content-between mt-2 ml-3">
+                <li class="list-inline-item">
+                    <button type="button" class="btn btn-primary btn-portal-border" tabindex="9" (click)="hide()">Close</button>
+                </li>
+                <li class="list-inline-item">
+                    <button type="button" class="btn btn-primary btn-portal-border" tabindex="10" (click)="clear()">Clear</button>
+                </li>
+                <li class="list-inline-item">
+                    <button type="submit" class="btn btn-primary btn-portal" tabindex="8" (click)="sendMail()" [disabled]="!formGroup.valid">Send</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</form>
