@@ -1,9 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, Input, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { SentMailService } from './sent-mail.service';
+
 import { MailTemplateService } from '../../../timecards/mail-template-type/mail-template-type.service';
 import { MailSettingsService } from '../../../timecards/mail-settings/mail-settings.service';
+import { MailService } from '../../services/mail.service';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class SentMailComponent implements OnInit, OnChanges {
     private toEmail: string[] = [];
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService,
-        private sentMailService: SentMailService, private mailTemplateTypeService: MailTemplateService, private mailSettingsService: MailSettingsService) {
+        private mailService: MailService, private mailTemplateTypeService: MailTemplateService, private mailSettingsService: MailSettingsService) {
         this.mailTemplateTypeService.mailTemplateTypes$.subscribe(data => { this.mailTemplateTypes = data; });
     }
 
@@ -62,7 +63,7 @@ export class SentMailComponent implements OnInit, OnChanges {
                 this.recruiterMailConfigs = res.body;
                 if (this.recruiterMailConfigs && this.recruiterMailConfigs.length > 0) {
                     this.selectedFromMail = this.recruiterMailConfigs[0].Id;
-                    this.formGroup.controls.fromMail.setValue(this.recruiterMailConfigs[0].Id); 
+                    this.formGroup.controls.fromMail.setValue(this.recruiterMailConfigs[0].Id);
                     this.getMailTemplateTypesByRecruiterId();
                 }
             });
@@ -103,7 +104,7 @@ export class SentMailComponent implements OnInit, OnChanges {
         this.selectedTemplateType = event.target.value;
         if (!this.selectedTemplateType) {
             this.formGroup.controls.body.setValue('');
-        }        
+        }
         else if (this.selectedTemplateType) {
             this.getMailTemplate();
         }
@@ -117,7 +118,7 @@ export class SentMailComponent implements OnInit, OnChanges {
         if (chip.value) {
             const result = this.validateEmail(chip.value);
             if (!result) {
-                const toEmailAddress: string[] = this.formGroup.controls.mailAddressTo.value;                
+                const toEmailAddress: string[] = this.formGroup.controls.mailAddressTo.value;
                 if (toEmailAddress && toEmailAddress.length > 0) {
                     toEmailAddress.pop();
                     this.formGroup.controls.mailAddressTo.patchValue(toEmailAddress);
@@ -186,13 +187,12 @@ export class SentMailComponent implements OnInit, OnChanges {
                 body: body
             }
 
-            this.sentMailService.sendMail(model).subscribe(res => {
-                if (res) {
-                    if (res.status === 200) {
-                        this.formGroup.reset();
-                        this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Mail send successfully', detail: '' });
-                        this.hideEvent.emit(false);
-                    }
+            this.mailService.sendMail(model).subscribe(res => {
+                if (res.status === 200) {
+                    console.log('sent');
+                    this.formGroup.reset();
+                    this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Mail send successfully', detail: '' });
+                    this.hideEvent.emit(false);
                 }
             },
                 err => {
