@@ -21,8 +21,8 @@ export class SentSMSComponent implements OnInit, OnChanges {
     private selectedEmail: string;
     private toEmail: string[] = [];
 
-    constructor(private fb: FormBuilder, private messageService: MessageService) {
-        
+    constructor(private fb: FormBuilder, private messageService: MessageService, private smsService: SentSMSService) {
+
     }
 
     ngOnInit() {
@@ -64,7 +64,7 @@ export class SentSMSComponent implements OnInit, OnChanges {
         this.selectedTemplateType = event.target.value;
         if (!this.selectedTemplateType) {
             this.formGroup.controls.body.setValue('');
-        }        
+        }
         else if (this.selectedTemplateType) {
         }
     }
@@ -84,5 +84,31 @@ export class SentSMSComponent implements OnInit, OnChanges {
     }
 
     sendSMS() {
+        let model = {
+            id: 0,
+            sendTime: new Date(),
+            fromNumber: '',
+            toNumber: '',
+            smsbody: '',
+            createdBy: 0,
+            createdDate: new Date(),
+            updatedBy: 0,
+            updatedDate: new Date()
+        }
+        this.smsService.sendSMS(model).subscribe(res => {
+            if (res.status === 200) {
+                console.log('sent');
+                this.formGroup.reset();
+                this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'SMS send successfully', detail: '' });
+                this.hideEvent.emit(false);
+            }
+            else {
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'SMS send failed', detail: '' });
+            }
+        },
+            err => {
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'SMS send failed', detail: '' });
+            });
+
     }
 }

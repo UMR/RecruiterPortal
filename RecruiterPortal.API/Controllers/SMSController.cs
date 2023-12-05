@@ -44,7 +44,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
         }
 
-        [Route("save")]
+        [Route("send")]
         [HttpPost]
         public async Task<IActionResult> SendSMS(SMSLogModel smsModel)
         {

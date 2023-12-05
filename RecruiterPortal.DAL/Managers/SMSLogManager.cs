@@ -20,13 +20,13 @@ namespace RecruiterPortalDAL.Managers
         public SMSLogManager(IConfiguration configuration)
         {
             _configuration = configuration;
-            RINGCENTRAL_CLIENTID = _configuration["Google:RingcentralClientId"];
-            RINGCENTRAL_CLIENTSECRET = _configuration["Google:RingcentralClientSecret"];
-            RINGCENTRAL_USERNAME = _configuration["Google:RingcentralUsername"];
-            RINGCENTRAL_PASSWORD = _configuration["Google:RingcentralPassword"];
-            RINGCENTRAL_FROM_NUMBER = _configuration["Google:RingcentralFromNumber"];
-            RINGCENTRAL_EXTENSION = _configuration["Google:RingcentralExtension"];
-            RINGCENTRAL_PRODUCTION = _configuration["Google:RingcentralProduction"];
+            RINGCENTRAL_CLIENTID = _configuration["Ringcentral:RingcentralClientId"];
+            RINGCENTRAL_CLIENTSECRET = _configuration["Ringcentral:RingcentralClientSecret"];
+            RINGCENTRAL_USERNAME = _configuration["Ringcentral:RingcentralUsername"];
+            RINGCENTRAL_PASSWORD = _configuration["Ringcentral:RingcentralPassword"];
+            RINGCENTRAL_FROM_NUMBER = _configuration["Ringcentral:RingcentralFromNumber"];
+            RINGCENTRAL_EXTENSION = _configuration["Ringcentral:RingcentralExtension"];
+            RINGCENTRAL_PRODUCTION = _configuration["Ringcentral:RingcentralProduction"];
         }
         public static async Task<int> Insert(SMSLogModel request, int recruiterId)
         {
@@ -102,31 +102,34 @@ namespace RecruiterPortalDAL.Managers
                     string selectedNumbers = string.Empty;
                     foreach (var entry in numbers)
                     {
-                        string receiverNumber = entry;
-                        string firstChar = receiverNumber.Substring(0, 1);
-                        string secondChar = receiverNumber.Substring(1, 1);
+                        if (!string.IsNullOrEmpty(entry))
+                        {
+                            string receiverNumber = entry;
+                            string firstChar = receiverNumber.Substring(0, 1);
+                            string secondChar = receiverNumber.Substring(1, 1);
 
-                        if (receiverNumber.Length == 10)
-                        {
-                            receiverNumber = "+1" + receiverNumber;
+                            if (receiverNumber.Length == 10)
+                            {
+                                receiverNumber = "+1" + receiverNumber;
+                            }
+                            else if (receiverNumber.Length == 11 && firstChar != "+" && firstChar == "1")
+                            {
+                                receiverNumber = "+" + receiverNumber;
+                            }
+                            else if (receiverNumber.Length == 11 && firstChar == "+" && firstChar != "1")
+                            {
+                                receiverNumber = "+" + "1" + receiverNumber.Substring(1, receiverNumber.Length - 1);
+                            }
+                            if (string.IsNullOrEmpty(selectedNumbers))
+                            {
+                                selectedNumbers = receiverNumber;
+                            }
+                            else
+                            {
+                                selectedNumbers = selectedNumbers + "," + receiverNumber;
+                            }
+                            sendNumbers.Add(receiverNumber); 
                         }
-                        else if (receiverNumber.Length == 11 && firstChar != "+" && firstChar == "1")
-                        {
-                            receiverNumber = "+" + receiverNumber;
-                        }
-                        else if (receiverNumber.Length == 11 && firstChar == "+" && firstChar != "1")
-                        {
-                            receiverNumber = "+" + "1" + receiverNumber.Substring(1, receiverNumber.Length - 1);
-                        }
-                        if (string.IsNullOrEmpty(selectedNumbers))
-                        {
-                            selectedNumbers = receiverNumber;
-                        }
-                        else
-                        {
-                            selectedNumbers = selectedNumbers + "," + receiverNumber;
-                        }
-                        sendNumbers.Add(receiverNumber);
                     }
 
                     var result = await SendBulkSMS(message, sendNumbers.ToArray());

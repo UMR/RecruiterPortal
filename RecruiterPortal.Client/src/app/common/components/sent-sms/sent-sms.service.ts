@@ -11,8 +11,8 @@ export class SentSMSService {
 
     constructor(private client: HttpClient) { }
 
-    sendMail(model: any): Observable<HttpResponse<any>> {
-        return this.client.post(`${resourceServerUrl}/api/MailConfiguration/send-mail`, model, {
+    sendSMS(model: any): Observable<HttpResponse<any>> {
+        return this.client.post(`${resourceServerUrl}/api/sms/send`, model, {
             headers: new HttpHeaders()
                 .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
         });
