@@ -35,6 +35,7 @@ export class ViewByApplicantComponent implements OnInit {
     public showSentMailDialog: boolean = false;
     public showSentSMSDialog: boolean = false;
     public showSentBulkMailDialog: boolean = false;
+    public selectedFilteredParams: any;
     @ViewChild('applicantTable', { static: false }) applicantTable: Table;
 
     constructor(private fb: FormBuilder,
@@ -214,6 +215,7 @@ export class ViewByApplicantComponent implements OnInit {
         this.selectedApplicant = applicant;        
         this.showSentMailDialog = true;
     }
+
     onSendSMSClick(applicant) {        
         this.selectedApplicant = applicant;        
         this.showSentSMSDialog = true;
@@ -222,11 +224,25 @@ export class ViewByApplicantComponent implements OnInit {
     handleSendMailHideEvent(show) {
         this.showSentMailDialog = show;
     }
+
     handleSendSMSHideEvent(show) {
         this.showSentSMSDialog = show;
     }
 
     onSendBulkMailClick() {
+        const firstName = this.viewByApplicantFormGroup.controls.applicantFirstName.value ? this.viewByApplicantFormGroup.controls.applicantFirstName.value : '';
+        const lastName = this.viewByApplicantFormGroup.controls.applicantLastName.value ? this.viewByApplicantFormGroup.controls.applicantLastName.value : '';
+        const email = this.viewByApplicantFormGroup.controls.applicantEmail.value ? this.viewByApplicantFormGroup.controls.applicantEmail.value : '';
+        this.selectedApplicantStatus == "1" ? true : false;
+
+        this.selectedFilteredParams = {};
+        this.selectedFilteredParams.firstName = firstName;
+        this.selectedFilteredParams.lastName = lastName;
+        this.selectedFilteredParams.email = email;
+        this.selectedFilteredParams.isVerified = this.selectedApplicantStatus;
+
+        console.log(this.selectedFilteredParams);
+        
         this.showSentBulkMailDialog = true;
     }
 

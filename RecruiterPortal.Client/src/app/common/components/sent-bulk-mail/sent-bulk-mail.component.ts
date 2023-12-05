@@ -12,7 +12,7 @@ import { MailSettingsService } from '../../../timecards/mail-settings/mail-setti
 })
 export class SentBulkMailComponent implements OnInit {
 
-    @Input() selectedApplicant: any;
+    @Input() selectedFilteredParams: any;
     @Output() hideEvent = new EventEmitter<boolean>();
     public formGroup: FormGroup;
     public recruiterMailConfigs: any[] = [];
@@ -105,6 +105,8 @@ export class SentBulkMailComponent implements OnInit {
     }
 
     sendMail() {
+
+        console.log(this.selectedFilteredParams);
 
         const filteredFromAddress = this.recruiterMailConfigs.filter(m => m.Id == this.selectedFromMail);
         if (filteredFromAddress.length > 0) {
