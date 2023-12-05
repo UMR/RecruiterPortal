@@ -188,8 +188,7 @@ export class SentMailComponent implements OnInit, OnChanges {
             }
 
             this.mailService.sendMail(model).subscribe(res => {
-                if (res.status === 200) {
-                    console.log('sent');
+                if (res.status === 200) {                    
                     this.formGroup.reset();
                     this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Mail send successfully', detail: '' });
                     this.hideEvent.emit(false);
