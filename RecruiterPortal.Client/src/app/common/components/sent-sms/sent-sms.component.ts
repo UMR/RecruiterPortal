@@ -8,7 +8,7 @@ import { SentSMSService } from './sent-sms.service';
     templateUrl: './sent-sms.component.html',
     styleUrls: ['./sent-sms.component.css']
 })
-export class SentSMSComponent implements OnInit {
+export class SentSMSComponent implements OnInit, AfterViewInit {
 
     @Input() selectedApplicant: any;
     @Output() hideEvent = new EventEmitter<boolean>();
@@ -23,6 +23,29 @@ export class SentSMSComponent implements OnInit {
 
     ngOnInit() {
         this.createFormGroup();
+        //this.getApplicantPhone();
+    }
+
+    getApplicantPhone() {
+        console.log(this.selectedApplicant);
+        if (this.selectedApplicant) {
+            this.smsService.getApplicantPhone(this.selectedApplicant.UserId).subscribe(res => {
+                let phone = [];
+                phone.push(res.body[0].Phone)
+                this.formGroup.controls.phoneNumber.setValue(phone);
+            },
+                err => {
+                    console.log(err);
+                }
+            )
+        }
+    }
+
+    ngAfterViewInit() {
+        this.test();
+    }
+    test() {
+        setTimeout(() => { this.getApplicantPhone() }, 5000);
     }
 
     createFormGroup() {
@@ -37,7 +60,10 @@ export class SentSMSComponent implements OnInit {
     }
 
     hide() {
+        this.getApplicantPhone();
+        console.log(this.selectedApplicant.UserId);
         this.formGroup.reset();
+        this.hideEvent.emit(false);
     }
 
     validatePhone(phone) {

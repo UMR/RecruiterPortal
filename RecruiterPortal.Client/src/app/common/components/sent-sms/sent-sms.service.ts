@@ -17,4 +17,8 @@ export class SentSMSService {
                 .set('Content-Type', 'application/json'), observe: 'response', responseType: 'text'
         });
     }
+
+    getApplicantPhone(applicantId: any): Observable<HttpResponse<any>> {
+        return this.client.get(`${resourceServerUrl}/api/applicant-info/details/` + applicantId, { observe: 'response' });
+    }
 }
