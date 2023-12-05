@@ -7,9 +7,9 @@ import { ConfirmDialogModule, AutoCompleteModule, ConfirmationService, MessageSe
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChipsModule } from 'primeng/chips';
 
-import { SentMailService } from './sent-mail.service';
 import { SentMailComponent } from './sent-mail.component';
 import { MailTemplateService } from '../../../timecards/mail-template-type/mail-template-type.service';
+import { MailService } from '../../services/mail.service';
 
 
 @NgModule({
@@ -27,7 +27,7 @@ import { MailTemplateService } from '../../../timecards/mail-template-type/mail-
         ChipsModule,
         EditorModule
     ],
-    providers: [ConfirmationService, MessageService, SentMailService, MailTemplateService]
+    providers: [ConfirmationService, MessageService, MailService, MailTemplateService]
 })
 export class SentMailModule {
 

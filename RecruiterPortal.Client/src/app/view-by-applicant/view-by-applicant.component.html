@@ -129,7 +129,7 @@
 </p-dialog>
 
 <p-dialog [(visible)]="showSentBulkMailDialog" [style]="{ width: '1200px' }" header="Send Mail" [modal]="true" [closable]="false" [draggable]="false" [resizable]="false">
-    <sent-mail (hideEvent)="handleSendBulkMailHideEvent($event)"></sent-mail>
+    <sent-bulk-mail (hideEvent)="handleSendBulkMailHideEvent($event)"></sent-bulk-mail>
 </p-dialog>
 
 <p-toast key="toastKey1"></p-toast>

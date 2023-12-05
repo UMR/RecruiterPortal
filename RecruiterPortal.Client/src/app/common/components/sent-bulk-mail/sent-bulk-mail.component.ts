@@ -10,7 +10,7 @@ import { MailSettingsService } from '../../../timecards/mail-settings/mail-setti
     templateUrl: './sent-bulk-mail.component.html',
     styleUrls: ['./sent-bulk-mail.component.css']
 })
-export class SentBulkMailComponent implements OnInit, OnChanges {
+export class SentBulkMailComponent implements OnInit {
 
     @Input() selectedApplicant: any;
     @Output() hideEvent = new EventEmitter<boolean>();
@@ -18,10 +18,7 @@ export class SentBulkMailComponent implements OnInit, OnChanges {
     public recruiterMailConfigs: any[] = [];
     public mailTemplateTypes: any[] = [];
     private selectedFromMail: number;
-    private selectedTemplateType: number;
-    public emailRegex = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
-    private selectedEmail: string;
-    private toEmail: string[] = [];
+    private selectedTemplateType: number;        
 
     constructor(private fb: FormBuilder, private messageService: MessageService, 
         private mailTemplateTypeService: MailTemplateService, private mailSettingsService: MailSettingsService) {
@@ -31,24 +28,12 @@ export class SentBulkMailComponent implements OnInit, OnChanges {
     ngOnInit() {
         this.createFormGroup();
         this.getMailConfigurationByRecruiterId();
-    }
-
-    ngOnChanges(changes: SimpleChanges) {
-        if (changes.selectedApplicant && changes.selectedApplicant.currentValue) {
-            this.selectedEmail = (changes.selectedApplicant.currentValue as any).Email;
-            this.toEmail = [];
-            this.toEmail.push(this.selectedEmail);
-            this.formGroup.controls.mailAddressTo.patchValue(this.toEmail);
-        }
-    }
+    }    
 
     createFormGroup() {
         this.formGroup = this.fb.group({
             fromMail: ['', Validators.compose([Validators.required])],
-            mailTemplateType: [''],
-            mailAddressTo: ['', Validators.compose([Validators.required])],
-            mailAddressCc: [''],
-            mailAddressBcc: [''],
+            mailTemplateType: [''],           
             subject: ['', Validators.compose([Validators.max(200)])],
             body: ['']
         });
@@ -108,52 +93,6 @@ export class SentBulkMailComponent implements OnInit, OnChanges {
         }
     }
 
-    validateEmail(email) {
-        return email.match(this.emailRegex);
-    }
-
-    onToTokenAdd(chip) {
-        if (chip.value) {
-            const result = this.validateEmail(chip.value);
-            if (!result) {
-                const toEmailAddress: string[] = this.formGroup.controls.mailAddressTo.value;                
-                if (toEmailAddress && toEmailAddress.length > 0) {
-                    toEmailAddress.pop();
-                    this.formGroup.controls.mailAddressTo.patchValue(toEmailAddress);
-                }
-                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid to email address', detail: '' });
-            }
-        }
-    }
-
-    onCcTokenAdd(chip) {
-        if (chip.value) {
-            const result = this.validateEmail(chip.value);
-            if (!result) {
-                const ccEmailAddress: string[] = this.formGroup.controls.mailAddressCc.value;
-                if (ccEmailAddress && ccEmailAddress.length > 0) {
-                    ccEmailAddress.pop();
-                    this.formGroup.controls.mailAddressCc.patchValue(ccEmailAddress);
-                }
-                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid cc email address', detail: '' });
-            }
-        }
-    }
-
-    onBccTokenAdd(chip) {
-        if (chip.value) {
-            const result = this.validateEmail(chip.value);
-            if (!result) {
-                const bccEmailAddress: string[] = this.formGroup.controls.mailAddressBcc.value;
-                if (bccEmailAddress && bccEmailAddress.length > 0) {
-                    bccEmailAddress.pop();
-                    this.formGroup.controls.mailAddressTo.patchValue(bccEmailAddress);
-                }
-                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid bcc email address', detail: '' });
-            }
-        }
-    }
-
     clear() {
         this.formGroup.reset();
         this.formGroup.controls.mailTemplateType.setValue("");
@@ -169,18 +108,12 @@ export class SentBulkMailComponent implements OnInit, OnChanges {
 
         const filteredFromAddress = this.recruiterMailConfigs.filter(m => m.Id == this.selectedFromMail);
         if (filteredFromAddress.length > 0) {
-            const fromAddress = filteredFromAddress[0].Email;
-            const toAddress = this.formGroup.controls.mailAddressTo.value ? this.formGroup.controls.mailAddressTo.value : [];
-            const ccAddress = this.formGroup.controls.mailAddressCc.value ? this.formGroup.controls.mailAddressCc.value : [];
-            const bccAddress = this.formGroup.controls.mailAddressBcc.value ? this.formGroup.controls.mailAddressBcc.value : [];
+            const fromAddress = filteredFromAddress[0].Email;            
             const subject = this.formGroup.controls.subject.value;
             const body = this.formGroup.controls.body.value;
 
             const model: any = {
-                fromAddress: fromAddress,
-                toAddress: toAddress,
-                ccAddress: ccAddress,
-                bccAddress: bccAddress,
+                fromAddress: fromAddress,                
                 subject: subject,
                 body: body
             }
