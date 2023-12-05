@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RecruiterPortal.API.Services;
+using RecruiterPortal.DAL.Managers;
 using RecruiterPortal.DAL.Models;
 using RecruiterPortalDAL.Managers;
 using System.Data;
@@ -54,22 +55,18 @@ namespace RecruiterPortal.API.Controllers
 
         [Route("send-bulk-email")]
         [HttpPost]
-        public IActionResult SendBulkEmail(ApplicantSearchModel applicantSearchModel)
+        public IActionResult SendBulkEmail(SendBulkEmailRequest request)
         {
             try
             {
-                DataSet dsApplicant = UserManager.GetAllUserByFilter(applicantSearchModel);
-                List<string> emailList = new();                
+                DataTable dtApplicant = MailManager.GetAllEmailByFilter(request.Email, request.FirstName, request.LastName, request.IsVerified, RecruiterId);
+                List<string> emailList = new List<string>();
 
-                if (dsApplicant != null && dsApplicant.Tables.Count > 0)
+                if (dtApplicant != null && dtApplicant.Rows.Count > 0)
                 {
-                    DataTable dtApplicant = dsApplicant.Tables[1];
-                    if (dtApplicant != null && dtApplicant.Rows.Count > 0)
+                    foreach (DataRow oRow in dtApplicant.Rows)
                     {
-                        foreach (DataRow oRow in dtApplicant.Rows)
-                        {
-                            emailList.Add(oRow["Email"].ToString());
-                        }
+                        emailList.Add(oRow["Email"].ToString());
                     }
                 }
 
