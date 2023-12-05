@@ -217,7 +217,7 @@ export class ViewByApplicantComponent implements OnInit {
     }
 
     onSendSMSClick(applicant) {        
-        this.selectedApplicant = applicant;        
+        this.selectedApplicantId = applicant.UserId;
         this.showSentSMSDialog = true;
     }
 

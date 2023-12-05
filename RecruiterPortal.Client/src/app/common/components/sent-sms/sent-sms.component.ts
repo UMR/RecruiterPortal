@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { SentSMSService } from './sent-sms.service';
@@ -8,9 +8,9 @@ import { SentSMSService } from './sent-sms.service';
     templateUrl: './sent-sms.component.html',
     styleUrls: ['./sent-sms.component.css']
 })
-export class SentSMSComponent implements OnInit, AfterViewInit {
+export class SentSMSComponent implements OnInit {
 
-    @Input() selectedApplicant: any;
+    @Input() selectedApplicantId: any;
     @Output() hideEvent = new EventEmitter<boolean>();
     public formGroup: FormGroup;
     public recruiterMailConfigs: any[] = [];
@@ -25,27 +25,28 @@ export class SentSMSComponent implements OnInit, AfterViewInit {
         this.createFormGroup();
         //this.getApplicantPhone();
     }
+    ngOnChanges(changes: SimpleChanges) {
 
-    getApplicantPhone() {
-        console.log(this.selectedApplicant);
-        if (this.selectedApplicant) {
-            this.smsService.getApplicantPhone(this.selectedApplicant.UserId).subscribe(res => {
+        this.getApplicantPhone(changes.selectedApplicantId.currentValue);
+        // You can also use categoryId.previousValue and 
+        // categoryId.firstChange for comparing old and new values
+
+    }
+    getApplicantPhone(appId) {
+        console.log(appId);
+        if (this.selectedApplicantId) {
+            this.smsService.getApplicantPhone(this.selectedApplicantId).subscribe(res => {
                 let phone = [];
-                phone.push(res.body[0].Phone)
-                this.formGroup.controls.phoneNumber.setValue(phone);
+                if (res.body[0].Phone != null || res.body[0].Phone != "") {
+                    phone.push(res.body[0].Phone)
+                    this.formGroup.controls.phoneNumber.setValue(phone);
+                }
             },
                 err => {
                     console.log(err);
                 }
             )
         }
-    }
-
-    ngAfterViewInit() {
-        this.test();
-    }
-    test() {
-        setTimeout(() => { this.getApplicantPhone() }, 5000);
     }
 
     createFormGroup() {
@@ -60,8 +61,6 @@ export class SentSMSComponent implements OnInit, AfterViewInit {
     }
 
     hide() {
-        this.getApplicantPhone();
-        console.log(this.selectedApplicant.UserId);
         this.formGroup.reset();
         this.hideEvent.emit(false);
     }
