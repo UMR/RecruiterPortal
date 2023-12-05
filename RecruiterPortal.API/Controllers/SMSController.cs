@@ -12,8 +12,10 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
     [ApiController]
     public class SMSController : CustomControllerBase
     {
-        public SMSController(ILogger<CustomControllerBase> logger) : base(logger)
+        public IConfiguration _configuration { get; set; }
+        public SMSController(ILogger<CustomControllerBase> logger, IConfiguration configuration) : base(logger)
         {
+            _configuration = configuration;
         }
 
         [Route("get")]
@@ -51,7 +53,8 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
             try
             {
-                return Ok(await SMSLogManager.SendSMS(smsModel.Smsbody, new[] { smsModel.ToNumber }, RecruiterId));
+                SMSLogManager sMSLog = new SMSLogManager(_configuration);
+                return Ok(sMSLog.SendSMS(smsModel.Smsbody, new[] { smsModel.ToNumber }, RecruiterId));
             }
             catch (Exception ex)
             {

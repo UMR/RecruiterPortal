@@ -49,17 +49,16 @@ namespace RecruiterPortalDAL.Managers
             smslog.ToNumber = request.ToNumber;
             smslog.FromNumber = request.FromNumber;
             smslog.Smsbody = request.Smsbody;
-            smslog.SendTime = request.SendTime;
+            smslog.SendTime = DateTime.Now;
             smslog.CreatedDate = DateTime.Now;
             smslog.CreatedBy = recruiterId;
 
             return smslog;
         }
 
-        public static async Task<MessageBatchInfo> SendBulkSMS(string body, string[] numbers)
+        public async Task<MessageBatchInfo> SendBulkSMS(string body, string[] numbers)
         {
             MessageBatchInfo messageBatchInfo = null;
-
             try
             {
                 var restClient = new RestClient(RINGCENTRAL_CLIENTID, RINGCENTRAL_CLIENTSECRET, RINGCENTRAL_PRODUCTION);
@@ -88,7 +87,7 @@ namespace RecruiterPortalDAL.Managers
             return messageBatchInfo;
         }
 
-        public static async Task<int> SendSMS(string messageBody, string[] numbers, int recuiterId)
+        public async Task<int> SendSMS(string messageBody, string[] numbers, int recuiterId)
         {
             try
             {
