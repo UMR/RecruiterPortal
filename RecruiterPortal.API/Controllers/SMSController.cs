@@ -48,13 +48,13 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
         [Route("send")]
         [HttpPost]
-        public async Task<IActionResult> SendSMS(SMSLogModel smsModel)
+        public async Task<IActionResult> SendSMS(SMSRequestModel smsModel)
         {
 
             try
             {
                 SMSLogManager sMSLog = new SMSLogManager(_configuration);
-                return Ok(sMSLog.SendSMS(smsModel.Smsbody, new[] { smsModel.ToNumber }, RecruiterId));
+                return Ok(sMSLog.SendSMS(smsModel.Smsbody, smsModel.ToNumber, RecruiterId));
             }
             catch (Exception ex)
             {

@@ -45,7 +45,7 @@ namespace RecruiterPortalDAL.Managers
         private static Smslog MapObjectRequest(SMSLogModel request, int recruiterId)
         {
             Smslog smslog = new Smslog();
-            smslog.Id = request.Id;
+            smslog.Id = 0;
             smslog.ToNumber = request.ToNumber;
             smslog.FromNumber = request.FromNumber;
             smslog.Smsbody = request.Smsbody;
@@ -137,7 +137,7 @@ namespace RecruiterPortalDAL.Managers
                     {
                         string msg = string.Empty;
                         SMSLogModel smsLogModel = new SMSLogModel();
-                        smsLogModel.FromNumber = "19147377499";
+                        smsLogModel.FromNumber = RINGCENTRAL_FROM_NUMBER;
                         smsLogModel.ToNumber = selectedNumbers;
                         smsLogModel.Smsbody = message;
                         return await Insert(smsLogModel, recuiterId);

@@ -21,7 +21,8 @@ import { SentSMSComponent } from './sent-sms.component';
         ToastModule,
         ConfirmDialogModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        ChipsModule
     ],
     providers: [ConfirmationService, MessageService, SentSMSService]
 })
