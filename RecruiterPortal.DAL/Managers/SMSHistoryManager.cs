@@ -6,7 +6,7 @@ using RingCentral;
 
 namespace RecruiterPortalDAL.Managers
 {
-    public class SMSLogManager
+    public class SMSHistoryManager
     {
         private readonly IConfiguration _configuration;
         public static string RINGCENTRAL_CLIENTID;
@@ -17,7 +17,7 @@ namespace RecruiterPortalDAL.Managers
         public static string RINGCENTRAL_EXTENSION;
         public static string RINGCENTRAL_PRODUCTION;
 
-        public SMSLogManager(IConfiguration configuration)
+        public SMSHistoryManager(IConfiguration configuration)
         {
             _configuration = configuration;
             RINGCENTRAL_CLIENTID = _configuration["Ringcentral:RingcentralClientId"];
@@ -32,9 +32,9 @@ namespace RecruiterPortalDAL.Managers
         {
             try
             {
-                GenericRepository<Smslog> repository = new GenericRepository<Smslog>();
-                Smslog sms = MapObjectRequest(request, recruiterId);
-                Smslog createdJob = await repository.SaveAsync(sms);
+                GenericRepository<Smshistory> repository = new GenericRepository<Smshistory>();
+                Smshistory sms = MapObjectRequest(request, recruiterId);
+                Smshistory createdJob = await repository.SaveAsync(sms);
                 return createdJob.Id;
             }
             catch (Exception ex)
@@ -42,9 +42,9 @@ namespace RecruiterPortalDAL.Managers
                 throw new Exception(ex.Message);
             }
         }
-        private static Smslog MapObjectRequest(SMSLogModel request, int recruiterId)
+        private static Smshistory MapObjectRequest(SMSLogModel request, int recruiterId)
         {
-            Smslog smslog = new Smslog();
+            Smshistory smslog = new Smshistory();
             smslog.Id = 0;
             smslog.ToNumber = request.ToNumber;
             smslog.FromNumber = request.FromNumber;
