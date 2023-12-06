@@ -91,37 +91,14 @@ namespace RecruiterPortalDAL.Managers
             message.IsBodyHtml = true;
             //message.Attachments.Add(new Attachment(new MemoryStream(resumeFileData), resumeFileName));
             return message;
-        }
-
-        public MailMessage GenerateMailMessage(SendMailRequest request) 
-        {
-            MailMessage message = new MailMessage();
-            message.From = new MailAddress(request.FromAddress);
-            foreach (string toAddress in request.ToAddress)
-            {
-                message.To.Add(new MailAddress(toAddress));
-            }
-            foreach (string ccAddress in request.CcAddress)
-            {
-                message.To.Add(new MailAddress(ccAddress));
-            }
-            foreach (string bccAddress in request.BccAddress)
-            {
-                message.Bcc.Add(new MailAddress(bccAddress));
-            }
-            message.Subject = request.Subject;
-            message.Body = request.Body;
-            message.IsBodyHtml = true;
-
-            return message;
-        }
+        }        
 
         public bool SendEmail(SendMailRequest request)
         {
             try
             {
                 var fromEmailAddress = request.FromAddress;
-                var message = GenerateMailMessage(request);
+                var message = generateMailMessage(request);
                 MimeMessage mimeMessage = MimeMessage.CreateFromMailMessage(message);
                 Message gmailMessage = new Message();
                 gmailMessage.Raw = base64UrlEncode(mimeMessage.ToString());
@@ -162,6 +139,29 @@ namespace RecruiterPortalDAL.Managers
             }
             
             return false;
+        }
+
+        private  MailMessage generateMailMessage(SendMailRequest request)
+        {
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(request.FromAddress);
+            foreach (string toAddress in request.ToAddress)
+            {
+                message.To.Add(new MailAddress(toAddress));
+            }
+            foreach (string ccAddress in request.CcAddress)
+            {
+                message.To.Add(new MailAddress(ccAddress));
+            }
+            foreach (string bccAddress in request.BccAddress)
+            {
+                message.Bcc.Add(new MailAddress(bccAddress));
+            }
+            message.Subject = request.Subject;
+            message.Body = request.Body;
+            message.IsBodyHtml = true;
+
+            return message;
         }
 
         private GmailService getGmailService(string emailAddress)

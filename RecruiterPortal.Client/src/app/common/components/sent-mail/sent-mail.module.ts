@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../../common/shared.module';
 import { LoadingImageModule } from '../../../common/loading-image.module';
 import { ToastModule } from 'primeng/toast';
-import { ConfirmDialogModule, AutoCompleteModule, ConfirmationService, MessageService, EditorModule } from 'primeng/primeng';
+import { ConfirmDialogModule, AutoCompleteModule, ConfirmationService, MessageService, EditorModule, FileUploadModule } from 'primeng/primeng';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChipsModule } from 'primeng/chips';
 
@@ -25,7 +25,8 @@ import { MailService } from '../../services/mail.service';
         ReactiveFormsModule,
         AutoCompleteModule,
         ChipsModule,
-        EditorModule
+        EditorModule,
+        FileUploadModule
     ],
     providers: [ConfirmationService, MessageService, MailService, MailTemplateService]
 })

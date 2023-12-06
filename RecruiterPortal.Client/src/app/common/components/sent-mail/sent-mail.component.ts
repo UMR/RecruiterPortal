@@ -6,6 +6,11 @@ import { MailTemplateService } from '../../../timecards/mail-template-type/mail-
 import { MailSettingsService } from '../../../timecards/mail-settings/mail-settings.service';
 import { MailService } from '../../services/mail.service';
 
+interface UploadEvent {
+    originalEvent: Event;
+    files: File[];
+}
+
 
 @Component({
     selector: 'sent-mail',
@@ -24,6 +29,7 @@ export class SentMailComponent implements OnInit, OnChanges {
     public emailRegex = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
     private selectedEmail: string;
     private toEmail: string[] = [];
+    public uploadedFiles: any[] = [];
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService,
         private mailService: MailService, private mailTemplateTypeService: MailTemplateService, private mailSettingsService: MailSettingsService) {
@@ -156,6 +162,22 @@ export class SentMailComponent implements OnInit, OnChanges {
         }
     }
 
+    onFileSelect(event: UploadEvent) {
+        if (event.files.length > 0) {
+            if (!event.files[0].type.includes("image/") && !event.files[0].type.includes("application/pdf") && !event.files[0].type.includes("application/msword") && !event.files[0].type.includes("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid file type', detail: 'Upload file' });
+            } else if (event.files[0].size > 5000000) {
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid file size', detail: 'File size limit: 5MB' });
+            } else {
+                for (let file of event.files) {
+                    this.uploadedFiles.push(file);
+                }
+            }
+        }
+
+        console.log(this.uploadedFiles);
+    }
+
     clear() {
         this.formGroup.reset();
         this.formGroup.controls.mailTemplateType.setValue("");
@@ -189,7 +211,7 @@ export class SentMailComponent implements OnInit, OnChanges {
             }
 
             this.mailService.sendMail(model).subscribe(res => {
-                if (res.status === 200) {                    
+                if (res.status === 200) {
                     this.formGroup.reset();
                     this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Mail send successfully', detail: '' });
                     this.hideEvent.emit(false);

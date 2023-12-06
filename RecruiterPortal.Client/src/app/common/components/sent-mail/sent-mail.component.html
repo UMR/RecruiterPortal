@@ -1,46 +1,83 @@
 <form [formGroup]="formGroup" novalidate>
     <div class="row">
-        <div class="col-6">
-            <div class="form-group">
-                <label for="fromMail" class="form-label">From Mail</label>
-                <select id="fromMail" name="fromMail" class="form-control" formControlName="fromMail" required tabindex="1" (change)="onFromMailChange($event)">
-                    <option value="">----Select----</option>
-                    <option *ngFor="let mailConfig of recruiterMailConfigs" [value]="mailConfig.Id">{{ mailConfig.Email}}</option>
-                </select>
+        <div class="col-8">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="fromMail" class="form-label">From Mail</label>
+                        <select id="fromMail" name="fromMail" class="form-control" formControlName="fromMail" required tabindex="1" (change)="onFromMailChange($event)">
+                            <option value="">----Select----</option>
+                            <option *ngFor="let mailConfig of recruiterMailConfigs" [value]="mailConfig.Id">{{ mailConfig.Email}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="mailTemplateType" class="form-label">Template Type</label>
+                        <select id="mailTemplateType" name="mailTemplateType" class="form-control" formControlName="mailTemplateType" tabindex="2"
+                                (change)="onMailTemplateTypeChange($event)">
+                            <option value="">----Select----</option>
+                            <option *ngFor="let mailType of mailTemplateTypes" [value]="mailType.Id">{{mailType?.Name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="mailAddressTo" class="form-label">TO</label>
+                        <p-chips formControlName="mailAddressTo" tabindex="3" [style]="{ width: '100%', height: '42px' }" required (onAdd)="onToTokenAdd($event)"></p-chips>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="mailAddressCc" class="form-label">CC</label>
+                        <p-chips formControlName="mailAddressCc" tabindex="4" [style]="{ width: '100%', height: '42px' }" (onAdd)="onCcTokenAdd($event)"></p-chips>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="mailAddressBcc" class="form-label">BCC</label>
+                        <p-chips formControlName="mailAddressBcc" tabindex="5" [style]="{ width: '100%', height: '42px' }" (onAdd)="onBccTokenAdd($event)"></p-chips>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-6">
-            <div class="form-group">
-                <label for="mailTemplateType" class="form-label">Template Type</label>
-                <select id="mailTemplateType" name="mailTemplateType" class="form-control" formControlName="mailTemplateType" tabindex="2"
-                        (change)="onMailTemplateTypeChange($event)">
-                    <option value="">----Select----</option>
-                    <option *ngFor="let mailType of mailTemplateTypes" [value]="mailType.Id">{{mailType?.Name}}</option>
-                </select>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="" class="form-label"></label>
+                    <div class="form-group mt-1">
+                        <div class="upload">
+                            <p-fileUpload chooseLabel="Attach Files"
+                                          mode="advanced"
+                                          auto="true"
+                                          accept="image/*,application/pdf,.doc,.docx,application/msword"
+                                          maxFileSize="5000000"
+                                          [multiple]="true"
+                                          (onSelect)="onFileSelect($event)"
+                                          (onUpload)="onUpload($event)">
+                                <ng-template pTemplate="toolbar">
+                                    <p class="mt-3">Size Maximum 5MB(doc, docx, pdf, jpg, jpeg, png, gif format)</p>
+                                    <ul class="list-group mt-3" *ngIf="uploadedFiles.length" style="position:fixed;height:100px;">
+                                        <li class="list-group-item list-group-item-success" *ngFor="let file of uploadedFiles">
+                                            <span>{{ file.name }}</span> - <span> {{ file.size }}</span> bytes
+                                        </li>
+                                    </ul>
+                                </ng-template>
+                                <ng-template let-file pTemplate="file">
+                                    <div>{{ file.name }}</div>
+                                </ng-template>                                
+                            </p-fileUpload>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="mailAddressTo" class="form-label">TO</label>
-                <p-chips formControlName="mailAddressTo" tabindex="3" [style]="{ width: '100%', height: '42px' }" required (onAdd)="onToTokenAdd($event)"></p-chips>
-            </div>
-        </div>        
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="mailAddressCc" class="form-label">CC</label>
-                <p-chips formControlName="mailAddressCc" tabindex="4" [style]="{ width: '100%', height: '42px' }" (onAdd)="onCcTokenAdd($event)"></p-chips>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="mailAddressBcc" class="form-label">BCC</label>
-                <p-chips formControlName="mailAddressBcc" tabindex="5" [style]="{ width: '100%', height: '42px' }" (onAdd)="onBccTokenAdd($event)"></p-chips>
-            </div>
-        </div>
         <div class="col-md-12">
             <div class="form-group">
                 <label for="subject" class="form-label">Subject</label>
