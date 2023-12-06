@@ -2,13 +2,11 @@
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../common/shared.module';
 import { LoadingImageModule } from '../../common/loading-image.module';
-import { ToastModule } from 'primeng/toast';
-import { ConfirmDialogModule, AutoCompleteModule, ConfirmationService, MessageService, EditorModule } from 'primeng/primeng';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ChipsModule } from 'primeng/chips';
+import { ConfirmationService, MessageService } from 'primeng/primeng';
 
 import { SmsHistoryService } from './sms-history.service';
 import { SmsHistoryComponent } from './sms-history.component';
+import { SmsHistoryRoutingModule } from './sms-history-routing.module';
 
 
 @NgModule({
@@ -18,11 +16,7 @@ import { SmsHistoryComponent } from './sms-history.component';
         CommonModule,
         SharedModule,
         LoadingImageModule,
-        ToastModule,
-        ConfirmDialogModule,
-        FormsModule,
-        ReactiveFormsModule,
-        ChipsModule
+        SmsHistoryRoutingModule
     ],
     providers: [ConfirmationService, MessageService, SmsHistoryService]
 })
