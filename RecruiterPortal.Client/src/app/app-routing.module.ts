@@ -87,6 +87,10 @@ const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
+        path: 'sms-history', loadChildren: () => import('./touches/sms-history/sms-history.module').then(m => m.SmsHistoryModule)
+    },
+    {
+        canActivate: [AuthGuard],
         path: 'job-orders', loadChildren: './job-orders/job-orders.module#JobOrdersModule'
     },
     {
@@ -139,7 +143,7 @@ const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
-        path: 'user-mail-configuration', loadChildren: () => import('./timecards/mail-configuration/mail-configuration.module').then(m=>m.MailConfigurationModule)
+        path: 'user-mail-configuration', loadChildren: () => import('./timecards/mail-configuration/mail-configuration.module').then(m => m.MailConfigurationModule)
     },
     {
         canActivate: [AuthGuard],
