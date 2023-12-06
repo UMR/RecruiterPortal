@@ -87,6 +87,10 @@ const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
+        path: 'email-history', loadChildren: () => import('./touches/email-history/email-history.module').then(m => m.EmailHistoryModule)
+    },
+    {
+        canActivate: [AuthGuard],
         path: 'sms-history', loadChildren: () => import('./touches/sms-history/sms-history.module').then(m => m.SmsHistoryModule)
     },
     {

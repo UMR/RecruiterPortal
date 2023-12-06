@@ -1,0 +1,4 @@
+
+:host >>> .ui-table .ui-table-tbody > tr.ui-state-highlight{
+    background-color:#007ad9 !important;
+}
