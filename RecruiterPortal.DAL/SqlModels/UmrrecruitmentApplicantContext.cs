@@ -73,7 +73,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
 
     public virtual DbSet<Role> Roles { get; set; }
 
-    public virtual DbSet<Smslog> Smslogs { get; set; }
+    public virtual DbSet<Smshistory> Smshistories { get; set; }
 
     public virtual DbSet<State> States { get; set; }
 
@@ -841,9 +841,11 @@ public partial class UmrrecruitmentApplicantContext : DbContext
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<Smslog>(entity =>
+        modelBuilder.Entity<Smshistory>(entity =>
         {
-            entity.ToTable("SMSLog");
+            entity.HasKey(e => e.Id).HasName("PK_SMSLog");
+
+            entity.ToTable("SMSHistory");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -859,11 +861,11 @@ public partial class UmrrecruitmentApplicantContext : DbContext
                 .HasMaxLength(30);
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
 
-            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.SmslogCreatedByNavigations)
+            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.SmshistoryCreatedByNavigations)
                 .HasForeignKey(d => d.CreatedBy)
                 .HasConstraintName("FK_SMS_Recruiter_CreatedBy");
 
-            entity.HasOne(d => d.UpdatedByNavigation).WithMany(p => p.SmslogUpdatedByNavigations)
+            entity.HasOne(d => d.UpdatedByNavigation).WithMany(p => p.SmshistoryUpdatedByNavigations)
                 .HasForeignKey(d => d.UpdatedBy)
                 .HasConstraintName("FK_SMS_Recruiter_UpdatedBy");
         });

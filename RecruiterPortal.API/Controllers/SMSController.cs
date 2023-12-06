@@ -53,7 +53,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
             try
             {
-                SMSLogManager sMSLog = new SMSLogManager(_configuration);
+                SMSHistoryManager sMSLog = new SMSHistoryManager(_configuration);
                 return Ok(sMSLog.SendSMS(smsModel.Smsbody, smsModel.ToNumber, RecruiterId));
             }
             catch (Exception ex)
