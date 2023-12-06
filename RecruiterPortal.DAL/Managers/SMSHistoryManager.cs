@@ -16,7 +16,25 @@ namespace RecruiterPortalDAL.Managers
         public static string RINGCENTRAL_FROM_NUMBER;
         public static string RINGCENTRAL_EXTENSION;
         public static string RINGCENTRAL_PRODUCTION;
+        public static async Task<List<Smshistory>> GetSmsHistory()
+        {
+            try
+            {
+                List<Smshistory> smshistories = new List<Smshistory>();
+                GenericRepository<Smshistory> repository = new GenericRepository<Smshistory>();
 
+                var smsHistory = await repository.GetAllAsync();
+                if (smsHistory != null && smsHistory.Count() > 0)
+                {
+                    smshistories = smsHistory.ToList();
+                }
+                return smshistories;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public SMSHistoryManager(IConfiguration configuration)
         {
             _configuration = configuration;
@@ -127,7 +145,7 @@ namespace RecruiterPortalDAL.Managers
                             {
                                 selectedNumbers = selectedNumbers + "," + receiverNumber;
                             }
-                            sendNumbers.Add(receiverNumber); 
+                            sendNumbers.Add(receiverNumber);
                         }
                     }
 
@@ -164,7 +182,8 @@ namespace RecruiterPortalDAL.Managers
                     throw new Exception("");
                     //ScriptManager.RegisterStartupScript(Page, typeof(Page), "Invalid", "Invalid()", true);
                 }
-                else {
+                else
+                {
                     return await Task.FromResult<int>(0);
                 }
             }

@@ -14,7 +14,7 @@
                          [columns]="cols"
                          [totalRecords]="totalSms"
                          [lazy]="true"
-                         (onLazyLoad)="loadJobLazy($event)"
+                         (onLazyLoad)="loadSmsLazy($event)"
                          [rowsPerPageOptions]="[10,15,20]"
                          [showCurrentPageReport]="true"
                          currentPageReportTemplate="Total Records: {{totalSms}}">
@@ -26,12 +26,12 @@
                             <th>Message Body</th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-job let-rowData let-columns="columns">
-                        <tr [pSelectableRow]="job">
-                            <td>{{job.JobTitle}}</td>
-                            <td>{{job.Position}}</td>
-                            <td>{{job.Institute}}</td>
-                            <td>{{job.Status == 1 ? 'Open' : 'Closed'}}</td>
+                    <ng-template pTemplate="body" let-sms let-rowData let-columns="columns">
+                        <tr [pSelectableRow]="sms">
+                            <td>{{sms.SendTime| date :'M/d/yy, h:mm a'}}</td>
+                            <td>{{sms.FromNumber}}</td>
+                            <td>{{sms.ToNumber}}</td>
+                            <td>{{sms.Smsbody}}</td>
                         </tr>
                     </ng-template>
                 </p-table>

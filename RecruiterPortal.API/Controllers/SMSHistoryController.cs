@@ -10,34 +10,21 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 {
     [Route("api/sms")]
     [ApiController]
-    public class SMSController : CustomControllerBase
+    public class SMSHistoryController : CustomControllerBase
     {
         public IConfiguration _configuration { get; set; }
-        public SMSController(ILogger<CustomControllerBase> logger, IConfiguration configuration) : base(logger)
+        public SMSHistoryController(ILogger<CustomControllerBase> logger, IConfiguration configuration) : base(logger)
         {
             _configuration = configuration;
         }
 
         [Route("get")]
         [HttpGet]
-        public IActionResult GetSMS()
+        public async Task<IActionResult> GetSMSHistory()
         {
             try
             {
-                List<SMSLogModel> agencyModelList = new List<SMSLogModel>();
-                DataTable smsDt = AgencyManager.GetAgencies();
-                int agencyCount = 0;
-                if (smsDt != null && smsDt.Rows.Count > 0)
-                {
-                    agencyCount = smsDt.Rows.Count;
-                    foreach (DataRow oRow in smsDt.Rows)
-                    {
-                        SMSLogModel agency = new SMSLogModel();
-                        agencyModelList.Add(agency);
-                    }
-                }
-                return Ok(new { agencies = agencyModelList, agencyCount = agencyCount });
-                //return Ok(agencyModelList);
+                return Ok(await SMSHistoryManager.GetSmsHistory());
             }
             catch (Exception ex)
             {
