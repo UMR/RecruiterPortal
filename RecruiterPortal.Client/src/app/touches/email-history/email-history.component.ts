@@ -28,7 +28,7 @@ export class EmailHistoryComponent implements OnInit {
                 console.log(err);
             })
     }
-    loadSmsLazy() {
+    loadEmailLazy() {
         this.getEmailHistory();
     }
 }
