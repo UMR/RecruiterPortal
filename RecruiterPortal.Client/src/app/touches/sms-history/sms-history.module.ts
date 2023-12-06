@@ -7,6 +7,7 @@ import { ConfirmationService, MessageService } from 'primeng/primeng';
 import { SmsHistoryService } from './sms-history.service';
 import { SmsHistoryComponent } from './sms-history.component';
 import { SmsHistoryRoutingModule } from './sms-history-routing.module';
+import { TableModule } from 'primeng/components/table/table';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { SmsHistoryRoutingModule } from './sms-history-routing.module';
         CommonModule,
         SharedModule,
         LoadingImageModule,
-        SmsHistoryRoutingModule
+        SmsHistoryRoutingModule,
+        TableModule
     ],
     providers: [ConfirmationService, MessageService, SmsHistoryService]
 })

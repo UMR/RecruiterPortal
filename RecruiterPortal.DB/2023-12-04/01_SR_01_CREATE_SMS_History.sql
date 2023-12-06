@@ -1,14 +1,14 @@
 ﻿USE [UMRRecruitmentApplicant]
 GO
 
-/****** Object:  Table [dbo].[SMSLog]    Script Date: 12/4/2023 12:42:05 PM ******/
+/****** Object:  Table [dbo].[SMSHistory]    Script Date: 12/6/2023 2:03:48 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [dbo].[SMSLog](
+CREATE TABLE [dbo].[SMSHistory](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[SendTime] [datetime] NOT NULL,
 	[FromNumber] [nvarchar](30) NOT NULL,
@@ -25,16 +25,18 @@ CREATE TABLE [dbo].[SMSLog](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[SMSLog]  WITH CHECK ADD  CONSTRAINT [FK_SMS_Recruiter_CreatedBy] FOREIGN KEY([CreatedBy])
+ALTER TABLE [dbo].[SMSHistory]  WITH CHECK ADD  CONSTRAINT [FK_SMS_Recruiter_CreatedBy] FOREIGN KEY([CreatedBy])
 REFERENCES [dbo].[Recruiter] ([RecruiterId])
 GO
 
-ALTER TABLE [dbo].[SMSLog] CHECK CONSTRAINT [FK_SMS_Recruiter_CreatedBy]
+ALTER TABLE [dbo].[SMSHistory] CHECK CONSTRAINT [FK_SMS_Recruiter_CreatedBy]
 GO
 
-ALTER TABLE [dbo].[SMSLog]  WITH CHECK ADD  CONSTRAINT [FK_SMS_Recruiter_UpdatedBy] FOREIGN KEY([UpdatedBy])
+ALTER TABLE [dbo].[SMSHistory]  WITH CHECK ADD  CONSTRAINT [FK_SMS_Recruiter_UpdatedBy] FOREIGN KEY([UpdatedBy])
 REFERENCES [dbo].[Recruiter] ([RecruiterId])
 GO
 
-ALTER TABLE [dbo].[SMSLog] CHECK CONSTRAINT [FK_SMS_Recruiter_UpdatedBy]
+ALTER TABLE [dbo].[SMSHistory] CHECK CONSTRAINT [FK_SMS_Recruiter_UpdatedBy]
 GO
+
+
