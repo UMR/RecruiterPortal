@@ -178,6 +178,10 @@ export class SentMailComponent implements OnInit, OnChanges {
         console.log(this.uploadedFiles);
     }
 
+    onDeleteFile(filename) {
+        console.log(filename);
+    }
+
     clear() {
         this.formGroup.reset();
         this.formGroup.controls.mailTemplateType.setValue("");
