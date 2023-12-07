@@ -21,7 +21,7 @@ namespace RecruiterPortal.API.Controllers
 
         [Route("send-email")]
         [HttpPost]
-        public IActionResult SendMail([FromBody] SendMailRequest request)
+        public IActionResult SendMail([FromForm] SendMailRequest request)
         {
             try
             {                

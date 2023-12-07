@@ -6,11 +6,6 @@ import { MailTemplateService } from '../../../timecards/mail-template-type/mail-
 import { MailSettingsService } from '../../../timecards/mail-settings/mail-settings.service';
 import { MailService } from '../../services/mail.service';
 
-interface UploadEvent {
-    originalEvent: Event;
-    files: File[];
-}
-
 
 @Component({
     selector: 'sent-mail',
@@ -29,7 +24,7 @@ export class SentMailComponent implements OnInit, OnChanges {
     public emailRegex = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
     private selectedEmail: string;
     private toEmail: string[] = [];
-    public uploadedFiles: any[] = [];
+    public uploadedFiles: File[] = [];
 
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService,
         private mailService: MailService, private mailTemplateTypeService: MailTemplateService, private mailSettingsService: MailSettingsService) {
@@ -162,7 +157,7 @@ export class SentMailComponent implements OnInit, OnChanges {
         }
     }
 
-    onFileSelect(event: UploadEvent) {
+    onFileSelect(event) {
         if (event.files.length > 0) {
             if (!event.files[0].type.includes("image/") && !event.files[0].type.includes("application/pdf") && !event.files[0].type.includes("application/msword") && !event.files[0].type.includes("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
                 this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid file type', detail: 'Upload file' });
@@ -170,7 +165,7 @@ export class SentMailComponent implements OnInit, OnChanges {
                 this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid file size', detail: 'File size limit: 5MB' });
             } else {
                 for (let file of event.files) {
-                    this.uploadedFiles.push(file);
+                    this.uploadedFiles.push(file as File);                    
                 }
             }
         }
@@ -211,7 +206,8 @@ export class SentMailComponent implements OnInit, OnChanges {
                 ccAddress: ccAddress,
                 bccAddress: bccAddress,
                 subject: subject,
-                body: body
+                body: body,
+                files: this.uploadedFiles
             }
 
             this.mailService.sendMail(model).subscribe(res => {

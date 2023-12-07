@@ -1,4 +1,6 @@
-﻿namespace RecruiterPortal.DAL.Models
+﻿using Microsoft.AspNetCore.Http;
+
+namespace RecruiterPortal.DAL.Models
 {
     public class SendMailRequest
     {
@@ -13,5 +15,7 @@
         public string Subject { get; set; }
 
         public string Body { get; set; }
+
+        public IFormFile[] Files { get; set; }
     }
 }

@@ -161,6 +161,17 @@ namespace RecruiterPortalDAL.Managers
             message.Body = request.Body;
             message.IsBodyHtml = true;
 
+            if(request.Files != null && request.Files.Count() > 0) 
+            {
+                foreach (var file in request.Files)
+                {
+                    using var memoryStream = new MemoryStream();
+                    file.CopyTo(memoryStream);
+                    var fileBytes = memoryStream.ToArray();
+                    message.Attachments.Add(new Attachment(new MemoryStream(fileBytes), file.FileName));
+                }                
+            }           
+
             return message;
         }
 
