@@ -16,7 +16,8 @@
                         <div class="timeline-list">
                             <img src="assets/img/refer.svg" class="img-fluid" width="30" alt="">
                             <div class="d-flex justify-content-between">
-                                <h4 style="margin-bottom:5px;"> {{ref.RefLastName}} {{ref.RefFirstName}} </h4>
+                                <h4 style="margin-bottom:5px;"><span *ngIf="RefMiddleName==''"> {{ref.RefLastName}} {{ref.RefFirstName}} </span>
+                                                               <span *ngIf="RefMiddleName!=''"> {{ref.RefLastName}} {{ref.RefMiddleName}} {{ref.RefFirstName}} </span></h4>
                                 <ul class="list-inline mr-5">
                                     <li class="list-inline-item mr-4"><a [routerLink]="['./add-edit',ref.UserReferenceID]" class="text-primary"><i class="fa fa-pencil-alt"></i> Edit</a></li>
                                     <li class="list-inline-item"><a (click)="onDelete(ref.UserReferenceID)" class="text-danger"><i class="fa fa-trash-alt"></i> Delete</a></li>
