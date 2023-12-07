@@ -181,12 +181,14 @@ export class SentMailComponent implements OnInit, OnChanges {
         this.formGroup.reset();
         this.formGroup.controls.mailTemplateType.setValue("");
         this.getMailConfigurationByRecruiterId();
+        this.uploadedFiles = [];
     }
 
     hide() {
         this.formGroup.reset();
         this.hideEvent.emit(false);
         this.getMailConfigurationByRecruiterId();
+        this.uploadedFiles = [];
     }
 
     sendMail() {
@@ -198,21 +200,28 @@ export class SentMailComponent implements OnInit, OnChanges {
             const ccAddress = this.formGroup.controls.mailAddressCc.value ? this.formGroup.controls.mailAddressCc.value : [];
             const bccAddress = this.formGroup.controls.mailAddressBcc.value ? this.formGroup.controls.mailAddressBcc.value : [];
             const subject = this.formGroup.controls.subject.value;
-            const body = this.formGroup.controls.body.value;
+            const body = this.formGroup.controls.body.value;           
 
-            const model: any = {
-                fromAddress: fromAddress,
-                toAddress: toAddress,
-                ccAddress: ccAddress,
-                bccAddress: bccAddress,
-                subject: subject,
-                body: body,
-                files: this.uploadedFiles
+            const formData = new FormData();            
+            formData.append('fromAddress', fromAddress);
+            formData.append('toAddress', toAddress);
+            formData.append('ccAddress', ccAddress);
+            formData.append('bccAddress', bccAddress);
+            formData.append('subject', subject);
+            formData.append('body', body);
+
+            if (this.uploadedFiles.length > 0) {
+                for (let i = 0; i < this.uploadedFiles.length; i++) {
+                    formData.append('files', this.uploadedFiles[i], this.uploadedFiles[i].name);
+                }
             }
 
-            this.mailService.sendMail(model).subscribe(res => {
+            console.log(formData);
+
+            this.mailService.sendMail(formData).subscribe(res => {
                 if (res.status === 200) {
                     this.formGroup.reset();
+                    this.uploadedFiles = [];
                     this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Mail send successfully', detail: '' });
                     this.hideEvent.emit(false);
                 }

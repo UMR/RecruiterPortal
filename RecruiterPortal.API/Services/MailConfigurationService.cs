@@ -6,6 +6,7 @@ using Google.Apis.Gmail.v1.Data;
 using Google.Apis.Services;
 using MimeKit;
 using Newtonsoft.Json;
+using Org.BouncyCastle.Utilities.Net;
 using RecruiterPortal.API.Services;
 using RecruiterPortal.DAL.Models;
 using System.Net;
@@ -145,17 +146,36 @@ namespace RecruiterPortalDAL.Managers
         {
             MailMessage message = new MailMessage();
             message.From = new MailAddress(request.FromAddress);
-            foreach (string toAddress in request.ToAddress)
+
+            if (request.ToAddress != null && request.ToAddress.Count() > 0)
             {
-                message.To.Add(new MailAddress(toAddress));
+                foreach (string toAddress in request.ToAddress)
+                {
+                    if (!string.IsNullOrEmpty(toAddress))
+                    {
+                        message.To.Add(new MailAddress(toAddress));
+                    }
+                }
             }
-            foreach (string ccAddress in request.CcAddress)
+            if (request.CcAddress != null && request.CcAddress.Count() > 0)
             {
-                message.To.Add(new MailAddress(ccAddress));
+                foreach (string ccAddress in request.CcAddress)
+                {
+                    if (!string.IsNullOrEmpty(ccAddress))
+                    {
+                        message.To.Add(new MailAddress(ccAddress));
+                    }
+                }
             }
-            foreach (string bccAddress in request.BccAddress)
+            if (request.BccAddress != null && request.BccAddress.Count() > 0)
             {
-                message.Bcc.Add(new MailAddress(bccAddress));
+                foreach (string bccAddress in request.BccAddress)
+                {
+                    if (!string.IsNullOrEmpty(bccAddress))
+                    {
+                        message.Bcc.Add(new MailAddress(bccAddress));
+                    }
+                }
             }
             message.Subject = request.Subject;
             message.Body = request.Body;

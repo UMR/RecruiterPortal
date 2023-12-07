@@ -11,24 +11,7 @@ export class MailService {
 
     constructor(private client: HttpClient) { }
 
-    sendMail(model: any): Observable<HttpResponse<any>> {
-
-        const formData = new FormData();
-        formData.append('files', model.files);
-        formData.append('fromAddress', model.fromAddress);
-        formData.append('toAddress', model.toAddress);
-        formData.append('ccAddress', model.ccAddress);
-        formData.append('bccAddress', model.bccAddress);
-        formData.append('subject', model.subject);
-        formData.append('body', model.body);
-
-        if (model.files.length > 0) {
-            for (let i = 0; i < model.files.length; i++) {
-                formData.append('files', model.files[i], model.files[i].name);
-            }
-        }
-
-        console.log(formData);
+    sendMail(formData: any): Observable<HttpResponse<any>> {        
 
         return this.client.post(`${resourceServerUrl}/api/Mail/send-email`, formData, {
              observe: 'response', responseType: 'text'
