@@ -174,7 +174,8 @@ export class SentMailComponent implements OnInit, OnChanges {
     }
 
     onDeleteFile(filename) {
-        console.log(filename);
+        const filteredFiles = this.uploadedFiles.filter(f => f.name != filename);
+        this.uploadedFiles = filteredFiles;        
     }
 
     clear() {
@@ -214,9 +215,7 @@ export class SentMailComponent implements OnInit, OnChanges {
                 for (let i = 0; i < this.uploadedFiles.length; i++) {
                     formData.append('files', this.uploadedFiles[i], this.uploadedFiles[i].name);
                 }
-            }
-
-            console.log(formData);
+            }            
 
             this.mailService.sendMail(formData).subscribe(res => {
                 if (res.status === 200) {
