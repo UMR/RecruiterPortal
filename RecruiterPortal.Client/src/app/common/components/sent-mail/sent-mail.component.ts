@@ -159,15 +159,21 @@ export class SentMailComponent implements OnInit, OnChanges {
 
     onFileSelect(event) {
         if (event.files.length > 0) {
-            if (!event.files[0].type.includes("image/") && !event.files[0].type.includes("application/pdf") && !event.files[0].type.includes("application/msword") && !event.files[0].type.includes("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
-                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid file type', detail: 'Upload file' });
-            } else if (event.files[0].size > 5000000) {
-                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid file size', detail: 'File size limit: 5MB' });
-            } else {
-                for (let file of event.files) {
-                    this.uploadedFiles.push(file as File);                    
+
+            for (let file of event.files) {
+                if (!file.type.includes("image/") &&
+                    !file.type.includes("application/pdf") &&
+                    !file.type.includes("application/msword") &&
+                    !file.type.includes("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
+                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid file type', detail: `Invalid file type for ${file.name}` });
+                } else if (event.files[0].size > 5000000) {
+                    this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid file size', detail: 'File size exceeds limit 5MB for ${file.name}`' });
+                }
+                else {
+                    this.uploadedFiles.push(file as File);
                 }
             }
+
         }
 
         console.log(this.uploadedFiles);
@@ -175,7 +181,7 @@ export class SentMailComponent implements OnInit, OnChanges {
 
     onDeleteFile(filename) {
         const filteredFiles = this.uploadedFiles.filter(f => f.name != filename);
-        this.uploadedFiles = filteredFiles;        
+        this.uploadedFiles = filteredFiles;
     }
 
     clear() {
@@ -201,9 +207,9 @@ export class SentMailComponent implements OnInit, OnChanges {
             const ccAddress = this.formGroup.controls.mailAddressCc.value ? this.formGroup.controls.mailAddressCc.value : [];
             const bccAddress = this.formGroup.controls.mailAddressBcc.value ? this.formGroup.controls.mailAddressBcc.value : [];
             const subject = this.formGroup.controls.subject.value;
-            const body = this.formGroup.controls.body.value;           
+            const body = this.formGroup.controls.body.value;
 
-            const formData = new FormData();            
+            const formData = new FormData();
             formData.append('fromAddress', fromAddress);
             formData.append('toAddress', toAddress);
             formData.append('ccAddress', ccAddress);
@@ -215,7 +221,7 @@ export class SentMailComponent implements OnInit, OnChanges {
                 for (let i = 0; i < this.uploadedFiles.length; i++) {
                     formData.append('files', this.uploadedFiles[i], this.uploadedFiles[i].name);
                 }
-            }            
+            }
 
             this.mailService.sendMail(formData).subscribe(res => {
                 if (res.status === 200) {
