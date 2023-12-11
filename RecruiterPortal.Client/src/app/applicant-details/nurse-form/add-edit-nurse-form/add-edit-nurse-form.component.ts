@@ -87,7 +87,6 @@ export class AddEditNurseFormComponent implements OnInit {
         this.isLoading = true;
         this.nurseFormService.getNurseFormByApplicantId(this.storageService.getApplicantId)
             .subscribe(data => {
-                console.log(data);
                 if (data.status === 200 && data.body) {
                     this.nurseForm = data.body;
                     this.nurseFormId = this.nurseForm.nurseFormID ? +this.nurseForm.nurseFormID : null;
@@ -446,8 +445,6 @@ export class AddEditNurseFormComponent implements OnInit {
             nurseFormModel.title = this.addEditNurseFormGroup.controls.title.value;
             nurseFormModel.newYorkStateProfession = this.addEditNurseFormGroup.controls.newYorkStateProfession.value;
             nurseFormModel.newYorkStateProfessionalLicenseNumber = this.addEditNurseFormGroup.controls.newYorkStateProfessionalLicenseNumber.value;
-
-            console.log(nurseFormModel);
 
             this.isLoading = true;
             this.nurseFormService.save(nurseFormModel)

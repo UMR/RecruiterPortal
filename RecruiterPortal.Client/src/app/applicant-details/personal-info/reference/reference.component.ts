@@ -88,7 +88,6 @@ export class ReferenceComponent implements OnInit {
         this.router.navigate(['personal-info/military/edit']);
     }
     nextPage() {
-        console.log("aaaaaaa")
         this.router.navigate(['personal-info/review']);
     }
 

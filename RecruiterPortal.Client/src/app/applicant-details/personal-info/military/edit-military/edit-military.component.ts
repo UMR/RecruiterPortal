@@ -5,8 +5,6 @@ import { MessageService } from 'primeng/api';
 import { EditMilitaryService } from './edit-military.service';
 import { CompareValidator } from '../../../../common/directives/compare-validator.directive';
 import { StorageService } from '../../../../common/services/storage.service';
-import { tick } from '@angular/core/testing';
-import { applicantId } from '../../../../common/constants/auth-keys';
 
 
 @Component({

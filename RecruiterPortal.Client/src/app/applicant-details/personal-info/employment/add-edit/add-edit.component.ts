@@ -52,7 +52,6 @@ export class AddEditComponent implements OnInit {
     getEmploymentById(employmentId: string) {
         this.addEditService.getEmploymentById(employmentId)
             .subscribe(data => {
-                console.log(data);
                 this.empForm.patchValue({
                     companyName: data.body.CompanyName,
                     supervisor: data.body.Supervisor,

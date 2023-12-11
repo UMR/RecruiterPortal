@@ -87,7 +87,6 @@ export class NurseFormComponent implements OnInit {
     getApplyingForJobTypeText(value): string {
         let text = '';
         if (value) {
-            console.log(value);
             if (value === 'True') {
                 text = 'Registered Professional Nurse';
             }

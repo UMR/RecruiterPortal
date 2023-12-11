@@ -51,7 +51,6 @@ export class AddEditHepabHippaInfoComponent implements OnInit {
             .subscribe(data => {                
                 if (data.status === 200 && data.body) {                    
                     this.userHepabHippa = data.body;
-                    console.log(this.userHepabHippa);
                     this.userHepabHippaID = this.userHepabHippa.HepaBHIPPAID ? +this.userHepabHippa.HepaBHIPPAID : 0;
                     this.fillUpHepaBHIPPAInfo();
                 }

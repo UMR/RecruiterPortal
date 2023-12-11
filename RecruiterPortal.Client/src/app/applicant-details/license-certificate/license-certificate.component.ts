@@ -15,7 +15,6 @@ export class LicenseCertificateComponent implements OnInit {
     constructor(private licenseService: LicenseCertificateService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
     ngOnInit() {
-        console.log('Test');
         this.getAllUserLicense();
     }
 
@@ -29,10 +28,8 @@ export class LicenseCertificateComponent implements OnInit {
                 else {
                     this.userLicenses = [];
                 }
-                console.log(this.userLicenses);
             },
                 err => {
-                    console.log('Test');
                     this.isLoading = false;
                     this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get user license', detail: '' });
                 },

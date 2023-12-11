@@ -25,7 +25,6 @@ export class AgreementFormInfoComponent implements OnInit {
   ngOnInit() {
     this.agreementService.getAgreementInfo(this.service.getApplicantId)
       .subscribe(data => {
-        console.log(data.body);
         if (data.status === 200 && data.body !== null) {
           this.contractorName = data.body.ContractorName;
           this.streetAdress = data.body.StreetAddress;
@@ -37,7 +36,6 @@ export class AgreementFormInfoComponent implements OnInit {
         }
       },
         err => {
-          console.log(err);
           this.isLoading = false;
           this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get agreement info', detail: '' });
         },
@@ -74,13 +72,10 @@ export class AgreementFormInfoComponent implements OnInit {
     let filename: string;
     try {
       const contentDisposition = response.headers.get('content-disposition');
-      console.log(contentDisposition);
-      console.log(response.headers);
 
       filename = contentDisposition.split(';')[1].split('filename')[1].split('=')[1].trim();
     }
     catch (e) {
-      console.log(e);
       filename = 'myfile.pdf'
     }
     return filename

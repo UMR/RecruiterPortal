@@ -216,7 +216,6 @@ export class EditApplicantInfoComponent implements OnInit {
     }    
 
     onZipCodeSelect($event) {
-        console.log($event)
         this.editApplicantInfoFormGroup.patchValue({
             /*zipCode: $event.ZipCode,*/
             city: $event.City,

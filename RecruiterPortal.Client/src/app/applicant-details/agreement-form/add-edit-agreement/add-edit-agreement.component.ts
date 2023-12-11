@@ -129,7 +129,6 @@ export class AddEditAgreementComponent implements OnInit {
     }
     onZipCodeSearch($event) {
         this.addEditAgreementService.getZipCodeCityStateByZipCode($event.query).subscribe(data => {
-            console.log(data);
             this.zipCodeResults = data.body;
         },
             err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get zip code', detail: '' }); },

@@ -21,7 +21,6 @@ export class ReviewEmploymentComponent implements OnInit {
         this.employmentService.getEmploymentsByUserId()
             .subscribe(data => {
                 this.employments = data;
-                console.log(this.employments);
             },
                 err => {
                     console.log(err);
