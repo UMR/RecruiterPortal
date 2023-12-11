@@ -6,11 +6,11 @@
         <a class="nav-link" id="v-pills-physical-tab" data-toggle="pill" [routerLink]="['./physical-info']" role="tab" aria-controls="v-pills-physical" aria-selected="false" routerLinkActive="active">Physical Info.</a>
         <a class="nav-link" id="v-pills-education-tab" data-toggle="pill" [routerLink]="['./education']" role="tab" aria-controls="v-pills-education" aria-selected="false" routerLinkActive="active">Education</a>
         <a class="nav-link" id="v-pills-previous-employment-tab" data-toggle="pill" [routerLink]="['./employment']" role="tab" aria-controls="v-pills-previous-employment" aria-selected="false" routerLinkActive="active">Employment</a>-->
-        <!--<a class="nav-link" id="v-pills-disclaimer-tab" data-toggle="pill" [routerLink]="['./license']" role="tab" aria-controls="v-pills-license" aria-selected="false" routerLinkActive="active">License/Certification</a>-->
-        <!--<a class="nav-link" id="v-pills-military-tab" data-toggle="pill" [routerLink]="['./military']" role="tab" aria-controls="v-pills-military" aria-selected="false" routerLinkActive="active">Military</a>
-        <a class="nav-link" id="v-pills-references-tab" data-toggle="pill" [routerLink]="['./reference']" role="tab" aria-controls="v-pills-references" aria-selected="false" routerLinkActive="active">Reference</a>-->
-        <!--<a class="nav-link" id="v-pills-disclaimer-tab" data-toggle="pill" [routerLink]="['./disclaimer']" role="tab" aria-controls="v-pills-disclaimer" aria-selected="false" routerLinkActive="active">Disclaimer</a>-->
-      <!--</div>
+<!--<a class="nav-link" id="v-pills-disclaimer-tab" data-toggle="pill" [routerLink]="['./license']" role="tab" aria-controls="v-pills-license" aria-selected="false" routerLinkActive="active">License/Certification</a>-->
+<!--<a class="nav-link" id="v-pills-military-tab" data-toggle="pill" [routerLink]="['./military']" role="tab" aria-controls="v-pills-military" aria-selected="false" routerLinkActive="active">Military</a>
+<a class="nav-link" id="v-pills-references-tab" data-toggle="pill" [routerLink]="['./reference']" role="tab" aria-controls="v-pills-references" aria-selected="false" routerLinkActive="active">Reference</a>-->
+<!--<a class="nav-link" id="v-pills-disclaimer-tab" data-toggle="pill" [routerLink]="['./disclaimer']" role="tab" aria-controls="v-pills-disclaimer" aria-selected="false" routerLinkActive="active">Disclaimer</a>-->
+<!--</div>
     </div>
     <div class="col-md-9">
       <div class="tab-content" id="v-pills-tabContent">
@@ -21,16 +21,19 @@
 </div>-->
 
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12 mb-3">
-      <div class="card">
-        <p-steps [model]="steps" [(activeIndex)]="activeIndex" [readonly]="false" class="step-height" (activeIndexChange)="onActiveIndexChange($event)"></p-steps>
-      </div>
-      <div class="card mt-3">
-        <router-outlet (activate)="onActivate($event)"></router-outlet>
-      </div>
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <div class="card mb-2">
+                <h3>{{applicantName}} Information</h3>
+            </div>
+            <div class="card">
+                <p-steps [model]="steps" [(activeIndex)]="activeIndex" [readonly]="false" class="step-height" (activeIndexChange)="onActiveIndexChange($event)"></p-steps>
+            </div>
+            <div class="card mt-3">
+                <router-outlet (activate)="onActivate($event)"></router-outlet>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 

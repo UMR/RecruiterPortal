@@ -4,6 +4,7 @@ import { StepsModule } from 'primeng/steps';
 
 import { PersonalInfoComponent } from './personal-info.component';
 import { PersonalInfoRoutingModule } from './personal-info-routing.module';
+import { EditApplicantInfoService } from './applicant-info/edit-applicant-info/edit-applicant-info.service';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { PersonalInfoRoutingModule } from './personal-info-routing.module';
     CommonModule,
     StepsModule,
     PersonalInfoRoutingModule
-  ]
+    ],
+    providers: [EditApplicantInfoService]
 })
 export class PersonalInfoModule { }
