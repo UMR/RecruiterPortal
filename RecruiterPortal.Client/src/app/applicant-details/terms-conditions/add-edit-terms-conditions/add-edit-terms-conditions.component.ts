@@ -120,6 +120,12 @@ export class AddEditTermsConditionsComponent implements OnInit {
         });
     }
 
+    onZipCodeClear() {
+        this.addEditTermsConditionsFormGroup.patchValue({
+            city: '',
+            stateName: ''
+        });
+    }
     getZipCode(): string {
         if (this.addEditTermsConditionsFormGroup.controls.zipCode.value) {
             return this.addEditTermsConditionsFormGroup.controls.zipCode.value.zipCode;
