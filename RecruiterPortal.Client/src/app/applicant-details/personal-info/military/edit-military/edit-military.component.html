@@ -12,7 +12,8 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="branch" class="form-label">Branch</label>
-                        <input id="branch" name="branch" type="text" class="form-control" autocomplete="off" autofocus formControlName="branch" tabindex="1" pTooltip="Maximum 500 characters" tooltipPosition="top"
+                        <input id="branch" name="branch" type="text" class="form-control" autocomplete="off" autofocus formControlName="branch"  [attr.disabled]="noMilitaryExpChk ? '' : null"
+                               tabindex="1" pTooltip="Maximum 500 characters" tooltipPosition="top"
                                tooltipEvent="focus" required trimmed>
                     </div>
                 </div>
@@ -26,6 +27,7 @@
                                     [monthNavigator]="true"
                                     [yearNavigator]="true"
                                     yearRange="1900:2030"
+                                     [disabled]="noMilitaryExpChk"
                                     [showIcon]="true" required compare="toDate" reverse="true" compare-operator="<">
                         </p-calendar>
                     </div>
@@ -40,6 +42,7 @@
                                     [monthNavigator]="true"
                                     [yearNavigator]="true"
                                     yearRange="1900:2030"
+                                     [disabled]="noMilitaryExpChk"
                                     [showIcon]="true" required compare="fromDate" reverse="true" compare-operator=">">
                         </p-calendar>
                     </div>
@@ -49,14 +52,16 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="rankDischarge" class="form-label">Rank at Discharge</label>
-                        <input id="rankDischarge" name="rankDischarge" type="text" class="form-control" tabindex="4" autocomplete="off" formControlName="rankDischarge" pTooltip="Maximum 150 characters" tooltipPosition="top"
+                        <input id="rankDischarge" name="rankDischarge" type="text" class="form-control" tabindex="4" autocomplete="off" [attr.disabled]="noMilitaryExpChk ? '' : null"
+                               formControlName="rankDischarge" pTooltip="Maximum 150 characters" tooltipPosition="top"
                                tooltipEvent="focus" required trimmed>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="typeDischarge" class="form-label">Type of Discharge</label>
-                        <select id="typeDischarge" name="typeDischarge" class="form-control" formControlName="typeDischarge" placeholder="Type of Discharge" (change)="onDischargeChange()"
+                        <select id="typeDischarge" name="typeDischarge" class="form-control" [attr.disabled]="noMilitaryExpChk ? '' : null"
+                                formControlName="typeDischarge" placeholder="Type of Discharge" (change)="onDischargeChange()"
                                 tabindex="5" required>
                             <!--<option *ngFor="let user of users" value="{{user.userId}}">{{user.name}}</option>-->
                             <option value="">----Select----</option>
@@ -71,7 +76,8 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="dishonour" class="form-label">If other than honorable, explain</label>
-                        <input #trefDishonour id="dishonour" name="dishonour" type="text" class="form-control" tabindex="6" autocomplete="off" formControlName="dishonour" pTooltip="Maximum 500 characters" tooltipPosition="top"
+                        <input #trefDishonour id="dishonour" name="dishonour" type="text" class="form-control" tabindex="6" [attr.disabled]="noMilitaryExpChk ? '' : null"
+                               autocomplete="off" formControlName="dishonour" pTooltip="Maximum 500 characters" tooltipPosition="top"
                                tooltipEvent="focus" required trimmed>
                     </div>
                 </div>
