@@ -97,14 +97,17 @@ export class EditMilitaryComponent implements OnInit {
 
             if (this.militaryFormGroup.get('typeDischarge').value == 0) {
                 this.trefDishonour.nativeElement.required = true;
+                this.militaryFormGroup.get('dishonour').setValue(this.userMilitary.DisonourComment);
                 this.militaryFormGroup.controls['dishonour'].enable();
             }
             else {
                 this.trefDishonour.nativeElement.required = false;
                 this.militaryFormGroup.controls['dishonour'].disable();
             }
-            this.militaryFormGroup.get('dishonour').setValue(this.userMilitary.DisonourComment);
-            if (this.userMilitary.userMilitaryID && this.militaryFormGroup.get('branch').value == "") {
+            if (this.userMilitary.UserMilitaryID && this.militaryFormGroup.get('branch').value == "") {
+                this.militaryFormGroup.get('dishonour').setValidators([Validators.required, Validators.maxLength(500)]);
+                this.militaryFormGroup.get('dishonour').updateValueAndValidity();
+                this.trefDishonour.nativeElement.required = true;
                 this.noMilitaryExpChk = true;
             }
         }
@@ -116,6 +119,7 @@ export class EditMilitaryComponent implements OnInit {
         this.militaryFormGroup.get('toDate').setValue('');
         this.militaryFormGroup.get('rankDischarge').setValue('');
         this.militaryFormGroup.get('typeDischarge').setValue('');
+        this.militaryFormGroup.get('dishonour').setValidators([Validators.required, Validators.maxLength(500)]);
         this.militaryFormGroup.get('dishonour').setValue('');
         if (this.noMilitaryExpChk) {
             this.onSave()
@@ -135,11 +139,10 @@ export class EditMilitaryComponent implements OnInit {
             fromDate: this.militaryFormGroup.get('fromDate').value ? new Date(this.militaryFormGroup.get('fromDate').value).toLocaleString() : '',
             toDate: this.militaryFormGroup.get('toDate').value ? new Date(this.militaryFormGroup.get('toDate').value).toLocaleString() : '',
             rankAtDischarge: this.militaryFormGroup.get('rankDischarge').value,
-            dischargeType: +this.militaryFormGroup.get('typeDischarge').value,
+            dischargeType: this.militaryFormGroup.get('typeDischarge').value == "" ? null : +this.militaryFormGroup.get('typeDischarge').value,
             disonourComment: this.militaryFormGroup.get('dishonour').value,
             userId: this.service.getApplicantId
         };
-        console.log(model);
         this.isLoading = true;
         this.editMilitaryService.save(model).subscribe(() => {
             this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Success', detail: 'Military information has been saved' });
