@@ -227,6 +227,13 @@ export class AddEditW9Component implements OnInit {
             state: $event.StateName
         });
     }
+
+    onZipCodeClear() {
+        this.addEditW9FormGroup.patchValue({
+            city: '',
+            state: ''
+        });
+    }
     onCompanyLiabilityChange() {
         var liabilty = this.addEditW9FormGroup.get('companyLiability').value;
         if (liabilty) {
