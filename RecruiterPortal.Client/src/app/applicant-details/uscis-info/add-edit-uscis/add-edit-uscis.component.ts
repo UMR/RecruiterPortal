@@ -284,4 +284,10 @@ export class AddEditUscisComponent implements OnInit {
             stateName: $event.StateName
         });
     }
+    onZipCodeClear() {
+        this.addEditUSCISGroup.patchValue({
+            city: '',
+            stateName: ''
+        });
+    }
 }
