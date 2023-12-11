@@ -190,8 +190,6 @@ export class AddEditCBCComponent implements OnInit {
         cbcModel.HomePhone = this.addEditCBCFormGroup.get('homePhone').value;
         cbcModel.Title = this.addEditCBCFormGroup.get('title').value;
 
-        console.log(cbcModel);
-
         this.isLoading = true;
         this.addEditCBCService.saveCBCInfo(cbcModel)
             .subscribe(result => {
@@ -292,12 +290,26 @@ export class AddEditCBCComponent implements OnInit {
             agState: $event.StateName
         });
     }
+
+    onAgZipCodeClear() {
+        this.addEditCBCFormGroup.patchValue({
+            agCity: '',
+            agState: ''
+        });
+    }
     onFpZipCodeSelect($event) {
         this.addEditCBCFormGroup.patchValue({
             fpCity: $event.City,
             fpState: $event.StateName
         });
     }
+    onFpZipCodeClear() {
+        this.addEditCBCFormGroup.patchValue({
+            fpCity: '',
+            fpState: ''
+        });
+    }
+    
     isEmpty(): boolean {
         let isEmpty: boolean = true;
         if (this.addEditCBCFormGroup.get('agencyIdentification').value) {

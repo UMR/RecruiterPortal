@@ -141,7 +141,12 @@ export class AddEditAgreementComponent implements OnInit {
             state: $event.StateName
         });
     }
-
+    onZipCodeClear() {
+        this.addEditAgreementFormGroup.patchValue({
+            cityTown: '',
+            state: ''
+        });
+    }
     isEmpty(): boolean {
         let isEmpty: boolean = true;
         if (this.addEditAgreementFormGroup.get('contractorName').value) {

@@ -91,7 +91,7 @@
           <div class="col-md-4">
             <div class="form-group">
               <label for="zipcode" class="form-label">Agency Zip Code</label>
-              <p-autoComplete formControlName="agZipCode" [suggestions]="zipCodeResults" class="form-control"
+              <p-autoComplete formControlName="agZipCode" [suggestions]="zipCodeResults" class="form-control" (onClear)="onAgZipCodeClear()"
                               (completeMethod)="onZipCodeSearch($event)" field="ZipCode" [dropdown]="true"
                               forceSelection="true" (onSelect)="onAgencyZipCodeSelect($event)" tabindex="12">
                 <ng-template let-zipCode pTemplate="item">
@@ -199,7 +199,7 @@
           <div class="col-md-3">
             <div class="form-group">
               <label for="zipcode" class="form-label">Zip Code</label>
-              <p-autoComplete formControlName="fpZipCode" [suggestions]="zipCodeResults" class="form-control"
+              <p-autoComplete formControlName="fpZipCode" [suggestions]="zipCodeResults" class="form-control" (onClear)="onFpZipCodeClear()"
                               (completeMethod)="onZipCodeSearch($event)" field="ZipCode" [dropdown]="true"
                               forceSelection="true" (onSelect)="onFpZipCodeSelect($event)" tabindex="12">
                 <ng-template let-zipCode pTemplate="item">
