@@ -242,13 +242,18 @@
             <div class="card-footer">
                 <ul class="list-inline mb-0 d-flex justify-content-between">
                     <li class="list-inline-item">
-                        <a [routerLink]="['/personal-info/applicant-info']" routerLinkActive="active" class="btn btn-primary btn-portal-border" tabindex="28">Back</a>
+                        <!--<a [routerLink]="['/personal-info/applicant-info/edit']" routerLinkActive="active" class="btn btn-primary btn-portal-border" tabindex="28">Back</a>-->
                     </li>
                     <li class="list-inline-item">
                         <button type="button" (click)="onClear()" class="btn btn-primary btn-portal-border" tabindex="29">Clear</button>
                     </li>
                     <li class="list-inline-item">
-                        <button type="submit" class="btn btn-primary btn-portal" [disabled]="!editApplicantInfoFormGroup.valid" tabindex="27">Save</button>
+                        <div class="btn-group" role="group" aria-label="Basic example" style="margin-right:10px;">
+                            <button type="submit" class="btn btn-primary btn-portal" [disabled]="!editApplicantInfoFormGroup.valid" tabindex="27">Save</button>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-primary btn-block btn-portal" (click)="nextPage()">Next<i class="fa fa-angle-right" aria-hidden="true" tabindex="7"></i></button>
+                        </div>
                     </li>
                 </ul>
             </div>

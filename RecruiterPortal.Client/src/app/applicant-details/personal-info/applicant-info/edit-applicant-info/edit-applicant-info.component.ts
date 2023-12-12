@@ -255,5 +255,8 @@ export class EditApplicantInfoComponent implements OnInit {
             this.editApplicantInfoFormGroup.controls['isAuthorized'].disable();
         }
     }
+    nextPage() {
+        this.router.navigate(['personal-info/physical-info/edit']);
+    }
 }
 
