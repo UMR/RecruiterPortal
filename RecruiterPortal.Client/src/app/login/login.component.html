@@ -24,7 +24,10 @@
             <div class="form-group">
                 <label for="password" class="form-label">Password</label>
                 <input id="password" [(ngModel)]="password" name="password" type="password" class="form-control"
-                       pattern="[^\s]+" tabindex="2" required />
+                       pattern="[^\s]+" tabindex="2" required  #passwordField/>
+                <span (click)="passwordField.type=passwordField.type=='password'?'text':'password'"
+                      class="fa fa-fw field-icon toggle-password"
+                      [ngClass]="(passwordField.type=='password')?' fa-eye':' fa-eye-slash'"></span>
             </div>
             <button type="submit" [disabled]="!loginForm.valid || isLoading" class="btn btn-primary btn-block btn-portal" tabindex="4">Login</button>
           </form>
