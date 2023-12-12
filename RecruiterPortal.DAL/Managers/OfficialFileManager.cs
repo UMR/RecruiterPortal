@@ -41,7 +41,7 @@ namespace RecruiterPortal.DAL.Managers
             OfficialFileResponse response = new OfficialFileResponse();
             response.Id = officialFile.Id;
             response.FileName = officialFile.FileName;
-            response.FileData = officialFile.FileData == null ? Convert.ToBase64String(officialFile.FileData) : null;
+            response.FileData = officialFile.FileData != null ? Convert.ToBase64String(officialFile.FileData) : null;
             response.Title = officialFile.Title;
             response.IsRequired = officialFile.IsRequired;
             response.IsAdministrative = officialFile.IsAdministrative;
