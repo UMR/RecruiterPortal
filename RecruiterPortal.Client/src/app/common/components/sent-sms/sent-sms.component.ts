@@ -37,8 +37,8 @@ export class SentSMSComponent implements OnInit {
         if (this.selectedApplicantId) {
             this.smsService.getApplicantPhone(this.selectedApplicantId).subscribe(res => {
                 let phone = [];
-                if (res.body[0].Phone != null || res.body[0].Phone != "") {
-                    phone.push(res.body[0].Phone)
+                if (res.body[0].Phone != null) {
+                    phone.push(res.body[0].Phone);
                     this.formGroup.controls.phoneNumber.setValue(phone);
                 }
             },
