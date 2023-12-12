@@ -53,7 +53,7 @@ export class JobOrdersComponent implements OnInit {
             positionId: [''],
             institution: ['', Validators.compose([Validators.required])],
             instituteId: [''],
-            jobDescription: ['']
+            jobDescription: ['', Validators.compose([Validators.required])]
         });
     }
     get f() { return this.jobFormGroup.controls; }
