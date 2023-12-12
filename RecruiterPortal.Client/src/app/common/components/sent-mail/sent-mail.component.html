@@ -26,7 +26,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="mailAddressTo" class="form-label">TO</label>
-                        <p-chips formControlName="mailAddressTo" tabindex="3" [style]="{ width: '100%', height: '42px' }" required (onAdd)="onToTokenAdd($event)"></p-chips>
+                        <p-chips formControlName="mailAddressTo" tabindex="3" [style]="{ width: '100%', height: '42px' }" required (onAdd)="onToTokenAdd($event)" addOnBlur="true"></p-chips>
                     </div>
                 </div>
             </div>
@@ -34,13 +34,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="mailAddressCc" class="form-label">CC</label>
-                        <p-chips formControlName="mailAddressCc" tabindex="4" [style]="{ width: '100%', height: '42px' }" (onAdd)="onCcTokenAdd($event)"></p-chips>
+                        <p-chips formControlName="mailAddressCc" tabindex="4" [style]="{ width: '100%', height: '42px' }" (onAdd)="onCcTokenAdd($event)" addOnBlur="true"></p-chips>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="mailAddressBcc" class="form-label">BCC</label>
-                        <p-chips formControlName="mailAddressBcc" tabindex="5" [style]="{ width: '100%', height: '42px' }" (onAdd)="onBccTokenAdd($event)"></p-chips>
+                        <p-chips formControlName="mailAddressBcc" tabindex="5" [style]="{ width: '100%', height: '42px' }" (onAdd)="onBccTokenAdd($event)" addOnBlur="true"></p-chips>
                     </div>
                 </div>
             </div>

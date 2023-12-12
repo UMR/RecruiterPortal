@@ -130,6 +130,7 @@ export class SentMailComponent implements OnInit, OnChanges {
     }
 
     onCcTokenAdd(chip) {
+        console.log(chip);
         if (chip.value) {
             const result = this.validateEmail(chip.value);
             if (!result) {
@@ -150,7 +151,7 @@ export class SentMailComponent implements OnInit, OnChanges {
                 const bccEmailAddress: string[] = this.formGroup.controls.mailAddressBcc.value;
                 if (bccEmailAddress && bccEmailAddress.length > 0) {
                     bccEmailAddress.pop();
-                    this.formGroup.controls.mailAddressTo.patchValue(bccEmailAddress);
+                    this.formGroup.controls.mailAddressBcc.patchValue(bccEmailAddress);
                 }
                 this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid bcc email address', detail: '' });
             }

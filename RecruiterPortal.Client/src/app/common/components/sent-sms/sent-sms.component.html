@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="phone" class="form-label">Phone Number</label>
-                <p-chips formControlName="phoneNumber" tabindex="1" [style]="{ width: '100%', height: '42px' }" required (onAdd)="onToTokenAdd($event)"></p-chips>
+                <p-chips formControlName="phoneNumber" tabindex="1" [style]="{ width: '100%', height: '42px' }" required (onAdd)="onToTokenAdd($event)" addOnBlur="true"></p-chips>
             </div>
         </div>
     </div>
