@@ -127,6 +127,7 @@ export class MailConfigurationComponent implements OnInit {
     }
 
     onClear() {
+        this.setDefaultFields(false, true, 0, null, "Add", "Save");
         this.formGroup.reset();
     }
 

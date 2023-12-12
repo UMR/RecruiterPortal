@@ -2,13 +2,13 @@
     <applicant-portal-header (onToggleButtonClicked)="(showHideMenu)()" isVisibleToggleButton=0></applicant-portal-header>
     <section class="main-content">
         <div class="container-fluid">
-            <div class="grid">
+            <!--<div class="grid">
                 <div class="col-12">
                     <button pButton pRipple label="Add New" class="p-button-success" (click)="onNew()" tabindex="0"></button>
                 </div>
-            </div>
+            </div>-->
             <div class="container-fluid mt-2">
-                <div class="login mb-3" style="padding:20px" *ngIf="showAddEdit">
+                <div class="login mb-3" style="padding:20px">
                     <div class="login-form ">
                         <h4>{{addEditTitle}} Mail Configuration</h4>
                         <form [formGroup]="formGroup" novalidate>
@@ -70,7 +70,7 @@
                             <td>
                                 <a (click)="onEdit(mailConfig)"><i class="pi pi-pencil"></i></a>
                                 <a style="color:red" (click)="onDelete(mailConfig)"><i class="pi pi-trash"></i></a>
-                                <a style="color:red" (click)="onEmail()">Send</a>
+                                <!--<a style="color:red" (click)="onEmail()">Send</a>-->
                             </td>
                         </tr>
                     </ng-template>
