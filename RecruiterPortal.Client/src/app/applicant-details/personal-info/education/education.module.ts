@@ -7,9 +7,8 @@ import { EducationComponent } from './education.component';
 import { EditEducationService } from './edit-education/edit-education.service';
 import { LoadingImageModule } from '../../../common/loading-image.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 
 @NgModule({

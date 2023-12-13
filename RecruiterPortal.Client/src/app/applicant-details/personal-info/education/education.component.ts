@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { EditEducationService } from './edit-education/edit-education.service';
 import { distinctUntilChanged, debounceTime } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 
 @Component({
     selector: 'app-education',
     templateUrl: './education.component.html',
-    styleUrls: ['./education.component.css'],
-    providers: [MessageService]
+    styleUrls: ['./education.component.css']
 })
-export class EducationComponent implements OnInit {
+export class EducationComponent implements OnInit, OnDestroy  {
     public editEducationModels: any = [];
     public isLoading: boolean = true;
     public facilities: any[] = [];
+    private unsubscribe$: Subject<any> = new Subject<any>();
 
     constructor(private editEducationService: EditEducationService,
         private messageService: MessageService,
@@ -24,33 +25,48 @@ export class EducationComponent implements OnInit {
     ngOnInit() {
         this.getFacilityType();
         this.getEdutions();
+        this.getUpdateMessage();
+        this.showMessage();
     }
 
     getFacilityType() {
         this.editEducationService.getFacilityType().subscribe(res => {
             if (res.status === 200) {
-                this.facilities = res.body;                
+                this.facilities = res.body;
             }
         })
+    }
+    getUpdateMessage() {
+         this.editEducationService.getMessage$.subscribe(msg => {
+            if (msg) {
+                this.messageService.add({ key: 'toastKey1', severity: 'success', summary: msg, detail: '' });
+            }
+        }, err => { },
+            () => { });
+    }
+    showMessage() {
+        setTimeout(() => {
+            this.getUpdateMessage();
+        }, 500);
     }
 
     getEdutions() {
         this.editEducationService.getEducationInfo().pipe(
             debounceTime(3000),
             distinctUntilChanged()).subscribe(data => {
-                if (data.status === 200) {                    
+                if (data.status === 200) {
                     const educationList = data.body;
                     if (educationList && educationList.length > 0) {
                         educationList.forEach((education) => {
                             if (this.facilities) {
                                 const facility = this.facilities.find(item => +item.Value === +education.InstitutionType);
                                 if (facility) {
-                                    const facilityName = facility.Text;                                    
-                                    const educationObj = {...education, FacilityType: facilityName}
+                                    const facilityName = facility.Text;
+                                    const educationObj = { ...education, FacilityType: facilityName }
                                     this.editEducationModels.push(educationObj);
-                                }                                
+                                }
                             }
-                        });                        
+                        });
                     }
                 }
             },
@@ -101,4 +117,8 @@ export class EducationComponent implements OnInit {
         this.router.navigate(['personal-info/employment']);
     }
 
+    ngOnDestroy() {
+        this.editEducationService.updateMessage('');
+        //this.editEducationService.sendMessage$.unsubscribe();
+    }
 }

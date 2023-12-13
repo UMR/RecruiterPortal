@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { HttpResponse, HttpClient, HttpHeaders } from '@angular/common/http';
 import { EditEducationModel } from './edit-education.model';
 import { resourceServerUrl } from '../../../../common/constants/auth-keys';
@@ -7,6 +7,9 @@ import { StorageService } from '../../../../common/services/storage.service';
 
 @Injectable()
 export class EditEducationService {
+
+    private sendMessage$ = new BehaviorSubject<any>('');
+    public getMessage$ = this.sendMessage$.asObservable();
 
     private educationInfoURI: string = `${resourceServerUrl}/api/education/info`;
     private educationURI: string = `${resourceServerUrl}/api/education`;
@@ -46,5 +49,10 @@ export class EditEducationService {
         return this.http.get(this.facilityTypeURI, {
             observe: 'response'
         });
+    }
+
+
+    updateMessage(msg) {
+        this.sendMessage$.next(msg);
     }
 }

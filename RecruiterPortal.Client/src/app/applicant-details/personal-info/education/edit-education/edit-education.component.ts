@@ -102,6 +102,7 @@ export class EditEducationComponent implements OnInit {
                 .subscribe(result => {
                     if (result.status === 200) {
                         this.router.navigate(['/personal-info/education']);
+                        this.editEducationService.updateMessage("Successfully updated education info.");
                     }
                     else {
                         this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to update education info', detail: '' });
@@ -114,6 +115,7 @@ export class EditEducationComponent implements OnInit {
             this.editEducationService.insertEducation(educationModel)
                 .subscribe(result => {
                     if (result.status === 200) {
+                        this.editEducationService.updateMessage("Successfully added education info.");
                         this.router.navigate(['/personal-info/education']);
                     }
                     else {

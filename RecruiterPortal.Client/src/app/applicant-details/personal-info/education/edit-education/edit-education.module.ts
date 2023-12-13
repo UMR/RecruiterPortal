@@ -22,6 +22,6 @@ import { InputBehaviorModule } from '../../../../common/input-behavior.module';
         CalendarModule,
         DropdownModule,
     ],
-    providers: [EditEducationService]
+    providers: []
 })
 export class EditEducationModule { }
