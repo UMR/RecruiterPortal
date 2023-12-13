@@ -77,14 +77,14 @@ export class EducationComponent implements OnInit {
                 this.editEducationService.deleteEmpInfo(id)
                     .subscribe(data => {
                         this.isLoading = false;
-                        this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Successfully delete', detail: '' });
+                        this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Successfully deleted', detail: '' });
                         this.editEducationModels = [];
                         this.getEdutions();
 
                     },
                         err => {
                             this.isLoading = false;
-                            this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to load', detail: '' });
+                            this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to delete education', detail: '' });
                         },
                         () => {
                             this.isLoading = false;
