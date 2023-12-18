@@ -22,7 +22,7 @@
                                     </ul>
                                 </div>
                                 <h5>{{editEducationModel.SchoolName}}</h5>
-                                <label for="">{{editEducationModel.Degree}}<span *ngIf="editEducationModel.FromDate!=''||editEducationModel.ToDate!=''"> ( {{editEducationModel.FromDate}} - {{editEducationModel.ToDate}} )</span></label>
+                                <label for="">{{editEducationModel.Degree}}<span *ngIf="editEducationModel.FromDate || editEducationModel.ToDate"> ( {{editEducationModel.FromDate}} - {{editEducationModel.ToDate}} )</span></label>
                             </div>
                         </li>
                     </ul>
