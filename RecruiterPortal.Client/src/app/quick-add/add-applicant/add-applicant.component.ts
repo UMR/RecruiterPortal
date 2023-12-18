@@ -42,12 +42,12 @@ export class AddApplicantComponent implements OnInit {
             console.log(res);
             if (res == 1) {
                 this.applicantForm.reset()
-                this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Applicant Added Successfully', detail: '' });
+                this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Success', detail: 'Applicant Added Successfully' });
             }
         },
             err => {
                 this.isLoading = false;
-                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Add Applicant failed', detail: '' });
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Error', detail: 'Add Applicant failed' });
             },
             () => {
                 this.isLoading = false;
