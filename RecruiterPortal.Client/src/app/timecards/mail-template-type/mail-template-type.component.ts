@@ -115,19 +115,28 @@ export class MailTemplateTypeComponent implements OnInit {
     }
 
     onDelete(mailTemplateType) {
-        this.mailTemplateTypeService.delete(mailTemplateType.Id).subscribe(res => {
-            if (res.status === 200) {
-                this.selectedMailTemplateTypeId = 0;
-                this.selectedMailTemplateType = null;
-                this.setDefaultFields();
-                this.getMailTemplateTypesByRecruiterId();
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail Template Type Deleted', life: 3000 });
+        this.confirmationService.confirm({
+            message: 'Are you sure you want to delete ' + mailTemplateType.Name + ' Mail Template Type ?',
+            header: 'Confirm',
+            icon: 'pi pi-trash',
+            accept: () => {
+                this.mailTemplateTypeService.delete(mailTemplateType.Id).subscribe(res => {
+                    if (res.status === 200) {
+                        this.selectedMailTemplateTypeId = 0;
+                        this.selectedMailTemplateType = null;
+                        this.setDefaultFields();
+                        this.getMailTemplateTypesByRecruiterId();
+                        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Mail Template Type Deleted', life: 3000 });
+                    }
+                },
+                    err => {
+                        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Mail Template Type Delete Failed', life: 3000 });
+                    }
+                );
+
             }
-        },
-            err => {
-                this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Mail Template Type Delete Failed', life: 3000 });
-            }
-        );
+        });
+       
     }
 
     cancel() {

@@ -1,11 +1,10 @@
 <div id="page-content-wrapper">
-    <applicant-portal-header (onToggleButtonClicked)="(showHideMenu)()" isVisibleToggleButton=0></applicant-portal-header>
     <loading-image [is-loading]="isLoading"></loading-image>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
+            <!--<div class="col-12">
                 <button pButton pRipple label="Add New" class="p-button-success" tabindex="0" (click)="onAddNew()"></button>
-            </div>
+            </div>-->
         </div>
         <form [formGroup]="formGroup" novalidate>
             <div class="row mt-2">
@@ -24,7 +23,7 @@
                             <button type="button" class="btn btn-primary btn-portal-border" (click)="onHide()">Close</button>
                         </li>
                         <li class="list-inline-item">
-                            <button type="button" class="btn btn-primary btn-portal-border" (click)="cancel()">Cancel</button>
+                            <button type="button" class="btn btn-primary btn-portal-border" (click)="cancel()">Clear</button>
                         </li>
                         <li>
                             <button type="submit" class="btn btn-primary btn-portal" (click)="save()" [disabled]="formGroup.invalid">{{addEditButtonText}}</button>
@@ -52,7 +51,7 @@
                     <ng-template pTemplate="body" let-mail let-rowData>
                         <tr [pSelectableRow]="mail">
                             <td>{{mail.Name}}</td>
-                            <td><a (click)="onEdit(mail)"><i class="pi pi-pencil"></i></a><a style="color:red" (click)="onDelete(mail)"><i class="pi pi-trash"></i></a></td>
+                            <td><a (click)="onEdit(mail)" style="padding-right:8px"><i class="pi pi-pencil"></i></a><a style="color:red" (click)="onDelete(mail)"><i class="pi pi-trash"></i></a></td>
                         </tr>
                     </ng-template>
                 </p-table>
@@ -62,7 +61,7 @@
 </div>
 
 <p-toast></p-toast>
-<p-confirmDialog [style]="{ width: '500px' }" #cd>
+<p-confirmDialog [style]="{ width: '500px' }" #cd [baseZIndex]="100002" [autoZIndex]="true" [closeOnEscape]="false" appendTo="body">
     <ng-template pTemplate="footer">
         <button type="button" pButton icon="pi pi-times" label="No" class="btn-no" (click)="cd.reject()"></button>
         <button type="button" pButton icon="pi pi-check" label="Yes" class="btn-yes" (click)="cd.accept()"></button>
