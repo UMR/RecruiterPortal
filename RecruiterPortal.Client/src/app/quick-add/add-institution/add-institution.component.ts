@@ -41,7 +41,7 @@ export class AddInstitutionComponent implements OnInit {
         this.addInstitutionService.getZipCodeCityStateByZipCode($event.query).subscribe(data => {
             this.zipCodeResults = data.body;
         },
-            err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get zip code', detail: '' }); },
+            err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Error', detail: 'Failed to get zip code' }); },
             () => { });
     }
 
@@ -89,12 +89,12 @@ export class AddInstitutionComponent implements OnInit {
             if (res) {
                 this.institutionForm.reset();
                 this.hide();
-                this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Institution Added Successfully', detail: '' });
+                this.messageService.add({ key: 'toastKey1', severity: 'success', summary: 'Success', detail: 'Institution Added Successfully' });
             }
         },
             err => {
                 this.isLoading = false;
-                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Add Institution failed', detail: '' });
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Error', detail: 'Add Institution failed' });
             },
             () => {
                 this.isLoading = false;
