@@ -18,3 +18,13 @@
     display: inline-block;
     width: 100%;
 }
+
+:host >>> .ui-fileupload .ui-fileupload-buttonbar .ui-button {
+    width: 100% !important;
+    margin: 0px !important;
+    padding: 5px !important;
+    box-shadow: none !important;
+    background: #434A5A !important;
+    border-radius: 4px !important;
+    border-width: 0px !important;
+}
