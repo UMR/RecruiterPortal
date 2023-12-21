@@ -1,4 +1,14 @@
+:host ::ng-deep p-inputmask.ng-dirty.ng-invalid > .ui-inputtext {
+    border-left: 5px solid red !important;
+}
 
+:host ::ng-deep p-inputmask.ng-invalid.ng-untouched > .ui-inputtext {
+    border-left: 5px solid red !important;
+}
+
+:host ::ng-deep p-inputmask.ng-dirty.ng-valid > .ui-inputtext {
+    border-left: 5px solid green !important;
+}
 .png-footer.btnyes {
     background-color: red !important;
 }

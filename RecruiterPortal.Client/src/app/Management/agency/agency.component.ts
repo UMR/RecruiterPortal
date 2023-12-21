@@ -42,7 +42,7 @@ export class AgencyComponent implements OnInit {
             agencyAddress: [""],
             agencyContactPerson: [""],
             contactPersonPhone: [""],
-            isActive: [false, Validators.required],
+            isActive: [false],
         });
 
     }
