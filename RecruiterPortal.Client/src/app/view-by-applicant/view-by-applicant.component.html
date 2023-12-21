@@ -124,11 +124,11 @@
     <sent-mail (hideEvent)="handleSendMailHideEvent($event)" [selectedApplicant]="selectedApplicant"></sent-mail>
 </p-dialog>
 
-<p-dialog [(visible)]="showSentSMSDialog" [style]="{ width: '400px' }" header="Send SMS" [modal]="true" [closable]="false" [draggable]="false" [resizable]="false">
+<p-dialog [(visible)]="showSentSMSDialog" [style]="{ width: '400px' }" header="Send SMS" [modal]="true" [closable]="true" [draggable]="false" [resizable]="false">
     <sent-sms (hideEvent)="handleSendSMSHideEvent($event)" [selectedApplicantId]="selectedApplicantId"></sent-sms>
 </p-dialog>
 
-<p-dialog [(visible)]="showSentBulkMailDialog" [style]="{ width: '1200px' }" header="Send Mail" [modal]="true" [closable]="false" [draggable]="false" [resizable]="false">
+<p-dialog [(visible)]="showSentBulkMailDialog" [style]="{ width: '1200px' }" header="Send Mail" [modal]="true" [closable]="true" [draggable]="false" [resizable]="false">
     <sent-bulk-mail (hideEvent)="handleSendBulkMailHideEvent($event)" [selectedFilteredParams]="selectedFilteredParams"></sent-bulk-mail>
 </p-dialog>
 
