@@ -29,6 +29,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             try
             {
+                applicantSearchModel.CurrentUserId = base.RecruiterId;
                 DataSet data = UserManager.GetAllUserByFilter(applicantSearchModel);
                 List<ApplicantInfoModel> appModelList = new List<ApplicantInfoModel>();
                 int applicantCount = 0;
