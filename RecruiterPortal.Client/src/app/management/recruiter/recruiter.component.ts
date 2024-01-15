@@ -39,6 +39,7 @@ export class RecruiterComponent implements OnInit {
     public searchFg: FormGroup;
     private emailRegEx = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
     public isEditMode: boolean = false;
+    public activeAgency:any = [];
     @ViewChild('recruiterTable', { static: false }) recruiterTable: Table;
 
 
@@ -59,6 +60,7 @@ export class RecruiterComponent implements OnInit {
             isAdministrator: [false],
             email: ["", [Validators.required, Validators.pattern(this.emailRegEx)]],
             password: ["", [Validators.required, Validators.minLength(4)]],
+            agencyId: ["", Validators.required],
             confirmPassword: ["", Validators.required],
         }, {
             validator: this.MustMatch('password', 'confirmPassword')
@@ -70,7 +72,9 @@ export class RecruiterComponent implements OnInit {
             sEmail: [""],
             status: [""]
         });
+        this.onAgencySearch();
         //this.getRecruiters();
+        //this.getActiveAgency();
     }
 
     MustMatch(controlName: string, matchingControlName: string) {
@@ -89,6 +93,13 @@ export class RecruiterComponent implements OnInit {
         }
     }
 
+    onAgencySearch() {
+        this.recruiterService.getActiveAgency().subscribe(response => {
+            this.activeAgency = response.body;
+        },
+            err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get agency', detail: '' }); },
+            () => { });
+    }
     get f() { return this.regForm.controls; }
 
     loadAgencyLazy(event: LazyLoadEvent) {
@@ -141,6 +152,24 @@ export class RecruiterComponent implements OnInit {
                     this.isLoading = false;
                 });
     }
+
+    //getActiveAgency() {
+    //    this.recruiterService.getActiveAgency()
+    //        .subscribe(response => {
+    //            console.log(response.body);
+    //            if (response.status === 200) {
+    //                this.activeAgency = response.body;
+    //            }
+    //        },
+    //            err => {
+    //                this.isLoading = false;
+    //                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get recruiter', detail: '' });
+    //            },
+    //            () => {
+    //                this.isLoading = false;
+    //            });
+    //}
+
     onStatusChange(evt) {
         this.recruiterTable.reset();
         this.getRecruiterByFilter();
@@ -158,6 +187,11 @@ export class RecruiterComponent implements OnInit {
         this.regForm.controls.telephone.setValue(recruiter.Telephone);
         this.regForm.controls.isActive.setValue(recruiter.IsActive);
         this.regForm.controls.email.setValue(recruiter.Email);
+        this.regForm.controls.agencyId.setValue(recruiter.AgencyId);
+        //console.log(this.activeAgency);
+        //this.activeAgency.result.map(element => element.AgencyId)
+        ////this.activeAgency = this.activeAgency.filter(a => a.AgencyId == recruiter.AgencyId);
+        //console.log(this.activeAgency);
         this.recruiterId = recruiter.RecruiterId;
 
         if (recruiter.RecruiterRole.includes('recruiter')) {
@@ -240,9 +274,10 @@ export class RecruiterComponent implements OnInit {
         recruiterFormModel.Email = this.regForm.get('email').value;
         recruiterFormModel.Telephone = this.regForm.get('telephone').value;
         recruiterFormModel.IsActive = this.regForm.get('isActive').value;
-        recruiterFormModel.AgencyId = 0;
+        recruiterFormModel.AgencyId = this.regForm.get('agencyId').value.AgencyId;
         recruiterFormModel.RecruiterRole = recruiterRole;
 
+        //console.log(recruiterFormModel);
 
         if (!this.isEditMode) {
             this.recruiterService.addRecruiter(recruiterFormModel).subscribe(res => {

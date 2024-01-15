@@ -17,6 +17,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputBehaviorModule } from '../../common/input-behavior.module';
+import { AutoCompleteModule } from 'primeng/primeng';
 
 @NgModule({
     declarations: [RecruiterComponent],
@@ -35,7 +36,8 @@ import { InputBehaviorModule } from '../../common/input-behavior.module';
         InputTextareaModule,
         KeyFilterModule,
         ReactiveFormsModule,
-        InputBehaviorModule
+        InputBehaviorModule,
+        AutoCompleteModule
     ],
     providers: [RecruiterService, ConfirmationService, MessageService]
 })

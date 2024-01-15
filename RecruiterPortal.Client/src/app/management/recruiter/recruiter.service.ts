@@ -10,6 +10,7 @@ import { RecruiterSearchModel } from './recruiter-search.model';
 })
 export class RecruiterService {
     private getRecruiterURI: string = `${resourceServerUrl}/api/recruiter/get`;
+    private getActiveAgencyURI: string = `${resourceServerUrl}/api/agency/get-active-agency`;
     private getRecruiterFilterURI: string = `${resourceServerUrl}/api/recruiter/get-recruiter-by-filter`;
     private addRecruiterURI: string = `${resourceServerUrl}/api/recruiter/save`;
     private updateStatusRecruiterURI: string = `${resourceServerUrl}/api/recruiter/update-status`;
@@ -19,6 +20,10 @@ export class RecruiterService {
 
     getRecruiter() {
         return this.httpClient.get(this.getRecruiterURI, { observe: 'response' });
+    }
+
+    getActiveAgency() {
+        return this.httpClient.get(this.getActiveAgencyURI, { observe: 'response' });
     }
 
     getRecruiterByFilter(searchParam: RecruiterSearchModel) {

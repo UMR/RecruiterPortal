@@ -53,6 +53,40 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+        [Route("get-active-agency")]
+        [HttpGet]
+        public IActionResult GetActiveAgency()
+        {
+            try
+            {
+                List<AgencyModel> agencyModelList = new List<AgencyModel>();
+                List<Agency> agencyList = AgencyManager.GetAllActiveAgency();
+                if (agencyList != null && agencyList.Count > 0)
+                {
+                    foreach (var oRow in agencyList.ToList())
+                    {
+                        AgencyModel agency = new AgencyModel();
+
+                        agency.AgencyAddress = oRow.AgencyAddress.ToString();
+                        agency.AgencyContactPerson = !string.IsNullOrEmpty(oRow.AgencyContactPerson) ? oRow.AgencyContactPerson.ToString() : "" ;
+                        agency.AgencyContactPersonPhone = !string.IsNullOrEmpty(oRow.AgencyContactPerson) ? oRow.AgencyContactPersonPhone.ToString() : "";
+                        agency.AgencyEmail = !string.IsNullOrEmpty(oRow.AgencyEmail) ? oRow.AgencyEmail.ToString() : "";
+                        agency.AgencyName = !string.IsNullOrEmpty(oRow.AgencyName) ? oRow.AgencyName.ToString() : "";
+                        agency.AgencyPhone = !string.IsNullOrEmpty(oRow.AgencyPhone) ? oRow.AgencyPhone.ToString() : "";
+                        agency.UrlPrefix = !string.IsNullOrEmpty(oRow.Urlprefix) ? oRow.Urlprefix.ToString() : "";
+                        agency.AgencyId = Convert.ToInt64(oRow.AgencyId.ToString());
+                        agencyModelList.Add(agency);
+                    }
+                }
+                //return Ok(new { agencies = agencyModelList, agencyCount = agencyCount });
+                return Ok(agencyModelList);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
+        }
 
         [Route("save")]
         [HttpPost]

@@ -109,3 +109,15 @@
 :host >>> .ui-table .ui-table-tbody > tr.ui-state-highlight {
     background-color: #007ad9 !important;
 }
+
+:host>>>p-autocomplete input{
+     width: 100% !important;
+}
+
+:host >>> p-autocomplete.ng-valid input:required {
+    border-left: 5px solid green !important;
+}
+
+:host >>> p-autocomplete.ng-invalid input:required {
+    border-left: 5px solid red !important;
+}

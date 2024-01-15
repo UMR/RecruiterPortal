@@ -82,6 +82,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                         recruiter.FirstName = oRow["FirstName"].ToString();
                         recruiter.LastName = oRow["LastName"].ToString();
                         recruiter.Email = oRow["Email"].ToString();
+                        recruiter.AgencyId = Convert.ToInt64(oRow["AgencyId"].ToString());
                         recruiter.Telephone = oRow["Telephone"].ToString();
                         var roleList = RoleManager.GetRoleNamesByRecruiterId(Convert.ToInt64(oRow["RecruiterId"].ToString()));
                         if (roleList != null)
