@@ -10,20 +10,23 @@ import { AddEditW9Service } from './add-edit-w9.service';
 import { LoadingImageModule } from '../../../common/loading-image.module';
 import { InputBehaviorModule } from '../../../common/input-behavior.module';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { InputMaskModule } from 'primeng/inputmask';
+
 
 @NgModule({
-  declarations: [AddEditW9Component],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    AddEditW9RoutingModule,
-    ToastModule,
-    LoadingImageModule,
-    InputBehaviorModule,
-    CalendarModule,
-    DropdownModule,
-    AutoCompleteModule
-  ],
-  providers: [AddEditW9Service]
+    declarations: [AddEditW9Component],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        AddEditW9RoutingModule,
+        ToastModule,
+        LoadingImageModule,
+        InputBehaviorModule,
+        CalendarModule,
+        DropdownModule,
+        AutoCompleteModule,
+        InputMaskModule
+    ],
+    providers: [AddEditW9Service]
 })
 export class AddEditW9Module { }
