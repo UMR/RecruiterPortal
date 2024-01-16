@@ -67,13 +67,13 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                     {
                         AgencyModel agency = new AgencyModel();
 
-                        agency.AgencyAddress = oRow.AgencyAddress.ToString();
-                        agency.AgencyContactPerson = !string.IsNullOrEmpty(oRow.AgencyContactPerson) ? oRow.AgencyContactPerson.ToString() : "" ;
-                        agency.AgencyContactPersonPhone = !string.IsNullOrEmpty(oRow.AgencyContactPerson) ? oRow.AgencyContactPersonPhone.ToString() : "";
-                        agency.AgencyEmail = !string.IsNullOrEmpty(oRow.AgencyEmail) ? oRow.AgencyEmail.ToString() : "";
+                        //agency.AgencyAddress = oRow.AgencyAddress.ToString();
+                        //agency.AgencyContactPerson = !string.IsNullOrEmpty(oRow.AgencyContactPerson) ? oRow.AgencyContactPerson.ToString() : "" ;
+                        //agency.AgencyContactPersonPhone = !string.IsNullOrEmpty(oRow.AgencyContactPerson) ? oRow.AgencyContactPersonPhone.ToString() : "";
+                        //agency.AgencyEmail = !string.IsNullOrEmpty(oRow.AgencyEmail) ? oRow.AgencyEmail.ToString() : "";
                         agency.AgencyName = !string.IsNullOrEmpty(oRow.AgencyName) ? oRow.AgencyName.ToString() : "";
-                        agency.AgencyPhone = !string.IsNullOrEmpty(oRow.AgencyPhone) ? oRow.AgencyPhone.ToString() : "";
-                        agency.UrlPrefix = !string.IsNullOrEmpty(oRow.Urlprefix) ? oRow.Urlprefix.ToString() : "";
+                        //agency.AgencyPhone = !string.IsNullOrEmpty(oRow.AgencyPhone) ? oRow.AgencyPhone.ToString() : "";
+                        //agency.UrlPrefix = !string.IsNullOrEmpty(oRow.Urlprefix) ? oRow.Urlprefix.ToString() : "";
                         agency.AgencyId = Convert.ToInt64(oRow.AgencyId.ToString());
                         agencyModelList.Add(agency);
                     }
