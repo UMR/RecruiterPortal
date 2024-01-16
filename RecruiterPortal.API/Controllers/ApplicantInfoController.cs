@@ -361,7 +361,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             try
             {
-                return Ok(await UserManager.GetApplicantCount());
+                return Ok(await UserManager.GetApplicantCount(AgencyId));
             }
             catch (Exception ex)
             {

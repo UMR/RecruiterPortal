@@ -579,16 +579,16 @@ namespace RecruiterPortalDAL.Managers
             return userDt;
         }
 
-        public static async Task<ApplicantCountModel> GetApplicantCount()
+        public static async Task<ApplicantCountModel> GetApplicantCount(long agencyId)
         {
             try
             {
                 GenericRepository<User> repository = new GenericRepository<User>();
-                var totalCount = await repository.GetAllAsyncCount();
+                var totalCount = await repository.GetAllAsyncCount(u => u.AgencyId == agencyId);
                 repository = new GenericRepository<User>();
-                var verifiedCount = await repository.GetAllAsyncCount(u => u.IsVerified == true);
+                var verifiedCount = await repository.GetAllAsyncCount(u => u.IsVerified == true && u.AgencyId == agencyId);
                 repository = new GenericRepository<User>();
-                var notVerifiedCount = await repository.GetAllAsyncCount(u => u.IsVerified == false);
+                var notVerifiedCount = await repository.GetAllAsyncCount(u => u.IsVerified == false && u.AgencyId == agencyId);
 
                 ApplicantCountModel applicantCountModel = new ApplicantCountModel();
                 applicantCountModel.TotalApplicant = totalCount.ToString();
