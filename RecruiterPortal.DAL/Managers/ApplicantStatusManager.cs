@@ -301,26 +301,26 @@ namespace RecruiterPortal.DAL.Managers
             return response;
         }
 
-        public static async Task<ApplicantStatusCountModel> GetApplicantStatusCount()
+        public static async Task<ApplicantStatusCountModel> GetApplicantStatusCount(long agencyId)
         {
             try
             {
                 GenericRepository<ApplicantStatus> repository = new GenericRepository<ApplicantStatus>();
-                var newLeads = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.NewLeads && u.IsActive == true);
+                var newLeads = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.NewLeads && u.IsActive == true && u.AgencyId == agencyId);
                 repository = new GenericRepository<ApplicantStatus>();
-                var preScreened = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.PreScreened && u.IsActive == true);
+                var preScreened = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.PreScreened && u.IsActive == true && u.AgencyId == agencyId);
                 repository = new GenericRepository<ApplicantStatus>();
-                var phoneScreened = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.PhoneScreened && u.IsActive == true);
+                var phoneScreened = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.PhoneScreened && u.IsActive == true && u.AgencyId == agencyId);
                 repository = new GenericRepository<ApplicantStatus>();
-                var finalInterview = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.FinalInterview && u.IsActive == true);
+                var finalInterview = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.FinalInterview && u.IsActive == true && u.AgencyId == agencyId);
                 repository = new GenericRepository<ApplicantStatus>();
-                var offered = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.Offered && u.IsActive == true);
+                var offered = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.Offered && u.IsActive == true && u.AgencyId == agencyId);
                 repository = new GenericRepository<ApplicantStatus>();
-                var accepted = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.Accepted && u.IsActive == true);
+                var accepted = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.Accepted && u.IsActive == true && u.AgencyId == agencyId);
                 repository = new GenericRepository<ApplicantStatus>();
-                var refused = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.Refused && u.IsActive == true);
+                var refused = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.Refused && u.IsActive == true && u.AgencyId == agencyId);
                 repository = new GenericRepository<ApplicantStatus>();
-                var rejected = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.Rejected && u.IsActive == true);
+                var rejected = await repository.GetAllAsyncCount(u => u.Status == (int)EnumApplicantStatus.Rejected && u.IsActive == true && u.AgencyId == agencyId);
 
                 ApplicantStatusCountModel applicantCountModel = new ApplicantStatusCountModel();
                 applicantCountModel.NewLeads = newLeads.ToString();

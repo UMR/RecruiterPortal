@@ -86,7 +86,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
         {
             try
             {
-                return Ok(await ApplicantStatusManager.GetApplicantStatusCount());
+                return Ok(await ApplicantStatusManager.GetApplicantStatusCount(AgencyId));
             }
             catch (Exception ex)
             {
