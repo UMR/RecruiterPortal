@@ -6,6 +6,8 @@ import { RecruiterModel } from './recruiter.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RecruiterSearchModel } from './recruiter-search.model';
 import { Table } from 'primeng/components/table/table';
+import { StorageService } from '../../common/services/storage.service';
+import { el } from '@fullcalendar/core/internal-common';
 
 @Component({
     selector: 'app-recruiter',
@@ -17,7 +19,7 @@ export class RecruiterComponent implements OnInit {
     public isLoading: boolean = false;
     public recruiters: any[] = [];
     public totalRecruiter: number;
-    public count : string = "";
+    public count: string = "";
     public selectedRecruiterId: number;
     public cols: any[];
     public rows: number = 15;
@@ -39,12 +41,14 @@ export class RecruiterComponent implements OnInit {
     public searchFg: FormGroup;
     private emailRegEx = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
     public isEditMode: boolean = false;
-    public activeAgency:any = [];
+    public activeAgency: any = [];
     @ViewChild('recruiterTable', { static: false }) recruiterTable: Table;
+    public isAdmin: boolean = false;
+
 
 
     constructor(private recruiterService: RecruiterService, private messageService: MessageService, private fb: FormBuilder,
-        private confirmationService: ConfirmationService) {
+        private confirmationService: ConfirmationService, private storageService: StorageService) {
     }
 
     ngOnInit() {
@@ -73,8 +77,20 @@ export class RecruiterComponent implements OnInit {
             status: [""]
         });
         this.onAgencySearch();
-        //this.getRecruiters();
+        this.agencyDropDownManage();
         //this.getActiveAgency();
+    }
+
+    agencyDropDownManage() {
+        this.isAdmin = this.storageService.getIsAdmin;
+        var user = this.storageService.getDataFromSession("CurrentUserInfo");
+        this.regForm.controls.agencyId.setValue(user.AgencyId);
+        if (this.isAdmin) {
+            this.regForm.controls['agencyId'].enable();
+        }
+        else {
+            this.regForm.controls['agencyId'].disable();
+        }
     }
 
     MustMatch(controlName: string, matchingControlName: string) {
@@ -152,23 +168,7 @@ export class RecruiterComponent implements OnInit {
                     this.isLoading = false;
                 });
     }
-
-    //getActiveAgency() {
-    //    this.recruiterService.getActiveAgency()
-    //        .subscribe(response => {
-    //            console.log(response.body);
-    //            if (response.status === 200) {
-    //                this.activeAgency = response.body;
-    //            }
-    //        },
-    //            err => {
-    //                this.isLoading = false;
-    //                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get recruiter', detail: '' });
-    //            },
-    //            () => {
-    //                this.isLoading = false;
-    //            });
-    //}
+    
 
     onStatusChange(evt) {
         this.recruiterTable.reset();
@@ -188,10 +188,7 @@ export class RecruiterComponent implements OnInit {
         this.regForm.controls.isActive.setValue(recruiter.IsActive);
         this.regForm.controls.email.setValue(recruiter.Email);
         this.regForm.controls.agencyId.setValue(recruiter.AgencyId);
-        //console.log(this.activeAgency);
-        //this.activeAgency.result.map(element => element.AgencyId)
-        ////this.activeAgency = this.activeAgency.filter(a => a.AgencyId == recruiter.AgencyId);
-        //console.log(this.activeAgency);
+        this.regForm.controls['agencyId'].disable();
         this.recruiterId = recruiter.RecruiterId;
 
         if (recruiter.RecruiterRole.includes('recruiter')) {
@@ -274,7 +271,7 @@ export class RecruiterComponent implements OnInit {
         recruiterFormModel.Email = this.regForm.get('email').value;
         recruiterFormModel.Telephone = this.regForm.get('telephone').value;
         recruiterFormModel.IsActive = this.regForm.get('isActive').value;
-        recruiterFormModel.AgencyId = this.regForm.get('agencyId').value.AgencyId;
+        recruiterFormModel.AgencyId = this.regForm.get('agencyId').value;
         recruiterFormModel.RecruiterRole = recruiterRole;
 
         //console.log(recruiterFormModel);
@@ -327,6 +324,7 @@ export class RecruiterComponent implements OnInit {
         this.regForm.controls['loginId'].enable();
         this.regForm.controls['password'].enable();
         this.regForm.controls['confirmPassword'].enable();
+        this.agencyDropDownManage();
         this.isEditMode = false;
         this.addEditTxt = "Add";
         this.recruiterArr = {};

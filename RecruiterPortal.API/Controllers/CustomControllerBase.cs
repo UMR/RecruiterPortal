@@ -61,6 +61,21 @@ namespace RecruiterPortal.API.Controllers
                 return currentUser.RecruiterId;
             }
         }
+        protected bool IsAdmin
+        {
+            get
+            {
+                var currentUser = GetCurrentUser();
+                if (currentUser != null && currentUser.Roles.Contains("admin"))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
 
         protected long AgencyId
         {

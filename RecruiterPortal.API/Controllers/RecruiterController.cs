@@ -68,7 +68,14 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             try
             {
                 List<RecruiterModel> recruiterModelList = new List<RecruiterModel>();
-                DataTable recruiterDt = RecruiterManager.GetRecruiterByFilter(AgencyId, recruiterSearchModel);
+                DataTable recruiterDt = new DataTable();
+                if (IsAdmin)
+                {
+                    recruiterDt = RecruiterManager.GetAllRecruiterByFilter(AgencyId, recruiterSearchModel);
+                }
+                else {
+                    recruiterDt = RecruiterManager.GetAgencyRecruiterByFilter(AgencyId, recruiterSearchModel);
+                }
                 int recruiterCount = 0;
                 if (recruiterDt != null && recruiterDt.Rows.Count > 0)
                 {

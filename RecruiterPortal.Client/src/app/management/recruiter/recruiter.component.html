@@ -149,15 +149,19 @@
         </div>
         <div class="field">
             <label for="agency">Agency</label>
-            <p-autoComplete formControlName="agencyId" [suggestions]="activeAgency" [style]="{'width':'100%'}" field="AgencyName" placeholder="Select a Agency"
+            <!--<p-autoComplete formControlName="agencyId" [suggestions]="activeAgency" [style]="{'width':'100%'}" placeholder="Select a Agency"
                             (completeMethod)="onAgencySearch()" required autocomplete="off" forceSelection="true" [ngClass]="{ 'is-invalid': submitted }"
-                            [dropdown]="true" tabindex="7">
+                            [dropdown]="true" tabindex="7" #agencyAutoComplete>
                 <ng-template let-agency pTemplate="item">
                     <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
                         <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{agency.AgencyName}}</div>
                     </div>
                 </ng-template>
-            </p-autoComplete>
+            </p-autoComplete>-->
+            <select id="agency" name="agency" class="form-control" formControlName="agencyId" placeholder="Select Agency" tabindex="8" required>
+                <option value="" selected>---- Select Agency ----</option>
+                <option *ngFor="let agency of activeAgency" value="{{agency.AgencyId}}">{{agency.AgencyName}}</option>
+            </select>
         </div>
         <div>
             <input type="checkbox" id="name" formControlName="isActive" />

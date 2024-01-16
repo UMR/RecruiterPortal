@@ -289,7 +289,7 @@ namespace RecruiterPortal.DAL.Managers
             }
         }
 
-        public static DataTable GetRecruiterByFilter(long agencyId, RecruiterSearchModel recruiterSearchModel)
+        public static DataTable GetAgencyRecruiterByFilter(long agencyId, RecruiterSearchModel recruiterSearchModel)
         {
             try
             {
@@ -414,6 +414,44 @@ namespace RecruiterPortal.DAL.Managers
                 //                           })).ToList();
                 //    }
                 //}
+                return recruiterDt;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public static DataTable GetAllRecruiterByFilter(long agencyId, RecruiterSearchModel recruiterSearchModel)
+        {
+            try
+            {
+                //IEnumerable<RecruiterModel> recruiterModels = null;
+                //int totalCount = 0;
+
+                string sqlWithWhereClouse = "SELECT * From Recruiter where Recruiter.AgencyId IS NOT NULL " ;
+
+                if (!string.IsNullOrEmpty(recruiterSearchModel.FirstName))
+                {
+                    sqlWithWhereClouse = sqlWithWhereClouse + " AND Recruiter.FirstName like '%" + recruiterSearchModel.FirstName + "%'";
+                }
+
+                if (!string.IsNullOrEmpty(recruiterSearchModel.LastName))
+                {
+                    sqlWithWhereClouse = sqlWithWhereClouse + " AND Recruiter.LastName like '%" + recruiterSearchModel.LastName + "%'";
+                }
+
+                if (!string.IsNullOrEmpty(recruiterSearchModel.Email))
+                {
+                    sqlWithWhereClouse = sqlWithWhereClouse + "AND Recruiter.Email like '%" + recruiterSearchModel.Email + "%'";
+                }
+                if (!string.IsNullOrEmpty(recruiterSearchModel.Status))
+                {
+                    sqlWithWhereClouse = sqlWithWhereClouse + "AND Recruiter.IsActive =" + recruiterSearchModel.Status;
+                }
+                GenericRepository<Recruiter> genericRepository = new GenericRepository<Recruiter>();
+                DataTable recruiterDt = genericRepository.LoadDataTableFromQuery(sqlWithWhereClouse, null);
+
+               
                 return recruiterDt;
             }
             catch (Exception ex)
