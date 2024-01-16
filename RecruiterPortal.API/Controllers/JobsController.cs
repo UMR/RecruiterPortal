@@ -92,7 +92,7 @@ namespace RecruiterPortal.API.Controllers
         {
             try
             {
-                return Ok(await JobManager.GetJobCount());
+                return Ok(await JobManager.GetJobCount(AgencyId));
             }
             catch (Exception ex)
             {

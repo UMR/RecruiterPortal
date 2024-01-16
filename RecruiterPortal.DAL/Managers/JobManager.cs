@@ -211,16 +211,16 @@ namespace RecruiterPortal.DAL.Managers
 
             return response;
         }
-        public static async Task<JobCountModel> GetJobCount()
+        public static async Task<JobCountModel> GetJobCount(long agencyId)
         {
             try
             {
                 GenericRepository<Job> repository = new GenericRepository<Job>();
-                var jobCount = await repository.GetAllAsyncCount();
+                var jobCount = await repository.GetAllAsyncCount(j => j.AgencyId == agencyId);
                 repository = new GenericRepository<Job>();
-                var activeJob = await repository.GetAllAsyncCount(j => j.Status == true);
+                var activeJob = await repository.GetAllAsyncCount(j => j.Status == true && j.AgencyId == agencyId);
                 repository = new GenericRepository<Job>();
-                var inActiveJob = await repository.GetAllAsyncCount(j => j.Status == false);
+                var inActiveJob = await repository.GetAllAsyncCount(j => j.Status == false && j.AgencyId == agencyId);
 
                 JobCountModel jobCountModel = new JobCountModel();
                 jobCountModel.TotalJob = jobCount.ToString();
