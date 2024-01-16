@@ -142,6 +142,7 @@
     <Folder Include="2023-11-29" />
     <Folder Include="2023-12-04" />
     <Folder Include="2023-12-05" />
+    <Folder Include="2024-01-16" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="2019-11-04\01_TR_01_CREATE_DATABASE.sql" />
@@ -502,5 +503,6 @@
     <None Include="2023-12-04\01_SR_01_CREATE_SMS_History.sql" />
     <None Include="2023-12-05\01_AZ_01_CREATE_PROCEDURE_GetAllEmailByFilter.sql" />
     <None Include="2023-12-05\02_SR_02_ALTER_sp_GetAllInstitutionByFilter.sql" />
+    <None Include="2024-01-16\01_SR_01_ALTER_sp_InsertRecruiter.sql" />
   </ItemGroup>
 </Project>
