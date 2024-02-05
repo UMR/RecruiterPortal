@@ -1,100 +1,133 @@
 <form [formGroup]="formGroup" novalidate>
     <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="institution" class="form-label">Status</label>
-                <p-autoComplete formControlName="status" [suggestions]="statusResults" class="form-control"
-                                required autocomplete="off" (completeMethod)="onStatusSearch()"
-                                forceSelection="true" (onSelect)="onStatusSelect($event)" [ngClass]="{ 'is-invalid': submitted }" [dropdown]="true">
-                    <ng-template let-status pTemplate="item">
-                        <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                            <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{status.StatusName}}</div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="institution" class="form-label">Status</label>
+                        <p-autoComplete formControlName="status" [suggestions]="statusResults" class="form-control"
+                                        required autocomplete="off" (completeMethod)="onStatusSearch()"
+                                        forceSelection="true" (onSelect)="onStatusSelect($event)" [ngClass]="{ 'is-invalid': submitted }" [dropdown]="true">
+                            <ng-template let-status pTemplate="item">
+                                <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{status.StatusName}}</div>
+                                </div>
+                            </ng-template>
+                        </p-autoComplete>
+                        <small class="p-error" *ngIf="submitted">Institution is required.</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="postion" class="form-label">Postion</label>
+                        <p-autoComplete formControlName="position" [suggestions]="positionResults" class="form-control"
+                                        (completeMethod)="onPositionSearch($event)" required autocomplete="off"
+                                        forceSelection="true" (onSelect)="onPositionSelect($event)" [ngClass]="{ 'is-invalid': submitted }" [dropdown]="true">
+                            <ng-template let-position pTemplate="item">
+                                <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{position.PositionName}}</div>
+                                </div>
+                            </ng-template>
+                        </p-autoComplete>
+                        <small class="p-error" *ngIf="submitted">Postion is required.</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="institution" class="form-label">Institution</label>
+                        <p-autoComplete formControlName="institution" [suggestions]="institutionResults" class="form-control"
+                                        (completeMethod)="onInstitutiionSearch($event)" autocomplete="off"
+                                        forceSelection="true" (onSelect)="onInstitutiionSelect($event)" [ngClass]="{ 'is-invalid': submitted }" [dropdown]="true">
+                            <ng-template let-institute pTemplate="item">
+                                <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
+                                    <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{institute.InstituteName}}</div>
+                                </div>
+                            </ng-template>
+                        </p-autoComplete>
+                        <small class="p-error" *ngIf="submitted">Institution is required.</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="institution" class="form-label">Current Salary</label>
+                        <input type="text" formControlName="currentSalary" pInputText pKeyFilter="num" placeholder="Current Salary" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="institution" class="form-label">Expected Salary</label>
+                        <input type="text" formControlName="expectedSalary" pInputText pKeyFilter="num" placeholder="Expected Salary" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="" class="form-label">Upload Resume</label>
+                        <div class="form-group mt-1">
+                            <div class="upload">
+                                <p-fileUpload chooseLabel="Uplaod Resume"
+                                              mode="advanced"
+                                              auto="true"
+                                              customUpload="true"
+                                              accept="image/*,application/pdf,.doc,.docx,application/msword"
+                                              maxFileSize="5000000"
+                                              tabindex="8"
+                                              (onSelect)="onFileSelect($event)">
+                                    <ng-template pTemplate="toolbar">
+                                        <p class="mt-3">Maximum 5MB(doc, docx, pdf, jpg, jpeg, png, gif format)</p>
+                                        <p class="mt-3" *ngIf="uploadedFile">
+                                            Name: {{ uploadedFile?.name}} <span *ngIf="uploadedFile?.size" style="border: 0px !important;">Size : </span>
+                                            {{uploadedFile?.size ? uploadedFile?.size/1000 : '' }} <span *ngIf="uploadedFile?.size" style="border: 0px !important;">bytes</span>
+                                        </p>
+                                    </ng-template>
+                                    <ng-template let-file pTemplate="file">
+                                    </ng-template>
+                                    <ng-template pTemplate="content">
+                                    </ng-template>
+                                </p-fileUpload>
+                            </div>
                         </div>
-                    </ng-template>
-                </p-autoComplete>
-                <small class="p-error" *ngIf="submitted">Institution is required.</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="note" class="form-label">Notes</label>
+                        <textarea type="text" formControlName="notes"  placeholder="Notes" class="form-control" style="line-height:1.5" maxlength="200"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="com-md-12">
+                    <ul class="list-inline mb-0 d-flex justify-content-between mt-2 ml-3">
+                        <li class="list-inline-item">
+                            <button type="button" class="btn btn-primary btn-portal-border" (click)="hide()">Close</button>
+                        </li>
+                        <li class="list-inline-item" style="margin-left:90px">
+                            <button type="button" class="btn btn-primary btn-portal-border" (click)="clear()">Clear</button>
+                        </li>
+                        <li class="list-inline-item">
+                            <button type="submit" class="btn btn-primary btn-portal" (click)="save()" [disabled]="!formGroup.valid">Save</button>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="postion" class="form-label">Postion</label>
-                <p-autoComplete formControlName="position" [suggestions]="positionResults" class="form-control"
-                                (completeMethod)="onPositionSearch($event)" required autocomplete="off"
-                                forceSelection="true" (onSelect)="onPositionSelect($event)" [ngClass]="{ 'is-invalid': submitted }" [dropdown]="true">
-                    <ng-template let-position pTemplate="item">
-                        <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                            <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{position.PositionName}}</div>
-                        </div>
-                    </ng-template>
-                </p-autoComplete>
-                <small class="p-error" *ngIf="submitted">Postion is required.</small>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="institution" class="form-label">Institution</label>
-                <p-autoComplete formControlName="institution" [suggestions]="institutionResults" class="form-control"
-                                (completeMethod)="onInstitutiionSearch($event)" autocomplete="off"
-                                forceSelection="true" (onSelect)="onInstitutiionSelect($event)" [ngClass]="{ 'is-invalid': submitted }" [dropdown]="true">
-                    <ng-template let-institute pTemplate="item">
-                        <div class="ui-helper-clearfix" style="border-bottom:1px solid #D5D5D5">
-                            <div style="font-size:18px;float:left;margin:10px 10px 0 0">{{institute.InstituteName}}</div>
-                        </div>
-                    </ng-template>
-                </p-autoComplete>
-                <small class="p-error" *ngIf="submitted">Institution is required.</small>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="institution" class="form-label">Resume</label>
-                <input type="text" formControlName="resume" pInputText  placeholder="Resume" class="form-control">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="institution" class="form-label">Notes</label>
-                <input type="text" formControlName="notes" pInputText placeholder="Notes" class="form-control">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="institution" class="form-label">Current Salary</label>
-                <input type="text" formControlName="currentSalary" pInputText pKeyFilter="num" placeholder="Current Salary" class="form-control">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="institution" class="form-label">Expected Salary</label>
-                <input type="text" formControlName="expectedSalary" pInputText pKeyFilter="num" placeholder="Expected Salary" class="form-control">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="com-md-12">
-            <ul class="list-inline mb-0 d-flex justify-content-between mt-2 ml-3">
-                <li class="list-inline-item">
-                    <button type="button" class="btn btn-primary btn-portal-border" (click)="hide()">Close</button>
-                </li>
-                <li class="list-inline-item" style="margin-left:190px">
-                    <button type="button" class="btn btn-primary btn-portal-border" (click)="clear()">Clear</button>
-                </li>
-                <li class="list-inline-item">
-                    <button type="submit" class="btn btn-primary btn-portal" (click)="save()" [disabled]="!formGroup.valid">Save</button>
-                </li>
-            </ul>
-        </div>
-    </div>
+    
 </form>

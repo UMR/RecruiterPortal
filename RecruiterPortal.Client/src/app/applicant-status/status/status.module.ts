@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StatusComponent } from './status.component';
 import { StatusService } from './status.service';
+import { FileUploadModule } from 'primeng/components/fileupload/fileupload';
 
 
 @NgModule({    
@@ -21,7 +22,8 @@ import { StatusService } from './status.service';
         ConfirmDialogModule,
         FormsModule,
         ReactiveFormsModule,
-        AutoCompleteModule
+        AutoCompleteModule,
+        FileUploadModule
     ],
     providers: [ConfirmationService, MessageService, StatusService]
 })

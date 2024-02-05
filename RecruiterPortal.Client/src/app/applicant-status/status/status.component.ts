@@ -36,7 +36,7 @@ export class StatusComponent implements OnInit {
             institution: [''],
             instituteId: [''],
             resume:[''],
-            notes:[],
+            notes:[''],
             currentSalary: [''],
             expectedSalary:['']
         });
@@ -88,6 +88,24 @@ export class StatusComponent implements OnInit {
             instituteId: $event.Id,
             institution: $event.InstituteName
         });
+    }
+
+    onFileSelect(event) {
+        if (event.files.length > 0) {
+            if (!event.files[0].type.includes("image/") && !event.files[0].type.includes("application/pdf") && !event.files[0].type.includes("application/msword") && !event.files[0].type.includes("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid file type', detail: 'Upload file' });
+            } else if (event.files[0].size > 5000000) {
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid file size', detail: 'File size limit: 5MB' });
+            } else {
+                //this.uploadedFile = event.files[0];
+                //this.licenseFormGroup.get('fileName').setValue(event.files[0].name);
+                let reader = new FileReader();
+                reader.readAsDataURL(event.files[0]);
+                reader.onloadend = () => {
+                    //this.licenseFile = reader.result.toString().split(',')[1];
+                }
+            }
+        }
     }
 
     clear() {
