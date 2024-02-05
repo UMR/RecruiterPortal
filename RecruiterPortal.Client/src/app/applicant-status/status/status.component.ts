@@ -117,6 +117,10 @@ export class StatusComponent implements OnInit {
         this.hideEvent.emit(false);
     }
 
+    onDelete(resume) {
+
+    }
+
     save() {
 
         let statusModel = new ApplicantStatusRequestModel;

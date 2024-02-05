@@ -5,6 +5,7 @@ import { LoadingImageModule } from '../../common/loading-image.module';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule, AutoCompleteModule, ConfirmationService, MessageService } from 'primeng/primeng';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TableModule } from 'primeng/components/table/table';
 
 import { StatusComponent } from './status.component';
 import { StatusService } from './status.service';
@@ -23,6 +24,7 @@ import { FileUploadModule } from 'primeng/components/fileupload/fileupload';
         FormsModule,
         ReactiveFormsModule,
         AutoCompleteModule,
+        TableModule,
         FileUploadModule
     ],
     providers: [ConfirmationService, MessageService, StatusService]

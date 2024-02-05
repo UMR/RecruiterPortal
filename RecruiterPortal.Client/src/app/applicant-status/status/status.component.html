@@ -104,11 +104,35 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <p-table [value]="resumes">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th style="width:75%">Resume Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-resume>
+                                <tr>
+                                    <td>{{ resume.name }}</td>
+                                    <td>
+                                        <a style="color:red" (click)="onDelete(resume)"><i class="pi pi-trash"></i></a>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="note" class="form-label">Notes</label>
-                        <textarea type="text" formControlName="notes"  placeholder="Notes" class="form-control" style="line-height:1.5" maxlength="200"></textarea>
+                        <textarea type="text" formControlName="notes" placeholder="Notes" class="form-control" style="line-height:1.5" maxlength="200"></textarea>
                     </div>
                 </div>
             </div>
@@ -129,5 +153,5 @@
             </div>
         </div>
     </div>
-    
+
 </form>
