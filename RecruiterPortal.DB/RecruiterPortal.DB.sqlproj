@@ -508,5 +508,6 @@
     <None Include="2024-02-05\01_SR_01_CREATE_ApplicantAttachment.sql" />
     <None Include="2024-02-05\02_SR_02_ALTER_ApplicantStatus.sql" />
     <None Include="2024-02-05\03_SR_03_CREATE_ApplicantStatusHistory.sql" />
+    <None Include="2024-02-05\04_SR_04_CREATE_TRIGGER_ApplicantStatusHistory.sql" />
   </ItemGroup>
 </Project>
