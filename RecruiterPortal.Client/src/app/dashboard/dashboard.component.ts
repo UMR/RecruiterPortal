@@ -1,25 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from './dashboard.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
 
     applicantCount: any;
     jobCount: any;
     statusCount: any;
     data1: any;
 
-    applicantOptions: any;
+    applicantCountOptions: any;
 
-    ngOnInit() {
-        
-    }
-
-    constructor(private dashboardService: DashboardService) {
+    constructor(private router: Router, private dashboardService: DashboardService) {
         this.getApplicantCount();
         this.getJobCount();
         this.getApplicantStatusCount();
@@ -43,15 +40,14 @@ export class DashboardComponent implements OnInit {
 
     getApplicantCount() {
         this.dashboardService.getApplicantCount().subscribe(res => {
-            this.getApplicantStatus(res.body.TotalApplicant, res.body.VerifiedApplicant, res.body.NotVerifiedApplicant)
+            this.generateApplicantCountPieChart(res.body.TotalApplicant, res.body.VerifiedApplicant, res.body.NotVerifiedApplicant)
         },
             err => {
-            },
-            () => {
             });
     }
-    getApplicantStatus(totalApplicant: any, verifiedApplicant: any, notVerifiedApplicant: any) {
-        this.applicantCount = {            
+
+    generateApplicantCountPieChart(totalApplicant: any, verifiedApplicant: any, notVerifiedApplicant: any) {
+        this.applicantCount = {
             labels: ['Total Applicant : ' + totalApplicant, 'Verified Applicant : ' + verifiedApplicant, 'Not Verified Applicant : ' + notVerifiedApplicant],
             datasets: [
                 {
@@ -60,18 +56,16 @@ export class DashboardComponent implements OnInit {
                         "#5BFF33",
                         "#36A2EB",
                         "#FFCE56"
-
                     ],
                     hoverBackgroundColor: [
                         "#5BFF33",
                         "#36A2EB",
                         "#FFCE56"
-
                     ]
                 }]
         };
 
-        this.applicantOptions = {
+        this.applicantCountOptions = {
             legend: {
                 position: 'left'
             },
@@ -79,6 +73,14 @@ export class DashboardComponent implements OnInit {
                 enabled: true
             }
         };
+    }
+
+    onApplicantCountSliceClick(event) {
+        const selectedLabel = this.applicantCount.labels[event.element._index];
+        const selectedDataIndex = event.element._index;
+        console.log('Selected Label:', selectedLabel);
+        console.log('Selected Data Index:', selectedDataIndex);
+        this.router.navigate(["view-by-applicant", selectedDataIndex]);
     }
 
     getApplicantStatusCount() {

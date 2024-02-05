@@ -51,6 +51,10 @@ const routes: Routes = [
     },
     {
         canActivate: [AuthGuard],
+        path: 'view-by-applicant/:applicantCountIndex', loadChildren: './view-by-applicant/view-by-applicant.module#ViewByApplicantModule'
+    },
+    {
+        canActivate: [AuthGuard],
         path: 'add-applicant', loadChildren: './add-applicant/add-applicant.module#AddApplicantModule'
     },
     {
