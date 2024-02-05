@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { LazyLoadEvent, MessageService } from 'primeng/api';
 import { Table } from 'primeng/components/table/table';
 import { StorageService } from '../common/services/storage.service';
 import { ViewByApplicantService } from './view-by-applicant.service';
+import { Menubar } from '../../../dist/recruiter-portal/assets/primeng/menubar';
 
 
 @Component({
@@ -37,11 +38,14 @@ export class ViewByApplicantComponent implements OnInit {
     public showSentBulkMailDialog: boolean = false;
     public selectedFilteredParams: any;
     @ViewChild('applicantTable', { static: false }) applicantTable: Table;
+    public applicantCountIndex: number;
 
     constructor(private fb: FormBuilder,
         private viewByApplicantService: ViewByApplicantService,
         private messageService: MessageService,
-        private router: Router, private storageService: StorageService) {
+        private router: Router,
+        private route: ActivatedRoute,
+        private storageService: StorageService) {
         this.createViewByApplicantFormGroup();
     }
 
@@ -52,7 +56,23 @@ export class ViewByApplicantComponent implements OnInit {
             { field: 'FirstName', header: 'Applicant First Name' },
             { field: 'Email', header: 'Applicant Email' },
         ];
-        this.selectedApplicantStatus = "1";
+        //this.selectedApplicantStatus = "1";
+        this.getApplicantCountParam();
+    }
+
+    getApplicantCountParam() {
+        this.route.paramMap.subscribe(params => {
+            if (params.get('applicantCountIndex')) {
+                this.applicantCountIndex = +params.get('applicantCountIndex').toString();
+                if (this.applicantCountIndex == 1) {
+                    this.selectedApplicantStatus = "1";
+                    this.viewByApplicantFormGroup.patchValue({ applicantStatus: "1" });
+                } else if (this.applicantCountIndex == 2) {                    
+                    this.selectedApplicantStatus = "0";
+                    this.viewByApplicantFormGroup.patchValue({ applicantStatus: "0" });
+                }
+            }
+        });
     }
 
     createViewByApplicantFormGroup() {
@@ -211,12 +231,12 @@ export class ViewByApplicantComponent implements OnInit {
         this.showDialog = show;
     }
 
-    onSendMailClick(applicant) {        
-        this.selectedApplicant = applicant;        
+    onSendMailClick(applicant) {
+        this.selectedApplicant = applicant;
         this.showSentMailDialog = true;
     }
 
-    onSendSMSClick(applicant) {        
+    onSendSMSClick(applicant) {
         this.selectedApplicantId = applicant.UserId;
         this.showSentSMSDialog = true;
     }
@@ -232,7 +252,7 @@ export class ViewByApplicantComponent implements OnInit {
     onSendBulkMailClick() {
         const firstName = this.viewByApplicantFormGroup.controls.applicantFirstName.value ? this.viewByApplicantFormGroup.controls.applicantFirstName.value : '';
         const lastName = this.viewByApplicantFormGroup.controls.applicantLastName.value ? this.viewByApplicantFormGroup.controls.applicantLastName.value : '';
-        const email = this.viewByApplicantFormGroup.controls.applicantEmail.value ? this.viewByApplicantFormGroup.controls.applicantEmail.value : '';        
+        const email = this.viewByApplicantFormGroup.controls.applicantEmail.value ? this.viewByApplicantFormGroup.controls.applicantEmail.value : '';
 
         this.selectedFilteredParams = {};
         this.selectedFilteredParams.firstName = firstName;
@@ -241,7 +261,7 @@ export class ViewByApplicantComponent implements OnInit {
         this.selectedFilteredParams.isVerified = this.selectedApplicantStatus == "1" ? true : false;
 
         console.log(this.selectedFilteredParams);
-        
+
         this.showSentBulkMailDialog = true;
     }
 
