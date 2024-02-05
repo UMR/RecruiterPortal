@@ -35,6 +35,8 @@ export class StatusComponent implements OnInit {
             positionId: [''],
             institution: [''],
             instituteId: [''],
+            resume:[''],
+            notes:[],
             currentSalary: [''],
             expectedSalary:['']
         });
