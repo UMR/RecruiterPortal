@@ -13,10 +13,11 @@ export class DashboardComponent implements OnInit {
     statusCount: any;
     data1: any;
 
+    applicantOptions: any;
+
     ngOnInit() {
+        
     }
-
-
 
     constructor(private dashboardService: DashboardService) {
         this.getApplicantCount();
@@ -32,7 +33,7 @@ export class DashboardComponent implements OnInit {
                 //    data: [65, 59, 80, 81, 56, 55, 40, 50, 30, 55, 60, 70]
                 //},
                 {
-                    label: 'Applicant Statistics',
+                    label: 'Applicant Volume',
                     backgroundColor: "#36A2EB",
                     data: [28, 48, 40, 19, 86, 27, 90, 70, 60, 50, 10, 20]
                 }
@@ -50,7 +51,7 @@ export class DashboardComponent implements OnInit {
             });
     }
     getApplicantStatus(totalApplicant: any, verifiedApplicant: any, notVerifiedApplicant: any) {
-        this.applicantCount = {
+        this.applicantCount = {            
             labels: ['Total Applicant : ' + totalApplicant, 'Verified Applicant : ' + verifiedApplicant, 'Not Verified Applicant : ' + notVerifiedApplicant],
             datasets: [
                 {
@@ -68,6 +69,15 @@ export class DashboardComponent implements OnInit {
 
                     ]
                 }]
+        };
+
+        this.applicantOptions = {
+            legend: {
+                position: 'left'
+            },
+            tooltips: {
+                enabled: true
+            }
         };
     }
 

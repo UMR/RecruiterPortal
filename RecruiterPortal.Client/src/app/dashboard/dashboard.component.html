@@ -4,25 +4,24 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-6">
-                    <div style="background-color:white">
-                        <p-chart type="pie" [data]="applicantCount"></p-chart>
+                    <div style="background-color:white;padding:15px;">
+                        <p-chart type="pie" [data]="applicantCount" [options]="applicantOptions"></p-chart>
                     </div>
                 </div>
                 <div class="col-6">
-                    <div style="background-color: white;">
+                    <div style="background-color: white; padding: 15px;">
                         <p-chart type="polarArea" [data]="statusCount"></p-chart>
                     </div>
                 </div>
-
             </div>
-            <div class="row">
+            <div class="row mt-3">
                 <div class="col-6">
-                    <div style="background-color:white;margin-top:16px">
+                    <div style="background-color: white; padding: 15px;">
                         <p-chart type="bar" [data]="data1"></p-chart>
                     </div>
                 </div>
                 <div class="col-6">
-                    <div style="background-color: white; margin-top: 16px">
+                    <div style="background-color: white; padding: 15px;">
                         <p-chart type="doughnut" [data]="jobCount"></p-chart>
                     </div>
                 </div>
