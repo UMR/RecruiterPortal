@@ -21,9 +21,13 @@ public partial class UmrrecruitmentApplicantContext : DbContext
 
     public virtual DbSet<AppVersion> AppVersions { get; set; }
 
+    public virtual DbSet<ApplicantAttachment> ApplicantAttachments { get; set; }
+
     public virtual DbSet<ApplicantInfoModel> ApplicantInfoModels { get; set; }
 
     public virtual DbSet<ApplicantStatus> ApplicantStatuses { get; set; }
+
+    public virtual DbSet<ApplicantStatusHistory> ApplicantStatusHistories { get; set; }
 
     public virtual DbSet<Cbcform> Cbcforms { get; set; }
 
@@ -201,6 +205,24 @@ public partial class UmrrecruitmentApplicantContext : DbContext
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
         });
 
+        modelBuilder.Entity<ApplicantAttachment>(entity =>
+        {
+            entity.ToTable("ApplicantAttachment");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.ApplicantId).HasColumnName("ApplicantID");
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.FileData).IsRequired();
+            entity.Property(e => e.FileName)
+                .IsRequired()
+                .HasMaxLength(100);
+            entity.Property(e => e.Title)
+                .IsRequired()
+                .HasMaxLength(200);
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
+            entity.Property(e => e.UserFileId).HasColumnName("UserFileID");
+        });
+
         modelBuilder.Entity<ApplicantInfoModel>(entity =>
         {
             entity
@@ -249,13 +271,14 @@ public partial class UmrrecruitmentApplicantContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK_ApplicantInstitutionStatus");
 
-            entity.ToTable("ApplicantStatus");
+            entity.ToTable("ApplicantStatus", tb => tb.HasTrigger("ApplicantStatusHistory_History_Data_Insert"));
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
             entity.Property(e => e.CurrentSalary).HasColumnType("decimal(10, 2)");
             entity.Property(e => e.Date).HasColumnType("datetime");
             entity.Property(e => e.ExpectedSalary).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Notes).HasMaxLength(500);
             entity.Property(e => e.Shift)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -282,6 +305,24 @@ public partial class UmrrecruitmentApplicantContext : DbContext
             entity.HasOne(d => d.UpdatedByNavigation).WithMany(p => p.ApplicantStatusUpdatedByNavigations)
                 .HasForeignKey(d => d.UpdatedBy)
                 .HasConstraintName("FK_ApplicantStatus_Recruiter1");
+        });
+
+        modelBuilder.Entity<ApplicantStatusHistory>(entity =>
+        {
+            entity.HasKey(e => e.HistoryId);
+
+            entity.ToTable("ApplicantStatusHistory");
+
+            entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.CurrentSalary).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Date).HasColumnType("datetime");
+            entity.Property(e => e.ExpectedSalary).HasColumnType("decimal(10, 2)");
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Notes).HasMaxLength(500);
+            entity.Property(e => e.Shift)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
         });
 
         modelBuilder.Entity<Cbcform>(entity =>

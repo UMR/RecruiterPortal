@@ -145,56 +145,7 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
-        public static PagedResponse<JobResponseModel> GetApplicantStatusByAgencyId(long agencyId, int skip, int take)
-        {
-            try
-            {
-                IEnumerable<JobResponseModel> jobs = Array.Empty<JobResponseModel>();
-                int jobsCount = 0;
-
-                using (UmrrecruitmentApplicantContext context = new UmrrecruitmentApplicantContext())
-                {
-                    jobsCount = (from job in context.Jobs
-                                 join pos in context.Positions
-                                 on job.JobId equals pos.Id
-                                 join ins in context.Institutions
-                                 on job.JobId equals ins.Id
-                                 where job.AgencyId == agencyId
-                                 select job).Count();
-
-                    jobs = (from job in context.Jobs
-                            join pos in context.Positions
-                            on job.JobId equals pos.Id
-                            join ins in context.Institutions
-                            on job.JobId equals ins.Id
-                            where job.AgencyId == agencyId
-                            select (new JobResponseModel
-                            {
-                                JobId = job.JobId,
-                                Status = job.Status,
-                                JobTitle = job.JobTitle,
-                                JobDescription = job.JobDescription,
-                                PositionId = job.PositionId,
-                                Position = pos.PositionName,
-                                InstituteId = ins.Id,
-                                Institute = ins.InstituteName,
-                                AgencyId = job.AgencyId,
-                                CreatedBy = job.CreatedBy,
-                                CreatedDate = job.CreatedDate,
-                                UpdatedBy = job.UpdatedBy,
-                                UpdatedDate = job.UpdatedDate
-                            })
-                           ).Skip(skip).Take(take)
-                           .ToList();
-                }
-
-                return new PagedResponse<JobResponseModel> { Records = jobs, TotalRecords = jobsCount };
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
+       
         public static async Task<ApplicantStatus> GetApplicantStatusById(long id)
         {
             try

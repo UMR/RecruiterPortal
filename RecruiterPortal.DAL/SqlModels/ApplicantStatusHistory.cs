@@ -3,8 +3,10 @@ using System.Collections.Generic;
 
 namespace RecruiterPortal.DAL.SqlModels;
 
-public partial class ApplicantStatus
+public partial class ApplicantStatusHistory
 {
+    public long HistoryId { get; set; }
+
     public long Id { get; set; }
 
     public long ApplicantId { get; set; }
@@ -44,14 +46,4 @@ public partial class ApplicantStatus
     public bool? IsActive { get; set; }
 
     public string Notes { get; set; }
-
-    public virtual Agency Agency { get; set; }
-
-    public virtual User Applicant { get; set; }
-
-    public virtual Recruiter CreatedByNavigation { get; set; }
-
-    public virtual Position Position { get; set; }
-
-    public virtual Recruiter UpdatedByNavigation { get; set; }
 }
