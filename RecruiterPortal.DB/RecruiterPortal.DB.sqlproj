@@ -506,5 +506,7 @@
     <None Include="2023-12-05\02_SR_02_ALTER_sp_GetAllInstitutionByFilter.sql" />
     <None Include="2024-01-16\01_SR_01_ALTER_sp_InsertRecruiter.sql" />
     <None Include="2024-02-05\01_SR_01_CREATE_ApplicantAttachment.sql" />
+    <None Include="2024-02-05\02_SR_02_ALTER_ApplicantStatus.sql" />
+    <None Include="2024-02-05\03_SR_03_CREATE_ApplicantStatusHistory.sql" />
   </ItemGroup>
 </Project>
