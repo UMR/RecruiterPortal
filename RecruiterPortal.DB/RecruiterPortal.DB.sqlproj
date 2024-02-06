@@ -144,6 +144,7 @@
     <Folder Include="2023-12-05" />
     <Folder Include="2024-01-16" />
     <Folder Include="2024-02-05" />
+    <Folder Include="2024-02-06" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="2019-11-04\01_TR_01_CREATE_DATABASE.sql" />
@@ -509,5 +510,6 @@
     <None Include="2024-02-05\02_SR_02_ALTER_ApplicantStatus.sql" />
     <None Include="2024-02-05\03_SR_03_CREATE_ApplicantStatusHistory.sql" />
     <None Include="2024-02-05\04_SR_04_CREATE_TRIGGER_ApplicantStatusHistory.sql" />
+    <None Include="2024-02-06\01_AZ_01_ALTER_PROCEDURE_GetAllApplicantByFilter.sql" />
   </ItemGroup>
 </Project>
