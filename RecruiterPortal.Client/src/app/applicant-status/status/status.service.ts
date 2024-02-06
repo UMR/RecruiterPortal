@@ -22,7 +22,22 @@ export class StatusService {
     getInsituteByInsituteName(institute: string): Observable<HttpResponse<any>> {
         return this.client.get(encodeURI(`${resourceServerUrl}/api/employment/institute?text=${institute}`), { observe: 'response' });
     }
+
     addApplicantStatus(applicantStatusModel: ApplicantStatusRequestModel) {
         return this.client.post(encodeURI(`${resourceServerUrl}/api/applicantstatus/save`), applicantStatusModel);
+    }
+
+    ///////////       Resume Section       /////////////
+
+    getApplicantResume(applicantId: any): Observable<HttpResponse<any>> {
+        return this.client.get(encodeURI(`${resourceServerUrl}/api/applicantresume/get-applicant-resume-by-id/${applicantId}`), { observe: 'response' });
+    }
+
+    uploadApplicantResume(resumeModel: any) {
+        return this.client.post(encodeURI(`${resourceServerUrl}/api/applicantresume/save`), resumeModel)
+    }
+
+    deleteApplicantResume(applicantId: any): Observable<HttpResponse<any>> {
+        return this.client.delete(encodeURI(`${resourceServerUrl}/api/applicantresume/delete/${applicantId}`), { observe: 'response' });
     }
 }

@@ -33,7 +33,6 @@ export class SentSMSComponent implements OnInit {
 
     }
     getApplicantPhone(appId) {
-        console.log(appId);
         if (this.selectedApplicantId) {
             this.smsService.getApplicantPhone(this.selectedApplicantId).subscribe(res => {
                 let phone = [];

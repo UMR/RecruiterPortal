@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { StatusService } from './status.service';
@@ -8,7 +8,7 @@ import { ApplicantStatusRequestModel } from '../../common/model/applicantStatusR
 @Component({
     selector: 'app-status',
     templateUrl: './status.component.html',
-    styleUrls: ['./status.component.css']    
+    styleUrls: ['./status.component.css']
 })
 export class StatusComponent implements OnInit {
 
@@ -18,10 +18,12 @@ export class StatusComponent implements OnInit {
     public statusResults: string[];
     public positionResults: string[];
     public institutionResults: any[];
-    
+    private fileName: string = "";
+    public resumes: any = [];
+
     constructor(private fb: FormBuilder, private messageService: MessageService, private confirmationService: ConfirmationService, private statusService: StatusService) {
 
-     }
+    }
 
     ngOnInit() {
         this.createFormGroup();
@@ -30,16 +32,20 @@ export class StatusComponent implements OnInit {
     createFormGroup() {
         this.formGroup = this.fb.group({
             status: ['', Validators.compose([Validators.required])],
-            statusId:[],
+            statusId: [],
             position: ['', Validators.compose([Validators.required])],
             positionId: [''],
             institution: [''],
             instituteId: [''],
-            resume:[''],
-            notes:[''],
+            resume: [''],
+            notes: [''],
             currentSalary: [''],
-            expectedSalary:['']
+            expectedSalary: ['']
         });
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        this.getApplicantResume(changes.selectedApplicant.currentValue);
     }
 
     onStatusSelect($event) {
@@ -51,13 +57,78 @@ export class StatusComponent implements OnInit {
 
     onStatusSearch() {
         this.statusService.getStatus().subscribe(response => {
-            console.log(response.body);
             this.statusResults = response.body;
         },
             err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get positions', detail: '' }); },
             () => { });
     }
-    
+
+    ///////////////  Resume Section   //////////////////
+
+    getApplicantResume(applicantId) {
+        if (this.selectedApplicant) {
+            this.statusService.getApplicantResume(applicantId).subscribe(response => {
+                this.resumes = response.body;
+            },
+                err => {
+                    //this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get resume', detail: '' });
+                },
+                () => { });
+        }
+    }
+
+    uploadResume(resumeModel: any) {
+        this.statusService.uploadApplicantResume(resumeModel).subscribe(response => {
+            this.getApplicantResume(this.selectedApplicant);
+        },
+            err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to upload resume', detail: '' }); },
+            () => { });
+    }
+
+    deleteResume(resumeId) {
+        if (this.selectedApplicant) {
+            this.statusService.deleteApplicantResume(resumeId).subscribe(response => {
+                this.getApplicantResume(this.selectedApplicant);
+            },
+                err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to delete resume', detail: '' }); },
+                () => { });
+        }
+    }
+
+    onDelete(resume) {
+        this.deleteResume(resume.Id);
+    }
+
+    onFileSelect(event) {
+        if (event.files.length > 0) {
+            if (!event.files[0].type.includes("image/") && !event.files[0].type.includes("application/pdf") && !event.files[0].type.includes("application/msword") && !event.files[0].type.includes("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid file type', detail: 'Upload file' });
+            } else if (event.files[0].size > 5000000) {
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid file size', detail: 'File size limit: 5MB' });
+            } else {
+                //this.uploadedFile = event.files[0];
+                //this.licenseFormGroup.get('fileName').setValue(event.files[0].name);
+                this.fileName = event.files[0].name;
+                let reader = new FileReader();
+                reader.readAsDataURL(event.files[0]);
+                reader.onloadend = () => {
+                    let licenseFile = reader.result.toString().split(',')[1];
+                    let uploadModel = {
+                        ApplicantId: this.selectedApplicant,
+                        Title: this.fileName,
+                        FileName: this.fileName,
+                        FileData: licenseFile
+                    }
+                    this.uploadResume(uploadModel);
+                }
+            }
+        }
+    }
+
+
+    //////////////////////////   End Resume   //////////////////////
+
+
     onPositionSearch($event) {
         this.statusService.getPositionByPositionName($event.query).subscribe(response => {
             this.positionResults = response.body;
@@ -90,23 +161,7 @@ export class StatusComponent implements OnInit {
         });
     }
 
-    onFileSelect(event) {
-        if (event.files.length > 0) {
-            if (!event.files[0].type.includes("image/") && !event.files[0].type.includes("application/pdf") && !event.files[0].type.includes("application/msword") && !event.files[0].type.includes("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
-                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid file type', detail: 'Upload file' });
-            } else if (event.files[0].size > 5000000) {
-                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Invalid file size', detail: 'File size limit: 5MB' });
-            } else {
-                //this.uploadedFile = event.files[0];
-                //this.licenseFormGroup.get('fileName').setValue(event.files[0].name);
-                let reader = new FileReader();
-                reader.readAsDataURL(event.files[0]);
-                reader.onloadend = () => {
-                    //this.licenseFile = reader.result.toString().split(',')[1];
-                }
-            }
-        }
-    }
+
 
     clear() {
         this.formGroup.reset();
@@ -115,10 +170,6 @@ export class StatusComponent implements OnInit {
     hide() {
         this.formGroup.reset();
         this.hideEvent.emit(false);
-    }
-
-    onDelete(resume) {
-
     }
 
     save() {
@@ -141,7 +192,7 @@ export class StatusComponent implements OnInit {
             }
         },
             err => {
-               /* this.isLoading = false;*/
+                /* this.isLoading = false;*/
                 this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Applicant send failed', detail: '' });
             },
             () => {
