@@ -143,7 +143,6 @@ export class StatusComponent implements OnInit {
     }
 
     onViewPdf(resume: any) {
-        console.log(resume);
         if (resume.FileName.includes(".pdf")) {
             //this.licenseService.getUserLicenseById(userLicense.LicenseID).subscribe(res => {
             var blob = this.b64toBlob(resume.FileData, "application/pdf", "");
