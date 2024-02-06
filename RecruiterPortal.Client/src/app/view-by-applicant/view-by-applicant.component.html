@@ -49,6 +49,7 @@
                                                         placeholder="Applicant Status" tabindex="5" #applicantStatus (change)='onApplicantStatusChange($event)'>
                                                     <option value="1">Verified</option>
                                                     <option value="0">Not Verified</option>
+                                                    <option value="">All</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -82,12 +83,12 @@
                                                  [rowsPerPageOptions]="[10,15,20]"
                                                  [showCurrentPageReport]="true"
                                                  currentPageReportTemplate="Total Records: {{totalApplicants}}">
-                                            <ng-template pTemplate="header" let-columns>
+                                            <ng-template pTemplate="header" let-columns let-applicant>
                                                 <tr>
                                                     <th *ngFor="let col of columns">
                                                         {{col.header}}
                                                     </th>
-                                                    <th *ngIf="selectedApplicantStatus==='1'" class="text-center">View/Edit</th>
+                                                    <th class="text-center" *ngIf="(selectedApplicantStatus == '1' || selectedApplicantStatus == '')">View/Edit</th>
                                                     <th class="text-center">Send To</th>
                                                     <th class="text-center">Send Mail</th>
                                                     <th class="text-center">Send SMS</th>
@@ -98,7 +99,9 @@
                                                     <td *ngFor="let col of columns">
                                                         <span class="p-column-title" style="padding-bottom: 2px; font-weight: bold;">{{col.header}}:&nbsp;</span>{{rowData[col.field]}}
                                                     </td>
-                                                    <td class="text-center" *ngIf="selectedApplicantStatus==='1'"><a (click)="onEdit(applicant.UserId)"><i class="pi pi-pencil"></i></a></td>
+                                                    <td class="text-center" *ngIf="(selectedApplicantStatus == '1' || selectedApplicantStatus == '')">
+                                                        <a *ngIf="applicant.IsVerified===true" (click)="onEdit(applicant.UserId)"><i class="pi pi-pencil"></i></a>
+                                                    </td>
                                                     <td class="text-center"><button type="button" (click)="onSendToClick(applicant)" class="btn btn-primary btn-import-sync">Send To</button> </td>
                                                     <td class="text-center"><button type="button" (click)="onSendMailClick(applicant)" class="btn btn-send-mail">Send Email</button> </td>
                                                     <td class="text-center"><button type="button" (click)="onSendSMSClick(applicant)" class="btn btn-send-sms">Send SMS</button> </td>

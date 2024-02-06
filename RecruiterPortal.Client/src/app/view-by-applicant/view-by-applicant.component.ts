@@ -70,6 +70,9 @@ export class ViewByApplicantComponent implements OnInit {
                 } else if (this.applicantCountIndex == 2) {                    
                     this.selectedApplicantStatus = "0";
                     this.viewByApplicantFormGroup.patchValue({ applicantStatus: "0" });
+                } else if (this.applicantCountIndex == 0) {
+                    this.selectedApplicantStatus = "";
+                    this.viewByApplicantFormGroup.patchValue({ applicantStatus: "" });
                 }
             }
         });
@@ -149,8 +152,8 @@ export class ViewByApplicantComponent implements OnInit {
         this.applicantTable.reset();
         this.selectedApplicantStatus = event.target.value;
         this.getApplicants();
-    }
-
+    }   
+     
     getApplicants() {
         this.isLoading = true;
         this.isSubmitted = true;
@@ -165,13 +168,13 @@ export class ViewByApplicantComponent implements OnInit {
             lastName: applicantLastName,
             email: applicantEmail,
             CurrentUserId: 1,
-            isVerified: this.selectedApplicantStatus == "1" ? true : false,
+            isVerified: !this.selectedApplicantStatus ? null : (this.selectedApplicantStatus == "1" ? true : false),            
             take: this.take,
             skip: this.skip,
         }
 
         this.viewByApplicantService.getViewByApplicantSearch(model)
-            .subscribe(response => {
+            .subscribe(response => {                
                 if (response.status === 200) {
                     this.applicants = (response.body as any).applicants;
                     this.totalApplicants = (response.body as any).totalApplicants;
