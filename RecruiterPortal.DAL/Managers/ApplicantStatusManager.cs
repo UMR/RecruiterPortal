@@ -44,6 +44,7 @@ namespace RecruiterPortal.DAL.Managers
             applicantStatus.ExpectedSalary = request.ExpectedSalary;
             applicantStatus.ProfileStatus = request.ProfileStatus;
             applicantStatus.Shift = request.Shift;
+            applicantStatus.Notes = request.Notes;
             applicantStatus.IsActive = request.IsActive;
             if (isInsert)
             {

@@ -11,6 +11,7 @@ export class ApplicantStatusRequestModel {
     CurrentSalary: number;
     ExpectedSalary?: number;
     ProfileStatus?: number;
-    Shift: string;
+    Shift: string
+    Notes: string;
     IsActive: boolean;
 }

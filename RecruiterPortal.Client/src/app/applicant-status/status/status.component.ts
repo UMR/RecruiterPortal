@@ -67,7 +67,7 @@ export class StatusComponent implements OnInit {
 
     getApplicantResume(applicantId) {
         if (this.selectedApplicant) {
-            this.statusService.getApplicantResume(applicantId).subscribe(response => {
+            this.statusService.getApplicantResume(this.selectedApplicant).subscribe(response => {
                 this.resumes = response.body;
             },
                 err => {
@@ -182,6 +182,7 @@ export class StatusComponent implements OnInit {
         statusModel.InstitutionId = this.formGroup.get('instituteId').value == '' ? null : this.formGroup.get('instituteId').value;
         statusModel.CurrentSalary = this.formGroup.get('currentSalary').value == '' ? null : this.formGroup.get('currentSalary').value;
         statusModel.ExpectedSalary = this.formGroup.get('expectedSalary').value == '' ? null : this.formGroup.get('expectedSalary').value;
+        statusModel.Notes = this.formGroup.get('notes').value == '' ? null : this.formGroup.get('notes').value;;
         statusModel.IsActive = true;
 
         this.statusService.addApplicantStatus(statusModel).subscribe(res => {
