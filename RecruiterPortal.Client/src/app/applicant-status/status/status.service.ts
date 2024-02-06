@@ -27,6 +27,10 @@ export class StatusService {
         return this.client.post(encodeURI(`${resourceServerUrl}/api/applicantstatus/save`), applicantStatusModel);
     }
 
+    getStatusByApplicantId(applicantId: any): Observable<HttpResponse<any>> {
+        return this.client.get(encodeURI(`${resourceServerUrl}/api/applicantstatus/get-status-by-applicant-id/`) + applicantId, { observe: 'response' });
+    }
+
     ///////////       Resume Section       /////////////
 
     getApplicantResume(applicantId: any): Observable<HttpResponse<any>> {

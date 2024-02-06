@@ -62,7 +62,21 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
             }
+        }
 
+        [Route("get-status-by-applicant-id/{applicantId}")]
+        [HttpGet]
+        public async Task<IActionResult> GetStatusByApplicantId(int applicantId)
+        {
+            try
+            {
+                return Ok(await ApplicantStatusManager.GetStatusByApplicantId(applicantId));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [Route("save")]

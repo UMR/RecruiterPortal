@@ -180,6 +180,20 @@ namespace RecruiterPortal.DAL.Managers
                 throw new Exception(ex.Message);
             }
         }
+
+        public static async Task<ApplicantStatus> GetStatusByApplicantId(long applicantId)
+        {
+            try
+            {
+                GenericRepository<ApplicantStatus> repository = new GenericRepository<ApplicantStatus>();
+                return await repository.GetByIdAsync(p => p.ApplicantId == applicantId && p.IsActive==true);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public static List<ApplicantStatusResponseModel> GetApplicantByStatus(long agencyId, int statusId)
         {
             try

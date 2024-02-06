@@ -46,6 +46,7 @@ export class StatusComponent implements OnInit {
 
     ngOnChanges(changes: SimpleChanges) {
         this.getApplicantResume(changes.selectedApplicant.currentValue);
+        this.getNotesForApplicant();
     }
 
     onStatusSelect($event) {
@@ -61,6 +62,22 @@ export class StatusComponent implements OnInit {
         },
             err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get positions', detail: '' }); },
             () => { });
+    }
+
+    getNotesForApplicant() {
+        if (this.selectedApplicant) {
+            this.statusService.getStatusByApplicantId(this.selectedApplicant).subscribe(res => {
+                if (res.body) {
+                    this.formGroup.patchValue({
+                        notes: res.body.Notes
+                    });
+                }
+            },
+                err => {
+                    //this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get resume', detail: '' });
+                },
+                () => { });
+        }
     }
 
     ///////////////  Resume Section   //////////////////
