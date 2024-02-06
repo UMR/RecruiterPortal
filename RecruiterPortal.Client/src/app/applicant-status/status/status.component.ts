@@ -142,6 +142,76 @@ export class StatusComponent implements OnInit {
         }
     }
 
+    onViewPdf(resume: any) {
+        console.log(resume);
+        if (resume.FileName.includes(".pdf")) {
+            //this.licenseService.getUserLicenseById(userLicense.LicenseID).subscribe(res => {
+            var blob = this.b64toBlob(resume.FileData, "application/pdf", "");
+            const fileURL = URL.createObjectURL(blob);
+            window.open(fileURL, '_blank');
+            //});
+        }
+        else if (resume.FileName.includes(".docx") || resume.FileName.includes(".doc")) {
+            //this.licenseService.getUserLicenseById(userLicense.LicenseID).subscribe(res => {
+            let blob = this.b64toBlobDoc(resume.FileData, "application/octet-stream",);
+            let blobUrl = URL.createObjectURL(blob);
+            let doc = document.createElement("a");
+            doc.href = blobUrl;
+            doc.download = resume.FileName;
+            doc.click();
+            //});
+        }
+        else {
+            //this.licenseService.getUserLicenseById(userLicense.LicenseID).subscribe(res => {
+            var blob = this.b64toBlob(resume.FileData, "image/jpeg", "");
+            const fileURL = URL.createObjectURL(blob);
+            window.open(fileURL, '_blank');
+            //});
+        }
+    }
+
+    b64toBlob(b64Data, contentType, sliceSize) {
+        contentType = contentType || "";
+        sliceSize = sliceSize || 512;
+
+        var byteCharacters = atob(b64Data);
+        var byteArrays = [];
+
+        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            var byteNumbers = new Array(slice.length);
+            for (var i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            var byteArray = new Uint8Array(byteNumbers);
+
+            byteArrays.push(byteArray);
+        }
+        return new File(byteArrays, "pot", { type: contentType });
+    }
+
+    b64toBlobDoc(b64Data, contentType = '', sliceSize = 512) {
+        const byteCharacters = atob(b64Data);
+        const byteArrays = [];
+
+        for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            const byteNumbers = new Array(slice.length);
+            for (let i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            const byteArray = new Uint8Array(byteNumbers);
+            byteArrays.push(byteArray);
+        }
+
+        const blob = new Blob(byteArrays, { type: contentType });
+        return blob;
+    }
+
 
     //////////////////////////   End Resume   //////////////////////
 
