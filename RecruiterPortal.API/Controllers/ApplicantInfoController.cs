@@ -31,7 +31,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             {
                 applicantSearchModel.CurrentUserId = base.RecruiterId;
                 DataSet data = UserManager.GetAllUserByFilter(applicantSearchModel);
-                List<ApplicantInfoModel> appModelList = new List<ApplicantInfoModel>();
+                List<Applicant> appModelList = new List<Applicant>();
                 int applicantCount = 0;
 
                 if (data != null)
@@ -45,12 +45,13 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
 
                     foreach (DataRow oRow in dataTable.Rows)
                     {
-                        ApplicantInfoModel userReferenceModel = new ApplicantInfoModel();
-                        userReferenceModel.Email = oRow["Email"].ToString(); ;
-                        userReferenceModel.FirstName = oRow["First_Name"].ToString();
-                        userReferenceModel.LastName = oRow["Last_Name"].ToString();
-                        userReferenceModel.UserId = Convert.ToInt32(oRow["UserID"].ToString());
-                        appModelList.Add(userReferenceModel);
+                        Applicant applicant = new Applicant();
+                        applicant.Email = oRow["Email"].ToString(); ;
+                        applicant.FirstName = oRow["First_Name"].ToString();
+                        applicant.LastName = oRow["Last_Name"].ToString();
+                        applicant.UserId = Convert.ToInt32(oRow["UserID"].ToString());
+                        applicant.IsVerified = Convert.ToBoolean(oRow["IsVerified"].ToString());
+                        appModelList.Add(applicant);
                     }
                 }
                 return Ok(new { applicants = appModelList, totalApplicants = applicantCount });
