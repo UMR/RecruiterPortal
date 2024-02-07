@@ -5,7 +5,6 @@ import { LazyLoadEvent, MessageService } from 'primeng/api';
 import { Table } from 'primeng/components/table/table';
 import { StorageService } from '../common/services/storage.service';
 import { ViewByApplicantService } from './view-by-applicant.service';
-import { Menubar } from '../../../dist/recruiter-portal/assets/primeng/menubar';
 
 
 @Component({
