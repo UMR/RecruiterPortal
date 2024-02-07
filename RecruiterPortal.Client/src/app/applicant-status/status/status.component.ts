@@ -12,6 +12,7 @@ import { ApplicantStatusRequestModel } from '../../common/model/applicantStatusR
 })
 export class StatusComponent implements OnInit {
 
+    public isLoading: boolean = false;
     @Output() hideEvent = new EventEmitter<boolean>();
     @Input() selectedApplicant: any;
     public formGroup: FormGroup;
@@ -95,11 +96,16 @@ export class StatusComponent implements OnInit {
     }
 
     uploadResume(resumeModel: any) {
+        this.isLoading = true;
         this.statusService.uploadApplicantResume(resumeModel).subscribe(response => {
+            this.isLoading = false;
             this.getApplicantResume(this.selectedApplicant);
         },
-            err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to upload resume', detail: '' }); },
-            () => { });
+            err => {
+                this.isLoading = false;
+                this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get resume', detail: '' });
+            },
+            () => { this.isLoading = false; });
     }
 
     deleteResume(resumeId) {

@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="postion" class="form-label">Postion</label>
+                        <label for="postion" class="form-label">Position</label>
                         <p-autoComplete formControlName="position" [suggestions]="positionResults" class="form-control"
                                         (completeMethod)="onPositionSearch($event)" required autocomplete="off"
                                         forceSelection="true" (onSelect)="onPositionSelect($event)" [ngClass]="{ 'is-invalid': submitted }" [dropdown]="true">
@@ -79,7 +79,7 @@
                         <label for="" class="form-label">Upload Resume</label>
                         <div class="form-group mt-1">
                             <div class="upload">
-                                <p-fileUpload chooseLabel="Uplaod Resume"
+                                <p-fileUpload chooseLabel="Upload Resume"
                                               mode="advanced"
                                               auto="true"
                                               customUpload="true"
@@ -107,6 +107,7 @@
 
             <div class="row">
                 <div class="col-md-12">
+                    <loading-image [is-loading]="isLoading"></loading-image>
                     <div class="form-group">
                         <p-table [value]="resumes">
                             <ng-template pTemplate="header">
