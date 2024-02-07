@@ -2,7 +2,8 @@
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
 }
-.fc-col-header, .fc-scrollgrid-sync-table, .fc-daygrid-body.fc-daygrid-body-unbalanced.fc-daygrid-body-natural, .fc-daygrid-body.fc-daygrid-body-unbalanced, .fc-timegrid-body, .fc-timegrid-slots table, .fc-timegrid-cols table {
-    width: 100% !important;
-    height:400px;
+
+:host ::ng-deep.fc-theme-standard {
+    height: 415px !important;
 }
+
