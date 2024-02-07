@@ -47,7 +47,7 @@ export class StatusComponent implements OnInit {
 
     ngOnChanges(changes: SimpleChanges) {
         this.getApplicantResume(changes.selectedApplicant.currentValue);
-        this.getNotesForApplicant();
+        this.getNotesForApplicant(changes.selectedApplicant.currentValue);
     }
 
     onStatusSelect($event) {
@@ -65,8 +65,9 @@ export class StatusComponent implements OnInit {
             () => { });
     }
 
-    getNotesForApplicant() {
+    getNotesForApplicant(applicantId) {
         if (this.selectedApplicant) {
+            this.formGroup.patchValue({ notes: '' });
             this.statusService.getStatusByApplicantId(this.selectedApplicant).subscribe(res => {
                 if (res.body) {
                     this.formGroup.patchValue({
@@ -84,6 +85,7 @@ export class StatusComponent implements OnInit {
     ///////////////  Resume Section   //////////////////
 
     getApplicantResume(applicantId) {
+        this.resumes = [];
         if (this.selectedApplicant) {
             this.statusService.getApplicantResume(this.selectedApplicant).subscribe(response => {
                 this.resumes = response.body;
