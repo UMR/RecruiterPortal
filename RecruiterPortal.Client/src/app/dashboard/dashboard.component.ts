@@ -7,13 +7,15 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import { CalendarService } from '../calendar/calendar.service';
+import D3Funnel from 'd3-funnel';
+
 
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
 
     public events: any[];
     applicantCount: any;
@@ -43,7 +45,7 @@ export class DashboardComponent {
             //this.handleEventClick(ee)
         },
         select: (eee) => {
-           // this.handleDateSelect(eee)
+            // this.handleDateSelect(eee)
         }
     };
     applicantCountOptions: any;
@@ -69,6 +71,10 @@ export class DashboardComponent {
                 }
             ]
         };
+    }
+
+    ngOnInit() {
+
     }
 
     getInterviewByRecruiterId() {
@@ -141,14 +147,33 @@ export class DashboardComponent {
 
     getApplicantStatusCount() {
         this.dashboardService.getApplicantStatusCount().subscribe(res => {
-            this.getStatus(res.body.NewLeads, res.body.PreScreened, res.body.PhoneScreened,
+            //this.getStatus(res.body.NewLeads, res.body.PreScreened, res.body.PhoneScreened,
+            //    res.body.FinalInterview, res.body.Offered, res.body.Accepted, res.body.Refused, res.body.Rejected)
+            this.generateApplicantStatusFunnelChart(res.body.NewLeads, res.body.PreScreened, res.body.PhoneScreened,
                 res.body.FinalInterview, res.body.Offered, res.body.Accepted, res.body.Refused, res.body.Rejected)
         },
             err => {
-            },
-            () => {
             });
     }
+
+    generateApplicantStatusFunnelChart(lead: any, preScreen: any, phScreend: any, interview: any, offered: any, accepted: any, refused: any, rejected: any) {
+        const data = [
+            { label: 'New Lead', value: lead },
+            { label: 'Pre-screened', value: preScreen },
+            { label: 'Phone Screened', value: phScreend },
+            { label: 'Final Interview', value: interview },
+        ];
+        const options = {
+            block: {
+                dynamicHeight: true,
+                minHeight: 15,
+            },
+        };
+
+        const chart = new D3Funnel('#funnel');
+        chart.draw(data, options);
+    }
+
     getStatus(lead: any, preScreen: any, phScreend: any, interview: any, offered: any, accepted: any, refused: any, rejected: any) {
         this.statusCount = {
             labels: ['New Lead: ' + lead, 'Pre-screened : ' + preScreen, 'Phone Screened : ' + phScreend
@@ -190,6 +215,7 @@ export class DashboardComponent {
             () => {
             });
     }
+
     getJobStatus(totalJob: any, activeJob: any, inActiveJob: any) {
         this.jobCount = {
             labels: ['Total Job : ' + totalJob, 'Active Job : ' + activeJob, 'In Active Job : ' + inActiveJob],
