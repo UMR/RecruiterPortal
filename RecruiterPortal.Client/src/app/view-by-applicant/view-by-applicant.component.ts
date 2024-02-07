@@ -160,14 +160,15 @@ export class ViewByApplicantComponent implements OnInit {
         const applicantFirstName = this.viewByApplicantFormGroup.controls.applicantFirstName.value ? this.viewByApplicantFormGroup.controls.applicantFirstName.value : '';
         const applicantLastName = this.viewByApplicantFormGroup.controls.applicantLastName.value ? this.viewByApplicantFormGroup.controls.applicantLastName.value : '';
         const applicantEmail = this.viewByApplicantFormGroup.controls.applicantEmail.value ? this.viewByApplicantFormGroup.controls.applicantEmail.value : '';
-        //const applicantStatus = this.viewByApplicantFormGroup.controls.applicantStatus.value ? this.viewByApplicantFormGroup.controls.applicantStatus.value : '';
+        const applicantStatus = this.viewByApplicantFormGroup.controls.applicantStatus.value ? this.viewByApplicantFormGroup.controls.applicantStatus.value : '';
 
         const model = {
             firstName: applicantFirstName,
             lastName: applicantLastName,
             email: applicantEmail,
             CurrentUserId: 1,
-            isVerified: !this.selectedApplicantStatus ? null : (this.selectedApplicantStatus == "1" ? true : false),            
+            //isVerified: !this.selectedApplicantStatus ? null : (this.selectedApplicantStatus == "1" ? true : false),            
+            isVerified: !applicantStatus ? null : (applicantStatus == "1" ? true : false),
             take: this.take,
             skip: this.skip,
         }
@@ -273,8 +274,9 @@ export class ViewByApplicantComponent implements OnInit {
 
     onClear() {
         this.viewByApplicantFormGroup.reset();
-        this.viewByApplicantFormGroup.controls.applicantStatus.setValue(this.selectedApplicantStatus);
-        this.selectedApplicantStatus = this.selectedApplicantStatus;
+        this.selectedApplicantStatus = "1";
+        //this.viewByApplicantFormGroup.controls.applicantStatus.setValue(this.selectedApplicantStatus);        
+        this.viewByApplicantFormGroup.patchValue({ applicantStatus: this.selectedApplicantStatus });
         this.applicantTable.reset();
         this.getApplicants();
     }
