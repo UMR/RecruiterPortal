@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard.component';
 import { SharedModule } from '../common/shared.module';
 import { ChartModule } from 'primeng/chart';
 import { DashboardService } from './dashboard.service';
+import { FullCalendarModule } from 'primeng/fullcalendar';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { DashboardService } from './dashboard.service';
         CommonModule,
         DashboardRoutingModule,
         SharedModule,
-        ChartModule
+        ChartModule,
+        FullCalendarModule
     ],
     providers: [DashboardService]
 })

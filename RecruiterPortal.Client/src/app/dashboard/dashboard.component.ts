@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from './dashboard.service';
 import { Router } from '@angular/router';
+import { CalendarOptions, EventClickArg, DateSelectArg } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import listPlugin from '@fullcalendar/list';
+import { CalendarService } from '../calendar/calendar.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -9,17 +15,44 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent {
 
+    public events: any[];
     applicantCount: any;
     jobCount: any;
     statusCount: any;
     data1: any;
 
+    calendarOptions: CalendarOptions = {
+        plugins: [
+            interactionPlugin,
+            dayGridPlugin,
+            timeGridPlugin,
+            listPlugin
+        ],
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+        },
+        initialView: 'dayGridMonth',
+        weekends: true,
+        editable: true,
+        selectable: true,
+        selectMirror: true,
+        dayMaxEvents: true,
+        eventClick: (ee) => {
+            //this.handleEventClick(ee)
+        },
+        select: (eee) => {
+           // this.handleDateSelect(eee)
+        }
+    };
     applicantCountOptions: any;
 
-    constructor(private router: Router, private dashboardService: DashboardService) {
+    constructor(private router: Router, private calendarService: CalendarService, private dashboardService: DashboardService) {
         this.getApplicantCount();
         this.getJobCount();
         this.getApplicantStatusCount();
+        this.getInterviewByRecruiterId()
         //this.getApplicantStatus();
         this.data1 = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Sep', 'October', 'November', 'December'],
@@ -36,6 +69,29 @@ export class DashboardComponent {
                 }
             ]
         };
+    }
+
+    getInterviewByRecruiterId() {
+        this.calendarService.getInterviewSchedule()
+            .subscribe(response => {
+                if (response.status === 200) {
+                    let allData: any[] = [];
+                    for (let i = 0; i < response.body.length; i++) {
+                        let data = {
+                            title: response.body[i].Title,
+                            id: response.body[i].Id,
+                            start: response.body[i].StartDate,
+                            end: response.body[i].EndDate
+                        }
+                        allData.push(data);
+                    }
+                    this.events = allData;
+                }
+            },
+                err => {
+                },
+                () => {
+                });
     }
 
     getApplicantCount() {

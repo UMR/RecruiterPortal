@@ -25,7 +25,9 @@
                 </div>
                 <div class="col-6">
                     <div style="background-color: white; padding: 15px;">
-                        <p-chart type="doughnut" [data]="jobCount"></p-chart>
+                        <div style="background-color: aliceblue; padding: 16px">
+                            <p-fullCalendar [events]="events" [options]="calendarOptions" [style]="{'height':'400px'}"></p-fullCalendar>
+                        </div>
                     </div>
                 </div>
             </div>
