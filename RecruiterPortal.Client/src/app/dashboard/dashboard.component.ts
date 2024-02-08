@@ -213,9 +213,11 @@ export class DashboardComponent implements OnInit {
                 },
             },
         };
-
+        var shortData = data.sort(function (a, b) {
+            return b.value - a.value
+        });
         const chart = new D3Funnel('#funnel');        
-        chart.draw(data, options);
+        chart.draw(shortData, options);
     }
 
     getStatus(lead: any, preScreen: any, phScreend: any, interview: any, offered: any, accepted: any, refused: any, rejected: any) {
