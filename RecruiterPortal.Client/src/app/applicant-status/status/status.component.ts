@@ -67,18 +67,20 @@ export class StatusComponent implements OnInit {
 
     getNotesForApplicant(applicantId) {
         if (this.selectedApplicant) {
-            this.formGroup.patchValue({ notes: '' });
-            this.statusService.getStatusByApplicantId(this.selectedApplicant).subscribe(res => {
-                if (res.body) {
-                    this.formGroup.patchValue({
-                        notes: res.body.Notes
-                    });
-                }
-            },
-                err => {
-                    //this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get resume', detail: '' });
+            if (typeof (this.selectedApplicant) !== "object") {
+                this.formGroup.patchValue({ notes: '' });
+                this.statusService.getStatusByApplicantId(this.selectedApplicant).subscribe(res => {
+                    if (res.body) {
+                        this.formGroup.patchValue({
+                            notes: res.body.Notes
+                        });
+                    }
                 },
-                () => { });
+                    err => {
+                        //this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get resume', detail: '' });
+                    },
+                    () => { });
+            }
         }
     }
 
@@ -87,13 +89,15 @@ export class StatusComponent implements OnInit {
     getApplicantResume(applicantId) {
         this.resumes = [];
         if (this.selectedApplicant) {
-            this.statusService.getApplicantResume(this.selectedApplicant).subscribe(response => {
-                this.resumes = response.body;
-            },
-                err => {
-                    //this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get resume', detail: '' });
+            if (typeof (this.selectedApplicant) !== "object") {
+                this.statusService.getApplicantResume(this.selectedApplicant).subscribe(response => {
+                    this.resumes = response.body;
                 },
-                () => { });
+                    err => {
+                        //this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to get resume', detail: '' });
+                    },
+                    () => { });
+            }
         }
     }
 
@@ -112,11 +116,13 @@ export class StatusComponent implements OnInit {
 
     deleteResume(resumeId) {
         if (this.selectedApplicant) {
-            this.statusService.deleteApplicantResume(resumeId).subscribe(response => {
-                this.getApplicantResume(this.selectedApplicant);
-            },
-                err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to delete resume', detail: '' }); },
-                () => { });
+            if (typeof (this.selectedApplicant) !== "object") {
+                this.statusService.deleteApplicantResume(resumeId).subscribe(response => {
+                    this.getApplicantResume(this.selectedApplicant);
+                },
+                    err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to delete resume', detail: '' }); },
+                    () => { });
+            }
         }
     }
 
