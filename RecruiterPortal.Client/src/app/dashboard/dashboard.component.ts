@@ -139,9 +139,7 @@ export class DashboardComponent implements OnInit {
 
     onApplicantCountSliceClick(event) {
         const selectedLabel = this.applicantCount.labels[event.element._index];
-        const selectedDataIndex = event.element._index;
-        console.log('Selected Label:', selectedLabel);
-        console.log('Selected Data Index:', selectedDataIndex);
+        const selectedDataIndex = event.element._index;        
         this.router.navigate(["view-by-applicant", selectedDataIndex]);
     }
 
@@ -164,13 +162,7 @@ export class DashboardComponent implements OnInit {
             { label: 'Accepted', value: accepted },
             { label: 'Refused', value: refused },
             { label: 'Rejected', value: rejected },
-        ];
-        //const options = {
-        //    block: {
-        //        dynamicHeight: true,
-        //        minHeight: 15,
-        //    },
-        //};
+        ];        
 
         var options = {
             chart: {
@@ -206,9 +198,46 @@ export class DashboardComponent implements OnInit {
             },
             events: {
                 click: {
-                    block: (event, d)=> {                       
-                        console.log(d.label);
-                        console.log(d.value);
+                    block: (event, d) => {
+                        const label = d.label.raw;                                              
+                        const value = +d.value;                        
+                        switch (label) {
+                            case 'New Lead': {
+                                this.router.navigate(["lead"]);
+                                break;
+                            }
+                            case 'Pre-screened': {   
+                                this.router.navigate(["paper-screened"]);
+                                break;
+                            }
+                            case 'Phone Screened': {
+                                this.router.navigate(["phone-screened"]);
+                                break;
+                            }
+                            case 'Final Interview': {
+                                this.router.navigate(["final-interview"]);
+                                break;
+                            }
+                            case 'Offered': {
+                                this.router.navigate(["offered"]);
+                                break;
+                            }
+                            case 'Accepted': {
+                                this.router.navigate(["accepted"]);
+                                break;
+                            }
+                            case 'Refused': {
+                                this.router.navigate(["refused"]);
+                                break;
+                            }
+                            case 'Rejected': {
+                                this.router.navigate(["rejected"]);
+                                break;
+                            }
+                            default: {                                
+                                break;
+                            } 
+                        }
                     },
                 },
             },
