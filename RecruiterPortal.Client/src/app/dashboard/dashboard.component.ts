@@ -146,9 +146,7 @@ export class DashboardComponent implements OnInit {
     }
 
     getApplicantStatusCount() {
-        this.dashboardService.getApplicantStatusCount().subscribe(res => {
-            //this.getStatus(res.body.NewLeads, res.body.PreScreened, res.body.PhoneScreened,
-            //    res.body.FinalInterview, res.body.Offered, res.body.Accepted, res.body.Refused, res.body.Rejected)
+        this.dashboardService.getApplicantStatusCount().subscribe(res => {            
             this.generateApplicantStatusFunnelChart(res.body.NewLeads, res.body.PreScreened, res.body.PhoneScreened,
                 res.body.FinalInterview, res.body.Offered, res.body.Accepted, res.body.Refused, res.body.Rejected)
         },
@@ -162,6 +160,10 @@ export class DashboardComponent implements OnInit {
             { label: 'Pre-screened', value: preScreen },
             { label: 'Phone Screened', value: phScreend },
             { label: 'Final Interview', value: interview },
+            { label: 'Offered', value: offered },
+            { label: 'Accepted', value: accepted },
+            { label: 'Refused', value: refused },
+            { label: 'Rejected', value: rejected },
         ];
         const options = {
             block: {
