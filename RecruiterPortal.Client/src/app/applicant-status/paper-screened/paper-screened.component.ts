@@ -56,6 +56,7 @@ export class PaperScreenedComponent implements OnInit {
     }
 
     handleHideEvent(show) {
+        this.selectedApplicant = 0;
         this.showDialog = show;
     }
 }
