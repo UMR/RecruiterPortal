@@ -147,14 +147,14 @@ export class DashboardComponent implements OnInit {
 
     getApplicantStatusCount() {
         this.dashboardService.getApplicantStatusCount().subscribe(res => {            
-            this.generateApplicantStatusFunnelChart(res.body.NewLeads, res.body.PreScreened, res.body.PhoneScreened,
+            this.generateApplicantStatusCountFunnelChart(res.body.NewLeads, res.body.PreScreened, res.body.PhoneScreened,
                 res.body.FinalInterview, res.body.Offered, res.body.Accepted, res.body.Refused, res.body.Rejected)
         },
             err => {
             });
     }
 
-    generateApplicantStatusFunnelChart(lead: any, preScreen: any, phScreend: any, interview: any, offered: any, accepted: any, refused: any, rejected: any) {
+    generateApplicantStatusCountFunnelChart(lead: any, preScreen: any, phScreend: any, interview: any, offered: any, accepted: any, refused: any, rejected: any) {
         const data = [
             { label: 'New Lead', value: lead },
             { label: 'Pre-screened', value: preScreen },
@@ -165,14 +165,56 @@ export class DashboardComponent implements OnInit {
             { label: 'Refused', value: refused },
             { label: 'Rejected', value: rejected },
         ];
-        const options = {
+        //const options = {
+        //    block: {
+        //        dynamicHeight: true,
+        //        minHeight: 15,
+        //    },
+        //};
+
+        var options = {
+            chart: {
+                bottomWidth: 1 / 3,
+                bottomPinch: 0,
+                inverted: false,
+                horizontal: false,
+                animate: 0,
+                curve: {
+                    enabled: false,
+                    height: 20,
+                    shade: -0.4,
+                },
+                totalCount: null,
+            },
             block: {
-                dynamicHeight: true,
-                minHeight: 15,
+                dynamicHeight: false,
+                dynamicSlope: false,
+                barOverlay: false,                
+                minHeight: 0,
+                highlight: true,
+            },
+            label: {
+                enabled: true,
+                fontFamily: null,
+                fontSize: '14px',
+                fill: '#fff',
+                format: '{l}: {f}',
+            },
+            tooltip: {
+                enabled: false,
+                format: '{l}: {f}',
+            },
+            events: {
+                click: {
+                    block: (event, d)=> {                       
+                        console.log(d.label);
+                        console.log(d.value);
+                    },
+                },
             },
         };
 
-        const chart = new D3Funnel('#funnel');
+        const chart = new D3Funnel('#funnel');        
         chart.draw(data, options);
     }
 
