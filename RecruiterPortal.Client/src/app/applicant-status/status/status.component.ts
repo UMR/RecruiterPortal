@@ -105,6 +105,7 @@ export class StatusComponent implements OnInit {
     }
 
     getResume() {
+        this.isLoading = true;
         this.statusService.getApplicantResume(this.selectedApplicant).subscribe(response => {
             this.resumes = response.body;
             this.isLoading = false;
@@ -131,7 +132,9 @@ export class StatusComponent implements OnInit {
     deleteResume(resumeId) {
         if (this.selectedApplicant) {
             if (typeof (this.selectedApplicant) !== "object") {
+                this.isLoading = true;
                 this.statusService.deleteApplicantResume(resumeId).subscribe(response => {
+                    this.isLoading = false;
                     this.getResume();
                 },
                     err => { this.messageService.add({ key: 'toastKey1', severity: 'error', summary: 'Failed to delete resume', detail: '' }); },
