@@ -4,17 +4,17 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-6">
-                    <div style="background-color:white;padding:15px;cursor:pointer;">
-                        <p-chart type="pie" [data]="applicantCount" 
-                                 [options]="applicantCountOptions" 
-                                 (onDataSelect)="onApplicantCountSliceClick($event)">
-                        </p-chart>
-                    </div>
-                </div>
-                <div class="col-6">
                     <div style="background-color: white; padding: 15px;">
                         <!--<p-chart type="polarArea" [data]="statusCount"></p-chart>-->
                         <div id="funnel" style="height:446px;"></div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div style="background-color:white;padding:15px;cursor:pointer;">
+                        <p-chart type="pie" [data]="applicantCount"
+                                 [options]="applicantCountOptions"
+                                 (onDataSelect)="onApplicantCountSliceClick($event)">
+                        </p-chart>
                     </div>
                 </div>
             </div>
