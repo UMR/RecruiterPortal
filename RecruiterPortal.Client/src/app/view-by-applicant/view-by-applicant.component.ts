@@ -66,7 +66,7 @@ export class ViewByApplicantComponent implements OnInit {
                 if (this.applicantCountIndex == 1) {
                     this.selectedApplicantStatus = "1";
                     this.viewByApplicantFormGroup.patchValue({ applicantStatus: "1" });
-                } else if (this.applicantCountIndex == 2) {                    
+                } else if (this.applicantCountIndex == 2) {
                     this.selectedApplicantStatus = "0";
                     this.viewByApplicantFormGroup.patchValue({ applicantStatus: "0" });
                 } else if (this.applicantCountIndex == 0) {
@@ -151,8 +151,8 @@ export class ViewByApplicantComponent implements OnInit {
         this.applicantTable.reset();
         this.selectedApplicantStatus = event.target.value;
         this.getApplicants();
-    }   
-     
+    }
+
     getApplicants() {
         this.isLoading = true;
         this.isSubmitted = true;
@@ -174,7 +174,7 @@ export class ViewByApplicantComponent implements OnInit {
         }
 
         this.viewByApplicantService.getViewByApplicantSearch(model)
-            .subscribe(response => {                
+            .subscribe(response => {
                 if (response.status === 200) {
                     this.applicants = (response.body as any).applicants;
                     this.totalApplicants = (response.body as any).totalApplicants;
@@ -257,15 +257,15 @@ export class ViewByApplicantComponent implements OnInit {
         const firstName = this.viewByApplicantFormGroup.controls.applicantFirstName.value ? this.viewByApplicantFormGroup.controls.applicantFirstName.value : '';
         const lastName = this.viewByApplicantFormGroup.controls.applicantLastName.value ? this.viewByApplicantFormGroup.controls.applicantLastName.value : '';
         const email = this.viewByApplicantFormGroup.controls.applicantEmail.value ? this.viewByApplicantFormGroup.controls.applicantEmail.value : '';
+        const applicantStatus = this.viewByApplicantFormGroup.controls.applicantStatus.value ? this.viewByApplicantFormGroup.controls.applicantStatus.value : '';
 
         this.selectedFilteredParams = {};
         this.selectedFilteredParams.firstName = firstName;
         this.selectedFilteredParams.lastName = lastName;
         this.selectedFilteredParams.email = email;
-        this.selectedFilteredParams.isVerified = this.selectedApplicantStatus == "1" ? true : false;
-
+        //this.selectedFilteredParams.isVerified = this.selectedApplicantStatus == "1" ? true : false;
+        this.selectedFilteredParams.isVerified = !applicantStatus ? null : (applicantStatus == "1" ? true : false),
         console.log(this.selectedFilteredParams);
-
         this.showSentBulkMailDialog = true;
     }
 

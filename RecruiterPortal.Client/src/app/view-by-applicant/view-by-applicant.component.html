@@ -131,7 +131,7 @@
     <sent-sms (hideEvent)="handleSendSMSHideEvent($event)" [selectedApplicantId]="selectedApplicantId"></sent-sms>
 </p-dialog>
 
-<p-dialog [(visible)]="showSentBulkMailDialog" [style]="{ width: '1200px' }" header="Send Mail" [modal]="true" [closable]="true" [draggable]="false" [resizable]="false">
+<p-dialog [(visible)]="showSentBulkMailDialog" [style]="{ width: '1200px' }" header="Send Bulk Mail" [modal]="true" [closable]="true" [draggable]="false" [resizable]="false">
     <sent-bulk-mail (hideEvent)="handleSendBulkMailHideEvent($event)" [selectedFilteredParams]="selectedFilteredParams"></sent-bulk-mail>
 </p-dialog>
 
