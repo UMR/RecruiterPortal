@@ -145,6 +145,7 @@
     <Folder Include="2024-01-16" />
     <Folder Include="2024-02-05" />
     <Folder Include="2024-02-06" />
+    <Folder Include="2024-02-12" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="2019-11-04\01_TR_01_CREATE_DATABASE.sql" />
@@ -511,5 +512,6 @@
     <None Include="2024-02-05\03_SR_03_CREATE_ApplicantStatusHistory.sql" />
     <None Include="2024-02-05\04_SR_04_CREATE_TRIGGER_ApplicantStatusHistory.sql" />
     <None Include="2024-02-06\01_AZ_01_ALTER_PROCEDURE_GetAllApplicantByFilter.sql" />
+    <None Include="2024-02-12\01_AZ_01_GetAllEmailByFilter.sql" />
   </ItemGroup>
 </Project>
