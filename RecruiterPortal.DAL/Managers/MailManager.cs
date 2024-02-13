@@ -8,7 +8,7 @@ namespace RecruiterPortal.DAL.Managers
 {
     public class MailManager
     {
-        public static DataTable GetAllEmailByFilter(string email, string firstName, string lastName, bool isVerified, int currentRecruiterId)
+        public static DataTable GetAllEmailByFilter(string email, string firstName, string lastName, bool? isVerified, int currentRecruiterId)
         {
             string spName = "sp_GetAllEmailByFilter";
             dynamic expandoObject = new ExpandoObject();            
