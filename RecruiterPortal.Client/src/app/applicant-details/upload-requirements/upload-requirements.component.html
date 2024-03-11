@@ -74,7 +74,7 @@
                     <tr>
                       <td (click)="onViewPdf(userFile)" style="cursor:pointer">{{userFile.FileName}}</td>
                       <td class="text-center">{{userFile.CreatedDate | date:'MM-dd-yyyy'}}</td>
-                      <td class="text-center"><a (click)="onDeleteFile(userFile.userFileID)"><i class="fa fa-trash-alt text-danger"></i></a></td>
+                      <td class="text-center"><a (click)="onDeleteFile(userFile.UserFileID)"><i class="fa fa-trash-alt text-danger"></i></a></td>
                     </tr>
                   </ng-template>
                 </p-table>
