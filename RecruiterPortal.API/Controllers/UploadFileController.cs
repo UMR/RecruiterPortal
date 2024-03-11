@@ -85,7 +85,7 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
         }
 
-        [Route("list/{userId}{fileType}")]
+        [Route("list/{userId}/{fileType}")]
         [HttpGet]
         public IActionResult GetUploadFile(long userId, byte fileType)
         {
