@@ -44,7 +44,7 @@ namespace RecruiterPortalDAL.Managers
                 return 1;
             }
             catch (Exception ex)
-            {                
+            {
                 throw new Exception(ex.Message);
             }
         }
@@ -62,7 +62,6 @@ namespace RecruiterPortalDAL.Managers
             }
 
             IEnumerable<UserFile> userFiles = null;
-
             try
             {
 
@@ -70,13 +69,14 @@ namespace RecruiterPortalDAL.Managers
 
             }
             catch (Exception ex)
-            {                 
+            {
                 throw new Exception(ex.Message);
             }
 
             return userFiles;
         }
-        public static IEnumerable<UserFile> GetUserFileByFileType(Int64 p_UserID,byte p_FileType)
+
+        public static IEnumerable<UserFile> GetUserFileByFileType(Int64 p_UserID, byte p_FileType)
         {
             string spName = "sp_GetUserFileDetailsByFileType";
             SqlParameter[] sqlParameters = new GenericRepository<User>().GetSqlParametersFromStoredProcedure(spName);
@@ -102,7 +102,7 @@ namespace RecruiterPortalDAL.Managers
 
             }
             catch (Exception ex)
-            {                
+            {
                 throw new Exception(ex.Message);
             }
 
@@ -129,7 +129,7 @@ namespace RecruiterPortalDAL.Managers
                 return result;
             }
             catch (Exception ex)
-            {                
+            {
                 throw new Exception(ex.Message);
             }
         }
