@@ -42,8 +42,8 @@ export class UploadRequirementsComponent implements OnInit {
     getEmpClass() {
         this.uploadFileService.getEmpolymentClass(this.service.getApplicantId).subscribe(data => {
             if (data.status === 200) {
-                this.myEmployment.nativeElement.value = data.body.employmentClass;
-                this.selectedEmpClass = data.body.employmentClass;
+                this.myEmployment.nativeElement.value = data.body.EmploymentClass;
+                this.selectedEmpClass = data.body.EmploymentClass;
                 if (this.myEmployment.nativeElement.value == '1099') {
                     this.fileTypes = Object.values(Enum1099FileNameByType);
                     this.fileTypeEnum = (<any>Enum1099FileType)[this.fileType];
@@ -70,6 +70,7 @@ export class UploadRequirementsComponent implements OnInit {
                 this.isLoading = false;
             });
     }
+
     onEmploymentClassChange(value) {
         this.isLoading = true;
         this.uploadFileService.updateEmpolymentClass(this.service.getApplicantId, value)
@@ -88,7 +89,7 @@ export class UploadRequirementsComponent implements OnInit {
     }
 
     onFileTypeChange(fileTypeName) {
-        this.selectedFileName = fileTypeName
+        this.selectedFileName = fileTypeName;
         if (this.selectedEmpClass == '1099') {
             this.fileNameEnum = Object.keys(Enum1099FileNameByType)[Object.values(Enum1099FileNameByType).indexOf(fileTypeName)];
             this.fileTypeEnum = Enum1099FileType[this.fileNameEnum];
