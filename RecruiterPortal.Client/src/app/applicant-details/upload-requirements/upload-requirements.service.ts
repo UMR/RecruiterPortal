@@ -29,7 +29,7 @@ export class UploadRequirementsService {
     }
 
     updateEmpolymentClass(aplicantId: any, empClass: any): Observable<HttpResponse<any>> {
-        return this.http.get(this.updateEmpClass + empClass, { observe: 'response' });
+        return this.http.get(this.updateEmpClass + aplicantId + '/' + empClass, { observe: 'response' });
     }
 
     getEmpolymentClass(appId): Observable<HttpResponse<any>> {
