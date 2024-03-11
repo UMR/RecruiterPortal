@@ -1,0 +1,15 @@
+.download {
+  font-size: 15px;
+  float: right;
+  padding-right: 10px;
+}
+
+:host >>> .pi-plus:before {
+  display: none !important;
+}
+
+.btn-download {
+  height: 42px;
+  cursor: pointer;
+  color: white;
+}

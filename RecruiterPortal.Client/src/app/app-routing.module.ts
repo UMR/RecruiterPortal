@@ -22,7 +22,7 @@ const routes: Routes = [
             { path: 'personal-info', loadChildren: './applicant-details/personal-info/personal-info.module#PersonalInfoModule' },
             /*{ path: 'change-password', loadChildren: './change-password/change-password.module#ChangePasswordModule' },*/
             //{ path: 'progress-tracking', loadChildren: './applicant-details/progress-tracking/progress-tracking.module#ProgressTrackingModule' },
-            /*{ path: 'upload-requirements', loadChildren: './applicant-details/upload-file/upload-file.module#UploadFileModule' },*/
+            { path: 'upload-requirements', loadChildren: './applicant-details/upload-requirements/upload-requirements.module#UploadRequirementsModule' },
             //{ path: 'download-file', loadChildren: './applicant-details/download-file/download-file.module#DownloadFileModule' },
             { path: 'emergency-info', loadChildren: './applicant-details/emergency-info/emergency-info.module#EmergencyInfoModule' },
             { path: 'identification-info', loadChildren: './applicant-details/identification-info/identification-info.module#IdentificationInfoModule' },
