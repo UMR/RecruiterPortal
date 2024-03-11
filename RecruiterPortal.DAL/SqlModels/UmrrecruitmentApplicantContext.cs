@@ -77,7 +77,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
 
     public virtual DbSet<Role> Roles { get; set; }
 
-    public virtual DbSet<Smshistory> Smshistories { get; set; }
+    public virtual DbSet<Smslog> Smslogs { get; set; }
 
     public virtual DbSet<State> States { get; set; }
 
@@ -588,9 +588,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
                 .HasForeignKey(d => d.CreatedBy)
                 .HasConstraintName("FK_Job_Recruiter");
 
-            entity.HasOne(d => d.UpdatedByNavigation).WithMany(p => p.JobUpdatedByNavigations)
-                .HasForeignKey(d => d.UpdatedBy)
-                .HasConstraintName("FK_Job_Recruiter1");
+            entity.HasOne(d => d.UpdatedByNavigation).WithMany(p => p.JobUpdatedByNavigations).HasForeignKey(d => d.UpdatedBy);
         });
 
         modelBuilder.Entity<LookupZipCode>(entity =>
@@ -797,6 +795,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
         {
             entity.ToTable("Recruiter");
 
+            entity.Property(e => e.RecruiterId).HasColumnName("RecruiterID");
             entity.Property(e => e.AgencyId).HasColumnName("AgencyID");
             entity.Property(e => e.ApplicantTypeId).HasColumnName("ApplicantTypeID");
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -865,6 +864,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
             entity.HasNoKey();
 
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+            entity.Property(e => e.RecruiterId).HasColumnName("RecruiterID");
             entity.Property(e => e.RoleId).HasColumnName("RoleID");
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
         });
@@ -882,11 +882,9 @@ public partial class UmrrecruitmentApplicantContext : DbContext
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
         });
 
-        modelBuilder.Entity<Smshistory>(entity =>
+        modelBuilder.Entity<Smslog>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK_SMSLog");
-
-            entity.ToTable("SMSHistory");
+            entity.ToTable("SMSLog");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.CreatedDate).HasColumnType("datetime");
@@ -902,11 +900,11 @@ public partial class UmrrecruitmentApplicantContext : DbContext
                 .HasMaxLength(30);
             entity.Property(e => e.UpdatedDate).HasColumnType("datetime");
 
-            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.SmshistoryCreatedByNavigations)
+            entity.HasOne(d => d.CreatedByNavigation).WithMany(p => p.SmslogCreatedByNavigations)
                 .HasForeignKey(d => d.CreatedBy)
                 .HasConstraintName("FK_SMS_Recruiter_CreatedBy");
 
-            entity.HasOne(d => d.UpdatedByNavigation).WithMany(p => p.SmshistoryUpdatedByNavigations)
+            entity.HasOne(d => d.UpdatedByNavigation).WithMany(p => p.SmslogUpdatedByNavigations)
                 .HasForeignKey(d => d.UpdatedBy)
                 .HasConstraintName("FK_SMS_Recruiter_UpdatedBy");
         });
@@ -1018,6 +1016,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
             entity.Property(e => e.Email)
                 .IsRequired()
                 .HasMaxLength(200);
+            entity.Property(e => e.EmploymentClass).HasMaxLength(50);
             entity.Property(e => e.FirstName)
                 .IsRequired()
                 .HasMaxLength(30)
@@ -1172,9 +1171,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
             entity.Property(e => e.CreatedDate)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
-            entity.Property(e => e.FileData)
-                .IsRequired()
-                .HasColumnName("FIleData");
+            entity.Property(e => e.FileData).HasColumnName("FIleData");
             entity.Property(e => e.FileName).IsRequired();
             entity.Property(e => e.FileType).HasDefaultValueSql("((3))");
             entity.Property(e => e.UserId).HasColumnName("UserID");
@@ -1189,7 +1186,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
         {
             entity.HasKey(e => e.LicenseId).HasName("PK_License");
 
-            entity.ToTable("UserLicense", tb => tb.HasTrigger("Update_ChangeTracker_UserLicense"));
+            entity.ToTable("UserLicense");
 
             entity.Property(e => e.LicenseId).HasColumnName("LicenseID");
             entity.Property(e => e.CreatedDate)
@@ -1220,7 +1217,7 @@ public partial class UmrrecruitmentApplicantContext : DbContext
 
         modelBuilder.Entity<UserMilitary>(entity =>
         {
-            entity.ToTable("UserMilitary", tb => tb.HasTrigger("Update_ChangeTracker_UserMilitary"));
+            entity.ToTable("UserMilitary");
 
             entity.Property(e => e.UserMilitaryId).HasColumnName("UserMilitaryID");
             entity.Property(e => e.Branch).HasMaxLength(500);

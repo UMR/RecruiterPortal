@@ -23,6 +23,8 @@ public partial class User
 
     public int? AgencyId { get; set; }
 
+    public string EmploymentClass { get; set; }
+
     public virtual ICollection<AgreementFrom> AgreementFroms { get; set; } = new List<AgreementFrom>();
 
     public virtual ICollection<ApplicantStatus> ApplicantStatuses { get; set; } = new List<ApplicantStatus>();
