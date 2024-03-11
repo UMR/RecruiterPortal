@@ -337,7 +337,7 @@ export class UploadRequirementsComponent implements OnInit {
             FIleData: this.fileData,
             FileName: this.fileName,
             CreatedDate: "",
-            UserID: 0,
+            UserID: this.service.getApplicantId,
             FileType: this.fileTypeEnum
         }
 

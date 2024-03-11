@@ -33,7 +33,7 @@ namespace RecruiterPortalDAL.Managers
                     {
                         sqlParameter.Value = userFile.CreatedDate;
                     }
-                    else if ("@p_" + nameof(userFile.UserId) == sqlParameter.ParameterName)
+                    else if ("@p_UserID" == sqlParameter.ParameterName)
                     {
                         sqlParameter.Value = userFile.UserId;
                     }
