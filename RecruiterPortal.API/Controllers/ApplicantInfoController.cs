@@ -11,6 +11,7 @@ using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.SqlModels;
 using RecruiterPortalDAL.Managers;
 using RecruiterPortalDAL.Models;
+using Serilog;
 using static RecruiterPortal.DAL.Utility.Utility;
 
 namespace ApplicantPortalAPI.ResourceServer.Controllers
@@ -63,6 +64,47 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
             }
         }
 
+        [Route("update-emplyment-class/{applicantId}/{employmentClass}")]
+        [HttpGet]
+        public IActionResult UpdateUserEmplymentClass(int applicantId,string employmentClass)
+        {
+            try
+            {
+                UserManager.UpdateUserEmplymentClass(applicantId, employmentClass);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex);
+            }
+        }
+
+        [Route("get-emplyment-class/{applicantId}")]
+        [HttpGet]
+        public IActionResult GetEmploymentClass(int applicantId)
+        {
+            try
+            {
+                var emplymentClass = UserManager.GetUserEmpClassByID(applicantId);
+                DataRow dataRow = emplymentClass.Rows[0];
+
+                if (!string.IsNullOrEmpty(dataRow["EmploymentClass"].ToString()))
+                {
+                    return Ok(new { EmploymentClass = dataRow["EmploymentClass"].ToString() });
+                }
+                else
+                {
+                    return Ok(500);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex);
+            }
+        }
         [Route("save")]
         [HttpPost]
         public IActionResult AddApplicant(User user)

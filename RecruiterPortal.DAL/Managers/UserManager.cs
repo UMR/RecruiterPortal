@@ -622,5 +622,42 @@ namespace RecruiterPortalDAL.Managers
                 throw new Exception(ex.Message);
             }
         }
+
+        public static void UpdateUserEmplymentClass(long userId, string employmentClass)
+        {
+            string spName = "sp_UpdateUserEmploymentClass";
+            dynamic expandoObject = new ExpandoObject();
+            expandoObject.UserID = userId;
+            expandoObject.EmploymentClass = employmentClass;
+            GenericRepository<User> userRepo = new GenericRepository<User>();
+            SqlParameter[] sqlParameters = userRepo.GetSqlParametersFromExpandoObject(expandoObject, spName, "@");
+            try
+            {
+                userRepo.Update(spName, sqlParameters);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static DataTable GetUserEmpClassByID(long UserID)
+        {
+            string spName = "sp_GetUserEmploymentClass";
+            dynamic expandoObject = new ExpandoObject();
+            expandoObject.UserID = UserID;
+            GenericRepository<User> userRepo = new GenericRepository<User>();
+            SqlParameter[] sqlParameters = userRepo.GetSqlParametersFromExpandoObject(expandoObject, spName);
+            DataTable appUser = null;
+            try
+            {
+                appUser = userRepo.LoadDataTable(spName, sqlParameters);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return appUser;
+        }
     }
 }
