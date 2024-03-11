@@ -223,16 +223,16 @@ export class UploadRequirementsComponent implements OnInit {
     }
 
     onViewPdf(userFile: any) {
-        if (userFile.fileName.includes(".pdf")) {
-            this.uploadFileService.getFileById(userFile.userFileID).subscribe(res => {
-                var blob = this.b64toBlob(res.body.fIleData, "application/pdf", "");
+        if (userFile.FileName.includes(".pdf")) {
+            this.uploadFileService.getFileById(userFile.UserFileID).subscribe(res => {
+                var blob = this.b64toBlob(res.body.FIleData, "application/pdf", "");
                 const fileURL = URL.createObjectURL(blob);
                 window.open(fileURL, '_blank');
             });
         }
-        else if (userFile.fileName.includes(".docx") || userFile.fileName.includes(".doc")) {
-            this.uploadFileService.getFileById(userFile.userFileID).subscribe(res => {
-                var blob = this.b64toBlobDoc(res.body.fIleData, "application/octet-stream",);
+        else if (userFile.FileName.includes(".docx") || userFile.FileName.includes(".doc")) {
+            this.uploadFileService.getFileById(userFile.UserFileID).subscribe(res => {
+                var blob = this.b64toBlobDoc(res.body.FIleData, "application/octet-stream",);
                 let blobUrl = URL.createObjectURL(blob);
                 let doc = document.createElement("a");
                 doc.href = blobUrl;
@@ -241,8 +241,8 @@ export class UploadRequirementsComponent implements OnInit {
             });
         }
         else {
-            this.uploadFileService.getFileById(userFile.userFileID).subscribe(res => {
-                var blob = this.b64toBlob(res.body.fIleData, "image/jpeg", "");
+            this.uploadFileService.getFileById(userFile.UserFileID).subscribe(res => {
+                var blob = this.b64toBlob(res.body.FIleData, "image/jpeg", "");
                 const fileURL = URL.createObjectURL(blob);
                 window.open(fileURL, '_blank');
             });
