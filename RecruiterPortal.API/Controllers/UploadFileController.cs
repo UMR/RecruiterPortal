@@ -4,6 +4,7 @@ using RecruiterPortal.DAL.Models;
 using RecruiterPortal.DAL.SqlModels;
 using RecruiterPortalDAL.Managers;
 using RecruiterPortalDAL.Models;
+using Serilog;
 using static RecruiterPortal.DAL.Utility.Utility;
 
 namespace ApplicantPortalAPI.ResourceServer.Controllers
@@ -115,7 +116,35 @@ namespace ApplicantPortalAPI.ResourceServer.Controllers
                 _logger.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex.Message);
             }
-        }        
+        }
+
+        [Route("get/{fileId}")]
+        [HttpGet]
+        public IActionResult GetUploadFileById(long fileId)
+        {
+            try
+            {
+                UserFile userFile = UploadFileManager.GetUserFileById(fileId);
+                UserFileModel userFileModel = new UserFileModel();
+
+                if (userFile != null)
+                {
+                    userFileModel.UserFileID = userFile.UserFileId;
+                    userFileModel.UserID = userFile.UserId;
+                    userFileModel.FileName = userFile.FileName;
+                    userFileModel.FIleData = userFile.FileData;
+                    userFileModel.CreatedDate = userFile.CreatedDate;
+                    userFileModel.FileType = userFile.FileType;
+                }
+                return Ok(userFileModel);
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex.Message);
+            }            
+        }
 
         [Route("delete/{fileId}")]
         [HttpDelete]

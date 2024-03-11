@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using RecruiterPortal.DAL.Repository;
 using RecruiterPortal.DAL.SqlModels;
+using System.Dynamic;
 
 namespace RecruiterPortalDAL.Managers
 {
@@ -131,6 +132,26 @@ namespace RecruiterPortalDAL.Managers
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+        }
+
+        public static UserFile GetUserFileById(long fileId)
+        {
+            string spName = "sp_GetUserFileById";
+
+            try
+            {
+                GenericRepository<UserFile> userFileRepo = new GenericRepository<UserFile>();
+                dynamic expandoObject = new ExpandoObject();
+                expandoObject.p_UserFileID = fileId;
+                SqlParameter[] sqlParameters = userFileRepo.GetSqlParametersFromExpandoObject(expandoObject, spName);
+                UserFile userFile = userFileRepo.GetOne(spName, sqlParameters);
+
+                return userFile;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }
