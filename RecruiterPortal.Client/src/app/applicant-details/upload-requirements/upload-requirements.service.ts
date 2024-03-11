@@ -9,7 +9,7 @@ import { resourceServerUrl } from '../../common/constants/auth-keys';
 })
 export class UploadRequirementsService {
 
-    private fileListURI: string = `${resourceServerUrl}/api/upload-file/list`;
+    private fileListURI: string = `${resourceServerUrl}/api/upload-file/list/`;
     private uploadFileURI: string = `${resourceServerUrl}/api/upload-file/upload`;
     private deleteFileURI: string = `${resourceServerUrl}/api/upload-file/delete/`;
     private getUserFileByIdURI: string = `${resourceServerUrl}/api/upload-file/get`;
@@ -24,8 +24,8 @@ export class UploadRequirementsService {
         return this.http.get(this.fileListURI, { observe: 'response' });
     }
 
-    getUserFileByFileType(fileType: any): Observable<HttpResponse<any>> {
-        return this.http.get(this.fileListURI + "/" + fileType, { observe: 'response' });
+    getUserFileByFileType(userId: any, fileType: any): Observable<HttpResponse<any>> {
+        return this.http.get(this.fileListURI + userId + '/' + fileType, { observe: 'response' });
     }
 
     updateEmpolymentClass(aplicantId: any, empClass: any): Observable<HttpResponse<any>> {

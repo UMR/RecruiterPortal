@@ -293,7 +293,7 @@ export class UploadRequirementsComponent implements OnInit {
 
     getUserFileByFileType() {
         this.isLoading = true;
-        this.uploadFileService.getUserFileByFileType(this.fileTypeEnum)
+        this.uploadFileService.getUserFileByFileType(this.service.getApplicantId, this.fileTypeEnum)
             .subscribe(data => {
                 if (data.status === 200) {
                     this.userFiles = data.body;
