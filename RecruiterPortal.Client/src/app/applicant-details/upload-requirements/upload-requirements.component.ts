@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MessageService, MenuItem, ConfirmationService } from 'primeng/api';
-import { Enum1099FileNameByType, Enum1099FileType, EnumFileNameByType, EnumFileType, IUploadFile } from '../upload-file/upload-file.model';
+import { Enum1099FileNameByType, Enum1099FileType, EnumFileNameByType, EnumFileType, EnumW2FileNameByType, EnumW2FileType, IUploadFile } from '../upload-file/upload-file.model';
 import { Table } from 'primeng/components/table/table';
 import { UploadRequirementsService } from './upload-requirements.service';
 import { StorageService } from '../../common/services/storage.service';
@@ -20,6 +20,7 @@ export class UploadRequirementsComponent implements OnInit {
     public selectedFile: IUploadFile;
     @ViewChild('applicationTable', { static: false }) applicationTable: Table;
     @ViewChild('myEmployment', { static: false }) myEmployment: ElementRef;
+    @ViewChild('fileTypeSelect', { static: false }) fileTypeSelect: ElementRef;
     public steps: MenuItem[];
     public activeIndex: number = 0;
     public selectedActiveIndex: number = 0;
@@ -50,15 +51,9 @@ export class UploadRequirementsComponent implements OnInit {
                     this.fileNameEnum = (<any>Enum1099FileNameByType)[this.fileType];
                 }
                 if (this.myEmployment.nativeElement.value == 'W-2') {
-
-                    this.fileTypes = null
-                    this.fileTypeEnum = '';
-                    this.fileNameEnum = '';
-
-
-                    //this.fileTypes = Object.values(EnumFileNameByType);
-                    //this.fileTypeEnum = (<any>EnumFileType)[this.fileType];
-                    //this.fileNameEnum = (<any>EnumFileNameByType)[this.fileType];
+                    this.fileTypes = Object.values(EnumW2FileNameByType);
+                    this.fileTypeEnum = (<any>EnumW2FileType)[this.fileType];
+                    this.fileNameEnum = (<any>EnumW2FileNameByType)[this.fileType];
                 }
             }
         },
@@ -76,6 +71,8 @@ export class UploadRequirementsComponent implements OnInit {
         this.uploadFileService.updateEmpolymentClass(this.service.getApplicantId, value)
             .subscribe(data => {
                 if (data.status === 200) {
+                    this.fileTypeSelect.nativeElement.value = '';
+                    this.userFiles = [];
                     this.getEmpClass();
                 }
             },
@@ -95,8 +92,8 @@ export class UploadRequirementsComponent implements OnInit {
             this.fileTypeEnum = Enum1099FileType[this.fileNameEnum];
         }
         else {
-            this.fileNameEnum = Object.keys(EnumFileNameByType)[Object.values(EnumFileNameByType).indexOf(fileTypeName)];
-            this.fileTypeEnum = EnumFileType[this.fileNameEnum];
+            this.fileNameEnum = Object.keys(EnumW2FileNameByType)[Object.values(EnumW2FileNameByType).indexOf(fileTypeName)];
+            this.fileTypeEnum = EnumW2FileType[this.fileNameEnum];
         }
         this.getUserFileByFileType();
         this.loadFilePath();
@@ -104,7 +101,7 @@ export class UploadRequirementsComponent implements OnInit {
 
     loadFilePath() {
         if (this.fileNameEnum == "AgencyHired") {
-            this.filePath = "assets/pdf/2021/AGENCY_HIRE_FORM_2021.docx";
+            this.filePath = "assets/pdf/w2/Agency Hire Form.docx";
         }
         else if (this.fileNameEnum == "AdministrativeFeeAgreement") {
             this.filePath = "assets/pdf/2021/Administrative_Fee_Agreement.docx";
@@ -113,25 +110,34 @@ export class UploadRequirementsComponent implements OnInit {
             this.filePath = "";
         }
         else if (this.fileNameEnum == "DeclinationInfluenza") {
-            this.filePath = "assets/pdf/2021/Declination_of_Influenza_Vaccination.docx";
+            this.filePath = "assets/pdf/w2/Declination of Influenza Vaccination.docx";
         }
         else if (this.fileNameEnum == "EmergencyContact") {
-            this.filePath = "assets/pdf/2021/Emergency_Contact_Information_Form.docx";
+            this.filePath = "assets/pdf/w2/Emergency Contact Information Form.docx";
         }
-        else if (this.fileNameEnum == "EmploymentApplication") {
+        else if (this.fileNameEnum == "EmploymentApplication" && this.myEmployment.nativeElement.value == '1099') {
             this.filePath = "assets/pdf/2024/Independent Contractor Application Form.docx";
+        }
+        else if (this.fileNameEnum == "EmploymentApplication" && this.myEmployment.nativeElement.value == 'W-2') {
+            this.filePath = "assets/pdf/w2/Application.docx";
         }
         else if (this.fileNameEnum == "EmploymentContract") {
             this.filePath = "";
         }
         else if (this.fileNameEnum == "EmploymentEligibility") {
-            this.filePath = "assets/pdf/2021/Employment_Eligibility_Verification.docx";
+            this.filePath = "assets/pdf/w2/I-9 Employment Eligibility Verification.pdf";
         }
-        else if (this.fileNameEnum == "HepatitisB") {
+        else if (this.fileNameEnum == "HepatitisB" && this.myEmployment.nativeElement.value == '1099') {
             this.filePath = "assets/pdf/2024/Hepatitis B Immunization.docx";
         }
-        else if (this.fileNameEnum == "HippaForm") {
+        else if (this.fileNameEnum == "HepatitisB" && this.myEmployment.nativeElement.value == 'W-2') {
+            this.filePath = "assets/pdf/w2/Hepatitis B Immunization.docx";
+        }
+        else if (this.fileNameEnum == "HippaForm" && this.myEmployment.nativeElement.value == '1099') {
             this.filePath = "assets/pdf/2024/HIPPA Form 2021.docx";
+        }
+        else if (this.fileNameEnum == "HippaForm" && this.myEmployment.nativeElement.value == 'W-2') {
+            this.filePath = "assets/pdf/w2/HIPPA_Form.docx";
         }
         else if (this.fileNameEnum == "IndependentContractorAgreement") {
             this.filePath = "assets/pdf/2024/Independent Contractor Agreement.docx";
@@ -140,10 +146,10 @@ export class UploadRequirementsComponent implements OnInit {
             this.filePath = "assets/pdf/2021/Nurse_Form_5.docx";
         }
         else if (this.fileNameEnum == "NysChrc") {
-            this.filePath = "assets/pdf/2021/Background_Checks.docx";
+            this.filePath = "assets/pdf/w2/DOH CHRC Form.pdf";
         }
         else if (this.fileNameEnum == "Payroll") {
-            this.filePath = "assets/pdf/2024/Direct Deposit Payroll Authorization.docx";
+            this.filePath = "assets/pdf/w2/Direct Deposit Payroll Authorization.docx";
         }
         else if (this.fileNameEnum == "PhysicalExam") {
             this.filePath = "";
@@ -157,17 +163,20 @@ export class UploadRequirementsComponent implements OnInit {
         else if (this.fileNameEnum == "TermsAndConditionsIndependentContractor") {
             this.filePath = "assets/pdf/2021/Terms_and_Conditions_Independent_Contractor_2020.docx";
         }
-        else if (this.fileNameEnum == "UmrHealthForm") {
+        else if (this.fileNameEnum == "UmrHealthForm" && this.myEmployment.nativeElement.value == '1099') {
             this.filePath = "assets/pdf/2024/UMR HEALTH FORM  11162023-001.pdf";
+        }
+        else if (this.fileNameEnum == "UmrHealthForm" && this.myEmployment.nativeElement.value == 'W-2') {
+            this.filePath = "assets/pdf/w2/UMR HEALTH FORM.docx";
         }
         else if (this.fileNameEnum == "VoidedCheque") {
             this.filePath = "";
         }
         else if (this.fileNameEnum == "W9") {
-            this.filePath = "assets/pdf/2021/W-9_Request_For_Taxpayer_Identification_Number_and_Certification.docx";
+            this.filePath = "assets/pdf/w2/W-9 Form.pdf";
         }
         else if (this.fileNameEnum == "W9CoverSheet") {
-            this.filePath = "assets/pdf/2021/W-9_Coversheet.docx";
+            this.filePath = "assets/pdf/w2/W-9 Coversheet.doc";
         }
         else if (this.fileNameEnum == "RNSupervisor3Year") {
             this.filePath = "assets/pdf/2024/RN SUPERVISOR Contractor 3 Year CONTRACT.docx";
@@ -190,7 +199,6 @@ export class UploadRequirementsComponent implements OnInit {
         else {
             this.filePath = "";
         }
-
     }
 
     isBase64(str) {

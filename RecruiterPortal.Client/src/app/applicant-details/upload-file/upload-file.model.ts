@@ -48,6 +48,20 @@ export enum Enum1099FileType {
     StaffNurse4Year = 29,
     StaffNurse5Year = 30,
 }
+export enum EnumW2FileType {
+    AgencyHired = 7,
+    EmploymentApplication = 17,
+    DeclinationInfluenza = 8,
+    Payroll = 14,
+    NysChrc = 13,
+    EmergencyContact = 9,
+    HepatitisB = 11,
+    HippaForm = 12,
+    EmploymentEligibility = 10,
+    UmrHealthForm = 1,
+    W9CoverSheet = 22,
+    W9 = 15
+}
 
 
 export enum Enum1099FileNameByType {
@@ -63,6 +77,20 @@ export enum Enum1099FileNameByType {
     StaffNurse3Year = "Staff Nurse Contractor 3 Year Contract",
     StaffNurse4Year = "Staff Nurse Contractor 4 Year Contract",
     StaffNurse5Year = "Staff Nurse Contractor 5 Year Contract"
+}
+export enum EnumW2FileNameByType {
+    AgencyHired = "Agency Hire Form",
+    EmploymentApplication = "Application Form",
+    DeclinationInfluenza = "Declination of Influenza Vaccination",
+    Payroll = "Direct Deposit Payroll Authorization",
+    NysChrc = "DOH CHRC Form",
+    EmergencyContact = "Emergency Contact Information Form",
+    HepatitisB = "Hepatitis B Immunization",
+    HippaForm = "HIPPA Form",
+    EmploymentEligibility = "I-9 Employment Eligibility Verification",
+    UmrHealthForm = "UMR HEALTH FORM",
+    W9CoverSheet = "W-9 Coversheet",
+    W9 = "W-9 Form"
 }
 
 export enum EnumFileNameByType {
