@@ -72,6 +72,7 @@ export class UploadRequirementsComponent implements OnInit {
             .subscribe(data => {
                 if (data.status === 200) {
                     this.fileTypeSelect.nativeElement.value = '';
+                    this.filePath = '';
                     this.userFiles = [];
                     this.getEmpClass();
                 }
