@@ -11,10 +11,10 @@ export const resourceServerUrl = 'http://localhost:6002';
 export const recaptchaSitekey = '6LcMLzYdAAAAAM2ZK5SePLk_sfsA_cP2og7KecX6';
 
 //////////////////////    172.16.1.11 TEST   //////////////////////////
-//export const authorizationServerUrl = 'http://www.umrtest.com/RecruiterPortalAuth';
+//export const authorizationServerUrl = 'https://www.umrtest.com/RecruiterPortalAuth';
 //export const pathMatch = '/RecruiterPortal';
 //export const scopes = ['RecruiterPortal', 'offline_access', 'openid'];
-//export const resourceServerUrl = 'http://www.umrtest.com/RecruiterPortalAPI';
+//export const resourceServerUrl = 'https://www.umrtest.com/RecruiterPortalAPI';
 //export const recaptchaSitekey = '6LcMLzYdAAAAAM2ZK5SePLk_sfsA_cP2og7KecX6';
 
 //////////////////////    www.ez-onboarding.biz   //////////////////////////
